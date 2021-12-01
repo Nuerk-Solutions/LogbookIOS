@@ -1,0 +1,606 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E98342402757B85800E1C314 /* LogbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E983423F2757B85800E1C314 /* LogbookApp.swift */; };
+		E98342422757B85800E1C314 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98342412757B85800E1C314 /* ContentView.swift */; };
+		E98342442757B85A00E1C314 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E98342432757B85A00E1C314 /* Assets.xcassets */; };
+		E98342472757B85A00E1C314 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E98342462757B85A00E1C314 /* Preview Assets.xcassets */; };
+		E98342492757B85A00E1C314 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98342482757B85A00E1C314 /* Persistence.swift */; };
+		E983424C2757B85A00E1C314 /* Logbook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E983424A2757B85A00E1C314 /* Logbook.xcdatamodeld */; };
+		E98342572757B85A00E1C314 /* LogbookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98342562757B85A00E1C314 /* LogbookTests.swift */; };
+		E98342622757B85A00E1C314 /* LogbookUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98342612757B85A00E1C314 /* LogbookUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E98342532757B85A00E1C314 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E98342342757B85800E1C314 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E983423B2757B85800E1C314;
+			remoteInfo = Logbook;
+		};
+		E983425E2757B85A00E1C314 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E98342342757B85800E1C314 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E983423B2757B85800E1C314;
+			remoteInfo = Logbook;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		E983423C2757B85800E1C314 /* Logbook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Logbook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E983423F2757B85800E1C314 /* LogbookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookApp.swift; sourceTree = "<group>"; };
+		E98342412757B85800E1C314 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E98342432757B85A00E1C314 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E98342462757B85A00E1C314 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E98342482757B85A00E1C314 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		E983424B2757B85A00E1C314 /* Logbook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Logbook.xcdatamodel; sourceTree = "<group>"; };
+		E983424D2757B85A00E1C314 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E98342522757B85A00E1C314 /* LogbookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LogbookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E98342562757B85A00E1C314 /* LogbookTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookTests.swift; sourceTree = "<group>"; };
+		E98342582757B85A00E1C314 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E983425D2757B85A00E1C314 /* LogbookUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LogbookUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E98342612757B85A00E1C314 /* LogbookUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookUITests.swift; sourceTree = "<group>"; };
+		E98342632757B85A00E1C314 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E98342392757B85800E1C314 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E983424F2757B85A00E1C314 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E983425A2757B85A00E1C314 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E98342332757B85800E1C314 = {
+			isa = PBXGroup;
+			children = (
+				E983423E2757B85800E1C314 /* Logbook */,
+				E98342552757B85A00E1C314 /* LogbookTests */,
+				E98342602757B85A00E1C314 /* LogbookUITests */,
+				E983423D2757B85800E1C314 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E983423D2757B85800E1C314 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E983423C2757B85800E1C314 /* Logbook.app */,
+				E98342522757B85A00E1C314 /* LogbookTests.xctest */,
+				E983425D2757B85A00E1C314 /* LogbookUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E983423E2757B85800E1C314 /* Logbook */ = {
+			isa = PBXGroup;
+			children = (
+				E983423F2757B85800E1C314 /* LogbookApp.swift */,
+				E98342412757B85800E1C314 /* ContentView.swift */,
+				E98342432757B85A00E1C314 /* Assets.xcassets */,
+				E98342482757B85A00E1C314 /* Persistence.swift */,
+				E983424D2757B85A00E1C314 /* Info.plist */,
+				E983424A2757B85A00E1C314 /* Logbook.xcdatamodeld */,
+				E98342452757B85A00E1C314 /* Preview Content */,
+			);
+			path = Logbook;
+			sourceTree = "<group>";
+		};
+		E98342452757B85A00E1C314 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				E98342462757B85A00E1C314 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E98342552757B85A00E1C314 /* LogbookTests */ = {
+			isa = PBXGroup;
+			children = (
+				E98342562757B85A00E1C314 /* LogbookTests.swift */,
+				E98342582757B85A00E1C314 /* Info.plist */,
+			);
+			path = LogbookTests;
+			sourceTree = "<group>";
+		};
+		E98342602757B85A00E1C314 /* LogbookUITests */ = {
+			isa = PBXGroup;
+			children = (
+				E98342612757B85A00E1C314 /* LogbookUITests.swift */,
+				E98342632757B85A00E1C314 /* Info.plist */,
+			);
+			path = LogbookUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E983423B2757B85800E1C314 /* Logbook */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E98342662757B85A00E1C314 /* Build configuration list for PBXNativeTarget "Logbook" */;
+			buildPhases = (
+				E98342382757B85800E1C314 /* Sources */,
+				E98342392757B85800E1C314 /* Frameworks */,
+				E983423A2757B85800E1C314 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Logbook;
+			productName = Logbook;
+			productReference = E983423C2757B85800E1C314 /* Logbook.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E98342512757B85A00E1C314 /* LogbookTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E98342692757B85A00E1C314 /* Build configuration list for PBXNativeTarget "LogbookTests" */;
+			buildPhases = (
+				E983424E2757B85A00E1C314 /* Sources */,
+				E983424F2757B85A00E1C314 /* Frameworks */,
+				E98342502757B85A00E1C314 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E98342542757B85A00E1C314 /* PBXTargetDependency */,
+			);
+			name = LogbookTests;
+			productName = LogbookTests;
+			productReference = E98342522757B85A00E1C314 /* LogbookTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		E983425C2757B85A00E1C314 /* LogbookUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E983426C2757B85A00E1C314 /* Build configuration list for PBXNativeTarget "LogbookUITests" */;
+			buildPhases = (
+				E98342592757B85A00E1C314 /* Sources */,
+				E983425A2757B85A00E1C314 /* Frameworks */,
+				E983425B2757B85A00E1C314 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E983425F2757B85A00E1C314 /* PBXTargetDependency */,
+			);
+			name = LogbookUITests;
+			productName = LogbookUITests;
+			productReference = E983425D2757B85A00E1C314 /* LogbookUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E98342342757B85800E1C314 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
+				TargetAttributes = {
+					E983423B2757B85800E1C314 = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					E98342512757B85A00E1C314 = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = E983423B2757B85800E1C314;
+					};
+					E983425C2757B85A00E1C314 = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = E983423B2757B85800E1C314;
+					};
+				};
+			};
+			buildConfigurationList = E98342372757B85800E1C314 /* Build configuration list for PBXProject "Logbook" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E98342332757B85800E1C314;
+			productRefGroup = E983423D2757B85800E1C314 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E983423B2757B85800E1C314 /* Logbook */,
+				E98342512757B85A00E1C314 /* LogbookTests */,
+				E983425C2757B85A00E1C314 /* LogbookUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E983423A2757B85800E1C314 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E98342472757B85A00E1C314 /* Preview Assets.xcassets in Resources */,
+				E98342442757B85A00E1C314 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E98342502757B85A00E1C314 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E983425B2757B85A00E1C314 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E98342382757B85800E1C314 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E98342492757B85A00E1C314 /* Persistence.swift in Sources */,
+				E983424C2757B85A00E1C314 /* Logbook.xcdatamodeld in Sources */,
+				E98342422757B85800E1C314 /* ContentView.swift in Sources */,
+				E98342402757B85800E1C314 /* LogbookApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E983424E2757B85A00E1C314 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E98342572757B85A00E1C314 /* LogbookTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E98342592757B85A00E1C314 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E98342622757B85A00E1C314 /* LogbookUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E98342542757B85A00E1C314 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E983423B2757B85800E1C314 /* Logbook */;
+			targetProxy = E98342532757B85A00E1C314 /* PBXContainerItemProxy */;
+		};
+		E983425F2757B85A00E1C314 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E983423B2757B85800E1C314 /* Logbook */;
+			targetProxy = E983425E2757B85A00E1C314 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		E98342642757B85A00E1C314 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E98342652757B85A00E1C314 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E98342672757B85A00E1C314 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Logbook/Preview Content\"";
+				DEVELOPMENT_TEAM = 3JWUJEGD2M;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Logbook/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = de.Thomas.Logbook;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E98342682757B85A00E1C314 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Logbook/Preview Content\"";
+				DEVELOPMENT_TEAM = 3JWUJEGD2M;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Logbook/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = de.Thomas.Logbook;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E983426A2757B85A00E1C314 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3JWUJEGD2M;
+				INFOPLIST_FILE = LogbookTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = de.Thomas.LogbookTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Logbook.app/Logbook";
+			};
+			name = Debug;
+		};
+		E983426B2757B85A00E1C314 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3JWUJEGD2M;
+				INFOPLIST_FILE = LogbookTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = de.Thomas.LogbookTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Logbook.app/Logbook";
+			};
+			name = Release;
+		};
+		E983426D2757B85A00E1C314 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3JWUJEGD2M;
+				INFOPLIST_FILE = LogbookUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = de.Thomas.LogbookUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Logbook;
+			};
+			name = Debug;
+		};
+		E983426E2757B85A00E1C314 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3JWUJEGD2M;
+				INFOPLIST_FILE = LogbookUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = de.Thomas.LogbookUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Logbook;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E98342372757B85800E1C314 /* Build configuration list for PBXProject "Logbook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E98342642757B85A00E1C314 /* Debug */,
+				E98342652757B85A00E1C314 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E98342662757B85A00E1C314 /* Build configuration list for PBXNativeTarget "Logbook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E98342672757B85A00E1C314 /* Debug */,
+				E98342682757B85A00E1C314 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E98342692757B85A00E1C314 /* Build configuration list for PBXNativeTarget "LogbookTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E983426A2757B85A00E1C314 /* Debug */,
+				E983426B2757B85A00E1C314 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E983426C2757B85A00E1C314 /* Build configuration list for PBXNativeTarget "LogbookUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E983426D2757B85A00E1C314 /* Debug */,
+				E983426E2757B85A00E1C314 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E983424A2757B85A00E1C314 /* Logbook.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E983424B2757B85A00E1C314 /* Logbook.xcdatamodel */,
+			);
+			currentVersion = E983424B2757B85A00E1C314 /* Logbook.xcdatamodel */;
+			path = Logbook.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = E98342342757B85800E1C314 /* Project object */;
+}
