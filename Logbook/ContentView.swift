@@ -10,6 +10,41 @@ import CoreData
 import Combine
 
 struct ContentView: View {
+    
+    @State private var driver: Driver = .Andrea
+    @State private var vehicle: Vehicle = .Ferrari
+    @State private var date = Date()
+    @State private var reason = "Stadtfahrt"
+    @State private var currentMileAge = 0
+    @State private var newMileAge = 0
+    @State private var additionalInformation: AdditionalInformation = .Nichts
+    @State private var fuelAmount = 0
+    @State private var serviceDescription = ""
+    
+    enum Driver: String, CaseIterable, Identifiable {
+        case Andrea
+        case Claudia
+        case Oliver
+        case Thomas
+        
+        var id: String { self.rawValue }
+    }
+    
+    enum Vehicle: String, CaseIterable, Identifiable {
+        case Ferrari
+        case VW
+        
+        var id: String { self.rawValue }
+    }
+    
+    enum AdditionalInformation: String, CaseIterable, Identifiable {
+        case Nichts
+        case Getankt
+        case Gewartet
+        
+        var id: String { self.rawValue }
+    }
+    
     @State var username: String = ""
     @State var isPrivate: Bool = true
     @State var notificationsEnabled: Bool = false
@@ -52,12 +87,37 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("PROFILE")) {
-                    TextField("Username", text: $username)
-                    Toggle(isOn: $isPrivate) {
-                        Text("Private Account")
+                Section(header: Text("Fahrerinfors")) {
+                    // Driver Segment Picker
+                    Picker("Fahrer", selection: $driver) {
+                        ForEach(Driver.allCases) { driver in
+                            Text(driver.rawValue.capitalized).tag(driver)
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    
+                    
+                    // Date picker
+                    DatePicker("Datum",
+                               selection: $date,
+                               displayedComponents: [.date])
+                    
+                    HStack {
+                        Text("Reiseziel")
+                        TextField("Stadtfahrt", text: $reason)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
                     }
                 }
+                
+                Section(header: Text("Fahrzeuginfos"), content: {
+                    // Vehicle Segment Picker
+                    Picker("Fahrzeug", selection: $vehicle) {
+                        ForEach(Vehicle.allCases) { vehicle in
+                            Text(vehicle.rawValue).tag(vehicle)
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                })
                 
                 Section(header: Text("NOTIFICATIONS")) {
                     Toggle(isOn: $notificationsEnabled) {
@@ -117,13 +177,6 @@ struct ContentView: View {
                     }
                 
                 Section(header: Text("User Info")) {
-                    // Segment Picker
-                    Picker("Gender", selection: $gender) {
-                        ForEach(Gender.allCases) { gender in
-                            Text(gender.rawValue.capitalized).tag(gender)
-                        }
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
                     // Date picker
                     DatePicker("Date of birth",
                                selection: $birthdate,
@@ -135,31 +188,29 @@ struct ContentView: View {
                         }
                     }
                 }
-            }
-            
-            
-            Section {
-                Button(action: {
-                    showingAlert = true
-                }) {
-                    HStack {
-                        Spacer()
-                        Text("Speichern")
-                        Spacer()
+                Section {
+                    Button(action: {
+                        showingAlert = true
+                    }) {
+                        HStack {
+                            Spacer()
+                            Text("Speichern")
+                            Spacer()
+                        }
+                    }
+                    .foregroundColor(.white)
+                    .padding(10)
+                    .background(Color.accentColor)
+                    .cornerRadius(8)
+                    .alert(isPresented: $showingAlert) {
+                        Alert(title: Text("Form submitted"),
+                              message: Text("Speichern"),
+                              dismissButton: .default(Text("OK")))
                     }
                 }
-                .foregroundColor(.white)
-                .padding(10)
-                .background(Color.accentColor)
-                .cornerRadius(8)
-                .alert(isPresented: $showingAlert) {
-                    Alert(title: Text("Form submitted"),
-                          message: Text("Speichern"),
-                          dismissButton: .default(Text("OK")))
-                }
             }
+            .navigationBarTitle("Fahrtenbuch")
         }
-        .navigationBarTitle("Settings")
         
         
         
