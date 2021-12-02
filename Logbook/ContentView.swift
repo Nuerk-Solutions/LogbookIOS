@@ -15,79 +15,17 @@ struct ContentView: View {
     @State private var vehicle: Vehicle = .Ferrari
     @State private var date = Date()
     @State private var reason = "Stadtfahrt"
-    @State private var currentMileAge = 0
-    @State private var newMileAge = 0
-    @State private var additionalInformation: AdditionalInformation = .Nichts
+    @ObservedObject private var currentMileAge = NumbersOnly(value: "123")
+    @ObservedObject private var newMileAge = NumbersOnly(value: "321")
+    @State private var additionalInformation: AdditionalInformation = .none
     @State private var fuelAmount = 0
     @State private var serviceDescription = ""
-    
-    enum Driver: String, CaseIterable, Identifiable {
-        case Andrea
-        case Claudia
-        case Oliver
-        case Thomas
-        
-        var id: String { self.rawValue }
-    }
-    
-    enum Vehicle: String, CaseIterable, Identifiable {
-        case Ferrari
-        case VW
-        
-        var id: String { self.rawValue }
-    }
-    
-    enum AdditionalInformation: String, CaseIterable, Identifiable {
-        case Nichts
-        case Getankt
-        case Gewartet
-        
-        var id: String { self.rawValue }
-    }
-    
-    @State var username: String = ""
-    @State var isPrivate: Bool = true
-    @State var notificationsEnabled: Bool = false
-    @State private var previewIndex = 0
-    @State var stand = "123"
     @State private var showingAlert = false
-    @State var value = ""
-    var placeholder = "Select Client"
-    var dropDownList = ["PSO", "PFA", "AIR", "HOT"]
-    var previewOptions = ["Always", "When Unlocked", "Never"]
-    
-    enum Gender: String, CaseIterable, Identifiable {
-        case male
-        case female
-        case other
-        
-        var id: String { self.rawValue }
-    }
-    
-    enum Language: String, CaseIterable, Identifiable {
-        case english
-        case french
-        case spanish
-        case japanese
-        case other
-        
-        var id: String { self.rawValue }
-    }
-    
-    @State var name: String = ""
-    @State var password: String = ""
-    
-    @State var gender: Gender = .male
-    @State var language: Language = .english
-    @State private var birthdate = Date()
-    
-    @State var isPublic: Bool = true
-    
     
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Fahrerinfors")) {
+                Section(header: Text("Fahrerinformationen")) {
                     // Driver Segment Picker
                     Picker("Fahrer", selection: $driver) {
                         ForEach(Driver.allCases) { driver in
@@ -96,20 +34,17 @@ struct ContentView: View {
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     
-                    
                     // Date picker
                     DatePicker("Datum",
                                selection: $date,
                                displayedComponents: [.date])
                     
-                    HStack {
-                        Text("Reiseziel")
-                        TextField("Stadtfahrt", text: $reason)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                    }
+                    // Reason
+                    FloatingTextField(title: "Reiseziel", text: $reason)
                 }
                 
-                Section(header: Text("Fahrzeuginfos"), content: {
+                // Vehicle Information
+                Section(header: Text("Fahrzeuginformationen"), content: {
                     // Vehicle Segment Picker
                     Picker("Fahrzeug", selection: $vehicle) {
                         ForEach(Vehicle.allCases) { vehicle in
@@ -117,78 +52,54 @@ struct ContentView: View {
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())
+                    
+                    HStack {
+                        FloatingTextField(title: "Aktueller Kilometerstand", text: $currentMileAge.value)
+                            .keyboardType(.decimalPad)
+                        
+                        Text("km")
+                            .padding(.top, 5)
+                    }
+                    
+                    HStack {
+                        FloatingTextField(title: "Neuer Kilometerstand", text: $newMileAge.value)
+                            .keyboardType(.decimalPad)
+                        
+                        Text("km")
+                            .padding(.top, 5)
+                    }
+                    
                 })
                 
-                Section(header: Text("NOTIFICATIONS")) {
-                    Toggle(isOn: $notificationsEnabled) {
-                        Text("Enabled")
-                    }
-                    Picker(selection: $previewIndex, label: Text("Show Previews")) {
-                        ForEach(0 ..< previewOptions.count) {
-                            Text(self.previewOptions[$0])
-                        }
-                    }
-                }
-                
-                Section(header: Text("ABOUT")) {
-                    HStack {
-                        Text("Version")
-                        Spacer()
-                        Text("2.2.1")
-                    }
-                }
-                
-                Section(header: Text("Credentials")) {
+                Section(header: Text("Zusätzliche Information")) {
                     
                     Menu {
-                        ForEach(dropDownList, id: \.self){ client in
-                            Button(client) {
-                                self.value = client
+                        ForEach(AdditionalInformation.allCases, id: \.self){ item in
+                            Button(item.rawValue) {
+                                self.additionalInformation = item
                             }
                         }
                     } label: {
                         VStack(spacing: 5){
                             HStack{
-                                Text(value.isEmpty ? placeholder : value)
-                                    .foregroundColor(value.isEmpty ? .gray : .black)
+                                Text(LocalizedStringKey(additionalInformation.rawValue) == AdditionalInformation.none.localizedName ? AdditionalInformation.none.localizedName : additionalInformation.localizedName).tag(additionalInformation)
+                                    .foregroundColor(additionalInformation == AdditionalInformation.none ? .gray : .black)
                                 Spacer()
                                 Image(systemName: "chevron.down")
-                                    .foregroundColor(Color.orange)
+                                    .foregroundColor(Color.blue)
                                     .font(Font.system(size: 20, weight: .bold))
                             }
-                            .padding(.horizontal)
-                            Rectangle()
-                                .fill(Color.orange)
-                                .frame(height: 2)
+                            if(additionalInformation == AdditionalInformation.none) {
+                                Rectangle()
+                                    .fill(Color.blue)
+                                    .frame(height: 2)
+                                    .padding(.top, 1)
+                            }
+                            
                         }
                     }
                 }
-                
-                
-                
-                // Secure field
-                TextField("Tankstand", text: $stand)
-                    .keyboardType(.numberPad)
-                    .onReceive(Just(stand)) { newValue in
-                        let filtered = newValue.filter { "0123456789".contains($0) }
-                        if filtered != newValue {
-                            self.stand = filtered
-                        }
-                    }
-                
-                Section(header: Text("User Info")) {
-                    // Date picker
-                    DatePicker("Date of birth",
-                               selection: $birthdate,
-                               displayedComponents: [.date])
-                    // Scroll picker
-                    Picker("Language", selection: $language) {
-                        ForEach(Language.allCases) { language in
-                            Text(language.rawValue.capitalized).tag(language)
-                        }
-                    }
-                }
-                Section {
+                Section(header: Text("Aktion")) {
                     Button(action: {
                         showingAlert = true
                     }) {
@@ -199,21 +110,55 @@ struct ContentView: View {
                         }
                     }
                     .foregroundColor(.white)
-                    .padding(10)
-                    .background(Color.accentColor)
+                    .padding(15)
+                    .background(Color.green)
                     .cornerRadius(8)
                     .alert(isPresented: $showingAlert) {
-                        Alert(title: Text("Form submitted"),
-                              message: Text("Speichern"),
+                        Alert(title: Text("Neue Fahrt hinzugefügt"),
+                              message: Text("Neue Fahrt mit P-1km im Fahrzeug P-2 für den Fahrer P-3"),
+                              dismissButton: .default(Text("OK")))
+                    }
+
+                    // Delete Last Entry
+                    Button(action: {
+                        showingAlert = true
+                    }) {
+                        HStack {
+                            Spacer()
+                            Text("Letzten Eintrag Löschen")
+                            Spacer()
+                        }
+                    }
+                    .foregroundColor(.white)
+                    .padding(10)
+                    .background(Color.red)
+                    .cornerRadius(8)
+                    .alert(isPresented: $showingAlert) {
+                        Alert(title: Text("Letzten Eintrag Löschen"),
+                              message: Text("Die letzte Fahrt für P-1 gelöscht"),
                               dismissButton: .default(Text("OK")))
                     }
                 }
+                // Download XLSX
+                Button(action: {
+                    showingAlert = true
+                }) {
+                    HStack {
+                        Spacer()
+                        Text("Download XLSX")
+                        Spacer()
+                    }
+                }
+                .foregroundColor(.white)
+                .padding(10)
+                .cornerRadius(8)
+                .alert(isPresented: $showingAlert) {
+                    Alert(title: Text("Öffne Safari..."))
+                }
+                .listRowBackground(Color.pink)
             }
             .navigationBarTitle("Fahrtenbuch")
         }
-        
-        
-        
     }
 }
 
