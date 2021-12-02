@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E91E77E62759373300309C7B /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91E77E52759373300309C7B /* Data.swift */; };
+		E91E77F327593B4100309C7B /* LogbookTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91E77F227593B4100309C7B /* LogbookTest.swift */; };
 		E98342402757B85800E1C314 /* LogbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E983423F2757B85800E1C314 /* LogbookApp.swift */; };
 		E98342422757B85800E1C314 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98342412757B85800E1C314 /* ContentView.swift */; };
 		E98342442757B85A00E1C314 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E98342432757B85A00E1C314 /* Assets.xcassets */; };
 		E98342472757B85A00E1C314 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E98342462757B85A00E1C314 /* Preview Assets.xcassets */; };
 		E98342492757B85A00E1C314 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98342482757B85A00E1C314 /* Persistence.swift */; };
 		E983424C2757B85A00E1C314 /* Logbook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E983424A2757B85A00E1C314 /* Logbook.xcdatamodeld */; };
-		E98342572757B85A00E1C314 /* LogbookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98342562757B85A00E1C314 /* LogbookTests.swift */; };
-		E98342622757B85A00E1C314 /* LogbookUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98342612757B85A00E1C314 /* LogbookUITests.swift */; };
 		E9A7357A2759102B00C6C33E /* EnumUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A735792759102B00C6C33E /* EnumUtils.swift */; };
 		E9D4E6F42758FEBB003F36DA /* FloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */; };
 		E9D4E6FD27590483003F36DA /* NumberUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D4E6FC27590483003F36DA /* NumberUtils.swift */; };
@@ -38,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E91E77E52759373300309C7B /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		E91E77F227593B4100309C7B /* LogbookTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookTest.swift; sourceTree = "<group>"; };
 		E983423C2757B85800E1C314 /* Logbook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Logbook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E983423F2757B85800E1C314 /* LogbookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookApp.swift; sourceTree = "<group>"; };
 		E98342412757B85800E1C314 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -47,11 +49,7 @@
 		E983424B2757B85A00E1C314 /* Logbook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Logbook.xcdatamodel; sourceTree = "<group>"; };
 		E983424D2757B85A00E1C314 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E98342522757B85A00E1C314 /* LogbookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LogbookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E98342562757B85A00E1C314 /* LogbookTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookTests.swift; sourceTree = "<group>"; };
-		E98342582757B85A00E1C314 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E983425D2757B85A00E1C314 /* LogbookUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LogbookUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E98342612757B85A00E1C314 /* LogbookUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookUITests.swift; sourceTree = "<group>"; };
-		E98342632757B85A00E1C314 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E9A735792759102B00C6C33E /* EnumUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumUtils.swift; sourceTree = "<group>"; };
 		E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextField.swift; sourceTree = "<group>"; };
 		E9D4E6FC27590483003F36DA /* NumberUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberUtils.swift; sourceTree = "<group>"; };
@@ -86,8 +84,6 @@
 			isa = PBXGroup;
 			children = (
 				E983423E2757B85800E1C314 /* Logbook */,
-				E98342552757B85A00E1C314 /* LogbookTests */,
-				E98342602757B85A00E1C314 /* LogbookUITests */,
 				E983423D2757B85800E1C314 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -113,6 +109,8 @@
 				E983424D2757B85A00E1C314 /* Info.plist */,
 				E983424A2757B85A00E1C314 /* Logbook.xcdatamodeld */,
 				E98342452757B85A00E1C314 /* Preview Content */,
+				E91E77E52759373300309C7B /* Data.swift */,
+				E91E77F227593B4100309C7B /* LogbookTest.swift */,
 			);
 			path = Logbook;
 			sourceTree = "<group>";
@@ -123,24 +121,6 @@
 				E98342462757B85A00E1C314 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		E98342552757B85A00E1C314 /* LogbookTests */ = {
-			isa = PBXGroup;
-			children = (
-				E98342562757B85A00E1C314 /* LogbookTests.swift */,
-				E98342582757B85A00E1C314 /* Info.plist */,
-			);
-			path = LogbookTests;
-			sourceTree = "<group>";
-		};
-		E98342602757B85A00E1C314 /* LogbookUITests */ = {
-			isa = PBXGroup;
-			children = (
-				E98342612757B85A00E1C314 /* LogbookUITests.swift */,
-				E98342632757B85A00E1C314 /* Info.plist */,
-			);
-			path = LogbookUITests;
 			sourceTree = "<group>";
 		};
 		E9D4E6FB2759046F003F36DA /* Utils */ = {
@@ -169,6 +149,8 @@
 			dependencies = (
 			);
 			name = Logbook;
+			packageProductDependencies = (
+			);
 			productName = Logbook;
 			productReference = E983423C2757B85800E1C314 /* Logbook.app */;
 			productType = "com.apple.product-type.application";
@@ -240,6 +222,8 @@
 				Base,
 			);
 			mainGroup = E98342332757B85800E1C314;
+			packageReferences = (
+			);
 			productRefGroup = E983423D2757B85800E1C314 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -289,6 +273,8 @@
 				E9D4E6F42758FEBB003F36DA /* FloatingTextField.swift in Sources */,
 				E9D4E6FD27590483003F36DA /* NumberUtils.swift in Sources */,
 				E98342402757B85800E1C314 /* LogbookApp.swift in Sources */,
+				E91E77E62759373300309C7B /* Data.swift in Sources */,
+				E91E77F327593B4100309C7B /* LogbookTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,7 +282,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E98342572757B85A00E1C314 /* LogbookTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,7 +289,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E98342622757B85A00E1C314 /* LogbookUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

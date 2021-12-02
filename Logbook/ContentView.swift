@@ -11,13 +11,14 @@ import Combine
 
 struct ContentView: View {
     
-    @State private var driver: Driver = .Andrea
-    @State private var vehicle: Vehicle = .Ferrari
+    @State var lastLogbookEntries: [Logbook] = []
+    @State private var driver: DriverEnum = .Andrea
+    @State private var vehicle: VehicleEnum = .Ferrari
     @State private var date = Date()
     @State private var reason = "Stadtfahrt"
     @ObservedObject private var currentMileAge = NumbersOnly(value: "123")
     @ObservedObject private var newMileAge = NumbersOnly(value: "321")
-    @State private var additionalInformation: AdditionalInformation = .none
+    @State private var additionalInformation: AdditionalInformationEnum = .none
     @State private var fuelAmount = 0
     @State private var serviceDescription = ""
     @State private var showingAlert = false
@@ -28,7 +29,7 @@ struct ContentView: View {
                 Section(header: Text("Fahrerinformationen")) {
                     // Driver Segment Picker
                     Picker("Fahrer", selection: $driver) {
-                        ForEach(Driver.allCases) { driver in
+                        ForEach(DriverEnum.allCases) { driver in
                             Text(driver.rawValue.capitalized).tag(driver)
                         }
                     }
@@ -47,7 +48,7 @@ struct ContentView: View {
                 Section(header: Text("Fahrzeuginformationen"), content: {
                     // Vehicle Segment Picker
                     Picker("Fahrzeug", selection: $vehicle) {
-                        ForEach(Vehicle.allCases) { vehicle in
+                        ForEach(VehicleEnum.allCases) { vehicle in
                             Text(vehicle.rawValue).tag(vehicle)
                         }
                     }
@@ -74,7 +75,7 @@ struct ContentView: View {
                 Section(header: Text("Zusätzliche Information")) {
                     
                     Menu {
-                        ForEach(AdditionalInformation.allCases, id: \.self){ item in
+                        ForEach(AdditionalInformationEnum.allCases, id: \.self){ item in
                             Button(item.rawValue) {
                                 self.additionalInformation = item
                             }
@@ -82,14 +83,14 @@ struct ContentView: View {
                     } label: {
                         VStack(spacing: 5){
                             HStack{
-                                Text(LocalizedStringKey(additionalInformation.rawValue) == AdditionalInformation.none.localizedName ? AdditionalInformation.none.localizedName : additionalInformation.localizedName).tag(additionalInformation)
-                                    .foregroundColor(additionalInformation == AdditionalInformation.none ? .gray : .black)
+                                Text(LocalizedStringKey(additionalInformation.rawValue) == AdditionalInformationEnum.none.localizedName ? AdditionalInformationEnum.none.localizedName : additionalInformation.localizedName).tag(additionalInformation)
+                                    .foregroundColor(additionalInformation == AdditionalInformationEnum.none ? .gray : .black)
                                 Spacer()
                                 Image(systemName: "chevron.down")
                                     .foregroundColor(Color.blue)
                                     .font(Font.system(size: 20, weight: .bold))
                             }
-                            if(additionalInformation == AdditionalInformation.none) {
+                            if(additionalInformation == AdditionalInformationEnum.none) {
                                 Rectangle()
                                     .fill(Color.blue)
                                     .frame(height: 2)
@@ -102,6 +103,7 @@ struct ContentView: View {
                 Section(header: Text("Aktion")) {
                     Button(action: {
                         showingAlert = true
+//                        print(VehicleEnum(rawValue: lastLogbookEntries[1].vehicle.typ))
                     }) {
                         HStack {
                             Spacer()
@@ -118,7 +120,7 @@ struct ContentView: View {
                               message: Text("Neue Fahrt mit P-1km im Fahrzeug P-2 für den Fahrer P-3"),
                               dismissButton: .default(Text("OK")))
                     }
-
+                    
                     // Delete Last Entry
                     Button(action: {
                         showingAlert = true
@@ -157,7 +159,14 @@ struct ContentView: View {
                 }
                 .listRowBackground(Color.pink)
             }
-            .navigationBarTitle("Fahrtenbuch")
+            
+            
+            .navigationTitle("Fahrtenbuch")
+            .navigationBarTitleDisplayMode(.large)
+        }.onAppear {
+            Api().getLogbookEntries{(logbooks) in
+                self.lastLogbookEntries = logbooks
+            }
         }
     }
 }
