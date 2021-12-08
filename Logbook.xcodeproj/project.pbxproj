@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		E91E77E62759373300309C7B /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91E77E52759373300309C7B /* Data.swift */; };
 		E91E77F327593B4100309C7B /* LogbookTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91E77F227593B4100309C7B /* LogbookTest.swift */; };
+		E9393ED82761330E00CB136F /* LogbookEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9393ED72761330E00CB136F /* LogbookEntryViewModel.swift */; };
+		E9393EDA27614B3E00CB136F /* FloatingNumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9393ED927614B3E00CB136F /* FloatingNumberField.swift */; };
 		E98342402757B85800E1C314 /* LogbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E983423F2757B85800E1C314 /* LogbookApp.swift */; };
 		E98342422757B85800E1C314 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98342412757B85800E1C314 /* ContentView.swift */; };
 		E98342442757B85A00E1C314 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E98342432757B85A00E1C314 /* Assets.xcassets */; };
@@ -20,26 +22,11 @@
 		E9D4E6FD27590483003F36DA /* NumberUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D4E6FC27590483003F36DA /* NumberUtils.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		E98342532757B85A00E1C314 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E98342342757B85800E1C314 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E983423B2757B85800E1C314;
-			remoteInfo = Logbook;
-		};
-		E983425E2757B85A00E1C314 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E98342342757B85800E1C314 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E983423B2757B85800E1C314;
-			remoteInfo = Logbook;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		E91E77E52759373300309C7B /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		E91E77F227593B4100309C7B /* LogbookTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookTest.swift; sourceTree = "<group>"; };
+		E9393ED72761330E00CB136F /* LogbookEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookEntryViewModel.swift; sourceTree = "<group>"; };
+		E9393ED927614B3E00CB136F /* FloatingNumberField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingNumberField.swift; sourceTree = "<group>"; };
 		E983423C2757B85800E1C314 /* Logbook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Logbook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E983423F2757B85800E1C314 /* LogbookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookApp.swift; sourceTree = "<group>"; };
 		E98342412757B85800E1C314 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -48,8 +35,6 @@
 		E98342482757B85A00E1C314 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		E983424B2757B85A00E1C314 /* Logbook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Logbook.xcdatamodel; sourceTree = "<group>"; };
 		E983424D2757B85A00E1C314 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E98342522757B85A00E1C314 /* LogbookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LogbookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E983425D2757B85A00E1C314 /* LogbookUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LogbookUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9A735792759102B00C6C33E /* EnumUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumUtils.swift; sourceTree = "<group>"; };
 		E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextField.swift; sourceTree = "<group>"; };
 		E9D4E6FC27590483003F36DA /* NumberUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberUtils.swift; sourceTree = "<group>"; };
@@ -57,20 +42,6 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		E98342392757B85800E1C314 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E983424F2757B85A00E1C314 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E983425A2757B85A00E1C314 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -92,8 +63,6 @@
 			isa = PBXGroup;
 			children = (
 				E983423C2757B85800E1C314 /* Logbook.app */,
-				E98342522757B85A00E1C314 /* LogbookTests.xctest */,
-				E983425D2757B85A00E1C314 /* LogbookUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -129,6 +98,8 @@
 				E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */,
 				E9D4E6FC27590483003F36DA /* NumberUtils.swift */,
 				E9A735792759102B00C6C33E /* EnumUtils.swift */,
+				E9393ED72761330E00CB136F /* LogbookEntryViewModel.swift */,
+				E9393ED927614B3E00CB136F /* FloatingNumberField.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -155,42 +126,6 @@
 			productReference = E983423C2757B85800E1C314 /* Logbook.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E98342512757B85A00E1C314 /* LogbookTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E98342692757B85A00E1C314 /* Build configuration list for PBXNativeTarget "LogbookTests" */;
-			buildPhases = (
-				E983424E2757B85A00E1C314 /* Sources */,
-				E983424F2757B85A00E1C314 /* Frameworks */,
-				E98342502757B85A00E1C314 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E98342542757B85A00E1C314 /* PBXTargetDependency */,
-			);
-			name = LogbookTests;
-			productName = LogbookTests;
-			productReference = E98342522757B85A00E1C314 /* LogbookTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		E983425C2757B85A00E1C314 /* LogbookUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E983426C2757B85A00E1C314 /* Build configuration list for PBXNativeTarget "LogbookUITests" */;
-			buildPhases = (
-				E98342592757B85A00E1C314 /* Sources */,
-				E983425A2757B85A00E1C314 /* Frameworks */,
-				E983425B2757B85A00E1C314 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E983425F2757B85A00E1C314 /* PBXTargetDependency */,
-			);
-			name = LogbookUITests;
-			productName = LogbookUITests;
-			productReference = E983425D2757B85A00E1C314 /* LogbookUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -203,14 +138,6 @@
 					E983423B2757B85800E1C314 = {
 						CreatedOnToolsVersion = 12.4;
 					};
-					E98342512757B85A00E1C314 = {
-						CreatedOnToolsVersion = 12.4;
-						TestTargetID = E983423B2757B85800E1C314;
-					};
-					E983425C2757B85A00E1C314 = {
-						CreatedOnToolsVersion = 12.4;
-						TestTargetID = E983423B2757B85800E1C314;
-					};
 				};
 			};
 			buildConfigurationList = E98342372757B85800E1C314 /* Build configuration list for PBXProject "Logbook" */;
@@ -220,6 +147,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = E98342332757B85800E1C314;
 			packageReferences = (
@@ -229,8 +157,6 @@
 			projectRoot = "";
 			targets = (
 				E983423B2757B85800E1C314 /* Logbook */,
-				E98342512757B85A00E1C314 /* LogbookTests */,
-				E983425C2757B85A00E1C314 /* LogbookUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -242,20 +168,6 @@
 			files = (
 				E98342472757B85A00E1C314 /* Preview Assets.xcassets in Resources */,
 				E98342442757B85A00E1C314 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E98342502757B85A00E1C314 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E983425B2757B85A00E1C314 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,40 +184,15 @@
 				E9A7357A2759102B00C6C33E /* EnumUtils.swift in Sources */,
 				E9D4E6F42758FEBB003F36DA /* FloatingTextField.swift in Sources */,
 				E9D4E6FD27590483003F36DA /* NumberUtils.swift in Sources */,
+				E9393EDA27614B3E00CB136F /* FloatingNumberField.swift in Sources */,
 				E98342402757B85800E1C314 /* LogbookApp.swift in Sources */,
+				E9393ED82761330E00CB136F /* LogbookEntryViewModel.swift in Sources */,
 				E91E77E62759373300309C7B /* Data.swift in Sources */,
 				E91E77F327593B4100309C7B /* LogbookTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E983424E2757B85A00E1C314 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E98342592757B85A00E1C314 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		E98342542757B85A00E1C314 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E983423B2757B85800E1C314 /* Logbook */;
-			targetProxy = E98342532757B85A00E1C314 /* PBXContainerItemProxy */;
-		};
-		E983425F2757B85A00E1C314 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E983423B2757B85800E1C314 /* Logbook */;
-			targetProxy = E983425E2757B85A00E1C314 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		E98342642757B85A00E1C314 /* Debug */ = {
@@ -468,90 +355,6 @@
 			};
 			name = Release;
 		};
-		E983426A2757B85A00E1C314 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3JWUJEGD2M;
-				INFOPLIST_FILE = LogbookTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = de.Thomas.LogbookTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Logbook.app/Logbook";
-			};
-			name = Debug;
-		};
-		E983426B2757B85A00E1C314 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3JWUJEGD2M;
-				INFOPLIST_FILE = LogbookTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = de.Thomas.LogbookTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Logbook.app/Logbook";
-			};
-			name = Release;
-		};
-		E983426D2757B85A00E1C314 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3JWUJEGD2M;
-				INFOPLIST_FILE = LogbookUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = de.Thomas.LogbookUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Logbook;
-			};
-			name = Debug;
-		};
-		E983426E2757B85A00E1C314 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3JWUJEGD2M;
-				INFOPLIST_FILE = LogbookUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = de.Thomas.LogbookUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Logbook;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -569,24 +372,6 @@
 			buildConfigurations = (
 				E98342672757B85A00E1C314 /* Debug */,
 				E98342682757B85A00E1C314 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E98342692757B85A00E1C314 /* Build configuration list for PBXNativeTarget "LogbookTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E983426A2757B85A00E1C314 /* Debug */,
-				E983426B2757B85A00E1C314 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E983426C2757B85A00E1C314 /* Build configuration list for PBXNativeTarget "LogbookUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E983426D2757B85A00E1C314 /* Debug */,
-				E983426E2757B85A00E1C314 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
