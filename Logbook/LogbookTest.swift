@@ -20,8 +20,8 @@ struct LogbookTest: View {
     }
 }
 
-struct LogbookTest_Previews: PreviewProvider {
-    static var previews: some View {
-        LogbookTest()
-    }
-}
+//struct LogbookTest_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LogbookTest()
+//    }
+//}
