@@ -11,24 +11,39 @@ import Combine
 
 struct ContentView: View {
     
-    @State var lastLogbookEntries: [Logbook] = []
+    @State private var lastLogbookEntries: [Logbook] = []
     @State private var driver: DriverEnum = .Andrea
     @State private var vehicle: VehicleEnum = .Ferrari
     @State private var date = Date()
     @State private var reason = "Stadtfahrt"
-    @ObservedObject private var currentMileAge = NumbersOnly(value: "123")
-    @ObservedObject private var newMileAge = NumbersOnly(value: "321")
+    @State private var currentMileAge = "0"
+    @State private var newMileAge = ""
     @State private var additionalInformation: AdditionalInformationEnum = .none
     @State private var fuelAmount = 0
     @State private var serviceDescription = ""
     @State private var showingAlert = false
+    @State private var alertTitle = "Alert Title"
+    @State private var alertMessage = "Alert Message"
+    @ObservedObject private var addLoogbookEntryVM = AddLogbookEntryViewModel()
+    
+    @State private var loogbookEntry = Logbook(driver: .Andrea, vehicle: Vehicle(typ: .VW, currentMileAge: 2, newMileAge: 0), date: Date(), driveReason: "Test", additionalInformation: nil)
     
     var body: some View {
         NavigationView {
             Form {
+//                Button("Refresh data") {
+//                    Api().getLogbookEntries{(logbooks) in
+//                        self.lastLogbookEntries = logbooks
+//                        print("Fetch in UI Sucessfully")
+//                    }
+//                }
+//                if(lastLogbookEntries.count > 0) {
+//                    Text("\(lastLogbookEntries[0].vehicle.currentMileAge)")
+//                }
+                
                 Section(header: Text("Fahrerinformationen")) {
                     // Driver Segment Picker
-                    Picker("Fahrer", selection: $driver) {
+                    Picker("Fahrer", selection: $loogbookEntry.driver) {
                         ForEach(DriverEnum.allCases) { driver in
                             Text(driver.rawValue.capitalized).tag(driver)
                         }
@@ -37,11 +52,12 @@ struct ContentView: View {
                     
                     // Date picker
                     DatePicker("Datum",
-                               selection: $date,
+                               selection: $loogbookEntry.date,
                                displayedComponents: [.date])
+                        .environment(\.locale, Locale.init(identifier: "de"))
                     
                     // Reason
-                    FloatingTextField(title: "Reiseziel", text: $reason)
+                    FloatingTextField(title: "Reiseziel", text: $loogbookEntry.driveReason)
                 }
                 
                 // Vehicle Information
@@ -52,18 +68,23 @@ struct ContentView: View {
                             Text(vehicle.rawValue).tag(vehicle)
                         }
                     }
+                    .onChange(of: vehicle) { _ in
+                        loogbookEntry = vehicle == VehicleEnum.VW ? lastLogbookEntries[0] : lastLogbookEntries[1]
+                    }
                     .pickerStyle(SegmentedPickerStyle())
                     
                     HStack {
-                        FloatingTextField(title: "Aktueller Kilometerstand", text: $currentMileAge.value)
+                        
+                        FloatingNumberField(title: "Aktueller Kilometerstand", text: $loogbookEntry.vehicle.currentMileAge)
                             .keyboardType(.decimalPad)
+                        
                         
                         Text("km")
                             .padding(.top, 5)
                     }
                     
                     HStack {
-                        FloatingTextField(title: "Neuer Kilometerstand", text: $newMileAge.value)
+                        FloatingNumberField(title: "Neuer Kilometerstand", text: $loogbookEntry.vehicle.newMileAge)
                             .keyboardType(.decimalPad)
                         
                         Text("km")
@@ -102,8 +123,12 @@ struct ContentView: View {
                 }
                 Section(header: Text("Aktion")) {
                     Button(action: {
+                        addLoogbookEntryVM.saveEntry(logbookEntry: loogbookEntry)
+                        if(addLoogbookEntryVM.brokenValues.count > 0) {
+                            alertTitle = "Fehler!"
+                            alertMessage = addLoogbookEntryVM.brokenValues[0].message
+                        }
                         showingAlert = true
-//                        print(VehicleEnum(rawValue: lastLogbookEntries[1].vehicle.typ))
                     }) {
                         HStack {
                             Spacer()
@@ -116,9 +141,14 @@ struct ContentView: View {
                     .background(Color.green)
                     .cornerRadius(8)
                     .alert(isPresented: $showingAlert) {
-                        Alert(title: Text("Neue Fahrt hinzugefügt"),
-                              message: Text("Neue Fahrt mit P-1km im Fahrzeug P-2 für den Fahrer P-3"),
-                              dismissButton: .default(Text("OK")))
+                        if(addLoogbookEntryVM.brokenValues.count > 0) {
+                            return Alert(title: Text("\(alertTitle)"),
+                                  message: Text("\(alertMessage)"))
+                        } else {
+                            return Alert(title: Text("Neue Fahrt hinzugefügt"),
+                                  message: Text("Neue Fahrt mit P-1km im Fahrzeug P-2 für den Fahrer P-3"),
+                                  dismissButton: .default(Text("OK")))
+                        }
                     }
                     
                     // Delete Last Entry
@@ -159,13 +189,13 @@ struct ContentView: View {
                 }
                 .listRowBackground(Color.pink)
             }
-            
-            
             .navigationTitle("Fahrtenbuch")
             .navigationBarTitleDisplayMode(.large)
         }.onAppear {
             Api().getLogbookEntries{(logbooks) in
                 self.lastLogbookEntries = logbooks
+                loogbookEntry = vehicle == VehicleEnum.VW ? lastLogbookEntries[0] : lastLogbookEntries[1]
+                print("Fetch in UI Sucessfully")
             }
         }
     }
