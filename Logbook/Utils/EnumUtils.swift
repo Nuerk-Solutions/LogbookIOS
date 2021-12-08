@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-enum DriverEnum: String, CaseIterable, Identifiable {
+enum DriverEnum: String, CaseIterable, Identifiable, Codable {
     case Andrea
     case Claudia
     case Oliver
@@ -17,14 +17,14 @@ enum DriverEnum: String, CaseIterable, Identifiable {
     var id: String { self.rawValue }
 }
 
-enum VehicleEnum: String, CaseIterable, Identifiable {
+enum VehicleEnum: String, CaseIterable, Identifiable, Codable {
     case Ferrari
     case VW
     
     var id: String { self.rawValue }
 }
 
-enum AdditionalInformationEnum: String, Equatable, CaseIterable, Identifiable {
+enum AdditionalInformationEnum: String, Equatable, CaseIterable, Identifiable, Codable {
     case none = "Keine"
     case refuled = "Getankt"
     case service = "Gewartet"
