@@ -13,8 +13,12 @@ struct LogbookApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            if #available(iOS 15.0, *) {
+                ContentView()
+                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            } else {
+                // Fallback on earlier versions
+            }
         }
     }
 }

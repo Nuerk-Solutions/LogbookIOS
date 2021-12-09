@@ -17,7 +17,7 @@ struct ContentView: View {
 //    @State private var date = Date()
 //    @State private var reason = "Stadtfahrt"
 //    @State private var currentMileAge = "0"
-//    @State private var newMileAge: Int = -1
+     @State private var newMileAge: String = ""
 //    @State private var additionalInformation: AdditionalInformationEnum = .none
 //    @State private var fuelAmount = 0
 //    @State private var serviceDescription = ""
@@ -25,6 +25,7 @@ struct ContentView: View {
     @State private var alertTitle = "Alert Title"
     @State private var alertMessage = "Alert Message"
     @ObservedObject private var addLoogbookEntryVM = AddLogbookEntryViewModel()
+    
     
     @State private var isLoading = true
     
@@ -61,28 +62,31 @@ struct ContentView: View {
                         // Vehicle Information
                         Section(header: Text("Fahrzeuginformationen"), content: {
                             // Vehicle Segment Picker
-                            Picker("Fahrzeug", selection: $currentLogbook.vehicle) {
+                            Picker("Fahrzeug", selection: $currentLogbook.vehicle.typ) {
                                 ForEach(VehicleEnum.allCases) { vehicle in
                                     Text(vehicle.rawValue).tag(vehicle)
                                 }
                             }
-                            //.onChange(of: vehicle) { _ in
-                                //currentLogbook.vehicle = currentLogbook.vehicle == VehicleEnum.VW ? lastLogbooks[0] : lastLogbooks[1]
-                            //}
+                            .onChange(of: currentLogbook.vehicle.typ) { _ in
+                                UIApplication.shared.endEditing()
+                            }
                             .pickerStyle(SegmentedPickerStyle())
                             
                             HStack {
                                 
                                 FloatingNumberField(title: "Aktueller Kilometerstand", text: $currentLogbook.vehicle.currentMileAge)
                                     .keyboardType(.decimalPad)
-                                
+                                    .onChange(of: currentLogbook.vehicle.typ) { _ in
+                                        let currentMilAge = currentLogbook.vehicle.typ == VehicleEnum.VW ? lastLogbooks[0].vehicle.currentMileAge : lastLogbooks[1].vehicle.currentMileAge
+                                        currentLogbook.vehicle = Vehicle(typ: currentLogbook.vehicle.typ, currentMileAge: currentMilAge, newMileAge: currentMilAge + 1)
+                                    }
                                 
                                 Text("km")
                                     .padding(.top, 5)
                             }
                             
                             HStack {
-                                FloatingNumberField(title: "Neuer Kilometerstand", text: $currentLogbook.vehicle.newMileAge)
+                                FloatingTextField(title: "Neuer Kilometerstand", text: $newMileAge)
                                     .keyboardType(.decimalPad)
                                 
                                 Text("km")
@@ -122,6 +126,7 @@ struct ContentView: View {
                         Section(header: Text("Aktion")) {
                             Button(action: {
                                 addLoogbookEntryVM.saveEntry(logbookEntry: currentLogbook)
+                                currentLogbook.vehicle.newMileAge = Int(newMileAge) ?? 0
                                 if(addLoogbookEntryVM.brokenValues.count > 0) {
                                     alertTitle = "Fehler!"
                                     alertMessage = addLoogbookEntryVM.brokenValues[0].message
@@ -144,7 +149,7 @@ struct ContentView: View {
                                                  message: Text("\(alertMessage)"))
                                 } else {
                                     return Alert(title: Text("Neue Fahrt hinzugefügt"),
-                                                 message: Text("Neue Fahrt mit P-1km im Fahrzeug P-2 für den Fahrer P-3"),
+                                                 message: Text("\(currentLogbook.vehicle.newMileAge)"),
                                                  dismissButton: .default(Text("OK")))
                                 }
                             }
@@ -197,7 +202,15 @@ struct ContentView: View {
                 Api().getLogbookEntries{(logbooks, error)  in
                     if(error == nil) {
                         self.lastLogbooks = logbooks!
-                        currentLogbook = vehicle == VehicleEnum.VW ? lastLogbooks[0] : lastLogbooks[1]
+                        
+                        let currentMilAge = currentLogbook.vehicle.typ == VehicleEnum.VW ? lastLogbooks[0].vehicle.currentMileAge : lastLogbooks[1].vehicle.currentMileAge
+                        
+                        if (currentLogbook.vehicle.typ == VehicleEnum.VW) {
+                            currentLogbook.vehicle = Vehicle(typ: .VW, currentMileAge: currentMilAge, newMileAge: currentMilAge + 1)
+                        } else {
+                            currentLogbook.vehicle = Vehicle(typ: .Ferrari, currentMileAge: currentMilAge, newMileAge: currentMilAge + 1)
+                        }
+                        
                         isLoading = false
                         print("Fetch in UI Sucessfully")
                     } else {
@@ -214,7 +227,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
-
