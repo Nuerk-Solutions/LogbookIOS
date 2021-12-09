@@ -13,7 +13,7 @@ struct FloatingNumberField: View {
     
     var body: some View {
         ZStack(alignment: .leading) {
-            let isEmpty = String(text.wrappedValue).isEmpty
+            let isEmpty = String(text.wrappedValue).isEmpty || text.wrappedValue == -1
             Text(title)
                 .foregroundColor(isEmpty ? Color(.placeholderText) : .accentColor)
                 .offset(y: isEmpty ? 0 : -25)
