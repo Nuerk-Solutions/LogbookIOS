@@ -16,7 +16,7 @@ struct Logbook: Codable, Identifiable {
     var additionalInformation: AdditionalInformation?
 }
 
-struct Vehicle: Codable, Identifiable {
+struct Vehicle: Codable, Identifiable, Hashable {
     let id = UUID()
     
     var typ: VehicleEnum
