@@ -11,49 +11,37 @@ import Combine
 
 struct ContentView: View {
     
-    @State private var lastLogbookEntries: [Logbook] = []
-    @State private var driver: DriverEnum = .Andrea
-    @State private var vehicle: VehicleEnum = .Ferrari
-    @State private var date = Date()
-    @State private var reason = "Stadtfahrt"
-    @State private var currentMileAge = "0"
-    @State private var newMileAge = ""
-    @State private var additionalInformation: AdditionalInformationEnum = .none
-    @State private var fuelAmount = 0
-    @State private var serviceDescription = ""
+    @State private var lastLogbooks: [Logbook] = []
+//    @State private var driver: DriverEnum = .Andrea
+//    @State private var vehicle: VehicleEnum = .Ferrari
+//    @State private var date = Date()
+//    @State private var reason = "Stadtfahrt"
+//    @State private var currentMileAge = "0"
+//    @State private var newMileAge: Int = -1
+//    @State private var additionalInformation: AdditionalInformationEnum = .none
+//    @State private var fuelAmount = 0
+//    @State private var serviceDescription = ""
     @State private var showingAlert = false
     @State private var alertTitle = "Alert Title"
     @State private var alertMessage = "Alert Message"
     @ObservedObject private var addLoogbookEntryVM = AddLogbookEntryViewModel()
     
     @State private var isLoading = true
-    @State private var showDetails = false
     
-    
-    @State private var loogbookEntry = Logbook(driver: .Andrea, vehicle: Vehicle(typ: .VW, currentMileAge: 0, newMileAge: 0), date: Date(), driveReason: "", additionalInformation: nil)
+    @State private var currentLogbook = Logbook(driver: .Andrea, vehicle: Vehicle(typ: .Ferrari, currentMileAge: 0, newMileAge: 0), date: Date(), driveReason: "Stadtfahrt", additionalInformation: nil)
     
     var body: some View {
         ZStack {
-            //if(isLoading) {
-             //   CircleLoader()
-             //       .transition(AnyTransition.opacity.animation(.linear(duration: 2).delay(3)))
-            //}
+            if(isLoading) {
+               CircleLoader()
+                   .transition(AnyTransition.opacity.animation(.linear(duration: 2).delay(3)))
+            }
             if !isLoading {
                 NavigationView {
                     Form {
-                        //                Button("Refresh data") {
-                        //                    Api().getLogbookEntries{(logbooks) in
-                        //                        self.lastLogbookEntries = logbooks
-                        //                        print("Fetch in UI Sucessfully")
-                        //                    }
-                        //                }
-                        //                if(lastLogbookEntries.count > 0) {
-                        //                    Text("\(lastLogbookEntries[0].vehicle.currentMileAge)")
-                        //                }
-                        
                         Section(header: Text("Fahrerinformationen")) {
                             // Driver Segment Picker
-                            Picker("Fahrer", selection: $loogbookEntry.driver) {
+                            Picker("Fahrer", selection: $currentLogbook.driver) {
                                 ForEach(DriverEnum.allCases) { driver in
                                     Text(driver.rawValue.capitalized).tag(driver)
                                 }
@@ -62,30 +50,30 @@ struct ContentView: View {
                             
                             // Date picker
                             DatePicker("Datum",
-                                       selection: $loogbookEntry.date,
+                                       selection: $currentLogbook.date,
                                        displayedComponents: [.date])
                                 .environment(\.locale, Locale.init(identifier: "de"))
                             
                             // Reason
-                            FloatingTextField(title: "Reiseziel", text: $loogbookEntry.driveReason)
+                            FloatingTextField(title: "Reiseziel", text: $currentLogbook.driveReason)
                         }
                         
                         // Vehicle Information
                         Section(header: Text("Fahrzeuginformationen"), content: {
                             // Vehicle Segment Picker
-                            Picker("Fahrzeug", selection: $vehicle) {
+                            Picker("Fahrzeug", selection: $currentLogbook.vehicle) {
                                 ForEach(VehicleEnum.allCases) { vehicle in
                                     Text(vehicle.rawValue).tag(vehicle)
                                 }
                             }
-                            .onChange(of: vehicle) { _ in
-                                loogbookEntry = vehicle == VehicleEnum.VW ? lastLogbookEntries[0] : lastLogbookEntries[1]
-                            }
+                            //.onChange(of: vehicle) { _ in
+                                //currentLogbook.vehicle = currentLogbook.vehicle == VehicleEnum.VW ? lastLogbooks[0] : lastLogbooks[1]
+                            //}
                             .pickerStyle(SegmentedPickerStyle())
                             
                             HStack {
                                 
-                                FloatingNumberField(title: "Aktueller Kilometerstand", text: $loogbookEntry.vehicle.currentMileAge)
+                                FloatingNumberField(title: "Aktueller Kilometerstand", text: $currentLogbook.vehicle.currentMileAge)
                                     .keyboardType(.decimalPad)
                                 
                                 
@@ -94,7 +82,7 @@ struct ContentView: View {
                             }
                             
                             HStack {
-                                FloatingNumberField(title: "Neuer Kilometerstand", text: $loogbookEntry.vehicle.newMileAge)
+                                FloatingNumberField(title: "Neuer Kilometerstand", text: $currentLogbook.vehicle.newMileAge)
                                     .keyboardType(.decimalPad)
                                 
                                 Text("km")
@@ -103,37 +91,37 @@ struct ContentView: View {
                             
                         })
                         
-                        Section(header: Text("Zusätzliche Information")) {
-                            
-                            Menu {
-                                ForEach(AdditionalInformationEnum.allCases, id: \.self){ item in
-                                    Button(item.rawValue) {
-                                        self.additionalInformation = item
-                                    }
-                                }
-                            } label: {
-                                VStack(spacing: 5){
-                                    HStack{
-                                        Text(LocalizedStringKey(additionalInformation.rawValue) == AdditionalInformationEnum.none.localizedName ? AdditionalInformationEnum.none.localizedName : additionalInformation.localizedName).tag(additionalInformation)
-                                            .foregroundColor(additionalInformation == AdditionalInformationEnum.none ? .gray : .black)
-                                        Spacer()
-                                        Image(systemName: "chevron.down")
-                                            .foregroundColor(Color.blue)
-                                            .font(Font.system(size: 20, weight: .bold))
-                                    }
-                                    if(additionalInformation == AdditionalInformationEnum.none) {
-                                        Rectangle()
-                                            .fill(Color.blue)
-                                            .frame(height: 2)
-                                            .padding(.top, 1)
-                                    }
-                                    
-                                }
-                            }
-                        }
+//                        Section(header: Text("Zusätzliche Information")) {
+//
+//                            Menu {
+//                                ForEach(AdditionalInformationEnum.allCases, id: \.self){ item in
+//                                    Button(item.rawValue) {
+//                                        currentLogbook.additionalInformation?.informationTyp = item
+//                                    }
+//                                }
+//                            } label: {
+//                                VStack(spacing: 5){
+//                                    HStack{
+//                                        Text(LocalizedStringKey(additionalInformation.rawValue) == AdditionalInformationEnum.none.localizedName ? AdditionalInformationEnum.none.localizedName : additionalInformation.localizedName).tag(additionalInformation)
+//                                            .foregroundColor(additionalInformation == AdditionalInformationEnum.none ? .gray : .black)
+//                                        Spacer()
+//                                        Image(systemName: "chevron.down")
+//                                            .foregroundColor(Color.blue)
+//                                            .font(Font.system(size: 20, weight: .bold))
+//                                    }
+//                                    if(currentLogbook.additionalInformation?.informationTyp == AdditionalInformationEnum.none) {
+//                                        Rectangle()
+//                                            .fill(Color.blue)
+//                                            .frame(height: 2)
+//                                            .padding(.top, 1)
+//                                    }
+//
+//                                }
+//                            }
+//                        }
                         Section(header: Text("Aktion")) {
                             Button(action: {
-                                addLoogbookEntryVM.saveEntry(logbookEntry: loogbookEntry)
+                                addLoogbookEntryVM.saveEntry(logbookEntry: currentLogbook)
                                 if(addLoogbookEntryVM.brokenValues.count > 0) {
                                     alertTitle = "Fehler!"
                                     alertMessage = addLoogbookEntryVM.brokenValues[0].message
@@ -202,13 +190,14 @@ struct ContentView: View {
                     .navigationTitle(Text("Fahrtenbuch"))
                 }
                 .navigationViewStyle(.stack)
-                //.transition(AnyTransition.opacity.animation(.linear(duration: 2).delay(1)))
+                .transition(AnyTransition.opacity.animation(.linear(duration: 2).delay(1)))
             }
         }
         .onAppear {
                 Api().getLogbookEntries{(logbooks, error)  in
                     if(error == nil) {
-                        loogbookEntry = vehicle == VehicleEnum.VW ? lastLogbookEntries[0] : lastLogbookEntries[1]
+                        self.lastLogbooks = logbooks!
+                        currentLogbook = vehicle == VehicleEnum.VW ? lastLogbooks[0] : lastLogbooks[1]
                         isLoading = false
                         print("Fetch in UI Sucessfully")
                     } else {
