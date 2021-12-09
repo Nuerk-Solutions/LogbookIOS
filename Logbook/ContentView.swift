@@ -26,177 +26,199 @@ struct ContentView: View {
     @State private var alertMessage = "Alert Message"
     @ObservedObject private var addLoogbookEntryVM = AddLogbookEntryViewModel()
     
-    @State private var loogbookEntry = Logbook(driver: .Andrea, vehicle: Vehicle(typ: .VW, currentMileAge: 2, newMileAge: 0), date: Date(), driveReason: "Test", additionalInformation: nil)
+    @State private var isLoading = true
+    @State private var showDetails = false
+    
+    
+    @State private var loogbookEntry = Logbook(driver: .Andrea, vehicle: Vehicle(typ: .VW, currentMileAge: 0, newMileAge: 0), date: Date(), driveReason: "", additionalInformation: nil)
     
     var body: some View {
-        NavigationView {
-            Form {
-//                Button("Refresh data") {
-//                    Api().getLogbookEntries{(logbooks) in
-//                        self.lastLogbookEntries = logbooks
-//                        print("Fetch in UI Sucessfully")
-//                    }
-//                }
-//                if(lastLogbookEntries.count > 0) {
-//                    Text("\(lastLogbookEntries[0].vehicle.currentMileAge)")
-//                }
-                
-                Section(header: Text("Fahrerinformationen")) {
-                    // Driver Segment Picker
-                    Picker("Fahrer", selection: $loogbookEntry.driver) {
-                        ForEach(DriverEnum.allCases) { driver in
-                            Text(driver.rawValue.capitalized).tag(driver)
-                        }
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
-                    
-                    // Date picker
-                    DatePicker("Datum",
-                               selection: $loogbookEntry.date,
-                               displayedComponents: [.date])
-                        .environment(\.locale, Locale.init(identifier: "de"))
-                    
-                    // Reason
-                    FloatingTextField(title: "Reiseziel", text: $loogbookEntry.driveReason)
-                }
-                
-                // Vehicle Information
-                Section(header: Text("Fahrzeuginformationen"), content: {
-                    // Vehicle Segment Picker
-                    Picker("Fahrzeug", selection: $vehicle) {
-                        ForEach(VehicleEnum.allCases) { vehicle in
-                            Text(vehicle.rawValue).tag(vehicle)
-                        }
-                    }
-                    .onChange(of: vehicle) { _ in
-                        loogbookEntry = vehicle == VehicleEnum.VW ? lastLogbookEntries[0] : lastLogbookEntries[1]
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
-                    
-                    HStack {
+        ZStack {
+            //if(isLoading) {
+             //   CircleLoader()
+             //       .transition(AnyTransition.opacity.animation(.linear(duration: 2).delay(3)))
+            //}
+            if !isLoading {
+                NavigationView {
+                    Form {
+                        //                Button("Refresh data") {
+                        //                    Api().getLogbookEntries{(logbooks) in
+                        //                        self.lastLogbookEntries = logbooks
+                        //                        print("Fetch in UI Sucessfully")
+                        //                    }
+                        //                }
+                        //                if(lastLogbookEntries.count > 0) {
+                        //                    Text("\(lastLogbookEntries[0].vehicle.currentMileAge)")
+                        //                }
                         
-                        FloatingNumberField(title: "Aktueller Kilometerstand", text: $loogbookEntry.vehicle.currentMileAge)
-                            .keyboardType(.decimalPad)
-                        
-                        
-                        Text("km")
-                            .padding(.top, 5)
-                    }
-                    
-                    HStack {
-                        FloatingNumberField(title: "Neuer Kilometerstand", text: $loogbookEntry.vehicle.newMileAge)
-                            .keyboardType(.decimalPad)
-                        
-                        Text("km")
-                            .padding(.top, 5)
-                    }
-                    
-                })
-                
-                Section(header: Text("Zusätzliche Information")) {
-                    
-                    Menu {
-                        ForEach(AdditionalInformationEnum.allCases, id: \.self){ item in
-                            Button(item.rawValue) {
-                                self.additionalInformation = item
+                        Section(header: Text("Fahrerinformationen")) {
+                            // Driver Segment Picker
+                            Picker("Fahrer", selection: $loogbookEntry.driver) {
+                                ForEach(DriverEnum.allCases) { driver in
+                                    Text(driver.rawValue.capitalized).tag(driver)
+                                }
                             }
+                            .pickerStyle(SegmentedPickerStyle())
+                            
+                            // Date picker
+                            DatePicker("Datum",
+                                       selection: $loogbookEntry.date,
+                                       displayedComponents: [.date])
+                                .environment(\.locale, Locale.init(identifier: "de"))
+                            
+                            // Reason
+                            FloatingTextField(title: "Reiseziel", text: $loogbookEntry.driveReason)
                         }
-                    } label: {
-                        VStack(spacing: 5){
-                            HStack{
-                                Text(LocalizedStringKey(additionalInformation.rawValue) == AdditionalInformationEnum.none.localizedName ? AdditionalInformationEnum.none.localizedName : additionalInformation.localizedName).tag(additionalInformation)
-                                    .foregroundColor(additionalInformation == AdditionalInformationEnum.none ? .gray : .black)
-                                Spacer()
-                                Image(systemName: "chevron.down")
-                                    .foregroundColor(Color.blue)
-                                    .font(Font.system(size: 20, weight: .bold))
+                        
+                        // Vehicle Information
+                        Section(header: Text("Fahrzeuginformationen"), content: {
+                            // Vehicle Segment Picker
+                            Picker("Fahrzeug", selection: $vehicle) {
+                                ForEach(VehicleEnum.allCases) { vehicle in
+                                    Text(vehicle.rawValue).tag(vehicle)
+                                }
                             }
-                            if(additionalInformation == AdditionalInformationEnum.none) {
-                                Rectangle()
-                                    .fill(Color.blue)
-                                    .frame(height: 2)
-                                    .padding(.top, 1)
+                            .onChange(of: vehicle) { _ in
+                                loogbookEntry = vehicle == VehicleEnum.VW ? lastLogbookEntries[0] : lastLogbookEntries[1]
+                            }
+                            .pickerStyle(SegmentedPickerStyle())
+                            
+                            HStack {
+                                
+                                FloatingNumberField(title: "Aktueller Kilometerstand", text: $loogbookEntry.vehicle.currentMileAge)
+                                    .keyboardType(.decimalPad)
+                                
+                                
+                                Text("km")
+                                    .padding(.top, 5)
                             }
                             
+                            HStack {
+                                FloatingNumberField(title: "Neuer Kilometerstand", text: $loogbookEntry.vehicle.newMileAge)
+                                    .keyboardType(.decimalPad)
+                                
+                                Text("km")
+                                    .padding(.top, 5)
+                            }
+                            
+                        })
+                        
+                        Section(header: Text("Zusätzliche Information")) {
+                            
+                            Menu {
+                                ForEach(AdditionalInformationEnum.allCases, id: \.self){ item in
+                                    Button(item.rawValue) {
+                                        self.additionalInformation = item
+                                    }
+                                }
+                            } label: {
+                                VStack(spacing: 5){
+                                    HStack{
+                                        Text(LocalizedStringKey(additionalInformation.rawValue) == AdditionalInformationEnum.none.localizedName ? AdditionalInformationEnum.none.localizedName : additionalInformation.localizedName).tag(additionalInformation)
+                                            .foregroundColor(additionalInformation == AdditionalInformationEnum.none ? .gray : .black)
+                                        Spacer()
+                                        Image(systemName: "chevron.down")
+                                            .foregroundColor(Color.blue)
+                                            .font(Font.system(size: 20, weight: .bold))
+                                    }
+                                    if(additionalInformation == AdditionalInformationEnum.none) {
+                                        Rectangle()
+                                            .fill(Color.blue)
+                                            .frame(height: 2)
+                                            .padding(.top, 1)
+                                    }
+                                    
+                                }
+                            }
                         }
+                        Section(header: Text("Aktion")) {
+                            Button(action: {
+                                addLoogbookEntryVM.saveEntry(logbookEntry: loogbookEntry)
+                                if(addLoogbookEntryVM.brokenValues.count > 0) {
+                                    alertTitle = "Fehler!"
+                                    alertMessage = addLoogbookEntryVM.brokenValues[0].message
+                                }
+                                showingAlert = true
+                            }) {
+                                HStack {
+                                    Spacer()
+                                    Text("Speichern")
+                                    Spacer()
+                                }
+                            }
+                            .foregroundColor(.white)
+                            .padding(15)
+                            .background(Color.green)
+                            .cornerRadius(8)
+                            .alert(isPresented: $showingAlert) {
+                                if(addLoogbookEntryVM.brokenValues.count > 0) {
+                                    return Alert(title: Text("\(alertTitle)"),
+                                                 message: Text("\(alertMessage)"))
+                                } else {
+                                    return Alert(title: Text("Neue Fahrt hinzugefügt"),
+                                                 message: Text("Neue Fahrt mit P-1km im Fahrzeug P-2 für den Fahrer P-3"),
+                                                 dismissButton: .default(Text("OK")))
+                                }
+                            }
+                            
+                            // Delete Last Entry
+                            Button(action: {
+                                showingAlert = true
+                            }) {
+                                HStack {
+                                    Spacer()
+                                    Text("Letzten Eintrag Löschen")
+                                    Spacer()
+                                }
+                            }
+                            .foregroundColor(.white)
+                            .padding(10)
+                            .background(Color.red)
+                            .cornerRadius(8)
+                            .alert(isPresented: $showingAlert) {
+                                Alert(title: Text("Letzten Eintrag Löschen"),
+                                      message: Text("Die letzte Fahrt für P-1 gelöscht"),
+                                      dismissButton: .default(Text("OK")))
+                            }
+                        }
+                        // Download XLSX
+                        Button(action: {
+                            showingAlert = true
+                        }) {
+                            HStack {
+                                Spacer()
+                                Text("Download XLSX")
+                                Spacer()
+                            }
+                        }
+                        .foregroundColor(.white)
+                        .padding(10)
+                        .cornerRadius(8)
+                        .alert(isPresented: $showingAlert) {
+                            Alert(title: Text("Öffne Safari..."))
+                        }
+                        .listRowBackground(Color.pink)
                     }
+                    .navigationTitle(Text("Fahrtenbuch"))
                 }
-                Section(header: Text("Aktion")) {
-                    Button(action: {
-                        addLoogbookEntryVM.saveEntry(logbookEntry: loogbookEntry)
-                        if(addLoogbookEntryVM.brokenValues.count > 0) {
-                            alertTitle = "Fehler!"
-                            alertMessage = addLoogbookEntryVM.brokenValues[0].message
-                        }
-                        showingAlert = true
-                    }) {
-                        HStack {
-                            Spacer()
-                            Text("Speichern")
-                            Spacer()
-                        }
-                    }
-                    .foregroundColor(.white)
-                    .padding(15)
-                    .background(Color.green)
-                    .cornerRadius(8)
-                    .alert(isPresented: $showingAlert) {
-                        if(addLoogbookEntryVM.brokenValues.count > 0) {
-                            return Alert(title: Text("\(alertTitle)"),
-                                  message: Text("\(alertMessage)"))
-                        } else {
-                            return Alert(title: Text("Neue Fahrt hinzugefügt"),
-                                  message: Text("Neue Fahrt mit P-1km im Fahrzeug P-2 für den Fahrer P-3"),
-                                  dismissButton: .default(Text("OK")))
-                        }
-                    }
-                    
-                    // Delete Last Entry
-                    Button(action: {
-                        showingAlert = true
-                    }) {
-                        HStack {
-                            Spacer()
-                            Text("Letzten Eintrag Löschen")
-                            Spacer()
-                        }
-                    }
-                    .foregroundColor(.white)
-                    .padding(10)
-                    .background(Color.red)
-                    .cornerRadius(8)
-                    .alert(isPresented: $showingAlert) {
-                        Alert(title: Text("Letzten Eintrag Löschen"),
-                              message: Text("Die letzte Fahrt für P-1 gelöscht"),
-                              dismissButton: .default(Text("OK")))
-                    }
-                }
-                // Download XLSX
-                Button(action: {
-                    showingAlert = true
-                }) {
-                    HStack {
-                        Spacer()
-                        Text("Download XLSX")
-                        Spacer()
-                    }
-                }
-                .foregroundColor(.white)
-                .padding(10)
-                .cornerRadius(8)
-                .alert(isPresented: $showingAlert) {
-                    Alert(title: Text("Öffne Safari..."))
-                }
-                .listRowBackground(Color.pink)
+                .navigationViewStyle(.stack)
+                //.transition(AnyTransition.opacity.animation(.linear(duration: 2).delay(1)))
             }
-            .navigationTitle("Fahrtenbuch")
-            .navigationBarTitleDisplayMode(.large)
-        }.onAppear {
-            Api().getLogbookEntries{(logbooks) in
-                self.lastLogbookEntries = logbooks
-                loogbookEntry = vehicle == VehicleEnum.VW ? lastLogbookEntries[0] : lastLogbookEntries[1]
-                print("Fetch in UI Sucessfully")
-            }
+        }
+        .onAppear {
+                Api().getLogbookEntries{(logbooks, error)  in
+                    if(error == nil) {
+                        loogbookEntry = vehicle == VehicleEnum.VW ? lastLogbookEntries[0] : lastLogbookEntries[1]
+                        isLoading = false
+                        print("Fetch in UI Sucessfully")
+                    } else {
+                        if(error! as! HttpError == HttpError.statusNot200) {
+                            showingAlert = true
+                        }
+                    }
+                }
+        }.alert(isPresented: $showingAlert) {
+            Alert(title: Text("Verbindungsfehler!"), message: Text("Es konnte keine Verbindung zum Server hergestellt werden"), dismissButton: .none)
         }
     }
 }
