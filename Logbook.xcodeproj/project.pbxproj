@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,8 @@
 		E98342472757B85A00E1C314 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E98342462757B85A00E1C314 /* Preview Assets.xcassets */; };
 		E98342492757B85A00E1C314 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98342482757B85A00E1C314 /* Persistence.swift */; };
 		E983424C2757B85A00E1C314 /* Logbook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E983424A2757B85A00E1C314 /* Logbook.xcdatamodeld */; };
+		E9881B9827650CCF00BE53CC /* Car_load.gif in Resources */ = {isa = PBXBuildFile; fileRef = E9881B9727650CCF00BE53CC /* Car_load.gif */; };
+		E9881B9B27650DC200BE53CC /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E9881B9A27650DC200BE53CC /* SDWebImageSwiftUI */; };
 		E9A7357A2759102B00C6C33E /* EnumUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A735792759102B00C6C33E /* EnumUtils.swift */; };
 		E9B828A82762803A00C83A2E /* HttpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B828A72762803900C83A2E /* HttpError.swift */; };
 		E9B828AA2762AAA700C83A2E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B828A92762AAA700C83A2E /* Extensions.swift */; };
@@ -36,6 +38,7 @@
 		E98342482757B85A00E1C314 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		E983424B2757B85A00E1C314 /* Logbook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Logbook.xcdatamodel; sourceTree = "<group>"; };
 		E983424D2757B85A00E1C314 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E9881B9727650CCF00BE53CC /* Car_load.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Car_load.gif; sourceTree = "<group>"; };
 		E9A735792759102B00C6C33E /* EnumUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumUtils.swift; sourceTree = "<group>"; };
 		E9B828A72762803900C83A2E /* HttpError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpError.swift; sourceTree = "<group>"; };
 		E9B828A92762AAA700C83A2E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -49,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9881B9B27650DC200BE53CC /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +78,7 @@
 		E983423E2757B85800E1C314 /* Logbook */ = {
 			isa = PBXGroup;
 			children = (
+				E9881B9627650CB700BE53CC /* Shared */,
 				E9D4E6FB2759046F003F36DA /* Utils */,
 				E983423F2757B85800E1C314 /* LogbookApp.swift */,
 				E98342412757B85800E1C314 /* ContentView.swift */,
@@ -95,6 +100,14 @@
 				E98342462757B85A00E1C314 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E9881B9627650CB700BE53CC /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				E9881B9727650CCF00BE53CC /* Car_load.gif */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		E9D4E6FB2759046F003F36DA /* Utils */ = {
@@ -127,6 +140,7 @@
 			);
 			name = Logbook;
 			packageProductDependencies = (
+				E9881B9A27650DC200BE53CC /* SDWebImageSwiftUI */,
 			);
 			productName = Logbook;
 			productReference = E983423C2757B85800E1C314 /* Logbook.app */;
@@ -157,6 +171,7 @@
 			);
 			mainGroup = E98342332757B85800E1C314;
 			packageReferences = (
+				E9881B9927650DC200BE53CC /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = E983423D2757B85800E1C314 /* Products */;
 			projectDirPath = "";
@@ -172,6 +187,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9881B9827650CCF00BE53CC /* Car_load.gif in Resources */,
 				E98342472757B85A00E1C314 /* Preview Assets.xcassets in Resources */,
 				E98342442757B85A00E1C314 /* Assets.xcassets in Resources */,
 			);
@@ -385,6 +401,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E9881B9927650DC200BE53CC /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E9881B9A27650DC200BE53CC /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E9881B9927650DC200BE53CC /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		E983424A2757B85A00E1C314 /* Logbook.xcdatamodeld */ = {
