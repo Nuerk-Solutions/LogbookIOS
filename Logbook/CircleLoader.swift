@@ -26,7 +26,7 @@ struct CircleLoader: View {
      // MARK:- views
     var body: some View {
         ZStack {
-            Color.blue
+            Color.white
                 .ignoresSafeArea(.all, edges: .all)
             
             ZStack {

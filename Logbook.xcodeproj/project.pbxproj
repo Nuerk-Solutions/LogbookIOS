@@ -10,6 +10,9 @@
 		E91E77E62759373300309C7B /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91E77E52759373300309C7B /* Data.swift */; };
 		E9393ED82761330E00CB136F /* LogbookEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9393ED72761330E00CB136F /* LogbookEntryViewModel.swift */; };
 		E9393EDA27614B3E00CB136F /* FloatingNumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9393ED927614B3E00CB136F /* FloatingNumberField.swift */; };
+		E963FC352766549300FFBD00 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963FC342766549300FFBD00 /* MainView.swift */; };
+		E963FC37276655C000FFBD00 /* TransitionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963FC36276655C000FFBD00 /* TransitionExtension.swift */; };
+		E963FC39276660A800FFBD00 /* Car_load.gif in Resources */ = {isa = PBXBuildFile; fileRef = E963FC38276660A800FFBD00 /* Car_load.gif */; };
 		E97D91B32765379900681B72 /* Car_load_new.gif in Resources */ = {isa = PBXBuildFile; fileRef = E97D91B22765379900681B72 /* Car_load_new.gif */; };
 		E98342402757B85800E1C314 /* LogbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E983423F2757B85800E1C314 /* LogbookApp.swift */; };
 		E98342422757B85800E1C314 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98342412757B85800E1C314 /* ContentView.swift */; };
@@ -30,6 +33,9 @@
 		E91E77E52759373300309C7B /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		E9393ED72761330E00CB136F /* LogbookEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookEntryViewModel.swift; sourceTree = "<group>"; };
 		E9393ED927614B3E00CB136F /* FloatingNumberField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingNumberField.swift; sourceTree = "<group>"; };
+		E963FC342766549300FFBD00 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		E963FC36276655C000FFBD00 /* TransitionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionExtension.swift; sourceTree = "<group>"; };
+		E963FC38276660A800FFBD00 /* Car_load.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Car_load.gif; sourceTree = "<group>"; };
 		E97D91B22765379900681B72 /* Car_load_new.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Car_load_new.gif; sourceTree = "<group>"; };
 		E983423C2757B85800E1C314 /* Logbook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Logbook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E983423F2757B85800E1C314 /* LogbookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookApp.swift; sourceTree = "<group>"; };
@@ -90,6 +96,8 @@
 				E91E77E52759373300309C7B /* Data.swift */,
 				E9EAEF4627627673005FE0BC /* CircleLoader.swift */,
 				E9B828A72762803900C83A2E /* HttpError.swift */,
+				E963FC342766549300FFBD00 /* MainView.swift */,
+				E963FC36276655C000FFBD00 /* TransitionExtension.swift */,
 			);
 			path = Logbook;
 			sourceTree = "<group>";
@@ -105,6 +113,7 @@
 		E9881B9627650CB700BE53CC /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				E963FC38276660A800FFBD00 /* Car_load.gif */,
 				E97D91B22765379900681B72 /* Car_load_new.gif */,
 			);
 			path = Shared;
@@ -188,6 +197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E98342472757B85A00E1C314 /* Preview Assets.xcassets in Resources */,
+				E963FC39276660A800FFBD00 /* Car_load.gif in Resources */,
 				E97D91B32765379900681B72 /* Car_load_new.gif in Resources */,
 				E98342442757B85A00E1C314 /* Assets.xcassets in Resources */,
 			);
@@ -201,7 +211,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E98342492757B85A00E1C314 /* Persistence.swift in Sources */,
+				E963FC352766549300FFBD00 /* MainView.swift in Sources */,
 				E983424C2757B85A00E1C314 /* Logbook.xcdatamodeld in Sources */,
+				E963FC37276655C000FFBD00 /* TransitionExtension.swift in Sources */,
 				E98342422757B85800E1C314 /* ContentView.swift in Sources */,
 				E9B828A82762803A00C83A2E /* HttpError.swift in Sources */,
 				E9A7357A2759102B00C6C33E /* EnumUtils.swift in Sources */,
