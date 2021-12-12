@@ -244,66 +244,38 @@ struct ContentView_Previews: PreviewProvider {
 
 struct SplashScreen: View {
     @State private var animationFinished = false
-    @State private var animate = false
+    @State private var animate = true
     @State private var endSplash = false
     @State private var positionX = 0
     var body: some View {
         ZStack {
             ZStack {
                 Home()
-                Color.blue
-                    .ignoresSafeArea(.all, edges: .all)
                 
-                if !animate {
+                if animate {
                     Color("BG")
                         .ignoresSafeArea(.all, edges: .all)
                         .zIndex(1)
-                        .transition(AnyTransition.iris)
-                                    AnimatedImage(url: getImageURL())
-                                        .resizable()
-                                        .renderingMode(.original)
-                                        .aspectRatio(contentMode: .fit)
-                                        .zIndex(2)
-                                        .frame(width: 350, height: 350)
-                                        .transition(AnyTransition.iris)
+                        .transition(AnyTransition.iris.combined(with: .opacity.animation(.easeInOut(duration: 0.5))))
+                    AnimatedImage(url: getImageURL())
+                        .playbackRate(1.2)
+                        .resizable()
+                        .renderingMode(.original)
+                        .aspectRatio(contentMode: .fit)
+                        .zIndex(2)
+                        .frame(width: 350, height: 350)
+                        .transition(AnyTransition.iris.combined(with: .opacity.animation(.easeIn(duration: 0.1))))
                 }
             }
-            .onTapGesture {
+            .onAppear {
                 withAnimation(.easeInOut) {
-                    animate.toggle()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.85) {
+                        withAnimation(.easeInOut(duration: 0.3)) {
+                            animate.toggle()
+                        }
+                    }
                 }
             }
-//            ZStack {
-//                AnimatedImage(url: getImageURL())
-//                    .resizable()
-//                    .renderingMode(.original)
-//                    .aspectRatio(contentMode: .fit)
-//                    .frame(width: 350, height: 350)
-//
-//            }
-//            //.offset(x: CGFloat(positionX))
-//            //.animation(.easeIn(duration: 1).speed(1))
-//            .ignoresSafeArea(.all, edges: .all)
-//            .onTapGesture {
-//                withAnimation {
-//                    animate.toggle()
-//                }
-//            }
-            //.onAppear() {
-            //    animateSplash()
-            //    DispatchQueue.main.asyncAfter(deadline: .now() + 2.7) {
-            //        positionX = -500
-            //    }
-            //}
-            //.opacity(endSplash ? 0 : 1)
-            //        .opacity(animationFinished ? 0 : 1)
-            //            .onAppear {
-            //                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            //                    withAnimation(.easeInOut(duration: 0.7)) {
-            //                        animationFinished = true
-            //                    }
-            //                }
-//                        }
         }
     }
     
