@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct Logbook: Codable, Identifiable {
     let id = UUID()
@@ -62,6 +63,7 @@ class Api {
                          completion(logbookEntries, nil)
                      } catch let error {
                          print("Error decoding: ", error)
+                         completion(nil, nil)
                      }
                  }
              } else {
