@@ -51,22 +51,15 @@ struct ContentView: View {
                     .zIndex(1)
             }
         }
-        .onChange(of: isLoading) { newState in
-            if(!newState) {
-                animateCircle()
-            }
-        }
         .onChange(of: scenePhase) { newPhase in
             if(newPhase == .inactive) {
                 isInactive = true
                 animate = true
-                isLoading = true
                 return
             }
             if(newPhase == .background) {
                 isInactive = false
                 animate = true
-                isLoading = true
                 return
             }
             isInactive = false
