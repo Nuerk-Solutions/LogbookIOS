@@ -76,6 +76,8 @@ struct ContentView: View {
     }
     
     func fetchData() {
+        isInactive = false
+        animate = true
         getLogbookEntries{(logbooks, error)  in
             if(error == nil) {
                 self.lastLogbooks = logbooks!
