@@ -82,7 +82,7 @@ struct ContentView: View {
             if(error == nil) {
                 self.lastLogbooks = logbooks!
                 
-                let currentMilAge = currentLogbook.vehicle.typ == VehicleEnum.VW ? lastLogbooks[0].vehicle.currentMileAge : lastLogbooks[1].vehicle.currentMileAge
+                let currentMilAge = currentLogbook.vehicle.typ == VehicleEnum.VW ? lastLogbooks[0].vehicle.newMileAge : lastLogbooks[1].vehicle.newMileAge
                 
                 currentLogbook.vehicle = Vehicle(typ: currentLogbook.vehicle.typ == VehicleEnum.VW ? .VW : .Ferrari, currentMileAge: currentMilAge, newMileAge: currentMilAge + 1)
                 print("Fetch in UI Sucessfully")
