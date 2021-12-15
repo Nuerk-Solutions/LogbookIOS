@@ -30,9 +30,9 @@ struct Vehicle: Codable, Identifiable, Hashable {
 struct AdditionalInformation: Codable, Identifiable {
     let id = UUID()
     
-    var informationTyp: AdditionalInformationEnum
-    var inforamtion: String
-    var distanceSinceLastInformation: Int
+    var informationTyp: AdditionalInformationEnum?
+    var inforamtion: String?
+    var distanceSinceLastInformation: Int?
 }
 
 class Api {
