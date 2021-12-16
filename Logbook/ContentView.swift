@@ -26,29 +26,40 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             Color("BG")
-                .ignoresSafeArea(.all, edges: .all)
+                .edgesIgnoringSafeArea(.all)
                 .zIndex(0)
             MainView(currentLogbook: $currentLogbook, lastLogbooks: $lastLogbooks)
             if(isInactive) {
-                Color("BG")
-                    .ignoresSafeArea(.all, edges: .all)
-                    .zIndex(0)
-                Image("logo")
-                    .ignoresSafeArea(.all, edges: .all)
-                    .scaledToFit()
-                    .frame(width: 400, height: 400)
-                    .zIndex(1)
+                ZStack {
+                    Color("BG")
+                    Image("logo")
+                        .resizable()
+                        .scaledToFit()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 400, height: 300)
+                }
+                .edgesIgnoringSafeArea(.all)
+                .zIndex(1)
             } else if animate {
-                Color("BG")
-                    .ignoresSafeArea(.all, edges: .all)
-                    .zIndex(0)
-                    .transition(.iris)
-                AnimatedImage(url: getImageURL())
-                    .playbackRate(1.2)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 400, height: 400)
-                    .zIndex(1)
+                ZStack {
+                    Color("BG")
+                    
+                    Image("logo")
+                        .resizable()
+                        .scaledToFit()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 400, height: 300)
+                    
+                    
+                    AnimatedImage(url: getImageURL())
+                        .playbackRate(1.2)
+                        .scaledToFit()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 400, height: 300)
+                }
+                .edgesIgnoringSafeArea(.all)
+                .zIndex(1)
+                .transition(.iris)
             }
         }
         .onChange(of: scenePhase) { newPhase in
