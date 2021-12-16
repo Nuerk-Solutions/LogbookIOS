@@ -19,6 +19,7 @@
 		E94725A7276BC16F006E6944 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94725A6276BC16F006E6944 /* ColorExtension.swift */; };
 		E94725A9276BC19F006E6944 /* UIApplicationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94725A8276BC19F006E6944 /* UIApplicationExtension.swift */; };
 		E94725AB276BC1BF006E6944 /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94725AA276BC1BF006E6944 /* DateFormatterExtension.swift */; };
+		E94725AD276BC342006E6944 /* LogbookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94725AC276BC341006E6944 /* LogbookViewModel.swift */; };
 		E963FC352766549300FFBD00 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963FC342766549300FFBD00 /* MainView.swift */; };
 		E963FC37276655C000FFBD00 /* TransitionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963FC36276655C000FFBD00 /* TransitionExtension.swift */; };
 		E963FC39276660A800FFBD00 /* Car_load.gif in Resources */ = {isa = PBXBuildFile; fileRef = E963FC38276660A800FFBD00 /* Car_load.gif */; };
@@ -48,6 +49,7 @@
 		E94725A6276BC16F006E6944 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		E94725A8276BC19F006E6944 /* UIApplicationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationExtension.swift; sourceTree = "<group>"; };
 		E94725AA276BC1BF006E6944 /* DateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtension.swift; sourceTree = "<group>"; };
+		E94725AC276BC341006E6944 /* LogbookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookViewModel.swift; sourceTree = "<group>"; };
 		E963FC342766549300FFBD00 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		E963FC36276655C000FFBD00 /* TransitionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionExtension.swift; sourceTree = "<group>"; };
 		E963FC38276660A800FFBD00 /* Car_load.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Car_load.gif; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 		E94725A0276BC0CE006E6944 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				E94725AC276BC341006E6944 /* LogbookViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				E9472599276BBDA8006E6944 /* Logbook.swift in Sources */,
 				E9B828A82762803A00C83A2E /* HttpError.swift in Sources */,
 				E9D4E6F42758FEBB003F36DA /* FloatingTextField.swift in Sources */,
+				E94725AD276BC342006E6944 /* LogbookViewModel.swift in Sources */,
 				E9D4E6FD27590483003F36DA /* NumberUtils.swift in Sources */,
 				E94725A9276BC19F006E6944 /* UIApplicationExtension.swift in Sources */,
 				E9EAEF4727627674005FE0BC /* CircleLoader.swift in Sources */,
