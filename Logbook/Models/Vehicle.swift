@@ -16,3 +16,10 @@ struct Vehicle: Codable, Identifiable, Hashable {
     //    var distance: Int
     //    var cost: Float
 }
+
+enum VehicleEnum: String, CaseIterable, Identifiable, Codable {
+    case Ferrari
+    case VW
+    
+    var id: String { self.rawValue }
+}

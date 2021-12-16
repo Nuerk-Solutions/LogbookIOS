@@ -29,7 +29,6 @@
 		E98342472757B85A00E1C314 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E98342462757B85A00E1C314 /* Preview Assets.xcassets */; };
 		E983424C2757B85A00E1C314 /* Logbook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E983424A2757B85A00E1C314 /* Logbook.xcdatamodeld */; };
 		E9881B9B27650DC200BE53CC /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E9881B9A27650DC200BE53CC /* SDWebImageSwiftUI */; };
-		E9A7357A2759102B00C6C33E /* EnumUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A735792759102B00C6C33E /* EnumUtils.swift */; };
 		E9B828A82762803A00C83A2E /* HttpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B828A72762803900C83A2E /* HttpError.swift */; };
 		E9D4E6F42758FEBB003F36DA /* FloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */; };
 		E9D4E6FD27590483003F36DA /* NumberUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D4E6FC27590483003F36DA /* NumberUtils.swift */; };
@@ -60,7 +59,6 @@
 		E98342462757B85A00E1C314 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E983424B2757B85A00E1C314 /* Logbook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Logbook.xcdatamodel; sourceTree = "<group>"; };
 		E983424D2757B85A00E1C314 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E9A735792759102B00C6C33E /* EnumUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumUtils.swift; sourceTree = "<group>"; };
 		E9B828A72762803900C83A2E /* HttpError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpError.swift; sourceTree = "<group>"; };
 		E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextField.swift; sourceTree = "<group>"; };
 		E9D4E6FC27590483003F36DA /* NumberUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberUtils.swift; sourceTree = "<group>"; };
@@ -195,7 +193,6 @@
 			isa = PBXGroup;
 			children = (
 				E9D4E6FC27590483003F36DA /* NumberUtils.swift */,
-				E9A735792759102B00C6C33E /* EnumUtils.swift */,
 				E9393ED72761330E00CB136F /* LogbookEntryViewModel.swift */,
 			);
 			path = Utils;
@@ -290,7 +287,6 @@
 				E947259B276BBDB1006E6944 /* AdditionalInformation.swift in Sources */,
 				E9472599276BBDA8006E6944 /* Logbook.swift in Sources */,
 				E9B828A82762803A00C83A2E /* HttpError.swift in Sources */,
-				E9A7357A2759102B00C6C33E /* EnumUtils.swift in Sources */,
 				E9D4E6F42758FEBB003F36DA /* FloatingTextField.swift in Sources */,
 				E9D4E6FD27590483003F36DA /* NumberUtils.swift in Sources */,
 				E94725A9276BC19F006E6944 /* UIApplicationExtension.swift in Sources */,

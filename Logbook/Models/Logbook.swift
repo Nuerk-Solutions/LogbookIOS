@@ -16,3 +16,12 @@ struct Logbook: Codable, Identifiable {
     var driveReason: String
     var additionalInformation: AdditionalInformation?
 }
+
+enum DriverEnum: String, CaseIterable, Identifiable, Codable {
+    case Andrea
+    case Claudia
+    case Oliver
+    case Thomas
+    
+    var id: String { self.rawValue }
+}

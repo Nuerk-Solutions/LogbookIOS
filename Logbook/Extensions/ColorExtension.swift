@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 extension Color {
     static let circleTrackStart: Color = Color(r: 237, g: 242, b: 255)
