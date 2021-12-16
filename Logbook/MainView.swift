@@ -186,7 +186,6 @@ struct MainView: View {
             }
             .navigationTitle(Text("Fahrtenbuch"))
         }
-        .navigationViewStyle(.stack)
         .transition(AnyTransition.opacity.animation(.linear(duration: 1)))
         
         .alert(isPresented: $showingAlert) {

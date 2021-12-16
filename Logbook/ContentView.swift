@@ -44,6 +44,7 @@ struct ContentView: View {
                 ZStack {
                     Color("BG")
                     
+                    // Needed for some reason, to hide initial animation of AnimatedImage
                     Image("logo")
                         .resizable()
                         .scaledToFit()
@@ -167,6 +168,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ContentView()
     }
 }
