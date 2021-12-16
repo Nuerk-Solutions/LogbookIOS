@@ -11,6 +11,9 @@
 		E9393ED82761330E00CB136F /* LogbookEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9393ED72761330E00CB136F /* LogbookEntryViewModel.swift */; };
 		E9393EDA27614B3E00CB136F /* FloatingNumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9393ED927614B3E00CB136F /* FloatingNumberField.swift */; };
 		E9472594276BAF83006E6944 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9472593276BAF83006E6944 /* Launch Screen.storyboard */; };
+		E9472597276BBD9A006E6944 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9472596276BBD9A006E6944 /* Vehicle.swift */; };
+		E9472599276BBDA8006E6944 /* Logbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9472598276BBDA8006E6944 /* Logbook.swift */; };
+		E947259B276BBDB1006E6944 /* AdditionalInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E947259A276BBDB1006E6944 /* AdditionalInformation.swift */; };
 		E963FC352766549300FFBD00 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963FC342766549300FFBD00 /* MainView.swift */; };
 		E963FC37276655C000FFBD00 /* TransitionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963FC36276655C000FFBD00 /* TransitionExtension.swift */; };
 		E963FC39276660A800FFBD00 /* Car_load.gif in Resources */ = {isa = PBXBuildFile; fileRef = E963FC38276660A800FFBD00 /* Car_load.gif */; };
@@ -34,6 +37,9 @@
 		E9393ED72761330E00CB136F /* LogbookEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookEntryViewModel.swift; sourceTree = "<group>"; };
 		E9393ED927614B3E00CB136F /* FloatingNumberField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingNumberField.swift; sourceTree = "<group>"; };
 		E9472593276BAF83006E6944 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		E9472596276BBD9A006E6944 /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
+		E9472598276BBDA8006E6944 /* Logbook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logbook.swift; sourceTree = "<group>"; };
+		E947259A276BBDB1006E6944 /* AdditionalInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInformation.swift; sourceTree = "<group>"; };
 		E963FC342766549300FFBD00 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		E963FC36276655C000FFBD00 /* TransitionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionExtension.swift; sourceTree = "<group>"; };
 		E963FC38276660A800FFBD00 /* Car_load.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Car_load.gif; sourceTree = "<group>"; };
@@ -65,6 +71,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E9472595276BBD87006E6944 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E9472596276BBD9A006E6944 /* Vehicle.swift */,
+				E9472598276BBDA8006E6944 /* Logbook.swift */,
+				E947259A276BBDB1006E6944 /* AdditionalInformation.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		E98342332757B85800E1C314 = {
 			isa = PBXGroup;
 			children = (
@@ -84,6 +100,7 @@
 		E983423E2757B85800E1C314 /* Logbook */ = {
 			isa = PBXGroup;
 			children = (
+				E9472595276BBD87006E6944 /* Models */,
 				E9881B9627650CB700BE53CC /* Shared */,
 				E9D4E6FB2759046F003F36DA /* Utils */,
 				E983423F2757B85800E1C314 /* LogbookApp.swift */,
@@ -214,7 +231,10 @@
 				E963FC352766549300FFBD00 /* MainView.swift in Sources */,
 				E983424C2757B85A00E1C314 /* Logbook.xcdatamodeld in Sources */,
 				E963FC37276655C000FFBD00 /* TransitionExtension.swift in Sources */,
+				E9472597276BBD9A006E6944 /* Vehicle.swift in Sources */,
 				E98342422757B85800E1C314 /* ContentView.swift in Sources */,
+				E947259B276BBDB1006E6944 /* AdditionalInformation.swift in Sources */,
+				E9472599276BBDA8006E6944 /* Logbook.swift in Sources */,
 				E9B828A82762803A00C83A2E /* HttpError.swift in Sources */,
 				E9A7357A2759102B00C6C33E /* EnumUtils.swift in Sources */,
 				E9D4E6F42758FEBB003F36DA /* FloatingTextField.swift in Sources */,
