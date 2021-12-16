@@ -9,7 +9,7 @@ import Foundation
 
 struct Vehicle: Codable, Identifiable, Hashable {
     let id = UUID()
-    
+
     var typ: VehicleEnum
     var currentMileAge: Int
     var newMileAge: Int

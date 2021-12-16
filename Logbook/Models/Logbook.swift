@@ -9,6 +9,7 @@ import Foundation
 
 struct Logbook: Codable, Identifiable {
     let id = UUID()
+    
     var driver: DriverEnum
     var vehicle: Vehicle
     var date: Date
