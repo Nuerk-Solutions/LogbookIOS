@@ -28,7 +28,7 @@ struct ContentView: View {
             Color("BG")
                 .edgesIgnoringSafeArea(.all)
                 .zIndex(0)
-            MainView(currentLogbook: $currentLogbook, lastLogbooks: $lastLogbooks)
+            LogbookView(currentLogbook: $currentLogbook, lastLogbooks: $lastLogbooks)
             if(isInactive) {
                 ZStack {
                     Color("BG")

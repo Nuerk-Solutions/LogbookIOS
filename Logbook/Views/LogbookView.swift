@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MainView: View {
+struct LogbookView: View {
     @Binding var currentLogbook: Logbook
     @Binding var lastLogbooks: [Logbook]
     //    @State private var driver: DriverEnum = .Andrea
@@ -23,6 +23,7 @@ struct MainView: View {
     @State private var alertTitle = "Alert Title"
     @State private var alertMessage = "Alert Message"
     @ObservedObject private var addLoogbookEntryVM = AddLogbookEntryViewModel()
+    @StateObject var viewModel = LogbookViewModel()
     @Environment(\.scenePhase) var scenePhase
     
     
@@ -188,9 +189,19 @@ struct MainView: View {
         }
         .transition(AnyTransition.opacity.animation(.linear(duration: 1)))
         
-        .alert(isPresented: $showingAlert) {
-            Alert(title: Text("Verbindungsfehler!"), message: Text("Es konnte keine Verbindung zum Server hergestellt werden"), dismissButton: .none)
+        .alert(isPresented: $viewModel.showAlert) {
+            if let errorMessage = viewModel.errorMessage {
+                Text(errorMessage)
+            }
+            Alert(title: Text("Application Error"), message: Text(errorMessage), dismissButton: .none)
         }
+//        .alert("Application Error", isPresented: $viewModel.showAlert, actions: {
+//            Button("OK") {}
+//        }, message: {
+//            if let errorMessage = viewModel.errorMessage {
+//                Text(errorMessage)
+//            }
+//        })
     }
 }
     //

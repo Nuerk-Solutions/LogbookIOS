@@ -20,7 +20,7 @@
 		E94725A9276BC19F006E6944 /* UIApplicationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94725A8276BC19F006E6944 /* UIApplicationExtension.swift */; };
 		E94725AB276BC1BF006E6944 /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94725AA276BC1BF006E6944 /* DateFormatterExtension.swift */; };
 		E94725AD276BC342006E6944 /* LogbookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94725AC276BC341006E6944 /* LogbookViewModel.swift */; };
-		E963FC352766549300FFBD00 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963FC342766549300FFBD00 /* MainView.swift */; };
+		E963FC352766549300FFBD00 /* LogbookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963FC342766549300FFBD00 /* LogbookView.swift */; };
 		E963FC37276655C000FFBD00 /* TransitionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963FC36276655C000FFBD00 /* TransitionExtension.swift */; };
 		E963FC39276660A800FFBD00 /* Car_load.gif in Resources */ = {isa = PBXBuildFile; fileRef = E963FC38276660A800FFBD00 /* Car_load.gif */; };
 		E97D91B32765379900681B72 /* Car_load_new.gif in Resources */ = {isa = PBXBuildFile; fileRef = E97D91B22765379900681B72 /* Car_load_new.gif */; };
@@ -50,7 +50,7 @@
 		E94725A8276BC19F006E6944 /* UIApplicationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationExtension.swift; sourceTree = "<group>"; };
 		E94725AA276BC1BF006E6944 /* DateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtension.swift; sourceTree = "<group>"; };
 		E94725AC276BC341006E6944 /* LogbookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookViewModel.swift; sourceTree = "<group>"; };
-		E963FC342766549300FFBD00 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		E963FC342766549300FFBD00 /* LogbookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookView.swift; sourceTree = "<group>"; };
 		E963FC36276655C000FFBD00 /* TransitionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionExtension.swift; sourceTree = "<group>"; };
 		E963FC38276660A800FFBD00 /* Car_load.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Car_load.gif; sourceTree = "<group>"; };
 		E97D91B22765379900681B72 /* Car_load_new.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Car_load_new.gif; sourceTree = "<group>"; };
@@ -100,6 +100,7 @@
 		E947259F276BC0C9006E6944 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E963FC342766549300FFBD00 /* LogbookView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -163,7 +164,6 @@
 				E9472593276BAF83006E6944 /* Launch Screen.storyboard */,
 				E983424A2757B85A00E1C314 /* Logbook.xcdatamodeld */,
 				E983423F2757B85800E1C314 /* LogbookApp.swift */,
-				E963FC342766549300FFBD00 /* MainView.swift */,
 				E9472595276BBD87006E6944 /* Models */,
 				E98342452757B85A00E1C314 /* Preview Content */,
 				E947259C276BBFFB006E6944 /* Services */,
@@ -280,7 +280,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E963FC352766549300FFBD00 /* MainView.swift in Sources */,
+				E963FC352766549300FFBD00 /* LogbookView.swift in Sources */,
 				E983424C2757B85A00E1C314 /* Logbook.xcdatamodeld in Sources */,
 				E94725AB276BC1BF006E6944 /* DateFormatterExtension.swift in Sources */,
 				E94725A5276BC15B006E6944 /* JsonDecoderExtension.swift in Sources */,
