@@ -9,7 +9,7 @@ import Foundation
 
 class LogbookViewModel: ObservableObject {
     @Published var latestLogbooks: [Logbook] = []
-    @Published var currentLogbook: Logbook = Logbook(driver: .Andrea, vehicle: Vehicle(typ: .Ferrari, currentMileAge: 0, newMileAge: 0), date: Date(), driveReason: "Stadtfahrt", additionalInformation: nil)
+    @Published var currentLogbook: Logbook = Logbook(driver: .Andrea, vehicle: Vehicle(typ: .Ferrari, currentMileAge: 0, newMileAge: 0), date: Date(), driveReason: "Stadtfahrt", additionalInformation: AdditionalInformation(informationTyp: AdditionalInformationEnum.none, inforamtion: "", cost: ""))
     @Published var isLoading = true
     @Published var showAlert = false
     @Published var errorMessage: String?

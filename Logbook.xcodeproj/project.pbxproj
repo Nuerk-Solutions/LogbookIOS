@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E90B2472276E90C500B185EF /* FloatingTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90B2471276E90C500B185EF /* FloatingTextEditor.swift */; };
+		E90B2474276E9C6A00B185EF /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90B2473276E9C6A00B185EF /* StringExtension.swift */; };
 		E90C2AC1276DB175005C1281 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90C2AC0276DB175005C1281 /* LoadingView.swift */; };
 		E9393ED82761330E00CB136F /* LogbookEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9393ED72761330E00CB136F /* LogbookEntryViewModel.swift */; };
 		E9393EDA27614B3E00CB136F /* FloatingNumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9393ED927614B3E00CB136F /* FloatingNumberField.swift */; };
@@ -31,9 +33,12 @@
 		E9D4E6F42758FEBB003F36DA /* FloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */; };
 		E9D4E6FD27590483003F36DA /* NumberUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D4E6FC27590483003F36DA /* NumberUtils.swift */; };
 		E9EAEF4727627674005FE0BC /* CircleLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EAEF4627627673005FE0BC /* CircleLoader.swift */; };
+		E9FF8D24276E437500F00E95 /* DownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FF8D23276E437500F00E95 /* DownloadService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E90B2471276E90C500B185EF /* FloatingTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextEditor.swift; sourceTree = "<group>"; };
+		E90B2473276E9C6A00B185EF /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		E90C2AC0276DB175005C1281 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		E9393ED72761330E00CB136F /* LogbookEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookEntryViewModel.swift; sourceTree = "<group>"; };
 		E9393ED927614B3E00CB136F /* FloatingNumberField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingNumberField.swift; sourceTree = "<group>"; };
@@ -59,6 +64,7 @@
 		E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextField.swift; sourceTree = "<group>"; };
 		E9D4E6FC27590483003F36DA /* NumberUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberUtils.swift; sourceTree = "<group>"; };
 		E9EAEF4627627673005FE0BC /* CircleLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleLoader.swift; sourceTree = "<group>"; };
+		E9FF8D23276E437500F00E95 /* DownloadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				E947259D276BC008006E6944 /* ApiService.swift */,
+				E9FF8D23276E437500F00E95 /* DownloadService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -116,6 +123,7 @@
 				E94725A4276BC15B006E6944 /* JsonDecoderExtension.swift */,
 				E94725A6276BC16F006E6944 /* ColorExtension.swift */,
 				E94725AA276BC1BF006E6944 /* DateFormatterExtension.swift */,
+				E90B2473276E9C6A00B185EF /* StringExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -126,6 +134,7 @@
 				E9EAEF4627627673005FE0BC /* CircleLoader.swift */,
 				E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */,
 				E9393ED927614B3E00CB136F /* FloatingNumberField.swift */,
+				E90B2471276E90C500B185EF /* FloatingTextEditor.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -276,7 +285,10 @@
 				E90C2AC1276DB175005C1281 /* LoadingView.swift in Sources */,
 				E94725A5276BC15B006E6944 /* JsonDecoderExtension.swift in Sources */,
 				E963FC37276655C000FFBD00 /* TransitionExtension.swift in Sources */,
+				E9FF8D24276E437500F00E95 /* DownloadService.swift in Sources */,
 				E9472597276BBD9A006E6944 /* Vehicle.swift in Sources */,
+				E90B2472276E90C500B185EF /* FloatingTextEditor.swift in Sources */,
+				E90B2474276E9C6A00B185EF /* StringExtension.swift in Sources */,
 				E98342422757B85800E1C314 /* ContentView.swift in Sources */,
 				E947259B276BBDB1006E6944 /* AdditionalInformation.swift in Sources */,
 				E9472599276BBDA8006E6944 /* Logbook.swift in Sources */,

@@ -18,7 +18,9 @@ struct LogbookView: View {
     //    @State private var reason = "Stadtfahrt"
     //    @State private var currentMileAge = "0"
     @State private var newMileAge: String = ""
-    //    @State private var additionalInformation: AdditionalInformationEnum = .none
+    @State private var additionalInformationTyp: AdditionalInformationEnum = .none
+    @State private var additionalInformationInformation: String = ""
+    @State private var additionalInformationCost: String = ""
     //    @State private var fuelAmount = 0
     //    @State private var serviceDescription = ""
     @ObservedObject private var addLoogbookEntryVM = AddLogbookEntryViewModel()
@@ -77,6 +79,7 @@ struct LogbookView: View {
                         
                         Text("km")
                             .padding(.top, 5)
+                            .foregroundColor(.gray)
                     }
                     
                     HStack {
@@ -85,42 +88,74 @@ struct LogbookView: View {
                         
                         Text("km")
                             .padding(.top, 5)
+                            .foregroundColor(.gray)
                     }
                     
                 })
                 
-                //                        Section(header: Text("Zusätzliche Information")) {
-                //
-                //                            Menu {
-                //                                ForEach(AdditionalInformationEnum.allCases, id: \.self){ item in
-                //                                    Button(item.rawValue) {
-                //                                        currentLogbook.additionalInformation?.informationTyp = item
-                //                                    }
-                //                                }
-                //                            } label: {
-                //                                VStack(spacing: 5){
-                //                                    HStack{
-                //                                        Text(LocalizedStringKey(additionalInformation.rawValue) == AdditionalInformationEnum.none.localizedName ? AdditionalInformationEnum.none.localizedName : additionalInformation.localizedName).tag(additionalInformation)
-                //                                            .foregroundColor(additionalInformation == AdditionalInformationEnum.none ? .gray : .black)
-                //                                        Spacer()
-                //                                        Image(systemName: "chevron.down")
-                //                                            .foregroundColor(Color.blue)
-                //                                            .font(Font.system(size: 20, weight: .bold))
-                //                                    }
-                //                                    if(currentLogbook.additionalInformation?.informationTyp == AdditionalInformationEnum.none) {
-                //                                        Rectangle()
-                //                                            .fill(Color.blue)
-                //                                            .frame(height: 2)
-                //                                            .padding(.top, 1)
-                //                                    }
-                //
-                //                                }
-                //                            }
-                //                        }
+                Section(header: Text("Zusätzliche Information")) {
+                    Menu {
+                        ForEach(AdditionalInformationEnum.allCases, id: \.self){ item in
+                            Button(item.rawValue) {
+                                currentLogbook.additionalInformation?.informationTyp = item
+                            }
+                        }
+                    } label: {
+                        VStack(spacing: 5){
+                            HStack{
+                                Text(currentLogbook.additionalInformation!.informationTyp.localizedName).tag(currentLogbook.additionalInformation?.informationTyp)
+                                    .foregroundColor(currentLogbook.additionalInformation?.informationTyp == AdditionalInformationEnum.none ? .gray : .primary)
+                                Spacer()
+                                Image(systemName: "chevron.down")
+                                    .foregroundColor(Color.blue)
+                                    .font(Font.system(size: 20, weight: .bold))
+                            }
+                            .transition(.opacity.animation(.linear(duration: 2)))
+                            if(currentLogbook.additionalInformation?.informationTyp == AdditionalInformationEnum.none) {
+                                Rectangle()
+                                    .fill(Color.blue)
+                                    .frame(height: 2)
+                                    .padding(.top, 1)
+                            }
+                        }
+                    }
+                    if(currentLogbook.additionalInformation?.informationTyp != AdditionalInformationEnum.none) {
+                        if(currentLogbook.additionalInformation?.informationTyp == .refuled) {
+                            HStack {
+                                FloatingTextField(title: "Menge", text: $additionalInformationInformation)
+                                    .keyboardType(.decimalPad)
+                                
+                                Text("L")
+                                    .padding(.top, 5)
+                                    .foregroundColor(.gray)
+                            }
+                            HStack {
+                                FloatingTextField(title: "Preis", text: $additionalInformationCost)
+                                    .keyboardType(.decimalPad)
+                                
+                                Text("€")
+                                    .padding(.top, 5)
+                                    .foregroundColor(.gray)
+                            }
+                        } else if(currentLogbook.additionalInformation?.informationTyp == .service) {
+                            HStack {
+                                FloatingTextEditor(title: "Beschreibung", text: $additionalInformationInformation)
+                            }
+                            HStack {
+                                FloatingTextField(title: "Preis", text: $additionalInformationCost)
+                                    .keyboardType(.decimalPad)
+                                
+                                Text("€")
+                                    .padding(.top, 5)
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                    }
+                }
                 Section(header: Text("Aktion")) {
                     Button(action: {
-                        addLoogbookEntryVM.saveEntry(logbookEntry: currentLogbook)
                         currentLogbook.vehicle.newMileAge = Int(newMileAge) ?? 0
+                        addLoogbookEntryVM.saveEntry(logbookEntry: currentLogbook)
                         if(addLoogbookEntryVM.brokenValues.count > 0) {
                             alertTitle = "Fehler!"
                             alertMessage = addLoogbookEntryVM.brokenValues[0].message
@@ -187,9 +222,11 @@ struct LogbookView: View {
         .transition(AnyTransition.opacity.animation(.linear(duration: 1)))
     }
 }
-    
-    struct MainView_Previews: PreviewProvider {
-        static var previews: some View {
-            ContentView()
-        }
-    }
+
+//#if DEBUG
+//struct LogbookView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LogbookView(latestLogbooks: .constant([]), currentLogbook: .constant(Logbook(driver: .Andrea, vehicle: Vehicle(typ: .Ferrari, currentMileAge: 0, newMileAge: 0), date: Date(), driveReason: "Stadtfahrt", additionalInformation: nil)))
+//    }
+//}
+//#endif

@@ -11,9 +11,9 @@ import SwiftUI
 struct AdditionalInformation: Codable, Identifiable {
     let id = UUID()
     
-    var informationTyp: AdditionalInformationEnum?
-    var inforamtion: String?
-    var cost: String?
+    var informationTyp: AdditionalInformationEnum
+    var inforamtion: String
+    var cost: String
 //    var distanceSinceLastInformation: Int?
 }
 
