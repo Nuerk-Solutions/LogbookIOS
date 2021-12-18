@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct LogbookView: View {
-    @Binding var currentLogbook: Logbook
-    @Binding var lastLogbooks: [Logbook]
+    @State private var currentLogbook = Logbook(driver: .Andrea, vehicle: Vehicle(typ: .Ferrari, currentMileAge: 0, newMileAge: 0), date: Date(), driveReason: "Stadtfahrt", additionalInformation: nil)
+    @State private var lastLogbooks: [Logbook] = []
     //    @State private var driver: DriverEnum = .Andrea
     //    @State private var vehicle: VehicleEnum = .Ferrari
     //    @State private var date = Date()
@@ -23,7 +23,7 @@ struct LogbookView: View {
     @State private var alertTitle = "Alert Title"
     @State private var alertMessage = "Alert Message"
     @ObservedObject private var addLoogbookEntryVM = AddLogbookEntryViewModel()
-    @StateObject var viewModel = LogbookViewModel()
+    @EnvironmentObject var viewModel: LogbookViewModel
     @Environment(\.scenePhase) var scenePhase
     
     
@@ -187,22 +187,12 @@ struct LogbookView: View {
             }
             .navigationTitle(Text("Fahrtenbuch"))
         }
-        .overlay(content: {
-            if(viewModel.isLoading) {
-                ProgressView()
-            }
-        })
         .transition(AnyTransition.opacity.animation(.linear(duration: 1)))
-        .onAppear(perform: {
-            viewModel.fetchLatestLogbooks()
-        })
-        .alert("Application Error", isPresented: $viewModel.showAlert, actions: {
-            Button("OK") {}
-        }, message: {
-            if let errorMessage = viewModel.errorMessage {
-                Text(errorMessage)
+        .onAppear {
+            if(!lastLogbooks.isEmpty) {
+                currentLogbook = lastLogbooks[0]
             }
-        })
+        }
     }
 }
     

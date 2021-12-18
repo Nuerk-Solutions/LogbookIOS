@@ -9,13 +9,12 @@ import Foundation
 
 class LogbookViewModel: ObservableObject {
     @Published var latestLogbooks: [Logbook] = []
-    @Published var isLoading = false
+    @Published var isLoading = true
     @Published var showAlert = false
     @Published var errorMessage: String?
     
     func fetchLatestLogbooks() {
         let apiService = APIService(urlString: "https://api.nuerk-solutions.de/logbook")
-        isLoading.toggle()
         apiService.getJSON(dateDecodingStrategy: JSONDecoder.DateDecodingStrategy.formatted(.standardT)) { (result: Result<[Logbook], APIError>) in
             defer {
                 DispatchQueue.main.async {
@@ -25,6 +24,7 @@ class LogbookViewModel: ObservableObject {
             switch result {
             case .success(let logbooks):
                 DispatchQueue.main.async {
+                    print("Succes!")
                     self.latestLogbooks = logbooks
                 }
             case .failure(let error):
