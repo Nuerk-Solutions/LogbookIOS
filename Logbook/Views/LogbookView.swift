@@ -182,11 +182,9 @@ struct LogbookView: View {
                     Text(alertMessage)
                 }
             })
+            .gesture(DragGesture().onChanged{_ in UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)})
         }
         .transition(AnyTransition.opacity.animation(.linear(duration: 1)))
-        .onChange(of: currentLogbook.vehicle.typ) { _ in
-            UIApplication.shared.endEditing()
-        }
     }
 }
     
