@@ -13,7 +13,8 @@ struct AdditionalInformation: Codable, Identifiable {
     
     var informationTyp: AdditionalInformationEnum?
     var inforamtion: String?
-    var distanceSinceLastInformation: Int?
+    var cost: String?
+//    var distanceSinceLastInformation: Int?
 }
 
 enum AdditionalInformationEnum: String, Equatable, CaseIterable, Identifiable, Codable {
