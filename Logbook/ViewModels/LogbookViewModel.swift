@@ -14,6 +14,7 @@ class LogbookViewModel: ObservableObject {
     @Published var errorMessage: String?
     
     func fetchLatestLogbooks() {
+        self.isLoading = true
         let apiService = APIService(urlString: "https://api.nuerk-solutions.de/logbook")
         apiService.getJSON(dateDecodingStrategy: JSONDecoder.DateDecodingStrategy.formatted(.standardT)) { (result: Result<[Logbook], APIError>) in
             defer {

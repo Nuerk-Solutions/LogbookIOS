@@ -28,26 +28,31 @@ struct ContentView: View {
         .overlay(content: {
             LoadingView(isLoading: $viewModel.isLoading, loadingPhase: $loadingPhase)
         })
+        .onChange(of: viewModel.isLoading, perform: { newValue in
+            if(!newValue && !viewModel.showAlert) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        loadingPhase = .none
+                    }
+                }
+            }
+        })
         .onChange(of: scenePhase) { newPhase in
             switch newPhase {
+            case .inactive:
+                loadingPhase = .image
+                break;
+            case .background:
+                loadingPhase = .animation
+                return
             case .active:
-                // Delay management
-//                if(!viewModel.isLoading) {
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-//                        loadingPhase = .animation
-//                        viewModel.fetchLatestLogbooks()
-//                    }
-//                }
-                break
-            case .inactive, .background:
-                loadingPhase = .image
-                viewModel.isLoading = true
-                break
-            default:
-                loadingPhase = .image
+                loadingPhase = .animation
+                viewModel.fetchLatestLogbooks()
+            @unknown default:
+                loadingPhase = .failed
             }
         }.onAppear(perform: {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 if(viewModel.isLoading) {
                     viewModel.fetchLatestLogbooks()
                 }
@@ -75,6 +80,7 @@ enum LoadingPhase {
     case image
     case animation
     case none
+    case failed
 }
 
 struct ContentView_Previews: PreviewProvider {

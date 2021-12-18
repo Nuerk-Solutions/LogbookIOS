@@ -10,13 +10,11 @@ import SDWebImageSwiftUI
 
 struct LoadingView: View {
     
-    //@Binding var animate: Bool
-    //@Binding var isInactive: Bool
     @Binding var isLoading: Bool
     @Binding var loadingPhase: LoadingPhase
     
     var body: some View {
-        ZStack {            
+        ZStack {
             if(loadingPhase == .image) {
                 ZStack {
                     Color("BG")
@@ -29,28 +27,25 @@ struct LoadingView: View {
                 .edgesIgnoringSafeArea(.all)
                 .zIndex(1)
             } else if loadingPhase == .animation {
-                if(isLoading) {
-                    ZStack {
-                        Color("BG")
-                        
-                        // Needed for some reason, to hide initial animation of AnimatedImage
-                        Image("logo")
-                            .resizable()
-                            .scaledToFit()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 400, height: 300)
-                        
-                        
-                        AnimatedImage(url: getImageURL())
-                            .playbackRate(1.2)
-                            .scaledToFit()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 400, height: 300)
-                    }
-                    .edgesIgnoringSafeArea(.all)
-                    .zIndex(1)
-                    .transition(.iris.animation(.easeInOut(duration: 0.3)))
+                ZStack {
+                    Color("BG")
+                    // Needed for some reason, to hide initial animation of AnimatedImage
+                    Image("logo")
+                        .resizable()
+                        .scaledToFit()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 400, height: 300)
+                    
+                    
+                    AnimatedImage(url: getImageURL())
+                        .playbackRate(1.2)
+                        .scaledToFit()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 400, height: 300)
                 }
+                .edgesIgnoringSafeArea(.all)
+                .zIndex(1)
+                .transition(.iris)
             }
         }
     }
