@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct LogbookView: View {
-    @State private var currentLogbook = Logbook(driver: .Andrea, vehicle: Vehicle(typ: .Ferrari, currentMileAge: 0, newMileAge: 0), date: Date(), driveReason: "Stadtfahrt", additionalInformation: nil)
-    @State private var lastLogbooks: [Logbook] = []
+    
+    @Binding var latestLogbooks: [Logbook]
+    //@State private var currentLogbook: Logbook = Logbook(driver: .Andrea, vehicle: Vehicle(typ: .Ferrari, currentMileAge: 0, newMileAge: 0), date: Date(), driveReason: "Stadtfahrt", additionalInformation: nil)
+    @Binding var currentLogbook: Logbook
     //    @State private var driver: DriverEnum = .Andrea
     //    @State private var vehicle: VehicleEnum = .Ferrari
     //    @State private var date = Date()
@@ -19,12 +21,14 @@ struct LogbookView: View {
     //    @State private var additionalInformation: AdditionalInformationEnum = .none
     //    @State private var fuelAmount = 0
     //    @State private var serviceDescription = ""
-    @State private var showingAlert = false
-    @State private var alertTitle = "Alert Title"
-    @State private var alertMessage = "Alert Message"
     @ObservedObject private var addLoogbookEntryVM = AddLogbookEntryViewModel()
     @EnvironmentObject var viewModel: LogbookViewModel
     @Environment(\.scenePhase) var scenePhase
+    
+    
+    @State private var showingAlert = false
+    @State private var alertTitle = "Alert Title"
+    @State private var alertMessage = ""
     
     
     @State private var isLoading = true
@@ -60,9 +64,6 @@ struct LogbookView: View {
                             Text(vehicle.rawValue).tag(vehicle)
                         }
                     }
-                    .onChange(of: currentLogbook.vehicle.typ) { _ in
-                        UIApplication.shared.endEditing()
-                    }
                     .pickerStyle(SegmentedPickerStyle())
                     
                     HStack {
@@ -70,8 +71,8 @@ struct LogbookView: View {
                         FloatingNumberField(title: "Aktueller Kilometerstand", text: $currentLogbook.vehicle.currentMileAge)
                             .keyboardType(.decimalPad)
                             .onChange(of: currentLogbook.vehicle.typ) { _ in
-                                let currentMilAge = currentLogbook.vehicle.typ == VehicleEnum.VW ? lastLogbooks[0].vehicle.currentMileAge : lastLogbooks[1].vehicle.currentMileAge
-                                currentLogbook.vehicle = Vehicle(typ: currentLogbook.vehicle.typ, currentMileAge: currentMilAge, newMileAge: currentMilAge + 1)
+                                let currentMilAge = currentLogbook.vehicle.typ == .VW ? latestLogbooks[0].vehicle.newMileAge : latestLogbooks[1].vehicle.newMileAge
+                                currentLogbook.vehicle = Vehicle(typ: currentLogbook.vehicle.typ, currentMileAge: currentMilAge, newMileAge: currentMilAge)
                             }
                         
                         Text("km")
@@ -123,8 +124,11 @@ struct LogbookView: View {
                         if(addLoogbookEntryVM.brokenValues.count > 0) {
                             alertTitle = "Fehler!"
                             alertMessage = addLoogbookEntryVM.brokenValues[0].message
+                        } else {
+                            alertTitle = "Neue Fahrt hinzugefügt"
                         }
                         showingAlert = true
+                        print(currentLogbook)
                     }) {
                         HStack {
                             Spacer()
@@ -136,19 +140,11 @@ struct LogbookView: View {
                     .padding(15)
                     .background(Color.green)
                     .cornerRadius(8)
-                    .alert(isPresented: $showingAlert) {
-                        if(addLoogbookEntryVM.brokenValues.count > 0) {
-                            return Alert(title: Text("\(alertTitle)"),
-                                         message: Text("\(alertMessage)"))
-                        } else {
-                            return Alert(title: Text("Neue Fahrt hinzugefügt"),
-                                         message: Text("\(currentLogbook.vehicle.newMileAge)"),
-                                         dismissButton: .default(Text("OK")))
-                        }
-                    }
                     
                     // Delete Last Entry
                     Button(action: {
+                        alertTitle = "Letzten Eintrag Löschen"
+                        alertMessage = "Die letzte Fahrt für P-1 gelöscht"
                         showingAlert = true
                     }) {
                         HStack {
@@ -161,14 +157,10 @@ struct LogbookView: View {
                     .padding(10)
                     .background(Color.red)
                     .cornerRadius(8)
-                    .alert(isPresented: $showingAlert) {
-                        Alert(title: Text("Letzten Eintrag Löschen"),
-                              message: Text("Die letzte Fahrt für P-1 gelöscht"),
-                              dismissButton: .default(Text("OK")))
-                    }
                 }
                 // Download XLSX
                 Button(action: {
+                    alertTitle = "Öffne Safari..."
                     showingAlert = true
                 }) {
                     HStack {
@@ -180,18 +172,20 @@ struct LogbookView: View {
                 .foregroundColor(.white)
                 .padding(10)
                 .cornerRadius(8)
-                .alert(isPresented: $showingAlert) {
-                    Alert(title: Text("Öffne Safari..."))
-                }
                 .listRowBackground(Color.pink)
             }
             .navigationTitle(Text("Fahrtenbuch"))
+            .alert(alertTitle, isPresented: $showingAlert, actions: {
+                Button("OK") {}
+            }, message: {
+                if let alertMessage = alertMessage {
+                    Text(alertMessage)
+                }
+            })
         }
         .transition(AnyTransition.opacity.animation(.linear(duration: 1)))
-        .onAppear {
-            if(!lastLogbooks.isEmpty) {
-                currentLogbook = lastLogbooks[0]
-            }
+        .onChange(of: currentLogbook.vehicle.typ) { _ in
+            UIApplication.shared.endEditing()
         }
     }
 }

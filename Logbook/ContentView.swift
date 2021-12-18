@@ -12,18 +12,13 @@ import SDWebImageSwiftUI
 struct ContentView: View {
     
     @State private var loadingPhase: LoadingPhase = .animation
-    
-    @State private var currentLogbook = Logbook(driver: .Andrea, vehicle: Vehicle(typ: .Ferrari, currentMileAge: 0, newMileAge: 0), date: Date(), driveReason: "Stadtfahrt", additionalInformation: nil)
-    @State private var lastLogbooks: [Logbook] = []
-    
     @Environment(\.scenePhase) var scenePhase
-    
     @StateObject var viewModel = LogbookViewModel()
     
     
     var body: some View {
         ZStack {
-            LogbookView()
+            LogbookView(latestLogbooks: $viewModel.latestLogbooks, currentLogbook: $viewModel.currentLogbook)
         }
         .overlay(content: {
             LoadingView(isLoading: $viewModel.isLoading, loadingPhase: $loadingPhase)

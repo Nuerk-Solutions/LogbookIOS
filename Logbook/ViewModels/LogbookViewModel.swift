@@ -9,6 +9,7 @@ import Foundation
 
 class LogbookViewModel: ObservableObject {
     @Published var latestLogbooks: [Logbook] = []
+    @Published var currentLogbook: Logbook = Logbook(driver: .Andrea, vehicle: Vehicle(typ: .Ferrari, currentMileAge: 0, newMileAge: 0), date: Date(), driveReason: "Stadtfahrt", additionalInformation: nil)
     @Published var isLoading = true
     @Published var showAlert = false
     @Published var errorMessage: String?
@@ -27,6 +28,7 @@ class LogbookViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     print("Succes!")
                     self.latestLogbooks = logbooks
+                    self.currentLogbook.vehicle = Vehicle(typ: .Ferrari, currentMileAge: logbooks[1].vehicle.newMileAge, newMileAge: logbooks[1].vehicle.newMileAge)
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
