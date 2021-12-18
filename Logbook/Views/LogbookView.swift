@@ -187,26 +187,27 @@ struct LogbookView: View {
             }
             .navigationTitle(Text("Fahrtenbuch"))
         }
+        .overlay(content: {
+            if(viewModel.isLoading) {
+                ProgressView()
+            }
+        })
         .transition(AnyTransition.opacity.animation(.linear(duration: 1)))
-        
-        .alert(isPresented: $viewModel.showAlert) {
+        .onAppear(perform: {
+            viewModel.fetchLatestLogbooks()
+        })
+        .alert("Application Error", isPresented: $viewModel.showAlert, actions: {
+            Button("OK") {}
+        }, message: {
             if let errorMessage = viewModel.errorMessage {
                 Text(errorMessage)
             }
-            Alert(title: Text("Application Error"), message: Text(errorMessage), dismissButton: .none)
-        }
-//        .alert("Application Error", isPresented: $viewModel.showAlert, actions: {
-//            Button("OK") {}
-//        }, message: {
-//            if let errorMessage = viewModel.errorMessage {
-//                Text(errorMessage)
-//            }
-//        })
+        })
     }
 }
-    //
-    //struct MainView_Previews: PreviewProvider {
-    //    static var previews: some View {
-    //        MainView()
-    //    }
-    //}
+    
+    struct MainView_Previews: PreviewProvider {
+        static var previews: some View {
+            ContentView()
+        }
+    }

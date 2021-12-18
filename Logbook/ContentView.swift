@@ -29,39 +29,39 @@ struct ContentView: View {
                 .edgesIgnoringSafeArea(.all)
                 .zIndex(0)
             LogbookView(currentLogbook: $currentLogbook, lastLogbooks: $lastLogbooks)
-            if(isInactive) {
-                ZStack {
-                    Color("BG")
-                    Image("logo")
-                        .resizable()
-                        .scaledToFit()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 400, height: 300)
-                }
-                .edgesIgnoringSafeArea(.all)
-                .zIndex(1)
-            } else if animate {
-                ZStack {
-                    Color("BG")
-                    
-                    // Needed for some reason, to hide initial animation of AnimatedImage
-                    Image("logo")
-                        .resizable()
-                        .scaledToFit()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 400, height: 300)
-                    
-                    
-                    AnimatedImage(url: getImageURL())
-                        .playbackRate(1.2)
-                        .scaledToFit()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 400, height: 300)
-                }
-                .edgesIgnoringSafeArea(.all)
-                .zIndex(1)
-                .transition(.iris)
-            }
+//            if(isInactive) {
+//                ZStack {
+//                    Color("BG")
+//                    Image("logo")
+//                        .resizable()
+//                        .scaledToFit()
+//                        .aspectRatio(contentMode: .fit)
+//                        .frame(width: 400, height: 300)
+//                }
+//                .edgesIgnoringSafeArea(.all)
+//                .zIndex(1)
+//            } else if animate {
+//                ZStack {
+//                    Color("BG")
+//                    
+//                    // Needed for some reason, to hide initial animation of AnimatedImage
+//                    Image("logo")
+//                        .resizable()
+//                        .scaledToFit()
+//                        .aspectRatio(contentMode: .fit)
+//                        .frame(width: 400, height: 300)
+//                    
+//                    
+//                    AnimatedImage(url: getImageURL())
+//                        .playbackRate(1.2)
+//                        .scaledToFit()
+//                        .aspectRatio(contentMode: .fit)
+//                        .frame(width: 400, height: 300)
+//                }
+//                .edgesIgnoringSafeArea(.all)
+//                .zIndex(1)
+//                .transition(.iris)
+//            }
         }
         .onChange(of: scenePhase) { newPhase in
             if(newPhase == .inactive) {
