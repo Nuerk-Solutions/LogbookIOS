@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		E90C2AC1276DB175005C1281 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90C2AC0276DB175005C1281 /* LoadingView.swift */; };
-		E91E77E62759373300309C7B /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91E77E52759373300309C7B /* Data.swift */; };
 		E9393ED82761330E00CB136F /* LogbookEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9393ED72761330E00CB136F /* LogbookEntryViewModel.swift */; };
 		E9393EDA27614B3E00CB136F /* FloatingNumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9393ED927614B3E00CB136F /* FloatingNumberField.swift */; };
 		E9472594276BAF83006E6944 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9472593276BAF83006E6944 /* Launch Screen.storyboard */; };
@@ -29,9 +28,7 @@
 		E98342422757B85800E1C314 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98342412757B85800E1C314 /* ContentView.swift */; };
 		E98342442757B85A00E1C314 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E98342432757B85A00E1C314 /* Assets.xcassets */; };
 		E98342472757B85A00E1C314 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E98342462757B85A00E1C314 /* Preview Assets.xcassets */; };
-		E983424C2757B85A00E1C314 /* Logbook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E983424A2757B85A00E1C314 /* Logbook.xcdatamodeld */; };
 		E9881B9B27650DC200BE53CC /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E9881B9A27650DC200BE53CC /* SDWebImageSwiftUI */; };
-		E9B828A82762803A00C83A2E /* HttpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B828A72762803900C83A2E /* HttpError.swift */; };
 		E9D4E6F42758FEBB003F36DA /* FloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */; };
 		E9D4E6FD27590483003F36DA /* NumberUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D4E6FC27590483003F36DA /* NumberUtils.swift */; };
 		E9EAEF4727627674005FE0BC /* CircleLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EAEF4627627673005FE0BC /* CircleLoader.swift */; };
@@ -39,7 +36,6 @@
 
 /* Begin PBXFileReference section */
 		E90C2AC0276DB175005C1281 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		E91E77E52759373300309C7B /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		E9393ED72761330E00CB136F /* LogbookEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookEntryViewModel.swift; sourceTree = "<group>"; };
 		E9393ED927614B3E00CB136F /* FloatingNumberField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingNumberField.swift; sourceTree = "<group>"; };
 		E9472593276BAF83006E6944 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -61,9 +57,7 @@
 		E98342412757B85800E1C314 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E98342432757B85A00E1C314 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E98342462757B85A00E1C314 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		E983424B2757B85A00E1C314 /* Logbook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Logbook.xcdatamodel; sourceTree = "<group>"; };
 		E983424D2757B85A00E1C314 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E9B828A72762803900C83A2E /* HttpError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpError.swift; sourceTree = "<group>"; };
 		E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextField.swift; sourceTree = "<group>"; };
 		E9D4E6FC27590483003F36DA /* NumberUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberUtils.swift; sourceTree = "<group>"; };
 		E9EAEF4627627673005FE0BC /* CircleLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleLoader.swift; sourceTree = "<group>"; };
@@ -104,6 +98,7 @@
 			children = (
 				E963FC342766549300FFBD00 /* LogbookView.swift */,
 				E90C2AC0276DB175005C1281 /* LoadingView.swift */,
+				E9472593276BAF83006E6944 /* Launch Screen.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -157,16 +152,12 @@
 		E983423E2757B85800E1C314 /* Logbook */ = {
 			isa = PBXGroup;
 			children = (
+				E983424D2757B85A00E1C314 /* Info.plist */,
+				E98342412757B85800E1C314 /* ContentView.swift */,
+				E983423F2757B85800E1C314 /* LogbookApp.swift */,
+				E98342432757B85A00E1C314 /* Assets.xcassets */,
 				E94725A3276BC127006E6944 /* Components */,
 				E94725A1276BC0E5006E6944 /* Extensions */,
-				E98342432757B85A00E1C314 /* Assets.xcassets */,
-				E98342412757B85800E1C314 /* ContentView.swift */,
-				E91E77E52759373300309C7B /* Data.swift */,
-				E9B828A72762803900C83A2E /* HttpError.swift */,
-				E983424D2757B85A00E1C314 /* Info.plist */,
-				E9472593276BAF83006E6944 /* Launch Screen.storyboard */,
-				E983424A2757B85A00E1C314 /* Logbook.xcdatamodeld */,
-				E983423F2757B85800E1C314 /* LogbookApp.swift */,
 				E9472595276BBD87006E6944 /* Models */,
 				E98342452757B85A00E1C314 /* Preview Content */,
 				E947259C276BBFFB006E6944 /* Services */,
@@ -284,7 +275,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E963FC352766549300FFBD00 /* LogbookView.swift in Sources */,
-				E983424C2757B85A00E1C314 /* Logbook.xcdatamodeld in Sources */,
 				E94725AB276BC1BF006E6944 /* DateFormatterExtension.swift in Sources */,
 				E90C2AC1276DB175005C1281 /* LoadingView.swift in Sources */,
 				E94725A5276BC15B006E6944 /* JsonDecoderExtension.swift in Sources */,
@@ -293,7 +283,6 @@
 				E98342422757B85800E1C314 /* ContentView.swift in Sources */,
 				E947259B276BBDB1006E6944 /* AdditionalInformation.swift in Sources */,
 				E9472599276BBDA8006E6944 /* Logbook.swift in Sources */,
-				E9B828A82762803A00C83A2E /* HttpError.swift in Sources */,
 				E9D4E6F42758FEBB003F36DA /* FloatingTextField.swift in Sources */,
 				E94725AD276BC342006E6944 /* LogbookViewModel.swift in Sources */,
 				E9D4E6FD27590483003F36DA /* NumberUtils.swift in Sources */,
@@ -303,7 +292,6 @@
 				E947259E276BC008006E6944 /* ApiService.swift in Sources */,
 				E98342402757B85800E1C314 /* LogbookApp.swift in Sources */,
 				E9393ED82761330E00CB136F /* LogbookEntryViewModel.swift in Sources */,
-				E91E77E62759373300309C7B /* Data.swift in Sources */,
 				E94725A7276BC16F006E6944 /* ColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -514,19 +502,6 @@
 			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		E983424A2757B85A00E1C314 /* Logbook.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				E983424B2757B85A00E1C314 /* Logbook.xcdatamodel */,
-			);
-			currentVersion = E983424B2757B85A00E1C314 /* Logbook.xcdatamodel */;
-			path = Logbook.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = E98342342757B85800E1C314 /* Project object */;
 }
