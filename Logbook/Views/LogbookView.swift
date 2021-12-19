@@ -15,7 +15,6 @@ struct LogbookView: View {
     @Binding var latestLogbooks: [Logbook]
     @Binding var currentLogbook: Logbook
     @State private var newMileAge: String = ""
-    @State private var additionalInformationTyp: AdditionalInformationEnum = .none
     @State private var additionalInformationInformation: String = ""
     @State private var additionalInformationCost: String = ""
     @ObservedObject private var addLoogbookEntryVM = AddLogbookEntryViewModel()
@@ -99,7 +98,7 @@ struct LogbookView: View {
                     } label: {
                         VStack(spacing: 5){
                             HStack{
-                                Text(currentLogbook.additionalInformation!.informationTyp?.localizedName ?? "").tag(currentLogbook.additionalInformation?.informationTyp)
+                                Text(currentLogbook.additionalInformation!.informationTyp!.localizedName).tag(currentLogbook.additionalInformation?.informationTyp)
                                     .foregroundColor(currentLogbook.additionalInformation?.informationTyp == AdditionalInformationEnum.none ? .gray : .primary)
                                 Spacer()
                                 Image(systemName: "chevron.down")
@@ -154,9 +153,8 @@ struct LogbookView: View {
                                                vehicle: Vehicle(typ: currentLogbook.vehicle.typ, currentMileAge: currentLogbook.vehicle.currentMileAge, newMileAge: Int(newMileAge) ?? 0),
                                                date: currentLogbook.date,
                                                driveReason: currentLogbook.driveReason,
-                                               additionalInformation: additionalInformationTyp == .none ? nil :
-                                                AdditionalInformation(informationTyp: additionalInformationTyp, inforamtion: additionalInformationInformation, cost: additionalInformationCost))
-
+                                               additionalInformation: currentLogbook.additionalInformation?.informationTyp == AdditionalInformationEnum.none ? nil :
+                                                AdditionalInformation(informationTyp: currentLogbook.additionalInformation?.informationTyp, information: additionalInformationInformation, cost: additionalInformationCost))
                     addLoogbookEntryVM.saveEntry(logbookEntry: finalLogbook)
                     if(addLoogbookEntryVM.brokenValues.count > 0) {
                         alertTitle = "Fehler!"

@@ -12,13 +12,13 @@ struct AdditionalInformation: Codable, Identifiable {
     let id = UUID()
     
     var informationTyp: AdditionalInformationEnum?
-    var inforamtion: String
+    var information: String
     var cost: String
 //    var distanceSinceLastInformation: Int?
     
     enum CodingKeys: String, CodingKey {
         case informationTyp = "informationTyp"
-        case inforamtion = "inforamtion"
+        case information = "information"
         case cost = "cost"
     }
 }
