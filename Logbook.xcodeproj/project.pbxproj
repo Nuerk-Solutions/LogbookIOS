@@ -30,6 +30,9 @@
 		E98342442757B85A00E1C314 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E98342432757B85A00E1C314 /* Assets.xcassets */; };
 		E98342472757B85A00E1C314 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E98342462757B85A00E1C314 /* Preview Assets.xcassets */; };
 		E9881B9B27650DC200BE53CC /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E9881B9A27650DC200BE53CC /* SDWebImageSwiftUI */; };
+		E9A76849276FAAD90043551A /* TermiNetwork in Frameworks */ = {isa = PBXBuildFile; productRef = E9A76848276FAAD90043551A /* TermiNetwork */; };
+		E9A7684C276FADDA0043551A /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = E9A7684B276FADDA0043551A /* SPAlert */; };
+		E9A7684F276FB1D90043551A /* FloatingLabelTextFieldSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E9A7684E276FB1D90043551A /* FloatingLabelTextFieldSwiftUI */; };
 		E9D1835B276F2B17001A764E /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = E9D1835A276F2B17001A764E /* AlertToast */; };
 		E9D1835E276F2E0D001A764E /* AlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D1835D276F2E0D001A764E /* AlertViewModel.swift */; };
 		E9D18361276F3B95001A764E /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = E9D18360276F3B95001A764E /* AlertKit */; };
@@ -77,8 +80,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9881B9B27650DC200BE53CC /* SDWebImageSwiftUI in Frameworks */,
+				E9A7684F276FB1D90043551A /* FloatingLabelTextFieldSwiftUI in Frameworks */,
+				E9A7684C276FADDA0043551A /* SPAlert in Frameworks */,
 				E9D1835B276F2B17001A764E /* AlertToast in Frameworks */,
 				E9D18361276F3B95001A764E /* AlertKit in Frameworks */,
+				E9A76849276FAAD90043551A /* TermiNetwork in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,6 +234,9 @@
 				E9881B9A27650DC200BE53CC /* SDWebImageSwiftUI */,
 				E9D1835A276F2B17001A764E /* AlertToast */,
 				E9D18360276F3B95001A764E /* AlertKit */,
+				E9A76848276FAAD90043551A /* TermiNetwork */,
+				E9A7684B276FADDA0043551A /* SPAlert */,
+				E9A7684E276FB1D90043551A /* FloatingLabelTextFieldSwiftUI */,
 			);
 			productName = Logbook;
 			productReference = E983423C2757B85800E1C314 /* Logbook.app */;
@@ -261,6 +270,9 @@
 				E9881B9927650DC200BE53CC /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				E9D18359276F2B17001A764E /* XCRemoteSwiftPackageReference "AlertToast" */,
 				E9D1835F276F3B95001A764E /* XCRemoteSwiftPackageReference "AlertKit" */,
+				E9A76847276FAAD90043551A /* XCRemoteSwiftPackageReference "TermiNetwork" */,
+				E9A7684A276FADDA0043551A /* XCRemoteSwiftPackageReference "SPAlert" */,
+				E9A7684D276FB1D90043551A /* XCRemoteSwiftPackageReference "FloatingLabelTextFieldSwiftUI" */,
 			);
 			productRefGroup = E983423D2757B85800E1C314 /* Products */;
 			projectDirPath = "";
@@ -513,6 +525,30 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		E9A76847276FAAD90043551A /* XCRemoteSwiftPackageReference "TermiNetwork" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/billp/TermiNetwork";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		E9A7684A276FADDA0043551A /* XCRemoteSwiftPackageReference "SPAlert" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ivanvorobei/SPAlert";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		E9A7684D276FB1D90043551A /* XCRemoteSwiftPackageReference "FloatingLabelTextFieldSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishanraja/FloatingLabelTextFieldSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		E9D18359276F2B17001A764E /* XCRemoteSwiftPackageReference "AlertToast" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/elai950/AlertToast.git";
@@ -536,6 +572,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E9881B9927650DC200BE53CC /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		E9A76848276FAAD90043551A /* TermiNetwork */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E9A76847276FAAD90043551A /* XCRemoteSwiftPackageReference "TermiNetwork" */;
+			productName = TermiNetwork;
+		};
+		E9A7684B276FADDA0043551A /* SPAlert */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E9A7684A276FADDA0043551A /* XCRemoteSwiftPackageReference "SPAlert" */;
+			productName = SPAlert;
+		};
+		E9A7684E276FB1D90043551A /* FloatingLabelTextFieldSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E9A7684D276FB1D90043551A /* XCRemoteSwiftPackageReference "FloatingLabelTextFieldSwiftUI" */;
+			productName = FloatingLabelTextFieldSwiftUI;
 		};
 		E9D1835A276F2B17001A764E /* AlertToast */ = {
 			isa = XCSwiftPackageProductDependency;

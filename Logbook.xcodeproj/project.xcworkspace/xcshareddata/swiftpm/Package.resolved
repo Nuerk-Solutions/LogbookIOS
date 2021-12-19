@@ -20,6 +20,15 @@
         }
       },
       {
+        "package": "FloatingLabelTextFieldSwiftUI",
+        "repositoryURL": "https://github.com/kishanraja/FloatingLabelTextFieldSwiftUI",
+        "state": {
+          "branch": null,
+          "revision": "b9aab8fa5f13474180274cfb7022357e8461b838",
+          "version": "4.2.1"
+        }
+      },
+      {
         "package": "SDWebImage",
         "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
         "state": {
@@ -35,6 +44,24 @@
           "branch": null,
           "revision": "cd8625b7cf11a97698e180d28bb7d5d357196678",
           "version": "2.0.2"
+        }
+      },
+      {
+        "package": "SPAlert",
+        "repositoryURL": "https://github.com/ivanvorobei/SPAlert",
+        "state": {
+          "branch": null,
+          "revision": "52c6fbfd025c8aeb2236c4f629dcca59e0060de6",
+          "version": "3.5.1"
+        }
+      },
+      {
+        "package": "TermiNetwork",
+        "repositoryURL": "https://github.com/billp/TermiNetwork",
+        "state": {
+          "branch": null,
+          "revision": "d6adbfe29490997a4a813df34b3747b03842af55",
+          "version": "2.1.1"
         }
       }
     ]

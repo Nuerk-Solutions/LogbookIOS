@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 import SDWebImageSwiftUI
 import AlertToast
+import SPAlert
 
 struct ContentView: View {
     
@@ -48,22 +49,15 @@ struct ContentView: View {
             @unknown default:
                 loadingPhase = .failed
             }
-        }.onAppear(perform: {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                if(viewModel.isLoading) {
-                    viewModel.fetchLatestLogbooks()
-                }
-            }
+        }.spAlert(isPresent: $viewModel.showAlert,
+                  message: viewModel.errorMessage ?? "",
+                  duration: 10.0,
+                  dismissOnTap: false,
+                  preset: .error,
+                  haptic: .error,
+                  completion: {
+            viewModel.fetchLatestLogbooks()
         })
-            .toast(isPresenting: $alertViewModel.show, duration: 9999) {
-            alertViewModel.alertToast
-        }
-        .onChange(of: viewModel.showAlert) { newValue in
-            if let errorMessage = viewModel.errorMessage {
-                alertViewModel.tapToDismiss = true
-                alertViewModel.alertToast = AlertToast(displayMode: .alert, type: .error(.red), title: errorMessage, style: .style(titleFont: .system(size: 10)))
-            }
-        }
     }
     
     func getImageURL() -> URL {

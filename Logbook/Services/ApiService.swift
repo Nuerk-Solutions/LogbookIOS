@@ -54,7 +54,7 @@ struct APIService {
         .resume()
     }
     
-    func postJSON<T: Decodable>(httpBody: T,
+    func postJSON<T: Decodable>(httpBody: Data,
                                 dateDecodingStrategy: JSONDecoder.DateDecodingStrategy = .deferredToDate,
                                 keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy = .useDefaultKeys,
                                 completion: @escaping (Result<T,APIError>) -> Void) {
@@ -65,18 +65,11 @@ struct APIService {
             return
         }
         
-        
         var request = URLRequest(url: url)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-        let encoder = JSONEncoder()
-        do {
-            let encodedData = try encoder.encode(httpBody as? Logbook)
-            request.httpMethod = "POST"
-            request.httpBody = encodedData
-        } catch {
-            completion(.failure(.decodingError(error.localizedDescription)))
-        }
+        request.httpMethod = "POST"
+        request.httpBody = httpBody
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard

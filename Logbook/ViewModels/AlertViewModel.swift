@@ -6,22 +6,21 @@
 //
 
 import Foundation
-import AlertToast
 
 class AlertViewModel: ObservableObject {
     
     @Published var show = false
     @Published var duration: Double = 2
     @Published var tapToDismiss = false
-    @Published var alertToast = AlertToast(displayMode: .alert, type: .regular, title: "Hello World") {
-        didSet {
-            print(duration)
-            self.show.toggle()
-            if(!tapToDismiss){
-                DispatchQueue.main.asyncAfter(deadline: .now() + self.duration) {
-                    self.show.toggle()
-                }
-            }
-        }
-    }
+//    @Published var alertToast = AlertToast(displayMode: .alert, type: .regular, title: "Hello World") {
+//        didSet {
+//            print(duration)
+//            self.show.toggle()
+//            if(!tapToDismiss){
+//                DispatchQueue.main.asyncAfter(deadline: .now() + self.duration) {
+//                    self.show.toggle()
+//                }
+//            }
+//        }
+//    }
 }

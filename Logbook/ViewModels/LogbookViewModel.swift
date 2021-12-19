@@ -8,6 +8,7 @@
 import Foundation
 
 class LogbookViewModel: ObservableObject {
+    
     @Published var latestLogbooks: [Logbook] = []
     @Published var currentLogbook: Logbook = Logbook(driver: .Andrea, vehicle: Vehicle(typ: .Ferrari, currentMileAge: 0, newMileAge: 0), date: Date(), driveReason: "Stadtfahrt", additionalInformation: AdditionalInformation(informationTyp: AdditionalInformationEnum.none, inforamtion: "", cost: ""))
     @Published var isLoading = true
@@ -42,7 +43,11 @@ class LogbookViewModel: ObservableObject {
     func submitLogbook(httpBody: Logbook) {
         self.isLoading = true
         let apiService = APIService(urlString: "https://api.nuerk-solutions.de/logbook")
-        apiService.postJSON(httpBody: httpBody, dateDecodingStrategy: JSONDecoder.DateDecodingStrategy.formatted(.standardT)) { (result: Result<Logbook, APIError>) in
+        
+        let encoder = JSONEncoder()
+        let encodedData = try! encoder.encode(httpBody)
+        
+        apiService.postJSON(httpBody: encodedData, dateDecodingStrategy: JSONDecoder.DateDecodingStrategy.formatted(.standardT)) { (result: Result<Logbook, APIError>) in
             defer {
                 DispatchQueue.main.async {
                     self.isLoading.toggle()
