@@ -30,6 +30,9 @@
 		E98342442757B85A00E1C314 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E98342432757B85A00E1C314 /* Assets.xcassets */; };
 		E98342472757B85A00E1C314 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E98342462757B85A00E1C314 /* Preview Assets.xcassets */; };
 		E9881B9B27650DC200BE53CC /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E9881B9A27650DC200BE53CC /* SDWebImageSwiftUI */; };
+		E9D1835B276F2B17001A764E /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = E9D1835A276F2B17001A764E /* AlertToast */; };
+		E9D1835E276F2E0D001A764E /* AlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D1835D276F2E0D001A764E /* AlertViewModel.swift */; };
+		E9D18361276F3B95001A764E /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = E9D18360276F3B95001A764E /* AlertKit */; };
 		E9D4E6F42758FEBB003F36DA /* FloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */; };
 		E9D4E6FD27590483003F36DA /* NumberUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D4E6FC27590483003F36DA /* NumberUtils.swift */; };
 		E9EAEF4727627674005FE0BC /* CircleLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EAEF4627627673005FE0BC /* CircleLoader.swift */; };
@@ -61,6 +64,7 @@
 		E98342432757B85A00E1C314 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E98342462757B85A00E1C314 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E983424D2757B85A00E1C314 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E9D1835D276F2E0D001A764E /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
 		E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextField.swift; sourceTree = "<group>"; };
 		E9D4E6FC27590483003F36DA /* NumberUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberUtils.swift; sourceTree = "<group>"; };
 		E9EAEF4627627673005FE0BC /* CircleLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleLoader.swift; sourceTree = "<group>"; };
@@ -73,6 +77,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9881B9B27650DC200BE53CC /* SDWebImageSwiftUI in Frameworks */,
+				E9D1835B276F2B17001A764E /* AlertToast in Frameworks */,
+				E9D18361276F3B95001A764E /* AlertKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,6 +107,7 @@
 		E947259F276BC0C9006E6944 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E98342412757B85800E1C314 /* ContentView.swift */,
 				E963FC342766549300FFBD00 /* LogbookView.swift */,
 				E90C2AC0276DB175005C1281 /* LoadingView.swift */,
 				E9472593276BAF83006E6944 /* Launch Screen.storyboard */,
@@ -111,6 +118,7 @@
 		E94725A0276BC0CE006E6944 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				E9D1835D276F2E0D001A764E /* AlertViewModel.swift */,
 				E94725AC276BC341006E6944 /* LogbookViewModel.swift */,
 			);
 			path = ViewModels;
@@ -159,7 +167,6 @@
 			isa = PBXGroup;
 			children = (
 				E983424D2757B85A00E1C314 /* Info.plist */,
-				E98342412757B85800E1C314 /* ContentView.swift */,
 				E983423F2757B85800E1C314 /* LogbookApp.swift */,
 				E98342432757B85A00E1C314 /* Assets.xcassets */,
 				E94725A3276BC127006E6944 /* Components */,
@@ -219,6 +226,8 @@
 			name = Logbook;
 			packageProductDependencies = (
 				E9881B9A27650DC200BE53CC /* SDWebImageSwiftUI */,
+				E9D1835A276F2B17001A764E /* AlertToast */,
+				E9D18360276F3B95001A764E /* AlertKit */,
 			);
 			productName = Logbook;
 			productReference = E983423C2757B85800E1C314 /* Logbook.app */;
@@ -250,6 +259,8 @@
 			mainGroup = E98342332757B85800E1C314;
 			packageReferences = (
 				E9881B9927650DC200BE53CC /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				E9D18359276F2B17001A764E /* XCRemoteSwiftPackageReference "AlertToast" */,
+				E9D1835F276F3B95001A764E /* XCRemoteSwiftPackageReference "AlertKit" */,
 			);
 			productRefGroup = E983423D2757B85800E1C314 /* Products */;
 			projectDirPath = "";
@@ -300,6 +311,7 @@
 				E947259E276BC008006E6944 /* ApiService.swift in Sources */,
 				E98342402757B85800E1C314 /* LogbookApp.swift in Sources */,
 				E9393ED82761330E00CB136F /* LogbookEntryViewModel.swift in Sources */,
+				E9D1835E276F2E0D001A764E /* AlertViewModel.swift in Sources */,
 				E94725A7276BC16F006E6944 /* ColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -501,6 +513,22 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		E9D18359276F2B17001A764E /* XCRemoteSwiftPackageReference "AlertToast" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elai950/AlertToast.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		E9D1835F276F3B95001A764E /* XCRemoteSwiftPackageReference "AlertKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rebeloper/AlertKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -508,6 +536,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E9881B9927650DC200BE53CC /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		E9D1835A276F2B17001A764E /* AlertToast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E9D18359276F2B17001A764E /* XCRemoteSwiftPackageReference "AlertToast" */;
+			productName = AlertToast;
+		};
+		E9D18360276F3B95001A764E /* AlertKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E9D1835F276F3B95001A764E /* XCRemoteSwiftPackageReference "AlertKit" */;
+			productName = AlertKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

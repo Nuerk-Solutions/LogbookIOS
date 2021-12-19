@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import AlertToast
+import AlertKit
 
 struct LogbookView: View {
     
@@ -31,6 +33,8 @@ struct LogbookView: View {
     @State private var showingAlert = false
     @State private var alertTitle = "Alert Title"
     @State private var alertMessage = ""
+    @StateObject var alertManager = AlertManager()
+    @EnvironmentObject var alertViewModel: AlertViewModel
     
     
     @State private var isLoading = true
@@ -103,7 +107,7 @@ struct LogbookView: View {
                     } label: {
                         VStack(spacing: 5){
                             HStack{
-                                Text(currentLogbook.additionalInformation!.informationTyp.localizedName).tag(currentLogbook.additionalInformation?.informationTyp)
+                                Text(currentLogbook.additionalInformation!.informationTyp?.localizedName ?? "").tag(currentLogbook.additionalInformation?.informationTyp)
                                     .foregroundColor(currentLogbook.additionalInformation?.informationTyp == AdditionalInformationEnum.none ? .gray : .primary)
                                 Spacer()
                                 Image(systemName: "chevron.down")
@@ -152,73 +156,93 @@ struct LogbookView: View {
                         }
                     }
                 }
-                Section(header: Text("Aktion")) {
-                    Button(action: {
-                        currentLogbook.vehicle.newMileAge = Int(newMileAge) ?? 0
-                        addLoogbookEntryVM.saveEntry(logbookEntry: currentLogbook)
-                        if(addLoogbookEntryVM.brokenValues.count > 0) {
-                            alertTitle = "Fehler!"
-                            alertMessage = addLoogbookEntryVM.brokenValues[0].message
-                        } else {
-                            alertTitle = "Neue Fahrt hinzugefügt"
-                        }
-                        showingAlert = true
-                        print(currentLogbook)
-                    }) {
-                        HStack {
-                            Spacer()
-                            Text("Speichern")
-                            Spacer()
-                        }
-                    }
-                    .foregroundColor(.white)
-                    .padding(15)
-                    .background(Color.green)
-                    .cornerRadius(8)
-                    
-                    // Delete Last Entry
-                    Button(action: {
-                        alertTitle = "Letzten Eintrag Löschen"
-                        alertMessage = "Die letzte Fahrt für P-1 gelöscht"
-                        showingAlert = true
-                    }) {
-                        HStack {
-                            Spacer()
-                            Text("Letzten Eintrag Löschen")
-                            Spacer()
-                        }
-                    }
-                    .foregroundColor(.white)
-                    .padding(10)
-                    .background(Color.red)
-                    .cornerRadius(8)
-                }
+//                Section(header: Text("Aktion")) {
+//                    Button(action: {
+//                        currentLogbook.vehicle.newMileAge = Int(newMileAge) ?? 0
+//                        addLoogbookEntryVM.saveEntry(logbookEntry: currentLogbook)
+//                        if(addLoogbookEntryVM.brokenValues.count > 0) {
+//                            alertTitle = "Fehler!"
+//                            alertMessage = addLoogbookEntryVM.brokenValues[0].message
+//                        } else {
+//                            alertTitle = "Neue Fahrt hinzugefügt"
+//                        }
+//                        alertManager.show(primarySecondary: .info(title: "Eintrag Bestätigen", message: "Fahrer: \(currentLogbook.driver) \n Reiseziel: \(currentLogbook.driveReason) \n Fahrzeug: \(currentLogbook.vehicle.typ)", primaryButton: Alert.Button.destructive(Text("Bestätigen")) {
+//
+//                            alertViewModel.alertToast = AlertToast(displayMode: .alert, type: .complete(.green), title: "Fahrt hinzugefügt")
+//                        }, secondaryButton: Alert.Button.cancel(Text("Abbrechen"))))
+//    //                    alertViewModel.tapToDismiss = true
+//                        print(currentLogbook)
+//                    }) {
+//                        HStack {
+//                            Spacer()
+//                            Text("Speichern")
+//                            Spacer()
+//                        }
+//                    }
+//                    .foregroundColor(.white)
+//                    .padding(15)
+//                    .background(Color.green)
+//                    .cornerRadius(8)
+//
+//                    // Delete Last Entry
+//                    Button(action: {
+//                        alertTitle = "Letzten Eintrag Löschen"
+//                        alertMessage = "Die letzte Fahrt für P-1 gelöscht"
+//                        showingAlert = true
+//                    }) {
+//                        HStack {
+//                            Spacer()
+//                            Text("Letzten Eintrag Löschen")
+//                            Spacer()
+//                        }
+//                    }
+//                    .foregroundColor(.white)
+//                    .padding(10)
+//                    .background(Color.red)
+//                    .cornerRadius(8)
+//                }
                 // Download XLSX
                 Button(action: {
-                    alertTitle = "Öffne Safari..."
-                    showingAlert = true
+                    let finalLogbook = Logbook(driver: currentLogbook.driver, vehicle: Vehicle(typ: currentLogbook.vehicle.typ, currentMileAge: currentLogbook.vehicle.currentMileAge, newMileAge: Int(newMileAge) ?? 0), date: currentLogbook.date, driveReason: currentLogbook.driveReason, additionalInformation: additionalInformationTyp == .none ? nil : AdditionalInformation(informationTyp: additionalInformationTyp, inforamtion: additionalInformationInformation, cost: additionalInformationCost))
+//                    currentLogbook.vehicle.newMileAge = Int(newMileAge) ?? 0
+//                    currentLogbook.additionalInformation = AdditionalInformation(informationTyp: additionalInformationTyp == .none ? nil : additionalInformationTyp, inforamtion: additionalInformationInformation, cost: additionalInformationCost)
+                    addLoogbookEntryVM.saveEntry(logbookEntry: finalLogbook)
+                    if(addLoogbookEntryVM.brokenValues.count > 0) {
+                        alertTitle = "Fehler!"
+                        alertMessage = addLoogbookEntryVM.brokenValues[0].message
+                    } else {
+                        alertTitle = "Neue Fahrt hinzugefügt"
+                    }
+                    alertManager.show(primarySecondary: .info(title: "Eintrag Bestätigen", message: "Fahrer: \(finalLogbook.driver) \n Reiseziel: \(finalLogbook.driveReason) \n Fahrzeug: \(finalLogbook.vehicle.typ)", primaryButton: Alert.Button.destructive(Text("Bestätigen")) {
+                        viewModel.submitLogbook(httpBody: finalLogbook)
+                        alertViewModel.alertToast = AlertToast(displayMode: .alert, type: .complete(.green), title: "Fahrt hinzugefügt")
+                    }, secondaryButton: Alert.Button.cancel(Text("Abbrechen"))))
+//                    alertViewModel.tapToDismiss = true
+                    print(currentLogbook)
                 }) {
                     HStack {
                         Spacer()
-                        Text("Download XLSX")
+                        Text("Speichern")
                         Spacer()
                     }
                 }
                 .foregroundColor(.white)
                 .padding(10)
                 .cornerRadius(8)
-                .listRowBackground(Color.pink)
+                .listRowBackground(Color.green)
             }
             .navigationTitle(Text("Fahrtenbuch"))
-            .alert(alertTitle, isPresented: $showingAlert, actions: {
-                Button("OK") {}
-            }, message: {
-                if let alertMessage = alertMessage {
-                    Text(alertMessage)
-                }
-            })
+//            .alert(alertTitle, isPresented: $showingAlert, actions: {
+//                Button("OK") {}
+//            }, message: {
+//                if let alertMessage = alertMessage {
+//                    Text(alertMessage)
+//                }
+//            })
             .gesture(DragGesture().onChanged{_ in UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)})
         }
+        .uses(alertManager)
+        .disabled(showingAlert || alertViewModel.show)
         .transition(AnyTransition.opacity.animation(.linear(duration: 1)))
     }
 }

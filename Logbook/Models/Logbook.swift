@@ -15,6 +15,14 @@ struct Logbook: Codable, Identifiable {
     var date: Date
     var driveReason: String
     var additionalInformation: AdditionalInformation?
+    
+    enum CodingKeys: String, CodingKey {
+        case driver = "driver"
+        case vehicle = "vehicle"
+        case date = "date"
+        case driveReason = "driveReason"
+        case additionalInformation = "additionalInformation"
+    }
 }
 
 enum DriverEnum: String, CaseIterable, Identifiable, Codable {

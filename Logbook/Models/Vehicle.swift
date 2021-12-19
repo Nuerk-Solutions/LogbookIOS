@@ -15,6 +15,12 @@ struct Vehicle: Codable, Identifiable, Hashable {
     var newMileAge: Int
     //    var distance: Int
     //    var cost: Float
+    
+    enum CodingKeys: String, CodingKey {
+        case typ = "typ"
+        case currentMileAge = "currentMileAge"
+        case newMileAge = "newMileAge"
+    }
 }
 
 enum VehicleEnum: String, CaseIterable, Identifiable, Codable {

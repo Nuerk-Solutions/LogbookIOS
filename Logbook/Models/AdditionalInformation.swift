@@ -11,10 +11,16 @@ import SwiftUI
 struct AdditionalInformation: Codable, Identifiable {
     let id = UUID()
     
-    var informationTyp: AdditionalInformationEnum
+    var informationTyp: AdditionalInformationEnum?
     var inforamtion: String
     var cost: String
 //    var distanceSinceLastInformation: Int?
+    
+    enum CodingKeys: String, CodingKey {
+        case informationTyp = "informationTyp"
+        case inforamtion = "inforamtion"
+        case cost = "cost"
+    }
 }
 
 enum AdditionalInformationEnum: String, Equatable, CaseIterable, Identifiable, Codable {

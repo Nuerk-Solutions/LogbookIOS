@@ -8,17 +8,19 @@
 import SwiftUI
 import Combine
 import SDWebImageSwiftUI
+import AlertToast
 
 struct ContentView: View {
     
     @State private var loadingPhase: LoadingPhase = .animation
     @Environment(\.scenePhase) var scenePhase
-    @StateObject var viewModel = LogbookViewModel()
     
+    @StateObject var viewModel = LogbookViewModel()
+    @StateObject var alertViewModel = AlertViewModel()
     
     var body: some View {
         ZStack {
-            LogbookView(latestLogbooks: $viewModel.latestLogbooks, currentLogbook: $viewModel.currentLogbook)
+            LogbookView(latestLogbooks: $viewModel.latestLogbooks, currentLogbook: $viewModel.currentLogbook).environmentObject(self.alertViewModel).environmentObject(self.viewModel)
         }
         .overlay(content: {
             LoadingView(isLoading: $viewModel.isLoading, loadingPhase: $loadingPhase)
@@ -53,13 +55,15 @@ struct ContentView: View {
                 }
             }
         })
-        .alert(Text("Application Error"), isPresented: $viewModel.showAlert, actions: {
-            Button("OK") {}
-        }, message: {
+            .toast(isPresenting: $alertViewModel.show, duration: 9999) {
+            alertViewModel.alertToast
+        }
+        .onChange(of: viewModel.showAlert) { newValue in
             if let errorMessage = viewModel.errorMessage {
-                Text(errorMessage)
+                alertViewModel.tapToDismiss = true
+                alertViewModel.alertToast = AlertToast(displayMode: .alert, type: .error(.red), title: errorMessage, style: .style(titleFont: .system(size: 10)))
             }
-        })
+        }
     }
     
     func getImageURL() -> URL {
