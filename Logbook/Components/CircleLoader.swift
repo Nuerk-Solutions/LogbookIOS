@@ -25,10 +25,7 @@ struct CircleLoader: View {
     
      // MARK:- views
     var body: some View {
-        ZStack {
-            Color.white
-                .ignoresSafeArea(.all, edges: .all)
-            
+        ZStack {            
             ZStack {
                 Circle()
                     .stroke(style: StrokeStyle(lineWidth: 20))

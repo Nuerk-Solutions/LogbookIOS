@@ -6,9 +6,8 @@
 //
 
 import SwiftUI
-import AlertToast
 import AlertKit
-import FloatingLabelTextFieldSwiftUI
+import SPAlert
 
 struct LogbookView: View {
     
@@ -17,16 +16,16 @@ struct LogbookView: View {
     @State private var newMileAge: String = ""
     @State private var additionalInformationInformation: String = ""
     @State private var additionalInformationCost: String = ""
-    @ObservedObject private var addLoogbookEntryVM = AddLogbookEntryViewModel()
-    @EnvironmentObject var viewModel: LogbookViewModel
     @Environment(\.scenePhase) var scenePhase
     
     
-    @State private var showingAlert = false
+    @State private var showSuccessAlert = false
     @State private var alertTitle = "Alert Title"
     @State private var alertMessage = ""
+    
     @StateObject var alertManager = AlertManager()
-    @EnvironmentObject var alertViewModel: AlertViewModel
+    @ObservedObject private var addLoogbookEntryVM = AddLogbookEntryViewModel()
+    @EnvironmentObject var viewModel: LogbookViewModel
     
     
     @State private var isLoading = true
@@ -85,7 +84,13 @@ struct LogbookView: View {
                             .padding(.top, 5)
                             .foregroundColor(.gray)
                     }
-                    
+                    let distance: Int  = (Int(newMileAge) ?? currentLogbook.vehicle.currentMileAge) - currentLogbook.vehicle.currentMileAge
+                    let cost: Double = Double(distance) * 0.2
+                    if(distance > 0) {
+                        HStack {
+                            Text("Strecke: \(String(distance)) km\nKosten: \(String(cost))€")
+                        }
+                    }
                 })
                 
                 Section(header: Text("Zusätzliche Information")) {
@@ -147,7 +152,7 @@ struct LogbookView: View {
                         }
                     }
                 }
-
+                
                 Button(action: {
                     let finalLogbook = Logbook(driver: currentLogbook.driver,
                                                vehicle: Vehicle(typ: currentLogbook.vehicle.typ, currentMileAge: currentLogbook.vehicle.currentMileAge, newMileAge: Int(newMileAge) ?? 0),
@@ -155,15 +160,30 @@ struct LogbookView: View {
                                                driveReason: currentLogbook.driveReason,
                                                additionalInformation: currentLogbook.additionalInformation?.informationTyp == AdditionalInformationEnum.none ? nil :
                                                 AdditionalInformation(informationTyp: currentLogbook.additionalInformation?.informationTyp, information: additionalInformationInformation, cost: additionalInformationCost))
+                    
                     addLoogbookEntryVM.saveEntry(logbookEntry: finalLogbook)
                     if(addLoogbookEntryVM.brokenValues.count > 0) {
-                        alertTitle = "Fehler!"
-                        alertMessage = addLoogbookEntryVM.brokenValues[0].message
-                    } else {
-                        alertTitle = "Neue Fahrt hinzugefügt"
+                        let alert = SPAlertView(title: "", message: addLoogbookEntryVM.brokenValues[0].message, preset: .error)
+                        alert.duration = 3.5
+                        alert.dismissByTap = true
+                        alert.present()
+                        return
                     }
-                    alertManager.show(primarySecondary: .info(title: "Eintrag Bestätigen", message: "Fahrer: \(finalLogbook.driver) \n Reiseziel: \(finalLogbook.driveReason) \n Fahrzeug: \(finalLogbook.vehicle.typ)", primaryButton: Alert.Button.destructive(Text("Bestätigen")) {
-                        viewModel.submitLogbook(httpBody: finalLogbook)
+                    let distance: Int  = (Int(newMileAge) ?? currentLogbook.vehicle.currentMileAge) - currentLogbook.vehicle.currentMileAge
+                    alertManager.show(primarySecondary: .info(title: "Eintrag Bestätigen", message: "Fahrer: \(finalLogbook.driver) \n Reiseziel: \(finalLogbook.driveReason)\n Fahrzeug: \(finalLogbook.vehicle.typ) \n Strecke: \(distance)", primaryButton: Alert.Button.destructive(Text("Bestätigen")) {
+                        //viewModel.submitLogbook(httpBody: finalLogbook)
+                        
+                        newMileAge = ""
+                        additionalInformationCost = ""
+                        additionalInformationInformation = ""
+                        currentLogbook.additionalInformation?.informationTyp = AdditionalInformationEnum.none
+                        
+                        SPAlertView(title: "Neue Fahrt hinzugefügt", message: "", preset: .done).present(haptic: .success) {
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                            
+                            viewModel.fetchLatestLogbooks()
+                            
+                        }
                     }, secondaryButton: Alert.Button.cancel(Text("Abbrechen"))))
                 }) {
                     HStack {
@@ -176,12 +196,11 @@ struct LogbookView: View {
                 .padding(10)
                 .cornerRadius(8)
                 .listRowBackground(Color.green)
+                .navigationTitle(Text("Fahrtenbuch"))
+                .gesture(DragGesture().onChanged{_ in UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)})
             }
-            .navigationTitle(Text("Fahrtenbuch"))
-            .gesture(DragGesture().onChanged{_ in UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)})
+            .uses(alertManager)
+            .transition(AnyTransition.opacity.animation(.linear(duration: 1)))
         }
-        .uses(alertManager)
-        .disabled(showingAlert || alertViewModel.show)
-        .transition(AnyTransition.opacity.animation(.linear(duration: 1)))
     }
 }

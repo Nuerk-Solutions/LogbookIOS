@@ -8,8 +8,6 @@
 import SwiftUI
 import Combine
 import SDWebImageSwiftUI
-import AlertToast
-import SPAlert
 
 struct ContentView: View {
     
@@ -17,14 +15,12 @@ struct ContentView: View {
     @Environment(\.scenePhase) var scenePhase
     
     @StateObject var viewModel = LogbookViewModel()
-    @StateObject var alertViewModel = AlertViewModel()
-    
     var body: some View {
         ZStack {
-            LogbookView(latestLogbooks: $viewModel.latestLogbooks, currentLogbook: $viewModel.currentLogbook).environmentObject(self.alertViewModel).environmentObject(self.viewModel)
+            LogbookView(latestLogbooks: $viewModel.latestLogbooks, currentLogbook: $viewModel.currentLogbook).environmentObject(self.viewModel)
         }
         .overlay(content: {
-            LoadingView(isLoading: $viewModel.isLoading, loadingPhase: $loadingPhase)
+            LoadingView(isLoading: $viewModel.isLoading, loadingPhase: $loadingPhase).environmentObject(self.viewModel)
         })
         .onChange(of: viewModel.isLoading, perform: { newValue in
             if(!newValue && !viewModel.showAlert) {
@@ -49,15 +45,7 @@ struct ContentView: View {
             @unknown default:
                 loadingPhase = .failed
             }
-        }.spAlert(isPresent: $viewModel.showAlert,
-                  message: viewModel.errorMessage ?? "",
-                  duration: 10.0,
-                  dismissOnTap: false,
-                  preset: .error,
-                  haptic: .error,
-                  completion: {
-            viewModel.fetchLatestLogbooks()
-        })
+        }
     }
     
     func getImageURL() -> URL {
@@ -66,7 +54,6 @@ struct ContentView: View {
         
         return url
     }
-    
 }
 
 enum LoadingPhase {
