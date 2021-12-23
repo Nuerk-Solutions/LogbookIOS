@@ -164,14 +164,14 @@ struct LogbookView: View {
                     addLoogbookEntryVM.saveEntry(logbookEntry: finalLogbook)
                     if(addLoogbookEntryVM.brokenValues.count > 0) {
                         let alert = SPAlertView(title: "", message: addLoogbookEntryVM.brokenValues[0].message, preset: .error)
-                        alert.duration = 3.5
                         alert.dismissByTap = true
+                        alert.duration = 2.5
                         alert.present()
                         return
                     }
                     let distance: Int  = (Int(newMileAge) ?? currentLogbook.vehicle.currentMileAge) - currentLogbook.vehicle.currentMileAge
                     alertManager.show(primarySecondary: .info(title: "Eintrag Bestätigen", message: "Fahrer: \(finalLogbook.driver) \n Reiseziel: \(finalLogbook.driveReason)\n Fahrzeug: \(finalLogbook.vehicle.typ) \n Strecke: \(distance)", primaryButton: Alert.Button.destructive(Text("Bestätigen")) {
-                        //viewModel.submitLogbook(httpBody: finalLogbook)
+                        viewModel.submitLogbook(httpBody: finalLogbook)
                         
                         newMileAge = ""
                         additionalInformationCost = ""
@@ -196,11 +196,11 @@ struct LogbookView: View {
                 .padding(10)
                 .cornerRadius(8)
                 .listRowBackground(Color.green)
-                .navigationTitle(Text("Fahrtenbuch"))
-                .gesture(DragGesture().onChanged{_ in UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)})
             }
+            .navigationTitle(Text("Fahrtenbuch"))
+            .gesture(DragGesture().onChanged{_ in UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)})
             .uses(alertManager)
-            .transition(AnyTransition.opacity.animation(.linear(duration: 1)))
+           .transition(AnyTransition.opacity.animation(.linear(duration: 1)))
         }
     }
 }

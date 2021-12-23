@@ -19,8 +19,6 @@ struct FloatingTextEditor: View {
                 .scaleEffect(text.wrappedValue.isEmpty ? 1 : 0.75, anchor: .leading)
             TextEditor(text: text)
         }
-        .padding(.top, 15)
-        .padding(.bottom, 5)
         .animation(.easeOut(duration: 0.1))
     }
 }

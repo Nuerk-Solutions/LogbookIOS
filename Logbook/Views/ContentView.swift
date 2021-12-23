@@ -18,6 +18,7 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             LogbookView(latestLogbooks: $viewModel.latestLogbooks, currentLogbook: $viewModel.currentLogbook).environmentObject(self.viewModel)
+                .edgesIgnoringSafeArea(.all)
         }
         .overlay(content: {
             LoadingView(isLoading: $viewModel.isLoading, loadingPhase: $loadingPhase).environmentObject(self.viewModel)
@@ -42,6 +43,12 @@ struct ContentView: View {
             case .active:
                 loadingPhase = .animation
                 viewModel.fetchLatestLogbooks()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    print("Second Check!")
+                    if(viewModel.isLoading) {
+                        viewModel.fetchLatestLogbooks()
+                    }
+                }
             @unknown default:
                 loadingPhase = .failed
             }
