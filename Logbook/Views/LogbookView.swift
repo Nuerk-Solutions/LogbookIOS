@@ -165,12 +165,13 @@ struct LogbookView: View {
                     if(addLoogbookEntryVM.brokenValues.count > 0) {
                         let alert = SPAlertView(title: "", message: addLoogbookEntryVM.brokenValues[0].message, preset: .error)
                         alert.dismissByTap = true
-                        alert.duration = 2.5
+                        alert.iconView?.tintColor = .red
+                        alert.duration = 3
                         alert.present()
                         return
                     }
                     let distance: Int  = (Int(newMileAge) ?? currentLogbook.vehicle.currentMileAge) - currentLogbook.vehicle.currentMileAge
-                    alertManager.show(primarySecondary: .info(title: "Eintrag Bestätigen", message: "Fahrer: \(finalLogbook.driver) \n Reiseziel: \(finalLogbook.driveReason)\n Fahrzeug: \(finalLogbook.vehicle.typ) \n Strecke: \(distance)", primaryButton: Alert.Button.destructive(Text("Bestätigen")) {
+                    alertManager.show(primarySecondary: .info(title: "Eintrag Bestätigen", message: "Fahrer: \(finalLogbook.driver) \n Reiseziel: \(finalLogbook.driveReason)\n Fahrzeug: \(finalLogbook.vehicle.typ) \n Strecke: \(distance)km", primaryButton: Alert.Button.destructive(Text("Bestätigen")) {
                         viewModel.submitLogbook(httpBody: finalLogbook)
                         
                         newMileAge = ""
@@ -178,7 +179,9 @@ struct LogbookView: View {
                         additionalInformationInformation = ""
                         currentLogbook.additionalInformation?.informationTyp = AdditionalInformationEnum.none
                         
-                        SPAlertView(title: "Neue Fahrt hinzugefügt", message: "", preset: .done).present(haptic: .success) {
+                        let alert = SPAlertView(title: "Neue Fahrt hinzugefügt", message: "", preset: .done)
+                        alert.iconView?.tintColor = .green
+                        alert.present(haptic: .success) {
                             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                             
                             viewModel.fetchLatestLogbooks()
