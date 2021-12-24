@@ -11,17 +11,31 @@ struct FloatingTextField: View {
     let title: String
     let text: Binding<String>
     
+    @State private var scaleEffect: CGFloat = 1
+    @State private var offset: CGFloat = 0
+    
     var body: some View {
         ZStack(alignment: .leading) {
             Text(title)
                 .foregroundColor(text.wrappedValue.isEmpty ? Color(.placeholderText) : .accentColor)
-                .offset(y: text.wrappedValue.isEmpty ? 0 : -25)
-                .scaleEffect(text.wrappedValue.isEmpty ? 1 : 0.75, anchor: .leading)
+                .offset(y: offset)
+                .scaleEffect(scaleEffect, anchor: .leading)
             TextField("", text: text)
         }
         .padding(.top, 15)
         .padding(.bottom, 5)
-        .animation(.easeOut(duration: 0.1))
+        .onChange(of: text.wrappedValue) { newValue in
+            withAnimation(.easeOut(duration: 0.1)) {
+                scaleEffect = text.wrappedValue.isEmpty ? 1 : 0.75
+                offset = text.wrappedValue.isEmpty ? 0 : -25
+            }
+        }
+        .onAppear(perform: {
+            withAnimation(.easeOut(duration: 0.1)) {
+                scaleEffect = text.wrappedValue.isEmpty ? 1 : 0.75
+                offset = text.wrappedValue.isEmpty ? 0 : -25
+            }
+        })
     }
 }
 

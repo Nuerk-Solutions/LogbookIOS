@@ -11,18 +11,26 @@ struct FloatingNumberField: View {
     let title: String
     let text: Binding<Int>
     
+    @State private var scaleEffect: CGFloat = 1
+    @State private var offset: CGFloat = 0
+    
     var body: some View {
+        let isEmpty = String(text.wrappedValue).isEmpty || text.wrappedValue == -1
         ZStack(alignment: .leading) {
-            let isEmpty = String(text.wrappedValue).isEmpty || text.wrappedValue == -1
             Text(title)
                 .foregroundColor(isEmpty ? Color(.placeholderText) : .accentColor)
-                .offset(y: isEmpty ? 0 : -25)
-                .scaleEffect(isEmpty ? 1 : 0.75, anchor: .leading)
+                .offset(y: offset)
+                .scaleEffect(scaleEffect, anchor: .leading)
             TextField("", value: text, formatter: NumberFormatter())
         }
         .padding(.top, 15)
         .padding(.bottom, 5)
-        .animation(.easeOut(duration: 0.1))
+        .onChange(of: text.wrappedValue) { newValue in
+            withAnimation(.easeOut(duration: 0.1)) {
+                scaleEffect = isEmpty ? 1 : 0.75
+                offset = isEmpty ? 0 : -25
+            }
+        }
     }
 }
 
