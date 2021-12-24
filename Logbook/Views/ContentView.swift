@@ -36,6 +36,7 @@ struct ContentView: View {
             switch newPhase {
             case .inactive:
                 loadingPhase = .image
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                 break;
             case .background:
                 loadingPhase = .animation
