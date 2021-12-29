@@ -15,7 +15,7 @@ extension String {
     
     func isInt() -> Bool {
 
-        if let _ = Int(self) {
+        if let intValue = Int(self) {
             return true
         }
 
@@ -24,7 +24,7 @@ extension String {
 
     func isFloat() -> Bool {
 
-        if let _ = Float(self) {
+        if let floatValue = Float(self) {
             return true
         }
 
@@ -33,7 +33,7 @@ extension String {
 
     func isDouble() -> Bool {
         let str = self.split(separator: ",").joined(separator: ["."])
-        if let _ = Double(String(str)) {
+        if let doubleValue = Double(String(str)) {
             return true
         }
 

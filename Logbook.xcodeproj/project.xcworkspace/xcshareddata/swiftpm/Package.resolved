@@ -11,6 +11,24 @@
         }
       },
       {
+        "package": "AlertToast",
+        "repositoryURL": "https://github.com/elai950/AlertToast.git",
+        "state": {
+          "branch": null,
+          "revision": "a4f4267f6454259ba4ed8f9dadb87334a789c26c",
+          "version": "1.3.7"
+        }
+      },
+      {
+        "package": "FloatingLabelTextFieldSwiftUI",
+        "repositoryURL": "https://github.com/kishanraja/FloatingLabelTextFieldSwiftUI",
+        "state": {
+          "branch": null,
+          "revision": "b9aab8fa5f13474180274cfb7022357e8461b838",
+          "version": "4.2.1"
+        }
+      },
+      {
         "package": "SDWebImage",
         "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
         "state": {
@@ -33,8 +51,17 @@
         "repositoryURL": "https://github.com/ivanvorobei/SPAlert",
         "state": {
           "branch": null,
-          "revision": "dd26764492c0cc7d4855e3a93adee79f92f84cd0",
-          "version": "4.1.0"
+          "revision": "52c6fbfd025c8aeb2236c4f629dcca59e0060de6",
+          "version": "3.5.1"
+        }
+      },
+      {
+        "package": "TermiNetwork",
+        "repositoryURL": "https://github.com/billp/TermiNetwork",
+        "state": {
+          "branch": null,
+          "revision": "d6adbfe29490997a4a813df34b3747b03842af55",
+          "version": "2.1.1"
         }
       }
     ]

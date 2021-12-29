@@ -48,7 +48,7 @@ struct LoadingView: View {
                 .zIndex(1)
                 .transition(.iris)
             }
-        }.SPAlert(isPresent: $viewModel.showAlert,
+        }.spAlert(isPresent: $viewModel.showAlert,
                   message: viewModel.errorMessage ?? "",
                   duration: 10.0,
                   dismissOnTap: false,
