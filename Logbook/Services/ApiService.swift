@@ -69,6 +69,8 @@ struct APIService {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.httpMethod = "POST"
+        print(httpBody)
+        return
         request.httpBody = httpBody
         
         URLSession.shared.dataTask(with: request) { data, response, error in

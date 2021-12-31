@@ -48,10 +48,10 @@ struct LoadingView: View {
                 .zIndex(1)
                 .transition(.iris)
             }
-        }.spAlert(isPresent: $viewModel.showAlert,
+        }.SPAlert(isPresent: $viewModel.showAlert,
                   message: viewModel.errorMessage ?? "",
                   duration: 10.0,
-                  dismissOnTap: false,
+                  dismissOnTap: true,
                   preset: SPAlertIconPreset.error,
                   haptic: .error,
                   completion: {

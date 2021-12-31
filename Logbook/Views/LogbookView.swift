@@ -85,10 +85,10 @@ struct LogbookView: View {
                             .foregroundColor(.gray)
                     }
                     let distance: Int  = (Int(newMileAge) ?? currentLogbook.vehicle.currentMileAge) - currentLogbook.vehicle.currentMileAge
-                    let cost: Double = Double(distance) * 0.2
+                    let cost = Double(distance) * 0.2
                     if(distance > 0) {
                         HStack {
-                            Text("Strecke: \(String(distance)) km\nKosten: \(String(cost))€")
+                            Text("Strecke: \(String(distance)) km\nKosten: \(cost, specifier: "%.2f")€")
                         }
                     }
                 })

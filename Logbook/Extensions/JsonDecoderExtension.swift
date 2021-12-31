@@ -39,3 +39,27 @@ extension JSONDecoder {
         }
     }
 }
+
+
+//extension JSONEncoder {
+//    var dateEncodingStrategyFormatters: [DateFormatter]? {
+//        @available(*, unavailable, message: "This variable is meant to be set only")
+//        get { return nil }
+//        set {
+//            guard let formatters = newValue else { return }
+//            self.dateEncodingStrategy = .custom { encoder,<#arg#>  in
+//
+//                let container = try encoder.singleValueContainer()
+//                let dateString = try container.encode(String.self)
+//
+//                for formatter in formatters {
+//                    if let date = formatter.date(from: dateString) {
+//                        return date
+//                    }
+//                }
+//
+//                throw EncodingError.dataCorruptedError(in: container, debugDescription: "Cannot decode date string \(dateString)")
+//            }
+//        }
+//    }
+//}
