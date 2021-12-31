@@ -47,6 +47,9 @@ class LogbookViewModel: ObservableObject {
         let apiService = APIService(urlString: "https://api.nuerk-solutions.de/logbook")
         
         let encoder = JSONEncoder()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        encoder.dateEncodingStrategy = .formatted(dateFormatter)
         let encodedData = try! encoder.encode(httpBody)
         
         apiService.postJSON(httpBody: encodedData, dateDecodingStrategy: JSONDecoder.DateDecodingStrategy.formatted(.standardT)) { (result: Result<Logbook, APIError>) in
