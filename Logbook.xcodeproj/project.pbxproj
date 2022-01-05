@@ -21,6 +21,9 @@
 		E94725A7276BC16F006E6944 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94725A6276BC16F006E6944 /* ColorExtension.swift */; };
 		E94725AB276BC1BF006E6944 /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94725AA276BC1BF006E6944 /* DateFormatterExtension.swift */; };
 		E94725AD276BC342006E6944 /* LogbookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94725AC276BC341006E6944 /* LogbookViewModel.swift */; };
+		E95C4F73278620D4009643B4 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C4F72278620D4009643B4 /* ListView.swift */; };
+		E95C4F75278622C9009643B4 /* LogbookListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C4F74278622C9009643B4 /* LogbookListViewModel.swift */; };
+		E95C4F77278623C2009643B4 /* DetailLogbookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C4F76278623C2009643B4 /* DetailLogbookView.swift */; };
 		E963FC352766549300FFBD00 /* LogbookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963FC342766549300FFBD00 /* LogbookView.swift */; };
 		E963FC37276655C000FFBD00 /* TransitionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963FC36276655C000FFBD00 /* TransitionExtension.swift */; };
 		E963FC39276660A800FFBD00 /* Car_load.gif in Resources */ = {isa = PBXBuildFile; fileRef = E963FC38276660A800FFBD00 /* Car_load.gif */; };
@@ -53,6 +56,9 @@
 		E94725A6276BC16F006E6944 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		E94725AA276BC1BF006E6944 /* DateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtension.swift; sourceTree = "<group>"; };
 		E94725AC276BC341006E6944 /* LogbookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookViewModel.swift; sourceTree = "<group>"; };
+		E95C4F72278620D4009643B4 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		E95C4F74278622C9009643B4 /* LogbookListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookListViewModel.swift; sourceTree = "<group>"; };
+		E95C4F76278623C2009643B4 /* DetailLogbookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailLogbookView.swift; sourceTree = "<group>"; };
 		E963FC342766549300FFBD00 /* LogbookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookView.swift; sourceTree = "<group>"; };
 		E963FC36276655C000FFBD00 /* TransitionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionExtension.swift; sourceTree = "<group>"; };
 		E963FC38276660A800FFBD00 /* Car_load.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Car_load.gif; sourceTree = "<group>"; };
@@ -109,6 +115,8 @@
 				E963FC342766549300FFBD00 /* LogbookView.swift */,
 				E90C2AC0276DB175005C1281 /* LoadingView.swift */,
 				E9472593276BAF83006E6944 /* Launch Screen.storyboard */,
+				E95C4F72278620D4009643B4 /* ListView.swift */,
+				E95C4F76278623C2009643B4 /* DetailLogbookView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -118,6 +126,7 @@
 			children = (
 				E9393ED72761330E00CB136F /* LogbookEntryViewModel.swift */,
 				E94725AC276BC341006E6944 /* LogbookViewModel.swift */,
+				E95C4F74278622C9009643B4 /* LogbookListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -293,9 +302,11 @@
 				E90C2AC1276DB175005C1281 /* LoadingView.swift in Sources */,
 				E94725A5276BC15B006E6944 /* JsonDecoderExtension.swift in Sources */,
 				E963FC37276655C000FFBD00 /* TransitionExtension.swift in Sources */,
+				E95C4F77278623C2009643B4 /* DetailLogbookView.swift in Sources */,
 				E9FF8D24276E437500F00E95 /* DownloadService.swift in Sources */,
 				E9472597276BBD9A006E6944 /* Vehicle.swift in Sources */,
 				E90B2472276E90C500B185EF /* FloatingTextEditor.swift in Sources */,
+				E95C4F73278620D4009643B4 /* ListView.swift in Sources */,
 				E90B2474276E9C6A00B185EF /* StringExtension.swift in Sources */,
 				E98342422757B85800E1C314 /* ContentView.swift in Sources */,
 				E947259B276BBDB1006E6944 /* AdditionalInformation.swift in Sources */,
@@ -307,6 +318,7 @@
 				E9393EDA27614B3E00CB136F /* FloatingNumberField.swift in Sources */,
 				E947259E276BC008006E6944 /* ApiService.swift in Sources */,
 				E98342402757B85800E1C314 /* LogbookApp.swift in Sources */,
+				E95C4F75278622C9009643B4 /* LogbookListViewModel.swift in Sources */,
 				E9393ED82761330E00CB136F /* LogbookEntryViewModel.swift in Sources */,
 				E94725A7276BC16F006E6944 /* ColorExtension.swift in Sources */,
 			);
@@ -440,7 +452,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Logbook/Preview Content\"";
 				DEVELOPMENT_TEAM = 3JWUJEGD2M;
 				ENABLE_PREVIEWS = YES;
@@ -463,7 +475,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Logbook/Preview Content\"";
 				DEVELOPMENT_TEAM = 3JWUJEGD2M;
 				ENABLE_PREVIEWS = YES;

@@ -42,6 +42,7 @@ struct LogbookView: View {
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     
+                    
                     // Date picker
                     DatePicker("Datum",
                                selection: $currentLogbook.date,
