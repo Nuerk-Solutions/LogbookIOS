@@ -12,7 +12,7 @@ struct LogbookApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ListView()
                 .onAppear {
                     // To Hide Constrains warnings
                 UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")

@@ -8,10 +8,39 @@
 import SwiftUI
 
 struct DetailLogbookView: View {
+    var logbookId: String?
     
-    var logbookId: UUID?
+    @StateObject var viewModel = DetailListViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            List {
+                ForEach(viewModel.logbook) { logbook in
+                    VStack {
+                        Text(logbook._id!)
+                        Text(logbook.driver.id)
+                        Text(logbook.driveReason)
+                    }
+                }
+            }
+            .overlay(
+                Group {
+                    if viewModel.isLoading {
+                        ProgressView()
+                    }
+                }
+            )
+            
+            .alert(isPresented: $viewModel.showAlert, content: {
+                Alert(title: Text("Application Error"), message: Text(viewModel.errorMessage ?? ""))
+            })
+            .navigationTitle("Eintrag")
+            .navigationBarTitleDisplayMode(.inline)
+            .listStyle(.plain)
+        }.onAppear {
+            viewModel.logbookId = logbookId
+            viewModel.fetchLogbookById()
+        }
     }
 }
 

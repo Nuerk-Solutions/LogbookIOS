@@ -10,6 +10,7 @@ import Foundation
 struct Logbook: Codable, Identifiable {
     let id = UUID()
     
+    var _id: String?
     var driver: DriverEnum
     var vehicle: Vehicle
     var date: Date
@@ -22,6 +23,7 @@ struct Logbook: Codable, Identifiable {
         case date = "date"
         case driveReason = "driveReason"
         case additionalInformation = "additionalInformation"
+        case _id = "_id"
     }
 }
 
