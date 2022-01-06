@@ -34,6 +34,8 @@
 		E98342442757B85A00E1C314 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E98342432757B85A00E1C314 /* Assets.xcassets */; };
 		E98342472757B85A00E1C314 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E98342462757B85A00E1C314 /* Preview Assets.xcassets */; };
 		E9881B9B27650DC200BE53CC /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E9881B9A27650DC200BE53CC /* SDWebImageSwiftUI */; };
+		E98C59C127877E720020381B /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = E98C59C027877E720020381B /* PopupView */; };
+		E98C59C32787812C0020381B /* AddLogbookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98C59C22787812C0020381B /* AddLogbookView.swift */; };
 		E9A7684C276FADDA0043551A /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = E9A7684B276FADDA0043551A /* SPAlert */; };
 		E9D18361276F3B95001A764E /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = E9D18360276F3B95001A764E /* AlertKit */; };
 		E9D4E6F42758FEBB003F36DA /* FloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */; };
@@ -71,6 +73,7 @@
 		E98342432757B85A00E1C314 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E98342462757B85A00E1C314 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E983424D2757B85A00E1C314 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E98C59C22787812C0020381B /* AddLogbookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLogbookView.swift; sourceTree = "<group>"; };
 		E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextField.swift; sourceTree = "<group>"; };
 		E9D4E6FC27590483003F36DA /* NumberUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberUtils.swift; sourceTree = "<group>"; };
 		E9EAEF4627627673005FE0BC /* CircleLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleLoader.swift; sourceTree = "<group>"; };
@@ -82,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E98C59C127877E720020381B /* PopupView in Frameworks */,
 				E9881B9B27650DC200BE53CC /* SDWebImageSwiftUI in Frameworks */,
 				E9A7684C276FADDA0043551A /* SPAlert in Frameworks */,
 				E9D18361276F3B95001A764E /* AlertKit in Frameworks */,
@@ -119,6 +123,7 @@
 				E9472593276BAF83006E6944 /* Launch Screen.storyboard */,
 				E95C4F72278620D4009643B4 /* ListView.swift */,
 				E95C4F76278623C2009643B4 /* DetailLogbookView.swift */,
+				E98C59C22787812C0020381B /* AddLogbookView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -237,6 +242,7 @@
 				E9881B9A27650DC200BE53CC /* SDWebImageSwiftUI */,
 				E9D18360276F3B95001A764E /* AlertKit */,
 				E9A7684B276FADDA0043551A /* SPAlert */,
+				E98C59C027877E720020381B /* PopupView */,
 			);
 			productName = Logbook;
 			productReference = E983423C2757B85800E1C314 /* Logbook.app */;
@@ -270,6 +276,7 @@
 				E9881B9927650DC200BE53CC /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				E9D1835F276F3B95001A764E /* XCRemoteSwiftPackageReference "AlertKit" */,
 				E9A7684A276FADDA0043551A /* XCRemoteSwiftPackageReference "SPAlert" */,
+				E98C59BF27877E720020381B /* XCRemoteSwiftPackageReference "PopupView" */,
 			);
 			productRefGroup = E983423D2757B85800E1C314 /* Products */;
 			projectDirPath = "";
@@ -317,6 +324,7 @@
 				E9D4E6F42758FEBB003F36DA /* FloatingTextField.swift in Sources */,
 				E95C4F7927862ECA009643B4 /* DetailListViewModel.swift in Sources */,
 				E94725AD276BC342006E6944 /* LogbookViewModel.swift in Sources */,
+				E98C59C32787812C0020381B /* AddLogbookView.swift in Sources */,
 				E9D4E6FD27590483003F36DA /* NumberUtils.swift in Sources */,
 				E9EAEF4727627674005FE0BC /* CircleLoader.swift in Sources */,
 				E9393EDA27614B3E00CB136F /* FloatingNumberField.swift in Sources */,
@@ -528,6 +536,14 @@
 				kind = branch;
 			};
 		};
+		E98C59BF27877E720020381B /* XCRemoteSwiftPackageReference "PopupView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/PopupView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		E9A7684A276FADDA0043551A /* XCRemoteSwiftPackageReference "SPAlert" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ivanvorobei/SPAlert";
@@ -551,6 +567,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E9881B9927650DC200BE53CC /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		E98C59C027877E720020381B /* PopupView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E98C59BF27877E720020381B /* XCRemoteSwiftPackageReference "PopupView" */;
+			productName = PopupView;
 		};
 		E9A7684B276FADDA0043551A /* SPAlert */ = {
 			isa = XCSwiftPackageProductDependency;
