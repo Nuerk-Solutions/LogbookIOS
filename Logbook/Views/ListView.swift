@@ -6,9 +6,14 @@
 //
 
 import SwiftUI
+import PopupView
 
 struct ListView: View {
     @StateObject var viewModel = LogbookListViewModel()
+    @State private var editMode = EditMode.inactive
+    @State private var showPopup = false
+    private var fixedHeight = false
+    private let topPadding = 300.0
     
     let readableDateFormat: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -48,22 +53,58 @@ struct ListView: View {
                 Alert(title: Text("Application Error"), message: Text(viewModel.errorMessage ?? ""))
             })
             .navigationTitle("Fahrtenbuch")
+            .navigationBarItems(leading: EditButton(), trailing: AddButton)
+            .environment(\.editMode, $editMode)
             .listStyle(.plain)
-            .toolbar {
-                EditButton()
-            }
             .refreshable {
                 viewModel.fetchLogbooks()
             }
             .onAppear {
                 viewModel.fetchLogbooks()
             }
+            .popup(isPresented: $showPopup, type: .toast, position: .bottom) {
+                ZStack {
+//                    bgColor.cornerRadius(40, corners: [.topLeft, .topRight])
+                    VStack {
+                        Color.white
+                            .frame(width: 72, height: 6)
+                            .clipShape(Capsule())
+                            .padding(.top, 15)
+                            .padding(.bottom, 10)
+
+                        AddLogbookView()
+                            .padding(.bottom, 30)
+                            //.frame(minHeight: UIScreen.main.bounds.height - topPadding)
+//                            .applyIf(fixedHeight) {
+//                                $0.frame(height: UIScreen.main.bounds.height - topPadding)
+//                            }
+//                            .applyIf(!fixedHeight) {
+//                                $0.frame(maxHeight: UIScreen.main.bounds.height - topPadding)
+//                            }
+                    }.background(.red)
+                }
+                .fixedSize(horizontal: false, vertical: true)
+            }
+            
         }
     }
     
     
     func deleteItems(at offsets: IndexSet) {
         viewModel.logbooks.remove(atOffsets: offsets)
+    }
+    
+    private var AddButton: some View {
+        switch editMode {
+        case .inactive:
+            return AnyView(Button(action: onAdd) { Image(systemName: "plus.circle") })
+        default:
+            return AnyView(EmptyView())
+        }
+    }
+    
+    func onAdd() {
+        showPopup.toggle()
     }
 }
 
