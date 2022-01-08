@@ -76,7 +76,7 @@ struct ListView: View {
             ZStack {
                 //                    bgColor.cornerRadius(40, corners: [.topLeft, .topRight])
                 VStack {
-                    Color.orange
+                    Color.accentColor
                         .frame(width: 72, height: 6)
                         .clipShape(Capsule())
                         .padding(.top, 15)
