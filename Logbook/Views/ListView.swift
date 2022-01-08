@@ -11,7 +11,7 @@ import PopupView
 struct ListView: View {
     @StateObject var viewModel = LogbookListViewModel()
     @State private var editMode = EditMode.inactive
-    @State private var showPopup = false
+    @StateObject var popupModel = PopupModel()
     private var fixedHeight = false
     private let topPadding = 80.0
     @State private var searchText = ""
@@ -65,16 +65,22 @@ struct ListView: View {
                 viewModel.fetchLogbooks()
             }
         }
-        .popup(isPresented: $showPopup, type: .toast, position: .bottom, closeOnTap: false, closeOnTapOutside: false) {
+        .popup(isPresented: $popupModel.showPopup, type: .toast, position: .bottom, closeOnTap: false, closeOnTapOutside: false, dismissCallback: {
+            viewModel.fetchLogbooks()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                popupModel.popPopup = true
+            }
+        }) {
+            if(!popupModel.popPopup) {
             ZStack {
-//                    bgColor.cornerRadius(40, corners: [.topLeft, .topRight])
+                //                    bgColor.cornerRadius(40, corners: [.topLeft, .topRight])
                 VStack {
                     Color.orange
                         .frame(width: 72, height: 6)
                         .clipShape(Capsule())
                         .padding(.top, 15)
                         .padding(.bottom, 10)
-
                     AddLogbookView(currentLogbook: Logbook(), isReadOnly: false)
                         .padding(.bottom, 30)
                         .frame(minHeight: UIScreen.main.bounds.height - topPadding)
@@ -84,9 +90,13 @@ struct ListView: View {
                         .applyIf(!fixedHeight) {
                             $0.frame(maxHeight: UIScreen.main.bounds.height - topPadding)
                         }
+                        .environmentObject(self.popupModel)
+                    
                 }.background(.regularMaterial).cornerRadius(40, corners: [.topLeft, .topRight])
+
             }
             .fixedSize(horizontal: false, vertical: true)
+            }
         }
     }
     
@@ -105,7 +115,8 @@ struct ListView: View {
     }
     
     func onAdd() {
-        showPopup.toggle()
+        popupModel.showPopup.toggle()
+        popupModel.popPopup = false
     }
     
     var searchResults: [Logbook] {

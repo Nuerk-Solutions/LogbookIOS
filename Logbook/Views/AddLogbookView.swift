@@ -12,6 +12,7 @@ import SPAlert
 struct AddLogbookView: View {
     
     @State var currentLogbook: Logbook
+    @EnvironmentObject var popupModel: PopupModel
     @State private var newMileAge: String = ""
     @State private var additionalInformationInformation: String = ""
     @State private var additionalInformationCost: String = ""
@@ -149,6 +150,10 @@ struct AddLogbookView: View {
             
             if !isReadOnly {
                 Button(action: {
+                    popupModel.showPopup = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        popupModel.popPopup = true
+                    }
                     let finalLogbook = Logbook(driver: currentLogbook.driver,
                                                vehicle: Vehicle(typ: currentLogbook.vehicle.typ, currentMileAge: currentLogbook.vehicle.currentMileAge, newMileAge: Int(newMileAge) ?? 0),
                                                date: currentLogbook.date,

@@ -11,6 +11,7 @@
 		E90B2474276E9C6A00B185EF /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90B2473276E9C6A00B185EF /* StringExtension.swift */; };
 		E90C2AC1276DB175005C1281 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90C2AC0276DB175005C1281 /* LoadingView.swift */; };
 		E91978FC27899B720002598A /* ShapeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91978FB27899B720002598A /* ShapeUtils.swift */; };
+		E91978FE2789F02C0002598A /* PopupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91978FD2789F02C0002598A /* PopupModel.swift */; };
 		E9393ED82761330E00CB136F /* LogbookEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9393ED72761330E00CB136F /* LogbookEntryViewModel.swift */; };
 		E9393EDA27614B3E00CB136F /* FloatingNumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9393ED927614B3E00CB136F /* FloatingNumberField.swift */; };
 		E9472594276BAF83006E6944 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9472593276BAF83006E6944 /* Launch Screen.storyboard */; };
@@ -49,6 +50,7 @@
 		E90B2473276E9C6A00B185EF /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		E90C2AC0276DB175005C1281 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		E91978FB27899B720002598A /* ShapeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeUtils.swift; sourceTree = "<group>"; };
+		E91978FD2789F02C0002598A /* PopupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupModel.swift; sourceTree = "<group>"; };
 		E9393ED72761330E00CB136F /* LogbookEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookEntryViewModel.swift; sourceTree = "<group>"; };
 		E9393ED927614B3E00CB136F /* FloatingNumberField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingNumberField.swift; sourceTree = "<group>"; };
 		E9472593276BAF83006E6944 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				E94725AC276BC341006E6944 /* LogbookViewModel.swift */,
 				E95C4F74278622C9009643B4 /* LogbookListViewModel.swift */,
 				E95C4F7827862ECA009643B4 /* DetailListViewModel.swift */,
+				E91978FD2789F02C0002598A /* PopupModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				E9393EDA27614B3E00CB136F /* FloatingNumberField.swift in Sources */,
 				E947259E276BC008006E6944 /* ApiService.swift in Sources */,
 				E98342402757B85800E1C314 /* LogbookApp.swift in Sources */,
+				E91978FE2789F02C0002598A /* PopupModel.swift in Sources */,
 				E95C4F75278622C9009643B4 /* LogbookListViewModel.swift in Sources */,
 				E9393ED82761330E00CB136F /* LogbookEntryViewModel.swift in Sources */,
 				E94725A7276BC16F006E6944 /* ColorExtension.swift in Sources */,
