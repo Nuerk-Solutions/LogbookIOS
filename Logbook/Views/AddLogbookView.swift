@@ -150,10 +150,6 @@ struct AddLogbookView: View {
             
             if !isReadOnly {
                 Button(action: {
-                    popupModel.showPopup = false
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                        popupModel.popPopup = true
-                    }
                     let finalLogbook = Logbook(driver: currentLogbook.driver,
                                                vehicle: Vehicle(typ: currentLogbook.vehicle.typ, currentMileAge: currentLogbook.vehicle.currentMileAge, newMileAge: Int(newMileAge) ?? 0),
                                                date: currentLogbook.date,
@@ -180,7 +176,10 @@ struct AddLogbookView: View {
                         
                         SPAlertView(title: "Neue Fahrt hinzugefügt", message: "", preset: .done).present(haptic: .success) {
                             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                            
+                                popupModel.showPopup = false
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                    popupModel.popPopup = true
+                                }
                             viewModel.fetchLatestLogbooks()
                             
                         }

@@ -26,7 +26,7 @@ class LogbookListViewModel: ObservableObject {
             switch result {
             case .success(let logbooks):
                 DispatchQueue.main.async {
-                    print("Succes!")
+                    print("Success!")
                     self.logbooks = logbooks
                 }
             case .failure(let error):
