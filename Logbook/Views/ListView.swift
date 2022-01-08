@@ -66,10 +66,9 @@ struct ListView: View {
             }
         }
         .popup(isPresented: $popupModel.showPopup, type: .toast, position: .bottom, closeOnTap: false, closeOnTapOutside: false, dismissCallback: {
-            viewModel.fetchLogbooks()
-            
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 popupModel.popPopup = true
+                viewModel.fetchLogbooks()
             }
         }) {
             if(!popupModel.popPopup) {
@@ -102,6 +101,8 @@ struct ListView: View {
     
     
     func deleteItems(at offsets: IndexSet) {
+        let index = offsets[offsets.startIndex]
+        viewModel.deleteLogbook(queryParamter: viewModel.logbooks[index]._id!)
         viewModel.logbooks.remove(atOffsets: offsets)
     }
     

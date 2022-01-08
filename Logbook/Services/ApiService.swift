@@ -54,6 +54,37 @@ struct APIService {
         .resume()
     }
     
+    func deleteWithQuery(queryParamter: String, completion: @escaping (Result<Bool,APIError>) -> Void) {
+        guard
+            let url = URL(string: urlString + queryParamter)
+        else {
+            completion(.failure(.invalidURL))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard
+                let httpResponse = response as? HTTPURLResponse,
+                httpResponse.statusCode == 200
+            else {
+                completion(.failure(.invalidResponseStatus))
+                return
+            }
+            guard
+                error == nil
+            else {
+                completion(.failure(.dataTaskError(error!.localizedDescription)))
+                return
+            }
+            completion(.success(true))
+            
+        }
+        .resume()
+    }
+    
     func postJSON<T: Decodable>(httpBody: Data,
                                 dateDecodingStrategy: JSONDecoder.DateDecodingStrategy = .deferredToDate,
                                 keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy = .useDefaultKeys,

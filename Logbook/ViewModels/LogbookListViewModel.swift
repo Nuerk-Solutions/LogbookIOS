@@ -37,4 +37,28 @@ class LogbookListViewModel: ObservableObject {
             }
         }
     }
+    
+    func deleteLogbook(queryParamter: String) {
+        self.isLoading = true
+        let apiService = APIService(urlString: "https://api.nuerk-solutions.de/logbook/")
+        apiService.deleteWithQuery(queryParamter: queryParamter) { (result: Result<Bool, APIError>) in
+            defer {
+                DispatchQueue.main.async {
+                    self.isLoading.toggle()
+                }
+            }
+            switch result {
+            case .success(let complete):
+                DispatchQueue.main.async {
+                    print("Success!")
+                    print(complete)
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self.showAlert = true
+                    self.errorMessage = error.localizedDescription
+                }
+            }
+        }
+    }
 }
