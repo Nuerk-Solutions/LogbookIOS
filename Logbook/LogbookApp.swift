@@ -12,11 +12,13 @@ struct LogbookApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ListView()
+            ContentView()
                 .onAppear {
                     // To Hide Constrains warnings
-                UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
-            }
+                    UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
+                    // Textfield clearButton active
+                    UITextField.appearance().clearButtonMode = .whileEditing
+                }
         }
     }
 }
