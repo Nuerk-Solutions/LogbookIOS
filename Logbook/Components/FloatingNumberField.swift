@@ -10,8 +10,6 @@ import SwiftUI
 struct FloatingNumberField: View {
     let title: String
     let text: Binding<Int>
-    @State private var placeholder = "2"
-    @State private var showPlaceHolder = true
     
     @State private var scaleEffect: CGFloat = 1
     @State private var offset: CGFloat = 0
@@ -23,18 +21,11 @@ struct FloatingNumberField: View {
                 .foregroundColor(isEmpty ? Color(.placeholderText) : .accentColor)
                 .offset(y: offset)
                 .scaleEffect(scaleEffect, anchor: .leading)
-            if showPlaceHolder {
-                TextField("", value: $placeholder, formatter: NumberFormatter())
-            }
                 TextField("", value: text, formatter: NumberFormatter())
-            
         }
         .padding(.top, 15)
         .padding(.bottom, 5)
         .onChange(of: text.wrappedValue) { newValue in
-            showPlaceHolder = String(newValue).isEmpty || newValue == -1
-            print(newValue)
-            print(showPlaceHolder)
             withAnimation(.easeOut(duration: 0.1)) {
                 scaleEffect = isEmpty ? 1 : 0.75
                 offset = isEmpty ? 0 : -25

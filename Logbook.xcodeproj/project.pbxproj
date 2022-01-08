@@ -42,7 +42,6 @@
 		E9D4E6F42758FEBB003F36DA /* FloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */; };
 		E9D4E6FD27590483003F36DA /* NumberUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D4E6FC27590483003F36DA /* NumberUtils.swift */; };
 		E9EAEF4727627674005FE0BC /* CircleLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EAEF4627627673005FE0BC /* CircleLoader.swift */; };
-		E9FF8D24276E437500F00E95 /* DownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FF8D23276E437500F00E95 /* DownloadService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,7 +78,6 @@
 		E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextField.swift; sourceTree = "<group>"; };
 		E9D4E6FC27590483003F36DA /* NumberUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberUtils.swift; sourceTree = "<group>"; };
 		E9EAEF4627627673005FE0BC /* CircleLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleLoader.swift; sourceTree = "<group>"; };
-		E9FF8D23276E437500F00E95 /* DownloadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,7 +109,6 @@
 			isa = PBXGroup;
 			children = (
 				E947259D276BC008006E6944 /* ApiService.swift */,
-				E9FF8D23276E437500F00E95 /* DownloadService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -317,7 +314,6 @@
 				E963FC37276655C000FFBD00 /* TransitionExtension.swift in Sources */,
 				E91978FC27899B720002598A /* ShapeUtils.swift in Sources */,
 				E95C4F77278623C2009643B4 /* DetailLogbookView.swift in Sources */,
-				E9FF8D24276E437500F00E95 /* DownloadService.swift in Sources */,
 				E9472597276BBD9A006E6944 /* Vehicle.swift in Sources */,
 				E90B2472276E90C500B185EF /* FloatingTextEditor.swift in Sources */,
 				E95C4F73278620D4009643B4 /* ListView.swift in Sources */,

@@ -75,7 +75,7 @@ struct ListView: View {
                         .padding(.top, 15)
                         .padding(.bottom, 10)
 
-                    AddLogbookView(currentLogbook: Logbook(driver: .Andrea, vehicle: .init(typ: .Ferrari, currentMileAge: 0, newMileAge: -1), date: Date.now, driveReason: "Stadtfahrt", additionalInformation: AdditionalInformation(informationTyp: AdditionalInformationEnum.none, information: "", cost: "")))
+                    AddLogbookView(currentLogbook: Logbook(), isReadOnly: false)
                         .padding(.bottom, 30)
                         .frame(minHeight: UIScreen.main.bounds.height - topPadding)
                         .applyIf(fixedHeight) {

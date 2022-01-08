@@ -15,7 +15,7 @@ struct DetailLogbookView: View {
     var body: some View {
         VStack {
             if !viewModel.isLoading {
-            AddLogbookView(currentLogbook: viewModel.logbook!)
+            AddLogbookView(currentLogbook: viewModel.logbook!, isReadOnly: true)
             }
         }
             .overlay(

@@ -28,7 +28,7 @@ class LogbookViewModel: ObservableObject {
             switch result {
             case .success(let logbooks):
                 DispatchQueue.main.async {
-                    print("Succes!")
+                    print("Success!")
                     self.latestLogbooks = logbooks
                     self.currentLogbook.vehicle = Vehicle(typ: .Ferrari, currentMileAge: logbooks[1].vehicle.newMileAge, newMileAge: logbooks[1].vehicle.newMileAge)
                 }

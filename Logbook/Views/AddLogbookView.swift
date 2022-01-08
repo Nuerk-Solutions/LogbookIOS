@@ -15,134 +15,139 @@ struct AddLogbookView: View {
     @State private var newMileAge: String = ""
     @State private var additionalInformationInformation: String = ""
     @State private var additionalInformationCost: String = ""
+    var isReadOnly: Bool
     
     
     @StateObject var alertManager = AlertManager()
     @ObservedObject private var addLoogbookEntryVM = AddLogbookEntryViewModel()
+    @StateObject private var viewModel = LogbookViewModel()
     
     var body: some View {
-            Form {
-                Section(header: Text("Fahrerinformationen")) {
-                    // Driver Segment Picker
-                    Picker("Fahrer", selection: $currentLogbook.driver) {
-                        ForEach(DriverEnum.allCases) { driver in
-                            Text(driver.rawValue.capitalized).tag(driver)
-                        }
+        Form {
+            Section(header: Text("Fahrerinformationen")) {
+                // Driver Segment Picker
+                Picker("Fahrer", selection: $currentLogbook.driver) {
+                    ForEach(DriverEnum.allCases) { driver in
+                        Text(driver.rawValue.capitalized).tag(driver)
                     }
-                    .pickerStyle(SegmentedPickerStyle())
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                
+                // Date picker
+                DatePicker("Datum",
+                           selection: $currentLogbook.date,
+                           displayedComponents: [.date])
+                    .environment(\.locale, Locale.init(identifier: "de"))
+                
+                // Reason
+                FloatingTextField(title: "Reiseziel", text: $currentLogbook.driveReason)
+            }
+            
+            // Vehicle Information
+            Section(header: Text("Fahrzeuginformationen"), content: {
+                // Vehicle Segment Picker
+                Picker("Fahrzeug", selection: $currentLogbook.vehicle.typ) {
+                    ForEach(VehicleEnum.allCases) { vehicle in
+                        Text(vehicle.rawValue).tag(vehicle)
+                    }
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                
+                HStack {
+                    FloatingNumberField(title: "Aktueller Kilometerstand", text: $currentLogbook.vehicle.currentMileAge)
+                        .keyboardType(.decimalPad)
+                        .onChange(of: currentLogbook.vehicle.typ) { _ in
+                            let currentMilAge = currentLogbook.vehicle.typ == .VW ? viewModel.latestLogbooks[0].vehicle.newMileAge : viewModel.latestLogbooks[1].vehicle.newMileAge
+                            currentLogbook.vehicle = Vehicle(typ: currentLogbook.vehicle.typ, currentMileAge: currentMilAge, newMileAge: currentMilAge)
+                        }
                     
-                    
-                    // Date picker
-                    DatePicker("Datum",
-                               selection: $currentLogbook.date,
-                               displayedComponents: [.date])
-                        .environment(\.locale, Locale.init(identifier: "de"))
-                    
-                    // Reason
-                    FloatingTextField(title: "Reiseziel", text: $currentLogbook.driveReason)
+                    Text("km")
+                        .padding(.top, 5)
+                        .foregroundColor(.gray)
                 }
                 
-                // Vehicle Information
-                Section(header: Text("Fahrzeuginformationen"), content: {
-                    // Vehicle Segment Picker
-                    Picker("Fahrzeug", selection: $currentLogbook.vehicle.typ) {
-                        ForEach(VehicleEnum.allCases) { vehicle in
-                            Text(vehicle.rawValue).tag(vehicle)
-                        }
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
-                    
-                    HStack {
-                        
-                        FloatingNumberField(title: "Aktueller Kilometerstand", text: $currentLogbook.vehicle.currentMileAge)
-                            .keyboardType(.decimalPad)
-//                            .onChange(of: currentLogbook.vehicle.typ) { _ in
-//                                let currentMilAge = currentLogbook.vehicle.typ == .VW ? latestLogbooks[0].vehicle.newMileAge : latestLogbooks[1].vehicle.newMileAge
-//                                currentLogbook.vehicle = Vehicle(typ: currentLogbook.vehicle.typ, currentMileAge: currentMilAge, newMileAge: currentMilAge)
-//                            }
-                        
-                        Text("km")
-                            .padding(.top, 5)
-                            .foregroundColor(.gray)
-                    }
-                    
-                    HStack {
+                HStack {
+                    if isReadOnly {
                         FloatingNumberField(title: "Neuer Kilometerstand", text: $currentLogbook.vehicle.newMileAge)
+                    } else {
+                        FloatingTextField(title: "Neuer Kilometerstand", text: $newMileAge)
                             .keyboardType(.decimalPad)
-                        
-                        Text("km")
-                            .padding(.top, 5)
-                            .foregroundColor(.gray)
                     }
-                    let distance: Int  = (Int(newMileAge) ?? currentLogbook.vehicle.currentMileAge) - currentLogbook.vehicle.currentMileAge
-                    let cost = Double(distance) * 0.2
-                    if(distance > 0) {
-                        HStack {
-                            Text("Strecke: \(String(distance)) km\nKosten: \(cost, specifier: "%.2f")€")
+                    
+                    Text("km")
+                        .padding(.top, 5)
+                        .foregroundColor(.gray)
+                }
+                let distance: Int  = (Int(newMileAge) ?? currentLogbook.vehicle.currentMileAge) - currentLogbook.vehicle.currentMileAge
+                let cost = Double(distance) * 0.2
+                if(distance > 0) {
+                    HStack {
+                        Text("Strecke: \(String(distance)) km\nKosten: \(cost, specifier: "%.2f")€")
+                    }
+                }
+            })
+            
+            Section(header: Text("Zusätzliche Information")) {
+                Menu {
+                    ForEach(AdditionalInformationEnum.allCases, id: \.self){ item in
+                        Button(item.rawValue) {
+                            currentLogbook.additionalInformation?.informationTyp = item
                         }
                     }
-                })
-                
-                Section(header: Text("Zusätzliche Information")) {
-                    Menu {
-                        ForEach(AdditionalInformationEnum.allCases, id: \.self){ item in
-                            Button(item.rawValue) {
-                                currentLogbook.additionalInformation?.informationTyp = item
-                            }
+                } label: {
+                    VStack(spacing: 5){
+                        HStack{
+                            Text(currentLogbook.additionalInformation?.informationTyp!.localizedName ?? AdditionalInformationEnum.none.localizedName).tag(currentLogbook.additionalInformation?.informationTyp)
+                                .foregroundColor(currentLogbook.additionalInformation?.informationTyp == AdditionalInformationEnum.none ? .gray : .primary)
+                            Spacer()
+                            Image(systemName: "chevron.down")
+                                .foregroundColor(Color.blue)
+                                .font(Font.system(size: 20, weight: .bold))
                         }
-                    } label: {
-                        VStack(spacing: 5){
-                            HStack{
-                                Text(currentLogbook.additionalInformation?.informationTyp!.localizedName ?? AdditionalInformationEnum.none.localizedName).tag(currentLogbook.additionalInformation?.informationTyp)
-                                    .foregroundColor(currentLogbook.additionalInformation?.informationTyp == AdditionalInformationEnum.none ? .gray : .primary)
-                                Spacer()
-                                Image(systemName: "chevron.down")
-                                    .foregroundColor(Color.blue)
-                                    .font(Font.system(size: 20, weight: .bold))
-                            }
-                            .transition(.opacity.animation(.linear(duration: 2)))
-                            if(currentLogbook.additionalInformation?.informationTyp == AdditionalInformationEnum.none) {
-                                Rectangle()
-                                    .fill(Color.blue)
-                                    .frame(height: 2)
-                                    .padding(.top, 1)
-                            }
-                        }
-                    }
-                    if(currentLogbook.additionalInformation?.informationTyp != AdditionalInformationEnum.none) {
-                        if(currentLogbook.additionalInformation?.informationTyp == .refuled) {
-                            HStack {
-                                FloatingTextField(title: "Menge", text: $additionalInformationInformation)
-                                    .keyboardType(.decimalPad)
-                                
-                                Text("L")
-                                    .padding(.top, 5)
-                                    .foregroundColor(.gray)
-                            }
-                            HStack {
-                                FloatingTextField(title: "Preis", text: $additionalInformationCost)
-                                    .keyboardType(.decimalPad)
-                                
-                                Text("€")
-                                    .padding(.top, 5)
-                                    .foregroundColor(.gray)
-                            }
-                        } else if(currentLogbook.additionalInformation?.informationTyp == .service) {
-                            HStack {
-                                FloatingTextEditor(title: "Beschreibung", text: $additionalInformationInformation)
-                            }
-                            HStack {
-                                FloatingTextField(title: "Preis", text: $additionalInformationCost)
-                                    .keyboardType(.decimalPad)
-                                
-                                Text("€")
-                                    .padding(.top, 5)
-                                    .foregroundColor(.gray)
-                            }
+                        .transition(.opacity.animation(.linear(duration: 2)))
+                        if(currentLogbook.additionalInformation?.informationTyp == AdditionalInformationEnum.none) {
+                            Rectangle()
+                                .fill(Color.blue)
+                                .frame(height: 2)
+                                .padding(.top, 1)
                         }
                     }
                 }
-                
+                if(currentLogbook.additionalInformation?.informationTyp != AdditionalInformationEnum.none) {
+                    if(currentLogbook.additionalInformation?.informationTyp == .refuled) {
+                        HStack {
+                            FloatingTextField(title: "Menge", text: $additionalInformationInformation)
+                                .keyboardType(.decimalPad)
+                            
+                            Text("L")
+                                .padding(.top, 5)
+                                .foregroundColor(.gray)
+                        }
+                        HStack {
+                            FloatingTextField(title: "Preis", text: $additionalInformationCost)
+                                .keyboardType(.decimalPad)
+                            
+                            Text("€")
+                                .padding(.top, 5)
+                                .foregroundColor(.gray)
+                        }
+                    } else if(currentLogbook.additionalInformation?.informationTyp == .service) {
+                        HStack {
+                            FloatingTextEditor(title: "Beschreibung", text: $additionalInformationInformation)
+                        }
+                        HStack {
+                            FloatingTextField(title: "Preis", text: $additionalInformationCost)
+                                .keyboardType(.decimalPad)
+                            
+                            Text("€")
+                                .padding(.top, 5)
+                                .foregroundColor(.gray)
+                        }
+                    }
+                }
+            }
+            
+            if !isReadOnly {
                 Button(action: {
                     let finalLogbook = Logbook(driver: currentLogbook.driver,
                                                vehicle: Vehicle(typ: currentLogbook.vehicle.typ, currentMileAge: currentLogbook.vehicle.currentMileAge, newMileAge: Int(newMileAge) ?? 0),
@@ -160,21 +165,21 @@ struct AddLogbookView: View {
                         return
                     }
                     let distance: Int  = (Int(newMileAge) ?? currentLogbook.vehicle.currentMileAge) - currentLogbook.vehicle.currentMileAge
-                    //                        alertManager.show(primarySecondary: .info(title: "Eintrag Bestätigen", message: "Fahrer: \(finalLogbook.driver) \n Reiseziel: \(finalLogbook.driveReason)\n Fahrzeug: \(finalLogbook.vehicle.typ) \n Strecke: \(distance)km", primaryButton: Alert.Button.destructive(Text("Bestätigen")) {
-                    //                            viewModel.submitLogbook(httpBody: finalLogbook)
-                    //
-                    //                            newMileAge = ""
-                    //                            additionalInformationCost = ""
-                    //                            additionalInformationInformation = ""
-                    //                            currentLogbook.additionalInformation?.informationTyp = AdditionalInformationEnum.none
-                    //
-                    //                            SPAlertView(title: "Neue Fahrt hinzugefügt", message: "", preset: .done).present(haptic: .success) {
-                    //                                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                    //
-                    //                                viewModel.fetchLatestLogbooks()
-                    //
-                    //                            }
-                    //                        }, secondaryButton: Alert.Button.cancel(Text("Abbrechen"))))
+                    alertManager.show(primarySecondary: .info(title: "Eintrag Bestätigen", message: "Fahrer: \(finalLogbook.driver) \n Reiseziel: \(finalLogbook.driveReason)\n Fahrzeug: \(finalLogbook.vehicle.typ) \n Strecke: \(distance)km", primaryButton: Alert.Button.destructive(Text("Bestätigen")) {
+                        viewModel.submitLogbook(httpBody: finalLogbook)
+                        
+                        newMileAge = ""
+                        additionalInformationCost = ""
+                        additionalInformationInformation = ""
+                        currentLogbook.additionalInformation?.informationTyp = AdditionalInformationEnum.none
+                        
+                        SPAlertView(title: "Neue Fahrt hinzugefügt", message: "", preset: .done).present(haptic: .success) {
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                            
+                            viewModel.fetchLatestLogbooks()
+                            
+                        }
+                    }, secondaryButton: Alert.Button.cancel(Text("Abbrechen"))))
                 }) {
                     HStack {
                         Spacer()
@@ -187,11 +192,27 @@ struct AddLogbookView: View {
                 .cornerRadius(8)
                 .listRowBackground(Color.green)
             }
-            .navigationTitle("Eintrag")
-            .navigationBarTitleDisplayMode(.automatic)
-            .gesture(DragGesture().onChanged{_ in UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)})
-            .uses(alertManager)
-            .transition(AnyTransition.opacity.animation(.linear(duration: 0.2)))
+        }
+        .overlay(
+            Group {
+                if viewModel.isLoading && !isReadOnly {
+                    ProgressView()
+                }
+            }
+        )
+        .gesture(DragGesture().onChanged{_ in UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)})
+        .uses(alertManager)
+        .transition(AnyTransition.opacity.animation(.linear(duration: 0.2)))
+        .onAppear {
+            if(!isReadOnly) {
+                viewModel.fetchLatestLogbooks()
+            }
+        }
+        .onReceive(viewModel.$currentLogbook, perform: { newValue in
+            if(!isReadOnly) {
+                self.currentLogbook = newValue
+            }
+        })
     }
 }
 

@@ -17,6 +17,22 @@ struct Logbook: Codable, Identifiable {
     var driveReason: String
     var additionalInformation: AdditionalInformation?
     
+    init() {
+        self.driver = .Andrea
+        self.vehicle = Vehicle(typ: .Ferrari, currentMileAge: -1, newMileAge: -1, distance: -1)
+        self.date = Date.distantPast
+        self.driveReason = "PLACEHOLDER"
+        self.additionalInformation = AdditionalInformation(informationTyp: AdditionalInformationEnum.none, information: "PLACEHOLDER", cost: "-1")
+    }
+    
+    init(driver: DriverEnum, vehicle: Vehicle, date: Date, driveReason: String, additionalInformation: AdditionalInformation?) {
+        self.driver = driver
+        self.vehicle = vehicle
+        self.date = date
+        self.driveReason = driveReason
+        self.additionalInformation = additionalInformation
+    }
+    
     enum CodingKeys: String, CodingKey {
         case driver = "driver"
         case vehicle = "vehicle"
