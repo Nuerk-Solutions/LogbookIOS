@@ -13,16 +13,11 @@ struct DetailLogbookView: View {
     @StateObject var viewModel = DetailListViewModel()
     
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(viewModel.logbook) { logbook in
-                    VStack {
-                        Text(logbook._id!)
-                        Text(logbook.driver.id)
-                        Text(logbook.driveReason)
-                    }
-                }
+        VStack {
+            if !viewModel.isLoading {
+            AddLogbookView(currentLogbook: viewModel.logbook!)
             }
+        }
             .overlay(
                 Group {
                     if viewModel.isLoading {
@@ -30,17 +25,13 @@ struct DetailLogbookView: View {
                     }
                 }
             )
-            
             .alert(isPresented: $viewModel.showAlert, content: {
                 Alert(title: Text("Application Error"), message: Text(viewModel.errorMessage ?? ""))
             })
-            .navigationTitle("Eintrag")
-            .navigationBarTitleDisplayMode(.inline)
-            .listStyle(.plain)
-        }.onAppear {
-            viewModel.logbookId = logbookId
-            viewModel.fetchLogbookById()
-        }
+            .onAppear {
+                viewModel.logbookId = logbookId
+                viewModel.fetchLogbookById()
+            }.disabled(true)
     }
 }
 

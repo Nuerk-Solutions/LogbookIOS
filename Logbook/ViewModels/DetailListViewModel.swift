@@ -8,7 +8,8 @@
 import Foundation
 class DetailListViewModel: ObservableObject {
     
-    @Published var logbook: [Logbook] = []
+    @Published var logbook: Logbook? 
+//    Logbook(driver: .Andrea, vehicle: .init(typ: .Ferrari, currentMileAge: -1, newMileAge: -1), date: Date.now, driveReason: "PLACEHOLDER", additionalInformation: .init(informationTyp: AdditionalInformationEnum.none, information: "", cost: ""))
     @Published var isLoading = true
     @Published var showAlert = false
     @Published var errorMessage: String?
@@ -28,7 +29,8 @@ class DetailListViewModel: ObservableObject {
             case .success(let logbook):
                 DispatchQueue.main.async {
                     print("Succes!")
-                    self.logbook = [logbook]
+                    print(logbook)
+                    self.logbook = logbook
                 }
             case .failure(let error):
                 DispatchQueue.main.async {

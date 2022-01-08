@@ -13,7 +13,8 @@ struct ListView: View {
     @State private var editMode = EditMode.inactive
     @State private var showPopup = false
     private var fixedHeight = false
-    private let topPadding = 300.0
+    private let topPadding = 80.0
+    @State private var searchText = ""
     
     let readableDateFormat: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -25,7 +26,7 @@ struct ListView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(viewModel.logbooks) { logbook in
+                ForEach(searchResults) { logbook in
                     NavigationLink {
                         DetailLogbookView(logbookId: logbook._id)
                     } label: {
@@ -59,33 +60,33 @@ struct ListView: View {
             .refreshable {
                 viewModel.fetchLogbooks()
             }
+            .searchable(text: $searchText)
             .onAppear {
                 viewModel.fetchLogbooks()
             }
-            .popup(isPresented: $showPopup, type: .toast, position: .bottom) {
-                ZStack {
+        }
+        .popup(isPresented: $showPopup, type: .toast, position: .bottom, closeOnTapOutside: true) {
+            ZStack {
 //                    bgColor.cornerRadius(40, corners: [.topLeft, .topRight])
-                    VStack {
-                        Color.white
-                            .frame(width: 72, height: 6)
-                            .clipShape(Capsule())
-                            .padding(.top, 15)
-                            .padding(.bottom, 10)
+                VStack {
+                    Color.white
+                        .frame(width: 72, height: 6)
+                        .clipShape(Capsule())
+                        .padding(.top, 15)
+                        .padding(.bottom, 10)
 
-                        AddLogbookView()
-                            .padding(.bottom, 30)
-                            //.frame(minHeight: UIScreen.main.bounds.height - topPadding)
-//                            .applyIf(fixedHeight) {
-//                                $0.frame(height: UIScreen.main.bounds.height - topPadding)
-//                            }
-//                            .applyIf(!fixedHeight) {
-//                                $0.frame(maxHeight: UIScreen.main.bounds.height - topPadding)
-//                            }
-                    }.background(.red)
-                }
-                .fixedSize(horizontal: false, vertical: true)
+                    AddLogbookView(currentLogbook: Logbook(driver: .Andrea, vehicle: .init(typ: .Ferrari, currentMileAge: 1, newMileAge: 2), date: Date.now, driveReason: "Stadtfahrt", additionalInformation: AdditionalInformation(informationTyp: AdditionalInformationEnum.none, information: "", cost: "")))
+                        .padding(.bottom, 30)
+                        .frame(minHeight: UIScreen.main.bounds.height - topPadding)
+                        .applyIf(fixedHeight) {
+                            $0.frame(height: UIScreen.main.bounds.height - topPadding)
+                        }
+                        .applyIf(!fixedHeight) {
+                            $0.frame(maxHeight: UIScreen.main.bounds.height - topPadding)
+                        }
+                }.background(.form).cornerRadius(40, corners: [.topLeft, .topRight])
             }
-            
+            .fixedSize(horizontal: false, vertical: true)
         }
     }
     
@@ -105,6 +106,14 @@ struct ListView: View {
     
     func onAdd() {
         showPopup.toggle()
+    }
+    
+    var searchResults: [Logbook] {
+        if searchText.isEmpty {
+            return viewModel.logbooks
+        } else {
+            return viewModel.logbooks.filter{$0.driveReason.contains(searchText)}
+        }
     }
 }
 
