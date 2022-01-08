@@ -65,17 +65,17 @@ struct ListView: View {
                 viewModel.fetchLogbooks()
             }
         }
-        .popup(isPresented: $showPopup, type: .toast, position: .bottom, closeOnTapOutside: true) {
+        .popup(isPresented: $showPopup, type: .toast, position: .bottom, closeOnTap: false, closeOnTapOutside: false) {
             ZStack {
 //                    bgColor.cornerRadius(40, corners: [.topLeft, .topRight])
                 VStack {
-                    Color.white
+                    Color.orange
                         .frame(width: 72, height: 6)
                         .clipShape(Capsule())
                         .padding(.top, 15)
                         .padding(.bottom, 10)
 
-                    AddLogbookView(currentLogbook: Logbook(driver: .Andrea, vehicle: .init(typ: .Ferrari, currentMileAge: 1, newMileAge: 2), date: Date.now, driveReason: "Stadtfahrt", additionalInformation: AdditionalInformation(informationTyp: AdditionalInformationEnum.none, information: "", cost: "")))
+                    AddLogbookView(currentLogbook: Logbook(driver: .Andrea, vehicle: .init(typ: .Ferrari, currentMileAge: 0, newMileAge: -1), date: Date.now, driveReason: "Stadtfahrt", additionalInformation: AdditionalInformation(informationTyp: AdditionalInformationEnum.none, information: "", cost: "")))
                         .padding(.bottom, 30)
                         .frame(minHeight: UIScreen.main.bounds.height - topPadding)
                         .applyIf(fixedHeight) {
@@ -84,7 +84,7 @@ struct ListView: View {
                         .applyIf(!fixedHeight) {
                             $0.frame(maxHeight: UIScreen.main.bounds.height - topPadding)
                         }
-                }.background(.form).cornerRadius(40, corners: [.topLeft, .topRight])
+                }.background(.regularMaterial).cornerRadius(40, corners: [.topLeft, .topRight])
             }
             .fixedSize(horizontal: false, vertical: true)
         }
@@ -112,7 +112,7 @@ struct ListView: View {
         if searchText.isEmpty {
             return viewModel.logbooks
         } else {
-            return viewModel.logbooks.filter{$0.driveReason.contains(searchText)}
+            return viewModel.logbooks.filter{$0.driveReason.contains(searchText) || readableDateFormat.string(from: $0.date).contains(searchText) || $0.driver.id.contains(searchText)}
         }
     }
 }

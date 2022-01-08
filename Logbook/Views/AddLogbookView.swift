@@ -12,7 +12,6 @@ import SPAlert
 struct AddLogbookView: View {
     
     @State var currentLogbook: Logbook
-    @State private var latestLogbooks: [Logbook] = []
     @State private var newMileAge: String = ""
     @State private var additionalInformationInformation: String = ""
     @State private var additionalInformationCost: String = ""
@@ -57,10 +56,10 @@ struct AddLogbookView: View {
                         
                         FloatingNumberField(title: "Aktueller Kilometerstand", text: $currentLogbook.vehicle.currentMileAge)
                             .keyboardType(.decimalPad)
-                            .onChange(of: currentLogbook.vehicle.typ) { _ in
-                                let currentMilAge = currentLogbook.vehicle.typ == .VW ? latestLogbooks[0].vehicle.newMileAge : latestLogbooks[1].vehicle.newMileAge
-                                currentLogbook.vehicle = Vehicle(typ: currentLogbook.vehicle.typ, currentMileAge: currentMilAge, newMileAge: currentMilAge)
-                            }
+//                            .onChange(of: currentLogbook.vehicle.typ) { _ in
+//                                let currentMilAge = currentLogbook.vehicle.typ == .VW ? latestLogbooks[0].vehicle.newMileAge : latestLogbooks[1].vehicle.newMileAge
+//                                currentLogbook.vehicle = Vehicle(typ: currentLogbook.vehicle.typ, currentMileAge: currentMilAge, newMileAge: currentMilAge)
+//                            }
                         
                         Text("km")
                             .padding(.top, 5)
@@ -68,7 +67,7 @@ struct AddLogbookView: View {
                     }
                     
                     HStack {
-                        FloatingTextField(title: "Neuer Kilometerstand", text: $newMileAge)
+                        FloatingNumberField(title: "Neuer Kilometerstand", text: $currentLogbook.vehicle.newMileAge)
                             .keyboardType(.decimalPad)
                         
                         Text("km")
