@@ -33,7 +33,7 @@ class LogbookListViewModel: ObservableObject {
             case .failure(let error):
                 DispatchQueue.main.async {
                     self.showAlert = true
-                    self.errorMessage = error.localizedDescription + "\nPlease contact the developer and provide this error and the steps to reproduce."
+                    self.errorMessage = error.localizedDescription + "\nBitte wende dich an Thomas für hilfe."
                 }
             }
         }
