@@ -38,7 +38,6 @@ struct AddLogbookView: View {
                 DatePicker("Datum",
                            selection: $currentLogbook.date,
                            displayedComponents: [.date])
-                    .environment(\.locale, Locale.init(identifier: "de_DE"))
                 
                 // Reason
                 FloatingTextField(title: "Reiseziel", text: $currentLogbook.driveReason)

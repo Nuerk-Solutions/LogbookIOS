@@ -108,7 +108,6 @@ struct ListView: View {
                 
             }
         }
-        .environment(\.locale, Locale.init(identifier: "de_DE"))
     }
     
     
