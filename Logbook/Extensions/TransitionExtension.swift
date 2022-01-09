@@ -21,10 +21,10 @@ struct ScaledCircle: Shape {
         var path = Path()
         path.move(to: CGPoint(x: rect.minX, y: -30))
         path.addQuadCurve(to: CGPoint(x: rect.minX, y: rect.size.height),
-                          control: CGPoint(x: rect.size.width * 4 * scaleFactor, y: -rect.size.height * scaleFactor))
+                          control: CGPoint(x: (rect.size.width + 20) * 4 * scaleFactor, y: -rect.size.height * scaleFactor))
         path.closeSubpath()
         path.addQuadCurve(to: CGPoint(x: rect.minX, y: rect.size.height * 2),
-                          control: CGPoint(x: rect.size.width * 4 * scaleFactor, y: rect.size.height * 2 * scaleFactor))
+                          control: CGPoint(x: (rect.size.width + 20) * 4 * scaleFactor, y: rect.size.height * 2 * scaleFactor))
         return path
  
 //        var bigRect = rect
