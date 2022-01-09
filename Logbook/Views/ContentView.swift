@@ -25,7 +25,7 @@ struct ContentView: View {
             LoadingView(isLoading: $viewModel.isLoading, loadingPhase: $loadingPhase).environmentObject(self.viewModel)
         })
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.1) {
                 withAnimation(.easeInOut(duration: 0.3)) {
                     loadingPhase = .none
                 }

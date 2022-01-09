@@ -8,12 +8,14 @@
 import SwiftUI
 import PopupView
 import SPAlert
+import AlertKit
 
 struct ListView: View {
     @StateObject var viewModel = LogbookListViewModel()
+    @StateObject var alertManager = AlertManager()
     @State private var editMode = EditMode.inactive
     @StateObject var popupModel = PopupModel()
-    private var fixedHeight = false
+    private var fixedHeight = true
     private let topPadding = 110.0
     @State private var searchText = ""
     
@@ -62,7 +64,7 @@ struct ListView: View {
                 }
             )
             .alert(isPresented: $viewModel.showAlert, content: {
-                Alert(title: Text("Application Error"), message: Text(viewModel.errorMessage ?? ""))
+                Alert(title: Text("Fehler!"), message: Text(viewModel.errorMessage ?? ""))
             })
             .navigationTitle("Fahrtenbuch")
             .navigationBarItems(leading: EditButton(), trailing: AddButton)
@@ -105,16 +107,20 @@ struct ListView: View {
                         
                     }
                     .fixedSize(horizontal: false, vertical: true)
-                
             }
         }
+        .uses(alertManager)
     }
     
     
     func deleteItems(at offsets: IndexSet) {
-        let index = offsets[offsets.startIndex]
-        viewModel.deleteLogbook(queryParamter: viewModel.logbooks[index]._id!)
-        viewModel.logbooks.remove(atOffsets: offsets)
+        alertManager.show(primarySecondary: .info(title: "Eintrag löschen?", message: "Das löschen des Eintrags kann nicht rückgängig gemacht werden!", primaryButton: Alert.Button.destructive(Text("Ja")) {
+            
+            let index = offsets[offsets.startIndex]
+            viewModel.deleteLogbook(queryParamter: viewModel.logbooks[index]._id!)
+            viewModel.logbooks.remove(atOffsets: offsets)
+            
+        }, secondaryButton: Alert.Button.cancel(Text("Abbrechen"))))
     }
     
     private var AddButton: some View {
