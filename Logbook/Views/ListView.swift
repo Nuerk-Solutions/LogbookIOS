@@ -7,13 +7,14 @@
 
 import SwiftUI
 import PopupView
+import SPAlert
 
 struct ListView: View {
     @StateObject var viewModel = LogbookListViewModel()
     @State private var editMode = EditMode.inactive
     @StateObject var popupModel = PopupModel()
     private var fixedHeight = false
-    private let topPadding = 80.0
+    private let topPadding = 110.0
     @State private var searchText = ""
     
     let readableDateFormat: DateFormatter = {
@@ -48,6 +49,16 @@ struct ListView: View {
                     if viewModel.isLoading {
                         ProgressView()
                     }
+                    
+                    if(viewModel.errorMessage != nil) {
+                        VStack {
+                            Text("Bitte verbinde dich mit dem Internet um einen neuen Eintrag hinzuzufügen!").foregroundColor(.red)
+                                .fontWeight(.bold)
+                                .font(.title)
+                        }.onAppear {
+                                viewModel.logbooks.removeAll()
+                        }
+                    }
                 }
             )
             .alert(isPresented: $viewModel.showAlert, content: {
@@ -72,31 +83,32 @@ struct ListView: View {
             }
         }) {
             if(!popupModel.popPopup) {
-            ZStack {
-                //                    bgColor.cornerRadius(40, corners: [.topLeft, .topRight])
-                VStack {
-                    Color.accentColor
-                        .frame(width: 72, height: 6)
-                        .clipShape(Capsule())
-                        .padding(.top, 15)
-                        .padding(.bottom, 10)
-                    AddLogbookView(currentLogbook: Logbook(), isReadOnly: false)
-                        .padding(.bottom, 30)
-                        .frame(minHeight: UIScreen.main.bounds.height - topPadding)
-                        .applyIf(fixedHeight) {
-                            $0.frame(height: UIScreen.main.bounds.height - topPadding)
-                        }
-                        .applyIf(!fixedHeight) {
-                            $0.frame(maxHeight: UIScreen.main.bounds.height - topPadding)
-                        }
-                        .environmentObject(self.popupModel)
-                    
-                }.background(.regularMaterial).cornerRadius(40, corners: [.topLeft, .topRight])
-
-            }
-            .fixedSize(horizontal: false, vertical: true)
+                    ZStack {
+                        VStack {
+                            Color.accentColor
+                                .frame(width: 72, height: 6)
+                                .clipShape(Capsule())
+                                .padding(.top, 30)
+                                .padding(.bottom, 25)
+                            AddLogbookView(currentLogbook: Logbook(), isReadOnly: false)
+                                .padding(.bottom, 30)
+                                .frame(minHeight: UIScreen.main.bounds.height - topPadding)
+                                .applyIf(fixedHeight) {
+                                    $0.frame(height: UIScreen.main.bounds.height - topPadding)
+                                }
+                                .applyIf(!fixedHeight) {
+                                    $0.frame(maxHeight: UIScreen.main.bounds.height - topPadding)
+                                }
+                                .environmentObject(self.popupModel)
+                            
+                        }.background(.regularMaterial).cornerRadius(40, corners: [.topLeft, .topRight])
+                        
+                    }
+                    .fixedSize(horizontal: false, vertical: true)
+                
             }
         }
+        .environment(\.locale, Locale.init(identifier: "de_DE"))
     }
     
     
@@ -109,7 +121,7 @@ struct ListView: View {
     private var AddButton: some View {
         switch editMode {
         case .inactive:
-            return AnyView(Button(action: onAdd) { Image(systemName: "plus.circle") })
+            return AnyView(Button(action: onAdd) { Image(systemName: "plus.circle") }.disabled((viewModel.errorMessage) != nil))
         default:
             return AnyView(EmptyView())
         }

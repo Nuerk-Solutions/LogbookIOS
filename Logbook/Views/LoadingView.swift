@@ -50,7 +50,7 @@ struct LoadingView: View {
             }
         }.SPAlert(isPresent: $viewModel.showAlert,
                   message: viewModel.errorMessage ?? "",
-                  duration: 10.0,
+                  duration: 3.0,
                   dismissOnTap: true,
                   preset: SPAlertIconPreset.error,
                   haptic: .error,
