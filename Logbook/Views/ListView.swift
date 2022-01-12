@@ -19,6 +19,8 @@ struct ListView: View {
     private let topPadding = 110.0
     @State private var searchText = ""
     
+    @State private var showConfimationDialog = false
+    
     let readableDateFormat: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
@@ -44,7 +46,38 @@ struct ListView: View {
                             }
                         }.padding(.bottom, 5)
                     }
-                }.onDelete(perform: deleteItems)
+//                    .swipeActions(edge: .trailing) {
+//                        Button(
+//                            role: .destructive,
+//                            action: {
+//                                showConfimationDialog = true
+//                            }
+//                        ){
+//                            Image (systemName: "trash")
+//                        }
+//                    }
+                
+                }
+                .onDelete(perform: { IndexSet in
+                            showConfimationDialog = true
+                        //deleteItems(at: IndexSet)
+                })
+                .confirmationDialog(
+                    "Are you sure?",
+                    isPresented: $showConfimationDialog,
+                    titleVisibility: .visible
+                ) {
+                    Button("Yes") {
+                        withAnimation {
+                            //viewModel.delete(message)
+                            print("DELTED")
+                        }
+                    }.keyboardShortcut(.defaultAction)
+
+                    Button("No", role: .cancel) {}
+                } message: {
+                    Text("This action cannot be undone")
+                }
             }
             .overlay(
                 Group {
@@ -58,7 +91,7 @@ struct ListView: View {
                                 .fontWeight(.bold)
                                 .font(.title)
                         }.onAppear {
-                                viewModel.logbooks.removeAll()
+                            viewModel.logbooks.removeAll()
                         }
                     }
                 }
@@ -85,28 +118,28 @@ struct ListView: View {
             }
         }) {
             if(!popupModel.popPopup) {
-                    ZStack {
-                        VStack {
-                            Color.accentColor
-                                .frame(width: 72, height: 6)
-                                .clipShape(Capsule())
-                                .padding(.top, 30)
-                                .padding(.bottom, 25)
-                            AddLogbookView(currentLogbook: Logbook(), isReadOnly: false)
-                                .padding(.bottom, 30)
-                                .frame(minHeight: UIScreen.main.bounds.height - topPadding)
-                                .applyIf(fixedHeight) {
-                                    $0.frame(height: UIScreen.main.bounds.height - topPadding)
-                                }
-                                .applyIf(!fixedHeight) {
-                                    $0.frame(maxHeight: UIScreen.main.bounds.height - topPadding)
-                                }
-                                .environmentObject(self.popupModel)
-                            
-                        }.background(.regularMaterial).cornerRadius(40, corners: [.topLeft, .topRight])
+                ZStack {
+                    VStack {
+                        Color.accentColor
+                            .frame(width: 72, height: 6)
+                            .clipShape(Capsule())
+                            .padding(.top, 30)
+                            .padding(.bottom, 25)
+                        AddLogbookView(currentLogbook: Logbook(), isReadOnly: false)
+                            .padding(.bottom, 30)
+                            .frame(minHeight: UIScreen.main.bounds.height - topPadding)
+                            .applyIf(fixedHeight) {
+                                $0.frame(height: UIScreen.main.bounds.height - topPadding)
+                            }
+                            .applyIf(!fixedHeight) {
+                                $0.frame(maxHeight: UIScreen.main.bounds.height - topPadding)
+                            }
+                            .environmentObject(self.popupModel)
                         
-                    }
-                    .fixedSize(horizontal: false, vertical: true)
+                    }.background(.regularMaterial).cornerRadius(40, corners: [.topLeft, .topRight])
+                    
+                }
+                .fixedSize(horizontal: false, vertical: true)
             }
         }
         .uses(alertManager)
@@ -117,7 +150,7 @@ struct ListView: View {
         alertManager.show(primarySecondary: .info(title: "Eintrag löschen?", message: "Das löschen des Eintrags kann nicht rückgängig gemacht werden!", primaryButton: Alert.Button.destructive(Text("Ja")) {
             
             let index = offsets[offsets.startIndex]
-            viewModel.deleteLogbook(queryParamter: viewModel.logbooks[index]._id!)
+            //viewModel.deleteLogbook(queryParamter: viewModel.logbooks[index]._id!)
             viewModel.logbooks.remove(atOffsets: offsets)
             
         }, secondaryButton: Alert.Button.cancel(Text("Abbrechen"))))
