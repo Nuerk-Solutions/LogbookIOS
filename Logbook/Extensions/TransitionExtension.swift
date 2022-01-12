@@ -20,11 +20,13 @@ struct ScaledCircle: Shape {
         let scaleFactor = animatableData
         var path = Path()
         path.move(to: CGPoint(x: rect.minX, y: -30))
-        path.addQuadCurve(to: CGPoint(x: rect.minX, y: rect.size.height),
-                          control: CGPoint(x: (rect.size.width + 20) * 4 * scaleFactor, y: -rect.size.height * scaleFactor))
-        path.closeSubpath()
-        path.addQuadCurve(to: CGPoint(x: rect.minX, y: rect.size.height * 2),
-                          control: CGPoint(x: (rect.size.width + 20) * 4 * scaleFactor, y: rect.size.height * 2 * scaleFactor))
+        path.addQuadCurve(to: CGPoint(x: rect.minX, y: rect.maxY * 2),
+                          control: CGPoint(x: (rect.maxX * 3) * scaleFactor, y: -600 * scaleFactor))
+//        path.addQuadCurve(to: CGPoint(x: rect.minX, y: rect.size.height),
+//                          control: CGPoint(x: (rect.size.width + 20) * 4 * scaleFactor, y: -rect.size.height * scaleFactor))
+//        path.closeSubpath()
+//        path.addQuadCurve(to: CGPoint(x: rect.minX, y: rect.size.height * 2),
+//                          control: CGPoint(x: (rect.size.width + 20) * 4 * scaleFactor, y: rect.size.height * 2 * scaleFactor))
         return path
  
 //        var bigRect = rect
