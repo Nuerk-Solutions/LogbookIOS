@@ -20,6 +20,7 @@ struct ListView: View {
     @State private var searchText = ""
     
     @State private var showConfimationDialog = false
+    @State private var showSheet = false
     
     let readableDateFormat: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -62,22 +63,22 @@ struct ListView: View {
                             showConfimationDialog = true
                         //deleteItems(at: IndexSet)
                 })
-                .confirmationDialog(
-                    "Are you sure?",
-                    isPresented: $showConfimationDialog,
-                    titleVisibility: .visible
-                ) {
-                    Button("Yes") {
-                        withAnimation {
-                            //viewModel.delete(message)
-                            print("DELTED")
-                        }
-                    }.keyboardShortcut(.defaultAction)
-
-                    Button("No", role: .cancel) {}
-                } message: {
-                    Text("This action cannot be undone")
-                }
+//                .confirmationDialog(
+//                    "Are you sure?",
+//                    isPresented: $showConfimationDialog,
+//                    titleVisibility: .visible
+//                ) {
+//                    Button("Yes") {
+//                        withAnimation {
+//                            //viewModel.delete(message)
+//                            print("DELTED")
+//                        }
+//                    }.keyboardShortcut(.defaultAction)
+//
+//                    Button("No", role: .cancel) {}
+//                } message: {
+//                    Text("This action cannot be undone")
+//                }
             }
             .overlay(
                 Group {
@@ -111,6 +112,10 @@ struct ListView: View {
                 viewModel.fetchLogbooks()
             }
         }
+        .halfSheet(showSheet: $showSheet) {
+            
+        }
+        
         .popup(isPresented: $popupModel.showPopup, type: .toast, position: .bottom, closeOnTap: false, closeOnTapOutside: false, dismissCallback: {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 popupModel.popPopup = true
@@ -185,5 +190,14 @@ struct ListView_Previews: PreviewProvider {
         Group {
             ListView()
         }
+    }
+}
+
+
+// Temp extension
+extension View {
+    
+    func halfSheet<SheetView: View>(showSheet: Binding<Bool>, @ViewBuilder sheetView: @escaping () -> SheetView) -> some View {
+        return self
     }
 }
