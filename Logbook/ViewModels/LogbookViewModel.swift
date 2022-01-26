@@ -10,7 +10,7 @@ import Foundation
 class LogbookViewModel: ObservableObject {
     
     @Published var latestLogbooks: [Logbook] = []
-    @Published var currentLogbook: Logbook = Logbook(driver: .Andrea, vehicle: Vehicle(typ: .Ferrari, currentMileAge: 0, newMileAge: 0), date: Date(), driveReason: "Stadtfahrt", additionalInformation: AdditionalInformation(informationTyp: AdditionalInformationEnum.none, information: "", cost: ""))
+    @Published var currentLogbook: Logbook = Logbook()
     @Published var isLoading = true
     @Published var showAlert = false
     @Published var errorMessage: String?
@@ -18,7 +18,7 @@ class LogbookViewModel: ObservableObject {
     func fetchLatestLogbooks() {
         self.showAlert = false
         self.isLoading = true
-        let apiService = APIService(urlString: "https://api.nuerk-solutions.de/logbook")
+        let apiService = APIService(urlString: "http://192.168.200.184:3000/logbook/find/latest")
         apiService.getJSON(dateDecodingStrategy: JSONDecoder.DateDecodingStrategy.formatted(.standardT)) { (result: Result<[Logbook], APIError>) in
             defer {
                 DispatchQueue.main.async {
@@ -30,7 +30,7 @@ class LogbookViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     print("Success!")
                     self.latestLogbooks = logbooks
-                    self.currentLogbook.vehicle = Vehicle(typ: .Ferrari, currentMileAge: logbooks[1].vehicle.newMileAge, newMileAge: logbooks[1].vehicle.newMileAge)
+                    self.currentLogbook.currentMileAge = logbooks[1].newMileAge
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
@@ -44,7 +44,7 @@ class LogbookViewModel: ObservableObject {
     func submitLogbook(httpBody: Logbook) {
         self.showAlert = false
         self.isLoading = true
-        let apiService = APIService(urlString: "https://api.nuerk-solutions.de/logbook")
+        let apiService = APIService(urlString: "http://192.168.200.184:3000/logbook")
         
         let encoder = JSONEncoder()
         let dateFormatter = DateFormatter()

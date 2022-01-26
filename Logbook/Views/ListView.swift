@@ -14,13 +14,9 @@ struct ListView: View {
     @StateObject var viewModel = LogbookListViewModel()
     @StateObject var alertManager = AlertManager()
     @State private var editMode = EditMode.inactive
-    @StateObject var popupModel = PopupModel()
-    private var fixedHeight = true
-    private let topPadding = 110.0
     @State private var searchText = ""
     
-    @State private var showConfimationDialog = false
-    @State private var showSheet = false
+    @State private var showSheet: Bool = false
     
     let readableDateFormat: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -41,44 +37,13 @@ struct ListView: View {
                                 .font(.headline)
                             Text(logbook.driver.id)
                             HStack (spacing: 5) {
-                                Text(logbook.vehicle.typ.id)
+                                Text(logbook.vehicleTyp.id)
                                 Text("-")
-                                Text(String(logbook.vehicle.distance!) + " km")
+                                Text(String(logbook.distance) + " km")
                             }
                         }.padding(.bottom, 5)
                     }
-//                    .swipeActions(edge: .trailing) {
-//                        Button(
-//                            role: .destructive,
-//                            action: {
-//                                showConfimationDialog = true
-//                            }
-//                        ){
-//                            Image (systemName: "trash")
-//                        }
-//                    }
-                
                 }
-                .onDelete(perform: { IndexSet in
-                            showConfimationDialog = true
-                        //deleteItems(at: IndexSet)
-                })
-//                .confirmationDialog(
-//                    "Are you sure?",
-//                    isPresented: $showConfimationDialog,
-//                    titleVisibility: .visible
-//                ) {
-//                    Button("Yes") {
-//                        withAnimation {
-//                            //viewModel.delete(message)
-//                            print("DELTED")
-//                        }
-//                    }.keyboardShortcut(.defaultAction)
-//
-//                    Button("No", role: .cancel) {}
-//                } message: {
-//                    Text("This action cannot be undone")
-//                }
             }
             .overlay(
                 Group {
@@ -101,8 +66,7 @@ struct ListView: View {
                 Alert(title: Text("Fehler!"), message: Text(viewModel.errorMessage ?? ""))
             })
             .navigationTitle("Fahrtenbuch")
-            .navigationBarItems(leading: EditButton(), trailing: AddButton)
-            .environment(\.editMode, $editMode)
+            .navigationBarItems(trailing: AddButton)
             .listStyle(.plain)
             .refreshable {
                 viewModel.fetchLogbooks()
@@ -112,67 +76,35 @@ struct ListView: View {
                 viewModel.fetchLogbooks()
             }
         }
-        .halfSheet(showSheet: $showSheet) {
-            
-        }
-        
-        .popup(isPresented: $popupModel.showPopup, type: .toast, position: .bottom, closeOnTap: false, closeOnTapOutside: false, dismissCallback: {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                popupModel.popPopup = true
-                viewModel.fetchLogbooks()
-            }
-        }) {
-            if(!popupModel.popPopup) {
-                ZStack {
-                    VStack {
-                        Color.accentColor
-                            .frame(width: 72, height: 6)
-                            .clipShape(Capsule())
-                            .padding(.top, 30)
-                            .padding(.bottom, 25)
-                        AddLogbookView(currentLogbook: Logbook(), isReadOnly: false)
-                            .padding(.bottom, 30)
-                            .frame(minHeight: UIScreen.main.bounds.height - topPadding)
-                            .applyIf(fixedHeight) {
-                                $0.frame(height: UIScreen.main.bounds.height - topPadding)
-                            }
-                            .applyIf(!fixedHeight) {
-                                $0.frame(maxHeight: UIScreen.main.bounds.height - topPadding)
-                            }
-                            .environmentObject(self.popupModel)
-                        
-                    }.background(.regularMaterial).cornerRadius(40, corners: [.topLeft, .topRight])
-                    
-                }
-                .fixedSize(horizontal: false, vertical: true)
-            }
-        }
         .uses(alertManager)
-    }
-    
-    
-    func deleteItems(at offsets: IndexSet) {
-        alertManager.show(primarySecondary: .info(title: "Eintrag löschen?", message: "Das löschen des Eintrags kann nicht rückgängig gemacht werden!", primaryButton: Alert.Button.destructive(Text("Ja")) {
-            
-            let index = offsets[offsets.startIndex]
-            //viewModel.deleteLogbook(queryParamter: viewModel.logbooks[index]._id!)
-            viewModel.logbooks.remove(atOffsets: offsets)
-            
-        }, secondaryButton: Alert.Button.cancel(Text("Abbrechen"))))
     }
     
     private var AddButton: some View {
         switch editMode {
         case .inactive:
-            return AnyView(Button(action: onAdd) { Image(systemName: "plus.circle") }.disabled((viewModel.errorMessage) != nil))
+            return AnyView(
+                Button(action: onAdd) {
+                    Image(systemName: "plus.circle")
+                }
+                    .disabled((viewModel.errorMessage) != nil)
+                    .halfSheet(showSheet: $showSheet) {
+                        ZStack {
+                            Color.white
+                            
+                            AddLogbookView(currentLogbook: Logbook(), showSheet: $showSheet)
+                        }.ignoresSafeArea()
+                    } onEnd: {
+                        print("Dismiss")
+                        viewModel.fetchLogbooks()
+                    }
+            )
         default:
             return AnyView(EmptyView())
         }
     }
     
     func onAdd() {
-        popupModel.showPopup.toggle()
-        popupModel.popPopup = false
+        showSheet.toggle()
     }
     
     var searchResults: [Logbook] {
@@ -197,7 +129,68 @@ struct ListView_Previews: PreviewProvider {
 // Temp extension
 extension View {
     
-    func halfSheet<SheetView: View>(showSheet: Binding<Bool>, @ViewBuilder sheetView: @escaping () -> SheetView) -> some View {
+    func halfSheet<SheetView: View>(showSheet: Binding<Bool>, @ViewBuilder sheetView: @escaping () -> SheetView, onEnd: @escaping () -> ()) -> some View {
         return self
+            .background(
+                HalfSheetHelper(sheetView: sheetView(), showSheet: showSheet, onEnd: onEnd)            )
     }
 }
+
+struct HalfSheetHelper<SheetView: View>: UIViewControllerRepresentable {
+    
+    var sheetView: SheetView
+    @Binding var showSheet: Bool
+    var onEnd: ()->()
+    
+    let controller = UIViewController()
+    
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(parent: self)
+    }
+    
+    func makeUIViewController(context: Context) -> UIViewController {
+        controller.view.backgroundColor = .clear
+        return controller
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+        if showSheet {
+            let sheetController = CustomHostingController(rootView: sheetView, onEnd1: onEnd)
+            sheetController.presentationController?.delegate = context.coordinator
+            uiViewController.present(sheetController, animated: true)
+        } else {
+            uiViewController.dismiss(animated: true)
+        }
+    }
+    
+    class Coordinator: NSObject, UISheetPresentationControllerDelegate {
+        var parent: HalfSheetHelper
+        
+        init(parent: HalfSheetHelper) {
+            self.parent = parent
+        }
+        
+        func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+            parent.showSheet = false
+            parent.onEnd()
+        }
+    }
+    
+    
+    class CustomHostingController<Content: View>: UIHostingController<Content>{
+        
+        override func viewDidLoad() {
+            
+            view.backgroundColor = .clear
+            
+            if let presentationController = presentationController as? UISheetPresentationController {
+                presentationController.detents = [
+                    .large()
+                    // add .medium to show halft Sheet
+                ]
+                presentationController.prefersGrabberVisible = true
+            }
+        }
+    }
+}
+

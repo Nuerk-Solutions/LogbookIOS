@@ -11,13 +11,10 @@
 		E90B2474276E9C6A00B185EF /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90B2473276E9C6A00B185EF /* StringExtension.swift */; };
 		E90C2AC1276DB175005C1281 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90C2AC0276DB175005C1281 /* LoadingView.swift */; };
 		E91978FC27899B720002598A /* ShapeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91978FB27899B720002598A /* ShapeUtils.swift */; };
-		E91978FE2789F02C0002598A /* PopupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91978FD2789F02C0002598A /* PopupModel.swift */; };
 		E9393ED82761330E00CB136F /* LogbookEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9393ED72761330E00CB136F /* LogbookEntryViewModel.swift */; };
 		E9393EDA27614B3E00CB136F /* FloatingNumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9393ED927614B3E00CB136F /* FloatingNumberField.swift */; };
 		E9472594276BAF83006E6944 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9472593276BAF83006E6944 /* Launch Screen.storyboard */; };
-		E9472597276BBD9A006E6944 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9472596276BBD9A006E6944 /* Vehicle.swift */; };
 		E9472599276BBDA8006E6944 /* Logbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9472598276BBDA8006E6944 /* Logbook.swift */; };
-		E947259B276BBDB1006E6944 /* AdditionalInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E947259A276BBDB1006E6944 /* AdditionalInformation.swift */; };
 		E947259E276BC008006E6944 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E947259D276BC008006E6944 /* ApiService.swift */; };
 		E94725A5276BC15B006E6944 /* JsonDecoderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94725A4276BC15B006E6944 /* JsonDecoderExtension.swift */; };
 		E94725A7276BC16F006E6944 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94725A6276BC16F006E6944 /* ColorExtension.swift */; };
@@ -50,13 +47,10 @@
 		E90B2473276E9C6A00B185EF /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		E90C2AC0276DB175005C1281 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		E91978FB27899B720002598A /* ShapeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeUtils.swift; sourceTree = "<group>"; };
-		E91978FD2789F02C0002598A /* PopupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupModel.swift; sourceTree = "<group>"; };
 		E9393ED72761330E00CB136F /* LogbookEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookEntryViewModel.swift; sourceTree = "<group>"; };
 		E9393ED927614B3E00CB136F /* FloatingNumberField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingNumberField.swift; sourceTree = "<group>"; };
 		E9472593276BAF83006E6944 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		E9472596276BBD9A006E6944 /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		E9472598276BBDA8006E6944 /* Logbook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logbook.swift; sourceTree = "<group>"; };
-		E947259A276BBDB1006E6944 /* AdditionalInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInformation.swift; sourceTree = "<group>"; };
 		E947259D276BC008006E6944 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		E94725A4276BC15B006E6944 /* JsonDecoderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDecoderExtension.swift; sourceTree = "<group>"; };
 		E94725A6276BC16F006E6944 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
@@ -100,9 +94,7 @@
 		E9472595276BBD87006E6944 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E9472596276BBD9A006E6944 /* Vehicle.swift */,
 				E9472598276BBDA8006E6944 /* Logbook.swift */,
-				E947259A276BBDB1006E6944 /* AdditionalInformation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -136,7 +128,6 @@
 				E94725AC276BC341006E6944 /* LogbookViewModel.swift */,
 				E95C4F74278622C9009643B4 /* LogbookListViewModel.swift */,
 				E95C4F7827862ECA009643B4 /* DetailListViewModel.swift */,
-				E91978FD2789F02C0002598A /* PopupModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -317,12 +308,10 @@
 				E963FC37276655C000FFBD00 /* TransitionExtension.swift in Sources */,
 				E91978FC27899B720002598A /* ShapeUtils.swift in Sources */,
 				E95C4F77278623C2009643B4 /* DetailLogbookView.swift in Sources */,
-				E9472597276BBD9A006E6944 /* Vehicle.swift in Sources */,
 				E90B2472276E90C500B185EF /* FloatingTextEditor.swift in Sources */,
 				E95C4F73278620D4009643B4 /* ListView.swift in Sources */,
 				E90B2474276E9C6A00B185EF /* StringExtension.swift in Sources */,
 				E98342422757B85800E1C314 /* ContentView.swift in Sources */,
-				E947259B276BBDB1006E6944 /* AdditionalInformation.swift in Sources */,
 				E9472599276BBDA8006E6944 /* Logbook.swift in Sources */,
 				E9D4E6F42758FEBB003F36DA /* FloatingTextField.swift in Sources */,
 				E95C4F7927862ECA009643B4 /* DetailListViewModel.swift in Sources */,
@@ -333,7 +322,6 @@
 				E9393EDA27614B3E00CB136F /* FloatingNumberField.swift in Sources */,
 				E947259E276BC008006E6944 /* ApiService.swift in Sources */,
 				E98342402757B85800E1C314 /* LogbookApp.swift in Sources */,
-				E91978FE2789F02C0002598A /* PopupModel.swift in Sources */,
 				E95C4F75278622C9009643B4 /* LogbookListViewModel.swift in Sources */,
 				E9393ED82761330E00CB136F /* LogbookEntryViewModel.swift in Sources */,
 				E94725A7276BC16F006E6944 /* ColorExtension.swift in Sources */,

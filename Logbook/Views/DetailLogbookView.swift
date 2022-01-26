@@ -9,15 +9,16 @@ import SwiftUI
 
 struct DetailLogbookView: View {
     var logbookId: String?
+    @State private var none: Bool = false
     
     @StateObject var viewModel = DetailListViewModel()
     
     var body: some View {
         VStack {
             if !viewModel.isLoading {
-            AddLogbookView(currentLogbook: viewModel.logbook!, isReadOnly: true)
+                AddLogbookView(currentLogbook: viewModel.logbook, isReadOnly: true, showSheet: $none)
             }
-        }
+            }
             .overlay(
                 Group {
                     if viewModel.isLoading {
@@ -31,7 +32,7 @@ struct DetailLogbookView: View {
             .onAppear {
                 viewModel.logbookId = logbookId
                 viewModel.fetchLogbookById()
-            }.disabled(true)
+            }
     }
 }
 

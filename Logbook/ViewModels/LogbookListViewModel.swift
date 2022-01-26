@@ -17,7 +17,7 @@ class LogbookListViewModel: ObservableObject {
         self.showAlert = false
         self.errorMessage = nil
         self.isLoading = true
-        let apiService = APIService(urlString: "https://api.nuerk-solutions.de/logbook?all=1&sort=-date")
+        let apiService = APIService(urlString: "http://192.168.200.184:3000/logbook/find/all?sort=-date")
         apiService.getJSON(dateDecodingStrategy: JSONDecoder.DateDecodingStrategy.formatted(.standardT)) { (result: Result<[Logbook], APIError>) in
             defer {
                 DispatchQueue.main.async {
@@ -34,30 +34,6 @@ class LogbookListViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.showAlert = true
                     self.errorMessage = error.localizedDescription + "\nBitte wende dich an Thomas für hilfe."
-                }
-            }
-        }
-    }
-    
-    func deleteLogbook(queryParamter: String) {
-        self.isLoading = true
-        let apiService = APIService(urlString: "https://api.nuerk-solutions.de/logbook/")
-        apiService.deleteWithQuery(queryParamter: queryParamter) { (result: Result<Bool, APIError>) in
-            defer {
-                DispatchQueue.main.async {
-                    self.isLoading.toggle()
-                }
-            }
-            switch result {
-            case .success(let complete):
-                DispatchQueue.main.async {
-                    print("Success!")
-                    print(complete)
-                }
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    self.showAlert = true
-                    self.errorMessage = error.localizedDescription
                 }
             }
         }

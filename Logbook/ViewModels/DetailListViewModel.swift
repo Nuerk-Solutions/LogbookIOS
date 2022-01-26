@@ -8,7 +8,7 @@
 import Foundation
 class DetailListViewModel: ObservableObject {
     
-    @Published var logbook: Logbook? 
+    @Published var logbook: Logbook = Logbook()
 //    Logbook(driver: .Andrea, vehicle: .init(typ: .Ferrari, currentMileAge: -1, newMileAge: -1), date: Date.now, driveReason: "PLACEHOLDER", additionalInformation: .init(informationTyp: AdditionalInformationEnum.none, information: "", cost: ""))
     @Published var isLoading = true
     @Published var showAlert = false
@@ -18,7 +18,7 @@ class DetailListViewModel: ObservableObject {
     func fetchLogbookById() {
         self.showAlert = false
         self.isLoading = true
-        let apiService = APIService(urlString: "https://api.nuerk-solutions.de/logbook/" + logbookId!)
+        let apiService = APIService(urlString: "http://192.168.200.184:3000/logbook/find/" + logbookId!)
         apiService.getJSON(dateDecodingStrategy: JSONDecoder.DateDecodingStrategy.formatted(.standardT)) { (result: Result<Logbook, APIError>) in
             defer {
                 DispatchQueue.main.async {

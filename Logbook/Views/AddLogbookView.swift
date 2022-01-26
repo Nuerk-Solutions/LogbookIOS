@@ -12,16 +12,15 @@ import SPAlert
 struct AddLogbookView: View {
     
     @State var currentLogbook: Logbook
-    @EnvironmentObject var popupModel: PopupModel
-    @State private var newMileAge: String = ""
-    @State private var additionalInformationInformation: String = ""
-    @State private var additionalInformationCost: String = ""
-    var isReadOnly: Bool
+    @State private var distance: Int = 0
+    var isReadOnly: Bool = false
     
+    @Binding var showSheet: Bool
     
     @StateObject var alertManager = AlertManager()
     @ObservedObject private var addLoogbookEntryVM = AddLogbookEntryViewModel()
     @StateObject private var viewModel = LogbookViewModel()
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         Form {
@@ -38,27 +37,35 @@ struct AddLogbookView: View {
                 DatePicker("Datum",
                            selection: $currentLogbook.date,
                            displayedComponents: [.date])
+                    .environment(\.locale, Locale.init(identifier: "de_DE"))
                 
                 // Reason
                 FloatingTextField(title: "Reiseziel", text: $currentLogbook.driveReason)
             }
+            .disabled(isReadOnly)
             
             // Vehicle Information
             Section(header: Text("Fahrzeuginformationen"), content: {
                 // Vehicle Segment Picker
-                Picker("Fahrzeug", selection: $currentLogbook.vehicle.typ) {
+                Picker("Fahrzeug", selection: $currentLogbook.vehicleTyp) {
                     ForEach(VehicleEnum.allCases) { vehicle in
-                        Text(vehicle.rawValue).tag(vehicle)
+                        Text(vehicle.id).tag(vehicle)
                     }
                 }
                 .pickerStyle(SegmentedPickerStyle())
+                .onChange(of: currentLogbook.vehicleTyp) { _ in
+                    // Change currentMilAge on Update of Vehicle switch
+                    currentLogbook.currentMileAge = currentLogbook.vehicleTyp == .VW ? viewModel.latestLogbooks[0].newMileAge : viewModel.latestLogbooks[1].newMileAge
+                }
+                
                 
                 HStack {
-                    FloatingNumberField(title: "Aktueller Kilometerstand", text: $currentLogbook.vehicle.currentMileAge)
+                    FloatingTextField(title: "Aktueller Kilometerstand", text: $currentLogbook.currentMileAge)
                         .keyboardType(.decimalPad)
-                        .onChange(of: currentLogbook.vehicle.typ) { _ in
-                            let currentMilAge = currentLogbook.vehicle.typ == .VW ? viewModel.latestLogbooks[0].vehicle.newMileAge : viewModel.latestLogbooks[1].vehicle.newMileAge
-                            currentLogbook.vehicle = Vehicle(typ: currentLogbook.vehicle.typ, currentMileAge: currentMilAge, newMileAge: currentMilAge)
+                        .onChange(of: currentLogbook.currentMileAge) { _ in
+                            withAnimation {
+                                updateDistance()
+                            }
                         }
                     
                     Text("km")
@@ -67,18 +74,18 @@ struct AddLogbookView: View {
                 }
                 
                 HStack {
-                    if isReadOnly {
-                        FloatingNumberField(title: "Neuer Kilometerstand", text: $currentLogbook.vehicle.newMileAge)
-                    } else {
-                        FloatingTextField(title: "Neuer Kilometerstand", text: $newMileAge)
-                            .keyboardType(.decimalPad)
-                    }
+                    FloatingTextField(title: "Neuer Kilometerstand", text: $currentLogbook.newMileAge)
+                        .keyboardType(.decimalPad)
+                        .onChange(of: currentLogbook.newMileAge) { _ in
+                            withAnimation {
+                                updateDistance()
+                            }
+                        }
                     
                     Text("km")
                         .padding(.top, 5)
                         .foregroundColor(.gray)
                 }
-                let distance: Int  = (Int(newMileAge) ?? currentLogbook.vehicle.currentMileAge) - currentLogbook.vehicle.currentMileAge
                 let cost = Double(distance) * 0.2
                 if(distance > 0) {
                     HStack {
@@ -86,37 +93,40 @@ struct AddLogbookView: View {
                     }
                 }
             })
+                .disabled(isReadOnly)
             
             Section(header: Text("Zusätzliche Information")) {
                 Menu {
-                    ForEach(AdditionalInformationEnum.allCases, id: \.self){ item in
-                        Button(item.rawValue) {
-                            currentLogbook.additionalInformation?.informationTyp = item
+                    ForEach(AdditionalInformationTypEnum.allCases, id: \.self){ item in
+                        Button(item.id) {
+                            withAnimation {
+                                currentLogbook.additionalInformationTyp = item
+                            }
                         }
                     }
                 } label: {
                     VStack(spacing: 5){
                         HStack{
-                            Text(currentLogbook.additionalInformation?.informationTyp!.localizedName ?? AdditionalInformationEnum.none.localizedName).tag(currentLogbook.additionalInformation?.informationTyp)
-                                .foregroundColor(currentLogbook.additionalInformation?.informationTyp == AdditionalInformationEnum.none ? .gray : .primary)
+                            Text(currentLogbook.additionalInformationTyp.id).tag(currentLogbook.additionalInformationTyp)
+                                .foregroundColor(currentLogbook.additionalInformationTyp == AdditionalInformationTypEnum.Keine ? .gray : .primary)
                             Spacer()
                             Image(systemName: "chevron.down")
-                                .foregroundColor(Color.blue)
+                                .foregroundColor(isReadOnly ? .gray : .blue)
                                 .font(Font.system(size: 20, weight: .bold))
                         }
                         .transition(.opacity.animation(.linear(duration: 2)))
-                        if(currentLogbook.additionalInformation?.informationTyp == AdditionalInformationEnum.none) {
+                        if(currentLogbook.additionalInformationTyp == AdditionalInformationTypEnum.Keine) {
                             Rectangle()
-                                .fill(Color.blue)
+                                .fill(isReadOnly ? .gray : .blue)
                                 .frame(height: 2)
                                 .padding(.top, 1)
                         }
                     }
                 }
-                if(currentLogbook.additionalInformation?.informationTyp != AdditionalInformationEnum.none) {
-                    if(currentLogbook.additionalInformation?.informationTyp == .refuled) {
+                if(currentLogbook.additionalInformationTyp != AdditionalInformationTypEnum.Keine) {
+                    if(currentLogbook.additionalInformationTyp == .Getankt) {
                         HStack {
-                            FloatingTextField(title: "Menge", text: $additionalInformationInformation)
+                            FloatingTextField(title: "Menge", text: $currentLogbook.additionalInformation)
                                 .keyboardType(.decimalPad)
                             
                             Text("L")
@@ -124,19 +134,19 @@ struct AddLogbookView: View {
                                 .foregroundColor(.gray)
                         }
                         HStack {
-                            FloatingTextField(title: "Preis", text: $additionalInformationCost)
+                            FloatingTextField(title: "Preis", text: $currentLogbook.additionalInformationCost)
                                 .keyboardType(.decimalPad)
                             
                             Text("€")
                                 .padding(.top, 5)
                                 .foregroundColor(.gray)
                         }
-                    } else if(currentLogbook.additionalInformation?.informationTyp == .service) {
+                    } else if(currentLogbook.additionalInformationTyp == .Gewartet) {
                         HStack {
-                            FloatingTextEditor(title: "Beschreibung", text: $additionalInformationInformation)
+                            FloatingTextEditor(title: "Beschreibung", text: $currentLogbook.additionalInformation)
                         }
                         HStack {
-                            FloatingTextField(title: "Preis", text: $additionalInformationCost)
+                            FloatingTextField(title: "Preis", text: $currentLogbook.additionalInformationCost)
                                 .keyboardType(.decimalPad)
                             
                             Text("€")
@@ -146,17 +156,12 @@ struct AddLogbookView: View {
                     }
                 }
             }
+            .disabled(isReadOnly)
             
             if !isReadOnly {
                 Button(action: {
-                    let finalLogbook = Logbook(driver: currentLogbook.driver,
-                                               vehicle: Vehicle(typ: currentLogbook.vehicle.typ, currentMileAge: currentLogbook.vehicle.currentMileAge, newMileAge: Int(newMileAge) ?? 0),
-                                               date: currentLogbook.date,
-                                               driveReason: currentLogbook.driveReason,
-                                               additionalInformation: currentLogbook.additionalInformation?.informationTyp == AdditionalInformationEnum.none ? nil :
-                                                AdditionalInformation(informationTyp: currentLogbook.additionalInformation?.informationTyp, information: additionalInformationInformation, cost: additionalInformationCost))
+                    addLoogbookEntryVM.saveEntry(logbookEntry: currentLogbook)
                     
-                    addLoogbookEntryVM.saveEntry(logbookEntry: finalLogbook)
                     if(addLoogbookEntryVM.brokenValues.count > 0) {
                         let alert = SPAlertView(title: "", message: addLoogbookEntryVM.brokenValues[0].message, preset: .error)
                         alert.dismissByTap = true
@@ -164,24 +169,38 @@ struct AddLogbookView: View {
                         alert.present()
                         return
                     }
-                    let distance: Int  = (Int(newMileAge) ?? currentLogbook.vehicle.currentMileAge) - currentLogbook.vehicle.currentMileAge
-                    alertManager.show(primarySecondary: .info(title: "Eintrag Bestätigen", message: "Fahrer: \(finalLogbook.driver) \n Reiseziel: \(finalLogbook.driveReason)\n Fahrzeug: \(finalLogbook.vehicle.typ) \n Strecke: \(distance)km", primaryButton: Alert.Button.destructive(Text("Bestätigen")) {
-                        viewModel.submitLogbook(httpBody: finalLogbook)
+                    
+                    alertManager.show(primarySecondary: .info(title: "Eintrag Bestätigen", message: "Fahrer: \(currentLogbook.driver) \n Reiseziel: \(currentLogbook.driveReason)\n Fahrzeug: \(currentLogbook.vehicleTyp) \n Strecke: \(distance)km", primaryButton: Alert.Button.destructive(Text("Bestätigen")) {
                         
-                        newMileAge = ""
-                        additionalInformationCost = ""
-                        additionalInformationInformation = ""
-                        currentLogbook.additionalInformation?.informationTyp = AdditionalInformationEnum.none
-                        
-                        SPAlertView(title: "Neue Fahrt hinzugefügt", message: "", preset: .done).present(haptic: .success) {
-                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                                popupModel.showPopup = false
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                                    popupModel.popPopup = true
-                                }
-                            viewModel.fetchLatestLogbooks()
-                            
+                        // For API accept
+                        if currentLogbook.additionalInformationCost.isEmpty {
+                            currentLogbook.additionalInformationCost = "0"
                         }
+                        
+                        currentLogbook.additionalInformationCost = currentLogbook.additionalInformationCost.replacingOccurrences(of: ",", with: ".")
+                        
+                        if(currentLogbook.additionalInformationTyp == .Getankt) {
+                            currentLogbook.additionalInformation = currentLogbook.additionalInformation.replacingOccurrences(of: ",", with: ".")
+                        }
+                            
+                        viewModel.submitLogbook(httpBody: currentLogbook)
+                        
+                        //currentLogbook = Logbook()
+                        
+                        //viewModel.fetchLatestLogbooks()
+                        
+                        // Todo Hide Sheet
+                        if(viewModel.showAlert) {
+                            alertManager.show(dismiss: .warning(title: "Fehler", message: viewModel.errorMessage!, dismissButton: .default(Text("OK"))))
+                            return
+                        } else {
+                            SPAlertView(title: "Neue Fahrt hinzugefügt", message: "", preset: .done).present(haptic: .success) {
+                                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                                
+                                presentationMode.wrappedValue.dismiss()
+                            }
+                        }
+                        
                     }, secondaryButton: Alert.Button.cancel(Text("Abbrechen"))))
                 }) {
                     HStack {
@@ -205,7 +224,7 @@ struct AddLogbookView: View {
         )
         .gesture(DragGesture().onChanged{_ in UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)})
         .uses(alertManager)
-        .transition(AnyTransition.opacity.animation(.linear(duration: 0.2)))
+        .transition(.opacity.animation(.linear(duration: 0.2)))
         .onAppear {
             if(!isReadOnly) {
                 viewModel.fetchLatestLogbooks()
@@ -216,6 +235,12 @@ struct AddLogbookView: View {
                 self.currentLogbook = newValue
             }
         })
+    }
+    
+    func updateDistance() {
+        let currentMilage: Int = Int(currentLogbook.currentMileAge)!
+        let newMilage: Int = Int(currentLogbook.newMileAge) ?? 0
+        distance = newMilage - currentMilage // When newMileAge is empty or null use currentMilAge
     }
 }
 

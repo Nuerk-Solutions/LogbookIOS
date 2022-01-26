@@ -10,37 +10,36 @@ import Foundation
 struct Logbook: Codable, Identifiable {
     let id = UUID()
     
-    var _id: String?
-    var driver: DriverEnum
-    var vehicle: Vehicle
-    var date: Date
+    var _id: String
+    var distanceSinceLastAdditionalInformation: String
+    var additionalInformationCost: String
+    var additionalInformation: String
+    var additionalInformationTyp: AdditionalInformationTypEnum
     var driveReason: String
-    var additionalInformation: AdditionalInformation?
+    var date: Date
+    var distanceCost: String
+    var distance: String
+    var newMileAge: String
+    var currentMileAge: String
+    var vehicleTyp: VehicleEnum
+    var driver: DriverEnum
     
     init() {
+        self._id = ""
+        self.distanceSinceLastAdditionalInformation = ""
+        self.additionalInformationCost = ""
+        self.additionalInformation = ""
+        self.additionalInformationTyp = .Keine
+        self.driveReason = "Stadtfahrt"
+        self.date = Date.now
+        self.distanceCost = ""
+        self.distance = ""
+        self.newMileAge = ""
+        self.currentMileAge = "0"
+        self.vehicleTyp = .Ferrari
         self.driver = .Andrea
-        self.vehicle = Vehicle(typ: .Ferrari, currentMileAge: -1, newMileAge: -1, distance: -1)
-        self.date = Date.distantPast
-        self.driveReason = "PLACEHOLDER"
-        self.additionalInformation = AdditionalInformation(informationTyp: AdditionalInformationEnum.none, information: "PLACEHOLDER", cost: "-1")
     }
     
-    init(driver: DriverEnum, vehicle: Vehicle, date: Date, driveReason: String, additionalInformation: AdditionalInformation?) {
-        self.driver = driver
-        self.vehicle = vehicle
-        self.date = date
-        self.driveReason = driveReason
-        self.additionalInformation = additionalInformation
-    }
-    
-    enum CodingKeys: String, CodingKey {
-        case driver = "driver"
-        case vehicle = "vehicle"
-        case date = "date"
-        case driveReason = "driveReason"
-        case additionalInformation = "additionalInformation"
-        case _id = "_id"
-    }
 }
 
 enum DriverEnum: String, CaseIterable, Identifiable, Codable {
@@ -51,3 +50,18 @@ enum DriverEnum: String, CaseIterable, Identifiable, Codable {
     
     var id: String { self.rawValue }
 }
+enum VehicleEnum: String, CaseIterable, Identifiable, Codable {
+    case Ferrari
+    case VW
+    
+    var id: String { self.rawValue }
+}
+
+enum AdditionalInformationTypEnum: String, Equatable, CaseIterable, Identifiable, Codable {
+    case Keine
+    case Getankt
+    case Gewartet
+    
+    var id: String { self.rawValue }
+}
+

@@ -25,33 +25,37 @@ class AddLogbookEntryViewModel: ObservableObject {
     
     private func validate(viewState: Logbook) -> Bool {
         brokenValues.removeAll()
+        
+        let currentMileAge: Int = Int(viewState.currentMileAge) ?? 0
+        let newMileAge: Int = Int(viewState.newMileAge) ?? 0
+        
         if(viewState.driveReason.isEmpty) {
             brokenValues.append(BrokenValue(message: "Das Reisziel darf nicht leer sein!"))
         }
-        if(String(viewState.vehicle.currentMileAge).isEmpty) {
+        if(viewState.currentMileAge.isEmpty) {
             brokenValues.append(BrokenValue(message: "Der aktuelle Kilometerstand darf nicht leer sein!"))
         }
-        if(String(viewState.vehicle.newMileAge).isEmpty) {
+        if(viewState.newMileAge.isEmpty) {
             brokenValues.append(BrokenValue(message: "Der neue Kilometerstand darf nicht leer sein!"))
         }
         
-        if(viewState.vehicle.newMileAge < viewState.vehicle.currentMileAge) {
+        if(newMileAge < currentMileAge) {
             brokenValues.append(BrokenValue(message: "Der neue Kilometerstand darf nicht kleiner als der aktuelle sein!"))
         }
-        if(viewState.additionalInformation?.informationTyp != AdditionalInformationEnum.none) {
-            if(viewState.additionalInformation?.informationTyp == .refuled) {
-                if(viewState.additionalInformation!.information.isEmpty || !viewState.additionalInformation!.information.isDouble()) {
+        if(viewState.additionalInformationTyp != .Keine) {
+            if(viewState.additionalInformationTyp == .Getankt) {
+                if(viewState.additionalInformation.isEmpty || !viewState.additionalInformation.isDouble()) {
                     brokenValues.append(BrokenValue(message: "Fehlerhafte Tankmenge!"))
                 }
-                if(viewState.additionalInformation!.cost.isEmpty || !viewState.additionalInformation!.cost.isDouble()) {
+                if(viewState.additionalInformationCost.isEmpty || !viewState.additionalInformationCost.isDouble()) {
                     brokenValues.append(BrokenValue(message: "Fehlerhafte Kosten!"))
                 }
             }
-            if(viewState.additionalInformation?.informationTyp == .service) {
-                if(viewState.additionalInformation!.information.isEmpty) {
+            if(viewState.additionalInformationTyp == .Gewartet) {
+                if(viewState.additionalInformation.isEmpty) {
                     brokenValues.append(BrokenValue(message: "Fehlerhafte Beschreibung!"))
                 }
-                if(viewState.additionalInformation!.cost.isEmpty || !viewState.additionalInformation!.cost.isDouble()) {
+                if(viewState.additionalInformationCost.isEmpty || !viewState.additionalInformationCost.isDouble()) {
                     brokenValues.append(BrokenValue(message: "Fehlerhafte Kosten!"))
                 }
             }
