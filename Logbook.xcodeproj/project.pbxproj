@@ -36,6 +36,7 @@
 		E98C59C127877E720020381B /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = E98C59C027877E720020381B /* PopupView */; };
 		E98C59C32787812C0020381B /* AddLogbookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98C59C22787812C0020381B /* AddLogbookView.swift */; };
 		E9A7684C276FADDA0043551A /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = E9A7684B276FADDA0043551A /* SPAlert */; };
+		E9B5A81A27A32B9C007CA4F7 /* KeyboardAvoider in Frameworks */ = {isa = PBXBuildFile; productRef = E9B5A81927A32B9C007CA4F7 /* KeyboardAvoider */; };
 		E9D18361276F3B95001A764E /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = E9D18360276F3B95001A764E /* AlertKit */; };
 		E9D4E6F42758FEBB003F36DA /* FloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */; };
 		E9D4E6FD27590483003F36DA /* NumberUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D4E6FC27590483003F36DA /* NumberUtils.swift */; };
@@ -83,6 +84,7 @@
 			files = (
 				E98C59C127877E720020381B /* PopupView in Frameworks */,
 				E9881B9B27650DC200BE53CC /* SDWebImageSwiftUI in Frameworks */,
+				E9B5A81A27A32B9C007CA4F7 /* KeyboardAvoider in Frameworks */,
 				E9A7684C276FADDA0043551A /* SPAlert in Frameworks */,
 				E9D18361276F3B95001A764E /* AlertKit in Frameworks */,
 			);
@@ -237,6 +239,7 @@
 				E9D18360276F3B95001A764E /* AlertKit */,
 				E9A7684B276FADDA0043551A /* SPAlert */,
 				E98C59C027877E720020381B /* PopupView */,
+				E9B5A81927A32B9C007CA4F7 /* KeyboardAvoider */,
 			);
 			productName = Logbook;
 			productReference = E983423C2757B85800E1C314 /* Logbook.app */;
@@ -271,6 +274,7 @@
 				E9D1835F276F3B95001A764E /* XCRemoteSwiftPackageReference "AlertKit" */,
 				E9A7684A276FADDA0043551A /* XCRemoteSwiftPackageReference "SPAlert" */,
 				E98C59BF27877E720020381B /* XCRemoteSwiftPackageReference "PopupView" */,
+				E9B5A81827A32B9C007CA4F7 /* XCRemoteSwiftPackageReference "KeyboardAvoider" */,
 			);
 			productRefGroup = E983423D2757B85800E1C314 /* Products */;
 			projectDirPath = "";
@@ -544,6 +548,14 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		E9B5A81827A32B9C007CA4F7 /* XCRemoteSwiftPackageReference "KeyboardAvoider" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/michaelhenry/KeyboardAvoider.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		E9D1835F276F3B95001A764E /* XCRemoteSwiftPackageReference "AlertKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/rebeloper/AlertKit.git";
@@ -569,6 +581,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E9A7684A276FADDA0043551A /* XCRemoteSwiftPackageReference "SPAlert" */;
 			productName = SPAlert;
+		};
+		E9B5A81927A32B9C007CA4F7 /* KeyboardAvoider */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E9B5A81827A32B9C007CA4F7 /* XCRemoteSwiftPackageReference "KeyboardAvoider" */;
+			productName = KeyboardAvoider;
 		};
 		E9D18360276F3B95001A764E /* AlertKit */ = {
 			isa = XCSwiftPackageProductDependency;

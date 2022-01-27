@@ -21,7 +21,7 @@ class LogbookListViewModel: ObservableObject {
         apiService.getJSON(dateDecodingStrategy: JSONDecoder.DateDecodingStrategy.formatted(.standardT)) { (result: Result<[Logbook], APIError>) in
             defer {
                 DispatchQueue.main.async {
-                    self.isLoading.toggle()
+                    self.isLoading = false
                 }
             }
             switch result {

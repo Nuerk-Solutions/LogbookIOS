@@ -9,12 +9,14 @@ import SwiftUI
 import PopupView
 import SPAlert
 import AlertKit
+import KeyboardAvoider
 
 struct ListView: View {
     @StateObject var viewModel = LogbookListViewModel()
     @StateObject var alertManager = AlertManager()
     @State private var editMode = EditMode.inactive
     @State private var searchText = ""
+    @State private var shouldLoad = true
     
     @State private var showSheet: Bool = false
     
@@ -45,6 +47,14 @@ struct ListView: View {
                     }
                 }
             }
+            .refreshable {
+                withAnimation {
+                    viewModel.fetchLogbooks()
+                }
+            }
+            .navigationTitle("Fahrtenbuch")
+            .navigationBarItems(trailing: AddButton)
+            .listStyle(.plain)
             .overlay(
                 Group {
                     if viewModel.isLoading {
@@ -57,26 +67,30 @@ struct ListView: View {
                                 .fontWeight(.bold)
                                 .font(.title)
                         }.onAppear {
-                            viewModel.logbooks.removeAll()
+                            withAnimation {
+                                viewModel.logbooks.removeAll()
+                            }
                         }
                     }
                 }
             )
+            
             .alert(isPresented: $viewModel.showAlert, content: {
                 Alert(title: Text("Fehler!"), message: Text(viewModel.errorMessage ?? ""))
             })
-            .navigationTitle("Fahrtenbuch")
-            .navigationBarItems(trailing: AddButton)
-            .listStyle(.plain)
-            .refreshable {
-                viewModel.fetchLogbooks()
-            }
             .searchable(text: $searchText)
             .onAppear {
-                viewModel.fetchLogbooks()
+                if shouldLoad {
+                    withAnimation {
+                        viewModel.fetchLogbooks()
+                        shouldLoad = false
+                    }
+                }
             }
+            
         }
         .uses(alertManager)
+        
     }
     
     private var AddButton: some View {
@@ -87,16 +101,27 @@ struct ListView: View {
                     Image(systemName: "plus.circle")
                 }
                     .disabled((viewModel.errorMessage) != nil)
-                    .halfSheet(showSheet: $showSheet) {
-                        ZStack {
-                            Color.white
-                            
-                            AddLogbookView(currentLogbook: Logbook(), showSheet: $showSheet)
-                        }.ignoresSafeArea()
-                    } onEnd: {
-                        print("Dismiss")
-                        viewModel.fetchLogbooks()
-                    }
+                    .sheet(isPresented: $showSheet, onDismiss: {
+                        withAnimation {
+                            viewModel.fetchLogbooks()
+                        }
+                    }, content: {
+                        AddLogbookView(currentLogbook: Logbook(), showSheet: $showSheet)
+                            .avoidKeyboard()
+                        .ignoresSafeArea(.all, edges: .all)
+                    })
+                //                    .halfSheet(showSheet: $showSheet) {
+                //                            AddLogbookView(currentLogbook: Logbook(), showSheet: $showSheet)
+                //                            .edgesIgnoringSafeArea(.all)
+                //                    } onEnd: {
+                //                    }
+                //                    .onChange(of: showSheet, perform: { newValue in
+                //                        if(!newValue) {
+                //                            withAnimation {
+                //                                viewModel.fetchLogbooks()
+                //                            }
+                //                        }
+                //                    })
             )
         default:
             return AnyView(EmptyView())
@@ -132,7 +157,8 @@ extension View {
     func halfSheet<SheetView: View>(showSheet: Binding<Bool>, @ViewBuilder sheetView: @escaping () -> SheetView, onEnd: @escaping () -> ()) -> some View {
         return self
             .background(
-                HalfSheetHelper(sheetView: sheetView(), showSheet: showSheet, onEnd: onEnd)            )
+                HalfSheetHelper(sheetView: sheetView(), showSheet: showSheet, onEnd: onEnd)
+            )
     }
 }
 
@@ -154,8 +180,9 @@ struct HalfSheetHelper<SheetView: View>: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+        
         if showSheet {
-            let sheetController = CustomHostingController(rootView: sheetView, onEnd1: onEnd)
+            let sheetController = CustomHostingController(rootView: sheetView)
             sheetController.presentationController?.delegate = context.coordinator
             uiViewController.present(sheetController, animated: true)
         } else {

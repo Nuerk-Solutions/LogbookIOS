@@ -30,8 +30,10 @@ struct DetailLogbookView: View {
                 Alert(title: Text("Application Error"), message: Text(viewModel.errorMessage ?? ""))
             })
             .onAppear {
-                viewModel.logbookId = logbookId
-                viewModel.fetchLogbookById()
+                withAnimation {
+                    viewModel.logbookId = logbookId
+                    viewModel.fetchLogbookById()
+                }
             }
     }
 }

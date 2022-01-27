@@ -20,7 +20,7 @@ struct FloatingTextField: View {
                 .foregroundColor(text.wrappedValue.isEmpty ? Color(.placeholderText) : .accentColor)
                 .offset(y: offset)
                 .scaleEffect(scaleEffect, anchor: .leading)
-            TextField("", text: text)
+            TextField("", text: text).ignoresSafeArea(.all, edges: .all)
         }
         .padding(.top, 15)
         .padding(.bottom, 5)
@@ -36,6 +36,7 @@ struct FloatingTextField: View {
                 offset = text.wrappedValue.isEmpty ? 0 : -25
             }
         })
+        .ignoresSafeArea(.all, edges: .all)
     }
 }
 

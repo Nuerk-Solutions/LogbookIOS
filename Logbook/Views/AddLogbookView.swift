@@ -20,7 +20,7 @@ struct AddLogbookView: View {
     @StateObject var alertManager = AlertManager()
     @ObservedObject private var addLoogbookEntryVM = AddLogbookEntryViewModel()
     @StateObject private var viewModel = LogbookViewModel()
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         Form {
@@ -143,7 +143,9 @@ struct AddLogbookView: View {
                         }
                     } else if(currentLogbook.additionalInformationTyp == .Gewartet) {
                         HStack {
-                            FloatingTextEditor(title: "Beschreibung", text: $currentLogbook.additionalInformation)
+                            FloatingTextField(title: "Beschreibung", text: $currentLogbook.additionalInformation)
+                                .keyboardType(.alphabet)
+//                            FloatingTextEditor(title: "Beschreibung", text: $currentLogbook.additionalInformation)
                         }
                         HStack {
                             FloatingTextField(title: "Preis", text: $currentLogbook.additionalInformationCost)
@@ -197,7 +199,10 @@ struct AddLogbookView: View {
                             SPAlertView(title: "Neue Fahrt hinzugefügt", message: "", preset: .done).present(haptic: .success) {
                                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                                 
-                                presentationMode.wrappedValue.dismiss()
+                                withAnimation {
+                                    showSheet = false
+                                    
+                                }
                             }
                         }
                         
@@ -222,7 +227,7 @@ struct AddLogbookView: View {
                 }
             }
         )
-        .gesture(DragGesture().onChanged{_ in UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)})
+//        .gesture(DragGesture().onChanged{_ in UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)})
         .uses(alertManager)
         .transition(.opacity.animation(.linear(duration: 0.2)))
         .onAppear {

@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "KeyboardAvoider",
+        "repositoryURL": "https://github.com/michaelhenry/KeyboardAvoider.git",
+        "state": {
+          "branch": null,
+          "revision": "e1c3860e7b50bce567f3480ed443f1c6b3659725",
+          "version": "1.0.3"
+        }
+      },
+      {
         "package": "PopupView",
         "repositoryURL": "https://github.com/exyte/PopupView.git",
         "state": {
