@@ -32,6 +32,9 @@ struct FloatingTextEditor: View {
 struct FloatingTextEditor_Previews: PreviewProvider {
     @State private static var text = "TestContent"
     static var previews: some View {
-        FloatingTextEditor(title: "Hellow World", text: $text)
+        VStack {
+            Spacer()
+            FloatingTextEditor(title: "Hellow World", text: $text)
+        }
     }
 }

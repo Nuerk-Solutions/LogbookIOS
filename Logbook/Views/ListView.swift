@@ -27,26 +27,38 @@ struct ListView: View {
         return dateFormatter
     }()
     
+    init() {
+        UITableView.appearance().sectionFooterHeight = 0
+    }
+    
     var body: some View {
         NavigationView {
             List {
                 ForEach(searchResults) { logbook in
-                    NavigationLink {
-                        DetailLogbookView(logbookId: logbook._id)
-                    } label: {
-                        VStack(alignment: .leading) {
-                            Text(logbook.driveReason + " (\(self.readableDateFormat.string(from: logbook.date)))")
-                                .font(.headline)
-                            Text(logbook.driver.id)
-                            HStack (spacing: 5) {
-                                Text(logbook.vehicleTyp.id)
-                                Text("-")
-                                Text(String(logbook.distance) + " km")
-                            }
-                        }.padding(.bottom, 5)
+                    Section {
+                        NavigationLink {
+                            DetailLogbookView(logbookId: logbook._id)
+                        } label: {
+                            HStack {
+                                Image(logbook.vehicleTyp == .VW ? "car_vw_cuttet" : "logo")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 80, height: 75)
+                                    .clipShape(Circle())
+                                    .overlay(Circle().stroke(Color.blue, lineWidth: 1).opacity(0.5))
+                                VStack(alignment: .leading) {
+                                    Text(logbook.driveReason)
+                                        .font(.headline)
+                                    Text(self.readableDateFormat.string(from: logbook.date))
+                                    Text(logbook.driver.id)
+                                        .font(.subheadline)
+                                }.padding(.leading, 8)
+                            }.padding(.init(top: 6, leading: 0, bottom: 6, trailing: 0))
+                        }
                     }
                 }
             }
+            .listStyle(InsetGroupedListStyle())
             .refreshable {
                 withAnimation {
                     viewModel.fetchLogbooks()
@@ -108,7 +120,7 @@ struct ListView: View {
                     }, content: {
                         AddLogbookView(currentLogbook: Logbook(), showSheet: $showSheet)
                             .avoidKeyboard()
-                        .ignoresSafeArea(.all, edges: .all)
+                            .ignoresSafeArea(.all, edges: .all)
                     })
                 //                    .halfSheet(showSheet: $showSheet) {
                 //                            AddLogbookView(currentLogbook: Logbook(), showSheet: $showSheet)

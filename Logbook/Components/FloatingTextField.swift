@@ -13,6 +13,7 @@ struct FloatingTextField: View {
     
     @State private var scaleEffect: CGFloat = 1
     @State private var offset: CGFloat = 0
+    @FocusState var isInputActive: Bool
     
     var body: some View {
         ZStack(alignment: .leading) {
@@ -20,7 +21,17 @@ struct FloatingTextField: View {
                 .foregroundColor(text.wrappedValue.isEmpty ? Color(.placeholderText) : .accentColor)
                 .offset(y: offset)
                 .scaleEffect(scaleEffect, anchor: .leading)
-            TextField("", text: text).ignoresSafeArea(.all, edges: .all)
+            TextField("", text: text)
+                .submitLabel(.done)
+                .focused($isInputActive)
+                .toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()
+                        Button("Fertig") {
+                            isInputActive = false
+                        }
+                    }
+                }.ignoresSafeArea(.all, edges: .all)
         }
         .padding(.top, 15)
         .padding(.bottom, 5)

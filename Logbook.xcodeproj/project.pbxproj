@@ -27,7 +27,6 @@
 		E963FC352766549300FFBD00 /* LogbookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963FC342766549300FFBD00 /* LogbookView.swift */; };
 		E963FC37276655C000FFBD00 /* TransitionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963FC36276655C000FFBD00 /* TransitionExtension.swift */; };
 		E963FC39276660A800FFBD00 /* Car_load.gif in Resources */ = {isa = PBXBuildFile; fileRef = E963FC38276660A800FFBD00 /* Car_load.gif */; };
-		E97D91B32765379900681B72 /* Car_load_new.gif in Resources */ = {isa = PBXBuildFile; fileRef = E97D91B22765379900681B72 /* Car_load_new.gif */; };
 		E98342402757B85800E1C314 /* LogbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E983423F2757B85800E1C314 /* LogbookApp.swift */; };
 		E98342422757B85800E1C314 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98342412757B85800E1C314 /* ContentView.swift */; };
 		E98342442757B85A00E1C314 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E98342432757B85A00E1C314 /* Assets.xcassets */; };
@@ -64,7 +63,6 @@
 		E963FC342766549300FFBD00 /* LogbookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookView.swift; sourceTree = "<group>"; };
 		E963FC36276655C000FFBD00 /* TransitionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionExtension.swift; sourceTree = "<group>"; };
 		E963FC38276660A800FFBD00 /* Car_load.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Car_load.gif; sourceTree = "<group>"; };
-		E97D91B22765379900681B72 /* Car_load_new.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Car_load_new.gif; sourceTree = "<group>"; };
 		E983423C2757B85800E1C314 /* Logbook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Logbook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E983423F2757B85800E1C314 /* LogbookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookApp.swift; sourceTree = "<group>"; };
 		E98342412757B85800E1C314 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -204,7 +202,6 @@
 			isa = PBXGroup;
 			children = (
 				E963FC38276660A800FFBD00 /* Car_load.gif */,
-				E97D91B22765379900681B72 /* Car_load_new.gif */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -292,7 +289,6 @@
 			files = (
 				E98342472757B85A00E1C314 /* Preview Assets.xcassets in Resources */,
 				E963FC39276660A800FFBD00 /* Car_load.gif in Resources */,
-				E97D91B32765379900681B72 /* Car_load_new.gif in Resources */,
 				E9472594276BAF83006E6944 /* Launch Screen.storyboard in Resources */,
 				E98342442757B85A00E1C314 /* Assets.xcassets in Resources */,
 			);

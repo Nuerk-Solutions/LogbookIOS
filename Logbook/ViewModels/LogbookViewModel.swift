@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class LogbookViewModel: ObservableObject {
     
@@ -14,6 +15,7 @@ class LogbookViewModel: ObservableObject {
     @Published var isLoading = true
     @Published var showAlert = false
     @Published var errorMessage: String?
+    @Published var submitted = false
     
     func fetchLatestLogbooks() {
         self.showAlert = false
@@ -44,6 +46,7 @@ class LogbookViewModel: ObservableObject {
     func submitLogbook(httpBody: Logbook) {
         self.showAlert = false
         self.isLoading = true
+        self.submitted = false
         let apiService = APIService(urlString: "http://192.168.200.184:3000/logbook")
         
         let encoder = JSONEncoder()
@@ -59,10 +62,12 @@ class LogbookViewModel: ObservableObject {
                 }
             }
             switch result {
-            case .success(let logbooks):
+            case .success:
                 DispatchQueue.main.async {
+                    withAnimation {
+                        self.submitted = true
+                    }
                     print("Succes!")
-                    print(logbooks)
                   }
             case .failure(let error):
                 DispatchQueue.main.async {
