@@ -17,7 +17,7 @@ class LogbookListViewModel: ObservableObject {
         self.showAlert = false
         self.errorMessage = nil
         self.isLoading = true
-        let apiService = APIService(urlString: "http://192.168.200.184:3000/logbook/find/all?sort=-date")
+        let apiService = APIService(urlString: "https://api2.nuerk-solutions.de/logbook/find/all?sort=-date")
         apiService.getJSON(dateDecodingStrategy: JSONDecoder.DateDecodingStrategy.formatted(.standardT)) { (result: Result<[Logbook], APIError>) in
             defer {
                 DispatchQueue.main.async {

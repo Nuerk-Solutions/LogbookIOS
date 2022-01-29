@@ -122,7 +122,7 @@ enum APIError: Error, LocalizedError {
         case .invalidURL:
             return NSLocalizedString("The endpoint URL is invalid", comment: "")
         case .invalidResponseStatus:
-            return NSLocalizedString("The APIO failed to issue a valid response.", comment: "")
+            return NSLocalizedString("Ein Verbindungsfehler zum Server ist aufgetreten. Überprüfe deine Internetverbindung!", comment: "")
         case .dataTaskError(let string):
             return string
         case .corruptData:

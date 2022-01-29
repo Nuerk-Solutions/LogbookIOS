@@ -20,7 +20,7 @@ class LogbookViewModel: ObservableObject {
     func fetchLatestLogbooks() {
         self.showAlert = false
         self.isLoading = true
-        let apiService = APIService(urlString: "http://192.168.200.184:3000/logbook/find/latest")
+        let apiService = APIService(urlString: "https://api2.nuerk-solutions.de/logbook/find/latest")
         apiService.getJSON(dateDecodingStrategy: JSONDecoder.DateDecodingStrategy.formatted(.standardT)) { (result: Result<[Logbook], APIError>) in
             defer {
                 DispatchQueue.main.async {
@@ -47,7 +47,7 @@ class LogbookViewModel: ObservableObject {
         self.showAlert = false
         self.isLoading = true
         self.submitted = false
-        let apiService = APIService(urlString: "http://192.168.200.184:3000/logbook")
+        let apiService = APIService(urlString: "https://api2.nuerk-solutions.de/logbook")
         
         let encoder = JSONEncoder()
         let dateFormatter = DateFormatter()

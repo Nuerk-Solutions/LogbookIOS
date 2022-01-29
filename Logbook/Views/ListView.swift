@@ -40,7 +40,7 @@ struct ListView: View {
                             DetailLogbookView(logbookId: logbook._id)
                         } label: {
                             HStack {
-                                Image(logbook.vehicleTyp == .VW ? "car_vw_cuttet" : "logo")
+                                Image(logbook.vehicleTyp == .VW ? "car_vw" : "logo_small")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 80, height: 75)

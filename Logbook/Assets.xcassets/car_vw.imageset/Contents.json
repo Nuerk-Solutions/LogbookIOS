@@ -1,11 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "car_vw.jpg",
+      "filename" : "car_vw_cuttet.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "car_vw_cuttet_200.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },
