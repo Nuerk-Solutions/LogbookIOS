@@ -162,9 +162,10 @@ struct AddLogbookView: View {
                                     .onChange(of: descriptionFocus) { newValue in
                                         descriptionFoucsBool = newValue
                                     }
+                                    .multilineTextAlignment(.leading)
+                                    .frame(minHeight: 30, alignment: .leading)
                                 
                             }
-                            .frame(width: 300, height: 20 + (22 * CGFloat($currentLogbook.additionalInformation.wrappedValue.numberOfLines)))
                             .font(.body)
 //                            FloatingTextField(title: "Beschreibung", text: $currentLogbook.additionalInformation)
 //                                .keyboardType(.alphabet)
