@@ -144,29 +144,30 @@ struct AddLogbookView: View {
                         }
                     } else if(currentLogbook.additionalInformationTyp == .Gewartet) {
                         HStack {
-                            ZStack(alignment: .topLeading) {
-                                RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                    .fill(Color(UIColor.secondarySystemBackground))
-                                
-                                if currentLogbook.additionalInformation.isEmpty {
-                                    Text("Beschreibung")
-                                        .foregroundColor(Color(UIColor.placeholderText))
-                                        .padding(.vertical, 12)
-                                }
-                                
-                                TextEditor(text: $currentLogbook.additionalInformation)
-                                    .submitLabel(.done)
-                                    .padding(.horizontal, -4)
-                                    .padding(.vertical, 3)
-                                    .focused($descriptionFocus)
-                                    .onChange(of: descriptionFocus) { newValue in
-                                        descriptionFoucsBool = newValue
-                                    }
-                                    .multilineTextAlignment(.leading)
-                                    .frame(minHeight: 30, alignment: .leading)
-                                
-                            }
-                            .font(.body)
+//                            ZStack(alignment: .topLeading) {
+                                FloatingTextEditor(title: "Beschreibung", text: $currentLogbook.additionalInformation)
+//                                RoundedRectangle(cornerRadius: 8, style: .continuous)
+//                                    .fill(Color(UIColor.secondarySystemBackground))
+//
+//                                if currentLogbook.additionalInformation.isEmpty {
+//                                    Text("Beschreibung")
+//                                        .foregroundColor(Color(UIColor.placeholderText))
+//                                        .padding(.vertical, 12)
+//                                }
+//
+//                                TextEditor(text: $currentLogbook.additionalInformation)
+//                                    .submitLabel(.done)
+//                                    .padding(.horizontal, -4)
+//                                    .padding(.vertical, 3)
+//                                    .focused($descriptionFocus)
+//                                    .onChange(of: descriptionFocus) { newValue in
+//                                        descriptionFoucsBool = newValue
+//                                    }
+//                                    .multilineTextAlignment(.leading)
+//                                    .frame(minHeight: 30, alignment: .leading)
+//
+//                            }
+//                            .font(.body)
 //                            FloatingTextField(title: "Beschreibung", text: $currentLogbook.additionalInformation)
 //                                .keyboardType(.alphabet)
 //                            FloatingTextEditor(title: "Beschreibung", text: $currentLogbook.additionalInformation)

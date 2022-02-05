@@ -14,16 +14,34 @@ struct FloatingTextEditor: View {
     @State private var offset: CGFloat = 0
     
     var body: some View {
-        ZStack(alignment: .leading) {
+        ZStack(alignment: .topLeading) {
+//            RoundedRectangle(cornerRadius: 8, style: .continuous)
+//                .fill(Color(UIColor.secondarySystemBackground))
             Text(title)
                 .foregroundColor(text.wrappedValue.isEmpty ? Color(.placeholderText) : .accentColor)
                 .offset(x: 1, y: offset)
                 .scaleEffect(scaleEffect, anchor: .leading)
+            
+            
             TextEditor(text: text)
-        }.onChange(of: text.wrappedValue) { newValue in
+                .submitLabel(.done)
+                .padding(.horizontal, -4)
+                .padding(.vertical, 3)
+                .multilineTextAlignment(.leading)
+                .frame(minHeight: 30, alignment: .leading)
+            
+        }
+        .padding(.top, 15)
+        .onChange(of: text.wrappedValue.isEmpty) { newValue in
             withAnimation (.easeOut(duration: 0.1)){
                 scaleEffect = text.wrappedValue.isEmpty ? 1 : 0.75
-                offset = text.wrappedValue.isEmpty ? 0 : -25 - CGFloat((text.wrappedValue.numberOfLines)-1) * 15
+                offset = text.wrappedValue.isEmpty ? 0 : -25
+            }
+        }
+        .onAppear {
+            withAnimation (.easeOut(duration: 0.1)){
+                scaleEffect = text.wrappedValue.isEmpty ? 1 : 0.75
+                offset = text.wrappedValue.isEmpty ? 0 : -20
             }
         }
     }
