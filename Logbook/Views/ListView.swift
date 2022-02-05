@@ -45,7 +45,7 @@ struct ListView: View {
                                     .scaledToFit()
                                     .frame(width: 80, height: 75)
                                     .clipShape(Circle())
-                                    .overlay(Circle().stroke(Color.blue, lineWidth: 1).opacity(0.5))
+                                    .overlay(Circle().stroke(logbook.vehicleTyp == .VW ? Color.blue : Color.black, lineWidth: 1).opacity(0.5))
                                 VStack(alignment: .leading) {
                                     Text(logbook.driveReason)
                                         .font(.headline)
