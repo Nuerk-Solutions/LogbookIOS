@@ -96,6 +96,9 @@ struct ListView: View {
                     withAnimation {
                         viewModel.fetchLogbooks()
                         shouldLoad = false
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
+                                showSheet = true
+                        }
                     }
                 }
             }
