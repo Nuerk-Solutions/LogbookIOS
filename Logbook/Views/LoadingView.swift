@@ -16,6 +16,7 @@ struct LoadingView: View {
     @EnvironmentObject var viewModel: LogbookViewModel
     
     var body: some View {
+        
         ZStack {
             if(loadingPhase == .image) {
                 ZStack {

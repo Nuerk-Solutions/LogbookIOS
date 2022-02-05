@@ -14,6 +14,7 @@ import KeyboardAvoider
 struct ListView: View {
     @StateObject var viewModel = LogbookListViewModel()
     @StateObject var alertManager = AlertManager()
+    @StateObject private var locationService: LocationService
     @State private var editMode = EditMode.inactive
     @State private var searchText = ""
     @State private var shouldLoad = true
@@ -29,6 +30,7 @@ struct ListView: View {
     
     init() {
         UITableView.appearance().sectionFooterHeight = 0
+        _locationService = StateObject(wrappedValue: LocationService())
     }
     
     var body: some View {
@@ -93,6 +95,7 @@ struct ListView: View {
             .searchable(text: $searchText)
             .onAppear {
                 if shouldLoad {
+                    locationService.requestLocationPermission(always: true)
                     withAnimation {
                         viewModel.fetchLogbooks()
                         shouldLoad = false

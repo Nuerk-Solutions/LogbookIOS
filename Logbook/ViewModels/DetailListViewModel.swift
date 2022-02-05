@@ -29,7 +29,6 @@ class DetailListViewModel: ObservableObject {
             case .success(let logbook):
                 DispatchQueue.main.async {
                     print("Succes!")
-                    print(logbook)
                     self.logbook = logbook
                 }
             case .failure(let error):

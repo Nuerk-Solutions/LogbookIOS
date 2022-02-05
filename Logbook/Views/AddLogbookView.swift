@@ -246,6 +246,7 @@ struct AddLogbookView: View {
             calculateDistance()
             if(!isReadOnly) {
                 viewModel.fetchLatestLogbooks()
+                UIApplication.shared.applicationIconBadgeNumber = 0
             }
         }
         .onReceive(viewModel.$currentLogbook, perform: { newValue in

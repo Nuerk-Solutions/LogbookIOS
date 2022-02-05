@@ -27,6 +27,16 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Die Fahrtenbuchapp braucht für das Notification Feature für eine Ständige Standort verfolgung.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Die Fahrtenbuchapp braucht für das Notification Feature für eine Ständige Standort verfolgung.</string>
+	<key>NSLocationDefaultAccuracyReduced</key>
+	<string>Test</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Die Fahrtenbuchapp braucht für das Notification Feature für eine Ständige Standort verfolgung.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Die Fahrtenbuchapp braucht für das Notification Feature für eine Ständige Standort verfolgung.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -34,6 +44,12 @@
 	</dict>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+		<string>processing</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchScreen</key>
 	<dict/>
 	<key>UILaunchStoryboardName</key>
