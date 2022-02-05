@@ -22,7 +22,6 @@ struct AddLogbookView: View {
     @StateObject var alertManager = AlertManager()
     @ObservedObject private var addLoogbookEntryVM = AddLogbookEntryViewModel()
     @StateObject private var viewModel = LogbookViewModel()
-    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         Form {
@@ -229,7 +228,7 @@ struct AddLogbookView: View {
         }
         .overlay(
             Group {
-                if viewModel.isLoading && !isReadOnly {
+                if (viewModel.isLoading && !isReadOnly) {
                     ProgressView()
                 }
             }
@@ -263,6 +262,11 @@ struct AddLogbookView: View {
                             
                         }
                 }
+            }
+        }
+        .onChange(of: viewModel.errorMessage) { newErrorMessage in
+            if(newErrorMessage != nil) {
+                showSheet = false
             }
         }
     }

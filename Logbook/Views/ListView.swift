@@ -118,9 +118,13 @@ struct ListView: View {
                             viewModel.fetchLogbooks()
                         }
                     }, content: {
+                        if(viewModel.isLoading) {
+                            ProgressView()
+                        } else {
                         AddLogbookView(currentLogbook: Logbook(), showSheet: $showSheet)
                             .avoidKeyboard()
                             .ignoresSafeArea(.all, edges: .all)
+                    }
                     })
                 //                    .halfSheet(showSheet: $showSheet) {
                 //                            AddLogbookView(currentLogbook: Logbook(), showSheet: $showSheet)
