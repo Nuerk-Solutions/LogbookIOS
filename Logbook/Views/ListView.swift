@@ -114,6 +114,8 @@ struct ListView: View {
             return AnyView(
                 Button(action: onAdd) {
                     Image(systemName: "plus.circle")
+                        .resizable()
+                        .frame(width: 30, height: 30)
                 }
                     .disabled((viewModel.errorMessage) != nil)
                     .sheet(isPresented: $showSheet, onDismiss: {
