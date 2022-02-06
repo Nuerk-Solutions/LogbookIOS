@@ -28,18 +28,18 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         for currentLocation in locations {
-            print("\(index): \(currentLocation)")
+            print("\(String(describing: index)): \(currentLocation)")
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         print("Entered: \(region.identifier)")
-        notificationService.requestLocalNotification(notification: NotificationModel(notificationId: UUID().uuidString, title:"Wilkommen am \(region.identifier) 👋🏻", body: "Hey du! Es scheint so als ob du wieder zu Hause bist. Hier eine kleiner erinnerung ans Fahrtenbuch 😉", data: nil))
+        notificationService.requestLocalNotification(notification: NotificationModel(notificationId: UUID().uuidString, title:"Wilkommen am \(region.identifier) 🏠", body: "Hey du! Es scheint so als ob du wieder zu Hause bist. Hier eine kleiner erinnerung ans Fahrtenbuch 😉", data: nil))
     }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
         print("Exited: \(region.identifier)")
-        notificationService.requestLocalNotification(notification: NotificationModel(notificationId: UUID().uuidString, title: "Tschüss \(region.identifier)", body: "Hey du! Bitte denke ans Fahrtenbuch wenn du angekommen bist 😉", data: nil))
+        notificationService.requestLocalNotification(notification: NotificationModel(notificationId: UUID().uuidString, title: "Tschüss \(region.identifier)👋🏻", body: "Hey du! Bitte denke ans Fahrtenbuch wenn du angekommen bist 🤗", data: nil))
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
