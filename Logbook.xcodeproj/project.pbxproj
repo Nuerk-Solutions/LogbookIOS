@@ -17,7 +17,6 @@
 		E9472599276BBDA8006E6944 /* LogbookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9472598276BBDA8006E6944 /* LogbookModel.swift */; };
 		E947259E276BC008006E6944 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E947259D276BC008006E6944 /* ApiService.swift */; };
 		E94725A5276BC15B006E6944 /* JsonDecoderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94725A4276BC15B006E6944 /* JsonDecoderExtension.swift */; };
-		E94725A7276BC16F006E6944 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94725A6276BC16F006E6944 /* ColorExtension.swift */; };
 		E94725AB276BC1BF006E6944 /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94725AA276BC1BF006E6944 /* DateFormatterExtension.swift */; };
 		E94725AD276BC342006E6944 /* AddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94725AC276BC341006E6944 /* AddViewModel.swift */; };
 		E95C4F73278620D4009643B4 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C4F72278620D4009643B4 /* ListView.swift */; };
@@ -41,7 +40,6 @@
 		E9D18361276F3B95001A764E /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = E9D18360276F3B95001A764E /* AlertKit */; };
 		E9D4E6F42758FEBB003F36DA /* FloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */; };
 		E9D4E6FD27590483003F36DA /* NumberUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D4E6FC27590483003F36DA /* NumberUtils.swift */; };
-		E9EAEF4727627674005FE0BC /* CircleLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EAEF4627627673005FE0BC /* CircleLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,7 +53,6 @@
 		E9472598276BBDA8006E6944 /* LogbookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookModel.swift; sourceTree = "<group>"; };
 		E947259D276BC008006E6944 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		E94725A4276BC15B006E6944 /* JsonDecoderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDecoderExtension.swift; sourceTree = "<group>"; };
-		E94725A6276BC16F006E6944 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		E94725AA276BC1BF006E6944 /* DateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtension.swift; sourceTree = "<group>"; };
 		E94725AC276BC341006E6944 /* AddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewModel.swift; sourceTree = "<group>"; };
 		E95C4F72278620D4009643B4 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
@@ -76,7 +73,6 @@
 		E98C59C22787812C0020381B /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextField.swift; sourceTree = "<group>"; };
 		E9D4E6FC27590483003F36DA /* NumberUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberUtils.swift; sourceTree = "<group>"; };
-		E9EAEF4627627673005FE0BC /* CircleLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,7 +147,6 @@
 			children = (
 				E963FC36276655C000FFBD00 /* TransitionExtension.swift */,
 				E94725A4276BC15B006E6944 /* JsonDecoderExtension.swift */,
-				E94725A6276BC16F006E6944 /* ColorExtension.swift */,
 				E94725AA276BC1BF006E6944 /* DateFormatterExtension.swift */,
 				E90B2473276E9C6A00B185EF /* StringExtension.swift */,
 			);
@@ -161,7 +156,6 @@
 		E94725A3276BC127006E6944 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				E9EAEF4627627673005FE0BC /* CircleLoader.swift */,
 				E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */,
 				E9393ED927614B3E00CB136F /* FloatingNumberField.swift */,
 				E90B2471276E90C500B185EF /* FloatingTextEditor.swift */,
@@ -333,13 +327,11 @@
 				E98C59C32787812C0020381B /* AddView.swift in Sources */,
 				E9D4E6FD27590483003F36DA /* NumberUtils.swift in Sources */,
 				E96170E227AEECB2004CA43C /* NotificationModel.swift in Sources */,
-				E9EAEF4727627674005FE0BC /* CircleLoader.swift in Sources */,
 				E9393EDA27614B3E00CB136F /* FloatingNumberField.swift in Sources */,
 				E947259E276BC008006E6944 /* ApiService.swift in Sources */,
 				E98342402757B85800E1C314 /* LogbookApp.swift in Sources */,
 				E95C4F75278622C9009643B4 /* ListViewModel.swift in Sources */,
 				E9393ED82761330E00CB136F /* LogbookValidationModel.swift in Sources */,
-				E94725A7276BC16F006E6944 /* ColorExtension.swift in Sources */,
 				E96170DA27AECDF7004CA43C /* LocationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
