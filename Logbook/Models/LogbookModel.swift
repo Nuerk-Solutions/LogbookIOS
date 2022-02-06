@@ -8,7 +8,7 @@
 import Foundation
 
 struct LogbookModel: Codable, Identifiable {
-    let id = UUID()
+    var id: String {_id}
     
     var _id: String
     var distanceSinceLastAdditionalInformation: String
