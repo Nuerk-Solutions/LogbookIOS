@@ -53,8 +53,8 @@ class AddViewModel: ObservableObject {
         do {
             submitted = try await apiService.postJSON(logbook, dateEncodingStrategy: .formatted(dateFormatter))
         } catch {
-                showAlert = true
-                errorMessage = error.localizedDescription + "\nBitte melde dich bei weiteren Problem bei Thomas."
+            showAlert = true
+            errorMessage = error.localizedDescription + "\nBitte melde dich bei weiteren Problem bei Thomas."
         }
     }
 }

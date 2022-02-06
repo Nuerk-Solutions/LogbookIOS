@@ -25,7 +25,7 @@ class NotificationService: NSObject, ObservableObject, UNUserNotificationCenterD
     func requestLocalNotification(notification: NotificationModel, removePendingRequest: Bool = true) {
         let center = UNUserNotificationCenter.current()
         if removePendingRequest {
-        center.removeAllPendingNotificationRequests()
+            center.removeAllPendingNotificationRequests()
         }
         
         let content = UNMutableNotificationContent()

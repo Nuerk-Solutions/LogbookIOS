@@ -21,7 +21,7 @@ struct FloatingNumberField: View {
                 .foregroundColor(isEmpty ? Color(.placeholderText) : .accentColor)
                 .offset(y: offset)
                 .scaleEffect(scaleEffect, anchor: .leading)
-                TextField("", value: text, formatter: NumberFormatter())
+            TextField("", value: text, formatter: NumberFormatter())
         }
         .padding(.top, 15)
         .padding(.bottom, 5)

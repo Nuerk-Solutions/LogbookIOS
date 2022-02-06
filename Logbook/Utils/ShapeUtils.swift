@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension View {
-
+    
     @ViewBuilder
     func applyIf<T: View>(_ condition: Bool, apply: (Self) -> T) -> some View {
         if condition {
@@ -17,12 +17,12 @@ extension View {
             self
         }
     }
-
-    #if os(iOS)
+    
+#if os(iOS)
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape(RoundedCorner(radius: radius, corners: corners))
     }
-    #endif
+#endif
 }
 
 #if os(iOS)

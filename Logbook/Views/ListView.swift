@@ -95,13 +95,13 @@ struct ListView: View {
             .onAppear {
                 if shouldLoad {
                     locationService.requestLocationPermission(always: true)
-                        Task {
-                            await listViewModel.fetchLogbooks()
-                        }
-                        shouldLoad = false
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
-                            showSheet = true
-                        }
+                    Task {
+                        await listViewModel.fetchLogbooks()
+                    }
+                    shouldLoad = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
+                        showSheet = true
+                    }
                 }
             }
             

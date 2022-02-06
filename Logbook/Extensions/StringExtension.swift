@@ -14,29 +14,29 @@ extension String {
     }
     
     func isInt() -> Bool {
-
+        
         if let _ = Int(self) {
             return true
         }
-
+        
         return false
     }
-
+    
     func isFloat() -> Bool {
-
+        
         if let _ = Float(self) {
             return true
         }
-
+        
         return false
     }
-
+    
     func isDouble() -> Bool {
         let str = self.split(separator: ",").joined(separator: ["."])
         if let _ = Double(String(str)) {
             return true
         }
-
+        
         return false
     }
 }
