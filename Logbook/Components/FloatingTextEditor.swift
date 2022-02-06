@@ -15,8 +15,6 @@ struct FloatingTextEditor: View {
     
     var body: some View {
         ZStack(alignment: .topLeading) {
-//            RoundedRectangle(cornerRadius: 8, style: .continuous)
-//                .fill(Color(UIColor.secondarySystemBackground))
             Text(title)
                 .foregroundColor(text.wrappedValue.isEmpty ? Color(.placeholderText) : .accentColor)
                 .offset(x: 1, y: offset)
@@ -24,7 +22,6 @@ struct FloatingTextEditor: View {
             
             
             TextEditor(text: text)
-                .submitLabel(.done)
                 .padding(.horizontal, -4)
                 .padding(.vertical, 3)
                 .multilineTextAlignment(.leading)

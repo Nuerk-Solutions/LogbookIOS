@@ -11,23 +11,22 @@
 		E90B2474276E9C6A00B185EF /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90B2473276E9C6A00B185EF /* StringExtension.swift */; };
 		E90C2AC1276DB175005C1281 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90C2AC0276DB175005C1281 /* LoadingView.swift */; };
 		E91978FC27899B720002598A /* ShapeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91978FB27899B720002598A /* ShapeUtils.swift */; };
-		E9393ED82761330E00CB136F /* LogbookEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9393ED72761330E00CB136F /* LogbookEntryViewModel.swift */; };
+		E9393ED82761330E00CB136F /* LogbookValidationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9393ED72761330E00CB136F /* LogbookValidationModel.swift */; };
 		E9393EDA27614B3E00CB136F /* FloatingNumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9393ED927614B3E00CB136F /* FloatingNumberField.swift */; };
 		E9472594276BAF83006E6944 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9472593276BAF83006E6944 /* Launch Screen.storyboard */; };
-		E9472599276BBDA8006E6944 /* Logbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9472598276BBDA8006E6944 /* Logbook.swift */; };
+		E9472599276BBDA8006E6944 /* LogbookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9472598276BBDA8006E6944 /* LogbookModel.swift */; };
 		E947259E276BC008006E6944 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E947259D276BC008006E6944 /* ApiService.swift */; };
 		E94725A5276BC15B006E6944 /* JsonDecoderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94725A4276BC15B006E6944 /* JsonDecoderExtension.swift */; };
 		E94725A7276BC16F006E6944 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94725A6276BC16F006E6944 /* ColorExtension.swift */; };
 		E94725AB276BC1BF006E6944 /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94725AA276BC1BF006E6944 /* DateFormatterExtension.swift */; };
-		E94725AD276BC342006E6944 /* LogbookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94725AC276BC341006E6944 /* LogbookViewModel.swift */; };
+		E94725AD276BC342006E6944 /* AddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94725AC276BC341006E6944 /* AddViewModel.swift */; };
 		E95C4F73278620D4009643B4 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C4F72278620D4009643B4 /* ListView.swift */; };
-		E95C4F75278622C9009643B4 /* LogbookListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C4F74278622C9009643B4 /* LogbookListViewModel.swift */; };
-		E95C4F77278623C2009643B4 /* DetailLogbookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C4F76278623C2009643B4 /* DetailLogbookView.swift */; };
-		E95C4F7927862ECA009643B4 /* DetailListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C4F7827862ECA009643B4 /* DetailListViewModel.swift */; };
+		E95C4F75278622C9009643B4 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C4F74278622C9009643B4 /* ListViewModel.swift */; };
+		E95C4F77278623C2009643B4 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C4F76278623C2009643B4 /* DetailView.swift */; };
+		E95C4F7927862ECA009643B4 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C4F7827862ECA009643B4 /* DetailViewModel.swift */; };
 		E96170DA27AECDF7004CA43C /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96170D927AECDF7004CA43C /* LocationService.swift */; };
 		E96170E027AEEAE4004CA43C /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96170DF27AEEAE4004CA43C /* NotificationService.swift */; };
 		E96170E227AEECB2004CA43C /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96170E127AEECB2004CA43C /* NotificationModel.swift */; };
-		E963FC352766549300FFBD00 /* LogbookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963FC342766549300FFBD00 /* LogbookView.swift */; };
 		E963FC37276655C000FFBD00 /* TransitionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963FC36276655C000FFBD00 /* TransitionExtension.swift */; };
 		E963FC39276660A800FFBD00 /* Car_load.gif in Resources */ = {isa = PBXBuildFile; fileRef = E963FC38276660A800FFBD00 /* Car_load.gif */; };
 		E98342402757B85800E1C314 /* LogbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E983423F2757B85800E1C314 /* LogbookApp.swift */; };
@@ -36,7 +35,7 @@
 		E98342472757B85A00E1C314 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E98342462757B85A00E1C314 /* Preview Assets.xcassets */; };
 		E9881B9B27650DC200BE53CC /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E9881B9A27650DC200BE53CC /* SDWebImageSwiftUI */; };
 		E98C59C127877E720020381B /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = E98C59C027877E720020381B /* PopupView */; };
-		E98C59C32787812C0020381B /* AddLogbookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98C59C22787812C0020381B /* AddLogbookView.swift */; };
+		E98C59C32787812C0020381B /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98C59C22787812C0020381B /* AddView.swift */; };
 		E9A7684C276FADDA0043551A /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = E9A7684B276FADDA0043551A /* SPAlert */; };
 		E9B5A81A27A32B9C007CA4F7 /* KeyboardAvoider in Frameworks */ = {isa = PBXBuildFile; productRef = E9B5A81927A32B9C007CA4F7 /* KeyboardAvoider */; };
 		E9D18361276F3B95001A764E /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = E9D18360276F3B95001A764E /* AlertKit */; };
@@ -50,23 +49,22 @@
 		E90B2473276E9C6A00B185EF /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		E90C2AC0276DB175005C1281 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		E91978FB27899B720002598A /* ShapeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeUtils.swift; sourceTree = "<group>"; };
-		E9393ED72761330E00CB136F /* LogbookEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookEntryViewModel.swift; sourceTree = "<group>"; };
+		E9393ED72761330E00CB136F /* LogbookValidationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookValidationModel.swift; sourceTree = "<group>"; };
 		E9393ED927614B3E00CB136F /* FloatingNumberField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingNumberField.swift; sourceTree = "<group>"; };
 		E9472593276BAF83006E6944 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		E9472598276BBDA8006E6944 /* Logbook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logbook.swift; sourceTree = "<group>"; };
+		E9472598276BBDA8006E6944 /* LogbookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookModel.swift; sourceTree = "<group>"; };
 		E947259D276BC008006E6944 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		E94725A4276BC15B006E6944 /* JsonDecoderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDecoderExtension.swift; sourceTree = "<group>"; };
 		E94725A6276BC16F006E6944 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		E94725AA276BC1BF006E6944 /* DateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtension.swift; sourceTree = "<group>"; };
-		E94725AC276BC341006E6944 /* LogbookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookViewModel.swift; sourceTree = "<group>"; };
+		E94725AC276BC341006E6944 /* AddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewModel.swift; sourceTree = "<group>"; };
 		E95C4F72278620D4009643B4 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
-		E95C4F74278622C9009643B4 /* LogbookListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookListViewModel.swift; sourceTree = "<group>"; };
-		E95C4F76278623C2009643B4 /* DetailLogbookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailLogbookView.swift; sourceTree = "<group>"; };
-		E95C4F7827862ECA009643B4 /* DetailListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailListViewModel.swift; sourceTree = "<group>"; };
+		E95C4F74278622C9009643B4 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
+		E95C4F76278623C2009643B4 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		E95C4F7827862ECA009643B4 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		E96170D927AECDF7004CA43C /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		E96170DF27AEEAE4004CA43C /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		E96170E127AEECB2004CA43C /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
-		E963FC342766549300FFBD00 /* LogbookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookView.swift; sourceTree = "<group>"; };
 		E963FC36276655C000FFBD00 /* TransitionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionExtension.swift; sourceTree = "<group>"; };
 		E963FC38276660A800FFBD00 /* Car_load.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Car_load.gif; sourceTree = "<group>"; };
 		E983423C2757B85800E1C314 /* Logbook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Logbook.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,7 +73,7 @@
 		E98342432757B85A00E1C314 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E98342462757B85A00E1C314 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E983424D2757B85A00E1C314 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E98C59C22787812C0020381B /* AddLogbookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLogbookView.swift; sourceTree = "<group>"; };
+		E98C59C22787812C0020381B /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextField.swift; sourceTree = "<group>"; };
 		E9D4E6FC27590483003F36DA /* NumberUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberUtils.swift; sourceTree = "<group>"; };
 		E9EAEF4627627673005FE0BC /* CircleLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleLoader.swift; sourceTree = "<group>"; };
@@ -97,10 +95,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E92EF7F427AFEA1500E4E1B4 /* ValidationModel */ = {
+			isa = PBXGroup;
+			children = (
+				E9393ED72761330E00CB136F /* LogbookValidationModel.swift */,
+			);
+			path = ValidationModel;
+			sourceTree = "<group>";
+		};
 		E9472595276BBD87006E6944 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E9472598276BBDA8006E6944 /* Logbook.swift */,
+				E9472598276BBDA8006E6944 /* LogbookModel.swift */,
 				E96170E127AEECB2004CA43C /* NotificationModel.swift */,
 			);
 			path = Models;
@@ -120,12 +126,11 @@
 			isa = PBXGroup;
 			children = (
 				E98342412757B85800E1C314 /* ContentView.swift */,
-				E963FC342766549300FFBD00 /* LogbookView.swift */,
 				E90C2AC0276DB175005C1281 /* LoadingView.swift */,
 				E9472593276BAF83006E6944 /* Launch Screen.storyboard */,
 				E95C4F72278620D4009643B4 /* ListView.swift */,
-				E95C4F76278623C2009643B4 /* DetailLogbookView.swift */,
-				E98C59C22787812C0020381B /* AddLogbookView.swift */,
+				E95C4F76278623C2009643B4 /* DetailView.swift */,
+				E98C59C22787812C0020381B /* AddView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -133,10 +138,10 @@
 		E94725A0276BC0CE006E6944 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				E9393ED72761330E00CB136F /* LogbookEntryViewModel.swift */,
-				E94725AC276BC341006E6944 /* LogbookViewModel.swift */,
-				E95C4F74278622C9009643B4 /* LogbookListViewModel.swift */,
-				E95C4F7827862ECA009643B4 /* DetailListViewModel.swift */,
+				E92EF7F427AFEA1500E4E1B4 /* ValidationModel */,
+				E94725AC276BC341006E6944 /* AddViewModel.swift */,
+				E95C4F74278622C9009643B4 /* ListViewModel.swift */,
+				E95C4F7827862ECA009643B4 /* DetailViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -310,31 +315,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E963FC352766549300FFBD00 /* LogbookView.swift in Sources */,
 				E94725AB276BC1BF006E6944 /* DateFormatterExtension.swift in Sources */,
 				E96170E027AEEAE4004CA43C /* NotificationService.swift in Sources */,
 				E90C2AC1276DB175005C1281 /* LoadingView.swift in Sources */,
 				E94725A5276BC15B006E6944 /* JsonDecoderExtension.swift in Sources */,
 				E963FC37276655C000FFBD00 /* TransitionExtension.swift in Sources */,
 				E91978FC27899B720002598A /* ShapeUtils.swift in Sources */,
-				E95C4F77278623C2009643B4 /* DetailLogbookView.swift in Sources */,
+				E95C4F77278623C2009643B4 /* DetailView.swift in Sources */,
 				E90B2472276E90C500B185EF /* FloatingTextEditor.swift in Sources */,
 				E95C4F73278620D4009643B4 /* ListView.swift in Sources */,
 				E90B2474276E9C6A00B185EF /* StringExtension.swift in Sources */,
 				E98342422757B85800E1C314 /* ContentView.swift in Sources */,
-				E9472599276BBDA8006E6944 /* Logbook.swift in Sources */,
+				E9472599276BBDA8006E6944 /* LogbookModel.swift in Sources */,
 				E9D4E6F42758FEBB003F36DA /* FloatingTextField.swift in Sources */,
-				E95C4F7927862ECA009643B4 /* DetailListViewModel.swift in Sources */,
-				E94725AD276BC342006E6944 /* LogbookViewModel.swift in Sources */,
-				E98C59C32787812C0020381B /* AddLogbookView.swift in Sources */,
+				E95C4F7927862ECA009643B4 /* DetailViewModel.swift in Sources */,
+				E94725AD276BC342006E6944 /* AddViewModel.swift in Sources */,
+				E98C59C32787812C0020381B /* AddView.swift in Sources */,
 				E9D4E6FD27590483003F36DA /* NumberUtils.swift in Sources */,
 				E96170E227AEECB2004CA43C /* NotificationModel.swift in Sources */,
 				E9EAEF4727627674005FE0BC /* CircleLoader.swift in Sources */,
 				E9393EDA27614B3E00CB136F /* FloatingNumberField.swift in Sources */,
 				E947259E276BC008006E6944 /* ApiService.swift in Sources */,
 				E98342402757B85800E1C314 /* LogbookApp.swift in Sources */,
-				E95C4F75278622C9009643B4 /* LogbookListViewModel.swift in Sources */,
-				E9393ED82761330E00CB136F /* LogbookEntryViewModel.swift in Sources */,
+				E95C4F75278622C9009643B4 /* ListViewModel.swift in Sources */,
+				E9393ED82761330E00CB136F /* LogbookValidationModel.swift in Sources */,
 				E94725A7276BC16F006E6944 /* ColorExtension.swift in Sources */,
 				E96170DA27AECDF7004CA43C /* LocationService.swift in Sources */,
 			);

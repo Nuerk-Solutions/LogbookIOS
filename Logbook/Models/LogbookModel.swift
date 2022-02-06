@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Logbook: Codable, Identifiable {
+struct LogbookModel: Codable, Identifiable {
     let id = UUID()
     
     var _id: String

@@ -13,10 +13,9 @@ struct LoadingView: View {
     
     @Binding var isLoading: Bool
     @Binding var loadingPhase: LoadingPhase
-    @EnvironmentObject var viewModel: LogbookViewModel
+    @EnvironmentObject var listViewModel: ListViewModel
     
     var body: some View {
-        
         ZStack {
             if(loadingPhase == .image) {
                 ZStack {
@@ -49,14 +48,16 @@ struct LoadingView: View {
                 .zIndex(1)
                 .transition(.iris)
             }
-        }.SPAlert(isPresent: $viewModel.showAlert,
-                  message: viewModel.errorMessage ?? "",
+        }.SPAlert(isPresent: $listViewModel.showAlert,
+                  message: listViewModel.errorMessage ?? "",
                   duration: 3.0,
                   dismissOnTap: true,
                   preset: SPAlertIconPreset.error,
                   haptic: .error,
                   completion: {
-            viewModel.fetchLatestLogbooks()
+            Task {
+                await listViewModel.fetchLogbooks()
+            }
         })
     }
     

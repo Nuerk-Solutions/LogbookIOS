@@ -12,9 +12,10 @@ import AlertKit
 import KeyboardAvoider
 
 struct ListView: View {
-    @StateObject var viewModel = LogbookListViewModel()
+    @StateObject var listViewModel = ListViewModel()
     @StateObject var alertManager = AlertManager()
     @StateObject private var locationService: LocationService
+    
     @State private var editMode = EditMode.inactive
     @State private var searchText = ""
     @State private var shouldLoad = true
@@ -39,7 +40,7 @@ struct ListView: View {
                 ForEach(searchResults) { logbook in
                     Section {
                         NavigationLink {
-                            DetailLogbookView(logbookId: logbook._id)
+                            DetailView(logbookId: logbook._id)
                         } label: {
                             HStack {
                                 Image(logbook.vehicleTyp == .VW ? "car_vw" : "logo_small")
@@ -62,53 +63,50 @@ struct ListView: View {
             }
             .listStyle(InsetGroupedListStyle())
             .refreshable {
-                withAnimation {
-                    viewModel.fetchLogbooks()
-                }
+                await listViewModel.fetchLogbooks()
             }
             .navigationTitle("Fahrtenbuch")
             .navigationBarItems(trailing: AddButton)
             .listStyle(.plain)
             .overlay(
                 Group {
-                    if viewModel.isLoading {
+                    if listViewModel.isLoading {
                         ProgressView()
                     }
                     
-                    if(viewModel.errorMessage != nil) {
+                    if(listViewModel.errorMessage != nil) {
                         VStack {
                             Text("Bitte verbinde dich mit dem Internet um einen neuen Eintrag hinzuzufügen!").foregroundColor(.red)
                                 .fontWeight(.bold)
                                 .font(.title)
                         }.onAppear {
                             withAnimation {
-                                viewModel.logbooks.removeAll()
+                                listViewModel.logbooks.removeAll()
                             }
                         }
                     }
                 }
             )
             
-            .alert(isPresented: $viewModel.showAlert, content: {
-                Alert(title: Text("Fehler!"), message: Text(viewModel.errorMessage ?? ""))
+            .alert(isPresented: $listViewModel.showAlert, content: {
+                Alert(title: Text("Fehler!"), message: Text(listViewModel.errorMessage ?? ""))
             })
             .searchable(text: $searchText)
             .onAppear {
                 if shouldLoad {
                     locationService.requestLocationPermission(always: true)
-                    withAnimation {
-                        viewModel.fetchLogbooks()
-                        shouldLoad = false
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.25) {
-                                showSheet = true
+                        Task {
+                            await listViewModel.fetchLogbooks()
                         }
-                    }
+                        shouldLoad = false
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
+                            showSheet = true
+                        }
                 }
             }
             
         }
         .uses(alertManager)
-        
     }
     
     private var AddButton: some View {
@@ -120,19 +118,16 @@ struct ListView: View {
                         .resizable()
                         .frame(width: 30, height: 30)
                 }
-                    .disabled((viewModel.errorMessage) != nil)
-                    .sheet(isPresented: $showSheet, onDismiss: {
-                        withAnimation {
-                            viewModel.fetchLogbooks()
-                        }
-                    }, content: {
-                        if(viewModel.isLoading) {
+                    .disabled((listViewModel.errorMessage) != nil)
+                    .sheet(isPresented: $showSheet, content: {
+                        if(listViewModel.isLoading) {
                             ProgressView()
                         } else {
-                        AddLogbookView(currentLogbook: Logbook(), showSheet: $showSheet)
-                            .avoidKeyboard()
-                            .ignoresSafeArea(.all, edges: .all)
-                    }
+                            AddLogbookView(showSheet: $showSheet)
+                                .avoidKeyboard()
+                                .environmentObject(listViewModel)
+                                .ignoresSafeArea(.all, edges: .all)
+                        }
                     })
                 //                    .halfSheet(showSheet: $showSheet) {
                 //                            AddLogbookView(currentLogbook: Logbook(), showSheet: $showSheet)
@@ -156,11 +151,11 @@ struct ListView: View {
         showSheet.toggle()
     }
     
-    var searchResults: [Logbook] {
+    var searchResults: [LogbookModel] {
         if searchText.isEmpty {
-            return viewModel.logbooks
+            return listViewModel.logbooks
         } else {
-            return viewModel.logbooks.filter{$0.driveReason.contains(searchText) || readableDateFormat.string(from: $0.date).contains(searchText) || $0.driver.id.contains(searchText)}
+            return listViewModel.logbooks.filter{$0.driveReason.contains(searchText) || readableDateFormat.string(from: $0.date).contains(searchText) || $0.driver.id.contains(searchText)}
         }
     }
 }

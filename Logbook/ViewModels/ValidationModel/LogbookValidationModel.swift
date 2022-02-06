@@ -17,13 +17,13 @@ class AddLogbookEntryViewModel: ObservableObject {
     
     @Published var brokenValues = [BrokenValue]()
     
-    func saveEntry(logbookEntry: Logbook) {
+    func saveEntry(logbookEntry: LogbookModel) {
         if(validate(viewState: logbookEntry)) {
             // save the entry
         }
     }
     
-    private func validate(viewState: Logbook) -> Bool {
+    private func validate(viewState: LogbookModel) -> Bool {
         brokenValues.removeAll()
         
         let currentMileAge: Int = Int(viewState.currentMileAge) ?? 0

@@ -11,7 +11,7 @@ import SPAlert
 
 struct AddLogbookView: View {
     
-    @State var currentLogbook: Logbook
+    @State var currentLogbook: LogbookModel = LogbookModel()
     @State private var distance: Int = 0
     @State private var descriptionFoucsBool: Bool = false
     @FocusState private var descriptionFocus: Bool
@@ -21,7 +21,8 @@ struct AddLogbookView: View {
     
     @StateObject var alertManager = AlertManager()
     @ObservedObject private var addLoogbookEntryVM = AddLogbookEntryViewModel()
-    @StateObject private var viewModel = LogbookViewModel()
+    @StateObject private var addViewModel = AddViewModel()
+    @EnvironmentObject private var listViewModel: ListViewModel
     
     var body: some View {
         Form {
@@ -38,7 +39,7 @@ struct AddLogbookView: View {
                 DatePicker("Datum",
                            selection: $currentLogbook.date,
                            displayedComponents: [.date])
-                    .environment(\.locale, Locale.init(identifier: "de_DE"))
+                .environment(\.locale, Locale.init(identifier: "de_DE"))
                 
                 // Reason
                 FloatingTextField(title: "Reiseziel", text: $currentLogbook.driveReason)
@@ -56,7 +57,7 @@ struct AddLogbookView: View {
                 .pickerStyle(SegmentedPickerStyle())
                 .onChange(of: currentLogbook.vehicleTyp) { _ in
                     // Change currentMilAge on Update of Vehicle switch
-                    currentLogbook.currentMileAge = currentLogbook.vehicleTyp == .VW ? viewModel.latestLogbooks[0].newMileAge : viewModel.latestLogbooks[1].newMileAge
+                    currentLogbook.currentMileAge = currentLogbook.vehicleTyp == .VW ? addViewModel.latestLogbooks![0].newMileAge : addViewModel.latestLogbooks![1].newMileAge
                 }
                 
                 
@@ -94,7 +95,7 @@ struct AddLogbookView: View {
                     }
                 }
             })
-                .disabled(isReadOnly)
+            .disabled(isReadOnly)
             
             Section(header: Text("Zusätzliche Information")) {
                 Menu {
@@ -144,33 +145,8 @@ struct AddLogbookView: View {
                         }
                     } else if(currentLogbook.additionalInformationTyp == .Gewartet) {
                         HStack {
-//                            ZStack(alignment: .topLeading) {
-                                FloatingTextEditor(title: "Beschreibung", text: $currentLogbook.additionalInformation)
-//                                RoundedRectangle(cornerRadius: 8, style: .continuous)
-//                                    .fill(Color(UIColor.secondarySystemBackground))
-//
-//                                if currentLogbook.additionalInformation.isEmpty {
-//                                    Text("Beschreibung")
-//                                        .foregroundColor(Color(UIColor.placeholderText))
-//                                        .padding(.vertical, 12)
-//                                }
-//
-//                                TextEditor(text: $currentLogbook.additionalInformation)
-//                                    .submitLabel(.done)
-//                                    .padding(.horizontal, -4)
-//                                    .padding(.vertical, 3)
-//                                    .focused($descriptionFocus)
-//                                    .onChange(of: descriptionFocus) { newValue in
-//                                        descriptionFoucsBool = newValue
-//                                    }
-//                                    .multilineTextAlignment(.leading)
-//                                    .frame(minHeight: 30, alignment: .leading)
-//
-//                            }
-//                            .font(.body)
-//                            FloatingTextField(title: "Beschreibung", text: $currentLogbook.additionalInformation)
-//                                .keyboardType(.alphabet)
-//                            FloatingTextEditor(title: "Beschreibung", text: $currentLogbook.additionalInformation)
+                            FloatingTextEditor(title: "Beschreibung", text: $currentLogbook.additionalInformation)
+                                .submitLabel(.done)
                         }
                         HStack {
                             FloatingTextField(title: "Preis", text: $currentLogbook.additionalInformationCost)
@@ -206,12 +182,15 @@ struct AddLogbookView: View {
                         if(currentLogbook.additionalInformationTyp == .Getankt) {
                             currentLogbook.additionalInformation = currentLogbook.additionalInformation.replacingOccurrences(of: ",", with: ".")
                         }
-                            
-                        viewModel.submitLogbook(httpBody: currentLogbook)
+                        Task {
+                            await addViewModel.submitLogbook(logbook: currentLogbook)
+                            await listViewModel.fetchLogbooks()
+                        }
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                         
                         // Todo Hide Sheet
-                        if(viewModel.showAlert) {
-                            alertManager.show(dismiss: .warning(title: "Fehler", message: viewModel.errorMessage!, dismissButton: .default(Text("OK"))))
+                        if(addViewModel.showAlert) {
+                            alertManager.show(dismiss: .warning(title: "Fehler", message: addViewModel.errorMessage!, dismissButton: .default(Text("OK"))))
                             return
                         }
                     }, secondaryButton: Alert.Button.cancel(Text("Abbrechen"))))
@@ -230,44 +209,52 @@ struct AddLogbookView: View {
         }
         .overlay(
             Group {
-                if (viewModel.isLoading && !isReadOnly) {
+                if (addViewModel.isLoading && !isReadOnly) {
                     ProgressView()
                 }
             }
         )
-//        .gesture(DragGesture().onChanged{_ in
-//            if !descriptionFoucsBool {
-//                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-//            }
-//        })
+        //        .gesture(DragGesture().onChanged{_ in
+        //            if !descriptionFoucsBool {
+        //                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        //            }
+        //        })
         .uses(alertManager)
         .transition(.opacity.animation(.linear(duration: 0.2)))
         .onAppear {
             calculateDistance()
             if(!isReadOnly) {
-                viewModel.fetchLatestLogbooks()
+                Task {
+                    await addViewModel.fetchLatestLogbooks()
+                }
                 UIApplication.shared.applicationIconBadgeNumber = 0
             }
         }
-        .onReceive(viewModel.$currentLogbook, perform: { newValue in
-            if(!isReadOnly) {
-                self.currentLogbook = newValue
+        .onReceive(addViewModel.$latestLogbooks, perform: { newValue in
+            if isReadOnly {
+                return
             }
+            guard let logbooks = newValue
+            else {
+                print("Empty Array!")
+                return
+            }
+            self.currentLogbook.currentMileAge = logbooks[1].newMileAge
         })
-        .onChange(of: viewModel.submitted) { newValue in
+        .onChange(of: addViewModel.submitted) { newValue in
             if newValue {
                 
-                    SPAlertView(title: "Neue Fahrt hinzugefügt", message: "", preset: .done).present(haptic: .success) {
-                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                SPAlertView(title: "Neue Fahrt hinzugefügt", message: "", preset: .done).present(haptic: .success) {
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    
+                    withAnimation {
+                        showSheet = false
                         
-                        withAnimation {
-                            showSheet = false
-                            
-                        }
+                    }
                 }
             }
         }
-        .onChange(of: viewModel.errorMessage) { newErrorMessage in
+        .onChange(of: addViewModel.errorMessage) { newErrorMessage in
             if(newErrorMessage != nil) {
                 showSheet = false
             }
@@ -280,9 +267,3 @@ struct AddLogbookView: View {
         distance = newMilage - currentMilage // When newMileAge is empty or null use currentMilAge
     }
 }
-
-//struct AddLogbookViews_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AddLogbookView()
-//    }
-//}
