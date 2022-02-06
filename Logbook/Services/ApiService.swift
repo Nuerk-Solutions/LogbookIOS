@@ -49,12 +49,15 @@ struct APIService {
                     continuation.resume(with: .success(decodedData))
                 } catch DecodingError.dataCorrupted(let context) {
                     print(context)
+                    continuation.resume(with: .failure(APIError.decodingError(context.debugDescription)))
                 } catch DecodingError.keyNotFound(let key, let context) {
                     print("Key '\(key)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    continuation.resume(with: .failure(APIError.decodingError(context.debugDescription)))
                 } catch DecodingError.valueNotFound(let value, let context) {
                     print("Value '\(value)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    continuation.resume(with: .failure(APIError.decodingError(context.debugDescription)))
                 } catch DecodingError.typeMismatch(let type, let context) {
                     print("Type '\(type)' mismatch:", context.debugDescription)
                     print("codingPath:", context.codingPath)
