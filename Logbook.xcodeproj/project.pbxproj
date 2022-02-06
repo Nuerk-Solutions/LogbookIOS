@@ -185,15 +185,15 @@
 				E983424D2757B85A00E1C314 /* Info.plist */,
 				E983423F2757B85800E1C314 /* LogbookApp.swift */,
 				E98342432757B85A00E1C314 /* Assets.xcassets */,
-				E94725A3276BC127006E6944 /* Components */,
-				E94725A1276BC0E5006E6944 /* Extensions */,
-				E9472595276BBD87006E6944 /* Models */,
-				E98342452757B85A00E1C314 /* Preview Content */,
-				E947259C276BBFFB006E6944 /* Services */,
 				E9881B9627650CB700BE53CC /* Shared */,
+				E94725A3276BC127006E6944 /* Components */,
+				E9472595276BBD87006E6944 /* Models */,
+				E947259C276BBFFB006E6944 /* Services */,
+				E94725A1276BC0E5006E6944 /* Extensions */,
 				E9D4E6FB2759046F003F36DA /* Utils */,
 				E94725A0276BC0CE006E6944 /* ViewModels */,
 				E947259F276BC0C9006E6944 /* Views */,
+				E98342452757B85A00E1C314 /* Preview Content */,
 			);
 			path = Logbook;
 			sourceTree = "<group>";

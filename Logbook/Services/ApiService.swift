@@ -39,8 +39,6 @@ struct APIService {
                     continuation.resume(with: .failure(APIError.corruptData))
                     return
                 }
-//                                let str = String(decoding: data, as: UTF8.self)
-//                                print(str)
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = dateDecodingStrategy
                 decoder.keyDecodingStrategy = keyDecodingStrategy
@@ -101,8 +99,6 @@ struct APIService {
         
         return try await withCheckedThrowingContinuation{ continuation in
             URLSession.shared.dataTask(with: request) { data, response, error in
-//                let str = String(decoding: data!, as: UTF8.self)
-//                print(str)
                 guard
                     let httpResponse = response as? HTTPURLResponse,
                     httpResponse.statusCode == 201

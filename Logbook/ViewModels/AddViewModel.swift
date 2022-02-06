@@ -11,7 +11,6 @@ import SwiftUI
 class AddViewModel: ObservableObject {
     
     @Published var latestLogbooks: [LogbookModel]?
-//    @Published var currentLogbook: LogbookModel = LogbookModel()
     @Published var isLoading = false
     @Published var showAlert = false
     @Published var errorMessage: String?
@@ -34,7 +33,6 @@ class AddViewModel: ObservableObject {
         
         do {
             latestLogbooks = try await apiService.getJSON()
-//            self.currentLogbook.currentMileAge = latestLogbooks[1].newMileAge
         } catch {
             showAlert = true
             errorMessage = error.localizedDescription + "\nBitte melde dich bei weiteren Problem bei Thomas."

@@ -68,9 +68,3 @@ struct LoadingView: View {
         return url
     }
 }
-
-//struct LoadingView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LoadingView()
-//    }
-//}
