@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSMotionUsageDescription</key>
+	<string>Detecd if your are moving inside a vehicle.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>de_DE</string>
 	<key>CFBundleDisplayName</key>
@@ -28,15 +30,15 @@
 		<true/>
 	</dict>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Die Fahrtenbuchapp braucht für das Notification Feature für eine Ständige Standort verfolgung.</string>
+	<string>Location Tracking for Fahrtenbuch</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Die Fahrtenbuchapp braucht für das Notification Feature für eine Ständige Standort verfolgung.</string>
+	<string>Location Tracking for Fahrtenbuch</string>
 	<key>NSLocationDefaultAccuracyReduced</key>
-	<string>Test</string>
+	<string>Location Tracking for Fahrtenbuch</string>
 	<key>NSLocationUsageDescription</key>
-	<string>Die Fahrtenbuchapp braucht für das Notification Feature für eine Ständige Standort verfolgung.</string>
+	<string>Location Tracking for Fahrtenbuch</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Die Fahrtenbuchapp braucht für das Notification Feature für eine Ständige Standort verfolgung.</string>
+	<string>Location Tracking for Fahrtenbuch</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

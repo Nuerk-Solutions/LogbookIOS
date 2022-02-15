@@ -1,61 +1,68 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "AlertKit",
-        "repositoryURL": "https://github.com/rebeloper/AlertKit.git",
-        "state": {
-          "branch": "main",
-          "revision": "e335b3edbad569c3a303fad598b99f7581538335",
-          "version": null
-        }
-      },
-      {
-        "package": "KeyboardAvoider",
-        "repositoryURL": "https://github.com/michaelhenry/KeyboardAvoider.git",
-        "state": {
-          "branch": null,
-          "revision": "e1c3860e7b50bce567f3480ed443f1c6b3659725",
-          "version": "1.0.3"
-        }
-      },
-      {
-        "package": "PopupView",
-        "repositoryURL": "https://github.com/exyte/PopupView.git",
-        "state": {
-          "branch": null,
-          "revision": "4cf8c01473282b3711e6780bd78ef81add97f6e2",
-          "version": "1.0.3"
-        }
-      },
-      {
-        "package": "SDWebImage",
-        "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
-        "state": {
-          "branch": null,
-          "revision": "a72df4849408da7e5d3c1b586797b7c601c41d1b",
-          "version": "5.12.1"
-        }
-      },
-      {
-        "package": "SDWebImageSwiftUI",
-        "repositoryURL": "https://github.com/SDWebImage/SDWebImageSwiftUI",
-        "state": {
-          "branch": "master",
-          "revision": "336d3f6d3b53729c1f274bf6b75f4532ada116eb",
-          "version": null
-        }
-      },
-      {
-        "package": "SPAlert",
-        "repositoryURL": "https://github.com/ivanvorobei/SPAlert",
-        "state": {
-          "branch": null,
-          "revision": "dd26764492c0cc7d4855e3a93adee79f92f84cd0",
-          "version": "4.1.0"
-        }
+  "pins" : [
+    {
+      "identity" : "alertkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/rebeloper/AlertKit.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "e335b3edbad569c3a303fad598b99f7581538335"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "keyboardavoider",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/michaelhenry/KeyboardAvoider.git",
+      "state" : {
+        "revision" : "e1c3860e7b50bce567f3480ed443f1c6b3659725",
+        "version" : "1.0.3"
+      }
+    },
+    {
+      "identity" : "localconsole",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/duraidabdul/LocalConsole/",
+      "state" : {
+        "branch" : "main",
+        "revision" : "d995119198d9c4379ac5b2e023452dbde9162ce0"
+      }
+    },
+    {
+      "identity" : "popupview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/exyte/PopupView.git",
+      "state" : {
+        "revision" : "4cf8c01473282b3711e6780bd78ef81add97f6e2",
+        "version" : "1.0.3"
+      }
+    },
+    {
+      "identity" : "sdwebimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/SDWebImage.git",
+      "state" : {
+        "revision" : "a72df4849408da7e5d3c1b586797b7c601c41d1b",
+        "version" : "5.12.1"
+      }
+    },
+    {
+      "identity" : "sdwebimageswiftui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/SDWebImageSwiftUI",
+      "state" : {
+        "branch" : "master",
+        "revision" : "336d3f6d3b53729c1f274bf6b75f4532ada116eb"
+      }
+    },
+    {
+      "identity" : "spalert",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ivanvorobei/SPAlert",
+      "state" : {
+        "revision" : "dd26764492c0cc7d4855e3a93adee79f92f84cd0",
+        "version" : "4.1.0"
+      }
+    }
+  ],
+  "version" : 2
 }

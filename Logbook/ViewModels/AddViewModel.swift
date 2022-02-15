@@ -24,6 +24,8 @@ class AddViewModel: ObservableObject {
     
     @MainActor
     func fetchLatestLogbooks() async {
+        showAlert = false
+        errorMessage = nil
         let apiService = APIService(urlString: "https://api2.nuerk-solutions.de/logbook/find/latest")
         isLoading.toggle()
         

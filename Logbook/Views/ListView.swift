@@ -22,6 +22,7 @@ struct ListView: View {
     
     @State private var showSheet: Bool = false
     
+    
     let readableDateFormat: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
@@ -103,6 +104,9 @@ struct ListView: View {
                         showSheet = true
                     }
                 }
+            }
+            .onTapGesture(count: 4) {
+                consoleManager.isVisible.toggle()
             }
             
         }
