@@ -16,6 +16,8 @@ class DetailViewModel: ObservableObject {
     
     @MainActor
     func fetchLogbookById() async {
+        showAlert = false
+        errorMessage = nil
         if let logbookId = logbookId {
             let apiService = APIService(urlString: "https://api2.nuerk-solutions.de/logbook/find/\(logbookId)")
             isLoading.toggle()

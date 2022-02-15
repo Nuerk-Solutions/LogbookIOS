@@ -22,6 +22,8 @@ class ListViewModel: ObservableObject {
     
     @MainActor
     func fetchLogbooks() async {
+        showAlert = false
+        errorMessage = nil
         let apiService = APIService(urlString: "https://api2.nuerk-solutions.de/logbook/find/all?sort=-date")
         isLoading.toggle()
         defer {
