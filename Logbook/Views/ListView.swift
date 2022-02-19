@@ -109,7 +109,6 @@ struct ListView: View {
             .onTapGesture(count: 4) {
                 consoleManager.isVisible.toggle()
             }
-            
         }
         .uses(alertManager)
     }
@@ -127,7 +126,8 @@ struct ListView: View {
                 showHelp = false
                 // Todo check if this could be removed
             }, content: {
-                HelpView().ignoresSafeArea(.all, edges: .all)
+                HelpView(locationService: locationService)
+                    .ignoresSafeArea(.all, edges: .all)
             })
         )
     }

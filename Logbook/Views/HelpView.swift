@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct HelpView: View {
+    
+    @StateObject var locationService: LocationService
+    @StateObject var helpViewModel = HelpViewModel()
+    
     var body: some View {
         Form {
             Section(header: Text("Ferrari")) {
@@ -20,13 +24,12 @@ struct HelpView: View {
                     Spacer()
                     Text("Kein E10 oder Super E10 oder Ad Blue !").underline(true, color: .red).foregroundColor(.red)
                         .bold()
-                    
                     Spacer()
                     Spacer()
                 }
             }.headerProminence(.increased)
             
-            Section(header: Text("Ferrari")) {
+            Section(header: Text("VW")) {
                 VStack (alignment: .leading) {
                     Spacer()
                     Text("Was wird getankt?").font(.headline)
@@ -35,13 +38,60 @@ struct HelpView: View {
                     Spacer()
                 }
             }.headerProminence(.increased)
+            
+            Section(header: Text("Nächste günste Tanke")) {
+                VStack (alignment: .leading) {
+                    Spacer()
+                    Text("Diesel").font(.headline)
+                    Spacer()
+                    Text("Lange Straße 99")
+                    Spacer()
+                }
+                VStack (alignment: .leading) {
+                    Spacer()
+                    Text("Bezin E5").font(.headline)
+                    Spacer()
+                    Text("Lange Straße 99")
+                    Spacer()
+                }
+            }.headerProminence(.increased)
+            Section {
+            if(!helpViewModel.isLoading) {
+                List {
+                    ForEach(helpViewModel.patrolStations.stations) { station in
+                        Section {
+                            NavigationLink {
+                                AnyView(
+                                    Text("Test")
+                                )
+                            } label: {
+                                HStack {
+                                    Text("Text: \(station.dist)")
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            }
+        }
+        .onAppear {
+            Task {
+                await helpViewModel.fetchFuelPrice(fuelType: "e5", locationService: locationService)
+            }
+        }
+        .overlay {
+            if(helpViewModel.isLoading) {
+                ProgressView()
+            }
         }
     }
+
 }
 
 
-struct HelpView_Previews: PreviewProvider {
-    static var previews: some View {
-        HelpView()
-    }
-}
+//struct HelpView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HelpView()
+//    }
+//}

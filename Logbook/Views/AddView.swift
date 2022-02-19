@@ -236,7 +236,6 @@ struct AddLogbookView: View {
             }
             guard let logbooks = newValue
             else {
-                print("Empty Array!")
                 return
             }
             self.currentLogbook.currentMileAge = logbooks[1].newMileAge

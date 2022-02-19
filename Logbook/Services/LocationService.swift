@@ -16,7 +16,6 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
     let motionActivityManager = CMMotionActivityManager()
     
     @Published var isAutomotive: Bool = false
-    @Published var activities = [CMMotionActivity] ()
     @Published var authorisationStatus: CLAuthorizationStatus = .notDetermined // For always in background question
     
     override init() {
@@ -28,7 +27,6 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
         let geoFenceRegion: CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(51.03650, 13.68830), radius: 500, identifier: "ARB 19")
         
         //        if CMMotionActivityManager.isActivityAvailable() {
-        print("AN")
         motionActivityManager.startActivityUpdates(to: OperationQueue.main) { [self] motion in
             guard let newMotion = motion else { return }
             print(newMotion.activityString())
@@ -41,11 +39,9 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
         
     }
     
-    //    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    //        for currentLocation in locations {
-    //            print("\(String(describing: index)): \(currentLocation)")
-    //        }
-    //    }
+//        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//            consoleManager.print(locationManager.location?.speed ?? "None")
+//        }
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         consoleManager.print("Entered: \(region.identifier)")
