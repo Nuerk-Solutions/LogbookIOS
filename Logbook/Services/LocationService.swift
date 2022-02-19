@@ -15,7 +15,7 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
     let locationManager: CLLocationManager = CLLocationManager()
     let motionActivityManager = CMMotionActivityManager()
     
-    @Published var isAutomotive: Bool = true
+    @Published var isAutomotive: Bool = false
     @Published var activities = [CMMotionActivity] ()
     @Published var authorisationStatus: CLAuthorizationStatus = .notDetermined // For always in background question
     
@@ -25,7 +25,7 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
         locationManager.distanceFilter = 500
-        let geoFenceRegion: CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(51.03650, 13.68830), radius: 100, identifier: "ARB 19")
+        let geoFenceRegion: CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(51.03650, 13.68830), radius: 500, identifier: "ARB 19")
         
         //        if CMMotionActivityManager.isActivityAvailable() {
         print("AN")
@@ -33,7 +33,6 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
             guard let newMotion = motion else { return }
             print(newMotion.activityString())
             consoleManager.print(newMotion.activityString())
-            self.activities.append(newMotion)
             if(motion?.automotive == true) {
                 self.isAutomotive = true
             }
@@ -53,7 +52,7 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
         print("Entered: \(region.identifier)")
         if(isAutomotive) {
             consoleManager.print("Notification SEND")
-            notificationService.requestLocalNotification(notification: NotificationModel(notificationId: UUID().uuidString, title:"Wilkommen am \(region.identifier) 🏠", body: "Hey du! Es scheint so als ob du wieder zu Hause bist. Hier eine kleiner erinnerung ans Fahrtenbuch 😉", data: nil))
+            notificationService.requestLocalNotification(notification: NotificationModel(notificationId: UUID().uuidString, title:"Wilkommen am \(region.identifier) 🏠", body: "Hey du! Es scheint so als ob du wieder zu Hause bist. Hier eine kleine Erinnerung ans Fahrtenbuch 😉", data: nil))
             notificationService.pushApplicationBadge(amount: 1)
             self.isAutomotive.toggle()
         }

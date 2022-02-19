@@ -21,6 +21,7 @@ struct ListView: View {
     @State private var shouldLoad = true
     
     @State private var showSheet: Bool = false
+    @State private var showHelp: Bool = false
     
     
     let readableDateFormat: DateFormatter = {
@@ -67,7 +68,7 @@ struct ListView: View {
                 await listViewModel.fetchLogbooks()
             }
             .navigationTitle("Fahrtenbuch")
-            .navigationBarItems(trailing: AddButton)
+            .navigationBarItems(leading: HelpButton, trailing: AddButton)
             .listStyle(.plain)
             .overlay(
                 Group {
@@ -112,6 +113,25 @@ struct ListView: View {
         }
         .uses(alertManager)
     }
+    
+    private var HelpButton: some View {
+        return AnyView(
+            Button(action: {
+                showHelp.toggle()
+            }, label: {
+                Image(systemName: "questionmark.circle")
+                    .resizable()
+                    .frame(width: 30, height: 30)
+            })
+            .sheet(isPresented: $showHelp, onDismiss: {
+                showHelp = false
+                // Todo check if this could be removed
+            }, content: {
+                HelpView().ignoresSafeArea(.all, edges: .all)
+            })
+        )
+    }
+    
     
     private var AddButton: some View {
         switch editMode {
