@@ -11,8 +11,6 @@ struct PatrolStationModel: Codable, Identifiable {
     
     let id = UUID()
     var ok: Bool
-    var license: String
-    var data: String
     var status: String
     var stations: [StationModel]
     

@@ -22,7 +22,7 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
         super.init()
         notificationService.requestNotificationPermission()
         locationManager.delegate = self
-        locationManager.distanceFilter = 100
+//        locationManager.distanceFilter = 1
         let geoFenceRegion: CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(51.03650, 13.68830), radius: 500, identifier: "ARB 19")
         
         //        if CMMotionActivityManager.isActivityAvailable() {
@@ -35,6 +35,7 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
             }
         }
         locationManager.startMonitoring(for: geoFenceRegion)
+        locationManager.startUpdatingLocation()
         
     }
     

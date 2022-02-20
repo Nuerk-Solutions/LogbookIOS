@@ -68,7 +68,7 @@ struct ListView: View {
                 await listViewModel.fetchLogbooks()
             }
             .navigationTitle("Fahrtenbuch")
-            .navigationBarItems(leading: HelpButton, trailing: AddButton)
+            .navigationBarItems(leading: RefuelButton, trailing: AddButton)
             .listStyle(.plain)
             .overlay(
                 Group {
@@ -113,20 +113,20 @@ struct ListView: View {
         .uses(alertManager)
     }
     
-    private var HelpButton: some View {
+    private var RefuelButton: some View {
         return AnyView(
             Button(action: {
                 showHelp.toggle()
             }, label: {
-                Image(systemName: "questionmark.circle")
+                Image(systemName: "fuelpump.circle")
                     .resizable()
-                    .frame(width: 30, height: 30)
+                    .frame(width: 35, height: 35)
             })
             .sheet(isPresented: $showHelp, onDismiss: {
                 showHelp = false
                 // Todo check if this could be removed
             }, content: {
-                HelpView(locationService: locationService)
+                RefuelView(locationService: locationService)
                     .ignoresSafeArea(.all, edges: .all)
             })
         )
@@ -140,7 +140,7 @@ struct ListView: View {
                 Button(action: onAdd) {
                     Image(systemName: "plus.circle")
                         .resizable()
-                        .frame(width: 30, height: 30)
+                        .frame(width: 35, height: 35)
                 }
                     .disabled((listViewModel.errorMessage) != nil)
                     .sheet(isPresented: $showSheet, content: {

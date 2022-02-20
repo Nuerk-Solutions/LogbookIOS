@@ -10,7 +10,7 @@ import SwiftUI
 
 class HelpViewModel: ObservableObject {
     
-    @Published var patrolStations: PatrolStationModel = PatrolStationModel(ok: false, license: "", data: "", status: "", stations: [])
+    @Published var patrolStations: PatrolStationModel = PatrolStationModel(ok: false, status: "", stations: [])
     @Published var isLoading = false
     @Published var showAlert = false
     @Published var errorMessage: String?
