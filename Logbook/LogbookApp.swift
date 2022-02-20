@@ -10,9 +10,12 @@ import SwiftUI
 @main
 struct LogbookApp: App {
     
+    @StateObject private var coreDataService = CoreDataService()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(\.managedObjectContext, coreDataService.container.viewContext)
                 .onAppear {
                     // To Hide Constrains warnings
                     UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")

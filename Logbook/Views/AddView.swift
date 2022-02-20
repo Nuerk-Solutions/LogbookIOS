@@ -24,6 +24,9 @@ struct AddLogbookView: View {
     @StateObject private var addViewModel = AddViewModel()
     @EnvironmentObject private var listViewModel: ListViewModel
     
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(entity: LogbookSettings.entity(), sortDescriptors: []) var logbookSettings: FetchedResults<LogbookSettings>
+    
     var body: some View {
         Form {
             Section(header: Text("Fahrerinformationen")) {
@@ -239,6 +242,10 @@ struct AddLogbookView: View {
                 return
             }
             self.currentLogbook.currentMileAge = logbooks[1].newMileAge
+            if(!logbookSettings.isEmpty) {
+                print(logbookSettings.count)
+                self.currentLogbook.driver = DriverEnum(rawValue: logbookSettings[0].lastDriver ?? "Andrea") ?? .Andrea
+            }
         })
         .onChange(of: addViewModel.submitted) { newValue in
             if newValue {
@@ -257,6 +264,15 @@ struct AddLogbookView: View {
             if(newErrorMessage != nil) {
                 showSheet = false
             }
+        }
+        .onDisappear {
+            if(logbookSettings.isEmpty) {
+                let newLogbookSettings = LogbookSettings(context: managedObjectContext)
+                newLogbookSettings.lastDriver = $currentLogbook.driver.id
+            } else {
+                logbookSettings[0].lastDriver = $currentLogbook.driver.id
+            }
+            try? managedObjectContext.save()
         }
     }
     
