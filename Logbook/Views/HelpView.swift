@@ -39,52 +39,57 @@ struct HelpView: View {
                 }
             }.headerProminence(.increased)
             
-//            Section(header: Text("Nächste günste Tanke")) {
-//                VStack (alignment: .leading) {
-//                    Spacer()
-//                    Text("Diesel").font(.headline)
-//                    Spacer()
-//                    Text("Lange Straße 99")
-//                    Spacer()
-//                }
-//                VStack (alignment: .leading) {
-//                    Spacer()
-//                    Text("Bezin E5").font(.headline)
-//                    Spacer()
-//                    Text("Lange Straße 99")
-//                    Spacer()
-//                }
-//            }.headerProminence(.increased)
-//            Section {
-//            if(!helpViewModel.isLoading) {
-//                List {
-//                    ForEach(helpViewModel.patrolStations.stations) { station in
-//                        Section {
-//                            NavigationLink {
-//                                AnyView(
-//                                    Text("Test")
-//                                )
-//                            } label: {
-//                                HStack {
-//                                    Text("Text: \(station.dist)")
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            }
+            Section(header: Text("Nächste günste Tanke")) {
+                VStack (alignment: .leading) {
+                    Spacer()
+                    Text("Diesel").font(.headline)
+                    Spacer()
+                    Text("Lange Straße 99")
+                    Spacer()
+                }
+                VStack (alignment: .leading) {
+                    Spacer()
+                    Text("Bezin E5").font(.headline)
+                    Spacer()
+                    Text("Lange Straße 99")
+                    Spacer()
+                }
+            }.headerProminence(.increased)
+            Section {
+            if(!helpViewModel.isLoading) {
+                List {
+                    ForEach(helpViewModel.patrolStations.stations) { station in
+                        Section {
+                            NavigationLink {
+                                AnyView(
+                                    Text("Test")
+                                )
+                            } label: {
+                                VStack(alignment: .leading) {
+                                    Text("Name: \(station.name)")
+                                    Text("Adr: \(station.street) \(station.houseNumber)")
+                                    Text("Ent: \(station.dist, specifier: "%.2f") km")
+                                    Text("Preis: \(station.price, specifier: "%.2f") Euro")
+                                    Text("Offen: \(station.isOpen ? "Ja" : "Nein")")
+                                    Text("Brand: \(station.brand)")
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            }
         }
-//        .onAppear {
-//            Task {
-//                await helpViewModel.fetchFuelPrice(fuelType: "e5", locationService: locationService)
-//            }
-//        }
-//        .overlay {
-//            if(helpViewModel.isLoading) {
-//                ProgressView()
-//            }
-//        }
+        .onAppear {
+            Task {
+                await helpViewModel.fetchFuelPrice(fuelType: "e5", locationService: locationService)
+            }
+        }
+        .overlay {
+            if(helpViewModel.isLoading) {
+                ProgressView()
+            }
+        }
     }
 
 }

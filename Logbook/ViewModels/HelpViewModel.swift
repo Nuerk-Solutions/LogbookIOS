@@ -30,7 +30,6 @@ class HelpViewModel: ObservableObject {
             // 100 km/h = 27.7 m/s
             
         let apiService = APIService(urlString: "https://creativecommons.tankerkoenig.de/json/list.php?lat=\(lat!)&lng=\(long!)&rad=\(radius)&type=\(fuelType)&sort=price&apikey=\(API_KEY)")
-        print(apiService.urlString)
             isLoading.toggle()
             defer { // Defer means that is executed after all is finished
                 isLoading.toggle()

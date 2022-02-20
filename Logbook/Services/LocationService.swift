@@ -22,8 +22,7 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
         super.init()
         notificationService.requestNotificationPermission()
         locationManager.delegate = self
-        locationManager.startUpdatingLocation()
-        locationManager.distanceFilter = 500
+        locationManager.distanceFilter = 100
         let geoFenceRegion: CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(51.03650, 13.68830), radius: 500, identifier: "ARB 19")
         
         //        if CMMotionActivityManager.isActivityAvailable() {
@@ -39,9 +38,11 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
         
     }
     
-//        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//            consoleManager.print(locationManager.location?.speed ?? "None")
-//        }
+        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+            let mPerS = locationManager.location?.speed
+            let kmPerH = (mPerS ?? 0) * 3.6
+            consoleManager.print("m/s: \(mPerS) | km/h:  \(kmPerH)")
+        }
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         consoleManager.print("Entered: \(region.identifier)")
