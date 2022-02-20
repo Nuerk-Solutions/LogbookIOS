@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>NSMotionUsageDescription</key>
-	<string>Detecd if your are moving inside a vehicle.</string>
+	<string>Die Fitnessdaten werden benötigt, um festzustellen ob du dich in einem bewegenden Fahrzeug befindest.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>de_DE</string>
 	<key>CFBundleDisplayName</key>

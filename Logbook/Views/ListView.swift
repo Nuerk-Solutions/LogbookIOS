@@ -101,7 +101,7 @@ struct ListView: View {
                         await listViewModel.fetchLogbooks()
                     }
                     shouldLoad = false
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.35) {
                         showSheet = true
                     }
                 }
