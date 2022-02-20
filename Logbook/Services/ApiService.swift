@@ -18,8 +18,17 @@ struct APIService {
         else {
             throw APIError.invalidURL
         }
+        
+        // Prepare request
+        var request = URLRequest(url: url)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        if(urlString.contains("nuerk-solutions.de")) {
+            request.setValue("Api-Key ca03na188ame03u1d78620de67282882a84", forHTTPHeaderField: "Authorization")
+        }
+        
         return try await withCheckedThrowingContinuation { continuation in
-            URLSession.shared.dataTask(with: url) { data, response, error in
+            URLSession.shared.dataTask(with: request) { data, response, error in
                 guard
                     let httpResponse = response as? HTTPURLResponse,
                     httpResponse.statusCode == 200
@@ -83,6 +92,9 @@ struct APIService {
         var request = URLRequest(url: url)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
+        if(urlString.contains("nuerk-solutions.de")) {
+            request.setValue("Api-Key ca03na188ame03u1d78620de67282882a84", forHTTPHeaderField: "Authorization")
+        }
         request.httpMethod = "POST"
         
         // Encode Data to JSON
