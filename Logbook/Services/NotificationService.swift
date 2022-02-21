@@ -53,4 +53,8 @@ class NotificationService: NSObject, ObservableObject, UNUserNotificationCenterD
     func pushApplicationBadge(amount: Int = 1) {
         UIApplication.shared.applicationIconBadgeNumber = amount
     }
+    
+    func increaseApplicationBadge(incresment: Int = 1) {
+        pushApplicationBadge(amount: UIApplication.shared.applicationIconBadgeNumber + incresment)
+    }
 }

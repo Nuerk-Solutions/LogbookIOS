@@ -85,7 +85,7 @@ struct RefuelView: View {
                         }
                     }
                 }
-            }
+            }	
             .headerProminence(.increased)
         }
         .uses(alertManager)
@@ -135,9 +135,9 @@ struct RefuelView: View {
 }
 
 
-struct HelpView_Previews: PreviewProvider {
+struct RefuelView_Previews: PreviewProvider {
     static var previews: some View {
-        HelpView(locationService: LocationService())
+        RefuelView(locationService: LocationService())
         
     }
 }
