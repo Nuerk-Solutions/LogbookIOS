@@ -36,6 +36,15 @@ struct AddLogbookView: View {
                         Text(driver.rawValue.capitalized).tag(driver)
                     }
                 }
+                .onChange(of: currentLogbook.driver, perform: { newValue in
+                        if(logbookSettings.isEmpty) {
+                            let newLogbookSettings = LogbookSettings(context: managedObjectContext)
+                            newLogbookSettings.lastDriver = newValue.id
+                        } else {
+                            logbookSettings[0].lastDriver = newValue.id
+                        }
+                        try? managedObjectContext.save()
+                })
                 .pickerStyle(SegmentedPickerStyle())
                 
                 // Date picker
@@ -264,15 +273,6 @@ struct AddLogbookView: View {
             if(newErrorMessage != nil) {
                 showSheet = false
             }
-        }
-        .onDisappear {
-            if(logbookSettings.isEmpty) {
-                let newLogbookSettings = LogbookSettings(context: managedObjectContext)
-                newLogbookSettings.lastDriver = $currentLogbook.driver.id
-            } else {
-                logbookSettings[0].lastDriver = $currentLogbook.driver.id
-            }
-            try? managedObjectContext.save()
         }
     }
     
