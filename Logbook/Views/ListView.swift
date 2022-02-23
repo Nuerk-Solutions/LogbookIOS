@@ -22,6 +22,10 @@ struct ListView: View {
     
     @State private var showSheet: Bool = false
     @State private var showHelp: Bool = false
+    @State private var showMail: Bool = false
+    
+    @State private var mailData = MailData(subject: "A subject", recipients: ["i.love@swiftuirecipes.com"], message: "Here's a message", attachments: [AttachmentData(data: "Some text".data(using: .utf8)!, mimeType: "text/plain", fileName: "text.txt")])
+    
     
     
     let readableDateFormat: DateFormatter = {
@@ -68,7 +72,22 @@ struct ListView: View {
                 await listViewModel.fetchLogbooks()
             }
             .navigationTitle("Fahrtenbuch")
-            .navigationBarItems(leading: RefuelButton, trailing: AddButton)
+            .toolbar(content: {
+                ToolbarItem(id: "First", placement: .navigationBarTrailing, showsByDefault: true) {
+                    AddButton
+                }
+                ToolbarItemGroup(placement: .navigationBarLeading) {
+                    RefuelButton
+                    
+                    if MailView.canSendMail {
+                        ExportButton
+                    }
+                }
+                //                ToolbarItem(id: "Second", placement: .navigationBarLeading, showsByDefault: true) {
+                //                    RefuelButton
+                //                }
+            })
+            //            .navigationBarItems(leading: RefuelButton, trailing: AddButton)
             .listStyle(.plain)
             .overlay(
                 Group {
@@ -102,7 +121,7 @@ struct ListView: View {
                     }
                     shouldLoad = false
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.35) {
-                        showSheet = true
+                        //                        showSheet = true
                     }
                 }
             }
@@ -132,52 +151,85 @@ struct ListView: View {
         )
     }
     
-    
-    private var AddButton: some View {
-        switch editMode {
-        case .inactive:
-            return AnyView(
-                Button(action: onAdd) {
-                    Image(systemName: "plus.circle")
-                        .resizable()
-                        .frame(width: 35, height: 35)
+    private var ExportButton: some View {
+        return AnyView(
+            
+            Button(action: {
+                showMail.toggle()
+                Task {
+                    await listViewModel.downloadXLSX()
                 }
-                    .disabled((listViewModel.errorMessage) != nil)
-                    .sheet(isPresented: $showSheet, content: {
-                        if(listViewModel.isLoading) {
-                            ProgressView()
-                        } else {
-                            AddLogbookView(showSheet: $showSheet)
-                                .avoidKeyboard()
-                                .environmentObject(listViewModel)
-                                .ignoresSafeArea(.all, edges: .all)
-                        }
-                    })
+            }, label: {
+                Image(systemName: "square.and.arrow.up")
+                    .resizable()
+                    .frame(width: 25, height: 30)
+                    .padding(.bottom, 3)
+            })
+            .sheet(isPresented: $showMail, onDismiss: {
+                showMail = false
+                // Todo check if this could be removed
+            }, content: {
+                if listViewModel.isLoading {
+                    ProgressView()
+                } else {
+//                    let attachmentData = AttachmentData(data: listViewModel.getXLSXData(), mimeType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName: "LogBook_\(Date().standardT)_Language_DE.xlsx")
+                    
+//                    mailData = MailData(subject: "Fahrtenbuch", recipients: "test", message: "Hier ist das Fahrtenbuch vom \(String(Date))", attachments: nil)
+                    
+                    MailView(data: $listViewModel.mailData) { result in
+                        print(result)
+                    }
+                }
+            })
             )
-        default:
-            return AnyView(EmptyView())
-        }
     }
-    
-    func onAdd() {
-        showSheet.toggle()
-    }
-    
-    var searchResults: [LogbookModel] {
-        if searchText.isEmpty {
-            return listViewModel.logbooks
-        } else {
-            return listViewModel.logbooks.filter{$0.driveReason.contains(searchText) || readableDateFormat.string(from: $0.date).contains(searchText) || $0.driver.id.contains(searchText)}
-        }
-    }
-}
-
-
-struct ListView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            ListView()
-        }
-    }
-}
-
+            
+            
+            private var AddButton: some View {
+                switch editMode {
+                case .inactive:
+                    return AnyView(
+                        Button(action: onAdd) {
+                            Image(systemName: "plus.circle")
+                                .resizable()
+                                .frame(width: 35, height: 35)
+                        }
+                            .disabled((listViewModel.errorMessage) != nil)
+                            .sheet(isPresented: $showSheet, content: {
+                                if(listViewModel.isLoading) {
+                                    ProgressView()
+                                } else {
+                                    AddLogbookView(showSheet: $showSheet)
+                                        .avoidKeyboard()
+                                        .environmentObject(listViewModel)
+                                        .ignoresSafeArea(.all, edges: .all)
+                                }
+                            })
+                    )
+                default:
+                    return AnyView(EmptyView())
+                }
+            }
+            
+            func onAdd() {
+                showSheet.toggle()
+            }
+            
+            var searchResults: [LogbookModel] {
+                if searchText.isEmpty {
+                    return listViewModel.logbooks
+                } else {
+                    return listViewModel.logbooks.filter{$0.driveReason.contains(searchText) || readableDateFormat.string(from: $0.date).contains(searchText) || $0.driver.id.contains(searchText)}
+                }
+            }
+            }
+            
+            
+            struct ListView_Previews: PreviewProvider {
+                static var previews: some View {
+                    Group {
+                        ListView()
+                    }
+                }
+            }
+            
