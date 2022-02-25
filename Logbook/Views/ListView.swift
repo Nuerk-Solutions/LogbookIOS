@@ -36,6 +36,7 @@ struct ListView: View {
     @Environment(\.presentationMode) var presentationMode
     
     init() {
+        UITableView.appearance().sectionFooterHeight = 0
         _locationService = StateObject(wrappedValue: LocationService())
     }
     
