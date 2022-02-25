@@ -28,12 +28,11 @@ struct ShareSheet: UIViewControllerRepresentable {
     
     func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
         uiViewController.completionWithItemsHandler = { activity, completed, returnedItems, activityError in
-            print(activity, completed, returnedItems, activityError)
             if activity == UIActivity.ActivityType.init(rawValue: "com.apple.DocumentManagerUICore.SaveToFiles") {
                 do {
-                    let firstItem = activityItems.first as! URL
+                    let firstActivityItem = activityItems.first as! URL
                 guard
-                    let url = URL(string: firstItem.absoluteString.replacingOccurrences(of: "file://", with: "shareddocuments://"))
+                    let url = URL(string: firstActivityItem.absoluteString.replacingOccurrences(of: "file://", with: "shareddocuments://"))
                 else {
                     throw APIError.invalidURL
                 }

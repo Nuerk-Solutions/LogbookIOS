@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class HelpViewModel: ObservableObject {
+class RefuelViewModel: ObservableObject {
     
     @Published var patrolStations: PatrolStationModel = PatrolStationModel(ok: false, status: "", stations: [])
     @Published var isLoading = false
@@ -32,7 +32,9 @@ class HelpViewModel: ObservableObject {
         let apiService = APIService(urlString: "https://creativecommons.tankerkoenig.de/json/list.php?lat=\(lat!)&lng=\(long!)&rad=\(radius)&type=\(fuelType)&sort=price&apikey=\(API_KEY)")
             isLoading.toggle()
             defer { // Defer means that is executed after all is finished
-                isLoading.toggle()
+                withAnimation {
+                    isLoading.toggle()
+                }
             }
             
             do {

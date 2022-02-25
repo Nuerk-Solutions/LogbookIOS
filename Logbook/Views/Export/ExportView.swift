@@ -7,19 +7,15 @@
 
 import SwiftUI
 
-struct MultipleSelectionList: View {
+struct ExportView: View {
     
     @State var driver: [DriverEnum]
     @State var selectedDrivers: [DriverEnum] = []
     @State var vehicle: [VehicleEnum]
     @State var selectedVehicles: [VehicleEnum] = []
     
-    @State var local = false
-    @Binding var showShare: Bool
-    @State private var blurAmount: CGFloat = 0
-    
+    @Binding var showActivitySheet: Bool
     @StateObject var exportViewModel = ExportViewModel()
-    
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -27,7 +23,7 @@ struct MultipleSelectionList: View {
             List {
                 Section("Fahrer") {
                     ForEach(self.driver, id: \.self) { item in
-                        MultipleSelectionRow(title: item.id, isSelected: self.selectedDrivers.contains(item)) {
+                        ExportSelectionRowView(title: item.id, isSelected: self.selectedDrivers.contains(item)) {
                             if self.selectedDrivers.contains(item) && self.selectedDrivers.count != 1 {
                                 self.selectedDrivers.removeAll(where: { $0 == item })
                             }
@@ -40,7 +36,7 @@ struct MultipleSelectionList: View {
                 
                 Section("Fahrzeuge") {
                     ForEach(self.vehicle, id: \.self) { item in
-                        MultipleSelectionRow(title: item.id, isSelected: self.selectedVehicles.contains(item)) {
+                        ExportSelectionRowView(title: item.id, isSelected: self.selectedVehicles.contains(item)) {
                             if self.selectedVehicles.contains(item) && self.selectedVehicles.count != 1 {
                                 self.selectedVehicles.removeAll(where: { $0 == item })
                             }
@@ -55,17 +51,16 @@ struct MultipleSelectionList: View {
                     Task {
                         await exportViewModel.downloadXLSX(driver: selectedDrivers, vehicles: selectedVehicles)
                     }
-                    local.toggle()
                 } label: {
                     Text("Exportieren")
                         .foregroundColor(.white)
                 }
                 .sheet(isPresented: $exportViewModel.downloaded, onDismiss: {
                     print("Dismissed SHARE")
-                    showShare.toggle()
+                    showActivitySheet.toggle()
                 }, content: {
                         let documentsURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-                        let fireUrl = documentsURL.appendingPathComponent(exportViewModel.mailData.attachments?.first!.fileName ?? "")
+                        let fireUrl = documentsURL.appendingPathComponent(exportViewModel.fileName ?? "")
                         ShareSheet(activityItems: [fireUrl])
                 })
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -85,9 +80,9 @@ struct MultipleSelectionList: View {
     }
 }
 
-struct MultipleSelectionList_Previews: PreviewProvider {
+struct ExportView_Previews: PreviewProvider {
     static var previews: some View {
-        MultipleSelectionList(driver: [DriverEnum.Thomas], vehicle: [VehicleEnum.VW], showShare: .constant(false))
+        ExportView(driver: [DriverEnum.Thomas], vehicle: [VehicleEnum.VW], showActivitySheet: .constant(false))
     }
 }
 

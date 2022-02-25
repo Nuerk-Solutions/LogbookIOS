@@ -6,14 +6,15 @@
 //
 
 import Foundation
+import SwiftUI
 
 class ExportViewModel: ObservableObject {
     
     @Published var isLoading = false
     @Published var showAlert = false
     @Published var errorMessage: String?
-    @Published var mailData: MailData = MailData.empty
     @Published var downloaded = false
+    @Published var fileName: String?
     
     @MainActor
     func downloadXLSX(driver: [DriverEnum], vehicles: [VehicleEnum]) async {
@@ -24,17 +25,17 @@ class ExportViewModel: ObservableObject {
         let downloadService = DownloadService(urlString: buildUrl(drivers: driver, vehicles: vehicles), fileName: "LogBook_\(Date().formatted(.iso8601))_Language_DE.xlsx")
         isLoading.toggle()
         defer {
-            isLoading.toggle()
+            withAnimation {
+                isLoading.toggle()
+            }
         }
         
         do {
-            let data = try await downloadService.downloadFile()
-            //            fileData = data
-            let attachmentData = AttachmentData(data: data, mimeType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName: downloadService.fileName)
-            
-            mailData = MailData(subject: "Fahrtenbuch", recipients: [""], message: "Hier ist das Fahrtenbuch vom \(Date().formatted(.iso8601))", attachments: [attachmentData])
-            //            showMail.toggle()
-            downloaded.toggle()
+            _ = try await downloadService.downloadFile()
+            fileName = downloadService.fileName
+            withAnimation {
+                downloaded.toggle()
+            }
         } catch  {
             errorMessage = error.localizedDescription + "\nBitte melde dich bei weiteren Problem bei Thomas."
             self.showAlert = true

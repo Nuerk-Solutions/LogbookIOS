@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import SwiftUI
+
 class DetailViewModel: ObservableObject {
     
     @Published var logbook: LogbookModel?
@@ -22,7 +24,9 @@ class DetailViewModel: ObservableObject {
             let apiService = APIService(urlString: "https://api2.nuerk-solutions.de/logbook/find/\(logbookId)")
             isLoading.toggle()
             defer { // Defer means that is executed after all is finished
-                isLoading.toggle()
+                withAnimation {
+                    isLoading.toggle()
+                }
             }
             
             do {

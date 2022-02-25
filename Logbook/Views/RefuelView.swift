@@ -11,7 +11,7 @@ import AlertKit
 struct RefuelView: View {
     
     @StateObject var locationService: LocationService
-    @StateObject var helpViewModel = HelpViewModel()
+    @StateObject var refuelViewModel = RefuelViewModel()
     @State private var selectedVehicle: VehicleEnum = VehicleEnum.Ferrari
     @StateObject var alertManager = AlertManager()
     
@@ -26,7 +26,7 @@ struct RefuelView: View {
                 .onChange(of: selectedVehicle) { newVehicle in
                     print(newVehicle)
                     Task {
-                        await helpViewModel.fetchFuelPrice(fuelType: newVehicle == .VW ? "diesel" : "e5", locationService: locationService)
+                        await refuelViewModel.fetchFuelPrice(fuelType: newVehicle == .VW ? "diesel" : "e5", locationService: locationService)
                     }
                 }
                 .pickerStyle(SegmentedPickerStyle())
@@ -48,54 +48,55 @@ struct RefuelView: View {
             }
             .headerProminence(.increased)
             
-            Section(header: Text("Tankstellen")) {
-                if(helpViewModel.isLoading) {
-                    Text("Laden...")
-                } else {
-                    List {
-                        ForEach(helpViewModel.patrolStations.stations) { station in
-                            let price: String = "\(station.price)"
-                            let price_1 = price[price.index(price.startIndex, offsetBy: 0)..<price.index(price.startIndex, offsetBy: 4)]
-                            let price_2 = price[price.index(price.startIndex, offsetBy: 4)..<price.index(price.startIndex, offsetBy: 5)]
-                            Section {
-                                Button {
-                                    openMaps(latitude: station.lat, longitude: station.lng, title: station.name)
-                                } label: {
-                                    
-                                    VStack(alignment: .leading) {
-                                        Text("\(station.brand)").font(.callout).underline()
-                                        Spacer()
-                                        HStack(spacing: 2) {
-                                            Text("Preis: ")
-                                            Text("\(String(price_1))").bold()
-                                            Text("\(String(price_2))").font(.caption2).offset(y: -5)
-                                            Text("€")
+            
+            if(refuelViewModel.isLoading || refuelViewModel.patrolStations.stations.isEmpty) {
+                Text("Laden...")
+            } else {
+                    Section(header: Text("Tankstellen")) {
+                            List {
+                                ForEach(refuelViewModel.patrolStations.stations) { station in
+                                    let price: String = "\(station.price)"
+                                    let price_1 = price[price.index(price.startIndex, offsetBy: 0)..<price.index(price.startIndex, offsetBy: 4)]
+                                    let price_2 = price[price.index(price.startIndex, offsetBy: 4)..<price.index(price.startIndex, offsetBy: 5)]
+                                    Section {
+                                        Button {
+                                            openMaps(latitude: station.lat, longitude: station.lng, title: station.name)
+                                        } label: {
+                                            
+                                            VStack(alignment: .leading) {
+                                                Text("\(station.brand)").font(.callout).underline()
+                                                Spacer()
+                                                HStack(spacing: 2) {
+                                                    Text("Preis: ")
+                                                    Text("\(String(price_1))").bold()
+                                                    Text("\(String(price_2))").font(.caption2).offset(y: -5)
+                                                    Text("€")
+                                                }
+                                                Text("Entfernung: \(station.dist, specifier: "%.2f") km")
+                                                Spacer()
+                                                Text("\(station.street) \(station.houseNumber)").font(.subheadline)
+                                                if(!station.isOpen) {
+                                                    Text("Tankstelle geschlossen!").foregroundColor(.red).bold()
+                                                }
+                                                Spacer()
+                                            }
                                         }
-                                        Text("Entfernung: \(station.dist, specifier: "%.2f") km")
-                                        Spacer()
-                                        Text("\(station.street) \(station.houseNumber)").font(.subheadline)
-                                        if(!station.isOpen) {
-                                            Text("Tankstelle geschlossen!").foregroundColor(.red).bold()
-                                        }
-                                        Spacer()
+                                        .foregroundColor(.primary)
                                     }
                                 }
-                                .foregroundColor(.primary)
-                            }
                         }
                     }
-                }
-            }	
-            .headerProminence(.increased)
+                    .headerProminence(.increased)
+            }
         }
         .uses(alertManager)
         .onAppear {
             Task {
-                await helpViewModel.fetchFuelPrice(fuelType: "e5", locationService: locationService)
+                await refuelViewModel.fetchFuelPrice(fuelType: "e5", locationService: locationService)
             }
         }
         .overlay {
-            if(helpViewModel.isLoading) {
+            if(refuelViewModel.isLoading) {
                 ProgressView()
             }
         }

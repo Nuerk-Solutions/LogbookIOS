@@ -11,13 +11,10 @@
 		E900E5EC27BC2E5D009EEFD5 /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = E900E5EB27BC2E5D009EEFD5 /* Console.swift */; };
 		E90B2472276E90C500B185EF /* FloatingTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90B2471276E90C500B185EF /* FloatingTextEditor.swift */; };
 		E90B2474276E9C6A00B185EF /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90B2473276E9C6A00B185EF /* StringExtension.swift */; };
-		E90BDEAB27C1711500E642F0 /* HelpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90BDEAA27C1711500E642F0 /* HelpViewModel.swift */; };
+		E90BDEAB27C1711500E642F0 /* RefuelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90BDEAA27C1711500E642F0 /* RefuelViewModel.swift */; };
 		E90BDEAD27C17A4400E642F0 /* PatrolStationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90BDEAC27C17A4400E642F0 /* PatrolStationModel.swift */; };
 		E90C2AC1276DB175005C1281 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90C2AC0276DB175005C1281 /* LoadingView.swift */; };
 		E91978FC27899B720002598A /* ShapeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91978FB27899B720002598A /* ShapeUtils.swift */; };
-		E91B383B27C6BED800256BF0 /* MailDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91B383A27C6BED800256BF0 /* MailDataModel.swift */; };
-		E91B383D27C6BF0D00256BF0 /* AttachmantDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91B383C27C6BF0D00256BF0 /* AttachmantDataModel.swift */; };
-		E91B384027C6BF4100256BF0 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91B383F27C6BF4100256BF0 /* MailView.swift */; };
 		E91B384227C6C8A100256BF0 /* DownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91B384127C6C8A100256BF0 /* DownloadService.swift */; };
 		E9393ED82761330E00CB136F /* LogbookValidationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9393ED72761330E00CB136F /* LogbookValidationModel.swift */; };
 		E9393EDA27614B3E00CB136F /* FloatingNumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9393ED927614B3E00CB136F /* FloatingNumberField.swift */; };
@@ -37,10 +34,9 @@
 		E96170E227AEECB2004CA43C /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96170E127AEECB2004CA43C /* NotificationModel.swift */; };
 		E963FC37276655C000FFBD00 /* TransitionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963FC36276655C000FFBD00 /* TransitionExtension.swift */; };
 		E963FC39276660A800FFBD00 /* Car_load.gif in Resources */ = {isa = PBXBuildFile; fileRef = E963FC38276660A800FFBD00 /* Car_load.gif */; };
-		E970ADBF27C7E745000149D1 /* SpreadSheetFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E970ADBE27C7E745000149D1 /* SpreadSheetFile.swift */; };
 		E970ADC127C82B6B000149D1 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E970ADC027C82B6B000149D1 /* ShareSheet.swift */; };
-		E970ADC427C835BF000149D1 /* MultipleSelectionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E970ADC327C835BF000149D1 /* MultipleSelectionRow.swift */; };
-		E970ADC727C836DD000149D1 /* MultipleSelectionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E970ADC627C836DD000149D1 /* MultipleSelectionList.swift */; };
+		E970ADC427C835BF000149D1 /* ExportSelectionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E970ADC327C835BF000149D1 /* ExportSelectionRowView.swift */; };
+		E970ADC727C836DD000149D1 /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E970ADC627C836DD000149D1 /* ExportView.swift */; };
 		E970ADC927C8F07C000149D1 /* ExportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E970ADC827C8F07C000149D1 /* ExportViewModel.swift */; };
 		E98342402757B85800E1C314 /* LogbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E983423F2757B85800E1C314 /* LogbookApp.swift */; };
 		E98342422757B85800E1C314 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98342412757B85800E1C314 /* ContentView.swift */; };
@@ -62,13 +58,10 @@
 		E900E5EB27BC2E5D009EEFD5 /* Console.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
 		E90B2471276E90C500B185EF /* FloatingTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextEditor.swift; sourceTree = "<group>"; };
 		E90B2473276E9C6A00B185EF /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
-		E90BDEAA27C1711500E642F0 /* HelpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewModel.swift; sourceTree = "<group>"; };
+		E90BDEAA27C1711500E642F0 /* RefuelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefuelViewModel.swift; sourceTree = "<group>"; };
 		E90BDEAC27C17A4400E642F0 /* PatrolStationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatrolStationModel.swift; sourceTree = "<group>"; };
 		E90C2AC0276DB175005C1281 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		E91978FB27899B720002598A /* ShapeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeUtils.swift; sourceTree = "<group>"; };
-		E91B383A27C6BED800256BF0 /* MailDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailDataModel.swift; sourceTree = "<group>"; };
-		E91B383C27C6BF0D00256BF0 /* AttachmantDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmantDataModel.swift; sourceTree = "<group>"; };
-		E91B383F27C6BF4100256BF0 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		E91B384127C6C8A100256BF0 /* DownloadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadService.swift; sourceTree = "<group>"; };
 		E9393ED72761330E00CB136F /* LogbookValidationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookValidationModel.swift; sourceTree = "<group>"; };
 		E9393ED927614B3E00CB136F /* FloatingNumberField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingNumberField.swift; sourceTree = "<group>"; };
@@ -88,11 +81,10 @@
 		E96170E127AEECB2004CA43C /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		E963FC36276655C000FFBD00 /* TransitionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionExtension.swift; sourceTree = "<group>"; };
 		E963FC38276660A800FFBD00 /* Car_load.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Car_load.gif; sourceTree = "<group>"; };
-		E970ADBE27C7E745000149D1 /* SpreadSheetFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadSheetFile.swift; sourceTree = "<group>"; };
 		E970ADC027C82B6B000149D1 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		E970ADC227C82E6B000149D1 /* Logbook.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Logbook.entitlements; sourceTree = "<group>"; };
-		E970ADC327C835BF000149D1 /* MultipleSelectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleSelectionRow.swift; sourceTree = "<group>"; };
-		E970ADC627C836DD000149D1 /* MultipleSelectionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleSelectionList.swift; sourceTree = "<group>"; };
+		E970ADC327C835BF000149D1 /* ExportSelectionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportSelectionRowView.swift; sourceTree = "<group>"; };
+		E970ADC627C836DD000149D1 /* ExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportView.swift; sourceTree = "<group>"; };
 		E970ADC827C8F07C000149D1 /* ExportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportViewModel.swift; sourceTree = "<group>"; };
 		E983423C2757B85800E1C314 /* Logbook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Logbook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E983423F2757B85800E1C314 /* LogbookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookApp.swift; sourceTree = "<group>"; };
@@ -124,16 +116,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E91B383E27C6BF1600256BF0 /* Mail */ = {
-			isa = PBXGroup;
-			children = (
-				E91B383A27C6BED800256BF0 /* MailDataModel.swift */,
-				E91B383C27C6BF0D00256BF0 /* AttachmantDataModel.swift */,
-				E970ADBE27C7E745000149D1 /* SpreadSheetFile.swift */,
-			);
-			path = Mail;
-			sourceTree = "<group>";
-		};
 		E92EF7F427AFEA1500E4E1B4 /* ValidationModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,7 +127,6 @@
 		E9472595276BBD87006E6944 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E91B383E27C6BF1600256BF0 /* Mail */,
 				E9472598276BBDA8006E6944 /* LogbookModel.swift */,
 				E96170E127AEECB2004CA43C /* NotificationModel.swift */,
 				E90BDEAC27C17A4400E642F0 /* PatrolStationModel.swift */,
@@ -168,6 +149,7 @@
 		E947259F276BC0C9006E6944 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E94824D827C90E9900228A35 /* Export */,
 				E98342412757B85800E1C314 /* ContentView.swift */,
 				E90C2AC0276DB175005C1281 /* LoadingView.swift */,
 				E9472593276BAF83006E6944 /* Launch Screen.storyboard */,
@@ -186,7 +168,7 @@
 				E94725AC276BC341006E6944 /* AddViewModel.swift */,
 				E95C4F74278622C9009643B4 /* ListViewModel.swift */,
 				E95C4F7827862ECA009643B4 /* DetailViewModel.swift */,
-				E90BDEAA27C1711500E642F0 /* HelpViewModel.swift */,
+				E90BDEAA27C1711500E642F0 /* RefuelViewModel.swift */,
 				E970ADC827C8F07C000149D1 /* ExportViewModel.swift */,
 			);
 			path = ViewModels;
@@ -210,17 +192,23 @@
 				E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */,
 				E9393ED927614B3E00CB136F /* FloatingNumberField.swift */,
 				E90B2471276E90C500B185EF /* FloatingTextEditor.swift */,
-				E91B383F27C6BF4100256BF0 /* MailView.swift */,
 				E970ADC027C82B6B000149D1 /* ShareSheet.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
 		};
+		E94824D827C90E9900228A35 /* Export */ = {
+			isa = PBXGroup;
+			children = (
+				E970ADC627C836DD000149D1 /* ExportView.swift */,
+				E970ADC327C835BF000149D1 /* ExportSelectionRowView.swift */,
+			);
+			path = Export;
+			sourceTree = "<group>";
+		};
 		E970ADC527C83686000149D1 /* ListSelectionView */ = {
 			isa = PBXGroup;
 			children = (
-				E970ADC327C835BF000149D1 /* MultipleSelectionRow.swift */,
-				E970ADC627C836DD000149D1 /* MultipleSelectionList.swift */,
 			);
 			path = ListSelectionView;
 			sourceTree = "<group>";
@@ -385,7 +373,7 @@
 				E963FC37276655C000FFBD00 /* TransitionExtension.swift in Sources */,
 				E970ADC127C82B6B000149D1 /* ShareSheet.swift in Sources */,
 				E91978FC27899B720002598A /* ShapeUtils.swift in Sources */,
-				E90BDEAB27C1711500E642F0 /* HelpViewModel.swift in Sources */,
+				E90BDEAB27C1711500E642F0 /* RefuelViewModel.swift in Sources */,
 				E95C4F77278623C2009643B4 /* DetailView.swift in Sources */,
 				E90B2472276E90C500B185EF /* FloatingTextEditor.swift in Sources */,
 				E95C4F73278620D4009643B4 /* ListView.swift in Sources */,
@@ -400,20 +388,16 @@
 				E98C59C32787812C0020381B /* AddView.swift in Sources */,
 				E91B384227C6C8A100256BF0 /* DownloadService.swift in Sources */,
 				E9D4E6FD27590483003F36DA /* NumberUtils.swift in Sources */,
-				E91B383D27C6BF0D00256BF0 /* AttachmantDataModel.swift in Sources */,
-				E91B384027C6BF4100256BF0 /* MailView.swift in Sources */,
-				E970ADC727C836DD000149D1 /* MultipleSelectionList.swift in Sources */,
+				E970ADC727C836DD000149D1 /* ExportView.swift in Sources */,
 				E98E868C27C24DD6004F4714 /* CoreDataService.swift in Sources */,
-				E970ADC427C835BF000149D1 /* MultipleSelectionRow.swift in Sources */,
+				E970ADC427C835BF000149D1 /* ExportSelectionRowView.swift in Sources */,
 				E96170E227AEECB2004CA43C /* NotificationModel.swift in Sources */,
 				E9393EDA27614B3E00CB136F /* FloatingNumberField.swift in Sources */,
 				E970ADC927C8F07C000149D1 /* ExportViewModel.swift in Sources */,
 				E947259E276BC008006E6944 /* ApiService.swift in Sources */,
 				E98342402757B85800E1C314 /* LogbookApp.swift in Sources */,
 				E95C4F75278622C9009643B4 /* ListViewModel.swift in Sources */,
-				E91B383B27C6BED800256BF0 /* MailDataModel.swift in Sources */,
 				E9393ED82761330E00CB136F /* LogbookValidationModel.swift in Sources */,
-				E970ADBF27C7E745000149D1 /* SpreadSheetFile.swift in Sources */,
 				E96170DA27AECDF7004CA43C /* LocationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

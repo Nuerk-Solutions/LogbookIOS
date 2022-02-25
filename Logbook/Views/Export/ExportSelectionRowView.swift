@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MultipleSelectionRow: View {
+struct ExportSelectionRowView: View {
     var title: String
     var isSelected: Bool
     var action: () -> Void
@@ -25,10 +25,9 @@ struct MultipleSelectionRow: View {
     }
 }
 
-struct MultipleSelectionRow_Previews: PreviewProvider {
+struct ExportSelectionRowView_Previews: PreviewProvider {
     static var previews: some View {
-        MultipleSelectionRow(title: "Test", isSelected: false) {
-            
+        ExportSelectionRowView(title: "Test", isSelected: false) {
         }
     }
 }

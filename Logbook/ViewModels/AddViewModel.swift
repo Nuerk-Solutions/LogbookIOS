@@ -30,7 +30,9 @@ class AddViewModel: ObservableObject {
         isLoading.toggle()
         
         defer {
-            isLoading.toggle()
+            withAnimation {
+                isLoading.toggle()
+            }
         }
         
         do {
@@ -49,7 +51,9 @@ class AddViewModel: ObservableObject {
         isLoading.toggle()
         
         defer {
-            isLoading.toggle()
+            withAnimation {
+                isLoading.toggle()
+            }
         }
         
         do {

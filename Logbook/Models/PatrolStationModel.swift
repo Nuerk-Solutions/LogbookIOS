@@ -9,7 +9,7 @@ import Foundation
 
 struct PatrolStationModel: Codable, Identifiable {
     
-    let id = UUID()
+    var id: UUID {UUID()}
     var ok: Bool
     var status: String
     var stations: [StationModel]
