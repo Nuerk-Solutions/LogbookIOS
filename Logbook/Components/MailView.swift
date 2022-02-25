@@ -28,23 +28,21 @@ public struct MailView: UIViewControllerRepresentable {
         @Binding var data: MailData
         let callback: MailViewCallback
 
-        init(presentation: Binding<PresentationMode>,
-             data: Binding<MailData>,
-             callback: MailViewCallback) {
+        init(presentation: Binding<PresentationMode>, data: Binding<MailData>, callback: MailViewCallback) {
             _data = data
             _presentation = presentation
             self.callback = callback
         }
 
-        public func mailComposeController(_ controller: MFMailComposeViewController,
-                                   didFinishWith result: MFMailComposeResult,
-                                   error: Error?) {
-            if let error = error {
-                callback?(.failure(error))
-            } else {
-                callback?(.success(result))
+        public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+            defer {
+                $presentation.wrappedValue.dismiss()
             }
-            $presentation.wrappedValue.dismiss()
+            guard error == nil else {
+                callback?(.failure(error!))
+                return
+            }
+            callback?(.success(result))
         }
     }
 
@@ -54,13 +52,13 @@ public struct MailView: UIViewControllerRepresentable {
 
     public func makeUIViewController(context: UIViewControllerRepresentableContext<MailView>) -> MFMailComposeViewController {
         let vc = MFMailComposeViewController()
-        vc.mailComposeDelegate = context.coordinator
-        vc.setSubject(data.subject)
         vc.setToRecipients(data.recipients)
-        vc.setMessageBody(data.message, isHTML: false)
+        vc.setSubject(data.subject)
         data.attachments?.forEach {
             vc.addAttachmentData($0.data, mimeType: $0.mimeType, fileName: $0.fileName)
         }
+        vc.setMessageBody(data.message, isHTML: false)
+        vc.mailComposeDelegate = context.coordinator
         vc.accessibilityElementDidLoseFocus()
         return vc
     }

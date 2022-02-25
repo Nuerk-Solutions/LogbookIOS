@@ -23,6 +23,6 @@ struct MailData {
         self.attachments = attachments
     }
     
-    public static let empty = MailData(subject: "", recipients: nil, message: "", attachments: nil)
+    public static let empty = MailData(subject: "", recipients: [""], message: "", attachments: nil)
     
 }

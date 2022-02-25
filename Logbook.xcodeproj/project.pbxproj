@@ -37,6 +37,11 @@
 		E96170E227AEECB2004CA43C /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96170E127AEECB2004CA43C /* NotificationModel.swift */; };
 		E963FC37276655C000FFBD00 /* TransitionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963FC36276655C000FFBD00 /* TransitionExtension.swift */; };
 		E963FC39276660A800FFBD00 /* Car_load.gif in Resources */ = {isa = PBXBuildFile; fileRef = E963FC38276660A800FFBD00 /* Car_load.gif */; };
+		E970ADBF27C7E745000149D1 /* SpreadSheetFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E970ADBE27C7E745000149D1 /* SpreadSheetFile.swift */; };
+		E970ADC127C82B6B000149D1 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E970ADC027C82B6B000149D1 /* ShareSheet.swift */; };
+		E970ADC427C835BF000149D1 /* MultipleSelectionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E970ADC327C835BF000149D1 /* MultipleSelectionRow.swift */; };
+		E970ADC727C836DD000149D1 /* MultipleSelectionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E970ADC627C836DD000149D1 /* MultipleSelectionList.swift */; };
+		E970ADC927C8F07C000149D1 /* ExportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E970ADC827C8F07C000149D1 /* ExportViewModel.swift */; };
 		E98342402757B85800E1C314 /* LogbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E983423F2757B85800E1C314 /* LogbookApp.swift */; };
 		E98342422757B85800E1C314 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98342412757B85800E1C314 /* ContentView.swift */; };
 		E98342442757B85A00E1C314 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E98342432757B85A00E1C314 /* Assets.xcassets */; };
@@ -83,6 +88,12 @@
 		E96170E127AEECB2004CA43C /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		E963FC36276655C000FFBD00 /* TransitionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionExtension.swift; sourceTree = "<group>"; };
 		E963FC38276660A800FFBD00 /* Car_load.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Car_load.gif; sourceTree = "<group>"; };
+		E970ADBE27C7E745000149D1 /* SpreadSheetFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadSheetFile.swift; sourceTree = "<group>"; };
+		E970ADC027C82B6B000149D1 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		E970ADC227C82E6B000149D1 /* Logbook.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Logbook.entitlements; sourceTree = "<group>"; };
+		E970ADC327C835BF000149D1 /* MultipleSelectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleSelectionRow.swift; sourceTree = "<group>"; };
+		E970ADC627C836DD000149D1 /* MultipleSelectionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleSelectionList.swift; sourceTree = "<group>"; };
+		E970ADC827C8F07C000149D1 /* ExportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportViewModel.swift; sourceTree = "<group>"; };
 		E983423C2757B85800E1C314 /* Logbook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Logbook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E983423F2757B85800E1C314 /* LogbookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookApp.swift; sourceTree = "<group>"; };
 		E98342412757B85800E1C314 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -118,6 +129,7 @@
 			children = (
 				E91B383A27C6BED800256BF0 /* MailDataModel.swift */,
 				E91B383C27C6BF0D00256BF0 /* AttachmantDataModel.swift */,
+				E970ADBE27C7E745000149D1 /* SpreadSheetFile.swift */,
 			);
 			path = Mail;
 			sourceTree = "<group>";
@@ -175,6 +187,7 @@
 				E95C4F74278622C9009643B4 /* ListViewModel.swift */,
 				E95C4F7827862ECA009643B4 /* DetailViewModel.swift */,
 				E90BDEAA27C1711500E642F0 /* HelpViewModel.swift */,
+				E970ADC827C8F07C000149D1 /* ExportViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -193,12 +206,23 @@
 		E94725A3276BC127006E6944 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				E970ADC527C83686000149D1 /* ListSelectionView */,
 				E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */,
 				E9393ED927614B3E00CB136F /* FloatingNumberField.swift */,
 				E90B2471276E90C500B185EF /* FloatingTextEditor.swift */,
 				E91B383F27C6BF4100256BF0 /* MailView.swift */,
+				E970ADC027C82B6B000149D1 /* ShareSheet.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		E970ADC527C83686000149D1 /* ListSelectionView */ = {
+			isa = PBXGroup;
+			children = (
+				E970ADC327C835BF000149D1 /* MultipleSelectionRow.swift */,
+				E970ADC627C836DD000149D1 /* MultipleSelectionList.swift */,
+			);
+			path = ListSelectionView;
 			sourceTree = "<group>";
 		};
 		E98342332757B85800E1C314 = {
@@ -220,6 +244,7 @@
 		E983423E2757B85800E1C314 /* Logbook */ = {
 			isa = PBXGroup;
 			children = (
+				E970ADC227C82E6B000149D1 /* Logbook.entitlements */,
 				E983424D2757B85A00E1C314 /* Info.plist */,
 				E983423F2757B85800E1C314 /* LogbookApp.swift */,
 				E98342432757B85A00E1C314 /* Assets.xcassets */,
@@ -358,6 +383,7 @@
 				E90C2AC1276DB175005C1281 /* LoadingView.swift in Sources */,
 				E94725A5276BC15B006E6944 /* JsonDecoderExtension.swift in Sources */,
 				E963FC37276655C000FFBD00 /* TransitionExtension.swift in Sources */,
+				E970ADC127C82B6B000149D1 /* ShareSheet.swift in Sources */,
 				E91978FC27899B720002598A /* ShapeUtils.swift in Sources */,
 				E90BDEAB27C1711500E642F0 /* HelpViewModel.swift in Sources */,
 				E95C4F77278623C2009643B4 /* DetailView.swift in Sources */,
@@ -376,14 +402,18 @@
 				E9D4E6FD27590483003F36DA /* NumberUtils.swift in Sources */,
 				E91B383D27C6BF0D00256BF0 /* AttachmantDataModel.swift in Sources */,
 				E91B384027C6BF4100256BF0 /* MailView.swift in Sources */,
+				E970ADC727C836DD000149D1 /* MultipleSelectionList.swift in Sources */,
 				E98E868C27C24DD6004F4714 /* CoreDataService.swift in Sources */,
+				E970ADC427C835BF000149D1 /* MultipleSelectionRow.swift in Sources */,
 				E96170E227AEECB2004CA43C /* NotificationModel.swift in Sources */,
 				E9393EDA27614B3E00CB136F /* FloatingNumberField.swift in Sources */,
+				E970ADC927C8F07C000149D1 /* ExportViewModel.swift in Sources */,
 				E947259E276BC008006E6944 /* ApiService.swift in Sources */,
 				E98342402757B85800E1C314 /* LogbookApp.swift in Sources */,
 				E95C4F75278622C9009643B4 /* ListViewModel.swift in Sources */,
 				E91B383B27C6BED800256BF0 /* MailDataModel.swift in Sources */,
 				E9393ED82761330E00CB136F /* LogbookValidationModel.swift in Sources */,
+				E970ADBF27C7E745000149D1 /* SpreadSheetFile.swift in Sources */,
 				E96170DA27AECDF7004CA43C /* LocationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -515,6 +545,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Logbook/Logbook.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"Logbook/Preview Content\"";
@@ -538,6 +569,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Logbook/Logbook.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"Logbook/Preview Content\"";
