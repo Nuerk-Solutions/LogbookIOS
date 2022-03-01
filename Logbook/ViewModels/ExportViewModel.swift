@@ -22,20 +22,18 @@ class ExportViewModel: ObservableObject {
         errorMessage = nil
         downloaded = false
         
-        let downloadService = DownloadService(urlString: buildUrl(drivers: driver, vehicles: vehicles), fileName: "LogBook_\(Date().formatted(.iso8601))_Language_DE.xlsx")
+        let currentDate = Date().formatted(.iso8601).replacingOccurrences(of: ":", with: "_")
+        print(currentDate)
+        let downloadService = DownloadService(urlString: buildUrl(drivers: driver, vehicles: vehicles), fileName: "LogBook_\(currentDate)_Language_DE.xlsx".replacingOccurrences(of: ":", with: "_"))
         isLoading.toggle()
         defer {
-            withAnimation {
-                isLoading.toggle()
-            }
+            isLoading.toggle()
         }
         
         do {
             _ = try await downloadService.downloadFile()
             fileName = downloadService.fileName
-            withAnimation {
-                downloaded.toggle()
-            }
+            downloaded.toggle()
         } catch  {
             errorMessage = error.localizedDescription + "\nBitte melde dich bei weiteren Problem bei Thomas."
             self.showAlert = true

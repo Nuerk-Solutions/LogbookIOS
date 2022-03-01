@@ -71,7 +71,7 @@ struct ExportView: View {
             .overlay(
                 Group {
                     if exportViewModel.isLoading {
-                        ProgressView()
+                        CustomProgressView(message: "Laden...")
                     }
                 }
             )

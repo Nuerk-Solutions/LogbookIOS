@@ -24,9 +24,7 @@ class DetailViewModel: ObservableObject {
             let apiService = APIService(urlString: "https://api2.nuerk-solutions.de/logbook/find/\(logbookId)")
             isLoading.toggle()
             defer { // Defer means that is executed after all is finished
-                withAnimation {
-                    isLoading.toggle()
-                }
+                isLoading.toggle()
             }
             
             do {

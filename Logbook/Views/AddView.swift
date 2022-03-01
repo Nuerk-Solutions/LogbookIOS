@@ -222,7 +222,7 @@ struct AddLogbookView: View {
         .overlay(
             Group {
                 if (addViewModel.isLoading && !isReadOnly) {
-                    ProgressView()
+                    CustomProgressView(message: "")
                 }
             }
         )

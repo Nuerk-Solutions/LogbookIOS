@@ -31,12 +31,19 @@ struct ShareSheet: UIViewControllerRepresentable {
             if activity == UIActivity.ActivityType.init(rawValue: "com.apple.DocumentManagerUICore.SaveToFiles") {
                 do {
                     let firstActivityItem = activityItems.first as! URL
-                guard
-                    let url = URL(string: firstActivityItem.absoluteString.replacingOccurrences(of: "file://", with: "shareddocuments://"))
-                else {
-                    throw APIError.invalidURL
-                }
-                UIApplication.shared.open(url)
+                    guard
+                        let url = URL(string: firstActivityItem.absoluteString.replacingOccurrences(of: "file://", with: "shareddocuments://"))
+                    else {
+                        throw APIError.invalidURL
+                    }
+                    print(url.absoluteString)
+                    if UIApplication.shared.canOpenURL(url) {
+                        UIApplication.shared.open(url) { completion in
+                            if completion {
+                                self.presentationMode.wrappedValue.dismiss()
+                            }
+                        }
+                    }
                 } catch {
                     print(error)
                 }

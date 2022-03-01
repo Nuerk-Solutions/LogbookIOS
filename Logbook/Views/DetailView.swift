@@ -22,7 +22,7 @@ struct DetailView: View {
         .overlay(
             Group {
                 if detailViewModel.isLoading {
-                    ProgressView()
+                    CustomProgressView(message: "Laden...")
                 }
             }
         )

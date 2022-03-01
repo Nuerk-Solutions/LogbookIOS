@@ -49,6 +49,7 @@
 		E98E868C27C24DD6004F4714 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E868B27C24DD6004F4714 /* CoreDataService.swift */; };
 		E9A7684C276FADDA0043551A /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = E9A7684B276FADDA0043551A /* SPAlert */; };
 		E9B5A81A27A32B9C007CA4F7 /* KeyboardAvoider in Frameworks */ = {isa = PBXBuildFile; productRef = E9B5A81927A32B9C007CA4F7 /* KeyboardAvoider */; };
+		E9C3A57727CA59BE0021EDD8 /* CustomProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C3A57627CA59BE0021EDD8 /* CustomProgressView.swift */; };
 		E9D18361276F3B95001A764E /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = E9D18360276F3B95001A764E /* AlertKit */; };
 		E9D4E6F42758FEBB003F36DA /* FloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */; };
 		E9D4E6FD27590483003F36DA /* NumberUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D4E6FC27590483003F36DA /* NumberUtils.swift */; };
@@ -95,6 +96,7 @@
 		E98C59C22787812C0020381B /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		E98E868927C24CA9004F4714 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		E98E868B27C24DD6004F4714 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		E9C3A57627CA59BE0021EDD8 /* CustomProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressView.swift; sourceTree = "<group>"; };
 		E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextField.swift; sourceTree = "<group>"; };
 		E9D4E6FC27590483003F36DA /* NumberUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -193,6 +195,7 @@
 				E9393ED927614B3E00CB136F /* FloatingNumberField.swift */,
 				E90B2471276E90C500B185EF /* FloatingTextEditor.swift */,
 				E970ADC027C82B6B000149D1 /* ShareSheet.swift */,
+				E9C3A57627CA59BE0021EDD8 /* CustomProgressView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 			files = (
 				E94725AB276BC1BF006E6944 /* DateFormatterExtension.swift in Sources */,
 				E98E868A27C24CA9004F4714 /* CoreDataModel.xcdatamodeld in Sources */,
+				E9C3A57727CA59BE0021EDD8 /* CustomProgressView.swift in Sources */,
 				E95BBA4C27C15217006F2EA9 /* RefuelView.swift in Sources */,
 				E96170E027AEEAE4004CA43C /* NotificationService.swift in Sources */,
 				E90C2AC1276DB175005C1281 /* LoadingView.swift in Sources */,
@@ -531,7 +535,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Logbook/Logbook.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"Logbook/Preview Content\"";
 				DEVELOPMENT_TEAM = 3JWUJEGD2M;
 				ENABLE_PREVIEWS = YES;
@@ -555,7 +559,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Logbook/Logbook.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"Logbook/Preview Content\"";
 				DEVELOPMENT_TEAM = 3JWUJEGD2M;
 				ENABLE_PREVIEWS = YES;

@@ -97,7 +97,7 @@ struct RefuelView: View {
         }
         .overlay {
             if(refuelViewModel.isLoading) {
-                ProgressView()
+                CustomProgressView(message: "Laden...")
             }
         }
     }

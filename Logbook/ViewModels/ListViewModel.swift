@@ -28,9 +28,7 @@ class ListViewModel: ObservableObject {
         let apiService = APIService(urlString: "https://api2.nuerk-solutions.de/logbook/find/all?sort=-date")
         isLoading.toggle()
         defer {
-            withAnimation {
-                isLoading.toggle()
-            }
+            isLoading.toggle()
         }
         do {
             logbooks = try await apiService.getJSON(dateDecodingStrategy: .formatted(dateFormatter))

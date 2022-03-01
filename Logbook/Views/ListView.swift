@@ -86,7 +86,7 @@ struct ListView: View {
             .overlay(
                 Group {
                     if listViewModel.isLoading {
-                        ProgressView()
+                        CustomProgressView(message: "Laden")
                     }
                     
                     if(listViewModel.errorMessage != nil) {
@@ -119,9 +119,9 @@ struct ListView: View {
                     }
                 }
             }
-            .onTapGesture(count: 4) {
-                consoleManager.isVisible.toggle()
-            }
+        }
+        .onTapGesture(count: 4) {
+            consoleManager.isVisible.toggle()
         }
         .uses(alertManager)
     }
@@ -159,7 +159,7 @@ struct ListView: View {
                     .overlay(
                         Group (content: {
                             if listViewModel.isLoading {
-                                ProgressView()
+                                CustomProgressView(message: "Laden...")
                             }
                         })
                     )
@@ -179,7 +179,7 @@ struct ListView: View {
             .disabled((listViewModel.errorMessage) != nil)
             .sheet(isPresented: $showAddSheet, content: {
                 if(listViewModel.isLoading) {
-                    ProgressView()
+                    CustomProgressView(message: "Laden...")
                 } else {
                     AddLogbookView(showSheet: $showAddSheet)
                         .avoidKeyboard()
