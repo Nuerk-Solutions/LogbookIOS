@@ -21,7 +21,7 @@ class DetailViewModel: ObservableObject {
         showAlert = false
         errorMessage = nil
         if let logbookId = logbookId {
-            let apiService = APIService(urlString: "https://api2.nuerk-solutions.de/logbook/find/\(logbookId)")
+            let apiService = APIService(urlString: "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/find/\(logbookId)")
             isLoading.toggle()
             defer { // Defer means that is executed after all is finished
                 isLoading.toggle()

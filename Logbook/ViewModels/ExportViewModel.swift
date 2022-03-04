@@ -41,20 +41,27 @@ class ExportViewModel: ObservableObject {
     }
     
     func buildUrl(drivers: [DriverEnum], vehicles: [VehicleEnum]) -> String {
-        let baseUrl = "https://api2.nuerk-solutions.de/logbook/download?"
+        let baseUrl = "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/download?"
         
         var builedUrl = baseUrl
         
+        builedUrl.append("driver=")
         for driver in drivers {
-            if driver == drivers.first {
-                builedUrl.append("driver[]=\(driver.id)")
+            if driver == drivers.last {
+                builedUrl.append("\(driver.id)")
             } else {
-                builedUrl.append("&driver[]=\(driver.id)")
+                builedUrl.append("\(driver.id),")
             }
+            builedUrl.append(",")
         }
+        builedUrl.append("&vehicle=")
         
         for vehicle in vehicles {
-            builedUrl.append("&vehicleTyp[]=\(vehicle.id)")
+            if vehicle == vehicles.last {
+                builedUrl.append("\(vehicle.id)")
+            } else {
+                builedUrl.append("\(vehicle.id),")
+            }
         }
         return builedUrl
         

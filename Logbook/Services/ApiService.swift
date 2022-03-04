@@ -23,7 +23,7 @@ struct APIService {
         var request = URLRequest(url: url)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-        if(urlString.contains("nuerk-solutions.de")) {
+        if(urlString.contains("europe-west1-logbookbackend")) {
             request.setValue("Api-Key ca03na188ame03u1d78620de67282882a84", forHTTPHeaderField: "Authorization")
         }
         
@@ -92,7 +92,7 @@ struct APIService {
         var request = URLRequest(url: url)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-        if(urlString.contains("nuerk-solutions.de")) {
+        if(urlString.contains("europe-west1-logbookbackend")) {
             request.setValue("Api-Key ca03na188ame03u1d78620de67282882a84", forHTTPHeaderField: "Authorization")
         }
         request.httpMethod = "POST"

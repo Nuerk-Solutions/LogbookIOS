@@ -26,7 +26,7 @@ class AddViewModel: ObservableObject {
     func fetchLatestLogbooks() async {
         showAlert = false
         errorMessage = nil
-        let apiService = APIService(urlString: "https://api2.nuerk-solutions.de/logbook/find/latest")
+        let apiService = APIService(urlString: "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/find/latest")
         isLoading.toggle()
         
         defer {
@@ -44,7 +44,7 @@ class AddViewModel: ObservableObject {
     @MainActor
     func submitLogbook(logbook: LogbookModel) async {
         self.submitted = false
-        let apiService = APIService(urlString: "https://api2.nuerk-solutions.de/logbook")
+        let apiService = APIService(urlString: "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook")
         
         isLoading.toggle()
         
