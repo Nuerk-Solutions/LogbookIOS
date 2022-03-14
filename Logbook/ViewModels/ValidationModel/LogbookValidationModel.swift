@@ -42,6 +42,9 @@ class AddLogbookEntryViewModel: ObservableObject {
         if(newMileAge < currentMileAge) {
             brokenValues.append(BrokenValue(message: "Der neue Kilometerstand darf nicht kleiner als der aktuelle sein!"))
         }
+        if(newMileAge == currentMileAge) {
+            brokenValues.append(BrokenValue(message: "Der neue Kilometerstand darf nicht dem aktuellem entsprechen!"))
+        }
         if(viewState.additionalInformationTyp != .Keine) {
             if(viewState.additionalInformationTyp == .Getankt) {
                 if(viewState.additionalInformation.isEmpty || !viewState.additionalInformation.isDouble()) {
