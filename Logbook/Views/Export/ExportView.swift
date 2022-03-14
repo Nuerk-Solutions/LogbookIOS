@@ -23,13 +23,21 @@ struct ExportView: View {
             List {
                 Section("Fahrer") {
                     ForEach(self.driver, id: \.self) { item in
+                        HStack {
                         ExportSelectionRowView(title: item.id, isSelected: self.selectedDrivers.contains(item)) {
-                            if self.selectedDrivers.contains(item) && self.selectedDrivers.count != 1 {
+                            if self.selectedDrivers.contains(item) {
+                                if(self.selectedDrivers.count == 1) {
+                                    if(item == self.selectedDrivers.first) {
+                                        return
+                                    }
+                                }
                                 self.selectedDrivers.removeAll(where: { $0 == item })
+                                print("Remove")
                             }
                             else {
                                 self.selectedDrivers.append(item)
                             }
+                        }
                         }
                     }
                 }
@@ -37,7 +45,12 @@ struct ExportView: View {
                 Section("Fahrzeuge") {
                     ForEach(self.vehicle, id: \.self) { item in
                         ExportSelectionRowView(title: item.id, isSelected: self.selectedVehicles.contains(item)) {
-                            if self.selectedVehicles.contains(item) && self.selectedVehicles.count != 1 {
+                            if self.selectedVehicles.contains(item) {
+                                    if(self.selectedVehicles.count == 1) {
+                                        if(item == self.selectedVehicles.first) {
+                                            return
+                                        }
+                                    }
                                 self.selectedVehicles.removeAll(where: { $0 == item })
                             }
                             else {
@@ -49,7 +62,7 @@ struct ExportView: View {
                 
                 Button {
                     Task {
-                        await exportViewModel.downloadXLSX(driver: selectedDrivers, vehicles: selectedVehicles)
+                        await exportViewModel.downloadXLSX(drivers: selectedDrivers, vehicles: selectedVehicles)
                     }
                 } label: {
                     Text("Exportieren")
@@ -82,7 +95,7 @@ struct ExportView: View {
 
 struct ExportView_Previews: PreviewProvider {
     static var previews: some View {
-        ExportView(driver: [DriverEnum.Thomas], vehicle: [VehicleEnum.VW], showActivitySheet: .constant(false))
+        ExportView(driver: [DriverEnum.Thomas, DriverEnum.Andrea], vehicle: [VehicleEnum.VW], showActivitySheet: .constant(false))
     }
 }
 
