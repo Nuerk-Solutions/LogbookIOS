@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		E900E5EA27BC2DBF009EEFD5 /* LocalConsole in Frameworks */ = {isa = PBXBuildFile; productRef = E900E5E927BC2DBF009EEFD5 /* LocalConsole */; };
 		E900E5EC27BC2E5D009EEFD5 /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = E900E5EB27BC2E5D009EEFD5 /* Console.swift */; };
+		E907B99F27DE36BD0082FB9B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E907B99E27DE36BD0082FB9B /* Alamofire */; };
+		E907B9A127DE3A370082FB9B /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E907B9A027DE3A370082FB9B /* Interceptor.swift */; };
 		E90B2472276E90C500B185EF /* FloatingTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90B2471276E90C500B185EF /* FloatingTextEditor.swift */; };
 		E90B2474276E9C6A00B185EF /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90B2473276E9C6A00B185EF /* StringExtension.swift */; };
 		E90BDEAB27C1711500E642F0 /* RefuelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90BDEAA27C1711500E642F0 /* RefuelViewModel.swift */; };
@@ -57,6 +59,7 @@
 
 /* Begin PBXFileReference section */
 		E900E5EB27BC2E5D009EEFD5 /* Console.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
+		E907B9A027DE3A370082FB9B /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
 		E90B2471276E90C500B185EF /* FloatingTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextEditor.swift; sourceTree = "<group>"; };
 		E90B2473276E9C6A00B185EF /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		E90BDEAA27C1711500E642F0 /* RefuelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefuelViewModel.swift; sourceTree = "<group>"; };
@@ -107,6 +110,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E98C59C127877E720020381B /* PopupView in Frameworks */,
+				E907B99F27DE36BD0082FB9B /* Alamofire in Frameworks */,
 				E9881B9B27650DC200BE53CC /* SDWebImageSwiftUI in Frameworks */,
 				E9B5A81A27A32B9C007CA4F7 /* KeyboardAvoider in Frameworks */,
 				E9A7684C276FADDA0043551A /* SPAlert in Frameworks */,
@@ -144,6 +148,7 @@
 				E96170DF27AEEAE4004CA43C /* NotificationService.swift */,
 				E98E868B27C24DD6004F4714 /* CoreDataService.swift */,
 				E91B384127C6C8A100256BF0 /* DownloadService.swift */,
+				E907B9A027DE3A370082FB9B /* Interceptor.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -302,6 +307,7 @@
 				E98C59C027877E720020381B /* PopupView */,
 				E9B5A81927A32B9C007CA4F7 /* KeyboardAvoider */,
 				E900E5E927BC2DBF009EEFD5 /* LocalConsole */,
+				E907B99E27DE36BD0082FB9B /* Alamofire */,
 			);
 			productName = Logbook;
 			productReference = E983423C2757B85800E1C314 /* Logbook.app */;
@@ -338,6 +344,7 @@
 				E98C59BF27877E720020381B /* XCRemoteSwiftPackageReference "PopupView" */,
 				E9B5A81827A32B9C007CA4F7 /* XCRemoteSwiftPackageReference "KeyboardAvoider" */,
 				E900E5E827BC2DBF009EEFD5 /* XCRemoteSwiftPackageReference "LocalConsole" */,
+				E907B99D27DE36BD0082FB9B /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = E983423D2757B85800E1C314 /* Products */;
 			projectDirPath = "";
@@ -375,6 +382,7 @@
 				E90C2AC1276DB175005C1281 /* LoadingView.swift in Sources */,
 				E94725A5276BC15B006E6944 /* JsonDecoderExtension.swift in Sources */,
 				E963FC37276655C000FFBD00 /* TransitionExtension.swift in Sources */,
+				E907B9A127DE3A370082FB9B /* Interceptor.swift in Sources */,
 				E970ADC127C82B6B000149D1 /* ShareSheet.swift in Sources */,
 				E91978FC27899B720002598A /* ShapeUtils.swift in Sources */,
 				E90BDEAB27C1711500E642F0 /* RefuelViewModel.swift in Sources */,
@@ -608,6 +616,14 @@
 				kind = branch;
 			};
 		};
+		E907B99D27DE36BD0082FB9B /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		E9881B9927650DC200BE53CC /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
@@ -655,6 +671,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E900E5E827BC2DBF009EEFD5 /* XCRemoteSwiftPackageReference "LocalConsole" */;
 			productName = LocalConsole;
+		};
+		E907B99E27DE36BD0082FB9B /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E907B99D27DE36BD0082FB9B /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 		E9881B9A27650DC200BE53CC /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;

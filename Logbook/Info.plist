@@ -22,7 +22,9 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>shareddocuments</string>
 		<string>comgooglemaps</string>
+		<string>file</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

@@ -44,159 +44,164 @@ struct ListView: View {
         NavigationView {
             List {
                 ForEach(searchResults) { logbook in
-                        Section {
-                            NavigationLink {
-                                DetailView(logbookId: logbook._id)
-                            } label: {
-                                HStack {
-                                    Image(logbook.vehicleTyp == .VW ? "car_vw" : "logo_small")
+                    Section {
+                        NavigationLink {
+                            DetailView(logbookId: logbook._id)
+                        } label: {
+                            HStack {
+                                Image(logbook.vehicleTyp == .VW ? "car_vw" : logbook.vehicleTyp == .Ferrari ? "logo_small" : "porsche")
                                         .resizable()
                                         .scaledToFit()
+                                        .scaleEffect(logbook.vehicleTyp == .Porsche ? 2.2 : 1)
                                         .frame(width: 80, height: 75)
+                                        .offset(x: logbook.vehicleTyp == .Porsche ? 15 : 0)
                                         .clipShape(Circle())
-                                        .overlay(Circle().stroke(logbook.vehicleTyp == .VW ? Color.blue : Color.black, lineWidth: 1).opacity(0.5))
-                                    VStack(alignment: .leading) {
-                                        Text(logbook.driveReason)
-                                            .font(.headline)
-                                        Text(self.readableDateFormat.string(from: logbook.date))
-                                        Text(logbook.driver.id)
-                                            .font(.subheadline)
-                                    }.padding(.leading, 8)
-                                }.padding(.init(top: 6, leading: 0, bottom: 6, trailing: 0))
-                            }
-                        }
-                    }
-            }
-            .listStyle(InsetGroupedListStyle())
-            .refreshable {
-                Task {
-                    await listViewModel.fetchLogbooks()
-                }
-            }
-            .navigationTitle("Fahrtenbuch")
-            .toolbar(content: {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    AddButton
-                }
-                ToolbarItemGroup(placement: .navigationBarLeading) {
-                    RefuelButton
-                    ExportButton
-                }
-            })
-            .overlay(
-                Group {
-                    if listViewModel.isLoading {
-                        CustomProgressView(message: "Laden")
-                    }
-                    
-                    if(listViewModel.errorMessage != nil) {
-                        VStack {
-                            Text("Bitte verbinde dich mit dem Internet um einen neuen Eintrag hinzuzufügen!").foregroundColor(.red)
-                                .fontWeight(.bold)
-                                .font(.title)
-                        }.onAppear {
-                            withAnimation {
-                                listViewModel.logbooks.removeAll()
-                            }
-                        }
-                    }
-                }
-            )
-            
-            .alert(isPresented: $listViewModel.showAlert, content: {
-                Alert(title: Text("Fehler!"), message: Text(listViewModel.errorMessage ?? ""))
-            })
-            .searchable(text: $searchText)
-            .onAppear {
-                if shouldLoad {
-                    locationService.requestLocationPermission(always: true)
-                    Task {
-                        await listViewModel.fetchLogbooks()
-                    }
-                    shouldLoad = false
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.35) {
-                        showAddSheet = true
+                                        .overlay(Circle().stroke(logbook.vehicleTyp == .VW ? Color.blue : logbook.vehicleTyp == .Ferrari ? Color.black : Color.gray, lineWidth: 1).opacity(0.5))
+                                
+                                
+//                            }
+                            VStack(alignment: .leading) {
+                                Text(logbook.driveReason)
+                                    .font(.headline)
+                                Text(self.readableDateFormat.string(from: logbook.date))
+                                Text(logbook.driver.id)
+                                    .font(.subheadline)
+                            }.padding(.leading, 8)
+                        }.padding(.init(top: 6, leading: 0, bottom: 6, trailing: 0))
                     }
                 }
             }
         }
+        .listStyle(InsetGroupedListStyle())
+        .refreshable {
+            Task {
+                await listViewModel.fetchLogbooks()
+            }
+        }
+        .navigationTitle("Fahrtenbuch")
+        .toolbar(content: {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                AddButton
+            }
+            ToolbarItemGroup(placement: .navigationBarLeading) {
+                RefuelButton
+                ExportButton
+            }
+        })
+        .overlay(
+            Group {
+                if listViewModel.isLoading {
+                    CustomProgressView(message: "Laden")
+                }
+                
+                if(listViewModel.errorMessage != nil) {
+                    VStack {
+                        Text("Bitte verbinde dich mit dem Internet um einen neuen Eintrag hinzuzufügen!").foregroundColor(.red)
+                            .fontWeight(.bold)
+                            .font(.title)
+                    }.onAppear {
+                        withAnimation {
+                            listViewModel.logbooks.removeAll()
+                        }
+                    }
+                }
+            }
+        )
+        
+        .alert(isPresented: $listViewModel.showAlert, content: {
+            Alert(title: Text("Fehler!"), message: Text(listViewModel.errorMessage ?? ""))
+        })
+        .searchable(text: $searchText)
+        .onAppear {
+            if shouldLoad {
+                locationService.requestLocationPermission(always: true)
+                Task {
+                    await listViewModel.fetchLogbooks()
+                }
+                shouldLoad = false
+                //                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.35) {
+                //                        showAddSheet = true
+                //                    }
+            }
+        }
+    }
         .onTapGesture(count: 4) {
             consoleManager.isVisible.toggle()
         }
         .uses(alertManager)
-    }
+}
+
+private var RefuelButton: some View {
+    return AnyView(
+        Button(action: {
+            showRefuelSheet.toggle()
+        }, label: {
+            Image(systemName: "fuelpump.circle")
+                .resizable()
+                .frame(width: 35, height: 35)
+        })
+        .sheet(isPresented: $showRefuelSheet, content: {
+            RefuelView(locationService: locationService)
+                .ignoresSafeArea(.all, edges: .all)
+        })
+    )
+}
+
+private var ExportButton: some View {
     
-    private var RefuelButton: some View {
-        return AnyView(
-            Button(action: {
-                showRefuelSheet.toggle()
-            }, label: {
-                Image(systemName: "fuelpump.circle")
-                    .resizable()
-                    .frame(width: 35, height: 35)
-            })
-            .sheet(isPresented: $showRefuelSheet, content: {
-                RefuelView(locationService: locationService)
-                    .ignoresSafeArea(.all, edges: .all)
-            })
-        )
-    }
-    
-    private var ExportButton: some View {
-        
-        return AnyView(
-            Button(action: {
-                showExportSheet.toggle()
-            }, label: {
-                Image(systemName: "square.and.arrow.up")
-                    .resizable()
-                    .frame(width: 24, height: 30)
-                    .padding(.bottom, 3)
-                    .font(Font.title.weight(.semibold))
-            })
-            .sheet(isPresented: $showExportSheet, content: {
-                ExportView(driver: DriverEnum.allCases, selectedDrivers: DriverEnum.allCases, vehicle: VehicleEnum.allCases, selectedVehicles: VehicleEnum.allCases, showActivitySheet: $showExportSheet)
-                    .overlay(
-                        Group (content: {
-                            if listViewModel.isLoading {
-                                CustomProgressView(message: "Laden...")
-                            }
-                        })
-                    )
-            })
-        )
-    }
-    
-    private var AddButton: some View {
-        return AnyView(
-            Button( action: {
-                showAddSheet.toggle()
-            }, label: {
-                Image(systemName: "plus.circle")
-                    .resizable()
-                    .frame(width: 35, height: 35)
-            })
-            .disabled((listViewModel.errorMessage) != nil)
-            .sheet(isPresented: $showAddSheet, content: {
-                if(listViewModel.isLoading) {
-                    CustomProgressView(message: "Laden...")
-                } else {
-                    AddLogbookView(showSheet: $showAddSheet)
-                        .avoidKeyboard()
-                        .environmentObject(listViewModel)
-                        .ignoresSafeArea(.all, edges: .all)
-                }
-            })
-        )
-    }
-    
-    var searchResults: [LogbookModel] {
-            if searchText.isEmpty {
-                return listViewModel.logbooks
+    return AnyView(
+        Button(action: {
+            showExportSheet.toggle()
+        }, label: {
+            Image(systemName: "square.and.arrow.up")
+                .resizable()
+                .frame(width: 24, height: 30)
+                .padding(.bottom, 3)
+                .font(Font.title.weight(.semibold))
+        })
+        .sheet(isPresented: $showExportSheet, content: {
+            ExportView(driver: DriverEnum.allCases, selectedDrivers: DriverEnum.allCases, vehicle: VehicleEnum.allCases, selectedVehicles: VehicleEnum.allCases, showActivitySheet: $showExportSheet)
+                .overlay(
+                    Group (content: {
+                        if listViewModel.isLoading {
+                            CustomProgressView(message: "Laden...")
+                        }
+                    })
+                )
+        })
+    )
+}
+
+private var AddButton: some View {
+    return AnyView(
+        Button( action: {
+            showAddSheet.toggle()
+        }, label: {
+            Image(systemName: "plus.circle")
+                .resizable()
+                .frame(width: 35, height: 35)
+        })
+        .disabled((listViewModel.errorMessage) != nil)
+        .sheet(isPresented: $showAddSheet, content: {
+            if(listViewModel.isLoading) {
+                CustomProgressView(message: "Laden...")
             } else {
-                return listViewModel.logbooks.filter{$0.driveReason.contains(searchText) || readableDateFormat.string(from: $0.date).contains(searchText) || $0.driver.id.contains(searchText)}
+                AddLogbookView(showSheet: $showAddSheet)
+                    .avoidKeyboard()
+                    .environmentObject(listViewModel)
+                    .ignoresSafeArea(.all, edges: .all)
             }
-        }
+        })
+    )
+}
+
+var searchResults: [LogbookModel] {
+    if searchText.isEmpty {
+        return listViewModel.logbooks
+    } else {
+        return listViewModel.logbooks.filter{$0.driveReason.contains(searchText) || readableDateFormat.string(from: $0.date).contains(searchText) || $0.driver.id.contains(searchText)}
+    }
+}
 }
 
 

@@ -37,13 +37,13 @@ struct AddLogbookView: View {
                     }
                 }
                 .onChange(of: currentLogbook.driver, perform: { newValue in
-                        if(logbookSettings.isEmpty) {
-                            let newLogbookSettings = LogbookSettings(context: managedObjectContext)
-                            newLogbookSettings.lastDriver = newValue.id
-                        } else {
-                            logbookSettings[0].lastDriver = newValue.id
-                        }
-                        try? managedObjectContext.save()
+                    if(logbookSettings.isEmpty) {
+                        let newLogbookSettings = LogbookSettings(context: managedObjectContext)
+                        newLogbookSettings.lastDriver = newValue.id
+                    } else {
+                        logbookSettings[0].lastDriver = newValue.id
+                    }
+                    try? managedObjectContext.save()
                 })
                 .pickerStyle(SegmentedPickerStyle())
                 
@@ -196,7 +196,6 @@ struct AddLogbookView: View {
                         }
                         Task {
                             await addViewModel.submitLogbook(logbook: currentLogbook)
-                            await listViewModel.fetchLogbooks()
                         }
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                         
@@ -250,7 +249,7 @@ struct AddLogbookView: View {
             else {
                 return
             }
-            self.currentLogbook.currentMileAge = logbooks[1].newMileAge
+                self.currentLogbook.currentMileAge = logbooks[1].newMileAge
             if(!logbookSettings.isEmpty) {
                 print(logbookSettings.count)
                 self.currentLogbook.driver = DriverEnum(rawValue: logbookSettings[0].lastDriver ?? "Andrea") ?? .Andrea
@@ -258,13 +257,15 @@ struct AddLogbookView: View {
         })
         .onChange(of: addViewModel.submitted) { newValue in
             if newValue {
-                
                 SPAlertView(title: "Neue Fahrt hinzugefügt", message: "", preset: .done).present(haptic: .success) {
                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                     
                     withAnimation {
                         showSheet = false
-                        
+                    }
+                    
+                    Task {
+                        await listViewModel.fetchLogbooks()
                     }
                 }
             }

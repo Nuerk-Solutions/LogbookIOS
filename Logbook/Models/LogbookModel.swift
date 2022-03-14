@@ -53,6 +53,7 @@ enum DriverEnum: String, CaseIterable, Identifiable, Codable {
 enum VehicleEnum: String, CaseIterable, Identifiable, Codable {
     case Ferrari
     case VW
+    case Porsche
     
     var id: String { self.rawValue }
 }

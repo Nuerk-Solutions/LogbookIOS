@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Alamofire
 
 class ExportViewModel: ObservableObject {
     
@@ -15,29 +16,74 @@ class ExportViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var downloaded = false
     @Published var fileName: String?
+    @Environment(\.presentationMode) var presentationMode
+    
+    
+    let session: Session
+    let interceptor: RequestInterceptor = Interceptor()
+    
+    
+    init() {
+        session = Session(interceptor: interceptor)
+    }
     
     @MainActor
-    func downloadXLSX(driver: [DriverEnum], vehicles: [VehicleEnum]) async {
+    func downloadXLSX(drivers: [DriverEnum], vehicles: [VehicleEnum]) async {
         showAlert = false
         errorMessage = nil
         downloaded = false
+        isLoading.toggle()
         
         let currentDate = Date().formatted(.iso8601).replacingOccurrences(of: ":", with: "_")
+        let fileName = "LogBook_\(currentDate)_Language_DE.xlsx".replacingOccurrences(of: ":", with: "_")
         print(currentDate)
-        let downloadService = DownloadService(urlString: buildUrl(drivers: driver, vehicles: vehicles), fileName: "LogBook_\(currentDate)_Language_DE.xlsx".replacingOccurrences(of: ":", with: "_"))
-        isLoading.toggle()
-        defer {
-            isLoading.toggle()
+        //        let downloadService = DownloadService(urlString: buildUrl(drivers: driver, vehicles: vehicles), fileName: "LogBook_\(currentDate)_Language_DE.xlsx".replacingOccurrences(of: ":", with: "_"))
+        //        let destination = DownloadRequest.suggestedDownloadDestination(for: .documentDirectory)
+        let destination: DownloadRequest.Destination = { _, _ in
+            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let fileURL = documentsURL.appendingPathComponent(fileName)
+            
+            return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
         }
-        
-        do {
-            _ = try await downloadService.downloadFile()
-            fileName = downloadService.fileName
-            downloaded.toggle()
-        } catch  {
-            errorMessage = error.localizedDescription + "\nBitte melde dich bei weiteren Problem bei Thomas."
-            self.showAlert = true
-        }
+        let url = buildUrl(drivers: drivers, vehicles: vehicles)
+        print(url)
+        session.download(url, to: destination)
+            .downloadProgress { progress in
+                print("Download Progress: \(progress.fractionCompleted)")
+            }
+            .responseData { response in
+                switch response.result {
+                case.failure(let error):
+                    switch response.response?.statusCode {
+                    default:
+                        self.errorMessage = error.localizedDescription
+                        self.showAlert = true
+                        self.isLoading = false
+                        print("error fetch all", error)
+                        break
+                    }
+                    print(error)
+                case.success(let data):
+                    print("Sucess Fetch All:", data)
+                    self.fileName = fileName
+//                    print(response.fileURL?.path)
+                    self.isLoading.toggle()
+                    self.downloaded.toggle()
+                    break
+                }
+                //        defer {
+                //            isLoading.toggle()
+                //        }
+                
+                //        do {
+                //            _ = try await downloadService.downloadFile()
+                //            fileName = downloadService.fileName
+                //            downloaded.toggle()
+                //        } catch  {
+                //            errorMessage = error.localizedDescription + "\nBitte melde dich bei weiteren Problem bei Thomas."
+                //            self.showAlert = true
+                //        }
+            }
     }
     
     func buildUrl(drivers: [DriverEnum], vehicles: [VehicleEnum]) -> String {
@@ -45,16 +91,15 @@ class ExportViewModel: ObservableObject {
         
         var builedUrl = baseUrl
         
-        builedUrl.append("driver=")
+        builedUrl.append("drivers=")
         for driver in drivers {
             if driver == drivers.last {
                 builedUrl.append("\(driver.id)")
             } else {
                 builedUrl.append("\(driver.id),")
             }
-            builedUrl.append(",")
         }
-        builedUrl.append("&vehicle=")
+        builedUrl.append("&vehicles=")
         
         for vehicle in vehicles {
             if vehicle == vehicles.last {
@@ -64,7 +109,6 @@ class ExportViewModel: ObservableObject {
             }
         }
         return builedUrl
-        
     }
+    
 }
-
