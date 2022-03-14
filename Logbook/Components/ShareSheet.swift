@@ -36,7 +36,6 @@ struct ShareSheet: UIViewControllerRepresentable {
                     else {
                         throw APIError.invalidURL
                     }
-                    print(url.absoluteString)
                     if UIApplication.shared.canOpenURL(url) {
                         UIApplication.shared.open(url) { completion in
                             if completion {
@@ -44,6 +43,7 @@ struct ShareSheet: UIViewControllerRepresentable {
                             }
                         }
                     }
+                    self.presentationMode.wrappedValue.dismiss()
                 } catch {
                     print(error)
                 }
