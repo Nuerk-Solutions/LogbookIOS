@@ -10,10 +10,11 @@ import AlertKit
 
 struct RefuelView: View {
     
-    @StateObject var locationService: LocationService
     @StateObject var refuelViewModel = RefuelViewModel()
     @State private var selectedVehicle: VehicleEnum = VehicleEnum.Ferrari
     @StateObject var alertManager = AlertManager()
+    @EnvironmentObject private var locationService: LocationService
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         Form {
@@ -89,11 +90,18 @@ struct RefuelView: View {
                     .headerProminence(.increased)
             }
         }
+        
         .uses(alertManager)
+        
+        .alert(isPresented: $refuelViewModel.showAlert, content: {
+            Alert(title: Text("Fehler!"), message: Text(refuelViewModel.errorMessage ?? ""), dismissButton: .default(Text("OK"), action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }))
+        })
         .onAppear {
-            Task {
-                await refuelViewModel.fetchFuelPrice(fuelType: "e5", locationService: locationService)
-            }
+                Task {
+                    await refuelViewModel.fetchFuelPrice(fuelType: "e5", locationService: locationService)
+                }
         }
         .overlay {
             if(refuelViewModel.isLoading) {
@@ -138,7 +146,7 @@ struct RefuelView: View {
 
 struct RefuelView_Previews: PreviewProvider {
     static var previews: some View {
-        RefuelView(locationService: LocationService())
+        RefuelView()
         
     }
 }

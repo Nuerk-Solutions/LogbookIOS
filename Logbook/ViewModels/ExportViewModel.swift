@@ -15,8 +15,12 @@ class ExportViewModel: ObservableObject {
     @Published var showAlert = false
     @Published var errorMessage: String?
     @Published var downloaded = false
+    @Published var showActivity = false
+    @Published var progress: Double = 0.0
     @Published var fileName: String?
     @Environment(\.presentationMode) var presentationMode
+    
+    @AppStorage("openActivityViewAfterExport") private var openActivityViewAfterExport = false
     
     
     let session: Session
@@ -49,6 +53,7 @@ class ExportViewModel: ObservableObject {
         print(url)
         session.download(url, to: destination)
             .downloadProgress { progress in
+                self.progress = progress.fractionCompleted
                 print("Download Progress: \(progress.fractionCompleted)")
             }
             .responseData { response in
@@ -68,6 +73,22 @@ class ExportViewModel: ObservableObject {
                     self.fileName = fileName
 //                    print(response.fileURL?.path)
                     self.isLoading.toggle()
+                        if self.openActivityViewAfterExport {
+                            self.showActivity.toggle()
+                        } else {
+                            guard
+                                let url = URL(string: response.fileURL!.absoluteString.replacingOccurrences(of: "file://", with: "shareddocuments://"))
+                            else {
+                                return
+                            }
+                            if UIApplication.shared.canOpenURL(url) {
+                                UIApplication.shared.open(url) { completion in
+                                    if completion {
+                                        self.presentationMode.wrappedValue.dismiss()
+                                    }
+                                }
+                            }
+                    }
                     self.downloaded.toggle()
                     break
                 }

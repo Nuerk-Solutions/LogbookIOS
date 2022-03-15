@@ -68,7 +68,7 @@ struct ExportView: View {
                     Text("Exportieren")
                         .foregroundColor(.white)
                 }
-                .sheet(isPresented: $exportViewModel.downloaded, onDismiss: {
+                .sheet(isPresented: $exportViewModel.showActivity, onDismiss: {
                     print("Dismissed SHARE")
                     showActivitySheet.toggle()
                 }, content: {
@@ -84,11 +84,26 @@ struct ExportView: View {
             .overlay(
                 Group {
                     if exportViewModel.isLoading {
-                        CustomProgressView(message: "Laden...")
+                        ZStack {
+                            
+                                Color(.systemBackground).opacity(0.4)
+                                    .ignoresSafeArea()
+                                    .blur(radius: 5)
+                            
+                            ProgressView("Laden...", value: exportViewModel.progress, total: 1.0)
+                                .padding(10)
+                                .background(RoundedRectangle(cornerRadius: 10).fill(Color(.systemBackground)))
+                        }
+                        .shadow(radius: 10)
                     }
                 }
             )
             .navigationTitle("Exportoptionen")
+            .onChange(of: exportViewModel.downloaded) { newValue in
+                if (newValue && !exportViewModel.showActivity) {
+                    showActivitySheet.toggle()
+                }
+            }
         }
     }
 }

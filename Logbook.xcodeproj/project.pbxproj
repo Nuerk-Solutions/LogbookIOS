@@ -20,6 +20,8 @@
 		E91B384227C6C8A100256BF0 /* DownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91B384127C6C8A100256BF0 /* DownloadService.swift */; };
 		E9393ED82761330E00CB136F /* LogbookValidationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9393ED72761330E00CB136F /* LogbookValidationModel.swift */; };
 		E9393EDA27614B3E00CB136F /* FloatingNumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9393ED927614B3E00CB136F /* FloatingNumberField.swift */; };
+		E940ED0E27E0CFDC00B2EAA7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E940ED0D27E0CFDC00B2EAA7 /* SettingsView.swift */; };
+		E940ED1127E0D3C700B2EAA7 /* SettingsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E940ED1027E0D3C700B2EAA7 /* SettingsRowView.swift */; };
 		E9472594276BAF83006E6944 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9472593276BAF83006E6944 /* Launch Screen.storyboard */; };
 		E9472599276BBDA8006E6944 /* LogbookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9472598276BBDA8006E6944 /* LogbookModel.swift */; };
 		E947259E276BC008006E6944 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E947259D276BC008006E6944 /* ApiService.swift */; };
@@ -69,6 +71,8 @@
 		E91B384127C6C8A100256BF0 /* DownloadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadService.swift; sourceTree = "<group>"; };
 		E9393ED72761330E00CB136F /* LogbookValidationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookValidationModel.swift; sourceTree = "<group>"; };
 		E9393ED927614B3E00CB136F /* FloatingNumberField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingNumberField.swift; sourceTree = "<group>"; };
+		E940ED0D27E0CFDC00B2EAA7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		E940ED1027E0D3C700B2EAA7 /* SettingsRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRowView.swift; sourceTree = "<group>"; };
 		E9472593276BAF83006E6944 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		E9472598276BBDA8006E6944 /* LogbookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookModel.swift; sourceTree = "<group>"; };
 		E947259D276BC008006E6944 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
@@ -130,6 +134,15 @@
 			path = ValidationModel;
 			sourceTree = "<group>";
 		};
+		E940ED0F27E0D3B900B2EAA7 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				E940ED0D27E0CFDC00B2EAA7 /* SettingsView.swift */,
+				E940ED1027E0D3C700B2EAA7 /* SettingsRowView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		E9472595276BBD87006E6944 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +169,7 @@
 		E947259F276BC0C9006E6944 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E940ED0F27E0D3B900B2EAA7 /* Settings */,
 				E94824D827C90E9900228A35 /* Export */,
 				E98342412757B85800E1C314 /* ContentView.swift */,
 				E90C2AC0276DB175005C1281 /* LoadingView.swift */,
@@ -397,6 +411,7 @@
 				E9D4E6F42758FEBB003F36DA /* FloatingTextField.swift in Sources */,
 				E95C4F7927862ECA009643B4 /* DetailViewModel.swift in Sources */,
 				E94725AD276BC342006E6944 /* AddViewModel.swift in Sources */,
+				E940ED1127E0D3C700B2EAA7 /* SettingsRowView.swift in Sources */,
 				E98C59C32787812C0020381B /* AddView.swift in Sources */,
 				E91B384227C6C8A100256BF0 /* DownloadService.swift in Sources */,
 				E9D4E6FD27590483003F36DA /* NumberUtils.swift in Sources */,
@@ -411,6 +426,7 @@
 				E95C4F75278622C9009643B4 /* ListViewModel.swift in Sources */,
 				E9393ED82761330E00CB136F /* LogbookValidationModel.swift in Sources */,
 				E96170DA27AECDF7004CA43C /* LocationService.swift in Sources */,
+				E940ED0E27E0CFDC00B2EAA7 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

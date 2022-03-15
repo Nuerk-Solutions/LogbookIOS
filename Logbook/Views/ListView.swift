@@ -14,7 +14,6 @@ import KeyboardAvoider
 struct ListView: View {
     @StateObject var listViewModel = ListViewModel()
     @StateObject var alertManager = AlertManager()
-    @StateObject private var locationService: LocationService
     
     @State private var editMode = EditMode.inactive
     @State private var searchText = ""
@@ -22,10 +21,14 @@ struct ListView: View {
     
     @State private var showAddSheet: Bool = false
     @State private var showRefuelSheet: Bool = false
+    @State private var showSettingsSheet: Bool = false
     @State private var showActivitySheet: Bool = false
     @State private var showExportSheet: Bool = false
     @State private var loadedAmount = 0.0
     let timer = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
+    
+    @AppStorage("openAddViewOnStart") private var openAddViewOnStart = true
+    @AppStorage("allowLocationTracking") private var allowLocationTracking = true
     
     let readableDateFormat: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -36,10 +39,10 @@ struct ListView: View {
     
     
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject private var locationService: LocationService
     
     init() {
         UITableView.appearance().sectionFooterHeight = 0
-        _locationService = StateObject(wrappedValue: LocationService())
     }
     
     var body: some View {
@@ -80,11 +83,13 @@ struct ListView: View {
             .navigationTitle("Fahrtenbuch")
             .toolbar(content: {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    AddButton
+                    if allowLocationTracking {
+                        RefuelButton
+                    }
+                    SettingsButton
                 }
                 ToolbarItemGroup(placement: .navigationBarLeading) {
-                    RefuelButton
-                    ExportButton
+                    AddButton
                 }
             })
             .overlay(
@@ -98,6 +103,8 @@ struct ListView: View {
                                         loadedAmount += 1
                                     }
                                 }
+                                .padding(50)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
                             }
                         } else {
                             CustomProgressView(message: "Laden")
@@ -124,21 +131,40 @@ struct ListView: View {
             .searchable(text: $searchText)
             .onAppear {
                 if shouldLoad {
-                    locationService.requestLocationPermission(always: true)
+                    
+                    if allowLocationTracking {
+                        locationService.requestLocationPermission(always: true)
+                    }
+                    
                     Task {
                         await listViewModel.fetchLogbooks()
                     }
                     shouldLoad = false
-                    //                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.35) {
-                    //                        showAddSheet = true
-                    //                    }
+                    if openAddViewOnStart {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.35) {
+                            showAddSheet = true
+                        }
+                    }
                 }
             }
         }
-        .onTapGesture(count: 4) {
-            consoleManager.isVisible.toggle()
-        }
         .uses(alertManager)
+    }
+    
+    
+    private var SettingsButton: some View {
+        return AnyView(
+            Button(action: {
+                showSettingsSheet.toggle()
+            }, label: {
+                Image(systemName: "gearshape")
+                    .resizable()
+                    .frame(width: 35, height: 35)
+            })
+            .sheet(isPresented: $showSettingsSheet, content: {
+                SettingsView()
+            })
+        )
     }
     
     private var RefuelButton: some View {
@@ -151,33 +177,8 @@ struct ListView: View {
                     .frame(width: 35, height: 35)
             })
             .sheet(isPresented: $showRefuelSheet, content: {
-                RefuelView(locationService: locationService)
+                RefuelView()
                     .ignoresSafeArea(.all, edges: .all)
-            })
-        )
-    }
-    
-    private var ExportButton: some View {
-        
-        return AnyView(
-            Button(action: {
-                showExportSheet.toggle()
-            }, label: {
-                Image(systemName: "square.and.arrow.up")
-                    .resizable()
-                    .frame(width: 24, height: 30)
-                    .padding(.bottom, 3)
-                    .font(Font.title.weight(.semibold))
-            })
-            .sheet(isPresented: $showExportSheet, content: {
-                ExportView(driver: DriverEnum.allCases, selectedDrivers: DriverEnum.allCases, vehicle: VehicleEnum.allCases, selectedVehicles: VehicleEnum.allCases, showActivitySheet: $showExportSheet)
-                    .overlay(
-                        Group (content: {
-                            if listViewModel.isLoading {
-                                CustomProgressView(message: "Laden...")
-                            }
-                        })
-                    )
             })
         )
     }
