@@ -10,7 +10,7 @@ import Alamofire
 
 class Interceptor: RequestInterceptor {
     
-    let retryLimit = 6
+    let retryLimit = 7
     let retryDelay: TimeInterval = 4
     var isRetrying = false
     
