@@ -25,6 +25,7 @@ struct AddLogbookView: View {
     @EnvironmentObject private var listViewModel: ListViewModel
     
     @Environment(\.managedObjectContext) var managedObjectContext
+    @Environment(\.scenePhase) var scenePhase
     @FetchRequest(entity: LogbookSettings.entity(), sortDescriptors: []) var logbookSettings: FetchedResults<LogbookSettings>
     
     var body: some View {
@@ -50,7 +51,7 @@ struct AddLogbookView: View {
                 // Date picker
                 DatePicker("Datum",
                            selection: $currentLogbook.date,
-                           displayedComponents: [.date])
+                           displayedComponents: [.date, .hourAndMinute])
                 .environment(\.locale, Locale.init(identifier: "de_DE"))
                 
                 // Reason
@@ -273,6 +274,11 @@ struct AddLogbookView: View {
         .onChange(of: addViewModel.errorMessage) { newErrorMessage in
             if(newErrorMessage != nil) {
                 showSheet = false
+            }
+        }
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .active {
+                currentLogbook.date = Date.now
             }
         }
     }
