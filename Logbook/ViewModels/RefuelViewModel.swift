@@ -37,7 +37,7 @@ class RefuelViewModel: ObservableObject {
         var speed = locationService.locationManager.location?.speed
         consoleManager.print("Speed: \(speed!)")
         guard let speed = speed else { return speed = 0 }
-        let radius = speed >= 25.0 ? 25 : 3.5
+        let radius = speed >= 25.0 ? 25 : 5
         consoleManager.print("Calculated Radius: \(radius)")
         // 100 km/h = 27.7 m/s
         
@@ -56,6 +56,7 @@ class RefuelViewModel: ObservableObject {
         
         do {
             patrolStations = try await apiService.getJSON()
+            print("Patrol Station Amount: \(patrolStations.stations.count)")
             consoleManager.print("Patrol Station Amount: \(patrolStations.stations.count)")
             DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
                 locationService.locationManager.stopUpdatingLocation()

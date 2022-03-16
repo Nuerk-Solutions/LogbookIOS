@@ -23,8 +23,13 @@ struct StationModel: Codable, Identifiable {
     var lat: Double
     var lng: Double
     var dist: Double
-    var price: Double
+    var price: Double?
     var isOpen: Bool
     var houseNumber: String
     var postCode: Int
+}
+
+extension StationModel {
+    
+    static let item: StationModel = StationModel(id: "", name: "", brand: "", street: "", place: "", lat: 0.0, lng: 0.0, dist: 0.0, isOpen: true, houseNumber: "", postCode: 0)
 }

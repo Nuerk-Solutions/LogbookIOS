@@ -27,7 +27,7 @@ struct RefuelView: View {
                 .onChange(of: selectedVehicle) { newVehicle in
                     print(newVehicle)
                     Task {
-                        await refuelViewModel.fetchFuelPrice(fuelType: newVehicle == .VW ? "diesel" : "e5", locationService: locationService)
+                        await refuelViewModel.fetchFuelPrice(fuelType: newVehicle == .VW ? "diesel" : newVehicle == .Ferrari ? "e5" : "e10", locationService: locationService)
                     }
                 }
                 .pickerStyle(SegmentedPickerStyle())
@@ -36,7 +36,7 @@ struct RefuelView: View {
                     Spacer()
                     Text("Was wird getankt?").font(.headline)
                     Spacer()
-                    Text(selectedVehicle == .Ferrari ? "In den Ferrari wird nur E5, Super oder Super+ getankt." : "In den VW wird nur Diesel getankt.")
+                    Text(selectedVehicle == .Ferrari ? "In den Ferrari wird nur E5, Super oder Super+ getankt." : selectedVehicle == .VW ? "In den VW wird nur Diesel getankt." : "In den Porsche wird nur Super+ getankt. Oliver übernimmt das Tanken!")
                     if(selectedVehicle == .Ferrari) {
                         Spacer()
                         Spacer()
@@ -56,34 +56,7 @@ struct RefuelView: View {
                 Section(header: Text("Tankstellen")) {
                     List {
                         ForEach(refuelViewModel.patrolStations.stations) { station in
-                            let price: String = "\(station.price)"
-                            let price_1 = price[price.index(price.startIndex, offsetBy: 0)..<price.index(price.startIndex, offsetBy: 4)]
-                            let price_2 = price[price.index(price.startIndex, offsetBy: 4)..<price.index(price.startIndex, offsetBy: 5)]
-                            Section {
-                                Button {
-                                    openMaps(latitude: station.lat, longitude: station.lng, title: station.name)
-                                } label: {
-                                    
-                                    VStack(alignment: .leading) {
-                                        Text("\(station.brand)").font(.callout).underline()
-                                        Spacer()
-                                        HStack(spacing: 2) {
-                                            Text("Preis: ")
-                                            Text("\(String(price_1))").bold()
-                                            Text("\(String(price_2))").font(.caption2).offset(y: -5)
-                                            Text("€")
-                                        }
-                                        Text("Entfernung: \(station.dist, specifier: "%.2f") km")
-                                        Spacer()
-                                        Text("\(station.street) \(station.houseNumber)").font(.subheadline)
-                                        if(!station.isOpen) {
-                                            Text("Tankstelle geschlossen!").foregroundColor(.red).bold()
-                                        }
-                                        Spacer()
-                                    }
-                                }
-                                .foregroundColor(.primary)
-                            }
+                            RefuelRowView(station: station, selectedVehicle: selectedVehicle)
                         }
                     }
                 }
@@ -131,38 +104,6 @@ struct RefuelView: View {
             }
         }
     }
-    
-    func openMaps(latitude: Double, longitude: Double, title: String?) {
-        let application = UIApplication.shared
-        let coordinate = "\(latitude),\(longitude)"
-        let encodedTitle = title?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        let handlers = [
-            ("Apple Maps", "http://maps.apple.com/?q=\(encodedTitle)&ll=\(coordinate)"),
-            ("Google Maps", "comgooglemaps://?q=\(coordinate)"),
-            ("Safari", "https://www.google.com/maps/dir/?api=1&destination=\(coordinate)&travelmode=driving")
-        ]
-            .compactMap { (name, address) in URL(string: address).map { (name, $0) } }
-            .filter { (_, url) in application.canOpenURL(url) }
-        
-        guard handlers.count > 1 else {
-            if let (_, url) = handlers.first {
-                application.open(url, options: [:])
-            }
-            return
-        }
-        
-        var buttons: [ActionSheet.Button] = []
-        handlers.forEach { (name, url) in
-            buttons.append(
-                .default(Text(name), action: {
-                    application.open(url, options: [:])
-                })
-            )
-        }
-        buttons.append(.cancel(Text("Abbrechen")))
-        alertManager.showActionSheet(.custom(title: "App auswählen", message: "Wähle eine App für die Navigation aus.", buttons: buttons))
-    }
-    
 }
 
 
