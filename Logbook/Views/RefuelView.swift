@@ -53,41 +53,41 @@ struct RefuelView: View {
             if(refuelViewModel.isLoading || refuelViewModel.patrolStations.stations.isEmpty) {
                 Text("Laden...")
             } else {
-                    Section(header: Text("Tankstellen")) {
-                            List {
-                                ForEach(refuelViewModel.patrolStations.stations) { station in
-                                    let price: String = "\(station.price)"
-                                    let price_1 = price[price.index(price.startIndex, offsetBy: 0)..<price.index(price.startIndex, offsetBy: 4)]
-                                    let price_2 = price[price.index(price.startIndex, offsetBy: 4)..<price.index(price.startIndex, offsetBy: 5)]
-                                    Section {
-                                        Button {
-                                            openMaps(latitude: station.lat, longitude: station.lng, title: station.name)
-                                        } label: {
-                                            
-                                            VStack(alignment: .leading) {
-                                                Text("\(station.brand)").font(.callout).underline()
-                                                Spacer()
-                                                HStack(spacing: 2) {
-                                                    Text("Preis: ")
-                                                    Text("\(String(price_1))").bold()
-                                                    Text("\(String(price_2))").font(.caption2).offset(y: -5)
-                                                    Text("€")
-                                                }
-                                                Text("Entfernung: \(station.dist, specifier: "%.2f") km")
-                                                Spacer()
-                                                Text("\(station.street) \(station.houseNumber)").font(.subheadline)
-                                                if(!station.isOpen) {
-                                                    Text("Tankstelle geschlossen!").foregroundColor(.red).bold()
-                                                }
-                                                Spacer()
-                                            }
+                Section(header: Text("Tankstellen")) {
+                    List {
+                        ForEach(refuelViewModel.patrolStations.stations) { station in
+                            let price: String = "\(station.price)"
+                            let price_1 = price[price.index(price.startIndex, offsetBy: 0)..<price.index(price.startIndex, offsetBy: 4)]
+                            let price_2 = price[price.index(price.startIndex, offsetBy: 4)..<price.index(price.startIndex, offsetBy: 5)]
+                            Section {
+                                Button {
+                                    openMaps(latitude: station.lat, longitude: station.lng, title: station.name)
+                                } label: {
+                                    
+                                    VStack(alignment: .leading) {
+                                        Text("\(station.brand)").font(.callout).underline()
+                                        Spacer()
+                                        HStack(spacing: 2) {
+                                            Text("Preis: ")
+                                            Text("\(String(price_1))").bold()
+                                            Text("\(String(price_2))").font(.caption2).offset(y: -5)
+                                            Text("€")
                                         }
-                                        .foregroundColor(.primary)
+                                        Text("Entfernung: \(station.dist, specifier: "%.2f") km")
+                                        Spacer()
+                                        Text("\(station.street) \(station.houseNumber)").font(.subheadline)
+                                        if(!station.isOpen) {
+                                            Text("Tankstelle geschlossen!").foregroundColor(.red).bold()
+                                        }
+                                        Spacer()
                                     }
                                 }
+                                .foregroundColor(.primary)
+                            }
                         }
                     }
-                    .headerProminence(.increased)
+                }
+                .headerProminence(.increased)
             }
         }
         
@@ -99,10 +99,32 @@ struct RefuelView: View {
             }))
         })
         .onAppear {
+            if locationService.authorizationStatus == .denied {
+                refuelViewModel.showAlert = true
+                refuelViewModel.errorMessage = "Bitte gib den Standort frei"
+                return
+            }
+            
+            if !locationService.hasPermission() {
+                locationService.requestLocationPermission()
+                return
+            } else {
                 Task {
                     await refuelViewModel.fetchFuelPrice(fuelType: "e5", locationService: locationService)
                 }
+            }
         }
+        .onChange(of: locationService.authorizationStatus, perform: { newValue in
+            print(newValue)
+            if newValue != .notDetermined && newValue != .denied {
+                Task {
+                    await refuelViewModel.fetchFuelPrice(fuelType: "e5", locationService: locationService)
+                }
+            } else {
+                refuelViewModel.showAlert = true
+                refuelViewModel.errorMessage = "Bitte gib den Standort frei"
+            }
+        })
         .overlay {
             if(refuelViewModel.isLoading) {
                 CustomProgressView(message: "Laden...")
@@ -121,7 +143,7 @@ struct RefuelView: View {
         ]
             .compactMap { (name, address) in URL(string: address).map { (name, $0) } }
             .filter { (_, url) in application.canOpenURL(url) }
-
+        
         guard handlers.count > 1 else {
             if let (_, url) = handlers.first {
                 application.open(url, options: [:])
@@ -132,9 +154,9 @@ struct RefuelView: View {
         var buttons: [ActionSheet.Button] = []
         handlers.forEach { (name, url) in
             buttons.append(
-                  .default(Text(name), action: {
-                        application.open(url, options: [:])
-                    })
+                .default(Text(name), action: {
+                    application.open(url, options: [:])
+                })
             )
         }
         buttons.append(.cancel(Text("Abbrechen")))

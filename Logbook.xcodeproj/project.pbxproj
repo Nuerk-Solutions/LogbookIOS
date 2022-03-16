@@ -51,6 +51,7 @@
 		E98C59C32787812C0020381B /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98C59C22787812C0020381B /* AddView.swift */; };
 		E98E868A27C24CA9004F4714 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E98E868827C24CA9004F4714 /* CoreDataModel.xcdatamodeld */; };
 		E98E868C27C24DD6004F4714 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E868B27C24DD6004F4714 /* CoreDataService.swift */; };
+		E9A66A9C27E24A89004033F5 /* TrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A66A9B27E24A89004033F5 /* TrackingView.swift */; };
 		E9A7684C276FADDA0043551A /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = E9A7684B276FADDA0043551A /* SPAlert */; };
 		E9B5A81A27A32B9C007CA4F7 /* KeyboardAvoider in Frameworks */ = {isa = PBXBuildFile; productRef = E9B5A81927A32B9C007CA4F7 /* KeyboardAvoider */; };
 		E9C3A57727CA59BE0021EDD8 /* CustomProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C3A57627CA59BE0021EDD8 /* CustomProgressView.swift */; };
@@ -103,6 +104,7 @@
 		E98C59C22787812C0020381B /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		E98E868927C24CA9004F4714 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		E98E868B27C24DD6004F4714 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		E9A66A9B27E24A89004033F5 /* TrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingView.swift; sourceTree = "<group>"; };
 		E9C3A57627CA59BE0021EDD8 /* CustomProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressView.swift; sourceTree = "<group>"; };
 		E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextField.swift; sourceTree = "<group>"; };
 		E9D4E6FC27590483003F36DA /* NumberUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberUtils.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				E95C4F76278623C2009643B4 /* DetailView.swift */,
 				E98C59C22787812C0020381B /* AddView.swift */,
 				E95BBA4B27C15217006F2EA9 /* RefuelView.swift */,
+				E9A66A9B27E24A89004033F5 /* TrackingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				E98C59C32787812C0020381B /* AddView.swift in Sources */,
 				E91B384227C6C8A100256BF0 /* DownloadService.swift in Sources */,
 				E9D4E6FD27590483003F36DA /* NumberUtils.swift in Sources */,
+				E9A66A9C27E24A89004033F5 /* TrackingView.swift in Sources */,
 				E970ADC727C836DD000149D1 /* ExportView.swift in Sources */,
 				E98E868C27C24DD6004F4714 /* CoreDataService.swift in Sources */,
 				E970ADC427C835BF000149D1 /* ExportSelectionRowView.swift in Sources */,

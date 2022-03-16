@@ -17,6 +17,7 @@ class Interceptor: RequestInterceptor {
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         var urlRequest = urlRequest
         urlRequest.setValue("Api-Key ca03na188ame03u1d78620de67282882a84", forHTTPHeaderField: "Authorization")
+        consoleManager.print("Adapt Call Success")
         print("Apdt Call")
         completion(.success(urlRequest))
     }
@@ -27,17 +28,20 @@ class Interceptor: RequestInterceptor {
         if request.retryCount < self.retryLimit {
             if let statusCode = response?.statusCode, statusCode >= 400, !isRetrying {
                 print("Pre Retry")
+                consoleManager.print("Pre Retry")
                 self.isRetrying = true
                 self.determineError(error: error, completion: completion)
                 return
             }
             else {
                 print("Retry with Delay Fallback")
+                consoleManager.print("Retry with Delay Fallback")
                 completion(.retryWithDelay(self.retryDelay))
                 return
             }
         } else {
             print("Cancel all")
+            consoleManager.print("Cancel all requests")
             AF.session.getAllTasks { (tasks) in
                 tasks.forEach {
                     $0.cancel()
@@ -45,9 +49,11 @@ class Interceptor: RequestInterceptor {
             }
             completion(.doNotRetry)
             print("Retry Limit")
+            consoleManager.print("Retry limit reached")
             return
         }
         print("Success")
+        consoleManager.print("Success!")
         completion(.doNotRetry)
         return
     }
@@ -85,6 +91,7 @@ class Interceptor: RequestInterceptor {
 //                    print("Retry 404")
 //            default: // AuthenticationAction.logout.rawValue
                 print("Statuscode", code)
+            consoleManager.print("Failed Statuscode: \(code)")
 //            print(reason)
             
                 self.isRetrying = false
@@ -99,6 +106,7 @@ class Interceptor: RequestInterceptor {
         default:
             self.isRetrying = false
             print("Finished")
+            consoleManager.print("Finished")
             completion(.doNotRetry)
 //            completion(.retryWithDelay(self.retryDelay))
         }

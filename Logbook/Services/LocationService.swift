@@ -7,33 +7,30 @@
 
 import Foundation
 import CoreLocation
-import CoreMotion
 import SwiftUI
 
 class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     private let notificationService = NotificationService()
-    let locationManager: CLLocationManager = CLLocationManager()
+    let locationManager: CLLocationManager
     
-    @Published var authorisationStatus: CLAuthorizationStatus = .notDetermined // For always in background question
+    @Published var authorizationStatus: CLAuthorizationStatus // For always in background question
+    @Published var lastSeenLocation: CLLocation?
+    @Published var currentPlacemark: CLPlacemark?
+    
+    
     @AppStorage("notificationsIconBadge") private var notificationsIconBadge = true
     @AppStorage("allowLocationTracking") private var allowLocationTracking = true
     @AppStorage("notifications") private var showNotifications = true
     
     override init() {
+        locationManager = CLLocationManager()
+        authorizationStatus = locationManager.authorizationStatus
         super.init()
-        self.locationManager.delegate = nil
-        if !allowLocationTracking {
-            return
-        }
-        if(showNotifications) {
-            notificationService.requestNotificationPermission()
-        }
         locationManager.delegate = self
-        locationManager.startUpdatingLocation()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.activityType = .otherNavigation
-        locationManager.distanceFilter = 100
+        locationManager.startUpdatingLocation()
         
         let geoFenceRegion: CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(51.03650, 13.68830), radius: 550, identifier: "ARB 19")
         
@@ -41,11 +38,23 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
         
     }
     
-    //    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    //        let mPerS = locationManager.location?.speed
-    //        let kmPerH = (mPerS ?? 0) * 3.6
-    //        consoleManager.print("m/s: \(mPerS) | km/h:  \(kmPerH)")
-    //    }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if GlobalVariable.measure {
+            lastSeenLocation = locations.first
+            fetchCountryAndCity(for: locations.first)
+            let mPerS = locationManager.location?.speed
+            let kmPerH = (mPerS ?? 0) * 3.6
+            consoleManager.print("m/s: \(mPerS ?? 0.0) | km/h:  \(kmPerH)")
+        }
+    }
+    
+    func fetchCountryAndCity(for location: CLLocation?) {
+        guard let location = location else { return }
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+            self.currentPlacemark = placemarks?.first
+        }
+    }
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         consoleManager.print("Entered: \(region.identifier)")
@@ -59,27 +68,28 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
+    // TODO: Check wich method works
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        self.authorisationStatus = status
+        self.authorizationStatus = status
+        print(status)
     }
     
-    
-    func requestLocationPermission(always: Bool = true) {
-        if allowLocationTracking {
-            if always {
-                self.locationManager.requestAlwaysAuthorization()
-            } else {
-                self.locationManager.requestWhenInUseAuthorization()
-            }
-        }
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        self.authorizationStatus = manager.authorizationStatus
+        print(manager.authorizationStatus)
     }
+    
+    func requestLocationPermission() {
+        self.locationManager.requestAlwaysAuthorization()
+    }
+    
     
     func hasPermission() -> Bool {
         if CLLocationManager.locationServicesEnabled() {
             switch locationManager.authorizationStatus {
             case .notDetermined, .restricted, .denied :
                 return false
-            
+                
             case .authorizedWhenInUse, .authorizedAlways:
                 return true
                 
@@ -88,19 +98,5 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
             }
         }
         return false
-    }
-}
-
-extension CMMotionActivity {
-    func activityString() -> String {
-        // returns a compound string of activities e.g. Stationary Automotive
-        var output = ""
-        if stationary { output = output + "Stationary "}
-        if walking { output = output + "Walking "}
-        if running { output = output + "Running "}
-        if automotive { output = output + "Automotive "}
-        if cycling { output = output + "Cycling "}
-        if unknown { output = output + "Unknown "}
-        return output
     }
 }

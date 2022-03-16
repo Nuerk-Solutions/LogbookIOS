@@ -12,6 +12,7 @@ import SPAlert
 struct AddLogbookView: View {
     
     @State var currentLogbook: LogbookModel = LogbookModel()
+    @State var latestSelectedLogbook: LogbookModel = LogbookModel()
     @State private var distance: Int = 0
     @State private var descriptionFoucsBool: Bool = false
     @FocusState private var descriptionFocus: Bool
@@ -51,6 +52,7 @@ struct AddLogbookView: View {
                 // Date picker
                 DatePicker("Datum",
                            selection: $currentLogbook.date,
+                           in: latestSelectedLogbook.date...Date(),
                            displayedComponents: [.date, .hourAndMinute])
                 .environment(\.locale, Locale.init(identifier: "de_DE"))
                 
@@ -68,9 +70,22 @@ struct AddLogbookView: View {
                     }
                 }
                 .pickerStyle(SegmentedPickerStyle())
-                .onChange(of: currentLogbook.vehicleTyp) { _ in
+                .onChange(of: currentLogbook.vehicleTyp) { newVehicle in
                     // Change currentMilAge on Update of Vehicle switch
-                    currentLogbook.currentMileAge = currentLogbook.vehicleTyp == .VW ? addViewModel.latestLogbooks![0].newMileAge : addViewModel.latestLogbooks![1].newMileAge
+                    switch (newVehicle) {
+                    case .Ferrari:
+                        currentLogbook.currentMileAge = addViewModel.latestLogbooks![1].newMileAge
+                        latestSelectedLogbook = addViewModel.latestLogbooks![1]
+                        break
+                    case .VW:
+                        currentLogbook.currentMileAge = addViewModel.latestLogbooks![0].newMileAge
+                        latestSelectedLogbook = addViewModel.latestLogbooks![0]
+                        break
+                    case .Porsche:
+                        currentLogbook.currentMileAge = addViewModel.latestLogbooks![2].newMileAge
+                        latestSelectedLogbook = addViewModel.latestLogbooks![2]
+                        break
+                    }
                 }
                 
                 
@@ -250,7 +265,8 @@ struct AddLogbookView: View {
             else {
                 return
             }
-                self.currentLogbook.currentMileAge = logbooks[1].newMileAge
+            self.currentLogbook.currentMileAge = logbooks[1].newMileAge
+            self.latestSelectedLogbook = logbooks[1]
             if(!logbookSettings.isEmpty) {
                 print(logbookSettings.count)
                 self.currentLogbook.driver = DriverEnum(rawValue: logbookSettings[0].lastDriver ?? "Andrea") ?? .Andrea

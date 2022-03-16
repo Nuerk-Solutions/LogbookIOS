@@ -26,3 +26,9 @@ extension DateFormatter {
         return dateFormatter
     }()
 }
+
+extension Date {
+    func component(_ component: Calendar.Component) -> Int {
+        Calendar.current.component(component, from: self)
+    }
+}

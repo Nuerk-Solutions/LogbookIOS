@@ -21,7 +21,6 @@ class AddViewModel: ObservableObject {
     let session: Session
     let interceptor: RequestInterceptor = Interceptor()
     
-    
     init() {
         session = Session(interceptor: interceptor)
     }
@@ -32,6 +31,17 @@ class AddViewModel: ObservableObject {
         return dateFormatter
     }()
     
+    func getDateRange(latestLogbook: LogbookModel) -> ClosedRange<Date> {
+        let now = Date()
+        let calendar = Calendar.current
+        let unitFlags = Set<Calendar.Component>([.day, .month, .year, .hour, .minute])
+        let startComponents = calendar.dateComponents(unitFlags, from: now)
+        print("Start", startComponents, latestLogbook.date)
+        let endComponents = calendar.dateComponents(unitFlags, from: latestLogbook.date)
+        print("End", endComponents)
+        return latestLogbook.date...now
+    }
+    
     @MainActor
     func fetchLatestLogbooks() async {
         showAlert = false
@@ -40,9 +50,9 @@ class AddViewModel: ObservableObject {
         
         isLoading.toggle()
         
-//        defer {
-//            isLoading.toggle()
-//        }
+        //        defer {
+        //            isLoading.toggle()
+        //        }
         
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(dateFormatter)
@@ -80,9 +90,9 @@ class AddViewModel: ObservableObject {
         
         isLoading.toggle()
         
-//        defer {
-//            isLoading.toggle()
-//        }
+        //        defer {
+        //            isLoading.toggle()
+        //        }
         
         let encoder: JSONEncoder = JSONEncoder()
         encoder.dateEncodingStrategy = .formatted(dateFormatter)
@@ -114,8 +124,8 @@ class AddViewModel: ObservableObject {
             }.responseString { result in
                 print(String(data: result.data!, encoding: .utf8))
             }
-//            .responseDecodable(of: [LogbookModel].self, decoder: decoder) { response in
-//                self.latestLogbooks = response.value ?? []
-//            }
+        //            .responseDecodable(of: [LogbookModel].self, decoder: decoder) { response in
+        //                self.latestLogbooks = response.value ?? []
+        //            }
     }
 }

@@ -25,7 +25,7 @@ struct ListView: View {
     @State private var showActivitySheet: Bool = false
     @State private var showExportSheet: Bool = false
     @State private var loadedAmount = 0.0
-    let timer = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
+    let timer = Timer.publish(every: 0.25, on: .main, in: .common).autoconnect()
     
     @AppStorage("openAddViewOnStart") private var openAddViewOnStart = true
     @AppStorage("allowLocationTracking") private var allowLocationTracking = true
@@ -57,11 +57,11 @@ struct ListView: View {
                                 Image(logbook.vehicleTyp == .VW ? "car_vw" : logbook.vehicleTyp == .Ferrari ? "logo_small" : "porsche")
                                     .resizable()
                                     .scaledToFit()
-                                    .scaleEffect(logbook.vehicleTyp == .Porsche ? 2.2 : 1)
+                                    .scaleEffect(logbook.vehicleTyp == .Porsche ? 1.2 : 1)
                                     .frame(width: 80, height: 75)
-                                    .offset(x: logbook.vehicleTyp == .Porsche ? 15 : 0)
+                                    .offset(y: logbook.vehicleTyp == .Porsche ? -5 : 0)
                                     .clipShape(Circle())
-                                    .overlay(Circle().stroke(logbook.vehicleTyp == .VW ? Color.blue : logbook.vehicleTyp == .Ferrari ? Color.black : Color.gray, lineWidth: 1).opacity(0.5))
+                                    .overlay(Circle().stroke(logbook.vehicleTyp == .VW ? Color.blue : logbook.vehicleTyp == .Ferrari ? Color.red : Color.gray, lineWidth: 1).opacity(0.5))
                                 VStack(alignment: .leading) {
                                     Text(logbook.driveReason)
                                         .font(.headline)
@@ -86,10 +86,10 @@ struct ListView: View {
                     if allowLocationTracking {
                         RefuelButton
                     }
-                    SettingsButton
+                    SettingsButton.disabled(listViewModel.isLoading)
                 }
                 ToolbarItemGroup(placement: .navigationBarLeading) {
-                    AddButton
+                    AddButton.disabled(listViewModel.isLoading)
                 }
             })
             .overlay(
@@ -97,14 +97,14 @@ struct ListView: View {
                     if listViewModel.isLoading {
                         if loadedAmount != 100 {
                             VStack {
-                            ProgressView(loadingText, value: loadedAmount, total: 100)
-                                .onReceive(timer) { _ in
-                                    if loadedAmount < 100 {
-                                        loadedAmount += 1
+                                ProgressView(loadingText, value: loadedAmount, total: 100)
+                                    .onReceive(timer) { _ in
+                                        if loadedAmount < 100 {
+                                            loadedAmount += 1
+                                        }
                                     }
-                                }
-                                .padding(50)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .padding(50)
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                             }
                         } else {
                             CustomProgressView(message: "Laden")
@@ -124,7 +124,6 @@ struct ListView: View {
                     }
                 }
             )
-            
             .alert(isPresented: $listViewModel.showAlert, content: {
                 Alert(title: Text("Fehler!"), message: Text(listViewModel.errorMessage ?? ""))
             })
@@ -132,18 +131,20 @@ struct ListView: View {
             .onAppear {
                 if shouldLoad {
                     
-                    if allowLocationTracking {
-                        locationService.requestLocationPermission(always: true)
-                    }
-                    
                     Task {
                         await listViewModel.fetchLogbooks()
                     }
                     shouldLoad = false
-                    if openAddViewOnStart {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.35) {
-                            showAddSheet = true
+                }
+            }
+            
+            .onReceive(listViewModel.$logbooks) { newValue in
+                if openAddViewOnStart {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.35) {
+                        if listViewModel.isLoading {
+                            return
                         }
+                        showAddSheet = true
                     }
                 }
             }

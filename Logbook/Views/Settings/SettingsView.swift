@@ -9,15 +9,15 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @AppStorage("allowLocationTracking") private var allowLocationTracking = false
+    @AppStorage("allowLocationTracking") private var allowLocationTracking = true
     @AppStorage("notifications") private var showNotifications = true
     @AppStorage("notificationsIconBadge") private var notificationsIconBadge = true
     @AppStorage("openAddViewOnStart") private var openAddViewOnStart = true
     @AppStorage("openActivityViewAfterExport") private var openActivityViewAfterExport = false
     @EnvironmentObject private var locationService: LocationService
     
-    @State private var developerconsole = false
-    @State private var measureSpeed = false
+    @AppStorage("developerconsole") private var developerconsole = false
+    @AppStorage("measureSpeed") private var measureSpeed = false
     @State private var showExportSheet: Bool = false
     
     var body: some View {
@@ -30,6 +30,8 @@ struct SettingsView: View {
                     .onChange(of: allowLocationTracking) { newValue in
                         if !newValue {
                             locationService.locationManager.stopUpdatingLocation()
+                        } else {
+                            locationService.requestLocationPermission()
                         }
                     }
                 } header: {
@@ -68,11 +70,24 @@ struct SettingsView: View {
                         Text("Developer Console")
                     }
                     .onChange(of: developerconsole) { newValue in
-                            consoleManager.isVisible.toggle()
+                            consoleManager.isVisible = newValue
+                        if !newValue {
+                            locationService.locationManager.stopUpdatingLocation()
+                        } else {
+                            if measureSpeed {
+                                locationService.locationManager.startUpdatingLocation()
+                            }
+                        }
                     }
                     if developerconsole {
-                        Toggle(isOn: $measureSpeed) {
+                        Toggle(isOn: $measureSpeed.animation()) {
                             Text("Measure Speed")
+                        }
+                        .onChange(of: measureSpeed) { newValue in
+                            GlobalVariable.measure = newValue
+                        }
+                        if measureSpeed {
+                            NavigationLink("Tracking", destination: TrackingView())
                         }
                     }
                 } header: {

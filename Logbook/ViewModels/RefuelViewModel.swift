@@ -21,12 +21,13 @@ class RefuelViewModel: ObservableObject {
     func fetchFuelPrice(fuelType: String, locationService: LocationService) async {
         showAlert = false
         errorMessage = nil
-        locationService.locationManager.requestAlwaysAuthorization()
-        if(!locationService.hasPermission()) {
-            self.showAlert = true
-            self.errorMessage = "Bitte gib den Standort frei"
-           return
-        }
+        
+        
+            if(!locationService.hasPermission()) {
+                self.showAlert = true
+                self.errorMessage = "Bitte gib den Standort frei"
+               return
+            }
         locationService.locationManager.startUpdatingLocation()
         consoleManager.print("Init Location Updates")
         let lat = locationService.locationManager.location?.coordinate.latitude
