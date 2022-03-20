@@ -20,7 +20,7 @@ class ExportViewModel: ObservableObject {
     @Published var fileName: String?
     @Environment(\.presentationMode) var presentationMode
     
-    @AppStorage("openActivityViewAfterExport") private var openActivityViewAfterExport = false
+    @Preference(\.openActivityViewAfterExport) var openActivityViewAfterExport
     
     
     let session: Session
@@ -36,7 +36,9 @@ class ExportViewModel: ObservableObject {
         showAlert = false
         errorMessage = nil
         downloaded = false
-        isLoading.toggle()
+        withAnimation {
+            isLoading.toggle()
+        }
         
         let currentDate = Date().formatted(.iso8601).replacingOccurrences(of: ":", with: "_")
         let fileName = "LogBook_\(currentDate)_Language_DE.xlsx".replacingOccurrences(of: ":", with: "_")
@@ -72,7 +74,9 @@ class ExportViewModel: ObservableObject {
                     print("Sucess Fetch All:", data)
                     self.fileName = fileName
 //                    print(response.fileURL?.path)
-                    self.isLoading.toggle()
+                    withAnimation {
+                        self.isLoading.toggle()
+                    }
                         if self.openActivityViewAfterExport {
                             self.showActivity.toggle()
                         } else {

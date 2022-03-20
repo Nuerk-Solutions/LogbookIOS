@@ -6,19 +6,23 @@
 //
 
 import SwiftUI
+import PermissionsSwiftUI
+import CorePermissionsSwiftUI
 
 struct SettingsView: View {
     
-    @AppStorage("allowLocationTracking") private var allowLocationTracking = true
-    @AppStorage("notifications") private var showNotifications = true
-    @AppStorage("notificationsIconBadge") private var notificationsIconBadge = true
-    @AppStorage("openAddViewOnStart") private var openAddViewOnStart = true
-    @AppStorage("openActivityViewAfterExport") private var openActivityViewAfterExport = false
+    @Preference(\.allowLocationTracking) var allowLocationTracking
+    @Preference(\.notifications) var notifications
+    @Preference(\.notificationsIconBadge) var notificationsIconBadge
+    @Preference(\.openAddViewOnStart) var openAddViewOnStart
+    @Preference(\.openActivityViewAfterExport) var openActivityViewAfterExport
+    @Preference(\.developerconsole) var developerconsole
+    @Preference(\.measureSpeed) var measureSpeed
     @EnvironmentObject private var locationService: LocationService
     
-    @AppStorage("developerconsole") private var developerconsole = false
-    @AppStorage("measureSpeed") private var measureSpeed = false
     @State private var showExportSheet: Bool = false
+    @State private var showLocationPermissionSheet: Bool = false
+    @State private var showNotificationPermissionSheet: Bool = false
     
     var body: some View {
         NavigationView {
@@ -31,32 +35,39 @@ struct SettingsView: View {
                         if !newValue {
                             locationService.locationManager.stopUpdatingLocation()
                         } else {
-                            locationService.requestLocationPermission()
+                            showLocationPermissionSheet = true
                         }
                     }
                 } header: {
                     Text("Standort")
                 } footer: {
-                    Text("Durch das deaktivieren dieser Option, ist es nicht möglich die Funktion Tankstellensuche und Benarichtigung zu benutzen.")
+                    Text("Durch das Deaktivieren dieser Option ist es nicht möglich, die Funktion Tankstellensuche und Benachrichtigungen zu benutzen.")
                 }
                 if allowLocationTracking {
                     Section {
-                        Toggle(isOn: $showNotifications) {
-                            Text("Benarichtigungen")
+                        Toggle(isOn: $notifications.animation()) {
+                            Text("Benachrichtigungen")
                         }
-                        Toggle(isOn: $notificationsIconBadge) {
-                            Text("Icon Badge")
-                        }.disabled(!showNotifications)
+                        .onChange(of: notifications) { newValue in
+                            if newValue {
+                                showNotificationPermissionSheet = true
+                            }
+                        }
+                        if notifications {
+                            Toggle(isOn: $notificationsIconBadge) {
+                                Text("Icon Badge")
+                            }
+                        }
                     } header: {
-                        Text("Benarichtigung")
+                        Text("Benachrichtigung")
                     } footer: {
-                        Text("Du erhälst eine Benarichtigung, wenn du außerhalb eines Umkreis von 550m dem ARB 19 wieder näher kommst.")
+                        Text("Du bekommst eine Benachrichtigung, wenn du außerhalb eines Umkreises von 550m dem ARB 19 wieder näher kommst.")
                     }
                 }
                 
                 Section {
                     Toggle(isOn: $openAddViewOnStart) {
-                        Text("Neuer Eintrag beim starten anzeigen")
+                        Text("Neuer Eintrag beim Starten anzeigen")
                     }
                     Toggle(isOn: $openActivityViewAfterExport) {
                         Text("Aktivitätsansicht nach dem Export öffnen")
@@ -67,7 +78,7 @@ struct SettingsView: View {
                 
                 Section {
                     Toggle(isOn: $developerconsole.animation()) {
-                        Text("Developer Console")
+                        Text("Console")
                     }
                     .onChange(of: developerconsole) { newValue in
                             consoleManager.isVisible = newValue
@@ -79,19 +90,16 @@ struct SettingsView: View {
                             }
                         }
                     }
-                    if developerconsole {
+                    if allowLocationTracking {
                         Toggle(isOn: $measureSpeed.animation()) {
                             Text("Measure Speed")
-                        }
-                        .onChange(of: measureSpeed) { newValue in
-                            GlobalVariable.measure = newValue
                         }
                         if measureSpeed {
                             NavigationLink("Tracking", destination: TrackingView())
                         }
                     }
                 } header: {
-                    Text("Sitzungseinstellungen")
+                    Text("Dev")
                 }
                 
                 Section {
@@ -108,6 +116,24 @@ struct SettingsView: View {
                     ExportButton
                 }
             })
+            
+            .JMModal(showModal: $showNotificationPermissionSheet, for: [.locationAlways, .notification], autoDismiss: true, autoCheckAuthorization: true, restrictDismissal: false)
+            .changeHeaderTo("Berechtigung")
+            .changeHeaderDescriptionTo("Damit du bestimmte Funktionen dieser App benutzen kannst, musst du entsprechende Berechtigungen freigeben.")
+            .changeBottomDescriptionTo("Diese Berechtigungen sind notwendig, damit alle Features richtig funktionieren. Ohne die Erlaubnis für Berichtigungen bekommst du keine Information wenn du dich dem ARB 19 näherst.")
+            .setPermissionComponent(for: .notification, title: "Benachrichtigungen")
+            .setPermissionComponent(for: .notification, description: "Erlaube Benachrichtigungen")
+            
+            .JMModal(showModal: $showLocationPermissionSheet, for: [.locationAlways,], autoDismiss: true, autoCheckAuthorization: true, restrictDismissal: false, onAppear: {}, onDisappear: {
+                if !locationService.hasPermission() {
+                    allowLocationTracking = false
+                }
+            })
+            .changeHeaderTo("Berechtigung")
+            .changeHeaderDescriptionTo("Damit du bestimmte Funktionen dieser App benutzen kannst, musst du entsprechende Berechtigungen freigeben.")
+            .changeBottomDescriptionTo("Diese Berechtigungen sind notwendig, damit alle Features richtig funktionieren. Ohne die Standortfreigabe ist es nicht möglich, das Tankstellen Feature zu benutzen.")
+            .setPermissionComponent(for: .locationAlways, title: "Standort immer")
+            .setPermissionComponent(for: .locationAlways, description: "Dauerhafte Standortfreigabe erlauben")
         }
     }
     

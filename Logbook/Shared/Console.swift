@@ -10,7 +10,3 @@ import LocalConsole
 
 
 let consoleManager = LCManager.shared
-
-struct GlobalVariable {
-    static var measure: Bool = false
-}

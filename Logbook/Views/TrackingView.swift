@@ -40,7 +40,9 @@ struct TrackingView: View {
             }
             .padding()
         }.onAppear {
-            locationService.requestLocationPermission()
+//            if !locationService.hasPermission() {
+//                locationService.requestLocationPermission()
+//            }
             locationService.locationManager.startUpdatingLocation()
         }
     }

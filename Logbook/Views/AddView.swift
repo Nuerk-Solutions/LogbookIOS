@@ -144,7 +144,7 @@ struct AddLogbookView: View {
                                 .foregroundColor(isReadOnly ? .gray : .blue)
                                 .font(Font.system(size: 20, weight: .bold))
                         }
-                        .transition(.opacity.animation(.linear(duration: 2)))
+//                        .transition(.opacity.animation(.linear(duration: 2)))
                         if(currentLogbook.additionalInformationTyp == AdditionalInformationTypEnum.Keine) {
                             Rectangle()
                                 .fill(isReadOnly ? .gray : .blue)
@@ -237,7 +237,7 @@ struct AddLogbookView: View {
         .overlay(
             Group {
                 if (addViewModel.isLoading && !isReadOnly) {
-                    CustomProgressView(message: "")
+                    CustomProgressView(message: "Warten...")
                 }
             }
         )
@@ -247,7 +247,7 @@ struct AddLogbookView: View {
         //            }
         //        })
         .uses(alertManager)
-        .transition(.opacity.animation(.linear(duration: 0.2)))
+//        .transition(.opacity.animation(.linear(duration: 0.2)))
         .onAppear {
             calculateDistance()
             if(!isReadOnly) {

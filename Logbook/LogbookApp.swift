@@ -13,8 +13,7 @@ struct LogbookApp: App {
     @StateObject private var coreDataService = CoreDataService()
     @StateObject private var locationService = LocationService()
     
-    @AppStorage("developerconsole") private var developerconsole = false
-    @AppStorage("measureSpeed") private var measureSpeed = false
+    @Preference(\.developerconsole) var developerconsole
     
     var body: some Scene {
         WindowGroup {
@@ -30,9 +29,6 @@ struct LogbookApp: App {
                 .onAppear {
                     if developerconsole {
                         consoleManager.isVisible = true
-                    }
-                    if measureSpeed {
-                        GlobalVariable.measure = true
                     }
                 }
         }

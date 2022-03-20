@@ -48,7 +48,9 @@ class AddViewModel: ObservableObject {
         errorMessage = nil
         //        let apiService = APIService(urlString: "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/find/latest")
         
-        isLoading.toggle()
+        withAnimation {
+            isLoading.toggle()
+        }
         
         //        defer {
         //            isLoading.toggle()
@@ -74,12 +76,16 @@ class AddViewModel: ObservableObject {
                     print(error)
                 case.success(let data):
                     print("Sucess fetch Single:", data)
-                    self.isLoading.toggle()
+                    withAnimation {
+                        self.isLoading.toggle()
+                    }
                     break
                 }
             }
             .responseDecodable(of: [LogbookModel].self, decoder: decoder) { response in
-                self.latestLogbooks = response.value ?? []
+                withAnimation {
+                    self.latestLogbooks = response.value ?? []
+                }
             }
     }
     

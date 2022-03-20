@@ -11,11 +11,11 @@ import AlertKit
 struct RefuelRowView: View {
     
     @State var station: StationModel
-    @State var selectedVehicle: VehicleEnum
+    @Binding var selectedVehicle: VehicleEnum
     @StateObject var alertManager = AlertManager()
     
     var body: some View {
-        let price: String = station.price == nil ? "0.000" : "\(station.price!)"
+        let price: String = station.price == nil ? "-1" : "\(station.price!)"
         let price_1 = price[price.index(price.startIndex, offsetBy: 0)..<price.index(price.startIndex, offsetBy: 4)]
         let price_2 = price[price.index(price.startIndex, offsetBy: 4)..<price.index(price.startIndex, offsetBy: 5)]
         Section {
@@ -23,24 +23,17 @@ struct RefuelRowView: View {
                 openMaps(latitude: station.lat, longitude: station.lng, title: station.name)
             } label: {
                 ZStack {
-                    
-                    
-                    if(selectedVehicle == .Porsche) {
-                        if station.brand.contains("Shell") {
-                            Color.red.opacity(0.5)
-                        }
-                    }
                     VStack(alignment: .leading) {
                         Text("\(station.brand)").font(.callout).underline()
                         Spacer()
                         HStack(spacing: 2) {
-                            if price != "0.000" {
+                            if station.price == nil || price == "-1" {
+                                Text("Kein Preis vorhanden").bold()
+                            } else {
                                 Text("Preis: ")
                                 Text("\(String(price_1))").bold()
                                 Text("\(String(price_2))").font(.caption2).offset(y: -5)
                                 Text("€")
-                            } else {
-                                Text("Kein Preis vorhanden").bold()
                             }
                         }
                         Text("Entfernung: \(station.dist, specifier: "%.2f") km")
@@ -53,6 +46,7 @@ struct RefuelRowView: View {
                     }
                 }
             }
+            .listRowBackground(selectedVehicle == .Porsche && station.brand.lowercased().contains("shell") ? Color.orange.opacity(0.25) : Color(.secondarySystemGroupedBackground))
             .foregroundColor(.primary)
         }
         .uses(alertManager)
@@ -92,6 +86,6 @@ struct RefuelRowView: View {
 
 struct RefuelRowView_Previews: PreviewProvider {
     static var previews: some View {
-        RefuelRowView(station: StationModel.item, selectedVehicle: .Porsche)
+        RefuelRowView(station: StationModel.item, selectedVehicle: .constant(.Porsche))
     }
 }

@@ -12,15 +12,15 @@ import UIKit
 
 class NotificationService: NSObject, ObservableObject, UNUserNotificationCenterDelegate {
     
-    func requestNotificationPermission() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-            if success {
-                print("All permissions Requested and set!")
-            } else if let error = error {
-                print(error.localizedDescription)
-            }
-        }
-    }
+//    func requestNotificationPermission() {
+//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+//            if success {
+//                print("All permissions Requested and set!")
+//            } else if let error = error {
+//                print(error.localizedDescription)
+//            }
+//        }
+//    }
     
     func requestLocalNotification(notification: NotificationModel, removePendingRequest: Bool = true) {
         let center = UNUserNotificationCenter.current()

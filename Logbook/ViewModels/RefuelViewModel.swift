@@ -23,11 +23,11 @@ class RefuelViewModel: ObservableObject {
         errorMessage = nil
         
         
-            if(!locationService.hasPermission()) {
-                self.showAlert = true
-                self.errorMessage = "Bitte gib den Standort frei"
-               return
-            }
+        if(!locationService.hasPermission()) {
+            self.showAlert = true
+            self.errorMessage = "Bitte gib den Standort frei"
+           return
+        }
         locationService.locationManager.startUpdatingLocation()
         consoleManager.print("Init Location Updates")
         let lat = locationService.locationManager.location?.coordinate.latitude
@@ -47,7 +47,12 @@ class RefuelViewModel: ObservableObject {
         print(urlString)
         
         let apiService = APIService(urlString: urlString)
-        isLoading.toggle()
+        
+        withAnimation {
+            
+            isLoading.toggle()
+        }
+        
         defer { // Defer means that is executed after all is finished
             withAnimation {
                 isLoading.toggle()
@@ -58,6 +63,7 @@ class RefuelViewModel: ObservableObject {
             patrolStations = try await apiService.getJSON()
             print("Patrol Station Amount: \(patrolStations.stations.count)")
             consoleManager.print("Patrol Station Amount: \(patrolStations.stations.count)")
+            print(patrolStations)
             DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
                 locationService.locationManager.stopUpdatingLocation()
                 consoleManager.print("Stopped updating location in Refuel Model")

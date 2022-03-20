@@ -54,10 +54,9 @@ struct RefuelView: View {
                 Text("Laden...")
             } else {
                 Section(header: Text("Tankstellen")) {
-                    List {
-                        ForEach(refuelViewModel.patrolStations.stations) { station in
-                            RefuelRowView(station: station, selectedVehicle: selectedVehicle)
-                        }
+                    List(refuelViewModel.patrolStations.stations) { station in
+                        RefuelRowView(station: station, selectedVehicle: $selectedVehicle)
+                            .transition(.slide)
                     }
                 }
                 .headerProminence(.increased)
@@ -78,15 +77,12 @@ struct RefuelView: View {
                 return
             }
             
-            if !locationService.hasPermission() {
-                locationService.requestLocationPermission()
-                return
-            } else {
-                Task {
-                    await refuelViewModel.fetchFuelPrice(fuelType: "e5", locationService: locationService)
-                }
-            }
         }
+        .task({
+            if locationService.hasPermission() {
+                await refuelViewModel.fetchFuelPrice(fuelType: "e5", locationService: locationService)
+            }
+        })
         .onChange(of: locationService.authorizationStatus, perform: { newValue in
             print(newValue)
             if newValue != .notDetermined && newValue != .denied {

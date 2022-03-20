@@ -8,12 +8,15 @@
 import Foundation
 import SwiftUI
 import Alamofire
+import Combine
 class ListViewModel: ObservableObject {
     
+    @Published private var originalLogbooks: [LogbookModel] = []
     @Published var logbooks: [LogbookModel] = []
     @Published var isLoading = false
     @Published var showAlert = false
     @Published var errorMessage: String?
+    @Published var searchTerm: String = ""
     
     let session: Session
     let interceptor: RequestInterceptor = Interceptor()
@@ -21,6 +24,17 @@ class ListViewModel: ObservableObject {
     
     init() {
         session = Session(interceptor: interceptor)
+        withAnimation {
+        Publishers.CombineLatest($originalLogbooks, $searchTerm)
+            .map { logbooks, searchTerm in
+                logbooks.filter { logbook in
+                        searchTerm.isEmpty ? true : (logbook.driveReason.contains(searchTerm) || logbook.driver.id.contains(searchTerm))
+                    }
+            }
+//            .debounce(for: .seconds(0.2), scheduler: RunLoop.main)
+            .assign(to: &$logbooks)
+            
+        }
     }
     
     private let dateFormatter: DateFormatter = {
@@ -35,7 +49,9 @@ class ListViewModel: ObservableObject {
         errorMessage = nil
         //        let apiService = APIService(urlString: "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/find/all?sort=-date")
         
-        isLoading.toggle()
+        withAnimation {
+            isLoading.toggle()
+        }
         //        defer {
         //            isLoading.toggle()
         //        }
@@ -59,12 +75,16 @@ class ListViewModel: ObservableObject {
                     print(error)
                 case.success(let data):
                     print("Sucess Fetch All:", data)
-                    self.isLoading.toggle()
+                    withAnimation {
+                        self.isLoading.toggle()
+                    }
                     break
                 }
             }
             .responseDecodable(of: [LogbookModel].self, decoder: decoder) { (response) in
-                self.logbooks = response.value ?? []
+                withAnimation {
+                    self.originalLogbooks = response.value ?? []
+                }
             }
     }
 }

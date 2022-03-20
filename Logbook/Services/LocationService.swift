@@ -19,9 +19,10 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var currentPlacemark: CLPlacemark?
     
     
-    @AppStorage("notificationsIconBadge") private var notificationsIconBadge = true
-    @AppStorage("allowLocationTracking") private var allowLocationTracking = true
-    @AppStorage("notifications") private var showNotifications = true
+    @Preference(\.allowLocationTracking) var allowLocationTracking
+    @Preference(\.notifications) var notifications
+    @Preference(\.notificationsIconBadge) var notificationsIconBadge
+    @Preference(\.measureSpeed) var measureSpeed
     
     override init() {
         locationManager = CLLocationManager()
@@ -39,7 +40,7 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if GlobalVariable.measure {
+        if measureSpeed {
             lastSeenLocation = locations.first
             fetchCountryAndCity(for: locations.first)
             let mPerS = locationManager.location?.speed
@@ -60,7 +61,7 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
         consoleManager.print("Entered: \(region.identifier)")
         print("Entered: \(region.identifier)")
         consoleManager.print("Notification SEND")
-        if showNotifications {
+        if notifications {
             notificationService.requestLocalNotification(notification: NotificationModel(notificationId: UUID().uuidString, title:"Wilkommen am \(region.identifier) 🏠", body: "Hey du! Es scheint so als ob du wieder zu Hause bist. Hier eine kleine Erinnerung ans Fahrtenbuch 😉", data: nil))
         }
         if notificationsIconBadge {
@@ -79,9 +80,9 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
         print(manager.authorizationStatus)
     }
     
-    func requestLocationPermission() {
-        self.locationManager.requestAlwaysAuthorization()
-    }
+//    func requestLocationPermission() {
+//        self.locationManager.requestAlwaysAuthorization()
+//    }
     
     
     func hasPermission() -> Bool {

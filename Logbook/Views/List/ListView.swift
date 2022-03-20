@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
-import PopupView
 import SPAlert
 import AlertKit
 import KeyboardAvoider
+import PermissionsSwiftUI
 
 struct ListView: View {
     @StateObject var listViewModel = ListViewModel()
@@ -18,24 +18,19 @@ struct ListView: View {
     @State private var editMode = EditMode.inactive
     @State private var searchText = ""
     @State private var shouldLoad = true
+    @State var logbooks: [LogbookModel] = []
     
     @State private var showAddSheet: Bool = false
     @State private var showRefuelSheet: Bool = false
     @State private var showSettingsSheet: Bool = false
     @State private var showActivitySheet: Bool = false
     @State private var showExportSheet: Bool = false
-    @State private var loadedAmount = 0.0
-    let timer = Timer.publish(every: 0.25, on: .main, in: .common).autoconnect()
     
-    @AppStorage("openAddViewOnStart") private var openAddViewOnStart = true
-    @AppStorage("allowLocationTracking") private var allowLocationTracking = true
+    @State private var showModal: Bool = true
     
-    let readableDateFormat: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
-        dateFormatter.locale = Locale(identifier: "de")
-        return dateFormatter
-    }()
+    @Preference(\.openAddViewOnStart) var openAddViewOnStart
+    @Preference(\.allowLocationTracking) var allowLocationTracking
+    
     
     
     @Environment(\.presentationMode) var presentationMode
@@ -47,38 +42,12 @@ struct ListView: View {
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(searchResults) { logbook in
-                    Section {
-                        NavigationLink {
-                            DetailView(logbookId: logbook._id)
-                        } label: {
-                            HStack {
-                                Image(logbook.vehicleTyp == .VW ? "car_vw" : logbook.vehicleTyp == .Ferrari ? "logo_small" : "porsche")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .scaleEffect(logbook.vehicleTyp == .Porsche ? 1.2 : 1)
-                                    .frame(width: 80, height: 75)
-                                    .offset(y: logbook.vehicleTyp == .Porsche ? -5 : 0)
-                                    .clipShape(Circle())
-                                    .overlay(Circle().stroke(logbook.vehicleTyp == .VW ? Color.blue : logbook.vehicleTyp == .Ferrari ? Color.red : Color.gray, lineWidth: 1).opacity(0.5))
-                                VStack(alignment: .leading) {
-                                    Text(logbook.driveReason)
-                                        .font(.headline)
-                                    Text(self.readableDateFormat.string(from: logbook.date))
-                                    Text(logbook.driver.id)
-                                        .font(.subheadline)
-                                }.padding(.leading, 8)
-                            }.padding(.init(top: 6, leading: 0, bottom: 6, trailing: 0))
-                        }
-                    }
-                }
+            List(listViewModel.logbooks) { logbook in
+                ListRowView(logbook: logbook)
             }
             .listStyle(InsetGroupedListStyle())
             .refreshable {
-                Task {
-                    await listViewModel.fetchLogbooks()
-                }
+                await listViewModel.fetchLogbooks()
             }
             .navigationTitle("Fahrtenbuch")
             .toolbar(content: {
@@ -95,20 +64,7 @@ struct ListView: View {
             .overlay(
                 Group {
                     if listViewModel.isLoading {
-                        if loadedAmount != 100 {
-                            VStack {
-                                ProgressView(loadingText, value: loadedAmount, total: 100)
-                                    .onReceive(timer) { _ in
-                                        if loadedAmount < 100 {
-                                            loadedAmount += 1
-                                        }
-                                    }
-                                    .padding(50)
-                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            }
-                        } else {
-                            CustomProgressView(message: "Laden")
-                        }
+                        CustomProgressView(message: "Laden")
                     }
                     
                     if(listViewModel.errorMessage != nil) {
@@ -127,15 +83,14 @@ struct ListView: View {
             .alert(isPresented: $listViewModel.showAlert, content: {
                 Alert(title: Text("Fehler!"), message: Text(listViewModel.errorMessage ?? ""))
             })
-            .searchable(text: $searchText)
-            .onAppear {
+            .searchable(text: $listViewModel.searchTerm)
+            .autocapitalization(.none)
+            .task {
                 if shouldLoad {
-                    
-                    Task {
-                        await listViewModel.fetchLogbooks()
-                    }
+                    await listViewModel.fetchLogbooks()
                     shouldLoad = false
                 }
+                
             }
             
             .onReceive(listViewModel.$logbooks) { newValue in
@@ -148,8 +103,26 @@ struct ListView: View {
                     }
                 }
             }
+            .uses(alertManager)
+            .JMModal(showModal: $showModal, for: [.locationAlways, .notification], autoDismiss: true, autoCheckAuthorization: true, restrictDismissal: false, onAppear: {}, onDisappear: {
+                if !locationService.hasPermission() {
+                    allowLocationTracking = false
+                }
+                if openAddViewOnStart {
+                    if listViewModel.isLoading {
+                        return
+                    }
+                    showAddSheet = true
+                }
+            })
+            .changeHeaderTo("Berechtigungen")
+            .changeHeaderDescriptionTo("Damit du bestimmte Funktionen dieser App benutzen kannst, musst du entsprechende Berechtigungen freigeben.")
+            .changeBottomDescriptionTo("Diese Berechtigungen sind notwendig, damit alle Features richtig funktionieren. Ohne die Standortfreigabe ist es nicht möglich, das Tankstellen Feature zu benutzen. Ohne die Erlaubnis für Benachrichtigungen bekommst du keine Information, wenn du dich dem ARB 19 näherst.")
+            .setPermissionComponent(for: .notification, title: "Benachrichtigungen")
+            .setPermissionComponent(for: .notification, description: "Erlaube Benachrichtigungen")
+            .setPermissionComponent(for: .locationAlways, title: "Standort immer")
+            .setPermissionComponent(for: .locationAlways, description: "Dauerhafte Standortfreigabe erlauben")
         }
-        .uses(alertManager)
     }
     
     
@@ -208,35 +181,12 @@ struct ListView: View {
     }
     
     var searchResults: [LogbookModel] {
-        if searchText.isEmpty {
-            return listViewModel.logbooks
-        } else {
-            return listViewModel.logbooks.filter{$0.driveReason.contains(searchText) || readableDateFormat.string(from: $0.date).contains(searchText) || $0.driver.id.contains(searchText)}
-        }
-    }
-    
-    var loadingText: String {
-        switch loadedAmount {
-        case 0...10:
-            return "Server anfragen..."
-        case 20...30:
-            return "Starte..."
-        case 30...40:
-            return "Datenbank initialisieren..."
-        case 40...50:
-            return "Starte..."
-        case 50...60:
-            return "Anfrage überprüfen..."
-        case 60...70:
-            return "Authentifizierung..."
-        case 70...80:
-            return "Warten..."
-        case 80...90:
-            return "Verbindung aufbauen..."
-        case 90...100:
-            return "Daten abrufen..."
-        default:
-            return "Laden..."
+        withAnimation {
+            if searchText.isEmpty {
+                return listViewModel.logbooks
+            } else {
+                return listViewModel.logbooks.filter{$0.driveReason.contains(searchText) || $0.driver.id.contains(searchText)}
+            }
         }
     }
 }

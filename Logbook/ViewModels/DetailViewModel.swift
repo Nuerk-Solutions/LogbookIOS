@@ -37,7 +37,10 @@ class DetailViewModel: ObservableObject {
         errorMessage = nil
         if let logbookId = logbookId {
             let apiService = APIService(urlString: "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/find/\(logbookId)")
-            isLoading.toggle()
+            
+            withAnimation {
+                isLoading.toggle()
+            }
             
             
             
@@ -61,13 +64,17 @@ class DetailViewModel: ObservableObject {
                         print(error)
                     case.success(let data):
                         print("Sucess Fetch All:", data)
-                        self.isLoading.toggle()
+                        withAnimation {
+                            self.isLoading.toggle()
+                        }
                         break
                     }
                 }
                 .responseDecodable(of: LogbookModel.self, decoder: decoder) { (response) in
                     print(response)
-                    self.logbook = response.value!
+                    withAnimation {
+                        self.logbook = response.value!
+                    }
                 }
             
             

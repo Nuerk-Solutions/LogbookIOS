@@ -37,12 +37,12 @@
       }
     },
     {
-      "identity" : "popupview",
+      "identity" : "permissionsswiftui",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/exyte/PopupView.git",
+      "location" : "https://github.com/jevonmao/PermissionsSwiftUI",
       "state" : {
-        "revision" : "4cf8c01473282b3711e6780bd78ef81add97f6e2",
-        "version" : "1.0.3"
+        "revision" : "91c75340567793d9737aa16a9b0f4044db1f87cf",
+        "version" : "1.5.4"
       }
     },
     {
@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
       "state" : {
-        "revision" : "a72df4849408da7e5d3c1b586797b7c601c41d1b",
-        "version" : "5.12.1"
+        "revision" : "2e63d0061da449ad0ed130768d05dceb1496de44",
+        "version" : "5.12.5"
       }
     },
     {
@@ -68,8 +68,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ivanvorobei/SPAlert",
       "state" : {
-        "revision" : "dd26764492c0cc7d4855e3a93adee79f92f84cd0",
-        "version" : "4.1.0"
+        "revision" : "0df499e9f5dc43790ac65f227821acfa7b05b168",
+        "version" : "4.2.0"
+      }
+    },
+    {
+      "identity" : "swiftui-introspect",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/siteline/SwiftUI-Introspect",
+      "state" : {
+        "revision" : "f2616860a41f9d9932da412a8978fec79c06fe24",
+        "version" : "0.1.4"
       }
     }
   ],
