@@ -9,7 +9,8 @@ import SwiftUI
 import SPAlert
 import AlertKit
 import KeyboardAvoider
-import PermissionsSwiftUI
+import PermissionsSwiftUINotification
+import PermissionsSwiftUILocationAlways
 
 struct ListView: View {
     @StateObject var listViewModel = ListViewModel()
@@ -64,7 +65,7 @@ struct ListView: View {
             .overlay(
                 Group {
                     if listViewModel.isLoading {
-                        CustomProgressView(message: "Laden")
+                        CustomProgressView(message: "Laden...")
                     }
                     
                     if(listViewModel.errorMessage != nil) {

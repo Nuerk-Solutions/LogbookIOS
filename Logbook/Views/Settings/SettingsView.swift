@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
-import PermissionsSwiftUI
 import CorePermissionsSwiftUI
+import PermissionsSwiftUINotification
+import PermissionsSwiftUILocationAlways
 
 struct SettingsView: View {
     

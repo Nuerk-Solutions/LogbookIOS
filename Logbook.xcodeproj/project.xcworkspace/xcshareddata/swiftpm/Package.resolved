@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/jevonmao/PermissionsSwiftUI",
       "state" : {
-        "revision" : "91c75340567793d9737aa16a9b0f4044db1f87cf",
-        "version" : "1.5.4"
+        "branch" : "main",
+        "revision" : "b19c90ca935ca15cc3b8d5ecc2800c320d3d6a0d"
       }
     },
     {

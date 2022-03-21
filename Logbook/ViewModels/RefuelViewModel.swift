@@ -61,10 +61,11 @@ class RefuelViewModel: ObservableObject {
         
         do {
             patrolStations = try await apiService.getJSON()
+            patrolStations.stations = patrolStations.stations.filter { $0.isOpen && $0.price != nil}
+            
             print("Patrol Station Amount: \(patrolStations.stations.count)")
             consoleManager.print("Patrol Station Amount: \(patrolStations.stations.count)")
-            print(patrolStations)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 locationService.locationManager.stopUpdatingLocation()
                 consoleManager.print("Stopped updating location in Refuel Model")
             }

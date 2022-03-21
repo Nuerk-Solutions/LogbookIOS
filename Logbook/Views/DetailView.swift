@@ -19,21 +19,17 @@ struct DetailView: View {
                 AddLogbookView(currentLogbook: detailViewModel.logbook!, isReadOnly: true, showSheet: $none)
             }
         }
-        .overlay(
-            Group {
+        .overlay {
                 if detailViewModel.isLoading {
                     CustomProgressView(message: "Laden...")
                 }
-            }
-        )
+        }
         .alert(isPresented: $detailViewModel.showAlert, content: {
             Alert(title: Text("Fehler!"), message: Text(detailViewModel.errorMessage ?? ""))
         })
-        .onAppear {
-            Task {
-                detailViewModel.logbookId = logbookId
-                await detailViewModel.fetchLogbookById()
-            }
+        .task {
+            detailViewModel.logbookId = logbookId
+            await detailViewModel.fetchLogbookById()
         }
     }
 }

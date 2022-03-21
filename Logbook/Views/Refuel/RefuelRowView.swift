@@ -15,7 +15,7 @@ struct RefuelRowView: View {
     @StateObject var alertManager = AlertManager()
     
     var body: some View {
-        let price: String = station.price == nil ? "-1" : "\(station.price!)"
+        let price: String = "\(station.price!)"
         let price_1 = price[price.index(price.startIndex, offsetBy: 0)..<price.index(price.startIndex, offsetBy: 4)]
         let price_2 = price[price.index(price.startIndex, offsetBy: 4)..<price.index(price.startIndex, offsetBy: 5)]
         Section {
@@ -27,26 +27,19 @@ struct RefuelRowView: View {
                         Text("\(station.brand)").font(.callout).underline()
                         Spacer()
                         HStack(spacing: 2) {
-                            if station.price == nil || price == "-1" {
-                                Text("Kein Preis vorhanden").bold()
-                            } else {
-                                Text("Preis: ")
-                                Text("\(String(price_1))").bold()
-                                Text("\(String(price_2))").font(.caption2).offset(y: -5)
-                                Text("€")
-                            }
+                            Text("Preis: ")
+                            Text("\(String(price_1))").bold()
+                            Text("\(String(price_2))").font(.caption2).offset(y: -5)
+                            Text("€")
                         }
                         Text("Entfernung: \(station.dist, specifier: "%.2f") km")
                         Spacer()
                         Text("\(station.street) \(station.houseNumber)").font(.subheadline)
-                        if(!station.isOpen) {
-                            Text("Tankstelle geschlossen!").foregroundColor(.red).bold()
-                        }
                         Spacer()
                     }
                 }
             }
-            .listRowBackground(selectedVehicle == .Porsche && station.brand.lowercased().contains("shell") ? Color.orange.opacity(0.25) : Color(.secondarySystemGroupedBackground))
+            .listRowBackground(selectedVehicle == .Porsche && station.brand.lowercased().contains("shell") ? Color.orange.opacity(0.5) : Color(.secondarySystemGroupedBackground))
             .foregroundColor(.primary)
         }
         .uses(alertManager)

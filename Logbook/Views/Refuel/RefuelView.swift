@@ -19,7 +19,7 @@ struct RefuelView: View {
     var body: some View {
         Form {
             Section(header: Text("Informationen zum Tanken")) {
-                Picker("Fahrzeug", selection: $selectedVehicle) {
+                Picker("Fahrzeug", selection: $selectedVehicle.animation()) {
                     ForEach(VehicleEnum.allCases) { vehicle in
                         Text(vehicle.id).tag(vehicle)
                     }
@@ -53,7 +53,8 @@ struct RefuelView: View {
             if(refuelViewModel.isLoading || refuelViewModel.patrolStations.stations.isEmpty) {
                 Text("Laden...")
             } else {
-                Section(header: Text("Tankstellen")) {
+                let detailFuelText: String = selectedVehicle == .Porsche ? "e10" : selectedVehicle == .Ferrari ? "e5" : "Diesel"
+                Section(header: Text("Tankstellen (\(detailFuelText))")) {
                     List(refuelViewModel.patrolStations.stations) { station in
                         RefuelRowView(station: station, selectedVehicle: $selectedVehicle)
                             .transition(.slide)
