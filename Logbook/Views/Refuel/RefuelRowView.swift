@@ -10,7 +10,7 @@ import AlertKit
 
 struct RefuelRowView: View {
     
-    @State var station: StationModel
+    var station: StationModel
     @Binding var selectedVehicle: VehicleEnum
     @StateObject var alertManager = AlertManager()
     

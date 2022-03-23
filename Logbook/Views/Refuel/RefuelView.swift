@@ -56,7 +56,6 @@ struct RefuelView: View {
                     Section(header: Text("Tankstellen (\(detailFuelText))")) {
                         List(refuelViewModel.patrolStations.stations) { station in
                             RefuelRowView(station: station, selectedVehicle: $selectedVehicle)
-                                .transition(.slide)
                         }
                     }
                     .headerProminence(.increased)
