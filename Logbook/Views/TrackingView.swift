@@ -45,6 +45,9 @@ struct TrackingView: View {
 //            }
             locationService.locationManager.startUpdatingLocation()
         }
+        .onDisappear {
+            locationService.locationManager.stopUpdatingLocation()
+        }
     }
     
     var coordinate: CLLocationCoordinate2D? {

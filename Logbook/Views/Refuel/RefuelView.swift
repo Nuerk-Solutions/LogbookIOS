@@ -14,7 +14,6 @@ struct RefuelView: View {
     @State private var selectedVehicle: VehicleEnum = VehicleEnum.Ferrari
     @StateObject var alertManager = AlertManager()
     @EnvironmentObject private var locationService: LocationService
-    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         Form {
@@ -49,29 +48,33 @@ struct RefuelView: View {
             }
             .headerProminence(.increased)
             
-            
-            if(refuelViewModel.isLoading || refuelViewModel.patrolStations.stations.isEmpty) {
-                Text("Laden...")
-            } else {
-                let detailFuelText: String = selectedVehicle == .Porsche ? "e10" : selectedVehicle == .Ferrari ? "e5" : "Diesel"
-                Section(header: Text("Tankstellen (\(detailFuelText))")) {
-                    List(refuelViewModel.patrolStations.stations) { station in
-                        RefuelRowView(station: station, selectedVehicle: $selectedVehicle)
-                            .transition(.slide)
+            if Reachability.isConnectedToNetwork() {
+                if(refuelViewModel.isLoading || refuelViewModel.patrolStations.stations.isEmpty) {
+                    Text("Laden...")
+                } else {
+                    let detailFuelText: String = selectedVehicle == .Porsche ? "e10" : selectedVehicle == .Ferrari ? "e5" : "Diesel"
+                    Section(header: Text("Tankstellen (\(detailFuelText))")) {
+                        List(refuelViewModel.patrolStations.stations) { station in
+                            RefuelRowView(station: station, selectedVehicle: $selectedVehicle)
+                                .transition(.slide)
+                        }
                     }
+                    .headerProminence(.increased)
                 }
-                .headerProminence(.increased)
             }
         }
         
         .uses(alertManager)
         
         .alert(isPresented: $refuelViewModel.showAlert, content: {
-            Alert(title: Text("Fehler!"), message: Text(refuelViewModel.errorMessage ?? ""), dismissButton: .default(Text("OK"), action: {
-                self.presentationMode.wrappedValue.dismiss()
-            }))
+            Alert(title: Text("Fehler!"), message: Text(refuelViewModel.errorMessage ?? ""), dismissButton: .default(Text("OK")))
         })
         .onAppear {
+            if !Reachability.isConnectedToNetwork() {
+                refuelViewModel.errorMessage = "Bitte stelle sicher das du eine Verbindung zum Internet hast, um die mächsten Tankstellen anzuzeigen!"
+                refuelViewModel.showAlert = true
+                return
+            }
             if locationService.authorizationStatus == .denied {
                 refuelViewModel.showAlert = true
                 refuelViewModel.errorMessage = "Bitte gib den Standort frei"

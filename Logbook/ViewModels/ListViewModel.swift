@@ -55,6 +55,15 @@ class ListViewModel: ObservableObject {
         //        defer {
         //            isLoading.toggle()
         //        }
+        
+        
+        if !Reachability.isConnectedToNetwork() {
+            self.errorMessage = "Bitte stelle sicher das du eine Verbindung zum Internet hast!"
+            self.showAlert = true
+            self.isLoading = false
+            return
+        }
+        
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(dateFormatter)
         //            logbooks = try await apiService.getJSON(dateDecodingStrategy: .formatted(dateFormatter))

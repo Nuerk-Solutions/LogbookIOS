@@ -22,6 +22,19 @@ class RefuelViewModel: ObservableObject {
         showAlert = false
         errorMessage = nil
         
+        withAnimation {
+            isLoading.toggle()
+        }
+        
+        defer { // Defer means that is executed after all is finished
+            withAnimation {
+                isLoading.toggle()
+            }
+        }
+        
+        if !Reachability.isConnectedToNetwork() {
+            return
+        }
         
         if(!locationService.hasPermission()) {
             self.showAlert = true
@@ -48,16 +61,6 @@ class RefuelViewModel: ObservableObject {
         
         let apiService = APIService(urlString: urlString)
         
-        withAnimation {
-            
-            isLoading.toggle()
-        }
-        
-        defer { // Defer means that is executed after all is finished
-            withAnimation {
-                isLoading.toggle()
-            }
-        }
         
         do {
             patrolStations = try await apiService.getJSON()
