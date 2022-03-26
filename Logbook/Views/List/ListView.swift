@@ -32,8 +32,6 @@ struct ListView: View {
     @Preference(\.openAddViewOnStart) var openAddViewOnStart
     @Preference(\.allowLocationTracking) var allowLocationTracking
     
-    
-    
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject private var locationService: LocationService
     
