@@ -19,6 +19,7 @@ struct SettingsView: View {
     @Preference(\.openActivityViewAfterExport) var openActivityViewAfterExport
     @Preference(\.developerconsole) var developerconsole
     @Preference(\.measureSpeed) var measureSpeed
+    @Preference(\.hideKeyboardOnDrag) var hideKeyboardOnDrag
     @EnvironmentObject private var locationService: LocationService
     
     @State private var showExportSheet: Bool = false
@@ -72,6 +73,9 @@ struct SettingsView: View {
                     }
                     Toggle(isOn: $openActivityViewAfterExport) {
                         Text("Aktivitätsansicht nach dem Export öffnen")
+                    }
+                    Toggle(isOn: $hideKeyboardOnDrag) {
+                        Text("Verstecke Tastatur bei berühren")
                     }
                 } header: {
                     Text("Funktionen")

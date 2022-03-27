@@ -70,6 +70,9 @@ final class Preferences {
     
     @UserDefault("measureSpeed")
     var measureSpeed: Bool = false
+    
+    @UserDefault("hideKeyboardOnDrag")
+    var hideKeyboardOnDrag: Bool = false
 }
 
 @propertyWrapper
