@@ -171,9 +171,9 @@ struct ListView: View {
                     CustomProgressView(message: "Laden...")
                 } else {
                     AddLogbookView(showSheet: $showAddSheet)
-                        .avoidKeyboard()
+//                        .avoidKeyboard()
                         .environmentObject(listViewModel)
-                        .ignoresSafeArea(.all, edges: .all)
+                        .ignoresSafeArea(.keyboard, edges: .bottom)
                 }
             })
         )

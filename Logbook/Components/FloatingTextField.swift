@@ -22,16 +22,7 @@ struct FloatingTextField: View {
                 .offset(y: offset)
                 .scaleEffect(scaleEffect, anchor: .leading)
             TextField("", text: text)
-                .submitLabel(.done)
-                .focused($isInputActive)
-                .toolbar {
-                    ToolbarItemGroup(placement: .keyboard) {
-                        Spacer()
-                        Button("Fertig") {
-                            isInputActive = false
-                        }
-                    }
-                }.ignoresSafeArea(.all, edges: .all)
+//                .focused($isInputActive)
         }
         .padding(.top, 15)
         .padding(.bottom, 5)
