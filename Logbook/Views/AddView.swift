@@ -279,24 +279,28 @@ struct AddLogbookView: View {
                     currentLogbook.date = Date.now
                 }
             }
-            .navigationTitle("Neuer Eintrag")
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle(isReadOnly ? "" : "Neuer Eintrag")
+            .navigationBarTitleDisplayMode(isReadOnly ? .inline : .automatic)
             
             .toolbar{
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        saveNewLogbook()
-                    } label: {
-                        Text("Speichern")
+                    if !isReadOnly {
+                        Button {
+                            saveNewLogbook()
+                        } label: {
+                            Text("Speichern")
+                        }
                     }
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        showSheet.toggle()
-                    } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .resizable()
-                            .frame(width: 30, height: 30, alignment: .center)
+                    if !isReadOnly {
+                        Button {
+                            showSheet.toggle()
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .resizable()
+                                .frame(width: 30, height: 30, alignment: .center)
+                        }
                     }
                 }
                 
@@ -306,6 +310,7 @@ struct AddLogbookView: View {
                         isInputActive = false
                     }
                 }
+                
             }
         }
     }
