@@ -41,7 +41,7 @@ class RefuelViewModel: ObservableObject {
             self.errorMessage = "Bitte gib den Standort frei"
            return
         }
-//        locationService.locationManager.startUpdatingLocation()
+        locationService.locationManager.startUpdatingLocation()
         consoleManager.print("Init Location Updates")
         let lat = locationService.locationManager.location?.coordinate.latitude
         consoleManager.print("Lat: \(lat!)")
@@ -69,7 +69,7 @@ class RefuelViewModel: ObservableObject {
             print("Patrol Station Amount: \(patrolStations.stations.count)")
             consoleManager.print("Patrol Station Amount: \(patrolStations.stations.count)")
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                locationService.locationManager.stopUpdatingLocation()
+                locationService.locationManager.stopUpdatingLocation()
                 consoleManager.print("Stopped updating location in Refuel Model")
             }
             
