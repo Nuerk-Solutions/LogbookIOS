@@ -52,12 +52,21 @@ struct AddLogbookView: View {
                     })
                     .pickerStyle(SegmentedPickerStyle())
                     
+                    
                     // Date picker
-                    DatePicker("Datum",
-                               selection: $currentLogbook.date,
-                               in: latestSelectedLogbook.date...Date(),
-                               displayedComponents: [.date, .hourAndMinute])
-                    .environment(\.locale, Locale.init(identifier: "de_DE"))
+                    if isReadOnly {
+                        DatePicker("Datum",
+                                   selection: $currentLogbook.date,
+                                   displayedComponents: [.date, .hourAndMinute])
+                        .environment(\.locale, Locale.init(identifier: "de_DE"))
+                    } else {
+                        DatePicker("Datum",
+                                   selection: $currentLogbook.date,
+                                   in: latestSelectedLogbook.date...Date(),
+                                   displayedComponents: [.date, .hourAndMinute])
+                        .environment(\.locale, Locale.init(identifier: "de_DE"))
+                    }
+                    
                     
                     // Reason
                     FloatingTextField(title: "Reiseziel", text: $currentLogbook.driveReason)
