@@ -31,7 +31,7 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.startUpdatingLocation()
+//        locationManager.startUpdatingLocation()
         
         let geoFenceRegion: CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(51.03650, 13.68830), radius: 550, identifier: "ARB 19")
         

@@ -43,10 +43,10 @@ struct TrackingView: View {
 //            if !locationService.hasPermission() {
 //                locationService.requestLocationPermission()
 //            }
-            locationService.locationManager.startUpdatingLocation()
+//            locationService.locationManager.startUpdatingLocation()
         }
         .onDisappear {
-            locationService.locationManager.stopUpdatingLocation()
+//            locationService.locationManager.stopUpdatingLocation()
         }
     }
     

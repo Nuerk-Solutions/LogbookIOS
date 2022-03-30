@@ -35,7 +35,7 @@ struct SettingsView: View {
                     }
                     .onChange(of: allowLocationTracking) { newValue in
                         if !newValue {
-                            locationService.locationManager.stopUpdatingLocation()
+//                            locationService.locationManager.stopUpdatingLocation()
                         } else {
                             showLocationPermissionSheet = true
                         }
@@ -88,10 +88,10 @@ struct SettingsView: View {
                     .onChange(of: developerconsole) { newValue in
                             consoleManager.isVisible = newValue
                         if !newValue {
-                            locationService.locationManager.stopUpdatingLocation()
+//                            locationService.locationManager.stopUpdatingLocation()
                         } else {
                             if measureSpeed {
-                                locationService.locationManager.startUpdatingLocation()
+//                                locationService.locationManager.startUpdatingLocation()
                             }
                         }
                     }
