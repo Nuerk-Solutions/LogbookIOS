@@ -285,7 +285,9 @@ struct AddLogbookView: View {
             }
             .onChange(of: scenePhase) { newPhase in
                 if newPhase == .active {
+                    if !isReadOnly {
                     currentLogbook.date = Date.now
+                    }
                 }
             }
             .navigationTitle(isReadOnly ? "" : "Neuer Eintrag")
