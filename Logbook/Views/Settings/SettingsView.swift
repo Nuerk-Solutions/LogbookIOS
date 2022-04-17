@@ -78,6 +78,9 @@ struct SettingsView: View {
                     Toggle(isOn: $hideKeyboardOnDrag) {
                         Text("Verstecke Tastatur bei berühren")
                     }
+                    Toggle(isOn: $usePagination) {
+                        Text("Seitenweises laden der Einträge")
+                    }
                 } header: {
                     Text("Funktionen")
                 }

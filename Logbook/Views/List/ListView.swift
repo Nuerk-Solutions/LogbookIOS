@@ -31,6 +31,7 @@ struct ListView: View {
     
     @Preference(\.openAddViewOnStart) var openAddViewOnStart
     @Preference(\.allowLocationTracking) var allowLocationTracking
+    @Preference(\.usePagination) var usePagination
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject private var locationService: LocationService
@@ -42,13 +43,15 @@ struct ListView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(listViewModel.logbooks, id: \.id) { logbook in
+                ForEach(listViewModel.logbooks) { logbook in
                     ListRowView(logbook: logbook)
                 }
+                if usePagination && !listViewModel.logbookListFull {
                 ProgressView()
                     .task {
                         await listViewModel.fetchLogbooks()
                     }
+                }
             }
             .listStyle(InsetGroupedListStyle())
             .refreshable {
@@ -90,13 +93,13 @@ struct ListView: View {
             })
             .searchable(text: $listViewModel.searchTerm)
             .autocapitalization(.none)
-            //            .task {
-            //                if shouldLoad {
-            //                    await listViewModel.fetchAllLogbooks()
-            //                    shouldLoad = false
-            //                }
-            //
-            //            }
+                        .task {
+                            if shouldLoad || !usePagination {
+                                await listViewModel.fetchAllLogbooks()
+                                shouldLoad = false
+                            }
+            
+                        }
             
             .onReceive(listViewModel.$logbooks) { newValue in
                 if openAddViewOnStart {
