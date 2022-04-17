@@ -20,6 +20,7 @@ struct SettingsView: View {
     @Preference(\.developerconsole) var developerconsole
     @Preference(\.measureSpeed) var measureSpeed
     @Preference(\.hideKeyboardOnDrag) var hideKeyboardOnDrag
+    @Preference(\.usePagination) var usePagination
     @EnvironmentObject private var locationService: LocationService
     
     @State private var showExportSheet: Bool = false

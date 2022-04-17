@@ -73,6 +73,9 @@ final class Preferences {
     
     @UserDefault("hideKeyboardOnDrag")
     var hideKeyboardOnDrag: Bool = false
+    
+    @UserDefault("usePagination")
+    var usePagination: Bool = true
 }
 
 @propertyWrapper

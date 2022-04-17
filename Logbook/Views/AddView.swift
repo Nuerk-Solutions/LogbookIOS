@@ -273,7 +273,7 @@ struct AddLogbookView: View {
                         }
                         
                         Task {
-                            await listViewModel.fetchLogbooks()
+                            await listViewModel.fetchAllLogbooks()
                         }
                     }
                 }

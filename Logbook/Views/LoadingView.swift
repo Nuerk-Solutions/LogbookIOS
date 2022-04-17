@@ -56,7 +56,7 @@ struct LoadingView: View {
                   haptic: .error,
                   completion: {
             Task {
-                await listViewModel.fetchLogbooks()
+                await listViewModel.fetchAllLogbooks()
             }
         })
     }

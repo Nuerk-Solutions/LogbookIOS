@@ -40,6 +40,22 @@ struct LogbookModel: Codable, Identifiable {
         self.driver = .Andrea
     }
     
+    init(with model: LogbookModel) {
+        self._id = model._id
+        self.distanceSinceLastAdditionalInformation = model.distanceSinceLastAdditionalInformation
+        self.additionalInformationCost = model.additionalInformationCost
+        self.additionalInformation = model.additionalInformation
+        self.additionalInformationTyp = model.additionalInformationTyp
+        self.driveReason = model.driveReason
+        self.date = model.date
+        self.distanceCost = model.distanceCost
+        self.distance = model.distance
+        self.newMileAge = model.newMileAge
+        self.currentMileAge = model.currentMileAge
+        self.vehicleTyp = model.vehicleTyp
+        self.driver = model.driver
+    }
+    
 }
 
 enum DriverEnum: String, CaseIterable, Identifiable, Codable {

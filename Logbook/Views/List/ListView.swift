@@ -41,12 +41,18 @@ struct ListView: View {
     
     var body: some View {
         NavigationView {
-            List(listViewModel.logbooks) { logbook in
-                ListRowView(logbook: logbook)
+            List {
+                ForEach(listViewModel.logbooks, id: \.id) { logbook in
+                    ListRowView(logbook: logbook)
+                }
+                ProgressView()
+                    .task {
+                        await listViewModel.fetchLogbooks()
+                    }
             }
             .listStyle(InsetGroupedListStyle())
             .refreshable {
-                await listViewModel.fetchLogbooks()
+                await listViewModel.fetchAllLogbooks()
             }
             .navigationTitle("Fahrtenbuch")
             .toolbar(content: {
@@ -84,13 +90,13 @@ struct ListView: View {
             })
             .searchable(text: $listViewModel.searchTerm)
             .autocapitalization(.none)
-            .task {
-                if shouldLoad {
-                    await listViewModel.fetchLogbooks()
-                    shouldLoad = false
-                }
-                
-            }
+            //            .task {
+            //                if shouldLoad {
+            //                    await listViewModel.fetchAllLogbooks()
+            //                    shouldLoad = false
+            //                }
+            //
+            //            }
             
             .onReceive(listViewModel.$logbooks) { newValue in
                 if openAddViewOnStart {
@@ -171,7 +177,7 @@ struct ListView: View {
                     CustomProgressView(message: "Laden...")
                 } else {
                     AddLogbookView(showSheet: $showAddSheet)
-//                        .avoidKeyboard()
+                    //                        .avoidKeyboard()
                         .environmentObject(listViewModel)
                         .ignoresSafeArea(.keyboard, edges: .bottom)
                 }
