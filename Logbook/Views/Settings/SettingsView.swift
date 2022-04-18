@@ -113,7 +113,7 @@ struct SettingsView: View {
                 
                 Section {
                     SettingsRowView(name: "Version", content: "1.0")
-                    SettingsRowView(name: "Build", content: "19")
+                    SettingsRowView(name: "Build", content: "23")
                 } header: {
                     Text("App")
                 }
