@@ -43,19 +43,30 @@ struct ListView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(listViewModel.logbooks) { logbook in
+                ForEach(listViewModel.logbooks.indices, id: \.self) { logbookIndex in
+                    let logbook = listViewModel.logbooks[logbookIndex]
                     ListRowView(logbook: logbook)
+                        .task {
+                            if logbookIndex == listViewModel.logbooks.count - 5 {
+                                    await listViewModel.fetchLogbooks()
+                            }
+                        }
                 }
                 if usePagination && !listViewModel.logbookListFull {
                 ProgressView()
                     .task {
-                        await listViewModel.fetchLogbooks()
+                        if shouldLoad {
+                            await listViewModel.fetchLogbooks()
+                            shouldLoad = false
+                        }
                     }
                 }
             }
             .listStyle(InsetGroupedListStyle())
             .refreshable {
-                await listViewModel.fetchAllLogbooks()
+                if !usePagination {
+                    await listViewModel.fetchAllLogbooks()
+                }
             }
             .navigationTitle("Fahrtenbuch")
             .toolbar(content: {
@@ -91,15 +102,13 @@ struct ListView: View {
             .alert(isPresented: $listViewModel.showAlert, content: {
                 Alert(title: Text("Fehler!"), message: Text(listViewModel.errorMessage ?? ""))
             })
-            .searchable(text: $listViewModel.searchTerm)
-            .autocapitalization(.none)
-                        .task {
-                            if shouldLoad || !usePagination {
-                                await listViewModel.fetchAllLogbooks()
-                                shouldLoad = false
-                            }
-            
-                        }
+//            .searchable(text: $listViewModel.searchTerm)
+            .task {
+                if shouldLoad && !usePagination {
+                    await listViewModel.fetchAllLogbooks()
+                    shouldLoad = false
+                }
+            }
             
             .onReceive(listViewModel.$logbooks) { newValue in
                 if openAddViewOnStart {

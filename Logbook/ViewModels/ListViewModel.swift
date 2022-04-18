@@ -18,9 +18,9 @@ class ListViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var searchTerm: String = ""
     
-    var logbookListFull = false
+    @Published var logbookListFull = false
     var currentPage = 0
-    let perPage = 15
+    let perPage = 10
     private var cancellable: AnyCancellable? = nil
     
     let session: Session
@@ -83,42 +83,17 @@ class ListViewModel: ObservableObject {
                 case.success(let data):
                     print("Sucess Fetch All:", data)
                     withAnimation {
-                        self.isLoading.toggle()
+                        self.isLoading = false
                     }
                     break
                 }
             }
             .publishDecodable(type: [LogbookModel].self, decoder: decoder)
-//            .sink { completion in
-//                switch(completion) {
-//                case .finished:
-//                    ()
-//                case .failure(let error):
-//                    print(error.localizedDescription)
-//                    self.errorMessage = error.localizedDescription
-//                    self.showAlert = true
-//                }
-//            } receiveValue: { [weak self](response) in
-////                withAnimation {
-//
-//                    switch response.result {
-//                    case .success(let logbooks):
-//                        self?.originalLogbooks = logbooks.map{ LogbookModel(with: $0)}
-//                        self?.isLoading = false
-//                    case .failure(let error):
-//                        print(error.localizedDescription)
-//                        self?.errorMessage = error.localizedDescription
-//                        self?.showAlert = true
-////                    }
-//                }
-//
-//            }
-
             .tryMap {$0.value}
             .receive(on: RunLoop.main)
-            .catch { _ in Just(self.logbooks)}
+            .catch { _ in Just(self.originalLogbooks)}
             .sink { [weak self] in
-                let logbooksString: [String] = (self?.logbooks.map { $0._id })!
+                let logbooksString: [String] = (self?.originalLogbooks.map { $0._id })!
                 if logbooksString.contains(($0?.last!._id)!) {
                     self?.logbookListFull = true
                     self?.isLoading = false
@@ -130,7 +105,7 @@ class ListViewModel: ObservableObject {
                     return logbooksString.contains(model._id)
                 })
 //                let array = $0.removeAll(where: {logbooksString.contains($0._id)})
-                self?.logbooks.append(contentsOf: asd ?? [])
+                self?.originalLogbooks.append(contentsOf: asd )
                 self?.isLoading = false
                 // If count of data receieved is less than perPage value then it is last page
                 // TODO: Impl in backend
@@ -140,31 +115,6 @@ class ListViewModel: ObservableObject {
                     self?.logbookListFull = true
                 }
             }
-        
-        
-//            .publishUnserialized()
-//            .tryMap { $0.data! }
-//            .decode(type: [LogbookModel].self, decoder: decoder)
-//            .receive(on: RunLoop.main)
-//            .catch { _ in Just(self.logbooks) }
-//            .sink { [weak self] in
-//                print("3")
-//                self?.currentPage += 1
-//                self?.logbooks.append(contentsOf: $0)
-//                print("1")
-//                // If count of data receieved is less than perPage value then it is last page
-//                // TODO: Impl in backend
-//
-//                if $0.count < self!.perPage {
-//                    self?.logbookListFull = true
-//                }
-//            }
-//            .responseDecodable(of: [LogbookModel].self, decoder: decoder) { (response) in
-//
-//                withAnimation {
-//                    self.originalLogbooks = response.value ?? []
-//                }
-//            }
     }
     
     @MainActor
