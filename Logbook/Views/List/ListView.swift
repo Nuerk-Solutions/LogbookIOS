@@ -53,7 +53,9 @@ struct ListView: View {
                         }
                 }
                 if usePagination && !listViewModel.logbookListFull {
-                ProgressView()
+                    ProgressView("Einträge laden (\(listViewModel.currentPage))")
+                    .frame(maxWidth: .infinity)
+                    .progressViewStyle(CircularProgressViewStyle(tint: .gray))
                     .task {
                         if shouldLoad {
                             await listViewModel.fetchLogbooks()
