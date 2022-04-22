@@ -47,7 +47,7 @@ struct ListView: View {
                     let logbook = listViewModel.logbooks[logbookIndex]
                     ListRowView(logbook: logbook)
                         .task {
-                            if logbookIndex == listViewModel.logbooks.count - 5 {
+                            if logbookIndex == listViewModel.logbooks.count - 10 {
                                     await listViewModel.fetchLogbooks()
                             }
                         }
@@ -76,7 +76,7 @@ struct ListView: View {
                     if allowLocationTracking {
                         RefuelButton
                     }
-                    SettingsButton.disabled(listViewModel.isLoading)
+//                    SettingsButton.disabled(listViewModel.isLoading)
                 }
                 ToolbarItemGroup(placement: .navigationBarLeading) {
                     AddButton.disabled(listViewModel.isLoading)
@@ -123,24 +123,24 @@ struct ListView: View {
                 }
             }
             .uses(alertManager)
-            .JMModal(showModal: $showModal, for: [.locationAlways, .notification], autoDismiss: true, autoCheckAuthorization: true, restrictDismissal: false, onAppear: {}, onDisappear: {
-                if !locationService.hasPermission() {
-                    allowLocationTracking = false
-                }
-                if openAddViewOnStart {
-                    if listViewModel.isLoading {
-                        return
-                    }
-                    showAddSheet = true
-                }
-            })
-            .changeHeaderTo("Berechtigungen")
-            .changeHeaderDescriptionTo("Damit du bestimmte Funktionen dieser App benutzen kannst, musst du entsprechende Berechtigungen freigeben.")
-            .changeBottomDescriptionTo("Diese Berechtigungen sind notwendig, damit alle Features richtig funktionieren. Ohne die Standortfreigabe ist es nicht möglich, das Tankstellen Feature zu benutzen. Ohne die Erlaubnis für Benachrichtigungen bekommst du keine Information, wenn du dich dem ARB 19 näherst.")
-            .setPermissionComponent(for: .notification, title: "Benachrichtigungen")
-            .setPermissionComponent(for: .notification, description: "Erlaube Benachrichtigungen")
-            .setPermissionComponent(for: .locationAlways, title: "Standort immer")
-            .setPermissionComponent(for: .locationAlways, description: "Dauerhafte Standortfreigabe erlauben")
+//            .JMModal(showModal: $showModal, for: [.locationAlways, .notification], autoDismiss: true, autoCheckAuthorization: true, restrictDismissal: false, onAppear: {}, onDisappear: {
+//                if !locationService.hasPermission() {
+//                    allowLocationTracking = false
+//                }
+//                if openAddViewOnStart {
+//                    if listViewModel.isLoading {
+//                        return
+//                    }
+//                    showAddSheet = true
+//                }
+//            })
+//            .changeHeaderTo("Berechtigungen")
+//            .changeHeaderDescriptionTo("Damit du bestimmte Funktionen dieser App benutzen kannst, musst du entsprechende Berechtigungen freigeben.")
+//            .changeBottomDescriptionTo("Diese Berechtigungen sind notwendig, damit alle Features richtig funktionieren. Ohne die Standortfreigabe ist es nicht möglich, das Tankstellen Feature zu benutzen. Ohne die Erlaubnis für Benachrichtigungen bekommst du keine Information, wenn du dich dem ARB 19 näherst.")
+//            .setPermissionComponent(for: .notification, title: "Benachrichtigungen")
+//            .setPermissionComponent(for: .notification, description: "Erlaube Benachrichtigungen")
+//            .setPermissionComponent(for: .locationAlways, title: "Standort immer")
+//            .setPermissionComponent(for: .locationAlways, description: "Dauerhafte Standortfreigabe erlauben")
         }
     }
     

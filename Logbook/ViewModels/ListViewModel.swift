@@ -20,7 +20,7 @@ class ListViewModel: ObservableObject {
     
     @Published var logbookListFull = false
     var currentPage = 0
-    let perPage = 10
+    let perPage = 25
     private var cancellable: AnyCancellable? = nil
     
     let session: Session
@@ -94,18 +94,17 @@ class ListViewModel: ObservableObject {
             .catch { _ in Just(self.originalLogbooks)}
             .sink { [weak self] in
                 let logbooksString: [String] = (self?.originalLogbooks.map { $0._id })!
-                if logbooksString.contains(($0?.last!._id)!) {
-                    self?.logbookListFull = true
-                    self?.isLoading = false
-                    return
-                }
+//                if logbooksString.contains(($0?.last!._id)!) {
+//                    self?.logbookListFull = true
+//                    self?.isLoading = false
+//                    return
+//                }
                 self?.currentPage += 1
-                var asd: [LogbookModel] = $0!
-                asd.removeAll(where: { model in
-                    return logbooksString.contains(model._id)
-                })
-//                let array = $0.removeAll(where: {logbooksString.contains($0._id)})
-                self?.originalLogbooks.append(contentsOf: asd )
+//                var asd: [LogbookModel] = $0!
+//                asd.removeAll(where: { model in
+//                    return logbooksString.contains(model._id)
+//                })
+                self?.originalLogbooks.append(contentsOf: $0! )
                 self?.isLoading = false
                 // If count of data receieved is less than perPage value then it is last page
                 // TODO: Impl in backend

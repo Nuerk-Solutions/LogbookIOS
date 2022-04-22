@@ -63,6 +63,11 @@
 		E9D18361276F3B95001A764E /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = E9D18360276F3B95001A764E /* AlertKit */; };
 		E9D4E6F42758FEBB003F36DA /* FloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */; };
 		E9D4E6FD27590483003F36DA /* NumberUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D4E6FC27590483003F36DA /* NumberUtils.swift */; };
+		E9D9B62A2812D78400DB2ED2 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D9B6292812D78400DB2ED2 /* TabBar.swift */; };
+		E9D9B62D2812D89700DB2ED2 /* InvoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D9B62C2812D89700DB2ED2 /* InvoiceView.swift */; };
+		E9D9B62F2812D9CF00DB2ED2 /* InvoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D9B62E2812D9CE00DB2ED2 /* InvoiceViewModel.swift */; };
+		E9D9B6312812E24600DB2ED2 /* InvoiceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D9B6302812E24600DB2ED2 /* InvoiceDetailView.swift */; };
+		E9D9B6332812E3ED00DB2ED2 /* InvoiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D9B6322812E3ED00DB2ED2 /* InvoiceModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +122,11 @@
 		E9C3A57627CA59BE0021EDD8 /* CustomProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressView.swift; sourceTree = "<group>"; };
 		E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextField.swift; sourceTree = "<group>"; };
 		E9D4E6FC27590483003F36DA /* NumberUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberUtils.swift; sourceTree = "<group>"; };
+		E9D9B6292812D78400DB2ED2 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		E9D9B62C2812D89700DB2ED2 /* InvoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceView.swift; sourceTree = "<group>"; };
+		E9D9B62E2812D9CE00DB2ED2 /* InvoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceViewModel.swift; sourceTree = "<group>"; };
+		E9D9B6302812E24600DB2ED2 /* InvoiceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetailView.swift; sourceTree = "<group>"; };
+		E9D9B6322812E3ED00DB2ED2 /* InvoiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +171,7 @@
 				E9472598276BBDA8006E6944 /* LogbookModel.swift */,
 				E96170E127AEECB2004CA43C /* NotificationModel.swift */,
 				E90BDEAC27C17A4400E642F0 /* PatrolStationModel.swift */,
+				E9D9B6322812E3ED00DB2ED2 /* InvoiceModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -181,6 +192,7 @@
 		E947259F276BC0C9006E6944 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E9D9B62B2812D88C00DB2ED2 /* Invoice */,
 				E98A0C5C27E763680038D133 /* List */,
 				E9A66A9D27E2731A004033F5 /* Refuel */,
 				E940ED0F27E0D3B900B2EAA7 /* Settings */,
@@ -191,6 +203,7 @@
 				E95C4F76278623C2009643B4 /* DetailView.swift */,
 				E98C59C22787812C0020381B /* AddView.swift */,
 				E9A66A9B27E24A89004033F5 /* TrackingView.swift */,
+				E9D9B6292812D78400DB2ED2 /* TabBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -204,6 +217,7 @@
 				E95C4F7827862ECA009643B4 /* DetailViewModel.swift */,
 				E90BDEAA27C1711500E642F0 /* RefuelViewModel.swift */,
 				E970ADC827C8F07C000149D1 /* ExportViewModel.swift */,
+				E9D9B62E2812D9CE00DB2ED2 /* InvoiceViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -331,6 +345,15 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		E9D9B62B2812D88C00DB2ED2 /* Invoice */ = {
+			isa = PBXGroup;
+			children = (
+				E9D9B62C2812D89700DB2ED2 /* InvoiceView.swift */,
+				E9D9B6302812E24600DB2ED2 /* InvoiceDetailView.swift */,
+			);
+			path = Invoice;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -426,6 +449,8 @@
 				E98E868A27C24CA9004F4714 /* CoreDataModel.xcdatamodeld in Sources */,
 				E9C3A57727CA59BE0021EDD8 /* CustomProgressView.swift in Sources */,
 				E95BBA4C27C15217006F2EA9 /* RefuelView.swift in Sources */,
+				E9D9B62D2812D89700DB2ED2 /* InvoiceView.swift in Sources */,
+				E9D9B62F2812D9CF00DB2ED2 /* InvoiceViewModel.swift in Sources */,
 				E96170E027AEEAE4004CA43C /* NotificationService.swift in Sources */,
 				E90C2AC1276DB175005C1281 /* LoadingView.swift in Sources */,
 				E94725A5276BC15B006E6944 /* JsonDecoderExtension.swift in Sources */,
@@ -433,9 +458,11 @@
 				E907B9A127DE3A370082FB9B /* Interceptor.swift in Sources */,
 				E98A0C4C27E73A190038D133 /* Preferences.swift in Sources */,
 				E970ADC127C82B6B000149D1 /* ShareSheet.swift in Sources */,
+				E9D9B6312812E24600DB2ED2 /* InvoiceDetailView.swift in Sources */,
 				E91978FC27899B720002598A /* ShapeUtils.swift in Sources */,
 				E90BDEAB27C1711500E642F0 /* RefuelViewModel.swift in Sources */,
 				E95C4F77278623C2009643B4 /* DetailView.swift in Sources */,
+				E9D9B6332812E3ED00DB2ED2 /* InvoiceModel.swift in Sources */,
 				E90B2472276E90C500B185EF /* FloatingTextEditor.swift in Sources */,
 				E95C4F73278620D4009643B4 /* ListView.swift in Sources */,
 				E90B2474276E9C6A00B185EF /* StringExtension.swift in Sources */,
@@ -447,6 +474,7 @@
 				E9472599276BBDA8006E6944 /* LogbookModel.swift in Sources */,
 				E9D4E6F42758FEBB003F36DA /* FloatingTextField.swift in Sources */,
 				E95C4F7927862ECA009643B4 /* DetailViewModel.swift in Sources */,
+				E9D9B62A2812D78400DB2ED2 /* TabBar.swift in Sources */,
 				E94725AD276BC342006E6944 /* AddViewModel.swift in Sources */,
 				E940ED1127E0D3C700B2EAA7 /* SettingsRowView.swift in Sources */,
 				E98C59C32787812C0020381B /* AddView.swift in Sources */,
