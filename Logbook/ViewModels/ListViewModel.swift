@@ -42,11 +42,6 @@ class ListViewModel: ObservableObject {
         }
     }
     
-    private let dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-        return dateFormatter
-    }()
     
     
     @MainActor
@@ -62,7 +57,7 @@ class ListViewModel: ObservableObject {
         
         
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+        decoder.dateDecodingStrategy = .formatted(.standardT)
         let url = "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/find/all?sort=-date&page=\(currentPage)&limit=\(perPage)"
         print(url)
         self.cancellable = session.request(url, method: .get)
@@ -131,7 +126,7 @@ class ListViewModel: ObservableObject {
         }
         
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+        decoder.dateDecodingStrategy = .formatted(.standardT)
         //            logbooks = try await apiService.getJSON(dateDecodingStrategy: .formatted(dateFormatter))
         session.request("https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/find/all?sort=-date", method: .get)
             .validate(statusCode: 200..<201)

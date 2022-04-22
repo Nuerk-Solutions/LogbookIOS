@@ -9,6 +9,8 @@ import SwiftUI
 
 struct InvoiceView: View {
     
+    @StateObject private var invoiceViewModel: InvoiceViewModel = InvoiceViewModel()
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -16,6 +18,7 @@ struct InvoiceView: View {
                     ForEach(DriverEnum.allCases, id: \.self) {item in
                         NavigationLink {
                             InvoiceDetailView(driver: item)
+                                .environmentObject(invoiceViewModel)
                         } label: {
                             VStack {
                                 Text(item.rawValue)
@@ -67,5 +70,6 @@ struct AnimatedBackground: View {
 struct InvoiceView_Previews: PreviewProvider {
     static var previews: some View {
         InvoiceView()
+            .environmentObject(InvoiceViewModel())
     }
 }

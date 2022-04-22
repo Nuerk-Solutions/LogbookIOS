@@ -17,7 +17,7 @@ struct ContentView: View {
     @StateObject var listViewModel = ListViewModel()
     var body: some View {
         ZStack {
-            ListView()
+            TabBar()
         }
         .overlay(content: {
             LoadingView(isLoading: $listViewModel.isLoading, loadingPhase: $loadingPhase).environmentObject(self.listViewModel)
