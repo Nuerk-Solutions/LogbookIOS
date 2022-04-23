@@ -10,13 +10,19 @@ import SwiftUI
 struct InvoiceView: View {
     
     @StateObject private var invoiceViewModel: InvoiceViewModel = InvoiceViewModel()
-    @State private var selectedDate: Date = Date()
+    @State private var selectedDate: Date? = Date()
     @State private var dateRange: Date = Date()
     @State private var showSheet: Bool = false
     
     var body: some View {
         NavigationView {
+            
             ScrollView {
+                
+                
+                
+                if showSheet {
+                }
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 200))], spacing: 15) {
                     ForEach(DriverEnum.allCases, id: \.self) {item in
                         NavigationLink {
@@ -45,19 +51,34 @@ struct InvoiceView: View {
             }
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        showSheet.toggle()
-                    } label: {
-                        DatePicker("TEST", selection: $selectedDate)
-//                        Image(systemName: "calendar")
-//                            .overlay {
-//
-//                                if showSheet {
-//                                    DatePicker("Datumsauswahl", selection: $selectedDate, in: $dateRange, displayedComponents: [.date])
-//                                }
-//                            }
-                    }
+                    //                    Button {
+                    //                        showSheet.toggle()
+                    //                    } label: {
+                    //                    ZStack {
+                    Button(action: {
+                        withAnimation {
+                            showSheet.toggle()
+                        }
+                    }, label: {
+                        Image(systemName: "calendar")
+                    })
+                    
+                    //                    }
+                    //                            .overlay {
+                    //
+                    //                                if showSheet {
+                    //                                    DatePicker("Datumsauswahl", selection: $selectedDate, in: $dateRange, displayedComponents: [.date])
+                    //                                }
+                    //                            }
+                    //                    }
                 }
+            })
+            .sheet(isPresented: $showSheet, content: {
+                
+                    DatePickerWithButtons(showDatePicker: $showSheet, savedDate: $selectedDate, selectedDate: selectedDate ?? Date())
+                        .animation(.linear)
+                        .transition(.opacity)
+                        .padding()
             })
             .navigationTitle("Statistik")
         }
@@ -85,6 +106,59 @@ struct AnimatedBackground: View {
                     self.start = .bottom
                 }
             })
+    }
+}
+
+struct DatePickerWithButtons: View {
+    
+    @Binding var showDatePicker: Bool
+    @Binding var savedDate: Date?
+    @State var selectedDate: Date = Date()
+    
+    var body: some View {
+        ZStack {
+            
+//            Color.black.opacity(0.3)
+//                .edgesIgnoringSafeArea(.all)
+//
+            
+            VStack {
+                DatePicker("Test", selection: $selectedDate, displayedComponents: [.date])
+                    .datePickerStyle(GraphicalDatePickerStyle())
+                    .labelsHidden()
+                
+                Divider()
+                HStack {
+                    
+                    Button(action: {
+                        showDatePicker = false
+                    }, label: {
+                        Text("Abbrechen")
+                    })
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        savedDate = selectedDate
+                        showDatePicker = false
+                    }, label: {
+                        Text("Speichern".uppercased())
+                            .bold()
+                    })
+                    
+                }
+                .padding(.horizontal)
+                
+            }
+            .padding()
+            .background(
+                Color.white
+                    .cornerRadius(30)
+            )
+            
+            
+        }
+        
     }
 }
 
