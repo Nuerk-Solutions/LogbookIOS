@@ -8,31 +8,27 @@
 import Foundation
 
 struct InvoiceModel: Codable {
-    var driver: String
+    var driver: DriverEnum
     var distance: Int
     var distanceCost: Double
-    var vehicles: Vehicles
+    var vehicles: [InvoiceVehicle]
     var drivesCostForFree: Double?
 }
 
-// MARK: FIX THIS
-// TODO: FIX THIS
+struct InvoiceVehicle: Codable {
+    var vehicleTyp: VehicleEnum
+    var distance: Int
+    var distanceCost: Double
+    var drivesCostForFree: Double?
+}
 
-struct Vehicles: Codable {
-    let ferrari: InvoiceVehicle?
-    let vw: InvoiceVehicle?
-    let porsche: InvoiceVehicle?
+extension InvoiceModel {
+    static let array: [InvoiceModel] = [
+        InvoiceModel(driver: .Andrea, distance: 20, distanceCost: 22, vehicles: [InvoiceVehicle(vehicleTyp: .Ferrari, distance: 20, distanceCost: 20), InvoiceVehicle(vehicleTyp: .VW, distance: 2, distanceCost: 2)]),
+        InvoiceModel(driver: .Claudia, distance: 20, distanceCost: 22, vehicles: [InvoiceVehicle(vehicleTyp: .Ferrari, distance: 20, distanceCost: 20), InvoiceVehicle(vehicleTyp: .VW, distance: 2, distanceCost: 2)]),
+        InvoiceModel(driver: .Oliver, distance: 20, distanceCost: 22, vehicles: [InvoiceVehicle(vehicleTyp: .Ferrari, distance: 20, distanceCost: 20), InvoiceVehicle(vehicleTyp: .VW, distance: 2, distanceCost: 2)]),
+        InvoiceModel(driver: .Thomas, distance: 20, distanceCost: 22, vehicles: [InvoiceVehicle(vehicleTyp: .Ferrari, distance: 20, distanceCost: 20), InvoiceVehicle(vehicleTyp: .VW, distance: 2, distanceCost: 2)])
+    ]
     
-    enum CodingKeys: String, CodingKey {
-        case ferrari = "Ferrari"
-        case vw = "VW"
-        case porsche = "Porsche"
-    }
-}
-
-
-struct InvoiceVehicle: Codable, Hashable {
-    var distance: Int
-    var distanceCost: Double
-    var drivesCostForFree: Double?
+    static let single: InvoiceModel = InvoiceModel(driver: .Claudia, distance: 25, distanceCost: 3, vehicles: [InvoiceVehicle(vehicleTyp: .Ferrari, distance: 20, distanceCost: 20, drivesCostForFree: 5),InvoiceVehicle(vehicleTyp: .VW, distance: 20, distanceCost: 20),InvoiceVehicle(vehicleTyp: .Porsche, distance: 20, distanceCost: 20, drivesCostForFree: 2)], drivesCostForFree: 7)
 }

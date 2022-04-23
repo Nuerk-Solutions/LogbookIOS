@@ -9,122 +9,56 @@ import SwiftUI
 
 struct InvoiceDetailView: View {
     
-    let driver: DriverEnum
-    @EnvironmentObject var invoiceViewModel: InvoiceViewModel
+    let invoiceModel: InvoiceModel
     
     
     var body: some View {
         Form {
-            if invoiceViewModel.invoiceList.first != nil {
             Section {
-                HStack {
-                    Text("Gefahrene Strecke")
-                    Spacer()
-                    Text("\(invoiceViewModel.invoiceList.first!.distance)km")
-                }
-                HStack {
-                    Text("Fahrtkosten")
-                    Spacer()
-                    Text("\(invoiceViewModel.invoiceList.first!.distanceCost)€")
-                }
-                if (invoiceViewModel.invoiceList.first!.drivesCostForFree != nil) {
-                HStack {
-                    Text("Übernomme Fahrtkosten")
-                    Spacer()
-                    Text("\(invoiceViewModel.invoiceList.first!.drivesCostForFree!)€")
-                }
+                InvoiceDetailSectionComponent(name: "Gefahrene Strecke", distance: invoiceModel.distance)
+                InvoiceDetailSectionComponent(name: "Fahrtkosten", cost: invoiceModel.distanceCost)
+                if (invoiceModel.drivesCostForFree != nil) {
+                    InvoiceDetailSectionComponent(name: "Übernommene Kosten", cost: invoiceModel.drivesCostForFree!)
+                        .listRowBackground(Color.orange)
                 }
             } header: {
-                Text("Gesamt")
-            }
+                Text("Gesamtnachweis")
+            } footer: {
+                Text("Die übernommen Fahrtkosten werden automatisch mit den Fahrtkosten von Claudia verrechnet.")
             }
             
-            
-            if (invoiceViewModel.invoiceList.first?.vehicles.ferrari != nil) {
-                Section {
-                    HStack {
-                        Text("Gefahrene Strecke")
-                        Spacer()
-                        Text("\(invoiceViewModel.invoiceList.first!.vehicles.ferrari!.distance)km")
+            Section {
+                ForEach(invoiceModel.vehicles, id: \.vehicleTyp) { item in
+                    Section {
+                        DisclosureGroup(content: {
+                            InvoiceDetailSectionComponent(name: "Gefahrene Strecke", distance: item.distance)
+                            InvoiceDetailSectionComponent(name: "Fahrtkosten", cost: item.distanceCost)
+                            if (item.drivesCostForFree != nil) {
+                                InvoiceDetailSectionComponent(name: "Übernommene Kosten", cost: item.drivesCostForFree!)
+                                    .listRowBackground(Color.orange)
+                            }
+                        }, label: {
+                            Text(item.vehicleTyp.id)
+                                .font(.headline)
+                        })
                     }
-                    HStack {
-                        Text("Fahrtkosten")
-                        Spacer()
-                        Text("\(invoiceViewModel.invoiceList.first!.vehicles.ferrari!.distanceCost)€")
-                    }
-                } header: {
-                    Text("Ferrari")
                 }
-                
-            }
-            if((invoiceViewModel.invoiceList.first?.vehicles.vw) != nil) {
-                
-                Section {
-                    HStack {
-                        Text("Gefahrene Strecke")
-                        Spacer()
-                        Text("\(invoiceViewModel.invoiceList.first!.vehicles.vw!.distance)km")
-                    }
-                    HStack {
-                        Text("Fahrtkosten")
-                        Spacer()
-                        Text("\(invoiceViewModel.invoiceList.first!.vehicles.vw!.distanceCost)€")
-                    }
-                } header: {
-                    Text("VW")
-                }
-            }
-            if((invoiceViewModel.invoiceList.first?.vehicles.porsche) != nil) {
-                
-                Section {
-                    HStack {
-                        Text("Gefahrene Strecke")
-                        Spacer()
-                        Text("\(invoiceViewModel.invoiceList.first!.vehicles.porsche!.distance)km")
-                    }
-                    HStack {
-                        Text("Fahrtkosten")
-                        Spacer()
-                        Text("\(invoiceViewModel.invoiceList.first!.vehicles.porsche!.distanceCost)€")
-                    }
-                } header: {
-                    Text("Porsche")
-                }
-                //                ForEach(invoiceViewModel.invoiceList.first?, id: \.self) { item in
-                //                    Section {
-                //                        HStack {
-                //                            Text("Gefahrene Strecke")
-                //                            Spacer()
-                ////                            Text(item.distance)
-                //                        }
-                //                        HStack {
-                //                            Text("Fahrtkosten")
-                //                            Spacer()
-                ////                            Text(item.distanceCost)
-                //                        }
-                //                    } header: {
-                //                        Text("TEST")
-                //                    }
-                
-            }
-        }
-        .navigationTitle(driver.rawValue)
-        .overlay {
-            if invoiceViewModel.isLoading {
-                ProgressView()
+            } header: {
+                Text("Einzelnachweis")
             }
             
         }
-        .task {
-            //            #if !DEBUG
-            await invoiceViewModel.fetchInvoice(drivers: [driver], vehicles: VehicleEnum.allCases, startDate: DateFormatter.yearMonthDay.date(from: "2021-01-01")!, detailed: true)
-            //            #endif
-        }
+        .navigationTitle(invoiceModel.driver.rawValue)
+        //        .task {
+        //            //            #if !DEBUG
+        //            await invoiceViewModel.fetchInvoice(drivers: [driver], vehicles: VehicleEnum.allCases, startDate: DateFormatter.yearMonthDay.date(from: "2021-01-01")!, detailed: true)
+        //            //            #endif
+        //        }
     }
 }
 
 struct InvoiceDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        InvoiceDetailView(driver: .Andrea)
+        InvoiceDetailView(invoiceModel: InvoiceModel.single)
     }
 }

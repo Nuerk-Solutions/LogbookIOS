@@ -68,6 +68,7 @@
 		E9D9B62F2812D9CF00DB2ED2 /* InvoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D9B62E2812D9CE00DB2ED2 /* InvoiceViewModel.swift */; };
 		E9D9B6312812E24600DB2ED2 /* InvoiceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D9B6302812E24600DB2ED2 /* InvoiceDetailView.swift */; };
 		E9D9B6332812E3ED00DB2ED2 /* InvoiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D9B6322812E3ED00DB2ED2 /* InvoiceModel.swift */; };
+		E9EA10C828141ADE000B2DB9 /* InvoiceDetailSectionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EA10C728141ADE000B2DB9 /* InvoiceDetailSectionComponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -127,6 +128,7 @@
 		E9D9B62E2812D9CE00DB2ED2 /* InvoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceViewModel.swift; sourceTree = "<group>"; };
 		E9D9B6302812E24600DB2ED2 /* InvoiceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetailView.swift; sourceTree = "<group>"; };
 		E9D9B6322812E3ED00DB2ED2 /* InvoiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceModel.swift; sourceTree = "<group>"; };
+		E9EA10C728141ADE000B2DB9 /* InvoiceDetailSectionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetailSectionComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -350,6 +352,7 @@
 			children = (
 				E9D9B62C2812D89700DB2ED2 /* InvoiceView.swift */,
 				E9D9B6302812E24600DB2ED2 /* InvoiceDetailView.swift */,
+				E9EA10C728141ADE000B2DB9 /* InvoiceDetailSectionComponent.swift */,
 			);
 			path = Invoice;
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 				E90C2AC1276DB175005C1281 /* LoadingView.swift in Sources */,
 				E94725A5276BC15B006E6944 /* JsonDecoderExtension.swift in Sources */,
 				E963FC37276655C000FFBD00 /* TransitionExtension.swift in Sources */,
+				E9EA10C828141ADE000B2DB9 /* InvoiceDetailSectionComponent.swift in Sources */,
 				E907B9A127DE3A370082FB9B /* Interceptor.swift in Sources */,
 				E98A0C4C27E73A190038D133 /* Preferences.swift in Sources */,
 				E970ADC127C82B6B000149D1 /* ShareSheet.swift in Sources */,

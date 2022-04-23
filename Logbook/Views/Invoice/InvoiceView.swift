@@ -10,6 +10,9 @@ import SwiftUI
 struct InvoiceView: View {
     
     @StateObject private var invoiceViewModel: InvoiceViewModel = InvoiceViewModel()
+    @State private var selectedDate: Date = Date()
+    @State private var dateRange: Date = Date()
+    @State private var showSheet: Bool = false
     
     var body: some View {
         NavigationView {
@@ -17,8 +20,9 @@ struct InvoiceView: View {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 200))], spacing: 15) {
                     ForEach(DriverEnum.allCases, id: \.self) {item in
                         NavigationLink {
-                            InvoiceDetailView(driver: item)
-                                .environmentObject(invoiceViewModel)
+                            if !invoiceViewModel.isLoading {
+                                InvoiceDetailView(invoiceModel: invoiceViewModel.invoiceList.first(where: {$0.driver == item}) ?? InvoiceModel.single)
+                            }
                         } label: {
                             VStack {
                                 Text(item.rawValue)
@@ -29,19 +33,36 @@ struct InvoiceView: View {
                                     .shadow(radius: 0)
                             }
                         }.shadow(radius: 5)
-                        
                     }
                 }
                 .padding()
             }
-            //        .background(LinearGradient(colors: [.red, .purple, .blue, .indigo], startPoint: .top, endPoint: .bottom))
             .background {
                 AnimatedBackground()
                     .edgesIgnoringSafeArea(.all)
                     .blur(radius: 50)
                     .opacity(0.5)
             }
+            .toolbar(content: {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showSheet.toggle()
+                    } label: {
+                        DatePicker("TEST", selection: $selectedDate)
+//                        Image(systemName: "calendar")
+//                            .overlay {
+//
+//                                if showSheet {
+//                                    DatePicker("Datumsauswahl", selection: $selectedDate, in: $dateRange, displayedComponents: [.date])
+//                                }
+//                            }
+                    }
+                }
+            })
             .navigationTitle("Statistik")
+        }
+        .task {
+            await invoiceViewModel.fetchInvoice(drivers: DriverEnum.allCases, vehicles: VehicleEnum.allCases, startDate: DateFormatter.yearMonthDay.date(from: "2021-01-01")!, detailed: true)
         }
     }
 }
