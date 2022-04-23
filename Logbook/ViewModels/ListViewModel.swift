@@ -86,28 +86,36 @@ class ListViewModel: ObservableObject {
             .publishDecodable(type: [LogbookModel].self, decoder: decoder)
             .tryMap {$0.value}
             .receive(on: RunLoop.main)
-            .catch { _ in Just(self.originalLogbooks)}
-            .sink { [weak self] in
-                let logbooksString: [String] = (self?.originalLogbooks.map { $0._id })!
-//                if logbooksString.contains(($0?.last!._id)!) {
-//                    self?.logbookListFull = true
-//                    self?.isLoading = false
-//                    return
-//                }
-                self?.currentPage += 1
-//                var asd: [LogbookModel] = $0!
-//                asd.removeAll(where: { model in
-//                    return logbooksString.contains(model._id)
-//                })
-                self?.originalLogbooks.append(contentsOf: $0! )
-                self?.isLoading = false
-                // If count of data receieved is less than perPage value then it is last page
-                // TODO: Impl in backend
-
+            .catch { _
+                in
                 
-                if $0!.count < self!.perPage {
-                    self?.logbookListFull = true
-                }
+                    withAnimation {
+                Just(self.originalLogbooks)
+                    }
+                
+            }
+            .sink { [weak self] in
+//                    let logbooksString: [String] = (self?.originalLogbooks.map { $0._id })!
+                    //                if logbooksString.contains(($0?.last!._id)!) {
+                    //                    self?.logbookListFull = true
+                    //                    self?.isLoading = false
+                    //                    return
+                    //                }
+                    self?.currentPage += 1
+                    //                var asd: [LogbookModel] = $0!
+                    //                asd.removeAll(where: { model in
+                    //                    return logbooksString.contains(model._id)
+                    //                })
+                    self?.originalLogbooks.append(contentsOf: $0! )
+                    self?.isLoading = false
+                    // If count of data receieved is less than perPage value then it is last page
+                    // TODO: Impl in backend
+                    
+                    
+                    if $0!.count < self!.perPage {
+                        self?.logbookListFull = true
+                    }
+                
             }
     }
     

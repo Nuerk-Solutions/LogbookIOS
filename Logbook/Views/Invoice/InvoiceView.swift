@@ -10,19 +10,28 @@ import SwiftUI
 struct InvoiceView: View {
     
     @StateObject private var invoiceViewModel: InvoiceViewModel = InvoiceViewModel()
-    @State private var selectedDate: Date? = Date()
-    @State private var dateRange: Date = Date()
+    
+    let internalStartDate: Date = DateFormatter.yearMonthDay.date(from: "2021-11-23")!
+    
+    @State private var startDate: Date = DateFormatter.yearMonthDay.date(from: "2021-11-23")!
+    @State private var endDate: Date = Date()
+    
     @State private var showSheet: Bool = false
     
     var body: some View {
         NavigationView {
-            
             ScrollView {
-                
-                
-                
-                if showSheet {
+                ScrollView(.horizontal, showsIndicators: true) {
+                    HStack {
+                        DatePicker("Von", selection: $startDate, in: internalStartDate...endDate, displayedComponents: .date)
+                            .environment(\.locale, Locale.init(identifier: "de_DE"))
+                        DatePicker("Bis", selection: $endDate, in: startDate...Date(), displayedComponents: .date)
+                            .environment(\.locale, Locale.init(identifier: "de_DE"))
+                            .padding(.horizontal, 15)
+                    }
+                    .padding()
                 }
+                
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 200))], spacing: 15) {
                     ForEach(DriverEnum.allCases, id: \.self) {item in
                         NavigationLink {
@@ -34,11 +43,12 @@ struct InvoiceView: View {
                                 Text(item.rawValue)
                                     .frame(maxWidth: .infinity)
                                     .padding(.vertical, 50)
-                                    .background(.thinMaterial)
+                                    .background(invoiceViewModel.isLoading ? .thinMaterial : .regularMaterial)
                                     .foregroundColor(.primary)
                                     .shadow(radius: 0)
                             }
                         }.shadow(radius: 5)
+                        .disabled(invoiceViewModel.isLoading)
                     }
                 }
                 .padding()
@@ -49,41 +59,45 @@ struct InvoiceView: View {
                     .blur(radius: 50)
                     .opacity(0.5)
             }
-            .toolbar(content: {
+            .toolbar{
+                ToolbarItem(placement: .navigationBarLeading) {
+                    if invoiceViewModel.isLoading {
+                        ProgressView()
+                    }
+                }
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    //                    Button {
-                    //                        showSheet.toggle()
-                    //                    } label: {
-                    //                    ZStack {
-                    Button(action: {
+                    Button {
                         withAnimation {
                             showSheet.toggle()
                         }
-                    }, label: {
-                        Image(systemName: "calendar")
-                    })
+                    } label: {
+                        Image(systemName: "books.vertical.circle")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                    }
                     
-                    //                    }
-                    //                            .overlay {
-                    //
-                    //                                if showSheet {
-                    //                                    DatePicker("Datumsauswahl", selection: $selectedDate, in: $dateRange, displayedComponents: [.date])
-                    //                                }
-                    //                            }
-                    //                    }
                 }
-            })
+            }
             .sheet(isPresented: $showSheet, content: {
-                
-                    DatePickerWithButtons(showDatePicker: $showSheet, savedDate: $selectedDate, selectedDate: selectedDate ?? Date())
-                        .animation(.linear)
-                        .transition(.opacity)
-                        .padding()
+                InvoiceCreateView()
+                    .environmentObject(invoiceViewModel)
             })
-            .navigationTitle("Statistik")
+            .navigationTitle("Statisitk")
+            .navigationBarTitleDisplayMode(.inline)
         }
         .task {
-            await invoiceViewModel.fetchInvoice(drivers: DriverEnum.allCases, vehicles: VehicleEnum.allCases, startDate: DateFormatter.yearMonthDay.date(from: "2021-01-01")!, detailed: true)
+            await invoiceViewModel.fetchInvoice(drivers: DriverEnum.allCases, vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate, detailed: true)
+        }
+        .onChange(of: startDate) { newValue in
+            Task {
+            await invoiceViewModel.fetchInvoice(drivers: DriverEnum.allCases, vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate, detailed: true)
+            }
+        }
+        .onChange(of: endDate) { newValue in
+            Task {
+            await invoiceViewModel.fetchInvoice(drivers: DriverEnum.allCases, vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate, detailed: true)
+            }
         }
     }
 }
@@ -106,59 +120,6 @@ struct AnimatedBackground: View {
                     self.start = .bottom
                 }
             })
-    }
-}
-
-struct DatePickerWithButtons: View {
-    
-    @Binding var showDatePicker: Bool
-    @Binding var savedDate: Date?
-    @State var selectedDate: Date = Date()
-    
-    var body: some View {
-        ZStack {
-            
-//            Color.black.opacity(0.3)
-//                .edgesIgnoringSafeArea(.all)
-//
-            
-            VStack {
-                DatePicker("Test", selection: $selectedDate, displayedComponents: [.date])
-                    .datePickerStyle(GraphicalDatePickerStyle())
-                    .labelsHidden()
-                
-                Divider()
-                HStack {
-                    
-                    Button(action: {
-                        showDatePicker = false
-                    }, label: {
-                        Text("Abbrechen")
-                    })
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        savedDate = selectedDate
-                        showDatePicker = false
-                    }, label: {
-                        Text("Speichern".uppercased())
-                            .bold()
-                    })
-                    
-                }
-                .padding(.horizontal)
-                
-            }
-            .padding()
-            .background(
-                Color.white
-                    .cornerRadius(30)
-            )
-            
-            
-        }
-        
     }
 }
 

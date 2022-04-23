@@ -68,10 +68,10 @@ class RefuelViewModel: ObservableObject {
             
             print("Patrol Station Amount: \(patrolStations.stations.count)")
             consoleManager.print("Patrol Station Amount: \(patrolStations.stations.count)")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 locationService.locationManager.stopUpdatingLocation()
                 consoleManager.print("Stopped updating location in Refuel Model")
-            }
+//            }
             
         } catch {
             showAlert = true
