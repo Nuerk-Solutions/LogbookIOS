@@ -71,12 +71,51 @@ class InvoiceViewModel: ObservableObject {
     }
     
     @MainActor
-    func fetchStats(drivers: [DriverEnum], vehicles: [VehicleEnum], startDate: Date, endDate: Date, detailed: Bool) async {
+    func fetchDriverStats(drivers: [DriverEnum], vehicles: [VehicleEnum], startDate: Date, endDate: Date, detailed: Bool) async {
         let endDateDay = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: endDate) ?? endDate
-        print("START: \(startDate)")
-        print("END: \(endDateDay)")
         let url = "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/stats/driver?vehicles=\(vehicles.map{ $0.rawValue }.joined(separator: ",") )&drivers=\(drivers.map{ $0.rawValue }.joined(separator: ","))&startDate=\(DateFormatter.yearMonthDay.string(from: startDate))&endDate=\(DateFormatter.standardT.string(from: endDateDay))&detailed=\(detailed)"
-        print(url)
+        showAlert = false
+        errorMessage = nil
+        withAnimation {
+            isLoading = true
+        }
+        
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .formatted(.standardT)
+        session.request(url, method: .get)
+            .validate(statusCode: 200..<201)
+            .validate(contentType: ["application/json"])
+            .responseData { response in
+                switch response.result {
+                case.failure(let error):
+                    switch response.response?.statusCode {
+                    default:
+                        self.errorMessage = error.localizedDescription
+                        self.showAlert = true
+                        self.isLoading = false
+                        print("error fetch all", error)
+                        break
+                    }
+                    print(error)
+                case.success(let data):
+                    print("Sucess Fetch All:", data)
+                    withAnimation {
+                        self.isLoading = false
+                    }
+                    break
+                }
+            }
+            .responseDecodable(of: [InvoiceModel].self, decoder: decoder) { (response) in
+                withAnimation {
+                    self.invoiceList = response.value?.sorted { $0.driver.rawValue < $1.driver.rawValue } ?? []
+                }
+            }
+    }
+    
+    @MainActor
+    func fetchVehicleStats(vehicles: [VehicleEnum], startDate: Date, endDate: Date) async {
+        let endDateDay = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: endDate) ?? endDate
+        let url = "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/stats/driver?vehicles=\(vehicles.map{ $0.rawValue }.joined(separator: ","))&startDate=\(DateFormatter.yearMonthDay.string(from: startDate))&endDate=\(DateFormatter.standardT.string(from: endDateDay))"
         showAlert = false
         errorMessage = nil
         withAnimation {

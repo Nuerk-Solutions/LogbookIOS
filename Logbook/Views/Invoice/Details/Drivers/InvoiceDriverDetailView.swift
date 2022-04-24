@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct InvoiceDetailView: View {
+struct InvoiceDriverDetailView: View {
     
     let invoiceModel: InvoiceModel
     
@@ -51,8 +51,8 @@ struct InvoiceDetailView: View {
     }
 }
 
-struct InvoiceDetailView_Previews: PreviewProvider {
+struct InvoiceDriverDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        InvoiceDetailView(invoiceModel: InvoiceModel.single)
+        InvoiceDriverDetailView(invoiceModel: InvoiceModel.single)
     }
 }

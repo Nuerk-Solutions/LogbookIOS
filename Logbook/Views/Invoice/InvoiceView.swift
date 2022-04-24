@@ -31,27 +31,13 @@ struct InvoiceView: View {
                     }
                     .padding()
                 }
-                
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 200))], spacing: 15) {
-                    ForEach($invoiceViewModel.invoiceList, id: \.driver) {item in
-                        NavigationLink {
-                            if !invoiceViewModel.isLoading {
-                                InvoiceDetailView(invoiceModel: invoiceViewModel.invoiceList.first(where: {$0.driver == item.driver.wrappedValue}) ?? InvoiceModel.single)
-                            }
-                        } label: {
-                            VStack {
-                                Text(item.driver.id)
-                                    .frame(maxWidth: .infinity)
-                                    .padding(.vertical, 50)
-                                    .background(invoiceViewModel.isLoading ? .thinMaterial : .regularMaterial)
-                                    .foregroundColor(.primary)
-                                    .shadow(radius: 0)
-                            }
-                        }.shadow(radius: 5)
-                        .disabled(invoiceViewModel.isLoading)
-                    }
+                if isVehicle {
+                    InvoiceVehicleOverview()
+                        .environmentObject(invoiceViewModel)
+                } else {
+                    InvoiceDriverOverview()
+                        .environmentObject(invoiceViewModel)
                 }
-                .padding()
             }
             .background {
                 AnimatedBackground()
@@ -83,9 +69,10 @@ struct InvoiceView: View {
                     Button {
                         withAnimation {
                             isVehicle.toggle()
+                            
                         }
                     } label: {
-                        Image(systemName: isVehicle ? "car.circle" : "person.2.circle")
+                        Image(systemName: !isVehicle ? "car.circle" : "person.2.circle")
                             .resizable()
                             .frame(width: 30, height: 30)
                     }
@@ -104,12 +91,12 @@ struct InvoiceView: View {
         }
         .onChange(of: startDate) { newValue in
             Task {
-            await invoiceViewModel.fetchStats(drivers: DriverEnum.allCases, vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate, detailed: true)
+            await invoiceViewModel.fetchDriverStats(drivers: DriverEnum.allCases, vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate, detailed: true)
             }
         }
         .onChange(of: endDate) { newValue in
             Task {
-            await invoiceViewModel.fetchStats(drivers: DriverEnum.allCases, vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate, detailed: true)
+            await invoiceViewModel.fetchDriverStats(drivers: DriverEnum.allCases, vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate, detailed: true)
             }
         }
         .onChange(of: invoiceViewModel.latestInvoiceDate) { newValue in
@@ -117,7 +104,7 @@ struct InvoiceView: View {
             if firstFetch {
                 Task {
                     firstFetch = false
-                await invoiceViewModel.fetchStats(drivers: DriverEnum.allCases, vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate, detailed: true)
+                await invoiceViewModel.fetchDriverStats(drivers: DriverEnum.allCases, vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate, detailed: true)
                 }
             }
         }

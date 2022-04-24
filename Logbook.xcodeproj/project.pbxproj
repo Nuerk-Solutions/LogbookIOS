@@ -68,8 +68,11 @@
 		E9D9B62A2812D78400DB2ED2 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D9B6292812D78400DB2ED2 /* TabBar.swift */; };
 		E9D9B62D2812D89700DB2ED2 /* InvoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D9B62C2812D89700DB2ED2 /* InvoiceView.swift */; };
 		E9D9B62F2812D9CF00DB2ED2 /* InvoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D9B62E2812D9CE00DB2ED2 /* InvoiceViewModel.swift */; };
-		E9D9B6312812E24600DB2ED2 /* InvoiceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D9B6302812E24600DB2ED2 /* InvoiceDetailView.swift */; };
+		E9D9B6312812E24600DB2ED2 /* InvoiceDriverDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D9B6302812E24600DB2ED2 /* InvoiceDriverDetailView.swift */; };
 		E9D9B6332812E3ED00DB2ED2 /* InvoiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D9B6322812E3ED00DB2ED2 /* InvoiceModel.swift */; };
+		E9DD88CC2815AE4B00421C7F /* InvoiceVehicleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DD88CB2815AE4B00421C7F /* InvoiceVehicleDetailView.swift */; };
+		E9DD88CE2815AE6100421C7F /* InvoiceDriverOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DD88CD2815AE6100421C7F /* InvoiceDriverOverview.swift */; };
+		E9DD88D02815AE8000421C7F /* InvoiceVehicleOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DD88CF2815AE8000421C7F /* InvoiceVehicleOverview.swift */; };
 		E9EA10C828141ADE000B2DB9 /* InvoiceDetailSectionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EA10C728141ADE000B2DB9 /* InvoiceDetailSectionComponent.swift */; };
 /* End PBXBuildFile section */
 
@@ -130,8 +133,11 @@
 		E9D9B6292812D78400DB2ED2 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		E9D9B62C2812D89700DB2ED2 /* InvoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceView.swift; sourceTree = "<group>"; };
 		E9D9B62E2812D9CE00DB2ED2 /* InvoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceViewModel.swift; sourceTree = "<group>"; };
-		E9D9B6302812E24600DB2ED2 /* InvoiceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetailView.swift; sourceTree = "<group>"; };
+		E9D9B6302812E24600DB2ED2 /* InvoiceDriverDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDriverDetailView.swift; sourceTree = "<group>"; };
 		E9D9B6322812E3ED00DB2ED2 /* InvoiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceModel.swift; sourceTree = "<group>"; };
+		E9DD88CB2815AE4B00421C7F /* InvoiceVehicleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceVehicleDetailView.swift; sourceTree = "<group>"; };
+		E9DD88CD2815AE6100421C7F /* InvoiceDriverOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDriverOverview.swift; sourceTree = "<group>"; };
+		E9DD88CF2815AE8000421C7F /* InvoiceVehicleOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceVehicleOverview.swift; sourceTree = "<group>"; };
 		E9EA10C728141ADE000B2DB9 /* InvoiceDetailSectionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetailSectionComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -374,8 +380,9 @@
 		E9DD88C92815ADEA00421C7F /* Drivers */ = {
 			isa = PBXGroup;
 			children = (
-				E9D9B6302812E24600DB2ED2 /* InvoiceDetailView.swift */,
+				E9D9B6302812E24600DB2ED2 /* InvoiceDriverDetailView.swift */,
 				E941CD8C28144D4700C5147D /* InvoiceCreateView.swift */,
+				E9DD88CD2815AE6100421C7F /* InvoiceDriverOverview.swift */,
 			);
 			path = Drivers;
 			sourceTree = "<group>";
@@ -383,6 +390,8 @@
 		E9DD88CA2815ADF100421C7F /* Vehicles */ = {
 			isa = PBXGroup;
 			children = (
+				E9DD88CB2815AE4B00421C7F /* InvoiceVehicleDetailView.swift */,
+				E9DD88CF2815AE8000421C7F /* InvoiceVehicleOverview.swift */,
 			);
 			path = Vehicles;
 			sourceTree = "<group>";
@@ -478,12 +487,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9DD88CE2815AE6100421C7F /* InvoiceDriverOverview.swift in Sources */,
 				E941CD8D28144D4700C5147D /* InvoiceCreateView.swift in Sources */,
 				E94725AB276BC1BF006E6944 /* DateFormatterExtension.swift in Sources */,
 				E98E868A27C24CA9004F4714 /* CoreDataModel.xcdatamodeld in Sources */,
 				E9C3A57727CA59BE0021EDD8 /* CustomProgressView.swift in Sources */,
 				E95BBA4C27C15217006F2EA9 /* RefuelView.swift in Sources */,
 				E941CD8F2814548D00C5147D /* NavigationUtil.swift in Sources */,
+				E9DD88D02815AE8000421C7F /* InvoiceVehicleOverview.swift in Sources */,
+				E9DD88CC2815AE4B00421C7F /* InvoiceVehicleDetailView.swift in Sources */,
 				E9D9B62D2812D89700DB2ED2 /* InvoiceView.swift in Sources */,
 				E9D9B62F2812D9CF00DB2ED2 /* InvoiceViewModel.swift in Sources */,
 				E96170E027AEEAE4004CA43C /* NotificationService.swift in Sources */,
@@ -494,7 +506,7 @@
 				E907B9A127DE3A370082FB9B /* Interceptor.swift in Sources */,
 				E98A0C4C27E73A190038D133 /* Preferences.swift in Sources */,
 				E970ADC127C82B6B000149D1 /* ShareSheet.swift in Sources */,
-				E9D9B6312812E24600DB2ED2 /* InvoiceDetailView.swift in Sources */,
+				E9D9B6312812E24600DB2ED2 /* InvoiceDriverDetailView.swift in Sources */,
 				E91978FC27899B720002598A /* ShapeUtils.swift in Sources */,
 				E90BDEAB27C1711500E642F0 /* RefuelViewModel.swift in Sources */,
 				E95C4F77278623C2009643B4 /* DetailView.swift in Sources */,
