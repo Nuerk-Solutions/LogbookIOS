@@ -22,6 +22,10 @@ struct InvoiceVehicle: Codable {
     var drivesCostForFree: Double?
 }
 
+struct InvoiceHistory: Codable {
+    var date: Date
+}
+
 extension InvoiceModel {
     static let array: [InvoiceModel] = [
         InvoiceModel(driver: .Andrea, distance: 20, distanceCost: 22, vehicles: [InvoiceVehicle(vehicleTyp: .Ferrari, distance: 20, distanceCost: 20), InvoiceVehicle(vehicleTyp: .VW, distance: 2, distanceCost: 2)]),

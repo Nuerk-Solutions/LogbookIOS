@@ -11,7 +11,6 @@ struct InvoiceDetailView: View {
     
     let invoiceModel: InvoiceModel
     
-    
     var body: some View {
         Form {
             Section {
@@ -49,11 +48,6 @@ struct InvoiceDetailView: View {
             
         }
         .navigationTitle(invoiceModel.driver.rawValue)
-        //        .task {
-        //            //            #if !DEBUG
-        //            await invoiceViewModel.fetchInvoice(drivers: [driver], vehicles: VehicleEnum.allCases, startDate: DateFormatter.yearMonthDay.date(from: "2021-01-01")!, detailed: true)
-        //            //            #endif
-        //        }
     }
 }
 

@@ -11,19 +11,19 @@ struct InvoiceView: View {
     
     @StateObject private var invoiceViewModel: InvoiceViewModel = InvoiceViewModel()
     
-    let internalStartDate: Date = DateFormatter.yearMonthDay.date(from: "2021-11-23")!
-    
     @State private var startDate: Date = DateFormatter.yearMonthDay.date(from: "2021-11-23")!
     @State private var endDate: Date = Date()
     
     @State private var showSheet: Bool = false
+    @State private var firstFetch: Bool = true
+    @State private var isVehicle: Bool = false
     
     var body: some View {
         NavigationView {
             ScrollView {
                 ScrollView(.horizontal, showsIndicators: true) {
                     HStack {
-                        DatePicker("Von", selection: $startDate, in: internalStartDate...endDate, displayedComponents: .date)
+                        DatePicker("Von", selection: $startDate, in: DateFormatter.yearMonthDay.date(from: "2021-11-23")!...endDate, displayedComponents: .date)
                             .environment(\.locale, Locale.init(identifier: "de_DE"))
                         DatePicker("Bis", selection: $endDate, in: startDate...Date(), displayedComponents: .date)
                             .environment(\.locale, Locale.init(identifier: "de_DE"))
@@ -33,14 +33,14 @@ struct InvoiceView: View {
                 }
                 
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 200))], spacing: 15) {
-                    ForEach(DriverEnum.allCases, id: \.self) {item in
+                    ForEach($invoiceViewModel.invoiceList, id: \.driver) {item in
                         NavigationLink {
                             if !invoiceViewModel.isLoading {
-                                InvoiceDetailView(invoiceModel: invoiceViewModel.invoiceList.first(where: {$0.driver == item}) ?? InvoiceModel.single)
+                                InvoiceDetailView(invoiceModel: invoiceViewModel.invoiceList.first(where: {$0.driver == item.driver.wrappedValue}) ?? InvoiceModel.single)
                             }
                         } label: {
                             VStack {
-                                Text(item.rawValue)
+                                Text(item.driver.id)
                                     .frame(maxWidth: .infinity)
                                     .padding(.vertical, 50)
                                     .background(invoiceViewModel.isLoading ? .thinMaterial : .regularMaterial)
@@ -67,16 +67,28 @@ struct InvoiceView: View {
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
+                    
+                        Button {
+                            withAnimation {
+                                showSheet.toggle()
+                            }
+                        } label: {
+                            Image(systemName: "books.vertical.circle")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                        }
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         withAnimation {
-                            showSheet.toggle()
+                            isVehicle.toggle()
                         }
                     } label: {
-                        Image(systemName: "books.vertical.circle")
+                        Image(systemName: isVehicle ? "car.circle" : "person.2.circle")
                             .resizable()
                             .frame(width: 30, height: 30)
                     }
-                    
                 }
             }
             .sheet(isPresented: $showSheet, content: {
@@ -87,16 +99,26 @@ struct InvoiceView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
         .task {
-            await invoiceViewModel.fetchInvoice(drivers: DriverEnum.allCases, vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate, detailed: true)
+            await invoiceViewModel.fetchInvoiceHistory()
+            
         }
         .onChange(of: startDate) { newValue in
             Task {
-            await invoiceViewModel.fetchInvoice(drivers: DriverEnum.allCases, vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate, detailed: true)
+            await invoiceViewModel.fetchStats(drivers: DriverEnum.allCases, vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate, detailed: true)
             }
         }
         .onChange(of: endDate) { newValue in
             Task {
-            await invoiceViewModel.fetchInvoice(drivers: DriverEnum.allCases, vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate, detailed: true)
+            await invoiceViewModel.fetchStats(drivers: DriverEnum.allCases, vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate, detailed: true)
+            }
+        }
+        .onChange(of: invoiceViewModel.latestInvoiceDate) { newValue in
+            startDate = newValue
+            if firstFetch {
+                Task {
+                    firstFetch = false
+                await invoiceViewModel.fetchStats(drivers: DriverEnum.allCases, vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate, detailed: true)
+                }
             }
         }
     }

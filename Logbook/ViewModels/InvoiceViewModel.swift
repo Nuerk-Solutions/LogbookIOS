@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import Alamofire
+import SPAlert
 
 class InvoiceViewModel: ObservableObject {
     
@@ -15,6 +16,8 @@ class InvoiceViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var isLoading = false
     @Published var invoiceSuccessful = false
+    @Published var invoiceHistory = [InvoiceHistory]()
+    @Published var latestInvoiceDate = Date.distantPast
     
     @Published var invoiceList: [InvoiceModel] = []
     
@@ -24,13 +27,14 @@ class InvoiceViewModel: ObservableObject {
     init() {
         session = Session(interceptor: interceptor)
     }
+    
     @MainActor
-    func fetchInvoice(drivers: [DriverEnum], vehicles: [VehicleEnum], startDate: Date, endDate: Date, detailed: Bool) async {
-        let url = "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/stats/driver?vehicles=\(vehicles.map{ $0.rawValue }.joined(separator: ",") )&drivers=\(drivers.map{ $0.rawValue }.joined(separator: ","))&startDate=\(DateFormatter.yearMonthDay.string(from: startDate))&endDate=\(DateFormatter.yearMonthDay.string(from: endDate))&detailed=\(detailed)"
+    func fetchInvoiceHistory() async {
+        let url = "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/invoice/history"
         showAlert = false
         errorMessage = nil
         withAnimation {
-            isLoading.toggle()
+            isLoading = true
         }
         
         let decoder = JSONDecoder()
@@ -53,14 +57,60 @@ class InvoiceViewModel: ObservableObject {
                 case.success(let data):
                     print("Sucess Fetch All:", data)
                     withAnimation {
-                        self.isLoading.toggle()
+                        self.isLoading = false
+                    }
+                    break
+                }
+            }
+            .responseDecodable(of: [InvoiceHistory].self, decoder: decoder) { (response) in
+                withAnimation {
+                    self.invoiceHistory = response.value?.sorted { $0.date > $1.date } ?? []
+                    self.latestInvoiceDate = self.invoiceHistory.first?.date ?? Date.distantPast
+                }
+            }
+    }
+    
+    @MainActor
+    func fetchStats(drivers: [DriverEnum], vehicles: [VehicleEnum], startDate: Date, endDate: Date, detailed: Bool) async {
+        let endDateDay = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: endDate) ?? endDate
+        print("START: \(startDate)")
+        print("END: \(endDateDay)")
+        let url = "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/stats/driver?vehicles=\(vehicles.map{ $0.rawValue }.joined(separator: ",") )&drivers=\(drivers.map{ $0.rawValue }.joined(separator: ","))&startDate=\(DateFormatter.yearMonthDay.string(from: startDate))&endDate=\(DateFormatter.standardT.string(from: endDateDay))&detailed=\(detailed)"
+        print(url)
+        showAlert = false
+        errorMessage = nil
+        withAnimation {
+            isLoading = true
+        }
+        
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .formatted(.standardT)
+        session.request(url, method: .get)
+            .validate(statusCode: 200..<201)
+            .validate(contentType: ["application/json"])
+            .responseData { response in
+                switch response.result {
+                case.failure(let error):
+                    switch response.response?.statusCode {
+                    default:
+                        self.errorMessage = error.localizedDescription
+                        self.showAlert = true
+                        self.isLoading = false
+                        print("error fetch all", error)
+                        break
+                    }
+                    print(error)
+                case.success(let data):
+                    print("Sucess Fetch All:", data)
+                    withAnimation {
+                        self.isLoading = false
                     }
                     break
                 }
             }
             .responseDecodable(of: [InvoiceModel].self, decoder: decoder) { (response) in
                 withAnimation {
-                    self.invoiceList = response.value ?? []
+                    self.invoiceList = response.value?.sorted { $0.driver.rawValue < $1.driver.rawValue } ?? []
                 }
             }
     }
@@ -68,7 +118,9 @@ class InvoiceViewModel: ObservableObject {
     
     @MainActor
     func createInvoice(drivers: [DriverEnum], endDate: Date) async {
-        let url = "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/invoice/create/?drivers=\(drivers.map{ $0.rawValue }.joined(separator: ","))"
+        let driverString = "?drivers=\(drivers.map{ $0.rawValue }.joined(separator: ","))"
+        
+        let url = "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/invoice/create/\(!drivers.isEmpty ? driverString : "")"
         showAlert = false
         errorMessage = nil
         withAnimation {
@@ -82,8 +134,7 @@ class InvoiceViewModel: ObservableObject {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(.standardT)
         session.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder(encoder: JSONEncoder()))
-            .validate(statusCode: 200...203)
-            .validate(contentType: ["application/json"])
+            .validate()
             .responseData { response in
                 switch response.result {
                 case.failure(let error):
@@ -101,6 +152,11 @@ class InvoiceViewModel: ObservableObject {
                     withAnimation {
                         self.isLoading.toggle()
                         self.invoiceSuccessful.toggle()
+                        SPAlertView(title: "Abrechnung erstellt", message: "", preset: .done).present(haptic: .success) {
+                            Task {
+                                await self.fetchInvoiceHistory()
+                            }
+                        }
                     }
                     break
                 }

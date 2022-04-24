@@ -10,7 +10,7 @@ import SPAlert
 
 struct InvoiceCreateView: View {
     
-    @State private var invoiceDate: Date = Date()
+    @State private var invoiceDate: Date = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
     @State private var showSheet: Bool = false
     
     @State var driver: [DriverEnum] = DriverEnum.allCases
@@ -21,7 +21,7 @@ struct InvoiceCreateView: View {
     private let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "de_DE")
-        dateFormatter.dateStyle = .short
+        dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
         return dateFormatter
     }()
@@ -30,7 +30,7 @@ struct InvoiceCreateView: View {
         NavigationView {
             Form {
                 Section {
-                    DatePicker("Abrechnung zum", selection: $invoiceDate, displayedComponents: .date)
+                    DatePicker("Abrechnung zum", selection: $invoiceDate, in: datePickerRange(), displayedComponents: .date)
                         .environment(\.locale, Locale.init(identifier: "de_DE"))
                     Button {
                         withAnimation {
@@ -39,17 +39,23 @@ struct InvoiceCreateView: View {
                     } label: {
                         Text("Abrechnung erstellen")
                     }
+                    .disabled(invoiceDate == Date())
                 } footer: {
-                    Text("Es wird eine Abrechnung für den Zeitraum von DATE1 bis inklusive \(dateFormatter.string(from: invoiceDate)) erstellt")
+                    Text("Es wird eine Abrechnung für den Zeitraum von \(dateFormatter.string(from: invoiceViewModel.latestInvoiceDate)) bis inklusive \(dateFormatter.string(from: invoiceDate)) erstellt. Wenn der Knopf einmal betätigt wurde, kann die Abrechnung nicht mehr abgebrochen werden.")
                 }
                 
                 DisclosureGroup {
-                    Text("TEST")
+                    ForEach(invoiceViewModel.invoiceHistory, id: \.date) { (item) in
+                        Text("\(dateFormatter.string(from: item.date) == "23.11.2021" ? ("\(dateFormatter.string(from: item.date)) (Initaldatum)") : (dateFormatter.string(from: item.date)))")
+                    }
                 } label: {
                     Text("Historie")
                 }
             }
             .navigationTitle("Abrechnung erstellen")
+        }
+        .task {
+            await invoiceViewModel.fetchInvoiceHistory()
         }
         .sheet(isPresented: $showSheet) {
             NavigationView {
@@ -60,7 +66,6 @@ struct InvoiceCreateView: View {
                                 ExportSelectionRowView(title: item.id, isSelected: self.selectedDrivers.contains(item)) {
                                     if self.selectedDrivers.contains(item) {
                                         self.selectedDrivers.removeAll(where: { $0 == item })
-                                        print("Remove")
                                     }
                                     else {
                                         self.selectedDrivers.append(item)
@@ -71,6 +76,9 @@ struct InvoiceCreateView: View {
                     }
                     
                     Button {
+                        Task {
+                            await invoiceViewModel.createInvoice(drivers: selectedDrivers, endDate: invoiceDate)
+                        }
                         let rootViewController = UIApplication.shared.connectedScenes
                             .filter {$0.activationState == .foregroundActive }
                             .map {$0 as? UIWindowScene }
@@ -78,13 +86,7 @@ struct InvoiceCreateView: View {
                             .first?.windows
                             .filter({ $0.isKeyWindow }).first?.rootViewController
                         
-                        rootViewController?.dismiss(animated: true) {
-                            SPAlertView(title: "Neue Abrechnung erstellt", message: "", preset: .done).present(haptic: .success) {
-                                Task {
-                                    await invoiceViewModel.createInvoice(drivers: selectedDrivers, endDate: invoiceDate)
-                                }
-                            }
-                        }
+                        rootViewController?.dismiss(animated: true)
                     } label: {
                         Text("Erstellen & Versenden")
                             .frame(maxWidth: .infinity)
@@ -95,6 +97,16 @@ struct InvoiceCreateView: View {
             }
             .interactiveDismissDisabled()
         }
+    }
+    
+    func datePickerRange() -> ClosedRange<Date> {
+        let startDate = Calendar.current.date(byAdding: .day, value: 1, to: invoiceViewModel.latestInvoiceDate)!
+        let endDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+        
+        if (endDate < startDate) {
+            return Date()...Date()
+        }
+        return startDate...endDate
     }
 }
 

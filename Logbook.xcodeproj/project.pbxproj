@@ -355,12 +355,36 @@
 		E9D9B62B2812D88C00DB2ED2 /* Invoice */ = {
 			isa = PBXGroup;
 			children = (
+				E9DD88C82815ADCF00421C7F /* Details */,
 				E9D9B62C2812D89700DB2ED2 /* InvoiceView.swift */,
-				E9D9B6302812E24600DB2ED2 /* InvoiceDetailView.swift */,
 				E9EA10C728141ADE000B2DB9 /* InvoiceDetailSectionComponent.swift */,
-				E941CD8C28144D4700C5147D /* InvoiceCreateView.swift */,
 			);
 			path = Invoice;
+			sourceTree = "<group>";
+		};
+		E9DD88C82815ADCF00421C7F /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				E9DD88CA2815ADF100421C7F /* Vehicles */,
+				E9DD88C92815ADEA00421C7F /* Drivers */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		E9DD88C92815ADEA00421C7F /* Drivers */ = {
+			isa = PBXGroup;
+			children = (
+				E9D9B6302812E24600DB2ED2 /* InvoiceDetailView.swift */,
+				E941CD8C28144D4700C5147D /* InvoiceCreateView.swift */,
+			);
+			path = Drivers;
+			sourceTree = "<group>";
+		};
+		E9DD88CA2815ADF100421C7F /* Vehicles */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Vehicles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
