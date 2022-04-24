@@ -10,6 +10,7 @@ import SwiftUI
 struct InvoiceDetailSectionComponent: View {
     
     let name: String
+    var text: String = ""
     var distance: Int = 0
     var cost: Double? = nil
     
@@ -22,12 +23,22 @@ struct InvoiceDetailSectionComponent: View {
         return numberFormatter
     }()
     
+    init(name: String, text: String = "", distance: Int = 0, cost: Double? = nil, digits: Int? = 2) {
+        self.name = name
+        self.text = text
+        self.distance = distance
+        self.cost = cost
+        numberFormatter.maximumFractionDigits = digits!
+    }
+    
     var body: some View {
         HStack {
             Text(name)
             Spacer()
             if cost != nil && distance == 0 {
                 Text("\(numberFormatter.string(from: NSNumber(value: cost!)) ?? "0 €")")
+            } else if(text != ""){
+                Text("\(text)")
             } else {
                 Text("\(distance) km")
             }

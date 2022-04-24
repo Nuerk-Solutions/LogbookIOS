@@ -20,6 +20,7 @@ class InvoiceViewModel: ObservableObject {
     @Published var latestInvoiceDate = Date.distantPast
     
     @Published var invoiceList: [InvoiceModel] = []
+    @Published var vehicleList: [InvoiceVehicleStats] = []
     
     let session: Session
     let interceptor: RequestInterceptor = Interceptor()
@@ -115,7 +116,8 @@ class InvoiceViewModel: ObservableObject {
     @MainActor
     func fetchVehicleStats(vehicles: [VehicleEnum], startDate: Date, endDate: Date) async {
         let endDateDay = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: endDate) ?? endDate
-        let url = "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/stats/driver?vehicles=\(vehicles.map{ $0.rawValue }.joined(separator: ","))&startDate=\(DateFormatter.yearMonthDay.string(from: startDate))&endDate=\(DateFormatter.standardT.string(from: endDateDay))"
+        let url = "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/stats/vehicle?vehicles=\(vehicles.map{ $0.rawValue }.joined(separator: ","))&startDate=\(DateFormatter.yearMonthDay.string(from: startDate))&endDate=\(DateFormatter.standardT.string(from: endDateDay))&api-key=ca03na188ame03u1d78620de67282882a84"
+        print(url)
         showAlert = false
         errorMessage = nil
         withAnimation {
@@ -124,9 +126,10 @@ class InvoiceViewModel: ObservableObject {
         
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(.standardT)
-        session.request(url, method: .get)
-            .validate(statusCode: 200..<201)
-            .validate(contentType: ["application/json"])
+        
+        AF.request(url, method: .get)
+            .validate()
+//            .validate(contentType: ["application/json"])
             .responseData { response in
                 switch response.result {
                 case.failure(let error):
@@ -141,15 +144,24 @@ class InvoiceViewModel: ObservableObject {
                     print(error)
                 case.success(let data):
                     print("Sucess Fetch All:", data)
+                    print("====================================")
                     withAnimation {
                         self.isLoading = false
                     }
                     break
                 }
             }
-            .responseDecodable(of: [InvoiceModel].self, decoder: decoder) { (response) in
+            .responseDecodable(of: [InvoiceVehicleStats].self, decoder: decoder) { (response) in
+                switch response.result {
+                case.failure(let error):
+                    print("===")
+                    print(error)
+                case .success(let data):
+                    print("SUCESS VEHICLE")
+                }
+                print(response.value)
                 withAnimation {
-                    self.invoiceList = response.value?.sorted { $0.driver.rawValue < $1.driver.rawValue } ?? []
+                    self.vehicleList = response.value?.sorted { $0.vehicle.rawValue < $1.vehicle.rawValue } ?? []
                 }
             }
     }

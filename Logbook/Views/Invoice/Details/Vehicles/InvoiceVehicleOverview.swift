@@ -13,14 +13,14 @@ struct InvoiceVehicleOverview: View {
     
     var body: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 200))], spacing: 15) {
-            ForEach($invoiceViewModel.invoiceList, id: \.driver) {item in
+            ForEach($invoiceViewModel.vehicleList, id: \.vehicle) {item in
                 NavigationLink {
                     if !invoiceViewModel.isLoading {
-                        InvoiceDriverDetailView(invoiceModel: invoiceViewModel.invoiceList.first(where: {$0.driver == item.driver.wrappedValue}) ?? InvoiceModel.single)
+                        InvoiceVehicleDetailView(invoiceModel: invoiceViewModel.vehicleList.first(where: {$0.vehicle == item.vehicle.wrappedValue})!)
                     }
                 } label: {
                     VStack {
-                        Text(item.driver.id)
+                        Text(item.vehicle.id)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 50)
                             .background(invoiceViewModel.isLoading ? .thinMaterial : .regularMaterial)

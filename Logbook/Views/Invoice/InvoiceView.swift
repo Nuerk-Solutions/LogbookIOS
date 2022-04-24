@@ -54,22 +54,22 @@ struct InvoiceView: View {
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     
-                        Button {
-                            withAnimation {
-                                showSheet.toggle()
-                            }
-                        } label: {
-                            Image(systemName: "books.vertical.circle")
-                                .resizable()
-                                .frame(width: 30, height: 30)
+                    Button {
+                        withAnimation {
+                            showSheet.toggle()
                         }
+                    } label: {
+                        Image(systemName: "books.vertical.circle")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                    }
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         withAnimation {
                             isVehicle.toggle()
-                            
+                            fetchLatestStats()
                         }
                     } label: {
                         Image(systemName: !isVehicle ? "car.circle" : "person.2.circle")
@@ -90,22 +90,30 @@ struct InvoiceView: View {
             
         }
         .onChange(of: startDate) { newValue in
-            Task {
-            await invoiceViewModel.fetchDriverStats(drivers: DriverEnum.allCases, vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate, detailed: true)
-            }
+            fetchLatestStats()
         }
         .onChange(of: endDate) { newValue in
-            Task {
-            await invoiceViewModel.fetchDriverStats(drivers: DriverEnum.allCases, vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate, detailed: true)
-            }
+            fetchLatestStats()
         }
         .onChange(of: invoiceViewModel.latestInvoiceDate) { newValue in
             startDate = newValue
             if firstFetch {
                 Task {
                     firstFetch = false
-                await invoiceViewModel.fetchDriverStats(drivers: DriverEnum.allCases, vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate, detailed: true)
+                    await invoiceViewModel.fetchDriverStats(drivers: DriverEnum.allCases, vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate, detailed: true)
                 }
+            }
+        }
+    }
+    
+    func fetchLatestStats() {
+        if isVehicle {
+            Task {
+                await invoiceViewModel.fetchVehicleStats(vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate)
+            }
+        } else {
+            Task {
+                await invoiceViewModel.fetchDriverStats(drivers: DriverEnum.allCases, vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate, detailed: true)
             }
         }
     }

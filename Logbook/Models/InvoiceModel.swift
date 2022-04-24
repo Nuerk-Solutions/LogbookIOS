@@ -22,6 +22,19 @@ struct InvoiceVehicle: Codable {
     var drivesCostForFree: Double?
 }
 
+// TODO: Sync naming
+
+struct InvoiceVehicleStats: Codable {
+    var vehicle: VehicleEnum
+    var distance: Int
+    var distanceCost: Double
+    var averageConsumptionSinceLastRefuel: Double
+    var averageCostPerKmSinceLastRefuel: Double?
+    var averageConsumption: Double
+    var averageCost: Double
+    var totalRefuels: Int
+}
+
 struct InvoiceHistory: Codable {
     var date: Date
 }
