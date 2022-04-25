@@ -272,9 +272,7 @@ struct AddLogbookView: View {
                             showSheet = false
                         }
                         
-                        Task {
-                            await listViewModel.fetchAllLogbooks()
-                        }
+                        listViewModel.refresh(append: true)
                     }
                 }
             }

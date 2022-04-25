@@ -48,17 +48,7 @@ struct LoadingView: View {
                 .zIndex(1)
                 .transition(.iris)
             }
-        }.SPAlert(isPresent: $listViewModel.showAlert,
-                  message: listViewModel.errorMessage ?? "",
-                  duration: 3.0,
-                  dismissOnTap: true,
-                  preset: SPAlertIconPreset.error,
-                  haptic: .error,
-                  completion: {
-            Task {
-                await listViewModel.fetchAllLogbooks()
-            }
-        })
+        }
     }
     
     func getImageURL() -> URL {

@@ -31,7 +31,6 @@ struct ListView: View {
     
     @Preference(\.openAddViewOnStart) var openAddViewOnStart
     @Preference(\.allowLocationTracking) var allowLocationTracking
-    @Preference(\.usePagination) var usePagination
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject private var locationService: LocationService
@@ -43,32 +42,21 @@ struct ListView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(listViewModel.logbooks.indices, id: \.self) { logbookIndex in
-                    let logbook = listViewModel.logbooks[logbookIndex]
+                ForEach(listViewModel.originalLogbooks) { logbook in
                     ListRowView(logbook: logbook)
-                        .task {
-                            if logbookIndex == listViewModel.logbooks.count - 10 {
-                                    await listViewModel.fetchLogbooks()
-                            }
+                        .onAppear {
+                            listViewModel.loadMoreContentIfNeeded(currentItem: logbook)
                         }
                 }
-                if usePagination && !listViewModel.logbookListFull {
+                if listViewModel.isLoadingPage {
                     ProgressView("Einträge laden (\(listViewModel.currentPage))")
                     .frame(maxWidth: .infinity)
                     .progressViewStyle(CircularProgressViewStyle(tint: .gray))
-                    .task {
-                        if shouldLoad {
-                            await listViewModel.fetchLogbooks()
-                            shouldLoad = false
-                        }
-                    }
                 }
             }
             .listStyle(InsetGroupedListStyle())
             .refreshable {
-                if !usePagination {
-                    await listViewModel.fetchAllLogbooks()
-                }
+                listViewModel.refresh()
             }
             .navigationTitle("Fahrtenbuch")
             .toolbar(content: {
@@ -76,7 +64,6 @@ struct ListView: View {
                     if allowLocationTracking {
                         RefuelButton
                     }
-//                    SettingsButton.disabled(listViewModel.isLoading)
                 }
                 ToolbarItemGroup(placement: .navigationBarLeading) {
                     AddButton.disabled(listViewModel.isLoading)
@@ -105,12 +92,12 @@ struct ListView: View {
                 Alert(title: Text("Fehler!"), message: Text(listViewModel.errorMessage ?? ""))
             })
 //            .searchable(text: $listViewModel.searchTerm)
-            .task {
-                if shouldLoad && !usePagination {
-                    await listViewModel.fetchAllLogbooks()
-                    shouldLoad = false
-                }
-            }
+//            .task {
+//                if shouldLoad && !usePagination {
+//                    await listViewModel.fetchAllLogbooks()
+//                    shouldLoad = false
+//                }
+//            }
             
             .onReceive(listViewModel.$logbooks) { newValue in
                 if openAddViewOnStart {

@@ -87,7 +87,6 @@ struct InvoiceView: View {
         }
         .task {
             await invoiceViewModel.fetchInvoiceHistory()
-            
         }
         .onChange(of: startDate) { newValue in
             fetchLatestStats()
@@ -122,13 +121,13 @@ struct InvoiceView: View {
 struct AnimatedBackground: View {
     @State var start: UnitPoint = .top
     @State var end: UnitPoint = .bottom
+    @Environment(\.colorScheme) var colorScheme
     
     let timer = Timer.publish(every: 1, on: .main, in: .default).autoconnect()
-    let colors = [Color.white, Color.red, Color.purple, Color.blue, Color.indigo, Color.orange, Color.white]
     
     var body: some View {
         
-        LinearGradient(gradient: Gradient(colors: colors), startPoint: start, endPoint: end)
+        LinearGradient(gradient: Gradient(colors:  [colorScheme == .dark ? Color.black : Color.white, Color.red, Color.purple, Color.blue, Color.indigo, Color.orange, colorScheme == .dark ? Color.black : Color.white]), startPoint: start, endPoint: end)
             .onReceive(timer, perform: { _ in
                 withAnimation(.easeInOut(duration: 10).repeatForever()) {
                     self.start = .bottom
