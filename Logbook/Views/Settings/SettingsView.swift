@@ -18,7 +18,6 @@ struct SettingsView: View {
     @Preference(\.openAddViewOnStart) var openAddViewOnStart
     @Preference(\.openActivityViewAfterExport) var openActivityViewAfterExport
     @Preference(\.developerconsole) var developerconsole
-    @Preference(\.measureSpeed) var measureSpeed
     @Preference(\.hideKeyboardOnDrag) var hideKeyboardOnDrag
     @Preference(\.usePagination) var usePagination
     @EnvironmentObject private var locationService: LocationService
@@ -90,22 +89,7 @@ struct SettingsView: View {
                         Text("Console")
                     }
                     .onChange(of: developerconsole) { newValue in
-                            consoleManager.isVisible = newValue
-                        if !newValue {
-                            locationService.locationManager.stopUpdatingLocation()
-                        } else {
-                            if measureSpeed {
-                                locationService.locationManager.startUpdatingLocation()
-                            }
-                        }
-                    }
-                    if allowLocationTracking {
-                        Toggle(isOn: $measureSpeed.animation()) {
-                            Text("Measure Speed")
-                        }
-                        if measureSpeed {
-                            NavigationLink("Tracking", destination: TrackingView())
-                        }
+                        consoleManager.isVisible = newValue
                     }
                 } header: {
                     Text("Dev")
