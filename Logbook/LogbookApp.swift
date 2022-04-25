@@ -11,7 +11,6 @@ import SwiftUI
 struct LogbookApp: App {
     
     @StateObject private var coreDataService = CoreDataService()
-    @StateObject private var locationService = LocationService()
     
     @Preference(\.developerconsole) var developerconsole
     
@@ -19,7 +18,6 @@ struct LogbookApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, coreDataService.container.viewContext)
-                .environmentObject(locationService)
                 .onAppear {
                     // To Hide Constrains warnings
                     UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")

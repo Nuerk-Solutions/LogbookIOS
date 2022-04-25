@@ -24,24 +24,6 @@ class AddViewModel: ObservableObject {
     init() {
         session = Session(interceptor: interceptor)
     }
-    
-    private let dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-        return dateFormatter
-    }()
-    
-    func getDateRange(latestLogbook: LogbookModel) -> ClosedRange<Date> {
-        let now = Date()
-        let calendar = Calendar.current
-        let unitFlags = Set<Calendar.Component>([.day, .month, .year, .hour, .minute])
-        let startComponents = calendar.dateComponents(unitFlags, from: now)
-        print("Start", startComponents, latestLogbook.date)
-        let endComponents = calendar.dateComponents(unitFlags, from: latestLogbook.date)
-        print("End", endComponents)
-        return latestLogbook.date...now
-    }
-    
     @MainActor
     func fetchLatestLogbooks() async {
         showAlert = false
@@ -57,7 +39,7 @@ class AddViewModel: ObservableObject {
         //        }
         
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+        decoder.dateDecodingStrategy = .formatted(.standardT)
         //            logbooks = try await apiService.getJSON(dateDecodingStrategy: .formatted(dateFormatter))
         session.request("https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/find/latest", method: .get)
             .validate(statusCode: 200..<201)
@@ -101,11 +83,11 @@ class AddViewModel: ObservableObject {
         //        }
         
         let encoder: JSONEncoder = JSONEncoder()
-        encoder.dateEncodingStrategy = .formatted(dateFormatter)
+        encoder.dateEncodingStrategy = .formatted(.standardT)
         
         
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+        decoder.dateDecodingStrategy = .formatted(.standardT)
         //            logbooks = try await apiService.getJSON(dateDecodingStrategy: .formatted(dateFormatter))
         session.request("https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook", method: .post, parameters: logbook, encoder: JSONParameterEncoder(encoder: encoder))
             .validate(statusCode: 200..<202) // Response code need to be 201

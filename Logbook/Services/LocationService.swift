@@ -22,7 +22,6 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Preference(\.allowLocationTracking) var allowLocationTracking
     @Preference(\.notifications) var notifications
     @Preference(\.notificationsIconBadge) var notificationsIconBadge
-    @Preference(\.measureSpeed) var measureSpeed
     
     override init() {
         locationManager = CLLocationManager()
@@ -39,13 +38,6 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if measureSpeed {
-            lastSeenLocation = locations.first
-            fetchCountryAndCity(for: locations.first)
-            let mPerS = locationManager.location?.speed
-            let kmPerH = (mPerS ?? 0) * 3.6
-            consoleManager.print("m/s: \(mPerS ?? 0.0) | km/h:  \(kmPerH)")
-        }
     }
     
     func fetchCountryAndCity(for location: CLLocation?) {

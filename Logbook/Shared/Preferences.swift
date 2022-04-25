@@ -68,14 +68,8 @@ final class Preferences {
     @UserDefault("developerconsole")
     var developerconsole: Bool = false
     
-    @UserDefault("measureSpeed")
-    var measureSpeed: Bool = false
-    
     @UserDefault("hideKeyboardOnDrag")
     var hideKeyboardOnDrag: Bool = false
-    
-    @UserDefault("usePagination")
-    var usePagination: Bool = true
 }
 
 @propertyWrapper

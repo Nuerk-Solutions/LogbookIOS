@@ -13,7 +13,7 @@ struct RefuelView: View {
     @StateObject var refuelViewModel = RefuelViewModel()
     @State private var selectedVehicle: VehicleEnum = VehicleEnum.Ferrari
     @StateObject var alertManager = AlertManager()
-    @EnvironmentObject private var locationService: LocationService
+    @StateObject private var locationService: LocationService = LocationService()
     
     var body: some View {
         Form {
@@ -21,12 +21,6 @@ struct RefuelView: View {
                 Picker("Fahrzeug", selection: $selectedVehicle.animation()) {
                     ForEach(VehicleEnum.allCases) { vehicle in
                         Text(vehicle.id).tag(vehicle)
-                    }
-                }
-                .onChange(of: selectedVehicle) { newVehicle in
-                    print(newVehicle)
-                    Task {
-                        await refuelViewModel.fetchFuelPrice(fuelType: newVehicle == .VW ? "diesel" : newVehicle == .Ferrari ? "e5" : "e10", locationService: locationService)
                     }
                 }
                 .pickerStyle(SegmentedPickerStyle())
@@ -79,13 +73,23 @@ struct RefuelView: View {
                 refuelViewModel.errorMessage = "Bitte gib den Standort frei"
                 return
             }
-            
+            locationService.locationManager.startUpdatingLocation()
+        }
+        .onDisappear {
+            locationService.locationManager.stopUpdatingLocation()
         }
         .task({
             if locationService.hasPermission() {
                 await refuelViewModel.fetchFuelPrice(fuelType: "e5", locationService: locationService)
             }
         })
+        
+        .onChange(of: selectedVehicle) { newVehicle in
+            print(newVehicle)
+            Task {
+                await refuelViewModel.fetchFuelPrice(fuelType: newVehicle == .VW ? "diesel" : newVehicle == .Ferrari ? "e5" : "e10", locationService: locationService)
+            }
+        }
         .onChange(of: locationService.authorizationStatus, perform: { newValue in
             print(newValue)
             if newValue != .notDetermined && newValue != .denied {

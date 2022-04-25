@@ -30,6 +30,7 @@
 		E94725A5276BC15B006E6944 /* JsonDecoderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94725A4276BC15B006E6944 /* JsonDecoderExtension.swift */; };
 		E94725AB276BC1BF006E6944 /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94725AA276BC1BF006E6944 /* DateFormatterExtension.swift */; };
 		E94725AD276BC342006E6944 /* AddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94725AC276BC341006E6944 /* AddViewModel.swift */; };
+		E94FC2C8281700F80032A990 /* BundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94FC2C7281700F80032A990 /* BundleExtension.swift */; };
 		E95BBA4C27C15217006F2EA9 /* RefuelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95BBA4B27C15217006F2EA9 /* RefuelView.swift */; };
 		E95C4F73278620D4009643B4 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C4F72278620D4009643B4 /* ListView.swift */; };
 		E95C4F75278622C9009643B4 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C4F74278622C9009643B4 /* ListViewModel.swift */; };
@@ -97,6 +98,7 @@
 		E94725A4276BC15B006E6944 /* JsonDecoderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDecoderExtension.swift; sourceTree = "<group>"; };
 		E94725AA276BC1BF006E6944 /* DateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtension.swift; sourceTree = "<group>"; };
 		E94725AC276BC341006E6944 /* AddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewModel.swift; sourceTree = "<group>"; };
+		E94FC2C7281700F80032A990 /* BundleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtension.swift; sourceTree = "<group>"; };
 		E95BBA4B27C15217006F2EA9 /* RefuelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefuelView.swift; sourceTree = "<group>"; };
 		E95C4F72278620D4009643B4 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		E95C4F74278622C9009643B4 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				E94725A4276BC15B006E6944 /* JsonDecoderExtension.swift */,
 				E94725AA276BC1BF006E6944 /* DateFormatterExtension.swift */,
 				E90B2473276E9C6A00B185EF /* StringExtension.swift */,
+				E94FC2C7281700F80032A990 /* BundleExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 				E9DD88D02815AE8000421C7F /* InvoiceVehicleOverview.swift in Sources */,
 				E9DD88CC2815AE4B00421C7F /* InvoiceVehicleDetailView.swift in Sources */,
 				E9D9B62D2812D89700DB2ED2 /* InvoiceView.swift in Sources */,
+				E94FC2C8281700F80032A990 /* BundleExtension.swift in Sources */,
 				E9D9B62F2812D9CF00DB2ED2 /* InvoiceViewModel.swift in Sources */,
 				E96170E027AEEAE4004CA43C /* NotificationService.swift in Sources */,
 				E90C2AC1276DB175005C1281 /* LoadingView.swift in Sources */,

@@ -16,6 +16,7 @@ struct LogbookModel: Codable, Identifiable {
     var additionalInformation: String
     var additionalInformationTyp: AdditionalInformationTypEnum
     var driveReason: String
+    var forFree: Bool? // Nullable beacuse since b26
     var date: Date
     var distanceCost: String
     var distance: String
@@ -31,6 +32,7 @@ struct LogbookModel: Codable, Identifiable {
         self.additionalInformation = ""
         self.additionalInformationTyp = .Keine
         self.driveReason = "Stadtfahrt"
+        self.forFree = false
         self.date = Date.now
         self.distanceCost = ""
         self.distance = ""
@@ -47,6 +49,7 @@ struct LogbookModel: Codable, Identifiable {
         self.additionalInformation = model.additionalInformation
         self.additionalInformationTyp = model.additionalInformationTyp
         self.driveReason = model.driveReason
+        self.forFree = model.forFree
         self.date = model.date
         self.distanceCost = model.distanceCost
         self.distance = model.distance

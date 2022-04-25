@@ -50,8 +50,8 @@ struct ListView: View {
                 }
                 if listViewModel.isLoadingPage {
                     ProgressView("Einträge laden (\(listViewModel.currentPage))")
-                    .frame(maxWidth: .infinity)
-                    .progressViewStyle(CircularProgressViewStyle(tint: .gray))
+                        .frame(maxWidth: .infinity)
+                        .progressViewStyle(CircularProgressViewStyle(tint: .gray))
                 }
             }
             .listStyle(InsetGroupedListStyle())
@@ -91,13 +91,13 @@ struct ListView: View {
             .alert(isPresented: $listViewModel.showAlert, content: {
                 Alert(title: Text("Fehler!"), message: Text(listViewModel.errorMessage ?? ""))
             })
-//            .searchable(text: $listViewModel.searchTerm)
-//            .task {
-//                if shouldLoad && !usePagination {
-//                    await listViewModel.fetchAllLogbooks()
-//                    shouldLoad = false
-//                }
-//            }
+            //            .searchable(text: $listViewModel.searchTerm)
+            //            .task {
+            //                if shouldLoad && !usePagination {
+            //                    await listViewModel.fetchAllLogbooks()
+            //                    shouldLoad = false
+            //                }
+            //            }
             
             .onReceive(listViewModel.$logbooks) { newValue in
                 if openAddViewOnStart {
@@ -110,24 +110,24 @@ struct ListView: View {
                 }
             }
             .uses(alertManager)
-//            .JMModal(showModal: $showModal, for: [.locationAlways, .notification], autoDismiss: true, autoCheckAuthorization: true, restrictDismissal: false, onAppear: {}, onDisappear: {
-//                if !locationService.hasPermission() {
-//                    allowLocationTracking = false
-//                }
-//                if openAddViewOnStart {
-//                    if listViewModel.isLoading {
-//                        return
-//                    }
-//                    showAddSheet = true
-//                }
-//            })
-//            .changeHeaderTo("Berechtigungen")
-//            .changeHeaderDescriptionTo("Damit du bestimmte Funktionen dieser App benutzen kannst, musst du entsprechende Berechtigungen freigeben.")
-//            .changeBottomDescriptionTo("Diese Berechtigungen sind notwendig, damit alle Features richtig funktionieren. Ohne die Standortfreigabe ist es nicht möglich, das Tankstellen Feature zu benutzen. Ohne die Erlaubnis für Benachrichtigungen bekommst du keine Information, wenn du dich dem ARB 19 näherst.")
-//            .setPermissionComponent(for: .notification, title: "Benachrichtigungen")
-//            .setPermissionComponent(for: .notification, description: "Erlaube Benachrichtigungen")
-//            .setPermissionComponent(for: .locationAlways, title: "Standort immer")
-//            .setPermissionComponent(for: .locationAlways, description: "Dauerhafte Standortfreigabe erlauben")
+            //            .JMModal(showModal: $showModal, for: [.locationAlways, .notification], autoDismiss: true, autoCheckAuthorization: true, restrictDismissal: false, onAppear: {}, onDisappear: {
+            //                if !locationService.hasPermission() {
+            //                    allowLocationTracking = false
+            //                }
+            //                if openAddViewOnStart {
+            //                    if listViewModel.isLoading {
+            //                        return
+            //                    }
+            //                    showAddSheet = true
+            //                }
+            //            })
+            //            .changeHeaderTo("Berechtigungen")
+            //            .changeHeaderDescriptionTo("Damit du bestimmte Funktionen dieser App benutzen kannst, musst du entsprechende Berechtigungen freigeben.")
+            //            .changeBottomDescriptionTo("Diese Berechtigungen sind notwendig, damit alle Features richtig funktionieren. Ohne die Standortfreigabe ist es nicht möglich, das Tankstellen Feature zu benutzen. Ohne die Erlaubnis für Benachrichtigungen bekommst du keine Information, wenn du dich dem ARB 19 näherst.")
+            //            .setPermissionComponent(for: .notification, title: "Benachrichtigungen")
+            //            .setPermissionComponent(for: .notification, description: "Erlaube Benachrichtigungen")
+            //            .setPermissionComponent(for: .locationAlways, title: "Standort immer")
+            //            .setPermissionComponent(for: .locationAlways, description: "Dauerhafte Standortfreigabe erlauben")
         }
     }
     
@@ -178,7 +178,6 @@ struct ListView: View {
                     CustomProgressView(message: "Laden...")
                 } else {
                     AddLogbookView(showSheet: $showAddSheet)
-                    //                        .avoidKeyboard()
                         .environmentObject(listViewModel)
                         .ignoresSafeArea(.keyboard, edges: .bottom)
                 }
