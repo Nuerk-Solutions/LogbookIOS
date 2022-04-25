@@ -15,14 +15,11 @@ struct DetailView: View {
     
     var body: some View {
         VStack {
-            if detailViewModel.logbook != nil {
+            if detailViewModel.logbook != nil && !detailViewModel.isLoading {
                 AddLogbookView(currentLogbook: detailViewModel.logbook!, isReadOnly: true, showSheet: $none)
+            } else {
+                CustomProgressView(message: "Laden...")
             }
-        }
-        .overlay {
-                if detailViewModel.isLoading {
-                    CustomProgressView(message: "Laden...")
-                }
         }
         .alert(isPresented: $detailViewModel.showAlert, content: {
             Alert(title: Text("Fehler!"), message: Text(detailViewModel.errorMessage ?? ""))
