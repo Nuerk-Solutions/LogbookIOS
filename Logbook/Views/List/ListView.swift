@@ -177,9 +177,12 @@ struct ListView: View {
                 if(listViewModel.isLoading) {
                     CustomProgressView(message: "Laden...")
                 } else {
-                    AddLogbookView(showSheet: $showAddSheet)
-                        .environmentObject(listViewModel)
-                        .ignoresSafeArea(.keyboard, edges: .bottom)
+                    NavigationView {
+                        AddLogbookView(showSheet: $showAddSheet)
+                            .environmentObject(listViewModel)
+                            .navigationTitle("Neuer Eintrag")
+                    }
+                    .ignoresSafeArea(.keyboard, edges: .bottom)
                 }
             })
         )

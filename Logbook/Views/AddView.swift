@@ -15,6 +15,7 @@ struct AddLogbookView: View {
     @State var latestSelectedLogbook: LogbookModel = LogbookModel()
     @State private var distance: Int = 0
     @State private var descriptionFoucsBool: Bool = false
+    @State private var forFree: Bool = false
     @FocusState private var descriptionFocus: Bool
     @FocusState var isInputActive: Bool
     var isReadOnly: Bool = false
@@ -31,12 +32,12 @@ struct AddLogbookView: View {
     @FetchRequest(entity: LogbookSettings.entity(), sortDescriptors: []) var logbookSettings: FetchedResults<LogbookSettings>
     
     @Preference(\.hideKeyboardOnDrag) var hideKeyboardOnDrag
+    
     var body: some View {
-        NavigationView {
             Form {
                 Section(header: Text("Fahrerinformationen")) {
                     // Driver Segment Picker
-                    Picker("Fahrer", selection: $currentLogbook.driver) {
+                    Picker("Fahrer", selection: $currentLogbook.driver.animation()) {
                         ForEach(DriverEnum.allCases) { driver in
                             Text(driver.rawValue.capitalized).tag(driver)
                         }
@@ -71,6 +72,14 @@ struct AddLogbookView: View {
                     // Reason
                     FloatingTextField(title: "Reiseziel", text: $currentLogbook.driveReason)
                         .focused($isInputActive)
+                    
+                    
+                    // ForFree
+                    if (currentLogbook.driver == .Andrea || currentLogbook.driver == .Thomas) {
+                        Toggle(isOn: $forFree) {
+                            Text("Kostenlose Fahrt")
+                        }
+                    }
                 }
                 .disabled(isReadOnly)
                 
@@ -131,7 +140,8 @@ struct AddLogbookView: View {
                             .padding(.top, 5)
                             .foregroundColor(.gray)
                     }
-                    let cost = Double(distance) * 0.2
+                    
+                    let cost = forFree ? 0 : Double(distance) * 0.2
                     if(distance > 0) {
                         HStack {
                             Text("Strecke: \(String(distance)) km\nKosten: \(cost, specifier: "%.2f")€")
@@ -246,8 +256,11 @@ struct AddLogbookView: View {
                         await addViewModel.fetchLatestLogbooks()
                     }
                     UIApplication.shared.applicationIconBadgeNumber = 0
+                } else {
+                    forFree = currentLogbook.forFree ?? false
                 }
             }
+            
             .onReceive(addViewModel.$latestLogbooks, perform: { newValue in
                 if isReadOnly {
                     return
@@ -288,9 +301,6 @@ struct AddLogbookView: View {
                     }
                 }
             }
-            .navigationTitle(isReadOnly ? "" : "Neuer Eintrag")
-            .navigationBarTitleDisplayMode(isReadOnly ? .inline : .automatic)
-            
             .toolbar{
                 ToolbarItem(placement: .navigationBarTrailing) {
                     if !isReadOnly {
@@ -320,10 +330,13 @@ struct AddLogbookView: View {
                     }
                 }
                 
-            }
         }
     }
     func saveNewLogbook() {
+        
+        if forFree {
+            currentLogbook.forFree = currentLogbook.driver != .Oliver && currentLogbook.driver != .Claudia
+        }
         
         addLoogbookEntryVM.saveEntry(logbookEntry: currentLogbook)
         

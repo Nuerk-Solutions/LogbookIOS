@@ -63,6 +63,11 @@ class AddLogbookEntryViewModel: ObservableObject {
                 }
             }
         }
+        
+        // Just for saftey reasons. This case can never happend.
+        if(viewState.forFree ?? false && (viewState.driver == .Claudia || viewState.driver == .Oliver)) {
+            brokenValues.append(BrokenValue(message: "Claudia oder Oliver können nicht kostenlos fahren."))
+        }
         return brokenValues.count == 0
     }
     
