@@ -59,19 +59,19 @@ class ListViewModel: ObservableObject {
         }
     }
     
-    func refresh(append: Bool = false) {
+    func refresh(afterNewEntry: Bool = false) {
         withAnimation {
             self.currentPage = 0
             self.canLoadMorePages = true
-            if append {
+            if !afterNewEntry {
                 self.originalLogbooks.removeAll()
             }
-            self.loadMoreContent()
+            self.loadMoreContent(afterNewEntry: afterNewEntry)
         }
     }
     
     
-    private func loadMoreContent(append: Bool = false) {
+    private func loadMoreContent(afterNewEntry: Bool = false) {
         guard !isLoadingPage && canLoadMorePages else {
             return
         }
@@ -111,7 +111,7 @@ class ListViewModel: ObservableObject {
             })
             .map({ response in
                 withAnimation {
-                    if append {
+                    if !afterNewEntry {
                         self.originalLogbooks.append(contentsOf: response ?? [])
                     } else {
                         self.originalLogbooks = response ?? []

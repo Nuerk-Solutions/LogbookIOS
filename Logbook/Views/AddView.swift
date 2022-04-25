@@ -272,7 +272,7 @@ struct AddLogbookView: View {
                             showSheet = false
                         }
                         
-                        listViewModel.refresh(append: true)
+                        listViewModel.refresh(afterNewEntry: true)
                     }
                 }
             }
