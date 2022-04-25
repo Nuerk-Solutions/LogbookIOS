@@ -9,6 +9,7 @@ import SwiftUI
 import CorePermissionsSwiftUI
 import PermissionsSwiftUINotification
 import PermissionsSwiftUILocationAlways
+import CoreLocation
 
 struct SettingsView: View {
     
@@ -19,8 +20,6 @@ struct SettingsView: View {
     @Preference(\.openActivityViewAfterExport) var openActivityViewAfterExport
     @Preference(\.developerconsole) var developerconsole
     @Preference(\.hideKeyboardOnDrag) var hideKeyboardOnDrag
-    @Preference(\.usePagination) var usePagination
-    @EnvironmentObject private var locationService: LocationService
     
     @State private var showExportSheet: Bool = false
     @State private var showLocationPermissionSheet: Bool = false
@@ -34,11 +33,7 @@ struct SettingsView: View {
                         Text("Tracking erlauben")
                     }
                     .onChange(of: allowLocationTracking) { newValue in
-                        if !newValue {
-                            locationService.locationManager.stopUpdatingLocation()
-                        } else {
                             showLocationPermissionSheet = true
-                        }
                     }
                 } header: {
                     Text("Standort")
@@ -77,9 +72,6 @@ struct SettingsView: View {
                     Toggle(isOn: $hideKeyboardOnDrag) {
                         Text("Verstecke Tastatur bei berühren")
                     }
-                    Toggle(isOn: $usePagination) {
-                        Text("Seitenweises laden der Einträge")
-                    }
                 } header: {
                     Text("Funktionen")
                 }
@@ -96,8 +88,8 @@ struct SettingsView: View {
                 }
                 
                 Section {
-                    SettingsRowView(name: "Version", content: "1.0")
-                    SettingsRowView(name: "Build", content: "23")
+                    SettingsRowView(name: "Version", content: Bundle.main.appVersionLong)
+                    SettingsRowView(name: "Build", content: Bundle.main.appBuild)
                 } header: {
                     Text("App")
                 }
@@ -118,8 +110,20 @@ struct SettingsView: View {
             .setPermissionComponent(for: .notification, description: "Erlaube Benachrichtigungen")
             
             .JMModal(showModal: $showLocationPermissionSheet, for: [.locationAlways,], autoDismiss: true, autoCheckAuthorization: true, restrictDismissal: false, onAppear: {}, onDisappear: {
-                if !locationService.hasPermission() {
+                if CLLocationManager.locationServicesEnabled() {
+                    switch CLLocationManager().authorizationStatus {
+                        case .notDetermined, .restricted, .denied:
+                            allowLocationTracking = false
+                            print("No access")
+                        case .authorizedAlways, .authorizedWhenInUse:
+                            print("Access")
+                        @unknown default:
+                            allowLocationTracking = false
+                            break
+                    }
+                } else {
                     allowLocationTracking = false
+                    print("Location services are not enabled")
                 }
             })
             .changeHeaderTo("Berechtigung")
