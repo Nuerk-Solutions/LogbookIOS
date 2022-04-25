@@ -17,6 +17,7 @@ struct DetailView: View {
         VStack {
             if detailViewModel.logbook != nil && !detailViewModel.isLoading {
                 AddLogbookView(currentLogbook: detailViewModel.logbook!, isReadOnly: true, showSheet: $none)
+                    .navigationBarTitleDisplayMode(.inline)
             } else {
                 CustomProgressView(message: "Laden...")
             }
