@@ -74,7 +74,6 @@ class AddViewModel: ObservableObject {
     @MainActor
     func submitLogbook(logbook: LogbookModel) async {
         self.submitted = false
-        let apiService = APIService(urlString: "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook")
         
         isLoading.toggle()
         
@@ -105,6 +104,50 @@ class AddViewModel: ObservableObject {
                     print(error)
                 case.success(let data):
                     print("Sucess Post:", data)
+                    self.isLoading.toggle()
+                    self.submitted.toggle()
+                    break
+                }
+            }.responseString { result in
+                print(String(data: result.data!, encoding: .utf8))
+            }
+        //            .responseDecodable(of: [LogbookModel].self, decoder: decoder) { response in
+        //                self.latestLogbooks = response.value ?? []
+        //            }
+    }
+    
+    func updateLogbook(logbook: LogbookModel) {
+        self.submitted = false
+        
+        isLoading.toggle()
+        
+        //        defer {
+        //            isLoading.toggle()
+        //        }
+        
+        let encoder: JSONEncoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .formatted(.standardT)
+        
+        
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .formatted(.standardT)
+        //            logbooks = try await apiService.getJSON(dateDecodingStrategy: .formatted(dateFormatter))
+        session.request("https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook", method: .patch, parameters: logbook, encoder: JSONParameterEncoder(encoder: encoder))
+            .validate(statusCode: 200..<202) // Response code need to be 201
+            .validate(contentType: ["application/json"])
+            .responseData { response in
+                switch response.result {
+                case.failure(let error):
+                    switch response.response?.statusCode {
+                    default:
+                        self.errorMessage = error.localizedDescription
+                        self.showAlert = true
+                        print("Error post", error)
+                        break
+                    }
+                    print(error)
+                case.success(let data):
+                    print("Sucess Patch:", data)
                     self.isLoading.toggle()
                     self.submitted.toggle()
                     break
