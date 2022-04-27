@@ -59,6 +59,8 @@
 		E98E868A27C24CA9004F4714 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E98E868827C24CA9004F4714 /* CoreDataModel.xcdatamodeld */; };
 		E98E868C27C24DD6004F4714 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E868B27C24DD6004F4714 /* CoreDataService.swift */; };
 		E996075A2819A7E00000719F /* APIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99607592819A7E00000719F /* APIRouter.swift */; };
+		E996075C2819AA560000719F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E996075B2819AA560000719F /* NetworkManager.swift */; };
+		E996075E2819AA910000719F /* NetworkInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E996075D2819AA910000719F /* NetworkInterceptor.swift */; };
 		E9A66A9F27E27335004033F5 /* RefuelRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A66A9E27E27335004033F5 /* RefuelRowView.swift */; };
 		E9A7684C276FADDA0043551A /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = E9A7684B276FADDA0043551A /* SPAlert */; };
 		E9B5A81A27A32B9C007CA4F7 /* KeyboardAvoider in Frameworks */ = {isa = PBXBuildFile; productRef = E9B5A81927A32B9C007CA4F7 /* KeyboardAvoider */; };
@@ -128,6 +130,8 @@
 		E98E868927C24CA9004F4714 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		E98E868B27C24DD6004F4714 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		E99607592819A7E00000719F /* APIRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRouter.swift; sourceTree = "<group>"; };
+		E996075B2819AA560000719F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		E996075D2819AA910000719F /* NetworkInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInterceptor.swift; sourceTree = "<group>"; };
 		E9A66A9E27E27335004033F5 /* RefuelRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefuelRowView.swift; sourceTree = "<group>"; };
 		E9C3A57627CA59BE0021EDD8 /* CustomProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressView.swift; sourceTree = "<group>"; };
 		E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextField.swift; sourceTree = "<group>"; };
@@ -347,6 +351,8 @@
 			children = (
 				E907B9A027DE3A370082FB9B /* Interceptor.swift */,
 				E99607592819A7E00000719F /* APIRouter.swift */,
+				E996075B2819AA560000719F /* NetworkManager.swift */,
+				E996075D2819AA910000719F /* NetworkInterceptor.swift */,
 			);
 			path = Web;
 			sourceTree = "<group>";
@@ -498,6 +504,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E996075C2819AA560000719F /* NetworkManager.swift in Sources */,
 				E9DD88CE2815AE6100421C7F /* InvoiceDriverOverview.swift in Sources */,
 				E941CD8D28144D4700C5147D /* InvoiceCreateView.swift in Sources */,
 				E94725AB276BC1BF006E6944 /* DateFormatterExtension.swift in Sources */,
@@ -515,6 +522,7 @@
 				E94725A5276BC15B006E6944 /* JsonDecoderExtension.swift in Sources */,
 				E963FC37276655C000FFBD00 /* TransitionExtension.swift in Sources */,
 				E9EA10C828141ADE000B2DB9 /* InvoiceDetailSectionComponent.swift in Sources */,
+				E996075E2819AA910000719F /* NetworkInterceptor.swift in Sources */,
 				E907B9A127DE3A370082FB9B /* Interceptor.swift in Sources */,
 				E98A0C4C27E73A190038D133 /* Preferences.swift in Sources */,
 				E970ADC127C82B6B000149D1 /* ShareSheet.swift in Sources */,

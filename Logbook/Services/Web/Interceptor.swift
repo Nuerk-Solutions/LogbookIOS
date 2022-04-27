@@ -17,7 +17,6 @@ class Interceptor: RequestInterceptor {
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         var urlRequest = urlRequest
         urlRequest.setValue("Api-Key ca03na188ame03u1d78620de67282882a84", forHTTPHeaderField: "Authorization")
-        HTTPH
         consoleManager.print("Adapt Call Success")
         print("Apdt Call")
         completion(.success(urlRequest))
