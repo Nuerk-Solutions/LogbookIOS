@@ -11,8 +11,6 @@ import SPAlert
 
 struct AddLogbookView: View {
     
-    
-    
     @State var currentLogbook: LogbookModel = LogbookModel()
     @State var latestSelectedLogbook: LogbookModel = LogbookModel()
     @State private var distance: Int = 0
@@ -264,9 +262,7 @@ struct AddLogbookView: View {
         .onAppear {
             calculateDistance()
             if(!isReadOnly) {
-                Task {
-                    await addViewModel.fetchLatestLogbooks()
-                }
+                 addViewModel.fetchLatestLogbooks()
                 UIApplication.shared.applicationIconBadgeNumber = 0
             } else {
                 forFree = currentLogbook.forFree ?? false
@@ -363,9 +359,7 @@ struct AddLogbookView: View {
         }
         
         alertManager.show(primarySecondary: .info(title: "Aktualisierung Bestätigen", message: "Fahrer: \(currentLogbook.driver) \n Reiseziel: \(currentLogbook.driveReason)\n Strecke: \(distance)km", primaryButton: Alert.Button.destructive(Text("Bestätigen")) {
-//            Task {
                  addViewModel.updateLogbook(logbook: currentLogbook)
-//            }
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
             
             // Todo Hide Sheet
@@ -403,9 +397,7 @@ struct AddLogbookView: View {
             if(currentLogbook.additionalInformationTyp == .Getankt) {
                 currentLogbook.additionalInformation = currentLogbook.additionalInformation.replacingOccurrences(of: ",", with: ".")
             }
-            Task {
-                await addViewModel.submitLogbook(logbook: currentLogbook)
-            }
+                addViewModel.submitLogbook(logbook: currentLogbook)
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
             
             // Todo Hide Sheet

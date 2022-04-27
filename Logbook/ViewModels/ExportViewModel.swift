@@ -22,7 +22,6 @@ class ExportViewModel: ObservableObject {
     
     @Preference(\.openActivityViewAfterExport) var openActivityViewAfterExport
     
-    
     let session: Session
     let interceptor: RequestInterceptor = Interceptor()
     
@@ -31,8 +30,7 @@ class ExportViewModel: ObservableObject {
         session = Session(interceptor: interceptor)
     }
     
-    @MainActor
-    func downloadXLSX(drivers: [DriverEnum], vehicles: [VehicleEnum]) async {
+    func downloadXLSX(drivers: [DriverEnum], vehicles: [VehicleEnum]) {
         showAlert = false
         errorMessage = nil
         downloaded = false
@@ -40,23 +38,27 @@ class ExportViewModel: ObservableObject {
             isLoading.toggle()
         }
         
+        defer {
+            withAnimation {
+                isLoading.toggle()
+            }
+        }
+        
         let currentDate = Date().formatted(.iso8601).replacingOccurrences(of: ":", with: "_")
         let fileName = "LogBook_\(currentDate)_Language_DE.xlsx".replacingOccurrences(of: ":", with: "_")
-        print(currentDate)
-        //        let downloadService = DownloadService(urlString: buildUrl(drivers: driver, vehicles: vehicles), fileName: "LogBook_\(currentDate)_Language_DE.xlsx".replacingOccurrences(of: ":", with: "_"))
-        //        let destination = DownloadRequest.suggestedDownloadDestination(for: .documentDirectory)
+        
         let destination: DownloadRequest.Destination = { _, _ in
             let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
             let fileURL = documentsURL.appendingPathComponent(fileName)
             
             return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
         }
-        let url = buildUrl(drivers: drivers, vehicles: vehicles)
-        print(url)
-        session.download(url, to: destination)
+        
+        session.download(buildUrl(drivers: drivers, vehicles: vehicles), to: destination)
             .downloadProgress { progress in
                 self.progress = progress.fractionCompleted
                 print("Download Progress: \(progress.fractionCompleted)")
+                consoleManager.print("Download Progress: \(progress.fractionCompleted)")
             }
             .responseData { response in
                 switch response.result {
@@ -67,47 +69,33 @@ class ExportViewModel: ObservableObject {
                         self.showAlert = true
                         self.isLoading = false
                         print("error fetch all", error)
+                        printError(description: "Export download", errorMessage: error.errorDescription)
                         break
                     }
                     print(error)
                 case.success(let data):
                     print("Sucess Fetch All:", data)
                     self.fileName = fileName
-//                    print(response.fileURL?.path)
-                    withAnimation {
-                        self.isLoading.toggle()
-                    }
-                        if self.openActivityViewAfterExport {
-                            self.showActivity.toggle()
-                        } else {
-                            guard
-                                let url = URL(string: response.fileURL!.absoluteString.replacingOccurrences(of: "file://", with: "shareddocuments://"))
-                            else {
-                                return
-                            }
-                            if UIApplication.shared.canOpenURL(url) {
-                                UIApplication.shared.open(url) { completion in
-                                    if completion {
-                                        self.presentationMode.wrappedValue.dismiss()
-                                    }
+                    if self.openActivityViewAfterExport {
+                        self.showActivity.toggle()
+                    } else {
+                        guard
+                            let url = URL(string: response.fileURL!.absoluteString.replacingOccurrences(of: "file://", with: "shareddocuments://"))
+                        else {
+                            return
+                        }
+                        if UIApplication.shared.canOpenURL(url) {
+                            UIApplication.shared.open(url) { completion in
+                                if completion {
+                                    self.presentationMode.wrappedValue.dismiss()
                                 }
                             }
+                        }
                     }
                     self.downloaded.toggle()
+                    consoleManager.print("Export & Download successful")
                     break
                 }
-                //        defer {
-                //            isLoading.toggle()
-                //        }
-                
-                //        do {
-                //            _ = try await downloadService.downloadFile()
-                //            fileName = downloadService.fileName
-                //            downloaded.toggle()
-                //        } catch  {
-                //            errorMessage = error.localizedDescription + "\nBitte melde dich bei weiteren Problem bei Thomas."
-                //            self.showAlert = true
-                //        }
             }
     }
     

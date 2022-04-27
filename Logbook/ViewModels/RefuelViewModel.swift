@@ -41,11 +41,9 @@ class RefuelViewModel: ObservableObject {
             self.errorMessage = "Bitte gib den Standort frei"
            return
         }
-        consoleManager.print("Init Location Updates")
+        consoleManager.print("Calculate radius...")
         let lat = locationService.locationManager.location?.coordinate.latitude
-        consoleManager.print("Lat: \(lat!)")
         let long = locationService.locationManager.location?.coordinate.longitude
-        consoleManager.print("Long: \(long!)")
         var speed = locationService.locationManager.location?.speed
         consoleManager.print("Speed: \(speed!)")
         guard let speed = speed else { return speed = 0 }
@@ -55,9 +53,6 @@ class RefuelViewModel: ObservableObject {
         
         
         let urlString = "https://creativecommons.tankerkoenig.de/json/list.php?lat=\(lat!)&lng=\(long!)&rad=\(radius)&type=\(fuelType)&sort=price&apikey=\(API_KEY)"
-        
-        print(urlString)
-        
         let apiService = APIService(urlString: urlString)
         
         
@@ -67,14 +62,11 @@ class RefuelViewModel: ObservableObject {
             
             print("Patrol Station Amount: \(patrolStations.stations.count)")
             consoleManager.print("Patrol Station Amount: \(patrolStations.stations.count)")
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                locationService.locationManager.stopUpdatingLocation()
-                consoleManager.print("Stopped updating location in Refuel Model")
-//            }
             
         } catch {
             showAlert = true
             errorMessage = error.localizedDescription + "\nBitte melde dich bei weiteren Problem bei Thomas."
+            printError(description: "Refuel fetch error", errorMessage: errorMessage?.debugDescription)
         }
     }
 }

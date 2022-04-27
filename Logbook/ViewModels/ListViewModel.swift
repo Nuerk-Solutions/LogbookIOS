@@ -91,10 +91,12 @@ class ListViewModel: ObservableObject {
                         self.errorMessage = error.localizedDescription
                         self.showAlert = true
                         self.isLoading = false
+                        printError(description: "Pagination fetch more content", errorMessage: error.errorDescription)
                         break
                     }
                     print(error)
                 case.success(_):
+                    print("Feteched entries (\(self.currentPage) \(self.canLoadMorePages)")
                     withAnimation {
                         self.isLoading = false
                     }

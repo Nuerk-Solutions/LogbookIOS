@@ -11,11 +11,10 @@ import Alamofire
 
 class DetailViewModel: ObservableObject {
     
-    @Published var logbook: LogbookModel?
+    @Published var detailedLogbook: LogbookModel?
     @Published var isLoading = false
     @Published var showAlert = false
     @Published var errorMessage: String?
-    var logbookId: String?
     
     let session: Session
     let interceptor: RequestInterceptor = Interceptor()
@@ -24,30 +23,23 @@ class DetailViewModel: ObservableObject {
         session = Session(interceptor: interceptor)
     }
     
-    
-    private let dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-        return dateFormatter
-    }()
-    
-    @MainActor
-    func fetchLogbookById() async {
+    func fetchLogbookById(logbookId: String?) {
         showAlert = false
         errorMessage = nil
         if let logbookId = logbookId {
-            let apiService = APIService(urlString: "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/find/\(logbookId)")
             
             withAnimation {
                 isLoading.toggle()
             }
             
-            
+            defer {
+                withAnimation {
+                    isLoading.toggle()
+                }
+            }
             
             let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .formatted(dateFormatter)
-            //            logbooks = try await apiService.getJSON(dateDecodingStrategy: .formatted(dateFormatter))
-            print(logbookId)
+            decoder.dateDecodingStrategy = .formatted(.standardT)
             session.request("https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/find/\(logbookId)", method: .get)
                 .validate()
                 .responseData { response in
@@ -57,37 +49,29 @@ class DetailViewModel: ObservableObject {
                         default:
                             self.errorMessage = error.localizedDescription
                             self.showAlert = true
-                            self.isLoading = false
                             print("error fetch all", error)
+                            printError(description: "Detailed fetch", errorMessage: error.errorDescription)
                             break
                         }
                         print(error)
-                    case.success(let data):
-                        print("Sucess Fetch All:", data)
-                        withAnimation {
-                            self.isLoading.toggle()
-                        }
+                    case.success( _):
+                        consoleManager.print("Fetched detailed data for ID: \(logbookId)")
                         break
                     }
                 }
                 .responseDecodable(of: LogbookModel.self, decoder: decoder) { (response) in
-                    print(response)
                     withAnimation {
-                        self.logbook = response.value!
+                        self.detailedLogbook = response.value
+                    }
+                    switch response.result {
+                    case .failure(let error):
+                        printError(description: "Detailed decoding", errorMessage: error.errorDescription)
+                        break
+                    case .success(_):
+                        consoleManager.print("Detailed data decoded!")
+                        break
                     }
                 }
-            
-            
-//            defer { // Defer means that is executed after all is finished
-//                isLoading.toggle()
-//            }
-            
-//            do {
-//                logbook = try await apiService.getJSON()
-//            } catch {
-//                showAlert = true
-//                errorMessage = error.localizedDescription + "\nBitte melde dich bei weiteren Problem bei Thomas."
-//            }
         }
     }
 }

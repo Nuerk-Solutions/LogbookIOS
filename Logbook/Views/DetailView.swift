@@ -15,8 +15,8 @@ struct DetailView: View {
     
     var body: some View {
         VStack {
-            if detailViewModel.logbook != nil && !detailViewModel.isLoading {
-                AddLogbookView(currentLogbook: detailViewModel.logbook!, isReadOnly: true, showSheet: $none)
+            if detailViewModel.detailedLogbook != nil && !detailViewModel.isLoading {
+                AddLogbookView(currentLogbook: detailViewModel.detailedLogbook!, isReadOnly: true, showSheet: $none)
                     .navigationBarTitleDisplayMode(.inline)
             } else {
                 CustomProgressView(message: "Laden...")
@@ -26,8 +26,7 @@ struct DetailView: View {
             Alert(title: Text("Fehler!"), message: Text(detailViewModel.errorMessage ?? ""))
         })
         .task {
-            detailViewModel.logbookId = logbookId
-            await detailViewModel.fetchLogbookById()
+            await detailViewModel.fetchLogbookById(logbookId: logbookId)
         }
     }
 }

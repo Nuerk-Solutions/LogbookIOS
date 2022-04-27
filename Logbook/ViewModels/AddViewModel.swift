@@ -24,23 +24,22 @@ class AddViewModel: ObservableObject {
     init() {
         session = Session(interceptor: interceptor)
     }
-    @MainActor
-    func fetchLatestLogbooks() async {
+    
+    func fetchLatestLogbooks() {
         showAlert = false
         errorMessage = nil
-        //        let apiService = APIService(urlString: "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/find/latest")
-        
         withAnimation {
             isLoading.toggle()
         }
         
-        //        defer {
-        //            isLoading.toggle()
-        //        }
+        defer {
+            withAnimation {
+                isLoading.toggle()
+            }
+        }
         
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(.standardT)
-        //            logbooks = try await apiService.getJSON(dateDecodingStrategy: .formatted(dateFormatter))
         session.request("https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/find/latest", method: .get)
             .validate(statusCode: 200..<201)
             .validate(contentType: ["application/json"])
@@ -51,16 +50,14 @@ class AddViewModel: ObservableObject {
                     default:
                         self.errorMessage = error.localizedDescription
                         self.showAlert = true
+                        printError(description: "Fetch Latest", errorMessage: error.errorDescription)
                         print("Error fetch single")
                         print(error)
                         break
                     }
                     print(error)
-                case.success(let data):
-                    print("Sucess fetch Single:", data)
-                    withAnimation {
-                        self.isLoading.toggle()
-                    }
+                case.success(_):
+                    consoleManager.print("Fetch latest logbooks")
                     break
                 }
             }
@@ -71,15 +68,20 @@ class AddViewModel: ObservableObject {
             }
     }
     
-    @MainActor
-    func submitLogbook(logbook: LogbookModel) async {
+    func submitLogbook(logbook: LogbookModel) {
         self.submitted = false
+        showAlert = false
+        errorMessage = nil
         
-        isLoading.toggle()
+        withAnimation {
+            isLoading.toggle()
+        }
         
-        //        defer {
-        //            isLoading.toggle()
-        //        }
+        defer {
+            withAnimation {
+                isLoading.toggle()
+            }
+        }
         
         let encoder: JSONEncoder = JSONEncoder()
         encoder.dateEncodingStrategy = .formatted(.standardT)
@@ -87,7 +89,6 @@ class AddViewModel: ObservableObject {
         
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(.standardT)
-        //            logbooks = try await apiService.getJSON(dateDecodingStrategy: .formatted(dateFormatter))
         session.request("https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook", method: .post, parameters: logbook, encoder: JSONParameterEncoder(encoder: encoder))
             .validate(statusCode: 200..<202) // Response code need to be 201
             .validate(contentType: ["application/json"])
@@ -98,32 +99,35 @@ class AddViewModel: ObservableObject {
                     default:
                         self.errorMessage = error.localizedDescription
                         self.showAlert = true
+                        printError(description: "Submit logbook", errorMessage: error.errorDescription)
                         print("Error post", error)
                         break
                     }
                     print(error)
                 case.success(let data):
                     print("Sucess Post:", data)
+                    consoleManager.print("Submitted logbook")
                     self.isLoading.toggle()
                     self.submitted.toggle()
                     break
                 }
-            }.responseString { result in
-                print(String(data: result.data!, encoding: .utf8))
             }
-        //            .responseDecodable(of: [LogbookModel].self, decoder: decoder) { response in
-        //                self.latestLogbooks = response.value ?? []
-        //            }
     }
     
     func updateLogbook(logbook: LogbookModel) {
         self.submitted = false
+        showAlert = false
+        errorMessage = nil
         
-        isLoading.toggle()
+        withAnimation {
+            isLoading.toggle()
+        }
         
-        //        defer {
-        //            isLoading.toggle()
-        //        }
+        defer {
+            withAnimation {
+                isLoading.toggle()
+            }
+        }
         
         let encoder: JSONEncoder = JSONEncoder()
         encoder.dateEncodingStrategy = .formatted(.standardT)
@@ -131,7 +135,6 @@ class AddViewModel: ObservableObject {
         
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(.standardT)
-        //            logbooks = try await apiService.getJSON(dateDecodingStrategy: .formatted(dateFormatter))
         session.request("https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook", method: .patch, parameters: logbook, encoder: JSONParameterEncoder(encoder: encoder))
             .validate(statusCode: 200..<202) // Response code need to be 201
             .validate(contentType: ["application/json"])
@@ -142,21 +145,18 @@ class AddViewModel: ObservableObject {
                     default:
                         self.errorMessage = error.localizedDescription
                         self.showAlert = true
+                        printError(description: "Update logbook", errorMessage: error.errorDescription)
                         print("Error post", error)
                         break
                     }
                     print(error)
                 case.success(let data):
                     print("Sucess Patch:", data)
+                    consoleManager.print("Updated logbook")
                     self.isLoading.toggle()
                     self.submitted.toggle()
                     break
                 }
-            }.responseString { result in
-                print(String(data: result.data!, encoding: .utf8))
             }
-        //            .responseDecodable(of: [LogbookModel].self, decoder: decoder) { response in
-        //                self.latestLogbooks = response.value ?? []
-        //            }
     }
 }
