@@ -18,6 +18,8 @@ struct InvoiceView: View {
     @State private var firstFetch: Bool = true
     @State private var isVehicle: Bool = false
     
+    @State private var delayed: Bool = false
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -31,10 +33,10 @@ struct InvoiceView: View {
                     }
                     .padding()
                 }
-                if isVehicle {
+                if isVehicle && !delayed {
                     InvoiceVehicleOverview()
                         .environmentObject(invoiceViewModel)
-                } else {
+                } else if(!delayed){
                     InvoiceDriverOverview()
                         .environmentObject(invoiceViewModel)
                 }
@@ -68,14 +70,21 @@ struct InvoiceView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         withAnimation {
+                            delayed.toggle()
                             isVehicle.toggle()
                             fetchLatestStats()
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            withAnimation {
+                                delayed.toggle()
+                            }
                         }
                     } label: {
                         Image(systemName: !isVehicle ? "car.circle" : "person.2.circle")
                             .resizable()
                             .frame(width: 30, height: 30)
                     }
+                    .disabled(delayed)
                 }
             }
             .sheet(isPresented: $showSheet, content: {
@@ -85,8 +94,8 @@ struct InvoiceView: View {
             .navigationTitle("Statisitk")
             .navigationBarTitleDisplayMode(.inline)
         }
-        .task {
-            await invoiceViewModel.fetchInvoiceHistory()
+        .onAppear {
+            invoiceViewModel.fetchInvoiceHistory()
         }
         .onChange(of: startDate) { newValue in
             fetchLatestStats()
@@ -97,23 +106,17 @@ struct InvoiceView: View {
         .onChange(of: invoiceViewModel.latestInvoiceDate) { newValue in
             startDate = newValue
             if firstFetch {
-                Task {
                     firstFetch = false
-                    await invoiceViewModel.fetchDriverStats(drivers: DriverEnum.allCases, vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate, detailed: true)
-                }
+                    invoiceViewModel.fetchDriverStats(drivers: DriverEnum.allCases, vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate, detailed: true)
             }
         }
     }
     
     func fetchLatestStats() {
         if isVehicle {
-            Task {
-                await invoiceViewModel.fetchVehicleStats(vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate)
-            }
+                invoiceViewModel.fetchVehicleStats(vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate)
         } else {
-            Task {
-                await invoiceViewModel.fetchDriverStats(drivers: DriverEnum.allCases, vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate, detailed: true)
-            }
+                invoiceViewModel.fetchDriverStats(drivers: DriverEnum.allCases, vehicles: VehicleEnum.allCases, startDate: startDate, endDate: endDate, detailed: true)
         }
     }
 }

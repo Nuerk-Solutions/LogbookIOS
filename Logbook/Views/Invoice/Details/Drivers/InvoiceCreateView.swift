@@ -54,8 +54,8 @@ struct InvoiceCreateView: View {
             }
             .navigationTitle("Abrechnung erstellen")
         }
-        .task {
-            await invoiceViewModel.fetchInvoiceHistory()
+        .onAppear {
+            invoiceViewModel.fetchInvoiceHistory()
         }
         .sheet(isPresented: $showSheet) {
             NavigationView {
@@ -76,9 +76,7 @@ struct InvoiceCreateView: View {
                     }
                     
                     Button {
-                        Task {
-                            await invoiceViewModel.createInvoice(drivers: selectedDrivers, endDate: invoiceDate)
-                        }
+                        invoiceViewModel.createInvoice(drivers: selectedDrivers, endDate: invoiceDate)
                         let rootViewController = UIApplication.shared.connectedScenes
                             .filter {$0.activationState == .foregroundActive }
                             .map {$0 as? UIWindowScene }

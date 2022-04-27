@@ -25,8 +25,8 @@ struct DetailView: View {
         .alert(isPresented: $detailViewModel.showAlert, content: {
             Alert(title: Text("Fehler!"), message: Text(detailViewModel.errorMessage ?? ""))
         })
-        .task {
-            await detailViewModel.fetchLogbookById(logbookId: logbookId)
+        .onAppear {
+            detailViewModel.fetchLogbookById(logbookId: logbookId)
         }
     }
 }

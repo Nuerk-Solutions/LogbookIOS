@@ -38,7 +38,7 @@ class InvoiceViewModel: ObservableObject {
         
         defer {
             withAnimation {
-                isLoading = true
+                isLoading = false
             }
         }
         
@@ -92,7 +92,7 @@ class InvoiceViewModel: ObservableObject {
         
         defer {
             withAnimation {
-                isLoading = true
+                isLoading = false
             }
         }
         
@@ -146,7 +146,7 @@ class InvoiceViewModel: ObservableObject {
         
         defer {
             withAnimation {
-                isLoading = true
+                isLoading = false
             }
         }
         

@@ -96,7 +96,7 @@ class ListViewModel: ObservableObject {
                     }
                     print(error)
                 case.success(_):
-                    print("Feteched entries (\(self.currentPage) \(self.canLoadMorePages)")
+                    consoleManager.print("Feteched entries (\(self.currentPage) \(self.canLoadMorePages)")
                     withAnimation {
                         self.isLoading = false
                     }

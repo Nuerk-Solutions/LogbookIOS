@@ -58,6 +58,7 @@
 		E98C59C32787812C0020381B /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98C59C22787812C0020381B /* AddView.swift */; };
 		E98E868A27C24CA9004F4714 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E98E868827C24CA9004F4714 /* CoreDataModel.xcdatamodeld */; };
 		E98E868C27C24DD6004F4714 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E868B27C24DD6004F4714 /* CoreDataService.swift */; };
+		E996075A2819A7E00000719F /* APIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99607592819A7E00000719F /* APIRouter.swift */; };
 		E9A66A9F27E27335004033F5 /* RefuelRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A66A9E27E27335004033F5 /* RefuelRowView.swift */; };
 		E9A7684C276FADDA0043551A /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = E9A7684B276FADDA0043551A /* SPAlert */; };
 		E9B5A81A27A32B9C007CA4F7 /* KeyboardAvoider in Frameworks */ = {isa = PBXBuildFile; productRef = E9B5A81927A32B9C007CA4F7 /* KeyboardAvoider */; };
@@ -126,6 +127,7 @@
 		E98C59C22787812C0020381B /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		E98E868927C24CA9004F4714 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		E98E868B27C24DD6004F4714 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		E99607592819A7E00000719F /* APIRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRouter.swift; sourceTree = "<group>"; };
 		E9A66A9E27E27335004033F5 /* RefuelRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefuelRowView.swift; sourceTree = "<group>"; };
 		E9C3A57627CA59BE0021EDD8 /* CustomProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressView.swift; sourceTree = "<group>"; };
 		E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextField.swift; sourceTree = "<group>"; };
@@ -191,12 +193,12 @@
 		E947259C276BBFFB006E6944 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				E99607582819A7A40000719F /* Web */,
 				E947259D276BC008006E6944 /* ApiService.swift */,
 				E96170D927AECDF7004CA43C /* LocationService.swift */,
 				E96170DF27AEEAE4004CA43C /* NotificationService.swift */,
 				E98E868B27C24DD6004F4714 /* CoreDataService.swift */,
 				E91B384127C6C8A100256BF0 /* DownloadService.swift */,
-				E907B9A027DE3A370082FB9B /* Interceptor.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -338,6 +340,15 @@
 				E98A0C5D27E7637C0038D133 /* ListRowView.swift */,
 			);
 			path = List;
+			sourceTree = "<group>";
+		};
+		E99607582819A7A40000719F /* Web */ = {
+			isa = PBXGroup;
+			children = (
+				E907B9A027DE3A370082FB9B /* Interceptor.swift */,
+				E99607592819A7E00000719F /* APIRouter.swift */,
+			);
+			path = Web;
 			sourceTree = "<group>";
 		};
 		E9A66A9D27E2731A004033F5 /* Refuel */ = {
@@ -508,6 +519,7 @@
 				E98A0C4C27E73A190038D133 /* Preferences.swift in Sources */,
 				E970ADC127C82B6B000149D1 /* ShareSheet.swift in Sources */,
 				E9D9B6312812E24600DB2ED2 /* InvoiceDriverDetailView.swift in Sources */,
+				E996075A2819A7E00000719F /* APIRouter.swift in Sources */,
 				E91978FC27899B720002598A /* ShapeUtils.swift in Sources */,
 				E90BDEAB27C1711500E642F0 /* RefuelViewModel.swift in Sources */,
 				E95C4F77278623C2009643B4 /* DetailView.swift in Sources */,

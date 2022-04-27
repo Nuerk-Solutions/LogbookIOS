@@ -61,9 +61,7 @@ struct ExportView: View {
                 }
                 
                 Button {
-                    Task {
-                        await exportViewModel.downloadXLSX(drivers: selectedDrivers, vehicles: selectedVehicles)
-                    }
+                    exportViewModel.downloadXLSX(drivers: selectedDrivers, vehicles: selectedVehicles)
                 } label: {
                     Text("Exportieren")
                         .foregroundColor(.white)
