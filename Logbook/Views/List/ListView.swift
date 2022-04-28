@@ -13,7 +13,7 @@ import PermissionsSwiftUINotification
 import PermissionsSwiftUILocationAlways
 
 struct ListView: View {
-    @StateObject var listViewModel = ListViewModel()
+    @EnvironmentObject var listViewModel: ListViewModel
     @StateObject var alertManager = AlertManager()
     
     @State private var editMode = EditMode.inactive

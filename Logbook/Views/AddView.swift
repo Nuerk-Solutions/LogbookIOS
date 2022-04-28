@@ -244,6 +244,24 @@ struct AddLogbookView: View {
             .padding(10)
             .cornerRadius(8)
             .listRowBackground(isReadOnly ? Color.orange : Color.green)
+            
+            if isReadOnly {
+                Spacer()
+                Button(action: {
+                    deleteLogbook()
+                }) {
+                    HStack {
+                        Spacer()
+                        Text("Löschen")
+                        Spacer()
+                    }
+                }
+                .foregroundColor(.white)
+                .padding(10)
+                .cornerRadius(8)
+                .listRowBackground(Color.red)
+            }
+            
         }
         .overlay(
             Group {
@@ -257,7 +275,6 @@ struct AddLogbookView: View {
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
             }
         })
-        .uses(alertManager)
         //        .transition(.opacity.animation(.linear(duration: 0.2)))
         .onAppear {
             calculateDistance()
@@ -284,6 +301,17 @@ struct AddLogbookView: View {
                 self.currentLogbook.driver = DriverEnum(rawValue: logbookSettings[0].lastDriver ?? "Andrea") ?? .Andrea
             }
         })
+        .onChange(of: addViewModel.deleted) { newValue in
+            if newValue {
+                SPAlertView(title: "Fahrt gelöscht", message: "Die Fahrt wurde erfolgreich gelöscht", preset: .done).present(haptic: .success) {
+                    withAnimation {
+                        showSheet = false
+                    }
+                    
+                    listViewModel.refresh(afterNewEntry: true)
+                }
+            }
+        }
         .onChange(of: addViewModel.submitted) { newValue in
             if newValue {
                 SPAlertView(title: isReadOnly ? "Fahrt aktualisiert" : "Neue Fahrt hinzugefügt", message: "", preset: .done).present(haptic: .success) {
@@ -341,7 +369,22 @@ struct AddLogbookView: View {
             }
             
         }
+        .uses(alertManager)
     }
+    
+    func deleteLogbook() {
+        alertManager.show(primarySecondary: .info(title: "Löschen Bestätigen", message: "Fahrer: \(currentLogbook.driver) \n Reiseziel: \(currentLogbook.driveReason)\n Strecke: \(distance)km", primaryButton: Alert.Button.destructive(Text("Bestätigen")) {
+            addViewModel.deleteLogbook(id: currentLogbook._id)
+            
+            // Todo Hide Sheet
+            if(addViewModel.showAlert) {
+                alertManager.show(dismiss: .warning(title: "Fehler", message: addViewModel.errorMessage!, dismissButton: .default(Text("OK"))))
+                return
+            }
+            
+        }, secondaryButton: Alert.Button.cancel(Text("Abbrechen"))))
+    }
+    
     func updateLogbook() {
         print("UPDATE")
         if forFree {

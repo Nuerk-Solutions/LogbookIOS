@@ -107,11 +107,12 @@ class ListViewModel: ObservableObject {
             .tryMap {$0.value}
             .receive(on: RunLoop.main)
             .handleEvents(receiveOutput: { response in
-                self.canLoadMorePages = response!.count == self.perPage
+                self.canLoadMorePages = response?.count == self.perPage
                 self.isLoadingPage = false
                 self.currentPage += 1
             })
             .map({ response in
+                consoleManager.print("Mapped items")
                 withAnimation {
                     if !afterNewEntry {
                         self.originalLogbooks.append(contentsOf: response ?? [])

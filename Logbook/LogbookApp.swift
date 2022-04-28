@@ -11,6 +11,7 @@ import SwiftUI
 struct LogbookApp: App {
     
     @StateObject private var coreDataService = CoreDataService()
+    @StateObject var listViewModel = ListViewModel()
     
     @Preference(\.developerconsole) var developerconsole
     
@@ -18,6 +19,7 @@ struct LogbookApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, coreDataService.container.viewContext)
+                .environmentObject(listViewModel)
                 .onAppear {
                     // To Hide Constrains warnings
                     UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
