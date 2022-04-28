@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ListRowView: View {
     
-    @State var logbook: LogbookModel
+    @Binding var logbook: LogbookModel
+    @State var isFirstItem: Bool = false
     
     let readableDateFormat: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -21,7 +22,7 @@ struct ListRowView: View {
     var body: some View {
         Section {
             NavigationLink {
-                DetailView(logbookId: logbook._id)
+                DetailView(logbookId: logbook._id, isFirstItem: isFirstItem)
             } label: {
                 HStack {
                     Image(logbook.vehicleTyp == .VW ? "car_vw" : logbook.vehicleTyp == .Ferrari ? "logo_small" : "porsche")

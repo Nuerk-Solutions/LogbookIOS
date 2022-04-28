@@ -19,6 +19,7 @@ struct AddLogbookView: View {
     @FocusState private var descriptionFocus: Bool
     @FocusState var isInputActive: Bool
     var isReadOnly: Bool = false
+    @State var isFirstItem: Bool = false
     
     @Binding var showSheet: Bool
     
@@ -29,6 +30,7 @@ struct AddLogbookView: View {
     
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.scenePhase) var scenePhase
+    @Environment(\.dismiss) var dismiss
     @FetchRequest(entity: LogbookSettings.entity(), sortDescriptors: []) var logbookSettings: FetchedResults<LogbookSettings>
     
     @Preference(\.hideKeyboardOnDrag) var hideKeyboardOnDrag
@@ -226,27 +228,27 @@ struct AddLogbookView: View {
             }
             .disabled(isReadOnly)
             
-            Button(action: {
-                print("ACTION")
-                if !isReadOnly {
-                    saveNewLogbook()
-                } else {
-                    updateLogbook()
+            Section {
+                Button(action: {
+                    print("ACTION")
+                    if !isReadOnly {
+                        saveNewLogbook()
+                    } else {
+                        updateLogbook()
+                    }
+                }) {
+                    HStack {
+                        Spacer()
+                        Text(isReadOnly ? "Aktualisieren" : "Speichern")
+                        Spacer()
+                    }
                 }
-            }) {
-                HStack {
-                    Spacer()
-                    Text(isReadOnly ? "Aktualisieren" : "Speichern")
-                    Spacer()
-                }
+                .foregroundColor(.white)
+                .padding(10)
+                .cornerRadius(8)
+                .listRowBackground(isReadOnly ? Color.orange : Color.green)
             }
-            .foregroundColor(.white)
-            .padding(10)
-            .cornerRadius(8)
-            .listRowBackground(isReadOnly ? Color.orange : Color.green)
-            
-            if isReadOnly {
-                Spacer()
+            if isReadOnly && isFirstItem {
                 Button(action: {
                     deleteLogbook()
                 }) {
@@ -279,7 +281,7 @@ struct AddLogbookView: View {
         .onAppear {
             calculateDistance()
             if(!isReadOnly) {
-                 addViewModel.fetchLatestLogbooks()
+                addViewModel.fetchLatestLogbooks()
                 UIApplication.shared.applicationIconBadgeNumber = 0
             } else {
                 forFree = currentLogbook.forFree ?? false
@@ -307,7 +309,6 @@ struct AddLogbookView: View {
                     withAnimation {
                         showSheet = false
                     }
-                    
                     listViewModel.refresh(afterNewEntry: true)
                 }
             }
@@ -319,9 +320,23 @@ struct AddLogbookView: View {
                     
                     withAnimation {
                         showSheet = false
+                        if(isReadOnly) {
+                            dismiss.callAsFunction()
+                        }
                     }
-                    
-                    listViewModel.refresh(afterNewEntry: true)
+                    if isReadOnly {
+                        listViewModel.refresh(afterNewEntry: true)
+//                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//                            listViewModel.originalLogbooks.replace(listViewModel.originalLogbooks.first { $0._id == currentLogbook._id} ?? LogbookModel(), with: currentLogbook)
+//                            listViewModel.originalLogbooks.append(currentLogbook)
+//                        }
+//                            if let index = listViewModel.originalLogbooks.firstIndex(where: {$0._id == currentLogbook._id}) {
+//                                listViewModel.originalLogbooks[index].driveReason = currentLogbook.driveReason
+//                                listViewModel.originalLogbooks[index].driver = currentLogbook.driver
+//                        }
+                    } else {
+                        listViewModel.refresh(afterNewEntry: false)
+                    }
                 }
             }
         }
@@ -386,7 +401,6 @@ struct AddLogbookView: View {
     }
     
     func updateLogbook() {
-        print("UPDATE")
         if forFree {
             currentLogbook.forFree = currentLogbook.driver != .Oliver && currentLogbook.driver != .Claudia
         }
@@ -402,7 +416,7 @@ struct AddLogbookView: View {
         }
         
         alertManager.show(primarySecondary: .info(title: "Aktualisierung Bestätigen", message: "Fahrer: \(currentLogbook.driver) \n Reiseziel: \(currentLogbook.driveReason)\n Strecke: \(distance)km", primaryButton: Alert.Button.destructive(Text("Bestätigen")) {
-                 addViewModel.updateLogbook(logbook: currentLogbook)
+            addViewModel.updateLogbook(logbook: currentLogbook)
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
             
             // Todo Hide Sheet
@@ -440,7 +454,7 @@ struct AddLogbookView: View {
             if(currentLogbook.additionalInformationTyp == .Getankt) {
                 currentLogbook.additionalInformation = currentLogbook.additionalInformation.replacingOccurrences(of: ",", with: ".")
             }
-                addViewModel.submitLogbook(logbook: currentLogbook)
+            addViewModel.submitLogbook(logbook: currentLogbook)
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
             
             // Todo Hide Sheet
@@ -459,4 +473,14 @@ struct AddLogbookView: View {
         distance = newMilage - currentMilage // When newMileAge is empty or null use currentMilAge
     }
     
+}
+extension Array where Element: Equatable {
+    @discardableResult
+    public mutating func replace(_ element: Element, with new: Element) -> Bool {
+        if let f = self.firstIndex(where: { $0 == element}) {
+            self[f] = new
+            return true
+        }
+        return false
+    }
 }

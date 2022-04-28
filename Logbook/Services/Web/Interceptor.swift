@@ -37,5 +37,4 @@ class Interceptor: RequestInterceptor {
             completion(.doNotRetry)
         }
     }
-    
 }

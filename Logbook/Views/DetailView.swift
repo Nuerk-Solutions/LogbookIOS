@@ -10,6 +10,7 @@ import AlertKit
 
 struct DetailView: View {
     var logbookId: String?
+    @State var isFirstItem: Bool = false
     @State private var none: Bool = false
     
     @StateObject var detailViewModel = DetailViewModel()
@@ -18,7 +19,7 @@ struct DetailView: View {
     var body: some View {
         VStack {
             if detailViewModel.detailedLogbook != nil && !detailViewModel.isLoading {
-                AddLogbookView(currentLogbook: detailViewModel.detailedLogbook!, isReadOnly: true, showSheet: $none, alertManager: alertManager)
+                AddLogbookView(currentLogbook: detailViewModel.detailedLogbook!, isReadOnly: true, isFirstItem: isFirstItem, showSheet: $none, alertManager: alertManager)
                     .navigationBarTitleDisplayMode(.inline)
             } else {
                 CustomProgressView(message: "Laden...")

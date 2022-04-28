@@ -11,7 +11,7 @@ import SwiftUI
 struct LogbookApp: App {
     
     @StateObject private var coreDataService = CoreDataService()
-    @StateObject var listViewModel = ListViewModel()
+    @ObservedObject var listViewModel = ListViewModel()
     
     @Preference(\.developerconsole) var developerconsole
     

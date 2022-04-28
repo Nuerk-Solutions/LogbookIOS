@@ -42,8 +42,8 @@ struct ListView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(listViewModel.originalLogbooks) { logbook in
-                    ListRowView(logbook: logbook)
+                ForEach($listViewModel.originalLogbooks) { $logbook in
+                    ListRowView(logbook: $logbook, isFirstItem: listViewModel.originalLogbooks.firstIndex(of: logbook) == 0)
                         .onAppear {
                             listViewModel.loadMoreContentIfNeeded(currentItem: logbook)
                         }

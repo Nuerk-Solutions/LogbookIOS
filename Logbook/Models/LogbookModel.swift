@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LogbookModel: Codable, Identifiable {
+struct LogbookModel: Codable, Identifiable, Equatable {
     var id: String {_id}
     
     var _id: String
