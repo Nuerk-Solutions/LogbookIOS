@@ -32,12 +32,6 @@ class DetailViewModel: ObservableObject {
                 isLoading.toggle()
             }
             
-            defer {
-                withAnimation {
-                    isLoading.toggle()
-                }
-            }
-            
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .formatted(.standardT)
             session.request("https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/find/\(logbookId)", method: .get)
@@ -69,6 +63,9 @@ class DetailViewModel: ObservableObject {
                         break
                     case .success(_):
                         consoleManager.print("Detailed data decoded!")
+                        withAnimation {
+                            self.isLoading = false
+                        }
                         break
                     }
                 }

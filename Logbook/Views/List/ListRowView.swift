@@ -11,6 +11,7 @@ struct ListRowView: View {
     
     @Binding var logbook: LogbookModel
     @State var isFirstItem: Bool = false
+    @EnvironmentObject var listViewModel: ListViewModel
     
     let readableDateFormat: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -23,6 +24,7 @@ struct ListRowView: View {
         Section {
             NavigationLink {
                 DetailView(logbookId: logbook._id, isFirstItem: isFirstItem)
+                    .environmentObject(listViewModel)
             } label: {
                 HStack {
                     Image(logbook.vehicleTyp == .VW ? "car_vw" : logbook.vehicleTyp == .Ferrari ? "logo_small" : "porsche")

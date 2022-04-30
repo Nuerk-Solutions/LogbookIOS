@@ -33,7 +33,7 @@ class ListViewModel: ObservableObject {
     init() {
         session = Session(interceptor: interceptor)
         //        Task {
-        loadMoreContent()
+        loadMoreContent(extend: true)
         //        }
         //        withAnimation {
         //            Publishers.CombineLatest($originalLogbooks, $searchTerm)
@@ -49,29 +49,25 @@ class ListViewModel: ObservableObject {
     
     func loadMoreContentIfNeeded(currentItem item: LogbookModel?) {
         guard let item = item else {
-            loadMoreContent()
+            loadMoreContent(extend: true)
             return
         }
         
         let thresholdIndex = originalLogbooks.index(originalLogbooks.endIndex, offsetBy: -5)
         if originalLogbooks.firstIndex(where: { $0.id == item.id }) == thresholdIndex {
-            loadMoreContent()
+            loadMoreContent(extend: true)
         }
     }
     
-    func refresh(afterNewEntry: Bool = false) {
+    func refresh(extend: Bool = false) {
         withAnimation {
             self.currentPage = 0
             self.canLoadMorePages = true
-            if !afterNewEntry {
-                self.originalLogbooks.removeAll()
-            }
-            self.loadMoreContent(afterNewEntry: afterNewEntry)
+            loadMoreContent(extend: extend)
         }
     }
     
-    
-    private func loadMoreContent(afterNewEntry: Bool = false) {
+    func loadMoreContent(extend: Bool = false) {
         guard !isLoadingPage && canLoadMorePages else {
             return
         }
@@ -103,26 +99,17 @@ class ListViewModel: ObservableObject {
                     break
                 }
             }
-            .publishDecodable(type: [LogbookModel].self, decoder: decoder)
-            .tryMap {$0.value}
-            .receive(on: RunLoop.main)
-            .handleEvents(receiveOutput: { response in
-                self.canLoadMorePages = response?.count == self.perPage
-                self.isLoadingPage = false
-                self.currentPage += 1
-            })
-            .map({ response in
-                consoleManager.print("Mapped items")
+            .responseDecodable(of: [LogbookModel].self, decoder: decoder) { (response) in
                 withAnimation {
-                    if !afterNewEntry {
-                        self.originalLogbooks.append(contentsOf: response ?? [])
-                    } else {
-                        self.originalLogbooks = response ?? []
+                    self.canLoadMorePages = response.value?.count == self.perPage
+                    self.isLoadingPage = false
+                    self.currentPage += 1
+                    if (extend) {
+                        self.originalLogbooks.append(contentsOf: response.value ?? [])
+                        return
                     }
+                    self.originalLogbooks = response.value ?? []
                 }
-                return self.originalLogbooks
-            })
-            .catch ({ _ in Just(self.originalLogbooks)})
-                .assign(to: &$originalLogbooks)
+            }
     }
 }

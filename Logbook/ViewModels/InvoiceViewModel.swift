@@ -36,12 +36,6 @@ class InvoiceViewModel: ObservableObject {
             isLoading = true
         }
         
-        defer {
-            withAnimation {
-                isLoading = false
-            }
-        }
-        
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(.standardT)
         session.request("https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/invoice/history", method: .get)
@@ -72,11 +66,14 @@ class InvoiceViewModel: ObservableObject {
                     break
                 case .success(_):
                     consoleManager.print("Decoded InvoiceHistroy")
+                    withAnimation {
+                        self.isLoading = false
+                    }
                     break
                 }
                 withAnimation {
                     self.invoiceHistory = response.value?.sorted { $0.date > $1.date } ?? []
-                    self.latestInvoiceDate = self.invoiceHistory.first?.date ?? Date.distantPast
+                    self.latestInvoiceDate = self.invoiceHistory.first?.date.addingTimeInterval(TimeInterval(60.0 * 60.0 * 24.0)) ?? Date.distantPast
                 }
             }
     }
@@ -88,12 +85,6 @@ class InvoiceViewModel: ObservableObject {
         errorMessage = nil
         withAnimation {
             isLoading = true
-        }
-        
-        defer {
-            withAnimation {
-                isLoading = false
-            }
         }
         
         let decoder = JSONDecoder()
@@ -125,6 +116,9 @@ class InvoiceViewModel: ObservableObject {
                     break
                 case .success(_):
                     consoleManager.print("Decoded Driverstats InvoiceModel")
+                    withAnimation {
+                        self.isLoading = false
+                    }
                     break
                 }
                 withAnimation {
@@ -135,7 +129,7 @@ class InvoiceViewModel: ObservableObject {
     
     func fetchVehicleStats(vehicles: [VehicleEnum], startDate: Date, endDate: Date) {
         let endDateDay = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: endDate) ?? endDate
-        let url = "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/stats/vehicle?vehicles=\(vehicles.map{ $0.rawValue }.joined(separator: ","))&startDate=\(DateFormatter.yearMonthDay.string(from: startDate))&endDate=\(DateFormatter.standardT.string(from: endDateDay))&api-key=ca03na188ame03u1d78620de67282882a84"
+        let url = "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/stats/vehicle?vehicles=\(vehicles.map{ $0.rawValue }.joined(separator: ","))&startDate=\(DateFormatter.yearMonthDay.string(from: startDate))&endDate=\(DateFormatter.standardT.string(from: endDateDay))"
 
         showAlert = false
         errorMessage = nil
@@ -144,16 +138,10 @@ class InvoiceViewModel: ObservableObject {
             isLoading = true
         }
         
-        defer {
-            withAnimation {
-                isLoading = false
-            }
-        }
-        
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(.standardT)
         
-        AF.request(url, method: .get)
+        session.request(url, method: .get)
             .validate()
             .responseData { response in
                 switch response.result {
@@ -180,6 +168,9 @@ class InvoiceViewModel: ObservableObject {
                     printError(description: "InvoiceVehicleStats decode", errorMessage: error.errorDescription)
                 case .success(_):
                     consoleManager.print("Decoded InvoiceVehicleStats")
+                    withAnimation {
+                        self.isLoading = false
+                    }
                 }
                 withAnimation {
                     self.vehicleList = response.value?.sorted { $0.vehicle.rawValue < $1.vehicle.rawValue } ?? []
@@ -196,12 +187,6 @@ class InvoiceViewModel: ObservableObject {
         errorMessage = nil
         withAnimation {
             isLoading.toggle()
-        }
-        
-        defer {
-            withAnimation {
-                isLoading.toggle()
-            }
         }
         
         let parameters: [String: String] = [
@@ -230,6 +215,7 @@ class InvoiceViewModel: ObservableObject {
                     consoleManager.print("Create Invoice fetch successful")
                     
                     withAnimation {
+                        self.isLoading.toggle()
                         self.invoiceSuccessful.toggle()
                         SPAlertView(title: "Abrechnung erstellt", message: "", preset: .done).present(haptic: .success) {
                             self.fetchInvoiceHistory()

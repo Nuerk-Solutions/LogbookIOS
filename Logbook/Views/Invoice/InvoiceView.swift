@@ -41,6 +41,11 @@ struct InvoiceView: View {
                         .environmentObject(invoiceViewModel)
                 }
             }
+            .overlay {
+                if invoiceViewModel.isLoading {
+                    CustomProgressView(message: "Laden...")
+                }
+            }
             .background {
                 AnimatedBackground()
                     .edgesIgnoringSafeArea(.all)

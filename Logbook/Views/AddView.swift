@@ -18,7 +18,7 @@ struct AddLogbookView: View {
     @State private var forFree: Bool = false
     @FocusState private var descriptionFocus: Bool
     @FocusState var isInputActive: Bool
-    var isReadOnly: Bool = false
+    @State var isReadOnly: Bool = false
     @State var isFirstItem: Bool = false
     
     @Binding var showSheet: Bool
@@ -34,8 +34,6 @@ struct AddLogbookView: View {
     @FetchRequest(entity: LogbookSettings.entity(), sortDescriptors: []) var logbookSettings: FetchedResults<LogbookSettings>
     
     @Preference(\.hideKeyboardOnDrag) var hideKeyboardOnDrag
-    
-    
     
     var body: some View {
         Form {
@@ -265,13 +263,11 @@ struct AddLogbookView: View {
             }
             
         }
-        .overlay(
-            Group {
-                if (addViewModel.isLoading && !isReadOnly) {
-                    CustomProgressView(message: "Warten...")
-                }
+        .overlay {
+            if (addViewModel.isLoading) {
+                CustomProgressView(message: "Warten...")
             }
-        )
+        }
         .gesture(DragGesture().onChanged{_ in
             if !descriptionFoucsBool && hideKeyboardOnDrag {
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -308,8 +304,11 @@ struct AddLogbookView: View {
                 SPAlertView(title: "Fahrt gelöscht", message: "Die Fahrt wurde erfolgreich gelöscht", preset: .done).present(haptic: .success) {
                     withAnimation {
                         showSheet = false
+                        dismiss.callAsFunction()
                     }
-                    listViewModel.refresh(afterNewEntry: true)
+                    //                    Task {
+                    listViewModel.refresh(extend: false)
+                    //                    }
                 }
             }
         }
@@ -325,17 +324,9 @@ struct AddLogbookView: View {
                         }
                     }
                     if isReadOnly {
-                        listViewModel.refresh(afterNewEntry: true)
-//                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                            listViewModel.originalLogbooks.replace(listViewModel.originalLogbooks.first { $0._id == currentLogbook._id} ?? LogbookModel(), with: currentLogbook)
-//                            listViewModel.originalLogbooks.append(currentLogbook)
-//                        }
-//                            if let index = listViewModel.originalLogbooks.firstIndex(where: {$0._id == currentLogbook._id}) {
-//                                listViewModel.originalLogbooks[index].driveReason = currentLogbook.driveReason
-//                                listViewModel.originalLogbooks[index].driver = currentLogbook.driver
-//                        }
+                        listViewModel.originalLogbooks.replace(listViewModel.originalLogbooks.first { $0._id == currentLogbook._id} ?? LogbookModel(), with: currentLogbook)
                     } else {
-                        listViewModel.refresh(afterNewEntry: false)
+                        listViewModel.refresh(extend: false)
                     }
                 }
             }
@@ -353,17 +344,17 @@ struct AddLogbookView: View {
             }
         }
         .toolbar{
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    if !isReadOnly {
-                        saveNewLogbook()
-                    } else {
-                        updateLogbook()
-                    }
-                } label: {
-                    Text(isReadOnly ? "Aktualisieren" : "Speichern")
-                }
-            }
+            //            ToolbarItem(placement: .navigationBarTrailing) {
+            //                Button {
+            //                    if !isReadOnly {
+            //                        saveNewLogbook()
+            //                    } else {
+            //                        updateLogbook()
+            //                    }
+            //                } label: {
+            //                    Text(isReadOnly ? "Aktualisieren" : "Speichern")
+            //                }
+            //            }
             ToolbarItem(placement: .navigationBarLeading) {
                 if !isReadOnly {
                     Button {

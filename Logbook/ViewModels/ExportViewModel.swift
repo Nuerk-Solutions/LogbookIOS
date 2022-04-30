@@ -38,12 +38,6 @@ class ExportViewModel: ObservableObject {
             isLoading.toggle()
         }
         
-        defer {
-            withAnimation {
-                isLoading.toggle()
-            }
-        }
-        
         let currentDate = Date().formatted(.iso8601).replacingOccurrences(of: ":", with: "_")
         let fileName = "LogBook_\(currentDate)_Language_DE.xlsx".replacingOccurrences(of: ":", with: "_")
         
@@ -75,6 +69,9 @@ class ExportViewModel: ObservableObject {
                     print(error)
                 case.success(let data):
                     print("Sucess Fetch All:", data)
+                    withAnimation {
+                        self.isLoading = false
+                    }
                     self.fileName = fileName
                     if self.openActivityViewAfterExport {
                         self.showActivity.toggle()

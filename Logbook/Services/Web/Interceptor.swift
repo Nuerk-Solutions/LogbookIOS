@@ -15,7 +15,7 @@ class Interceptor: RequestInterceptor {
     
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         var urlRequest = urlRequest
-        urlRequest.cachePolicy = .reloadRevalidatingCacheData
+//        urlRequest.cachePolicy = .reloadRevalidatingCacheData
         urlRequest.setValue("Api-Key ca03na188ame03u1d78620de67282882a84", forHTTPHeaderField: "Authorization")
         completion(.success(urlRequest))
     }
@@ -27,8 +27,9 @@ class Interceptor: RequestInterceptor {
                 print("Retry: \(request.retryCount) with \(response.statusCode)")
                 completion(.retryWithDelay(retryDelay))
             } else {
-                consoleManager.print("Statuscode not match!")
-                print("Statuscode not match!")
+                let response = request.task?.response as? HTTPURLResponse
+                consoleManager.print("Statuscode match! \(response?.statusCode ?? -1)")
+                print("Statuscode match! \(response?.statusCode ?? -1)")
                 completion(.doNotRetry)
             }
         } else {

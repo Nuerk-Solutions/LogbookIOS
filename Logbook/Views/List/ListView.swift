@@ -11,9 +11,10 @@ import AlertKit
 import KeyboardAvoider
 import PermissionsSwiftUINotification
 import PermissionsSwiftUILocationAlways
+import CoreLocation
 
 struct ListView: View {
-    @EnvironmentObject var listViewModel: ListViewModel
+    @StateObject var listViewModel = ListViewModel()
     @StateObject var alertManager = AlertManager()
     
     @State private var editMode = EditMode.inactive
@@ -44,6 +45,7 @@ struct ListView: View {
             List {
                 ForEach($listViewModel.originalLogbooks) { $logbook in
                     ListRowView(logbook: $logbook, isFirstItem: listViewModel.originalLogbooks.firstIndex(of: logbook) == 0)
+                        .environmentObject(listViewModel)
                         .onAppear {
                             listViewModel.loadMoreContentIfNeeded(currentItem: logbook)
                         }
@@ -56,7 +58,9 @@ struct ListView: View {
             }
             .listStyle(InsetGroupedListStyle())
             .refreshable {
-                listViewModel.refresh()
+                DispatchQueue.main.async {
+                    listViewModel.refresh(extend: false)
+                }
             }
             .navigationTitle("Fahrtenbuch")
             .toolbar(content: {
@@ -99,7 +103,7 @@ struct ListView: View {
             //                }
             //            }
             
-            .onReceive(listViewModel.$logbooks) { newValue in
+            .onReceive(listViewModel.$originalLogbooks) { newValue in
                 if openAddViewOnStart {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.35) {
                         if listViewModel.isLoading {
@@ -110,24 +114,36 @@ struct ListView: View {
                 }
             }
             .uses(alertManager)
-            //            .JMModal(showModal: $showModal, for: [.locationAlways, .notification], autoDismiss: true, autoCheckAuthorization: true, restrictDismissal: false, onAppear: {}, onDisappear: {
-            //                if !locationService.hasPermission() {
-            //                    allowLocationTracking = false
-            //                }
-            //                if openAddViewOnStart {
-            //                    if listViewModel.isLoading {
-            //                        return
-            //                    }
-            //                    showAddSheet = true
-            //                }
-            //            })
-            //            .changeHeaderTo("Berechtigungen")
-            //            .changeHeaderDescriptionTo("Damit du bestimmte Funktionen dieser App benutzen kannst, musst du entsprechende Berechtigungen freigeben.")
-            //            .changeBottomDescriptionTo("Diese Berechtigungen sind notwendig, damit alle Features richtig funktionieren. Ohne die Standortfreigabe ist es nicht möglich, das Tankstellen Feature zu benutzen. Ohne die Erlaubnis für Benachrichtigungen bekommst du keine Information, wenn du dich dem ARB 19 näherst.")
-            //            .setPermissionComponent(for: .notification, title: "Benachrichtigungen")
-            //            .setPermissionComponent(for: .notification, description: "Erlaube Benachrichtigungen")
-            //            .setPermissionComponent(for: .locationAlways, title: "Standort immer")
-            //            .setPermissionComponent(for: .locationAlways, description: "Dauerhafte Standortfreigabe erlauben")
+                        .JMModal(showModal: $showModal, for: [.locationAlways, .notification], autoDismiss: true, autoCheckAuthorization: true, restrictDismissal: false, onAppear: {}, onDisappear: {
+                            if CLLocationManager.locationServicesEnabled() {
+                                switch CLLocationManager().authorizationStatus {
+                                    case .notDetermined, .restricted, .denied:
+                                        allowLocationTracking = false
+                                        print("No access")
+                                    case .authorizedAlways, .authorizedWhenInUse:
+                                        print("Access")
+                                    @unknown default:
+                                        allowLocationTracking = false
+                                        break
+                                }
+                            } else {
+                                allowLocationTracking = false
+                                print("Location services are not enabled")
+                            }
+                            if openAddViewOnStart {
+                                if listViewModel.isLoading {
+                                    return
+                                }
+                                showAddSheet = true
+                            }
+                        })
+                        .changeHeaderTo("Berechtigungen")
+                        .changeHeaderDescriptionTo("Damit du bestimmte Funktionen dieser App benutzen kannst, musst du entsprechende Berechtigungen freigeben.")
+                        .changeBottomDescriptionTo("Diese Berechtigungen sind notwendig, damit alle Features richtig funktionieren. Ohne die Standortfreigabe ist es nicht möglich, das Tankstellen Feature zu benutzen. Ohne die Erlaubnis für Benachrichtigungen bekommst du keine Information, wenn du dich dem ARB 19 näherst.")
+                        .setPermissionComponent(for: .notification, title: "Benachrichtigungen")
+                        .setPermissionComponent(for: .notification, description: "Erlaube Benachrichtigungen")
+                        .setPermissionComponent(for: .locationAlways, title: "Standort immer")
+                        .setPermissionComponent(for: .locationAlways, description: "Dauerhafte Standortfreigabe erlauben")
         }
     }
     

@@ -12,15 +12,27 @@ struct DetailView: View {
     var logbookId: String?
     @State var isFirstItem: Bool = false
     @State private var none: Bool = false
+    @State private var show: Bool = false
     
     @StateObject var detailViewModel = DetailViewModel()
     @StateObject var alertManager = AlertManager()
+    @EnvironmentObject var listViewModel: ListViewModel
     
     var body: some View {
         VStack {
             if detailViewModel.detailedLogbook != nil && !detailViewModel.isLoading {
                 AddLogbookView(currentLogbook: detailViewModel.detailedLogbook!, isReadOnly: true, isFirstItem: isFirstItem, showSheet: $none, alertManager: alertManager)
+                    .environmentObject(listViewModel)
                     .navigationBarTitleDisplayMode(.inline)
+                    .onAppear {
+                        // MARK - This is done to hide update button pop in
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            withAnimation {
+                                show = true
+                            }
+                        }
+                    }
+                    .opacity(show ? 1 : 0)
             } else {
                 CustomProgressView(message: "Laden...")
             }
