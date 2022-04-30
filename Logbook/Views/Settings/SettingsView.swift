@@ -93,9 +93,16 @@ struct SettingsView: View {
                 } header: {
                     Text("App")
                 }
+                VStack {
+                    Text("Made by Thomas ❤️")
+                    Text("2021 - 2022")
+                        .font(.caption)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                .listRowInsets(EdgeInsets())
+                .background(Color(UIColor.systemGroupedBackground))
             }
             .navigationTitle("Einstellungen")
-            
             .toolbar(content: {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     ExportButton
