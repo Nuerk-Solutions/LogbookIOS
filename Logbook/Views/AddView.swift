@@ -148,6 +148,7 @@ struct AddLogbookView: View {
                         .padding(.top, 5)
                         .foregroundColor(.gray)
                 }
+                .disabled(!isFirstItem && isReadOnly)
                 
                 let cost = forFree ? 0 : Double(distance) * 0.2
                 if(distance > 0) {
