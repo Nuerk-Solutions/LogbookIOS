@@ -34,7 +34,7 @@ class DetailViewModel: ObservableObject {
             
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .formatted(.standardT)
-            session.request("https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/find/\(logbookId)", method: .get)
+            session.request("https://api.nuerk-solutions.de/logbook/find/\(logbookId)", method: .get)
                 .validate()
                 .responseData { response in
                     switch response.result {

@@ -97,7 +97,7 @@ class ExportViewModel: ObservableObject {
     }
     
     func buildUrl(drivers: [DriverEnum], vehicles: [VehicleEnum]) -> String {
-        let baseUrl = "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/download?"
+        let baseUrl = "https://api.nuerk-solutions.de/logbook/download?"
         
         var builedUrl = baseUrl
         

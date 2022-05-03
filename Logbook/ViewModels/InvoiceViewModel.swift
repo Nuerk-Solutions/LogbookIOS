@@ -38,7 +38,7 @@ class InvoiceViewModel: ObservableObject {
         
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(.standardT)
-        session.request("https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/invoice/history", method: .get)
+        session.request("https://api.nuerk-solutions.de/logbook/invoice/history", method: .get)
             .validate(statusCode: 200..<201)
             .validate(contentType: ["application/json"])
             .responseData { response in
@@ -80,7 +80,7 @@ class InvoiceViewModel: ObservableObject {
     
     func fetchDriverStats(drivers: [DriverEnum], vehicles: [VehicleEnum], startDate: Date, endDate: Date, detailed: Bool) {
         let endDateDay = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: endDate) ?? endDate
-        let url = "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/stats/driver?vehicles=\(vehicles.map{ $0.rawValue }.joined(separator: ",") )&drivers=\(drivers.map{ $0.rawValue }.joined(separator: ","))&startDate=\(DateFormatter.yearMonthDay.string(from: startDate))&endDate=\(DateFormatter.standardT.string(from: endDateDay))&detailed=\(detailed)"
+        let url = "https://api.nuerk-solutions.de/logbook/stats/driver?vehicles=\(vehicles.map{ $0.rawValue }.joined(separator: ",") )&drivers=\(drivers.map{ $0.rawValue }.joined(separator: ","))&startDate=\(DateFormatter.yearMonthDay.string(from: startDate))&endDate=\(DateFormatter.standardT.string(from: endDateDay))&detailed=\(detailed)"
         showAlert = false
         errorMessage = nil
         withAnimation {
@@ -129,7 +129,7 @@ class InvoiceViewModel: ObservableObject {
     
     func fetchVehicleStats(vehicles: [VehicleEnum], startDate: Date, endDate: Date) {
         let endDateDay = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: endDate) ?? endDate
-        let url = "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/stats/vehicle?vehicles=\(vehicles.map{ $0.rawValue }.joined(separator: ","))&startDate=\(DateFormatter.yearMonthDay.string(from: startDate))&endDate=\(DateFormatter.standardT.string(from: endDateDay))"
+        let url = "https://api.nuerk-solutions.de/logbook/stats/vehicle?vehicles=\(vehicles.map{ $0.rawValue }.joined(separator: ","))&startDate=\(DateFormatter.yearMonthDay.string(from: startDate))&endDate=\(DateFormatter.standardT.string(from: endDateDay))"
 
         showAlert = false
         errorMessage = nil
@@ -182,7 +182,7 @@ class InvoiceViewModel: ObservableObject {
     func createInvoice(drivers: [DriverEnum], endDate: Date) {
         let driverString = "?drivers=\(drivers.map{ $0.rawValue }.joined(separator: ","))"
         
-        let url = "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/invoice/create/\(!drivers.isEmpty ? driverString : "")"
+        let url = "https://api.nuerk-solutions.de/logbook/invoice/create/\(!drivers.isEmpty ? driverString : "")"
         showAlert = false
         errorMessage = nil
         withAnimation {

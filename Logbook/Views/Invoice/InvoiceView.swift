@@ -96,7 +96,7 @@ struct InvoiceView: View {
                 InvoiceCreateView()
                     .environmentObject(invoiceViewModel)
             })
-            .navigationTitle("Statisitk")
+            .navigationTitle("Statistik")
             .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {

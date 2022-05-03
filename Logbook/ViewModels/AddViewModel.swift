@@ -34,7 +34,7 @@ class AddViewModel: ObservableObject {
         }
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(.standardT)
-        session.request("https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/find/latest", method: .get)
+        session.request("https://api.nuerk-solutions.de/logbook/find/latest", method: .get)
             .validate(statusCode: 200..<201)
             .validate(contentType: ["application/json"])
             .responseData { response in
@@ -78,7 +78,7 @@ class AddViewModel: ObservableObject {
         
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(.standardT)
-        session.request("https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook", method: .post, parameters: logbook, encoder: JSONParameterEncoder(encoder: encoder))
+        session.request("https://api.nuerk-solutions.de/logbook", method: .post, parameters: logbook, encoder: JSONParameterEncoder(encoder: encoder))
             .validate(statusCode: 200..<202) // Response code need to be 201
             .validate(contentType: ["application/json"])
             .responseData { response in
@@ -120,7 +120,7 @@ class AddViewModel: ObservableObject {
         
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(.standardT)
-        session.request("https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/\(logbook._id)", method: .patch, parameters: logbook, encoder: JSONParameterEncoder(encoder: encoder))
+        session.request("https://api.nuerk-solutions.de/logbook/\(logbook._id)", method: .patch, parameters: logbook, encoder: JSONParameterEncoder(encoder: encoder))
             .validate(statusCode: 200..<202) // Response code need to be 201
             .validate(contentType: ["application/json"])
             .responseData { response in
@@ -154,7 +154,7 @@ class AddViewModel: ObservableObject {
         withAnimation {
             isLoading = true
         }
-        session.request("https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/\(id)", method: .delete)
+        session.request("https://api.nuerk-solutions.de/logbook/\(id)", method: .delete)
             .validate(statusCode: 200..<300) // Response code need to be 204 NO_CONTENT
             .responseData { response in
                 switch response.result {

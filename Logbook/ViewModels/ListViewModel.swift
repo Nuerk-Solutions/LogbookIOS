@@ -75,7 +75,7 @@ class ListViewModel: ObservableObject {
         
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(.standardT)
-        let url = "https://europe-west1-logbookbackend.cloudfunctions.net/api/logbook/find/all?sort=-date&page=\(currentPage)&limit=\(perPage)"
+        let url = "https://api.nuerk-solutions.de/logbook/find/all?sort=-date&page=\(currentPage)&limit=\(perPage)"
         session.request(url, method: .get)
             .validate(statusCode: 200..<201)
             .validate(contentType: ["application/json"])
