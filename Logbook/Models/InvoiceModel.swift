@@ -30,6 +30,7 @@ struct InvoiceVehicleStats: Codable {
     var distanceCost: Double
     var averageConsumptionSinceLastRefuel: Double
     var averageCostPerKmSinceLastRefuel: Double?
+    var averageMaintenanceCostPerKm: Double?
     var averageConsumption: Double
     var averageCost: Double
     var totalRefuels: Int

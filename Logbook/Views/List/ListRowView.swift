@@ -11,6 +11,7 @@ struct ListRowView: View {
     
     @Binding var logbook: LogbookModel
     @State var isFirstItem: Bool = false
+    @State var isReadOnly: Bool = false
     @EnvironmentObject var listViewModel: ListViewModel
     
     let readableDateFormat: DateFormatter = {

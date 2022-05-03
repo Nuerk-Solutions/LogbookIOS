@@ -30,6 +30,11 @@ struct ListView: View {
     
     @State private var showModal: Bool = true
     
+    @State private var isInvoiceLink: Bool = false
+    @State private var invoiceLinkDriver: DriverEnum?
+    @State private var invoiceLinkStartDate: Date?
+    @State private var invoiceLinkEndDate: Date?
+    
     @Preference(\.openAddViewOnStart) var openAddViewOnStart
     @Preference(\.allowLocationTracking) var allowLocationTracking
     
@@ -132,6 +137,38 @@ struct ListView: View {
                         .setPermissionComponent(for: .notification, description: "Erlaube Benachrichtigungen")
                         .setPermissionComponent(for: .locationAlways, title: "Standort immer")
                         .setPermissionComponent(for: .locationAlways, description: "Dauerhafte Standortfreigabe erlauben")
+        }
+        .sheet(isPresented: $isInvoiceLink, content: {
+            InvoiceLinkOverview(driver: $invoiceLinkDriver, startDate: $invoiceLinkStartDate, endDate: $invoiceLinkEndDate)
+                .onAppear {
+                    print("******")
+                    print(invoiceLinkStartDate!)
+                }
+        })
+        .onOpenURL { url in
+            
+            guard let driverIdentifier = url.driverIdentifier else {
+                return
+            }
+            guard let startDate = url.startDateIdentifier else {
+                return
+            }
+            guard let endDate = url.endDateIdentifier else {
+                return
+            }
+            print(driverIdentifier)
+            print(startDate)
+            print(endDate)
+            invoiceLinkDriver = driverIdentifier
+            invoiceLinkStartDate = startDate
+            invoiceLinkEndDate = endDate
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                print("====")
+                print(invoiceLinkDriver!)
+                print(invoiceLinkStartDate!)
+                print(invoiceLinkEndDate!)
+                isInvoiceLink = true
+            }
         }
     }
     

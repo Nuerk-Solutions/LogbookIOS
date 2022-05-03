@@ -17,6 +17,9 @@ struct InvoiceVehicleDetailView: View {
                 InvoiceDetailSectionComponent(name: "Zurückgelete Strecke", distance: invoiceModel.distance)
                 InvoiceDetailSectionComponent(name: "Gesamte Fahrtkosten", cost: invoiceModel.distanceCost)
                 InvoiceDetailSectionComponent(name: "Anzahl Tankungen", text: "\(invoiceModel.totalRefuels + 1)")
+                if(invoiceModel.averageMaintenanceCostPerKm != nil) {
+                InvoiceDetailSectionComponent(name: "Wartungskosten pro km", cost: invoiceModel.averageMaintenanceCostPerKm)
+                }
             }
             
             Section {

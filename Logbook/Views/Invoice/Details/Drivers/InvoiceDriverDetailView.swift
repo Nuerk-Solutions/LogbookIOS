@@ -18,7 +18,7 @@ struct InvoiceDriverDetailView: View {
                 InvoiceDetailSectionComponent(name: "Fahrtkosten", cost: invoiceModel.distanceCost)
                 if (invoiceModel.drivesCostForFree != nil) {
                     InvoiceDetailSectionComponent(name: "Übernommene Kosten", cost: invoiceModel.drivesCostForFree!)
-                        .listRowBackground(Color.orange)
+                        .listRowBackground(Color.gray.opacity(0.1))
                 }
             } header: {
                 Text("Gesamtnachweis")
@@ -34,7 +34,7 @@ struct InvoiceDriverDetailView: View {
                             InvoiceDetailSectionComponent(name: "Fahrtkosten", cost: item.distanceCost)
                             if (item.drivesCostForFree != nil) {
                                 InvoiceDetailSectionComponent(name: "Übernommene Kosten", cost: item.drivesCostForFree!)
-                                    .listRowBackground(Color.orange)
+                                    .listRowBackground(Color.gray.opacity(0.05))
                             }
                         }, label: {
                             Text(item.vehicleTyp.id)

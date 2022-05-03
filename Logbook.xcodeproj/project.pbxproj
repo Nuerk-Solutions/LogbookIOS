@@ -62,6 +62,8 @@
 		E9A7684C276FADDA0043551A /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = E9A7684B276FADDA0043551A /* SPAlert */; };
 		E9B5A81A27A32B9C007CA4F7 /* KeyboardAvoider in Frameworks */ = {isa = PBXBuildFile; productRef = E9B5A81927A32B9C007CA4F7 /* KeyboardAvoider */; };
 		E9C3A57727CA59BE0021EDD8 /* CustomProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C3A57627CA59BE0021EDD8 /* CustomProgressView.swift */; };
+		E9CB9C62282189660025D706 /* UrlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB9C61282189660025D706 /* UrlExtension.swift */; };
+		E9CB9C6428218B1F0025D706 /* InvoiceLinkOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB9C6328218B1F0025D706 /* InvoiceLinkOverview.swift */; };
 		E9D18361276F3B95001A764E /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = E9D18360276F3B95001A764E /* AlertKit */; };
 		E9D4E6F42758FEBB003F36DA /* FloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */; };
 		E9D4E6FD27590483003F36DA /* NumberUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D4E6FC27590483003F36DA /* NumberUtils.swift */; };
@@ -128,6 +130,8 @@
 		E98E868B27C24DD6004F4714 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		E9A66A9E27E27335004033F5 /* RefuelRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefuelRowView.swift; sourceTree = "<group>"; };
 		E9C3A57627CA59BE0021EDD8 /* CustomProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressView.swift; sourceTree = "<group>"; };
+		E9CB9C61282189660025D706 /* UrlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlExtension.swift; sourceTree = "<group>"; };
+		E9CB9C6328218B1F0025D706 /* InvoiceLinkOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceLinkOverview.swift; sourceTree = "<group>"; };
 		E9D4E6F32758FEBB003F36DA /* FloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextField.swift; sourceTree = "<group>"; };
 		E9D4E6FC27590483003F36DA /* NumberUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberUtils.swift; sourceTree = "<group>"; };
 		E9D9B6292812D78400DB2ED2 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
@@ -241,6 +245,7 @@
 				E94725AA276BC1BF006E6944 /* DateFormatterExtension.swift */,
 				E90B2473276E9C6A00B185EF /* StringExtension.swift */,
 				E94FC2C7281700F80032A990 /* BundleExtension.swift */,
+				E9CB9C61282189660025D706 /* UrlExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -372,6 +377,7 @@
 				E9DD88C82815ADCF00421C7F /* Details */,
 				E9D9B62C2812D89700DB2ED2 /* InvoiceView.swift */,
 				E9EA10C728141ADE000B2DB9 /* InvoiceDetailSectionComponent.swift */,
+				E9CB9C6328218B1F0025D706 /* InvoiceLinkOverview.swift */,
 			);
 			path = Invoice;
 			sourceTree = "<group>";
@@ -440,6 +446,9 @@
 		E98342342757B85800E1C314 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					URL,
+				);
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
@@ -525,6 +534,7 @@
 				E90B2474276E9C6A00B185EF /* StringExtension.swift in Sources */,
 				E90BDEAD27C17A4400E642F0 /* PatrolStationModel.swift in Sources */,
 				E960463C27EA65CF001D0C3B /* Reachability.swift in Sources */,
+				E9CB9C6428218B1F0025D706 /* InvoiceLinkOverview.swift in Sources */,
 				E98342422757B85800E1C314 /* ContentView.swift in Sources */,
 				E98A0C5E27E7637C0038D133 /* ListRowView.swift in Sources */,
 				E900E5EC27BC2E5D009EEFD5 /* Console.swift in Sources */,
@@ -532,6 +542,7 @@
 				E9D4E6F42758FEBB003F36DA /* FloatingTextField.swift in Sources */,
 				E95C4F7927862ECA009643B4 /* DetailViewModel.swift in Sources */,
 				E9D9B62A2812D78400DB2ED2 /* TabBar.swift in Sources */,
+				E9CB9C62282189660025D706 /* UrlExtension.swift in Sources */,
 				E94725AD276BC342006E6944 /* AddViewModel.swift in Sources */,
 				E940ED1127E0D3C700B2EAA7 /* SettingsRowView.swift in Sources */,
 				E98C59C32787812C0020381B /* AddView.swift in Sources */,

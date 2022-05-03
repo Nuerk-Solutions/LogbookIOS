@@ -12,6 +12,7 @@ import Combine
 class ListViewModel: ObservableObject {
     
     @Published var originalLogbooks = [LogbookModel]()
+    @Published var invoiceLogbooks = [LogbookModel]()
     @Published var logbooks = [LogbookModel]()
     @Published var isLoading = false
     @Published var showAlert = false
@@ -109,6 +110,45 @@ class ListViewModel: ObservableObject {
                         return
                     }
                     self.originalLogbooks = response.value ?? []
+                }
+            }
+    }
+    
+    func fetchLogbooksForDriver(driver: DriverEnum, startDate: Date, endDate: Date) {
+        showAlert = false
+        errorMessage = nil
+        withAnimation {
+            isLoading.toggle()
+        }
+        
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .formatted(.standardT)
+        session.request("https://api.nuerk-solutions.de/logbook/find/all?sort=-date&drivers=\(driver)&startDate=\(DateFormatter.yearMonthDay.string(from: startDate))&endDate=\(DateFormatter.yearMonthDay.string(from: endDate))", method: .get)
+            .validate(statusCode: 200..<201)
+            .validate(contentType: ["application/json"])
+            .responseData { response in
+                switch response.result {
+                case.failure(let error):
+                    switch response.response?.statusCode {
+                    default:
+                        self.errorMessage = error.localizedDescription
+                        self.showAlert = true
+                        self.isLoading = false
+                        print("error fetch all", error)
+                        break
+                    }
+                    print(error)
+                case.success(let data):
+                    print("Sucess Fetch All:", data)
+                    withAnimation {
+                        self.isLoading = false
+                    }
+                    break
+                }
+            }
+            .responseDecodable(of: [LogbookModel].self, decoder: decoder) { (response) in
+                withAnimation {
+                    self.invoiceLogbooks = response.value ?? []
                 }
             }
     }
