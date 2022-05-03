@@ -78,18 +78,6 @@ struct ListView: View {
                     if listViewModel.isLoading {
                         CustomProgressView(message: "Laden...")
                     }
-                    
-                    if(listViewModel.errorMessage != nil) {
-                        VStack {
-                            Text("Bitte verbinde dich mit dem Internet um einen neuen Eintrag hinzuzufügen!").foregroundColor(.red)
-                                .fontWeight(.bold)
-                                .font(.title)
-                        }.onAppear {
-                            withAnimation {
-                                listViewModel.logbooks.removeAll()
-                            }
-                        }
-                    }
                 }
             )
             .alert(isPresented: $listViewModel.showAlert, content: {
