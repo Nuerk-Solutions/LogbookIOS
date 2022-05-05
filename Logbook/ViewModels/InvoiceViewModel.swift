@@ -180,7 +180,7 @@ class InvoiceViewModel: ObservableObject {
     
     
     func createInvoice(drivers: [DriverEnum], endDate: Date) {
-        let driverString = "?drivers=\(drivers.map{ $0.rawValue }.joined(separator: ","))"
+        let driverString = "?emailDrivers=\(drivers.map{ $0.rawValue }.joined(separator: ","))"
         
         let url = "https://api.nuerk-solutions.de/logbook/invoice/create/\(!drivers.isEmpty ? driverString : "")"
         showAlert = false

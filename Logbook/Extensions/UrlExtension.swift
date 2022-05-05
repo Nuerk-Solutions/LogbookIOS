@@ -19,7 +19,7 @@ extension URL {
     }
     
     var startDateIdentifier: Date? {
-        guard pathComponents.count > 1, let date = DateFormatter.yearMonthDay.date(from: pathComponents[1]) else {
+        guard pathComponents.count > 1, let date = DateFormatter.standardT.date(from: pathComponents[1]) else {
             return nil
         }
         
@@ -27,7 +27,7 @@ extension URL {
     }
     
     var endDateIdentifier: Date? {
-        guard pathComponents.count > 2, let date = DateFormatter.yearMonthDay.date(from: pathComponents[2]) else {
+        guard pathComponents.count > 2, let date = DateFormatter.standardT.date(from: pathComponents[2]) else {
             return nil
         }
         

@@ -146,7 +146,6 @@ struct ListView: View {
                 }
         })
         .onOpenURL { url in
-            
             guard let driverIdentifier = url.driverIdentifier else {
                 return
             }
@@ -156,17 +155,10 @@ struct ListView: View {
             guard let endDate = url.endDateIdentifier else {
                 return
             }
-            print(driverIdentifier)
-            print(startDate)
-            print(endDate)
             invoiceLinkDriver = driverIdentifier
             invoiceLinkStartDate = startDate
             invoiceLinkEndDate = endDate
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                print("====")
-                print(invoiceLinkDriver!)
-                print(invoiceLinkStartDate!)
-                print(invoiceLinkEndDate!)
                 isInvoiceLink = true
             }
         }
