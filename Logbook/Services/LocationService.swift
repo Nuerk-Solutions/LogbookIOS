@@ -37,44 +37,23 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
         
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    }
-    
-    func fetchCountryAndCity(for location: CLLocation?) {
-        guard let location = location else { return }
-        let geocoder = CLGeocoder()
-        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
-            self.currentPlacemark = placemarks?.first
-        }
-    }
-    
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         consoleManager.print("Entered: \(region.identifier)")
         print("Entered: \(region.identifier)")
-        consoleManager.print("Notification SEND")
         if notifications {
             notificationService.requestLocalNotification(notification: NotificationModel(notificationId: UUID().uuidString, title:"Wilkommen am \(region.identifier) 🏠", body: "Hey du! Es scheint so als ob du wieder zu Hause bist. Hier eine kleine Erinnerung ans Fahrtenbuch 😉", data: nil))
         }
         if notificationsIconBadge {
             notificationService.pushApplicationBadge(amount: 1)
         }
+        consoleManager.print("Notification SEND")
     }
     
-    // TODO: Check wich method works
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        self.authorizationStatus = status
-        print(status)
-    }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         self.authorizationStatus = manager.authorizationStatus
         print(manager.authorizationStatus)
     }
-    
-//    func requestLocationPermission() {
-//        self.locationManager.requestAlwaysAuthorization()
-//    }
-    
     
     func hasPermission() -> Bool {
         if CLLocationManager.locationServicesEnabled() {

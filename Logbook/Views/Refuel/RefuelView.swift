@@ -13,7 +13,7 @@ struct RefuelView: View {
     @StateObject var refuelViewModel = RefuelViewModel()
     @State private var selectedVehicle: VehicleEnum = VehicleEnum.Ferrari
     @StateObject var alertManager = AlertManager()
-    @StateObject private var locationService: LocationService = LocationService()
+    @EnvironmentObject private var locationService: LocationService
     
     var body: some View {
         Form {

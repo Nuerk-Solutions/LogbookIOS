@@ -39,7 +39,7 @@ struct ListView: View {
     @Preference(\.allowLocationTracking) var allowLocationTracking
     
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject private var locationService: LocationService
+    @StateObject private var locationService: LocationService = LocationService()
     
     init() {
         UITableView.appearance().sectionFooterHeight = 0
@@ -192,6 +192,7 @@ struct ListView: View {
             .sheet(isPresented: $showRefuelSheet, content: {
                 RefuelView()
                     .ignoresSafeArea(.all, edges: .all)
+                    .environmentObject(locationService)
             })
         )
     }
