@@ -77,14 +77,7 @@ struct InvoiceCreateView: View {
                     
                     Button {
                         invoiceViewModel.createInvoice(drivers: selectedDrivers, endDate: invoiceDate)
-                        let rootViewController = UIApplication.shared.connectedScenes
-                            .filter {$0.activationState == .foregroundActive }
-                            .map {$0 as? UIWindowScene }
-                            .compactMap { $0 }
-                            .first?.windows
-                            .filter({ $0.isKeyWindow }).first?.rootViewController
-                        
-                        rootViewController?.dismiss(animated: true)
+                        dismissToRoot()
                     } label: {
                         Text("Erstellen & Versenden")
                             .frame(maxWidth: .infinity)

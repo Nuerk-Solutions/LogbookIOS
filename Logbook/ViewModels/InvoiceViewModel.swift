@@ -50,7 +50,7 @@ class InvoiceViewModel: ObservableObject {
                         self.showAlert = true
                         self.isLoading = false
                         print("error fetch all", error)
-                        printError(description: "Invoice history fetch", errorMessage: error.errorDescription)
+                        printError(description: "Invoice history fetch", errorMessage: error.localizedDescription)
                         break
                     }
                     print(error)
@@ -62,7 +62,7 @@ class InvoiceViewModel: ObservableObject {
             .responseDecodable(of: [InvoiceHistory].self, decoder: decoder) { (response) in
                 switch response.result {
                 case .failure(let error):
-                    printError(description: "InvoiceHistory decode", errorMessage: error.errorDescription)
+                    printError(description: "InvoiceHistory decode", errorMessage: error.localizedDescription)
                     break
                 case .success(_):
                     consoleManager.print("Decoded InvoiceHistroy")
@@ -101,7 +101,7 @@ class InvoiceViewModel: ObservableObject {
                         self.showAlert = true
                         self.isLoading = false
                         print("error fetch all", error)
-                        printError(description: "Driver stats fetch", errorMessage: error.errorDescription)
+                        printError(description: "Driver stats fetch", errorMessage: error.localizedDescription)
                         break
                     }
                 case.success(_):
@@ -112,7 +112,7 @@ class InvoiceViewModel: ObservableObject {
             .responseDecodable(of: [InvoiceModel].self, decoder: decoder) { (response) in
                 switch response.result {
                 case .failure(let error):
-                    printError(description: "Driverstats decode", errorMessage: error.errorDescription)
+                    printError(description: "Driverstats decode", errorMessage: error.localizedDescription)
                     break
                 case .success(_):
                     consoleManager.print("Decoded Driverstats InvoiceModel")
@@ -152,7 +152,7 @@ class InvoiceViewModel: ObservableObject {
                         self.showAlert = true
                         self.isLoading = false
                         print("error fetch all", error)
-                        printError(description: "InvoiceVehicleStats fetch", errorMessage: error.errorDescription)
+                        printError(description: "InvoiceVehicleStats fetch", errorMessage: error.localizedDescription)
                         break
                     }
                     print(error)
@@ -165,7 +165,7 @@ class InvoiceViewModel: ObservableObject {
             .responseDecodable(of: [InvoiceVehicleStats].self, decoder: decoder) { (response) in
                 switch response.result {
                 case.failure(let error):
-                    printError(description: "InvoiceVehicleStats decode", errorMessage: error.errorDescription)
+                    printError(description: "InvoiceVehicleStats decode", errorMessage: error.localizedDescription)
                 case .success(_):
                     consoleManager.print("Decoded InvoiceVehicleStats")
                     withAnimation {
@@ -206,7 +206,7 @@ class InvoiceViewModel: ObservableObject {
                         self.showAlert = true
                         self.isLoading = false
                         print("error fetch all", error)
-                        printError(description: "CreateInvoice fetch", errorMessage: error.errorDescription)
+                        printError(description: "CreateInvoice fetch", errorMessage: error.localizedDescription)
                         break
                     }
                     print(error)

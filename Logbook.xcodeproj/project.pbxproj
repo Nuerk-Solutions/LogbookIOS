@@ -48,6 +48,7 @@
 		E970ADC427C835BF000149D1 /* ExportSelectionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E970ADC327C835BF000149D1 /* ExportSelectionRowView.swift */; };
 		E970ADC727C836DD000149D1 /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E970ADC627C836DD000149D1 /* ExportView.swift */; };
 		E970ADC927C8F07C000149D1 /* ExportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E970ADC827C8F07C000149D1 /* ExportViewModel.swift */; };
+		E970DF0928259C80005F8808 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E970DF0828259C80005F8808 /* ViewExtension.swift */; };
 		E98342402757B85800E1C314 /* LogbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E983423F2757B85800E1C314 /* LogbookApp.swift */; };
 		E98342422757B85800E1C314 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98342412757B85800E1C314 /* ContentView.swift */; };
 		E98342442757B85A00E1C314 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E98342432757B85A00E1C314 /* Assets.xcassets */; };
@@ -117,6 +118,7 @@
 		E970ADC327C835BF000149D1 /* ExportSelectionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportSelectionRowView.swift; sourceTree = "<group>"; };
 		E970ADC627C836DD000149D1 /* ExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportView.swift; sourceTree = "<group>"; };
 		E970ADC827C8F07C000149D1 /* ExportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportViewModel.swift; sourceTree = "<group>"; };
+		E970DF0828259C80005F8808 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		E983423C2757B85800E1C314 /* Logbook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Logbook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E983423F2757B85800E1C314 /* LogbookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookApp.swift; sourceTree = "<group>"; };
 		E98342412757B85800E1C314 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				E90B2473276E9C6A00B185EF /* StringExtension.swift */,
 				E94FC2C7281700F80032A990 /* BundleExtension.swift */,
 				E9CB9C61282189660025D706 /* UrlExtension.swift */,
+				E970DF0828259C80005F8808 /* ViewExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -552,6 +555,7 @@
 				E98E868C27C24DD6004F4714 /* CoreDataService.swift in Sources */,
 				E9A66A9F27E27335004033F5 /* RefuelRowView.swift in Sources */,
 				E970ADC427C835BF000149D1 /* ExportSelectionRowView.swift in Sources */,
+				E970DF0928259C80005F8808 /* ViewExtension.swift in Sources */,
 				E96170E227AEECB2004CA43C /* NotificationModel.swift in Sources */,
 				E9393EDA27614B3E00CB136F /* FloatingNumberField.swift in Sources */,
 				E970ADC927C8F07C000149D1 /* ExportViewModel.swift in Sources */,

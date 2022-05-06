@@ -39,6 +39,7 @@ struct ListView: View {
     @Preference(\.allowLocationTracking) var allowLocationTracking
     
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     @StateObject private var locationService: LocationService = LocationService()
     
     init() {
@@ -96,10 +97,10 @@ struct ListView: View {
             //                }
             //            }
             
-            .onReceive(listViewModel.$originalLogbooks) { newValue in
+            .onAppear {
                 if openAddViewOnStart {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.35) {
-                        if listViewModel.isLoading {
+                        if listViewModel.isLoading || isInvoiceLink || invoiceLinkDriver != nil {
                             return
                         }
                         showAddSheet = true
@@ -140,10 +141,6 @@ struct ListView: View {
         }
         .sheet(isPresented: $isInvoiceLink, content: {
             InvoiceLinkOverview(driver: $invoiceLinkDriver, startDate: $invoiceLinkStartDate, endDate: $invoiceLinkEndDate)
-                .onAppear {
-                    print("******")
-                    print(invoiceLinkStartDate!)
-                }
         })
         .onOpenURL { url in
             guard let driverIdentifier = url.driverIdentifier else {
@@ -158,7 +155,10 @@ struct ListView: View {
             invoiceLinkDriver = driverIdentifier
             invoiceLinkStartDate = startDate
             invoiceLinkEndDate = endDate
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                dismissToRoot()
+            })
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 isInvoiceLink = true
             }
         }

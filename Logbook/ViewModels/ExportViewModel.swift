@@ -63,7 +63,7 @@ class ExportViewModel: ObservableObject {
                         self.showAlert = true
                         self.isLoading = false
                         print("error fetch all", error)
-                        printError(description: "Export download", errorMessage: error.errorDescription)
+                        printError(description: "Export download", errorMessage: error.localizedDescription)
                         break
                     }
                     print(error)

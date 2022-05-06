@@ -44,7 +44,7 @@ class DetailViewModel: ObservableObject {
                             self.errorMessage = error.localizedDescription
                             self.showAlert = true
                             print("error fetch all", error)
-                            printError(description: "Detailed fetch", errorMessage: error.errorDescription)
+                            printError(description: "Detailed fetch", errorMessage: error.localizedDescription)
                             break
                         }
                         print(error)
@@ -59,7 +59,7 @@ class DetailViewModel: ObservableObject {
                     }
                     switch response.result {
                     case .failure(let error):
-                        printError(description: "Detailed decoding", errorMessage: error.errorDescription)
+                        printError(description: "Detailed decoding", errorMessage: error.localizedDescription)
                         break
                     case .success(_):
                         consoleManager.print("Detailed data decoded!")

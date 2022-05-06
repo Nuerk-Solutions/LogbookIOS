@@ -14,7 +14,6 @@ struct InvoiceLinkOverview: View {
     @Binding var endDate: Date?
     
     @StateObject private var listViewModel = ListViewModel()
-    @Environment(\.presentationMode) var presentationMode
     
     let readableDateFormat: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -59,7 +58,7 @@ struct InvoiceLinkOverview: View {
         .toolbar(content: {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
-                    self.presentationMode.wrappedValue.dismiss()
+                    dismissToRoot()
                 } label: {
                     Image(systemName: "xmark.circle.fill")
                         .resizable()
