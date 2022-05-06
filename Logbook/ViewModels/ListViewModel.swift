@@ -15,6 +15,7 @@ class ListViewModel: ObservableObject {
     @Published var invoiceLogbooks = [LogbookModel]()
     @Published var logbooks = [LogbookModel]()
     @Published var isLoading = false
+    @Published var isLoadingInvoiceOverview = false
     @Published var showAlert = false
     @Published var errorMessage: String?
     @Published var searchTerm: String = ""
@@ -118,7 +119,7 @@ class ListViewModel: ObservableObject {
         showAlert = false
         errorMessage = nil
         withAnimation {
-            isLoading.toggle()
+            isLoadingInvoiceOverview.toggle()
         }
         
         let decoder = JSONDecoder()
@@ -133,22 +134,20 @@ class ListViewModel: ObservableObject {
                     default:
                         self.errorMessage = error.localizedDescription
                         self.showAlert = true
-                        self.isLoading = false
+                        self.isLoadingInvoiceOverview = false
                         print("error fetch all", error)
                         break
                     }
                     print(error)
                 case.success(let data):
                     print("Sucess Fetch All:", data)
-                    withAnimation {
-                        self.isLoading = false
-                    }
                     break
                 }
             }
             .responseDecodable(of: [LogbookModel].self, decoder: decoder) { (response) in
                 withAnimation {
                     self.invoiceLogbooks = response.value ?? []
+                    self.isLoadingInvoiceOverview = false
                 }
             }
     }

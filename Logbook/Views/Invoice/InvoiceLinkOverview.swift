@@ -51,8 +51,8 @@ struct InvoiceLinkOverview: View {
             listViewModel.fetchLogbooksForDriver(driver: driver!, startDate: startDate!, endDate: endDate!)
         }
         .overlay {
-            if listViewModel.isLoading {
-                CustomProgressView(message: "Laden...")
+            if listViewModel.isLoadingInvoiceOverview {
+                CustomProgressView(message: "Übersicht Laden...")
             }
         }
         .toolbar(content: {

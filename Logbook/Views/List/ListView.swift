@@ -152,6 +152,7 @@ struct ListView: View {
             guard let endDate = url.endDateIdentifier else {
                 return
             }
+            isInvoiceLink = false
             invoiceLinkDriver = driverIdentifier
             invoiceLinkStartDate = startDate
             invoiceLinkEndDate = endDate
