@@ -88,7 +88,7 @@ class ListViewModel: ObservableObject {
                         self.errorMessage = error.localizedDescription
                         self.showAlert = true
                         self.isLoading = false
-                        printError(description: "Pagination fetch more content", errorMessage: error.errorDescription)
+                        printError(description: "Pagination fetch more content", errorMessage: error.localizedDescription)
                         break
                     }
                     print(error)

@@ -44,7 +44,7 @@ class AddViewModel: ObservableObject {
                     default:
                         self.errorMessage = error.localizedDescription
                         self.showAlert = true
-                        printError(description: "Fetch Latest", errorMessage: error.errorDescription)
+                        printError(description: "Fetch Latest", errorMessage: error.localizedDescription)
                         print("Error fetch single")
                         print(error)
                         break
@@ -88,7 +88,7 @@ class AddViewModel: ObservableObject {
                     default:
                         self.errorMessage = error.localizedDescription
                         self.showAlert = true
-                        printError(description: "Submit logbook", errorMessage: error.errorDescription)
+                        printError(description: "Submit logbook", errorMessage: error.localizedDescription)
                         print("Error post", error)
                         break
                     }
@@ -130,7 +130,7 @@ class AddViewModel: ObservableObject {
                     default:
                         self.errorMessage = error.localizedDescription
                         self.showAlert = true
-                        printError(description: "Update logbook", errorMessage: error.errorDescription)
+                        printError(description: "Update logbook", errorMessage: error.localizedDescription)
                         print("Error post", error)
                         break
                     }
@@ -163,7 +163,7 @@ class AddViewModel: ObservableObject {
                     default:
                         self.errorMessage = error.localizedDescription
                         self.showAlert = true
-                        printError(description: "Delete logbook", errorMessage: error.asAFError.debugDescription)
+                        printError(description: "Delete logbook", errorMessage: error.localizedDescription)
                         print("Error post", error)
                         break
                     }
