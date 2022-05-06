@@ -64,12 +64,19 @@ struct InvoiceLinkOverview: View {
                         .resizable()
                         .frame(width: 30, height: 30, alignment: .center)
                 }
-
+            }
+            
+            ToolbarItem(placement: .principal) {
+                VStack {
+                    Text("Zusammenfassung \(driver!.rawValue)")
+                        .font(.headline)
+                    Text("\(readableDateFormat.string(from: startDate!)) - \(readableDateFormat.string(from: endDate!))")
+                }
             }
         })
         .listStyle(InsetGroupedListStyle())
-        .navigationTitle("Zusammenfassung")
-        }
+        .navigationBarTitleDisplayMode(.inline)
+    }
     }
 }
 
