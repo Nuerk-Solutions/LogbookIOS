@@ -345,17 +345,6 @@ struct AddLogbookView: View {
             }
         }
         .toolbar{
-            //            ToolbarItem(placement: .navigationBarTrailing) {
-            //                Button {
-            //                    if !isReadOnly {
-            //                        saveNewLogbook()
-            //                    } else {
-            //                        updateLogbook()
-            //                    }
-            //                } label: {
-            //                    Text(isReadOnly ? "Aktualisieren" : "Speichern")
-            //                }
-            //            }
             ToolbarItem(placement: .navigationBarLeading) {
                 if !isReadOnly {
                     Button {

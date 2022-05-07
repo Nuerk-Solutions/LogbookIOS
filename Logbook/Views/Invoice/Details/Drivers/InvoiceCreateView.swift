@@ -53,6 +53,17 @@ struct InvoiceCreateView: View {
                 }
             }
             .navigationTitle("Abrechnung erstellen")
+            .toolbar(content: {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        dismissToRoot()
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .resizable()
+                            .frame(width: 30, height: 30, alignment: .center)
+                    }
+                }
+            })
         }
         .onAppear {
             invoiceViewModel.fetchInvoiceHistory()

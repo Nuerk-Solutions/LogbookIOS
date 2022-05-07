@@ -79,6 +79,17 @@ struct ExportView: View {
                 .listRowBackground(Color.clear)
 
             }
+            .toolbar(content: {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        dismissToRoot()
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .resizable()
+                            .frame(width: 30, height: 30, alignment: .center)
+                    }
+                }
+            })
             .overlay(
                 Group {
                     if exportViewModel.isLoading {

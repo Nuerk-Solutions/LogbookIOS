@@ -15,7 +15,14 @@ struct RefuelView: View {
     @StateObject var alertManager = AlertManager()
     @EnvironmentObject private var locationService: LocationService
     
+    
+    init() {
+        UITableView.appearance().sectionFooterHeight = 0
+    }
+    
+    
     var body: some View {
+        NavigationView {
         Form {
             Section(header: Text("Informationen zum Tanken")) {
                 Picker("Fahrzeug", selection: $selectedVehicle.animation()) {
@@ -56,6 +63,18 @@ struct RefuelView: View {
                 }
             }
         }
+        .toolbar(content: {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    dismissToRoot()
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .resizable()
+                        .frame(width: 30, height: 30, alignment: .center)
+                }
+            }
+        })
+        .navigationBarTitleDisplayMode(.inline)
         
         .uses(alertManager)
         
@@ -106,6 +125,7 @@ struct RefuelView: View {
                 CustomProgressView(message: "Laden...")
             }
         }
+    }
     }
 }
 
