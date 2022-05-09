@@ -64,12 +64,30 @@
       }
     },
     {
+      "identity" : "skeletonui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/CSolanaM/SkeletonUI",
+      "state" : {
+        "revision" : "132f12a34b7fdab275bfc61968749b1f11c36300",
+        "version" : "1.0.7"
+      }
+    },
+    {
       "identity" : "spalert",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ivanvorobei/SPAlert",
       "state" : {
         "revision" : "5fd3e2923d26f0f0b40f0e6c10fca458a61a73c4",
         "version" : "4.2.0"
+      }
+    },
+    {
+      "identity" : "swift-snapshot-testing",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-snapshot-testing",
+      "state" : {
+        "revision" : "f8a9c997c3c1dab4e216a8ec9014e23144cbab37",
+        "version" : "1.9.0"
       }
     },
     {

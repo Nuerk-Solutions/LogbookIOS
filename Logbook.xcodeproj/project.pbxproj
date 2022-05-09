@@ -18,6 +18,7 @@
 		E90C2AC1276DB175005C1281 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90C2AC0276DB175005C1281 /* LoadingView.swift */; };
 		E91978FC27899B720002598A /* ShapeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91978FB27899B720002598A /* ShapeUtils.swift */; };
 		E91B384227C6C8A100256BF0 /* DownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91B384127C6C8A100256BF0 /* DownloadService.swift */; };
+		E91F2220282974D7003FA639 /* SkeletonUI in Frameworks */ = {isa = PBXBuildFile; productRef = E91F221F282974D7003FA639 /* SkeletonUI */; };
 		E9393ED82761330E00CB136F /* LogbookValidationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9393ED72761330E00CB136F /* LogbookValidationModel.swift */; };
 		E9393EDA27614B3E00CB136F /* FloatingNumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9393ED927614B3E00CB136F /* FloatingNumberField.swift */; };
 		E940ED0E27E0CFDC00B2EAA7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E940ED0D27E0CFDC00B2EAA7 /* SettingsView.swift */; };
@@ -153,6 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E907B99F27DE36BD0082FB9B /* Alamofire in Frameworks */,
+				E91F2220282974D7003FA639 /* SkeletonUI in Frameworks */,
 				E9881B9B27650DC200BE53CC /* SDWebImageSwiftUI in Frameworks */,
 				E9B5A81A27A32B9C007CA4F7 /* KeyboardAvoider in Frameworks */,
 				E9A7684C276FADDA0043551A /* SPAlert in Frameworks */,
@@ -438,6 +440,7 @@
 				E907B99E27DE36BD0082FB9B /* Alamofire */,
 				E96CC04327E9047000C054FE /* PermissionsSwiftUILocationAlways */,
 				E96CC04527E9047000C054FE /* PermissionsSwiftUINotification */,
+				E91F221F282974D7003FA639 /* SkeletonUI */,
 			);
 			productName = Logbook;
 			productReference = E983423C2757B85800E1C314 /* Logbook.app */;
@@ -478,6 +481,7 @@
 				E900E5E827BC2DBF009EEFD5 /* XCRemoteSwiftPackageReference "LocalConsole" */,
 				E907B99D27DE36BD0082FB9B /* XCRemoteSwiftPackageReference "Alamofire" */,
 				E96CC04227E9047000C054FE /* XCRemoteSwiftPackageReference "PermissionsSwiftUI" */,
+				E91F221E282974D7003FA639 /* XCRemoteSwiftPackageReference "SkeletonUI" */,
 			);
 			productRefGroup = E983423D2757B85800E1C314 /* Products */;
 			projectDirPath = "";
@@ -780,6 +784,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		E91F221E282974D7003FA639 /* XCRemoteSwiftPackageReference "SkeletonUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CSolanaM/SkeletonUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		E96CC04227E9047000C054FE /* XCRemoteSwiftPackageReference "PermissionsSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jevonmao/PermissionsSwiftUI";
@@ -832,6 +844,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E907B99D27DE36BD0082FB9B /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		E91F221F282974D7003FA639 /* SkeletonUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E91F221E282974D7003FA639 /* XCRemoteSwiftPackageReference "SkeletonUI" */;
+			productName = SkeletonUI;
 		};
 		E96CC04327E9047000C054FE /* PermissionsSwiftUILocationAlways */ = {
 			isa = XCSwiftPackageProductDependency;
