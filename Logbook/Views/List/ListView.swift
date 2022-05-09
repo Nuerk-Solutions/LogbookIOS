@@ -55,6 +55,7 @@ struct ListView: View {
                         .onAppear {
                             listViewModel.loadMoreContentIfNeeded(currentItem: logbook)
                         }
+                        
                 }
                 if listViewModel.isLoadingPage {
                     ProgressView("Einträge laden (\(listViewModel.currentPage))")
@@ -98,6 +99,9 @@ struct ListView: View {
             //            }
             
             .onAppear {
+                if listViewModel.originalLogbooks.isEmpty {
+                    listViewModel.loadMoreContent(extend: false)
+                }
                 if openAddViewOnStart {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.35) {
                         if listViewModel.isLoading || isInvoiceLink || invoiceLinkDriver != nil {
