@@ -23,6 +23,7 @@ struct ListView: View {
     @State var logbooks: [LogbookModel] = []
     
     @State private var showAddSheet: Bool = false
+    @State private var hasOpend: Bool = false
     @State private var showRefuelSheet: Bool = false
     @State private var showSettingsSheet: Bool = false
     @State private var showActivitySheet: Bool = false
@@ -40,7 +41,6 @@ struct ListView: View {
     
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.dismiss) var dismiss
-    @StateObject private var locationService: LocationService = LocationService()
     
     init() {
         UITableView.appearance().sectionFooterHeight = 0
@@ -77,7 +77,7 @@ struct ListView: View {
                     }
                 }
                 ToolbarItemGroup(placement: .navigationBarLeading) {
-                    AddButton.disabled(listViewModel.isLoading)
+                    AddButton
                 }
             })
             .overlay(
@@ -102,11 +102,12 @@ struct ListView: View {
                 if listViewModel.originalLogbooks.isEmpty {
                     listViewModel.loadMoreContent(extend: false)
                 }
-                if openAddViewOnStart {
+                if openAddViewOnStart && !hasOpend {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.35) {
                         if listViewModel.isLoading || isInvoiceLink || invoiceLinkDriver != nil {
                             return
                         }
+                        hasOpend = true
                         showAddSheet = true
                     }
                 }
@@ -129,9 +130,6 @@ struct ListView: View {
                                 print("Location services are not enabled")
                             }
                             if openAddViewOnStart {
-                                if listViewModel.isLoading {
-                                    return
-                                }
                                 showAddSheet = true
                             }
                         })
@@ -197,7 +195,6 @@ struct ListView: View {
             .sheet(isPresented: $showRefuelSheet, content: {
                 RefuelView()
                     .ignoresSafeArea(.all, edges: .all)
-                    .environmentObject(locationService)
             })
         )
     }
@@ -211,7 +208,6 @@ struct ListView: View {
                     .resizable()
                     .frame(width: 35, height: 35)
             })
-            .disabled((listViewModel.errorMessage) != nil)
             .sheet(isPresented: $showAddSheet, content: {
                 if(listViewModel.isLoading) {
                     CustomProgressView(message: "Laden...")

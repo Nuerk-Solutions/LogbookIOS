@@ -12,17 +12,24 @@ struct RefuelRowView: View {
     
     var station: StationModel
     @Binding var selectedVehicle: VehicleEnum
+    @Binding var heading: Double
     @StateObject var alertManager = AlertManager()
     
     var body: some View {
         let price: String = "\(station.price!)"
         let price_1 = price[price.index(price.startIndex, offsetBy: 0)..<price.index(price.startIndex, offsetBy: 4)]
         let price_2 = price[price.index(price.startIndex, offsetBy: 4)..<price.index(price.startIndex, offsetBy: 5)]
+        
+        let pos = Angle(degrees: station.bearing ?? 0) + Angle(degrees: 90)
+        let neg = Angle(degrees: station.bearing ?? 0) - Angle(degrees: 90)
+        let green = heading < pos.degrees && heading > neg.degrees
+        
         Section {
             Button {
                 openMaps(latitude: station.lat, longitude: station.lng, title: station.name)
             } label: {
                 ZStack {
+                    HStack {
                     VStack(alignment: .leading) {
                         Text("\(station.brand)").font(.callout).underline()
                         Spacer()
@@ -35,6 +42,10 @@ struct RefuelRowView: View {
                         Text("Entfernung: \(station.dist, specifier: "%.2f") km")
                         Spacer()
                         Text("\(station.street) \(station.houseNumber)").font(.subheadline)
+                        Spacer()
+                    }
+                        Spacer()
+                        DirectionArrow(station: station, heading: $heading)
                         Spacer()
                     }
                 }
@@ -79,6 +90,6 @@ struct RefuelRowView: View {
 
 struct RefuelRowView_Previews: PreviewProvider {
     static var previews: some View {
-        RefuelRowView(station: StationModel.item, selectedVehicle: .constant(.Porsche))
+        RefuelRowView(station: StationModel.item, selectedVehicle: .constant(.Porsche), heading: .constant(0))
     }
 }

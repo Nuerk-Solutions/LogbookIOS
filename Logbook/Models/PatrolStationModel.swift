@@ -27,6 +27,7 @@ struct StationModel: Codable, Identifiable {
     var isOpen: Bool
     var houseNumber: String
     var postCode: Int
+    var bearing: Double?
 }
 
 extension StationModel {

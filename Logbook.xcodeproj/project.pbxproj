@@ -25,6 +25,7 @@
 		E940ED1127E0D3C700B2EAA7 /* SettingsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E940ED1027E0D3C700B2EAA7 /* SettingsRowView.swift */; };
 		E941CD8D28144D4700C5147D /* InvoiceCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E941CD8C28144D4700C5147D /* InvoiceCreateView.swift */; };
 		E941CD8F2814548D00C5147D /* NavigationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E941CD8E2814548D00C5147D /* NavigationUtil.swift */; };
+		E944ED2A284D36BD00A9A120 /* DirectionArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E944ED29284D36BD00A9A120 /* DirectionArrow.swift */; };
 		E9472594276BAF83006E6944 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9472593276BAF83006E6944 /* Launch Screen.storyboard */; };
 		E9472599276BBDA8006E6944 /* LogbookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9472598276BBDA8006E6944 /* LogbookModel.swift */; };
 		E947259E276BC008006E6944 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E947259D276BC008006E6944 /* ApiService.swift */; };
@@ -96,6 +97,7 @@
 		E940ED1027E0D3C700B2EAA7 /* SettingsRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRowView.swift; sourceTree = "<group>"; };
 		E941CD8C28144D4700C5147D /* InvoiceCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceCreateView.swift; sourceTree = "<group>"; };
 		E941CD8E2814548D00C5147D /* NavigationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationUtil.swift; sourceTree = "<group>"; };
+		E944ED29284D36BD00A9A120 /* DirectionArrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionArrow.swift; sourceTree = "<group>"; };
 		E9472593276BAF83006E6944 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		E9472598276BBDA8006E6944 /* LogbookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookModel.swift; sourceTree = "<group>"; };
 		E947259D276BC008006E6944 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 			children = (
 				E95BBA4B27C15217006F2EA9 /* RefuelView.swift */,
 				E9A66A9E27E27335004033F5 /* RefuelRowView.swift */,
+				E944ED29284D36BD00A9A120 /* DirectionArrow.swift */,
 			);
 			path = Refuel;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				E9472599276BBDA8006E6944 /* LogbookModel.swift in Sources */,
 				E9D4E6F42758FEBB003F36DA /* FloatingTextField.swift in Sources */,
 				E95C4F7927862ECA009643B4 /* DetailViewModel.swift in Sources */,
+				E944ED2A284D36BD00A9A120 /* DirectionArrow.swift in Sources */,
 				E9D9B62A2812D78400DB2ED2 /* TabBar.swift in Sources */,
 				E9CB9C62282189660025D706 /* UrlExtension.swift in Sources */,
 				E94725AD276BC342006E6944 /* AddViewModel.swift in Sources */,

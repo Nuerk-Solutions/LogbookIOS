@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import CoreLocation
 
 class RefuelViewModel: ObservableObject {
     
@@ -58,15 +59,40 @@ class RefuelViewModel: ObservableObject {
         
         do {
             patrolStations = try await apiService.getJSON()
+            
+            patrolStations.stations.indices.forEach { index in
+                patrolStations.stations[index].bearing = getBearingBetweenTwoPoints(start: CLLocation(latitude: lat!, longitude: long!), end: CLLocation(latitude: patrolStations.stations[index].lat, longitude: patrolStations.stations[index].lng))
+            }
+            
             patrolStations.stations = patrolStations.stations.filter { $0.isOpen && $0.price != nil}
             
             print("Patrol Station Amount: \(patrolStations.stations.count)")
             consoleManager.print("Patrol Station Amount: \(patrolStations.stations.count)")
-            
         } catch {
             showAlert = true
             errorMessage = error.localizedDescription + "\nBitte melde dich bei weiteren Problem bei Thomas."
             printError(description: "Refuel fetch error", errorMessage: errorMessage?.debugDescription)
         }
+    }
+    
+    func degreesToRadians(degrees: Double) -> Double { return degrees * .pi / 180.0 }
+    func radiansToDegrees(radians: Double) -> Double { return radians * 180.0 / .pi }
+
+    func getBearingBetweenTwoPoints(start : CLLocation, end : CLLocation) -> Double {
+
+        let latRadiansStart = degreesToRadians(degrees: start.coordinate.latitude)
+        let latRadiansEnd = degreesToRadians(degrees: end.coordinate.latitude)
+
+        let lonRadiansStart = degreesToRadians(degrees: start.coordinate.longitude)
+        let lonRadiansEnd = degreesToRadians(degrees: end.coordinate.longitude)
+
+        let dLon = lonRadiansEnd - lonRadiansStart
+
+        let y = sin(dLon) * cos(latRadiansEnd)
+        let x = cos(latRadiansStart) * sin(latRadiansEnd) - sin(latRadiansStart) * cos(latRadiansEnd) * cos(dLon)
+        var radiansBearing = atan2(y, x)
+//        radiansBearing = radiansBearing < 0 ? radiansBearing + (2 * .pi) : radiansBearing
+
+        return radiansToDegrees(radians: radiansBearing)
     }
 }

@@ -13,7 +13,8 @@ struct RefuelView: View {
     @StateObject var refuelViewModel = RefuelViewModel()
     @State private var selectedVehicle: VehicleEnum = VehicleEnum.Ferrari
     @StateObject var alertManager = AlertManager()
-    @EnvironmentObject private var locationService: LocationService
+    @State private var heading: Double = 0.0
+    @ObservedObject private var locationService: LocationService = LocationService()
     
     
     init() {
@@ -56,7 +57,7 @@ struct RefuelView: View {
                     let detailFuelText: String = selectedVehicle == .Porsche ? "e10" : selectedVehicle == .Ferrari ? "e5" : "Diesel"
                     Section(header: Text("Tankstellen (\(detailFuelText))")) {
                         List(refuelViewModel.patrolStations.stations) { station in
-                            RefuelRowView(station: station, selectedVehicle: $selectedVehicle)
+                            RefuelRowView(station: station, selectedVehicle: $selectedVehicle, heading: $locationService.heading)
                         }
                     }
                     .headerProminence(.increased)
@@ -118,6 +119,11 @@ struct RefuelView: View {
             } else {
                 refuelViewModel.showAlert = true
                 refuelViewModel.errorMessage = "Bitte gib den Standort frei"
+            }
+        })
+        .onReceive(locationService.$heading, perform: { newValue in
+            DispatchQueue.main.async {
+                heading = newValue
             }
         })
         .overlay {

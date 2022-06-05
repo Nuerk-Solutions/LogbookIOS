@@ -8,6 +8,7 @@
 import Foundation
 
 extension URL {
+    
     var isDepplink: Bool {
         return scheme == "logbookapp"
     }
