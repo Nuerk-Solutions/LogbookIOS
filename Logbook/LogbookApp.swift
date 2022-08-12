@@ -2,33 +2,36 @@
 //  LogbookApp.swift
 //  Logbook
 //
-//  Created by Thomas on 01.12.21.
+//  Created by Thomas on 26.05.22.
 //
 
 import SwiftUI
+import SwiftDate
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        SwiftDate.defaultRegion = Region.current
+        NetworkActivityIndicatorManager.shared.startDelay = 0
+        NetworkActivityIndicatorManager.shared.isEnabled = true
+        return true
+    }
+}
+
+
+
 
 @main
 struct LogbookApp: App {
-    
-    @StateObject private var coreDataService = CoreDataService()
-    
-    @Preference(\.developerconsole) var developerconsole
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @StateObject var model = Model() // Avoid calling multiple times, ensures that model initilize once and follows the lifecycle of the app
+    @StateObject var networkReachablility: NetworkReachability = NetworkReachability()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.managedObjectContext, coreDataService.container.viewContext)
-                .onAppear {
-                    // To Hide Constrains warnings
-                    UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
-                    // Textfield clearButton active
-                    UITextField.appearance().clearButtonMode = .whileEditing
-                }
-                .onAppear {
-                    if developerconsole {
-                        consoleManager.isVisible = true
-                    }
-                }
+                .environmentObject(model)
+                .environmentObject(networkReachablility)
+            
         }
     }
 }

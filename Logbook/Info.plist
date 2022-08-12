@@ -2,98 +2,67 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>de_DE</string>
-	<key>CFBundleDisplayName</key>
-	<string>Fahrtenbuch</string>
-	<key>CFBundleExecutable</key>
-	<string>$(EXECUTABLE_NAME)</string>
-	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
-	<key>CFBundlePackageType</key>
-	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
-	<key>CFBundleShortVersionString</key>
-	<string>$(MARKETING_VERSION)</string>
-	<key>CFBundleURLTypes</key>
-	<array>
+	<key>CFBundleIcons</key>
+	<dict>
+		<key>CFBundleAlternateIcons</key>
 		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLIconFile</key>
-			<string>Car_load</string>
-			<key>CFBundleURLName</key>
-			<string>de.Thomas.logbookapp</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>logbookapp</string>
-			</array>
+			<key>Ferrari</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Ferrari</string>
+				</array>
+			</dict>
+			<key>Legacy</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Legacy</string>
+				</array>
+			</dict>
+			<key>Porsche</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Porsche</string>
+				</array>
+			</dict>
+			<key>VW</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>VW</string>
+				</array>
+			</dict>
 		</dict>
-	</array>
-	<key>CFBundleVersion</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>shareddocuments</string>
-		<string>comgooglemaps</string>
-		<string>file</string>
-	</array>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>LSSupportsOpeningDocumentsInPlace</key>
-	<true/>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string></string>
+			</array>
+			<key>CFBundleIconName</key>
+			<string></string>
+			<key>UIPrerenderedIcon</key>
+			<false/>
+		</dict>
+		<key>UINewsstandIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string></string>
+			</array>
+			<key>UINewsstandBindingEdge</key>
+			<string>UINewsstandBindingEdgeLeft</string>
+			<key>UINewsstandBindingType</key>
+			<string>UINewsstandBindingTypeMagazine</string>
+		</dict>
 	</dict>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Location Tracking for Fahrtenbuch</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Location Tracking for Fahrtenbuch</string>
-	<key>NSLocationDefaultAccuracyReduced</key>
-	<string>Location Tracking for Fahrtenbuch</string>
-	<key>NSLocationUsageDescription</key>
-	<string>Location Tracking for Fahrtenbuch</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Location Tracking for Fahrtenbuch</string>
-	<key>NSMotionUsageDescription</key>
-	<string>Die Fitnessdaten werden benötigt, um festzustellen ob du dich in einem bewegenden Fahrzeug befindest.</string>
-	<key>UIApplicationSceneManifest</key>
-	<dict>
-		<key>UIApplicationSupportsMultipleScenes</key>
-		<true/>
-	</dict>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
-	<key>UIBackgroundModes</key>
+	<key>UIAppFonts</key>
 	<array>
-		<string>location</string>
+		<string>Inter-Regular.ttf</string>
+		<string>Inter-SemiBold.ttf</string>
+		<string>Poppins-Bold.ttf</string>
 	</array>
-	<key>UILaunchScreen</key>
-	<dict/>
-	<key>UILaunchStoryboardName</key>
-	<string>Launch Screen</string>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>armv7</string>
-	</array>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-	</array>
-	<key>UISupportedInterfaceOrientations~ipad</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UISupportsDocumentBrowser</key>
-	<true/>
 </dict>
 </plist>

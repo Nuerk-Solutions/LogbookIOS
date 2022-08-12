@@ -3,100 +3,55 @@
     {
       "identity" : "alamofire",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Alamofire/Alamofire",
-      "state" : {
-        "revision" : "354dda32d89fc8cd4f5c46487f64957d355f53d8",
-        "version" : "5.6.1"
-      }
-    },
-    {
-      "identity" : "alertkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/rebeloper/AlertKit.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "e335b3edbad569c3a303fad598b99f7581538335"
-      }
-    },
-    {
-      "identity" : "keyboardavoider",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/michaelhenry/KeyboardAvoider.git",
-      "state" : {
-        "revision" : "e1c3860e7b50bce567f3480ed443f1c6b3659725",
-        "version" : "1.0.3"
-      }
-    },
-    {
-      "identity" : "localconsole",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/duraidabdul/LocalConsole/",
-      "state" : {
-        "branch" : "main",
-        "revision" : "d995119198d9c4379ac5b2e023452dbde9162ce0"
-      }
-    },
-    {
-      "identity" : "permissionsswiftui",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/jevonmao/PermissionsSwiftUI",
-      "state" : {
-        "branch" : "main",
-        "revision" : "42455d9a4059db40eb2dce1db7ed56cde7847e0c"
-      }
-    },
-    {
-      "identity" : "sdwebimage",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SDWebImage/SDWebImage.git",
-      "state" : {
-        "revision" : "2e63d0061da449ad0ed130768d05dceb1496de44",
-        "version" : "5.12.5"
-      }
-    },
-    {
-      "identity" : "sdwebimageswiftui",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SDWebImage/SDWebImageSwiftUI",
+      "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
         "branch" : "master",
-        "revision" : "336d3f6d3b53729c1f274bf6b75f4532ada116eb"
+        "revision" : "51d67100121d586c9d15ec0227de96442af4dd6d"
       }
     },
     {
-      "identity" : "skeletonui",
+      "identity" : "rive-ios",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/CSolanaM/SkeletonUI",
+      "location" : "https://github.com/rive-app/rive-ios",
       "state" : {
-        "revision" : "132f12a34b7fdab275bfc61968749b1f11c36300",
-        "version" : "1.0.7"
+        "revision" : "45c5adc897e928281ef6db3d90854bb8de2e01c5",
+        "version" : "3.0.1"
       }
     },
     {
-      "identity" : "spalert",
+      "identity" : "swiftdate",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ivanvorobei/SPAlert",
+      "location" : "https://github.com/malcommac/SwiftDate.git",
       "state" : {
-        "revision" : "5fd3e2923d26f0f0b40f0e6c10fca458a61a73c4",
-        "version" : "4.2.0"
+        "branch" : "master",
+        "revision" : "6190d0cefff3013e77ed567e6b074f324e5c5bf5"
       }
     },
     {
-      "identity" : "swift-snapshot-testing",
+      "identity" : "swiftlocationwheading",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pointfreeco/swift-snapshot-testing",
+      "location" : "https://github.com/derech1e/SwiftLocationWHeading",
       "state" : {
-        "revision" : "f8a9c997c3c1dab4e216a8ec9014e23144cbab37",
-        "version" : "1.9.0"
+        "branch" : "main",
+        "revision" : "54458884e8c232fee9144de9fea50a52344282fa"
+      }
+    },
+    {
+      "identity" : "swiftui-extensions",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/derech1e/SwiftUI-Extensions.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "30a34ff7502e03897a8d6fbf9219de5b9748a7cb"
       }
     },
     {
       "identity" : "swiftui-introspect",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/siteline/SwiftUI-Introspect",
+      "location" : "https://github.com/siteline/SwiftUI-Introspect.git",
       "state" : {
-        "revision" : "f2616860a41f9d9932da412a8978fec79c06fe24",
-        "version" : "0.1.4"
+        "branch" : "master",
+        "revision" : "7ef0df639079491ee1aaf6b83b6fd4d08df80393"
       }
     }
   ],

@@ -2,244 +2,241 @@
 //  ListView.swift
 //  Logbook
 //
-//  Created by Thomas on 05.01.22.
+//  Created by Thomas on 26.05.22.
 //
 
+import Foundation
+
 import SwiftUI
-import SPAlert
-import AlertKit
-import KeyboardAvoider
-import PermissionsSwiftUINotification
-import PermissionsSwiftUILocationAlways
-import CoreLocation
+import SwiftUI_Extensions
+import Alamofire
+import UIKit
 
 struct ListView: View {
-    @StateObject var listViewModel = ListViewModel()
-    @StateObject var alertManager = AlertManager()
     
-    @State private var editMode = EditMode.inactive
-    @State private var searchText = ""
-    @State private var shouldLoad = true
-    @State var logbooks: [LogbookModel] = []
+    var columns = [GridItem(.adaptive(minimum: 300), spacing: 20)]
+    @State var contentHasScrolled = false
+    @State var scrollViewOffset: CGFloat = 0
+    @State var showStatusBar = true
     
-    @State private var showAddSheet: Bool = false
-    @State private var hasOpend: Bool = false
-    @State private var showRefuelSheet: Bool = false
-    @State private var showSettingsSheet: Bool = false
-    @State private var showActivitySheet: Bool = false
-    @State private var showExportSheet: Bool = false
+//    @Binding var showAdd: Bool
+    @Binding var lastRefreshDate: Date?
     
-    @State private var showModal: Bool = true
+    @EnvironmentObject var model: Model
+    @EnvironmentObject var networkReachablility: NetworkReachability
     
-    @State private var isInvoiceLink: Bool = false
-    @State private var invoiceLinkDriver: DriverEnum?
-    @State private var invoiceLinkStartDate: Date?
-    @State private var invoiceLinkEndDate: Date?
-    
-    @Preference(\.openAddViewOnStart) var openAddViewOnStart
-    @Preference(\.allowLocationTracking) var allowLocationTracking
-    
-    @Environment(\.presentationMode) var presentationMode
-    @Environment(\.dismiss) var dismiss
-    
-    init() {
-        UITableView.appearance().sectionFooterHeight = 0
+    @StateObject var logbooksVM: LogbooksViewModel
+    @Namespace var namespace
+    let deleteAction = UIAction(
+        title: "Delete",
+        image: UIImage(systemName: "delete.left"),
+        identifier: nil,
+        attributes: UIMenuElement.Attributes.destructive,
+        handler: { _ in print("Deleted") }
+    )
+    init(logbooks: [LogbookEntry]? = nil, showAdd: Binding<Bool>, lastRefreshDate: Binding<Date?>) {
+        self._logbooksVM = StateObject(wrappedValue: LogbooksViewModel(logbooks: logbooks))
+//        self._showAdd = showAdd
+        self._lastRefreshDate = lastRefreshDate
     }
     
     var body: some View {
-        NavigationView {
-            List {
-                ForEach($listViewModel.originalLogbooks) { $logbook in
-                    ListRowView(logbook: $logbook, isFirstItem: listViewModel.originalLogbooks.firstIndex(of: logbook) == 0)
-                        .environmentObject(listViewModel)
-                        .onAppear {
-                            listViewModel.loadMoreContentIfNeeded(currentItem: logbook)
-                        }
-                        
-                }
-                if listViewModel.isLoadingPage {
-                    ProgressView("Einträge laden (\(listViewModel.currentPage))")
-                        .frame(maxWidth: .infinity)
-                        .progressViewStyle(CircularProgressViewStyle(tint: .gray))
-                }
-            }
-            .listStyle(InsetGroupedListStyle())
-            .refreshable {
-                DispatchQueue.main.async {
-                    listViewModel.refresh(extend: false)
-                }
-            }
-            .navigationTitle("Fahrtenbuch")
-            .toolbar(content: {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    if allowLocationTracking {
-                        RefuelButton
-                    }
-                }
-                ToolbarItemGroup(placement: .navigationBarLeading) {
-                    AddButton
-                }
-            })
-            .overlay(
-                Group {
-                    if listViewModel.isLoading {
-                        CustomProgressView(message: "Laden...")
-                    }
-                }
-            )
-            .alert(isPresented: $listViewModel.showAlert, content: {
-                Alert(title: Text("Fehler!"), message: Text(listViewModel.errorMessage ?? ""))
-            })
-            //            .searchable(text: $listViewModel.searchTerm)
-            //            .task {
-            //                if shouldLoad && !usePagination {
-            //                    await listViewModel.fetchAllLogbooks()
-            //                    shouldLoad = false
-            //                }
-            //            }
+        ZStack {
+            Color("Background").ignoresSafeArea()
             
-            .onAppear {
-                if listViewModel.originalLogbooks.isEmpty {
-                    listViewModel.loadMoreContent(extend: false)
-                }
-                if openAddViewOnStart && !hasOpend {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.35) {
-                        if listViewModel.isLoading || isInvoiceLink || invoiceLinkDriver != nil {
-                            return
-                        }
-                        hasOpend = true
-                        showAddSheet = true
-                    }
-                }
+            if model.showDetail {
+                detail
             }
-            .uses(alertManager)
-                        .JMModal(showModal: $showModal, for: [.locationAlways, .notification], autoDismiss: true, autoCheckAuthorization: true, restrictDismissal: false, onAppear: {}, onDisappear: {
-                            if CLLocationManager.locationServicesEnabled() {
-                                switch CLLocationManager().authorizationStatus {
-                                    case .notDetermined, .restricted, .denied:
-                                        allowLocationTracking = false
-                                        print("No access")
-                                    case .authorizedAlways, .authorizedWhenInUse:
-                                        print("Access")
-                                    @unknown default:
-                                        allowLocationTracking = false
-                                        break
-                                }
-                            } else {
-                                allowLocationTracking = false
-                                print("Location services are not enabled")
-                            }
-                            if openAddViewOnStart {
-                                showAddSheet = true
-                            }
-                        })
-                        .changeHeaderTo("Berechtigungen")
-                        .changeHeaderDescriptionTo("Damit du bestimmte Funktionen dieser App benutzen kannst, musst du entsprechende Berechtigungen freigeben.")
-                        .changeBottomDescriptionTo("Diese Berechtigungen sind notwendig, damit alle Features richtig funktionieren. Ohne die Standortfreigabe ist es nicht möglich, das Tankstellen Feature zu benutzen. Ohne die Erlaubnis für Benachrichtigungen bekommst du keine Information, wenn du dich dem ARB 19 näherst.")
-                        .setPermissionComponent(for: .notification, title: "Benachrichtigungen")
-                        .setPermissionComponent(for: .notification, description: "Erlaube Benachrichtigungen")
-                        .setPermissionComponent(for: .locationAlways, title: "Standort immer")
-                        .setPermissionComponent(for: .locationAlways, description: "Dauerhafte Standortfreigabe erlauben")
+            
+            content
+            //                .background(Image("Blob 1").offset(x: -180, y: 300))
         }
-        .sheet(isPresented: $isInvoiceLink, content: {
-            InvoiceLinkOverview(driver: $invoiceLinkDriver, startDate: $invoiceLinkStartDate, endDate: $invoiceLinkEndDate)
+        .overlay(NavigationBar(title: "Fahrtenbuch", contentHasScrolled: $contentHasScrolled))
+        .overlay(overlayView)
+        
+        .onChange(of: model.showDetail) { value in
+            withAnimation {
+                model.showTab.toggle()
+                model.showNav.toggle()
+                showStatusBar.toggle()
+            }
+        }
+        .onChange(of: model.lastAddedEntry, perform: { newValue in
+            refreshTask()
         })
-        .onOpenURL { url in
-            guard let driverIdentifier = url.driverIdentifier else {
-                return
+        .statusBar(hidden: !showStatusBar)
+    }
+    
+    var detail: some View {
+        ForEach(logbooks) { entry in
+            if entry.id == model.selectedEntry {
+                EntryView(namespace: namespace, entry: .constant(entry))
             }
-            guard let startDate = url.startDateIdentifier else {
-                return
+        }
+    }
+    
+    var content: some View {
+        ScrollView {
+            
+            scrollDetection
+            
+            entrySection2
+                .padding(.vertical, 70)
+                .padding(.bottom, 50)
+                .id("SCROLL_TO_TOP")
+            
+        }
+        .task(id: logbooksVM.fetchTaskToken, loadFirstTask)
+        .coordinateSpace(name: "scroll")
+        .onReceive(networkReachablility.$connected) { newValue in
+            if !networkReachablility.connected && newValue {
+                Task {
+                    await logbooksVM.loadFirstPage(connected: newValue)
+                }
             }
-            guard let endDate = url.endDateIdentifier else {
-                return
+        }
+        .onReceive(logbooksVM.$phase, perform: { newValue in
+            withAnimation {
+                model.showDetail = false
             }
-            isInvoiceLink = false
-            invoiceLinkDriver = driverIdentifier
-            invoiceLinkStartDate = startDate
-            invoiceLinkEndDate = endDate
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                dismissToRoot()
-            })
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                isInvoiceLink = true
+        })
+    }
+    
+    @ViewBuilder
+    private var overlayView: some View {
+        switch logbooksVM.phase {
+//        case .empty:
+//            CustomProgressView(message: "Fetching Logbooks")
+        case .success(let logbooks) where logbooks.isEmpty:
+            EmptyPlaceholderView(text: "No Logbooks")
+        case .failure(let error):
+            RetryView(text: error.localizedDescription, retryAction: refreshTask)
+        default: EmptyView()
+        }
+    }
+    
+    private var logbooks: [LogbookEntry] {
+        if case let .success(logbooks) = logbooksVM.phase {
+            return logbooks
+        } else {
+            return logbooksVM.phase.value ?? logbooksVM.loadedLogbooks
+        }
+    }
+    
+    
+    @Sendable
+    private func loadFirstTask() async {
+        let lastRefresh: TimeInterval = (lastRefreshDate?.timeIntervalSinceReferenceDate ?? 99)
+        let canFetch = Date().timeIntervalSinceReferenceDate - lastRefresh > 60 || model.lastAddedEntry.timeIntervalSinceReferenceDate - lastRefresh < 60 || logbooksVM.phase.value == nil
+        if canFetch {
+            lastRefreshDate = Date()
+        }
+        await logbooksVM.loadFirstPage(connected: networkReachablility.connected && canFetch)
+    }
+    
+    @Sendable
+    private func loadTask() async {
+        await logbooksVM.loadNextPage()
+    }
+    
+    @Sendable
+    private func refreshTask() {
+        Task {
+            await logbooksVM.refreshTask()
+        }
+    }
+    
+    var entrySection2: some View {
+        Group {
+            if model.showDetail {
+                LazyVGrid(columns: columns, spacing: 20) {
+                    ForEach(logbooks) { entry in
+                        Rectangle()
+                            .fill(.regularMaterial)
+                            .frame(height: 300)
+                            .cornerRadius(30)
+                            .shadow(color: Color("Shadow").opacity(0.2), radius: 20, x: 0, y: 10)
+                            .opacity(0.3)
+                    }
+                }
+                .padding(.horizontal, 20)
+                .offset(y: -80)
+            } else {
+                LazyVGrid(columns: columns, spacing: 20) {
+                    entry.frame(height: 200)
+                        .padding(.bottom, 20)
+                    if logbooksVM.isFetchingNextPage {
+                        CustomProgressView(message: "Laden...")
+//                            .offset(y: -40)
+                    }
+                }
+                .padding(.horizontal, 20)
+                .opacity(logbooksVM.logbooksOpacity)
+            }
+        }
+    }
+    
+    var entry: some View {
+        
+        ForEach(logbooks) { entry in
+            if entry == logbooks.last {
+            EntryItem(namespace: namespace, entry: entry)
+                .accessibilityElement(children: .combine)
+                .accessibilityAddTraits(.isButton)
+                .task(id: logbooksVM.fetchTaskToken, loadTask)
+                .transition(.opacity)
+            } else {
+                EntryItem(namespace: namespace, entry: entry)
+                    .accessibilityElement(children: .combine)
+                    .accessibilityAddTraits(.isButton)
+                    .transition(.opacity)
+                    .contextMenu {
+                        Button {
+                            print("Edited")
+                        } label: {
+                            Label {
+                                Text("Bearbeiten")
+                            } icon: {
+                                Image(systemName: "pencil")
+                            }
+                        }
+                        Button {
+                            print("Deleted")
+                        } label: {
+                            Label {
+                                Text("Löschen")
+                            } icon: {
+                                Image(systemName: "trash")
+                            }
+                        }
+                    }
             }
         }
     }
     
     
-    private var SettingsButton: some View {
-        return AnyView(
-            Button(action: {
-                showSettingsSheet.toggle()
-            }, label: {
-                Image(systemName: "gearshape")
-                    .resizable()
-                    .frame(width: 35, height: 35)
-            })
-            .sheet(isPresented: $showSettingsSheet, content: {
-                SettingsView()
-            })
-        )
-    }
-    
-    private var RefuelButton: some View {
-        return AnyView(
-            Button(action: {
-                showRefuelSheet.toggle()
-            }, label: {
-                Image(systemName: "fuelpump.circle")
-                    .resizable()
-                    .frame(width: 35, height: 35)
-            })
-            .sheet(isPresented: $showRefuelSheet, content: {
-                RefuelView()
-                    .ignoresSafeArea(.all, edges: .all)
-            })
-        )
-    }
-    
-    private var AddButton: some View {
-        return AnyView(
-            Button( action: {
-                showAddSheet.toggle()
-            }, label: {
-                Image(systemName: "plus.circle")
-                    .resizable()
-                    .frame(width: 35, height: 35)
-            })
-            .sheet(isPresented: $showAddSheet, content: {
-                if(listViewModel.isLoading) {
-                    CustomProgressView(message: "Laden...")
+    var scrollDetection: some View {
+        GeometryReader { proxy in
+            let offset = proxy.frame(in: .named("scroll")).minY
+            Color.clear.preference(key: ScrollPreferenceKey.self, value: offset)
+        }
+        .onPreferenceChange(ScrollPreferenceKey.self) { value in
+            withAnimation(.easeInOut) {
+                if value < 0 {
+                    contentHasScrolled = true
                 } else {
-                    NavigationView {
-                        AddLogbookView(showSheet: $showAddSheet)
-                            .environmentObject(listViewModel)
-                            .navigationTitle("Neuer Eintrag")
-                    }
-                    .ignoresSafeArea(.keyboard, edges: .bottom)
+                    contentHasScrolled = false
                 }
-            })
-        )
-    }
-    
-    var searchResults: [LogbookModel] {
-        withAnimation {
-            if searchText.isEmpty {
-                return listViewModel.logbooks
-            } else {
-                return listViewModel.logbooks.filter{$0.driveReason.contains(searchText) || $0.driver.id.contains(searchText)}
             }
         }
     }
 }
-
 
 struct ListView_Previews: PreviewProvider {
+    
     static var previews: some View {
-        Group {
-            ListView()
-        }
+        ListView(logbooks: LogbookEntry.previewData, showAdd: .constant(false), lastRefreshDate: .constant(Date()))
+            .environmentObject(Model())
+            .environmentObject(NetworkReachability())
     }
 }
-
