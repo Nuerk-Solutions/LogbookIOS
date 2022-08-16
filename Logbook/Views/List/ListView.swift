@@ -19,7 +19,7 @@ struct ListView: View {
     @State var scrollViewOffset: CGFloat = 0
     @State var showStatusBar = true
     
-//    @Binding var showAdd: Bool
+    //    @Binding var showAdd: Bool
     @Binding var lastRefreshDate: Date?
     
     @EnvironmentObject var model: Model
@@ -34,9 +34,19 @@ struct ListView: View {
         attributes: UIMenuElement.Attributes.destructive,
         handler: { _ in print("Deleted") }
     )
+    
+    
+    let mediumDateAndTime: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        formatter.locale = Locale(identifier: "de_DE")
+        return formatter
+    }()
+    
     init(logbooks: [LogbookEntry]? = nil, showAdd: Binding<Bool>, lastRefreshDate: Binding<Date?>) {
         self._logbooksVM = StateObject(wrappedValue: LogbooksViewModel(logbooks: logbooks))
-//        self._showAdd = showAdd
+        //        self._showAdd = showAdd
         self._lastRefreshDate = lastRefreshDate
     }
     
@@ -47,7 +57,6 @@ struct ListView: View {
             if model.showDetail {
                 detail
             }
-            
             content
             //                .background(Image("Blob 1").offset(x: -180, y: 300))
         }
@@ -80,9 +89,39 @@ struct ListView: View {
             
             scrollDetection
             
+            HStack {
+                Text("Letzte Aktualisierung: \(mediumDateAndTime.string(from:  logbooksVM.fetchTaskToken.token))")
+                    .font(.footnote.weight(.medium))
+                    .transition(.identity.animation(.linear(duration: 1).delay(2)))
+                
+                if logbooksVM.phase == .empty{
+                    ProgressView()
+                        .padding(.horizontal, 5)
+                } else {
+                    if(networkReachablility.connected) {
+                        Button {
+                            Task {
+                                await logbooksVM.loadFirstPage(connected: networkReachablility.connected)
+                            }
+                        } label: {
+                            Image(systemName: "arrow.counterclockwise.circle")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .rotationEffect(Angle(degrees: -90))
+                                .symbolRenderingMode(.hierarchical)
+                        }
+                    } else {
+                        EmptyView()
+                    }
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .topLeading)
+            .padding(.horizontal, 21)
+            .padding(.top, 50)
+            
             entrySection2
-                .padding(.vertical, 70)
-                .padding(.bottom, 50)
+                .padding(.top, 20)
+                .padding(.bottom, 120)
                 .id("SCROLL_TO_TOP")
             
         }
@@ -105,8 +144,8 @@ struct ListView: View {
     @ViewBuilder
     private var overlayView: some View {
         switch logbooksVM.phase {
-//        case .empty:
-//            CustomProgressView(message: "Fetching Logbooks")
+            //        case .empty:
+            //            CustomProgressView(message: "Fetching Logbooks")
         case .success(let logbooks) where logbooks.isEmpty:
             EmptyPlaceholderView(text: "No Logbooks")
         case .failure(let error):
@@ -167,7 +206,7 @@ struct ListView: View {
                         .padding(.bottom, 20)
                     if logbooksVM.isFetchingNextPage {
                         CustomProgressView(message: "Laden...")
-//                            .offset(y: -40)
+                        //                            .offset(y: -40)
                     }
                 }
                 .padding(.horizontal, 20)
@@ -180,11 +219,11 @@ struct ListView: View {
         
         ForEach(logbooks) { entry in
             if entry == logbooks.last {
-            EntryItem(namespace: namespace, entry: entry)
-                .accessibilityElement(children: .combine)
-                .accessibilityAddTraits(.isButton)
-                .task(id: logbooksVM.fetchTaskToken, loadTask)
-                .transition(.opacity)
+                EntryItem(namespace: namespace, entry: entry)
+                    .accessibilityElement(children: .combine)
+                    .accessibilityAddTraits(.isButton)
+                    .task(id: logbooksVM.fetchTaskToken, loadTask)
+                    .transition(.opacity)
             } else {
                 EntryItem(namespace: namespace, entry: entry)
                     .accessibilityElement(children: .combine)

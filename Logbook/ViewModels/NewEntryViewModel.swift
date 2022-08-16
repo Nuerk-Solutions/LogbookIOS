@@ -44,7 +44,7 @@ class NewEntryViewModel: ObservableObject {
             if let lastLogbooks = await cache.value(forKey: "last") {
                 print("[NewEntry]: CACHE HIT for last value")
                 withAnimation {
-                    fetchPhase =  !connected ? .success(lastLogbooks) : .fetchingNextPage(lastLogbooks)
+                    fetchPhase = !connected ? .success(lastLogbooks) : .fetchingNextPage(lastLogbooks)
                 }
             }
         }

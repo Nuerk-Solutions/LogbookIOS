@@ -28,12 +28,24 @@ struct AddEntryView: View {
     
     @EnvironmentObject var networkReachablility: NetworkReachability
     
+    @Namespace var namespace
+    
     let confetti = RiveViewModel(fileName: "confetti", stateMachineName: "State Machine 1")
     let check = RiveViewModel(fileName: "check", stateMachineName: "State Machine 1")
     
     var canSubmit: Bool {
-        newEntryVM.newLogbook.newMileAge != "" && newEntryVM.newLogbook.currentMileAge != "" && newEntryVM.newLogbook.newMileAge > newEntryVM.newLogbook.currentMileAge
+        newEntryVM.newLogbook.newMileAge != "" && newEntryVM.newLogbook.currentMileAge != "" && Int(newEntryVM.newLogbook.newMileAge) ?? 0 > Int(newEntryVM.newLogbook.currentMileAge) ?? 0 &&
+        !newEntryVM.newLogbook.driveReason.isEmpty
     }
+    
+    var distance: Double {
+        (Double(newEntryVM.newLogbook.newMileAge) ?? 0.0) - Double(newEntryVM.newLogbook.currentMileAge)!
+    }
+    
+    var cost: Double {
+        distance * 0.20
+    }
+    
     
     let mediumDateAndTime: DateFormatter = {
         let formatter = DateFormatter()
@@ -281,8 +293,16 @@ struct AddEntryView: View {
                     showModal.toggle()
                 }
             }
-            //            .frame(maxWidth: .infinity, alignment: .leading)
-            
+            if(canSubmit) {
+                Text("Zusammenfassung: \(String(format: "%.0fkm", distance)) / \(cost.formatted(.currency(code: "EUR").locale(Locale(identifier: "de-DE"))))")
+                    .matchedGeometryEffect(id: "summaryText", in: namespace)
+                    .transition(.opacity)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            } else {
+                Text("Bitte überprüfe deine Angaben! Speicher nicht möglich!")
+                    .matchedGeometryEffect(id: "summaryText", in: namespace)
+                    .transition(.opacity)
+            }
             Spacer()
             
             button.view()
@@ -448,6 +468,7 @@ struct NewAddView_Previews: PreviewProvider {
     static var previews: some View {
         AddEntryView(show: .constant(true), showTab: .constant(false), lastAddedEntry: .constant(Date()))
             .preferredColorScheme(.light)
+            .environmentObject(NetworkReachability())
     }
 }
 

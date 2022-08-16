@@ -123,10 +123,12 @@ struct GasStationsView: View {
     var sectionsSection: some View {
         VStack(spacing: 16) {
             let biggestDistance = gasStations.compactMap { $0.distance }.max() ?? 0.00
-            let baseCircleRatio = 1 / (gasStationVM.ratingMap.values.max() ?? 1)
+            let baseCircleRatio = 1 / (Double(gasStations.count))
+//            let baseCircleRatio = 1 / (gasStationVM.ratingMap.values.max() ?? 1)
             ForEach(Array(gasStations.enumerated()), id: \.offset) { index, station in
                 if index != 0 { Divider() }
-                let circleValue = Double(truncating: baseCircleRatio as NSNumber) * Double(truncating: gasStationVM.ratingMap[station.poiID]! as NSNumber) // Calculates the circle radius based on the rating Map
+                let circleValue = baseCircleRatio * Double(index)
+//                let circleValue = Double(truncating: baseCircleRatio as NSNumber) * Double(truncating: gasStationVM.ratingMap[station.poiID]! as NSNumber) // Calculates the circle radius based on the rating Map
                 let progressValue = (1 / biggestDistance) * station.distance // Calculates length of the progress line with the given distance
                 
                 GasStationRow(currentLocation: gasStationVM.currentLocation, heading: gasStationVM.currentHeading, station: station, circleValue: circleValue, progressValue: progressValue)

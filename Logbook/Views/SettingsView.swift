@@ -189,6 +189,33 @@ struct SettingsView: View {
             .listStyle(.insetGrouped)
             .refreshable {
             }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink {
+                        Form {
+                            ForEach(VehicleEnum.allCases) { vehicle in
+                                Section {
+                                    Text(vehicle.fuelDescription)
+                                    .padding()
+                                } header: {
+                                    HStack {
+                                        Image(vehicle.rawValue)
+                                                .resizable()
+                                                .frame(width: 60, height: 60, alignment: .center)
+                                        Text(vehicle.rawValue)
+                                    }
+                                }
+                                .headerProminence(.increased)
+                            }
+                        }
+                        .navigationBarTitleDisplayMode(.inline)
+                    } label: {
+                        Image(systemName: "info.circle")
+                            .padding()
+                    }
+
+                }
+            }
         }
         .navigationViewStyle(.stack)
     }

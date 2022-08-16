@@ -95,6 +95,17 @@ enum VehicleEnum: String, CaseIterable, Identifiable, Codable, Equatable {
         }
     }
     
+    var fuelDescription: String {
+        switch self {
+        case .Ferrari:
+            return "In den Ferrari wird nur e5 oder Super getankt."
+        case .VW:
+            return "In den VW wird nur Diesel getankt."
+        case .Porsche:
+            return "In den Porsche wird nur Super+ getankt."
+        }
+    }
+    
     var id: String { UUID().uuidString }
 }
 
