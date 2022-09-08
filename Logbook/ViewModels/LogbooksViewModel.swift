@@ -14,9 +14,9 @@ class LogbooksViewModel: ObservableObject {
     
     @EnvironmentObject var model: Model
     @Published var phase = DataFetchPhase<[LogbookEntry]>.empty
-    @Published var fetchTaskToken: FetchTaskToken
     @Published var loadedLogbooks: [LogbookEntry] = []
     @Published var logbooksOpacity: Double = 1
+    @AppStorage("lastListRefresh") var lastListRefresh: Int = -1
     private let cache = DiskCache<[LogbookEntry]>(filename: "xca_list_entries", expirationInterval: 30 * 60 * 60 * 24)
     private let logbookAPI = LogbookAPI.shared
     private let pagingData = PagingData(itemsPerPage: 25, maxPageLimit: 999) // TODO: May rethink this decission
@@ -26,7 +26,11 @@ class LogbooksViewModel: ObservableObject {
     private var canLoadMorePages = true
     
     var lastRefreshedDateText: String {
-        return "Last refresh at: \(DateFormatter.readableDeShort.string(from: fetchTaskToken.token))"
+        if lastListRefresh != -1 {
+            return "Letzte Aktualisierung: \(DateFormatter.readableDeShort.string(from: Date(timeIntervalSince1970: TimeInterval(lastListRefresh))))"
+        } else {
+            return "Warten..."
+        }
     }
     
     var logbooks: [LogbookEntry] {
@@ -46,7 +50,8 @@ class LogbooksViewModel: ObservableObject {
         } else {
             self.phase = .empty
         }
-        self.fetchTaskToken = FetchTaskToken(fetchCategory: .list, token: Date())
+        self.lastListRefresh = Int(Date().timeIntervalSince1970)
+//        self.fetchTaskToken = FetchTaskToken(fetchCategory: .list, token: Date())
         
         Task(priority: .userInitiated) {
             try? await cache.loadFromDisk()
@@ -57,7 +62,8 @@ class LogbooksViewModel: ObservableObject {
         //        Task {
         await pagingData.reset()
         await cache.removeValue(forKey: "\(pagingData.currentPage)")
-        self.fetchTaskToken.token = Date()
+        self.lastListRefresh = Int(Date().timeIntervalSince1970)
+//        self.fetchTaskToken.token = Date()
         //        }
     }
     

@@ -25,6 +25,7 @@ struct AddEntryView: View {
     @AppStorage("currentDriver") var currentDriver: DriverEnum = .Andrea
     @AppStorage("currentVehicle") var currentVehicle: VehicleEnum = .Ferrari
     @Preference(\.isLiteMode) var isLiteMode
+    @Preference(\.isLiteModeBackground) var isLiteModeBackground
     
     @EnvironmentObject var networkReachablility: NetworkReachability
     
@@ -124,7 +125,7 @@ struct AddEntryView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
             .padding(20)
-            .offset(y: showModal ? -200 : 40)
+            .offset(y: showModal ? -200 : 55)
             
         }
     }
@@ -155,6 +156,7 @@ struct AddEntryView: View {
                     }
                 }
             }
+            .padding(.vertical, -10)
             
             
             //            Picker("", selection: $newEntryVM.newLogbook.driver) {
@@ -299,10 +301,11 @@ struct AddEntryView: View {
                     .transition(.opacity)
                     .frame(maxWidth: .infinity, alignment: .leading)
             } else {
-                Text("Bitte überprüfe deine Angaben! Speicher nicht möglich!")
+                Text("Bitte überprüfe deine Angaben!")
                     .matchedGeometryEffect(id: "summaryText", in: namespace)
                     .transition(.opacity)
             }
+            VStack {
             Spacer()
             
             button.view()
@@ -345,6 +348,8 @@ struct AddEntryView: View {
                         //                        }
                     }
                 }
+                Spacer()
+            }
         }
         .padding(.horizontal, 40)
         .padding(.top, 80)
@@ -358,10 +363,14 @@ struct AddEntryView: View {
                     .blendMode(BlendMode.hardLight)
             }
         }
-        .background(
-            Image("Spline")
-                .blur(radius: 50)
-                .offset(x: 200, y: 100)
+        .background (
+            ZStack {
+                if isLiteModeBackground {
+                    Image("Spline")
+                        .blur(radius: 50)
+                    .offset(x: 200, y: 100)
+            }
+            }
         )
         .background(.regularMaterial)
         .overlay(
@@ -441,13 +450,11 @@ struct AddEntryView: View {
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             confetti.triggerInput("Trigger explosion")
-            withAnimation {
-                isLoading = false
-            }
             lastAddedEntry = Date()
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
             withAnimation {
+                isLoading = false
                 show.toggle()
                 showTab.toggle()
             }

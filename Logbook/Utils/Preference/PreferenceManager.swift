@@ -41,6 +41,9 @@ final class PreferenceManager {
     @UserDefault("isLiteMode")
     var isLiteMode: Bool = true
     
+    @UserDefault("isLiteModeBackground")
+    var isLiteModeBackground: Bool = true
+    
     @UserDefault("isIntelligentGasStationRadius")
     var isIntelligentGasStationRadius: Bool = true
     

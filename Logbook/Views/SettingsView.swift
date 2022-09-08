@@ -36,6 +36,7 @@ struct SettingsView: View {
     @Preference(\.isOpenAddViewOnStart) var isOpenAddViewOnStart
     @Preference(\.isRememberLastDriver) var isRememberLastDriver
     @Preference(\.isLiteMode) var isLiteMode
+    @Preference(\.isLiteModeBackground) var isLiteModeBackground
     @Preference(\.isIntelligentGasStationRadius) var isIntelligentGasStationRadius
     @Preference(\.isIntelligentGasStationSelection) var isIntelligentGasStationSelection
     @Preference(\.isUseNotSuperScript) var isUseNotSuperScript
@@ -126,8 +127,14 @@ struct SettingsView: View {
 //                        Label("Letztes Fahrzeug merken", systemImage: isRememberLastDriver ? "person.fill.checkmark" : "person.fill.xmark")
 //                    }
                     
-                    Toggle(isOn: $isLiteMode) {
+                    Toggle(isOn: $isLiteMode.animation()) {
                         Label("Lite Mode", systemImage: isLiteMode ? "tortoise" : "hare")
+                    }
+                    
+                    if isLiteMode {
+                        Toggle(isOn: $isLiteModeBackground) {
+                            Label("Bunter Hintergrund", systemImage: "eyedropper")
+                        }
                     }
                 }
                 

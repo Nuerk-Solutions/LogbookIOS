@@ -90,7 +90,7 @@ struct ListView: View {
             scrollDetection
             
             HStack {
-                Text("Letzte Aktualisierung: \(mediumDateAndTime.string(from:  logbooksVM.fetchTaskToken.token))")
+                Text("Letzte Aktualisierung: \(mediumDateAndTime.string(from: Date(timeIntervalSince1970: TimeInterval(logbooksVM.lastListRefresh))))")
                     .font(.footnote.weight(.medium))
                     .transition(.identity.animation(.linear(duration: 1).delay(2)))
                 
@@ -125,7 +125,7 @@ struct ListView: View {
                 .id("SCROLL_TO_TOP")
             
         }
-        .task(id: logbooksVM.fetchTaskToken, loadFirstTask)
+        .task(id: logbooksVM.lastListRefresh, loadFirstTask)
         .coordinateSpace(name: "scroll")
         .onReceive(networkReachablility.$connected) { newValue in
             if !networkReachablility.connected && newValue {
@@ -222,7 +222,7 @@ struct ListView: View {
                 EntryItem(namespace: namespace, entry: entry)
                     .accessibilityElement(children: .combine)
                     .accessibilityAddTraits(.isButton)
-                    .task(id: logbooksVM.fetchTaskToken, loadTask)
+                    .task(id: logbooksVM.lastListRefresh, loadTask)
                     .transition(.opacity)
             } else {
                 EntryItem(namespace: namespace, entry: entry)

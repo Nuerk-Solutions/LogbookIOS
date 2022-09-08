@@ -34,7 +34,7 @@ struct ContentView: View {
             
             //            SideMenu()
             
-            //            Group {
+                        Group {
             switch selectedTab {
             case .home:
                 ListView(showAdd: $model.showTab, lastRefreshDate: $lastRefreshDate)
@@ -71,22 +71,22 @@ struct ContentView: View {
             case .settings:
                 SettingsView()
             }
-            //            }
-            //            .safeAreaInset(edge: .bottom) {
-            //                VStack {}.frame(height: model.showTab ? 44 : 0)
-            //            }
+                        }
+                        .safeAreaInset(edge: .bottom) {
+                            VStack {}.frame(height: model.showTab ? 44 : 0)
+                        }
             
             
             TabBar()
-            //                .offset(y: -24)
+//                            .offset(y: -24)
                 .background(
                     LinearGradient(colors: [Color("Background").opacity(0), Color("Background")], startPoint: .top, endPoint: .bottom)
                         .frame(height: 100)
                         .frame(maxHeight: .infinity, alignment: .bottom)
                         .allowsHitTesting(false)
-                    //                        .blur(radius: 30)
+                                            .blur(radius: 30)
                 )
-            //                .ignoresSafeArea()
+//                            .ignoresSafeArea()
                 .offset(y: isOpen ? 300 : 0)
                 .offset(y: !model.showTab ? 200 : 0)
             
