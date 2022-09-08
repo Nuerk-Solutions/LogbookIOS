@@ -314,7 +314,7 @@ struct AddEntryView: View {
                         .opacity(0.3)
                         .offset(y: 10)
                 )
-                .disabled(!canSubmit)
+                .disabled(!canSubmit || isLoading)
                 .opacity(canSubmit ? 1 : 0.5)
                 .overlay(
                     Label("Fahrt hinzufügen", systemImage: "arrow.forward")

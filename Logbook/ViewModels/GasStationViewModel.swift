@@ -67,7 +67,7 @@ class GasStationViewModel: ObservableObject {
         }
         
         gasStations.forEach { item in
-            let rating = factorMap[item.preis]! + item.distance / 10
+            let rating = (factorMap[item.preis] ?? 0.0) + item.distance / 10
             ratingMap[item.poiID] = rating
         }
         
