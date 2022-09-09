@@ -324,6 +324,7 @@ struct AddEntryView: View {
                         .offset(x: 4, y: 4)
                         .customFont(.headline)
                         .accentColor(.primary)
+                        .foregroundColor(.black)
                 )
                 .onTapGesture {
                     

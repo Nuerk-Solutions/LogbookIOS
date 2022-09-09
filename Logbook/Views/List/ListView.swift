@@ -147,7 +147,7 @@ struct ListView: View {
             //        case .empty:
             //            CustomProgressView(message: "Fetching Logbooks")
         case .success(let logbooks) where logbooks.isEmpty:
-            EmptyPlaceholderView(text: "No Logbooks")
+            EmptyPlaceholderView(text: "Keine Einträge vorhanden")
         case .failure(let error):
             RetryView(text: error.localizedDescription, retryAction: refreshTask)
         default: EmptyView()
@@ -230,23 +230,28 @@ struct ListView: View {
                     .accessibilityAddTraits(.isButton)
                     .transition(.opacity)
                     .contextMenu {
+//                        Button {
+//                            print("Edited")
+//                        } label: {
+//                            Label {
+//                                Text("Bearbeiten")
+//                            } icon: {
+//                                Image(systemName: "pencil")
+//                            }
+//                        }
+                        if entry == logbooks.first {
                         Button {
-                            print("Edited")
-                        } label: {
-                            Label {
-                                Text("Bearbeiten")
-                            } icon: {
-                                Image(systemName: "pencil")
+                            Task {
+                                await logbooksVM.deleteEntry(connected: networkReachablility.connected, logbook: entry)
+                                await logbooksVM.refreshTask()
                             }
-                        }
-                        Button {
-                            print("Deleted")
                         } label: {
                             Label {
                                 Text("Löschen")
                             } icon: {
                                 Image(systemName: "trash")
                             }
+                        }
                         }
                     }
             }

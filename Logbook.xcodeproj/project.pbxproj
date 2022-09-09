@@ -57,6 +57,8 @@
 		E94A0CFD284F98CF00693352 /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94A0CFC284F98CF00693352 /* LogoView.swift */; };
 		E94A0CFF284FA96700693352 /* EntryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94A0CFE284FA96700693352 /* EntryItem.swift */; };
 		E94A769C28591AA600BCA71A /* AdditionalInfoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94A769B28591AA600BCA71A /* AdditionalInfoImageView.swift */; };
+		E94F70F528CB85E4003FCF2B /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F70F428CB85E4003FCF2B /* ChartView.swift */; };
+		E94F710728CB8B35003FCF2B /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = E94F710628CB8B35003FCF2B /* SwiftUICharts */; };
 		E957A297285F88DB00464FB0 /* GasStationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E957A296285F88DB00464FB0 /* GasStationViewModel.swift */; };
 		E957A29D285F91BA00464FB0 /* HeadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E957A29C285F91BA00464FB0 /* HeadingIndicator.swift */; };
 		E957A29F285F921900464FB0 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E957A29E285F921900464FB0 /* LocationManager.swift */; };
@@ -161,6 +163,7 @@
 		E94A0CFC284F98CF00693352 /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		E94A0CFE284FA96700693352 /* EntryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryItem.swift; sourceTree = "<group>"; };
 		E94A769B28591AA600BCA71A /* AdditionalInfoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoImageView.swift; sourceTree = "<group>"; };
+		E94F70F428CB85E4003FCF2B /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		E957A296285F88DB00464FB0 /* GasStationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasStationViewModel.swift; sourceTree = "<group>"; };
 		E957A29C285F91BA00464FB0 /* HeadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingIndicator.swift; sourceTree = "<group>"; };
 		E957A29E285F921900464FB0 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -218,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E969B0C72893112F00E22690 /* RiveRuntime in Frameworks */,
+				E94F710728CB8B35003FCF2B /* SwiftUICharts in Frameworks */,
 				E9F1E72F2895137D0045A41B /* Introspect in Frameworks */,
 				E95862B9287B0D990017F2BA /* SwiftLocation in Frameworks */,
 				E91AFA23283FD0D60024131D /* Alamofire in Frameworks */,
@@ -323,6 +327,7 @@
 		E91AFA29283FD4170024131D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E94F70F328CB85D7003FCF2B /* Statistics */,
 				E9715407289D531500889084 /* Add */,
 				E96259BF284F9755007D9479 /* Detail */,
 				E91AFA4428401BF70024131D /* List */,
@@ -428,6 +433,14 @@
 				E940E8C728427395009F1225 /* Tab.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		E94F70F328CB85D7003FCF2B /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				E94F70F428CB85E4003FCF2B /* ChartView.swift */,
+			);
+			path = Statistics;
 			sourceTree = "<group>";
 		};
 		E957A29B285F91A600464FB0 /* Location */ = {
@@ -588,6 +601,7 @@
 				E95862B8287B0D990017F2BA /* SwiftLocation */,
 				E969B0C62893112F00E22690 /* RiveRuntime */,
 				E9F1E72E2895137D0045A41B /* Introspect */,
+				E94F710628CB8B35003FCF2B /* SwiftUICharts */,
 			);
 			productName = Logbook;
 			productReference = E91AFA0B283FD09F0024131D /* Logbook.app */;
@@ -624,6 +638,7 @@
 				E95862B7287B0D990017F2BA /* XCRemoteSwiftPackageReference "SwiftLocationWHeading" */,
 				E969B0C52893112F00E22690 /* XCRemoteSwiftPackageReference "rive-ios" */,
 				E9F1E72D2895137D0045A41B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				E94F710528CB8B35003FCF2B /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = E91AFA0C283FD09F0024131D /* Products */;
 			projectDirPath = "";
@@ -706,6 +721,7 @@
 				E940E8C128426EFA009F1225 /* Modifiers.swift in Sources */,
 				E92F54BB287DDE76008A72AF /* GasStationAPI.swift in Sources */,
 				E95D87CC28A04AC60078EA7C /* OfflineRequest.swift in Sources */,
+				E94F70F528CB85E4003FCF2B /* ChartView.swift in Sources */,
 				E91AFA11283FD09F0024131D /* ContentView.swift in Sources */,
 				E95D87D028A04B090078EA7C /* OfflineRequestManager.swift in Sources */,
 				E940E8C828427395009F1225 /* Tab.swift in Sources */,
@@ -983,6 +999,14 @@
 				kind = branch;
 			};
 		};
+		E94F710528CB8B35003FCF2B /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.2;
+			};
+		};
 		E95862B7287B0D990017F2BA /* XCRemoteSwiftPackageReference "SwiftLocationWHeading" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/derech1e/SwiftLocationWHeading";
@@ -1024,6 +1048,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E93872A9286394670009F0F1 /* XCRemoteSwiftPackageReference "SwiftDate" */;
 			productName = SwiftDate;
+		};
+		E94F710628CB8B35003FCF2B /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E94F710528CB8B35003FCF2B /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
 		};
 		E95862B8287B0D990017F2BA /* SwiftLocation */ = {
 			isa = XCSwiftPackageProductDependency;

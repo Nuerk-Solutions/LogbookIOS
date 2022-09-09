@@ -203,7 +203,7 @@ struct SettingsView: View {
                             ForEach(VehicleEnum.allCases) { vehicle in
                                 Section {
                                     Text(vehicle.fuelDescription)
-                                    .padding()
+//                                    .padding()
                                 } header: {
                                     HStack {
                                         Image(vehicle.rawValue)

@@ -50,7 +50,7 @@ class LogbooksViewModel: ObservableObject {
         } else {
             self.phase = .empty
         }
-        self.lastListRefresh = Int(Date().timeIntervalSince1970)
+//        self.lastListRefresh = Int(Date().timeIntervalSince1970)
 //        self.fetchTaskToken = FetchTaskToken(fetchCategory: .list, token: Date())
         
         Task(priority: .userInitiated) {
@@ -58,6 +58,18 @@ class LogbooksViewModel: ObservableObject {
         }
     }
     
+    func deleteEntry(connected: Bool, logbook: LogbookEntry) async {
+        if Task.isCancelled { return }
+        
+        if !connected {
+            print("[Deleting]: No network connection")
+            print("[Deleting]: 🛑 Prevent API request...")
+            return
+        }
+        
+        logbookAPI.delete(with: logbook)
+        
+    }
     func refreshTask() async {
         //        Task {
         await pagingData.reset()
@@ -102,6 +114,8 @@ class LogbooksViewModel: ObservableObject {
 //            }
             await cache.setValue(logbooks, forKey: "\(pagingData.currentPage)")
             try? await cache.saveToDisk()
+            
+//            self.lastListRefresh = Int(Date().timeIntervalSince1970)
 
             if Task.isCancelled { return }
 

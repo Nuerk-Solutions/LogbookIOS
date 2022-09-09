@@ -40,6 +40,10 @@ struct LogbookAPI {
         try await sendLogbook(from: URL(string: baseUrl)!, logbook: logbook)
     }
     
+    func delete(with logbook: LogbookEntry) {
+        deleteLogbook(from: URL(string: baseUrl + "/\(logbook._id!)")!)
+    }
+    
     private func fetchLogbooks(from url: URL) async throws -> [LogbookEntry] {
         print(url)
         return try await session.request(url, method: .get)
@@ -73,6 +77,20 @@ struct LogbookAPI {
             }
             .serializingDecodable(LogbookEntry.self, decoder: jsonDecoder)
             .value
+    }
+    
+    private func deleteLogbook(from url: URL) {
+        session.request(url, method: .delete)
+            .validate(statusCode: 204..<205)
+            .responseData { (response) in
+                switch response.result {
+                case .success:
+                    break
+                case .failure(let error):
+                    print(error)
+                    break
+                }
+            }
     }
     
     private func generateError(code: Int = 1, description: String) async -> Error {
