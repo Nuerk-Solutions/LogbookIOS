@@ -57,15 +57,9 @@ struct AddAdditionalInfoView: View {
                         }
                         
                         withAnimation(.spring()) {
-                            let messageToSet = savedMessage
-                            if newValue == .Getankt {
-                                savedMessage = newLogbook.additionalInformation
-                                newLogbook.additionalInformation = messageToSet
-                            } else {
-                                savedMessage = newLogbook.additionalInformation
-                                newLogbook.additionalInformation = messageToSet
-                                
-                            }
+                        let messageToSet = savedMessage
+                            savedMessage = newLogbook.additionalInformation
+                            newLogbook.additionalInformation = messageToSet
                         }
                     }
                 }

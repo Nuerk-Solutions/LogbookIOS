@@ -112,15 +112,15 @@ class NewEntryViewModel: ObservableObject {
             sendPhase = .sending
         }
         
-        if !connected {
-            offlineRequestManager.queueRequest(AlamonOfflineRequest.newRequest {
-                Task {
-                    await self.sendBody()
-                }
-            })
-            sendPhase = .success(newLogbook)
-            return
-        }
+//        if !connected {
+//            offlineRequestManager.queueRequest(AlamonOfflineRequest.newRequest {
+//                Task {
+//                    await self.sendBody()
+//                }
+//            })
+//            sendPhase = .success(newLogbook)
+//            return
+//        }
         await sendBody()
     }
 }
