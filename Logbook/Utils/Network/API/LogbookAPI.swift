@@ -14,7 +14,7 @@ struct LogbookAPI {
     static let shared = LogbookAPI()
     private init() {}
     
-    private let baseUrl = "https://api.nuerk-solutions.de/logbook"
+    private let baseUrl = "http://192.168.200.184:3000/logbook"
     private let session = ApiSession.logbookShared.session
     private let jsonDecoder: JSONDecoder = {
         let decoder = JSONDecoder()
@@ -28,11 +28,11 @@ struct LogbookAPI {
         return encoder
     }()
     
-    func fetch(with requestParameters: LogbookRequestParameters) async throws -> [LogbookEntry] {
+    func fetch(with requestParameters: LogbookRequestParameters) async throws -> LogbookAPIResponse {
         try await fetchLogbooks(from: generateSearchUrl(with: requestParameters))
     }
     
-    func fetchLast() async throws -> [LogbookEntry] {
+    func fetchLast() async throws -> LogbookAPIResponse {
         try await fetchLogbooks(from: URL(string: baseUrl + "/find/latest")!)
     }
     
@@ -44,7 +44,7 @@ struct LogbookAPI {
         deleteLogbook(from: URL(string: baseUrl + "/\(logbook._id!)")!)
     }
     
-    private func fetchLogbooks(from url: URL) async throws -> [LogbookEntry] {
+    private func fetchLogbooks(from url: URL) async throws -> LogbookAPIResponse {
         print(url)
         return try await session.request(url, method: .get)
             .validate(statusCode: 200..<201)
@@ -59,7 +59,7 @@ struct LogbookAPI {
 //                    return generateError(code: response.response?.statusCode ?? -1, description: error.localizedDescription ?? "Ein Fehler ist aufgetreten")
                 }
             }
-            .serializingDecodable([LogbookEntry].self, decoder: jsonDecoder)
+            .serializingDecodable(LogbookAPIResponse.self, decoder: jsonDecoder)
             .value
     }
     

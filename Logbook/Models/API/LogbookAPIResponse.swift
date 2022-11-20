@@ -9,11 +9,10 @@ import Foundation
 
 struct LogbookAPIResponse: Decodable {
     
-    let status: String
-    let totalResults: Int?
-    let logbooks: [LogbookEntry]?
-    
-    let code: String?
-    let message: String?
-    
+    let total: Int
+    let length: Int
+    let limit: Int
+    let page: Int?
+    let pageCount: Int
+    let data: [LogbookEntry]?
 }

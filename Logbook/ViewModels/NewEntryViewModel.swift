@@ -62,14 +62,14 @@ class NewEntryViewModel: ObservableObject {
             
             if Task.isCancelled { return }
             
-            await cache.setValue(lastFetchedLogbooks, forKey: "last")
+            await cache.setValue(lastFetchedLogbooks.data, forKey: "last")
             try? await cache.saveToDisk()
             
             print("[NewEntry]: Fetched last logbooks")
-            print("[NewEntry]: Count of \(lastFetchedLogbooks.count)")
+            print("[NewEntry]: Count of \(lastFetchedLogbooks.length)")
             
             withAnimation {
-                fetchPhase = .success(lastFetchedLogbooks)
+                fetchPhase = .success(lastFetchedLogbooks.data ?? [])
                 self.fetchTaskToken = FetchTaskToken(fetchCategory: .latest, token: Date())
             }
             

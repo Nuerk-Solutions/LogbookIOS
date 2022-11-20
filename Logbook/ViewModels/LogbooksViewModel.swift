@@ -199,9 +199,9 @@ class LogbooksViewModel: ObservableObject {
     private func loadLogbooks(page: Int) async throws -> [LogbookEntry] {
         let logbooks = try await logbookAPI.fetch(with: LogbookRequestParameters(page: page, limit: pagingData.itemsPerPage))
         if Task.isCancelled {  return [] }
-        await print("[Paging]: Cache EXPIRED for page \(pagingData.currentPage) (\(page)), maxPageLimit: \(pagingData.maxPageLimit), size: \(logbooks.count)")
+        await print("[Paging]: Cache EXPIRED for page \(pagingData.currentPage) (\(page)), maxPageLimit: \(pagingData.maxPageLimit), size: \(logbooks.length)")
         print("[Paging]: 🚀 Making request...")
-        return logbooks
+        return logbooks.data ?? []
     }
 }
 
