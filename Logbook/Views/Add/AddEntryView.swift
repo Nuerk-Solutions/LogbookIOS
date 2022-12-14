@@ -132,15 +132,10 @@ struct AddEntryView: View {
     
     var content: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Neuer Eintrag")
-                .font(.custom("Poppins Bold", size: 30))
-                .frame(width: 260, alignment: .leading)
-            
-            HStack {
-                Text("Letzte Aktualisierung: \(mediumDateAndTime.string(from: newEntryVM.fetchTaskToken.token))")
-                    .font(.footnote.weight(.medium))
-                    .transition(.identity.animation(.linear(duration: 1).delay(2)))
-                
+            HStack (alignment: .firstTextBaseline, spacing: 0) {
+                Text("Neuer Eintrag")
+                    .font(.custom("Poppins Bold", size: 30))
+                    .frame(width: 260, alignment: .leading)
                 if newEntryVM.fetchPhase == .fetchingNextPage(lastLogbooks) {
                     ProgressView()
                         .padding(.horizontal, 5)
@@ -156,38 +151,42 @@ struct AddEntryView: View {
                     }
                 }
             }
-            .padding(.vertical, -10)
             
-            
-            //            Picker("", selection: $newEntryVM.newLogbook.driver) {
-            //                ForEach(DriverEnum.allCases) { driver in
-            //                    Text(driver.rawValue)
-            //                        .tag(driver)
-            //                }
-            //            }
-            //            .pickerStyle(.segmented)
-            //            .customFont(.body)
-            //            .frame(maxWidth: .infinity, alignment: .leading)
             
             DatePicker("Datum", selection: $newEntryVM.newLogbook.date, in: (getLogbookForVehicle(vehicle: newEntryVM.newLogbook.vehicleTyp)?.date ?? Date())...Date())
                 .customFont(.body)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            
-            Picker("", selection: $newEntryVM.newLogbook.vehicleTyp) {
-                ForEach(VehicleEnum.allCases) { vehicle in
-                    Text(vehicle.rawValue)
-                        .tag(vehicle)
+            HStack {
+                Picker("", selection: $newEntryVM.newLogbook.vehicleTyp) {
+                    ForEach(VehicleEnum.allCases) { vehicle in
+                        Text(vehicle.rawValue)
+                            .tag(vehicle)
+                    }
                 }
+                .pickerStyle(.segmented)
+                .customFont(.body)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .onChange(of: newEntryVM.newLogbook.vehicleTyp) { newValue in
+                    updateVehicleData(vehicle: newValue)
+                }
+                
+                Menu(content: {
+                    Picker(selection: $newEntryVM.newLogbook.driver) {
+                        ForEach(DriverEnum.allCases) { driver in
+                            Text(driver.rawValue)
+                                .tag(driver)
+                        }
+                    } label: {
+                        Text("TEST")
+                    }
+                    .customFont(.body)
+                }, label: {
+                    Image(systemName: "person.circle")
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                })
             }
-            .pickerStyle(.segmented)
-            .customFont(.body)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .onChange(of: newEntryVM.newLogbook.vehicleTyp) { newValue in
-                updateVehicleData(vehicle: newValue)
-            }
-            
-            
             
             VStack(spacing: 8) {
                 VStack(alignment: .leading, spacing: 3) {
@@ -217,6 +216,9 @@ struct AddEntryView: View {
                     TextField("", text: $newEntryVM.newLogbook.driveReason)
                         .addDoneButtonOnKeyboard()
                         .customTextField(image: Image(systemName: "scope"))
+                        .introspectTextField(customize: {
+                            $0.clearButtonMode = .whileEditing
+                        })
                 }
             }
             
@@ -306,50 +308,23 @@ struct AddEntryView: View {
                     .transition(.opacity)
             }
             VStack {
-            Spacer()
-            
-            button.view()
-                .frame(width: 236, height: 64)
-                .background(
-                    Color.black
-                        .cornerRadius(30)
-                        .blur(radius: 10)
-                        .opacity(0.3)
-                        .offset(y: 10)
-                )
-                .disabled(!canSubmit || isLoading)
-                .opacity(canSubmit ? 1 : 0.5)
-                .overlay(
-                    Label("Fahrt hinzufügen", systemImage: "arrow.forward")
-                        .offset(x: 4, y: 4)
-                        .customFont(.headline)
-                        .accentColor(.primary)
-                        .foregroundColor(.black)
-                )
-                .onTapGesture {
-                    
+                Spacer()
+                
+                Button {
                     if !canSubmit {
                         return
                     }
-                    
-                    button.play(animationName: "active")
-                    Task {
-                        await newEntryVM.send(connected: networkReachablility.connected)
+                    playSaveAnimation()
+                } label: {
+                    HStack {
+                        Image(systemName: "arrow.right")
+                        Text("Fahrt hinzufügen")
+                            .customFont(.headline)
                     }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                        button.reset()
-                        button.triggerInput("Reset")
-                        check.reset()
-                        check.triggerInput("Reset")
-                        confetti.reset()
-                        confetti.triggerInput("Reset")
-                        playAnimation()
-                        //                        withAnimation(.spring()) {
-                        //                            showModal.toggle()
-                        //                        }
-                    }
+                    .largeButton(disabled: !canSubmit)
                 }
-                Spacer()
+                .disabled(!canSubmit || isLoading)
+                //                Spacer()
             }
         }
         .padding(.horizontal, 40)
@@ -369,8 +344,8 @@ struct AddEntryView: View {
                 if isLiteModeBackground {
                     Image("Spline")
                         .blur(radius: 50)
-                    .offset(x: 200, y: 100)
-            }
+                        .offset(x: 200, y: 100)
+                }
             }
         )
         .background(.regularMaterial)
@@ -441,33 +416,26 @@ struct AddEntryView: View {
     }
     
     
-    
-    func playAnimation() {
-        isLoading = true
+    func playSaveAnimation() {
+        withAnimation(.spring()) {
+            isLoading = true
+        }
         
-        //        if email != "" {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            check.triggerInput("Check")
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            confetti.triggerInput("Trigger explosion")
-            lastAddedEntry = Date()
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-            withAnimation {
-                isLoading = false
-                show.toggle()
-                showTab.toggle()
+        if canSubmit {
+            Task {
+                await newEntryVM.send(connected: networkReachablility.connected)
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
+                withAnimation(.spring()) {
+                    isLoading = false
+                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.1) {
+                withAnimation(.spring()) {
+                    show = false
+                }
             }
         }
-        //        } else {
-        //            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-        //                try? check.triggerInput("Error")
-        //            }
-        //            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-        //                isLoading = false
-        //            }
-        //        }
     }
     
 }

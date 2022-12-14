@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import LocalConsole
 
 struct ContentView: View {
     
@@ -24,6 +25,7 @@ struct ContentView: View {
     
     @Preference(\.isOpenAddViewOnStart) var isOpenAddViewOnStart
     
+    let consoleManager = LCManager.shared
     init() {
         showAccount = false
     }
@@ -47,27 +49,7 @@ struct ContentView: View {
                     GasStationsView()
                 }
             case .invoice:
-                ZStack {
-                    Color("Background").ignoresSafeArea()
-                        .zIndex(0)
-                    Image("Under construction 2")
-                        .resizable()
-                        .scaledToFit()
-                        .padding(.bottom, 100)
-                        .background(Image("Blob 1").offset(x: -180, y: 300))
-                    Text("Bauarbeitem im Gange ")
-                        .customFont(.title)
-                        .foregroundColor(.primary)
-                        .zIndex(5)
-                        .padding(8)
-                        .backgroundColor()
-                        .background(.ultraThinMaterial)
-                        .cornerRadius(10)
-                        .shadow(radius: 50)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                        .padding(.top, 200)
-                    
-                }
+                ChartView()
             case .settings:
                 SettingsView()
             }
@@ -84,7 +66,7 @@ struct ContentView: View {
                         .frame(height: 100)
                         .frame(maxHeight: .infinity, alignment: .bottom)
                         .allowsHitTesting(false)
-                                            .blur(radius: 30)
+                        .blur(radius: 15)
                 )
 //                            .ignoresSafeArea()
                 .offset(y: isOpen ? 300 : 0)

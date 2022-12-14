@@ -30,7 +30,7 @@ extension View {
         func textEditorBackground<V>(@ViewBuilder _ content: () -> V) -> some View where V : View {
             self
                 .onAppear {
-                    UITextView.appearance().backgroundColor = .clear
+                    UITextView.appearance().backgroundColor = .red
                 }
                 .background(content())
         }

@@ -27,13 +27,22 @@ struct EntryView: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass
     @Environment(\.presentationMode) var presentationMode
     
+    let digitsFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.init(identifier: "de") // MARK: Test if .current work here
+        formatter.numberStyle = .decimal
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 0
+        return formatter
+    }()
+    
     var body: some View {
         ZStack {
             ScrollView {
                 cover
                 sectionsSection
                     .opacity(appear[2] ? 1 : 0)
-//
+                //
                 if entry.additionalInformationTyp != .Keine {
                     Text("Zusätzliche Informationen".uppercased())
                         .padding(.top, 20)
@@ -77,7 +86,7 @@ struct EntryView: View {
             
             AdditionalInfoImageView(informationTyp: entry.additionalInformationTyp)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-//                .padding(20)
+            //                .padding(20)
                 .matchedGeometryEffect(id: "logo\(entry.id)", in: namespace)
                 .ignoresSafeArea()
                 .accessibility(hidden: true)
@@ -104,10 +113,10 @@ struct EntryView: View {
                     .aspectRatio(contentMode: .fit)
                     .padding(20)
                     .matchedGeometryEffect(id: "image\(entry.id)", in: namespace)
-                    .offset(y: -50)
+                    .offset(y: -70)
                     .offset(y: scrollY > 0 ? -scrollY : 0)
                     .accessibility(hidden: true)
-//                    .frame(maxWidth: 150)
+                //                    .frame(maxWidth: 150)
             )
             .background(
                 Image(getVehicleBackground(vehicleTyp: entry.vehicleTyp))
@@ -138,31 +147,70 @@ struct EntryView: View {
             .overlay(
                 VStack(alignment: .leading, spacing: 16) {
                     Text(entry.driveReason)
-                        .font(.title).bold()
+                        .font(.title3).bold()
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .foregroundColor(.primary)
                         .matchedGeometryEffect(id: "title\(entry.id)", in: namespace)
                     
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("\(entry.driver.rawValue) - \(entry.vehicleTyp.rawValue)".uppercased())
-                            .font(.footnote).bold()
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .foregroundColor(.primary.opacity(0.7))
-                            .matchedGeometryEffect(id: "subtitle\(entry.id)", in: namespace)
+                        HStack {
+                            Image(systemName: "person.circle")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 24, height: 24)
+                            
+                            Text("\(entry.driver.rawValue)")
+                                .font(.body).bold()
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .foregroundColor(.primary.opacity(0.7))
+                                .matchedGeometryEffect(id: "subtitle\(entry.id)", in: namespace)
+                        }
+                        .padding(.bottom, 5)
                         
+                        HStack {
+                            Image("eurosign")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 16, height: 16)
+                                .padding(3)
+                                .padding(.trailing, 1)
+                                .cornerRadius(100)
+                                .overlay(RoundedRectangle(cornerRadius: 100)
+                                    .stroke(Color.black, lineWidth: 2))
+                                .padding(.leading, 1)
+                            
+                            Text("\(entry.distanceCost) €")
+                                .font(.body).bold()
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .foregroundColor(.primary.opacity(0.7))
+                                .matchedGeometryEffect(id: "description\(entry.id)", in: namespace)
+                        }
+                        .padding(.bottom, 5)
                         
-                        Text("\(DateFormatter.readableDeShort.string(from: entry.date))".uppercased())
-                            .font(.footnote).bold()
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .foregroundColor(.primary.opacity(0.7))
-                            .matchedGeometryEffect(id: "description\(entry.id)", in: namespace)
+                        HStack {
+                            Image(systemName: "road.lanes")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 24, height: 24)
+                            
+                            Text("\(entry.distance) km")
+                                .font(.body).bold()
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .foregroundColor(.primary.opacity(0.7))
+//                                .matchedGeometryEffect(id: "description\(entry.id)", in: namespace)
+                        }
+                        //                        Text("\(DateFormatter.readableDeShort.string(from: entry.date))".uppercased())
+                        //                            .font(.footnote).bold()
+                        //                            .frame(maxWidth: .infinity, alignment: .leading)
+                        //                            .foregroundColor(.primary.opacity(0.7))
+                        //                            .matchedGeometryEffect(id: "description\(entry.id)", in: namespace)
                     }
                     
-                    Text("Bei dieser Fahrt wurden \(entry.distance)km zu einem Preis von \(entry.distanceCost)€ gefahren.")
-                        .font(.footnote)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .foregroundColor(.primary.opacity(0.7))
-                        .matchedGeometryEffect(id: "description\(1)", in: namespace)
+                    //                    Text("Bei dieser Fahrt wurden \(entry.distance)km zu einem Preis von \(entry.distanceCost)€ gefahren.")
+                    //                        .font(.footnote)
+                    //                        .frame(maxWidth: .infinity, alignment: .leading)
+                    //                        .foregroundColor(.primary.opacity(0.7))
+                    //                        .matchedGeometryEffect(id: "description\(1)", in: namespace)
                     
                     Divider()
                         .foregroundColor(.secondary)
@@ -212,34 +260,40 @@ struct EntryView: View {
     }
     
     var sectionsSection: some View {
-        Group {
-            SectionIconRow(iconName: "flag", circleValue: 1, progressValue: 0) {
-                Text("Aktueller Kilometerstand")
+        HStack {
+            SectionIconRow(iconName: "flag", innerFrame: 18, outerFrame: 30, contentSpacing: 10, shouldSpace: true, circleValue: 1, progressValue: 0) {
+                Text("Aktuell")
                     .font(.subheadline.weight(.medium))
                     .foregroundStyle(.secondary)
-                Text("\(entry.currentMileAge) km")
+                Text("\(digitsFormatter.string(for: (entry.currentMileAge as NSString).integerValue)!) km")
                     .fontWeight(.semibold)
             }
-            .padding(20)
-            .background(.ultraThinMaterial)
-            .backgroundStyle(cornerRadius: 30)
-            .padding(20)
-            .padding(.top, verticalSizeClass == .compact ? 0 : 80)
+            .padding(10)
+            //            .background(.ultraThinMaterial)
+            //            .backgroundStyle(cornerRadius: 30)
+            //            .padding(20)
+            //            .padding(.top, verticalSizeClass == .compact ? 0 : 80)
             
-            SectionIconRow(iconName: "flag.fill", circleValue: 1, progressValue: 0) {
-                Text("Neuer Kilometerstand")
+            SectionIconRow(iconName: "flag.fill", innerFrame: 18, outerFrame: 30, contentSpacing: 10, shouldSpace: false, circleValue: 1, progressValue: 0) {
+                Text("Neu")
                     .font(.subheadline.weight(.medium))
                     .foregroundStyle(.secondary)
-                Text("\(entry.newMileAge) km")
+                
+                Text("\(digitsFormatter.string(for: (entry.newMileAge as NSString).integerValue)!) km")
                     .fontWeight(.semibold)
+                    .padding(.trailing, 15)
             }
-            .padding(20)
-            .background(.ultraThinMaterial)
-            .backgroundStyle(cornerRadius: 30)
-            .padding(20)
-            .padding(.top, -40)
+            //            .padding(5)
+            //            .background(.ultraThinMaterial)
+            //            .backgroundStyle(cornerRadius: 30)
+            //            .padding(20)
+            //            .padding(.top, -40)
         }
         .padding(.horizontal, verticalSizeClass == .compact ? 25 : 0)
+        .background(.ultraThinMaterial)
+        .backgroundStyle(cornerRadius: 30)
+        .padding(.top, verticalSizeClass == .compact ? 0 : 80)
+        .padding(20)
         
     }
     
@@ -262,7 +316,7 @@ struct EntryView: View {
             .backgroundStyle(cornerRadius: 30)
             .padding(20)
             .padding(.top, -60)
-//            .padding(.top, verticalSizeClass == .compact ? 0 : 80)
+            //            .padding(.top, verticalSizeClass == .compact ? 0 : 80)
             
             SectionIconRow(iconName: detailedIconName, circleValue: 1, progressValue: 0) {
                 Text(description)
@@ -276,7 +330,7 @@ struct EntryView: View {
             .backgroundStyle(cornerRadius: 30)
             .padding(20)
             .padding(.top, -40)
-//            .padding(.top, verticalSizeClass == .compact ? 0 : 80)
+            //            .padding(.top, verticalSizeClass == .compact ? 0 : 80)
             
             SectionImageRow(imageName: "eurosign", circleValue: 1, progressValue: 0) {
                 Text("Kosten")
@@ -353,13 +407,13 @@ struct EntryView: View {
 struct EntryView_Previews: PreviewProvider {
     @Namespace static var namespace
     static var previews: some View {
-                EntryView(namespace: namespace, entry: .constant(LogbookEntry.previewData[14]))
-                    .preferredColorScheme(.dark)
-//                    .previewInterfaceOrientation(.landscapeRight)
-                    .environmentObject(Model())
+        //                EntryView(namespace: namespace, entry: .constant(LogbookEntry.previewData[14]))
+        ////                    .preferredColorScheme(.dark)
+        ////                    .previewInterfaceOrientation(.landscapeRight)
+        //                    .environmentObject(Model())
         
-//        EntryView(namespace: namespace, entry: .constant(LogbookEntry.previewData[11]))
-//            .environmentObject(Model())
-//            .preferredColorScheme(.dark)
+        EntryView(namespace: namespace, entry: .constant(LogbookEntry.previewData[1]))
+            .environmentObject(Model())
+        //            .preferredColorScheme(.dark)
     }
 }

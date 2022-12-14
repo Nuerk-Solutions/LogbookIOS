@@ -98,7 +98,8 @@ struct LogbookAPI {
     }
     
     private func generateSearchUrl(with requestParameters: LogbookRequestParameters) -> URL {
-        var queryItems = [URLQueryItem(name: "sort", value: requestParameters.sort)]
+//        var queryItems = [URLQueryItem(name: "sort", value: requestParameters.sort)]
+        var queryItems: [URLQueryItem] = []
         if requestParameters.page != nil && requestParameters.limit != nil {
             queryItems.append(URLQueryItem(name: "page", value: String(requestParameters.page!)))
             queryItems.append(URLQueryItem(name: "limit", value: String(requestParameters.limit!)))
@@ -113,7 +114,7 @@ struct LogbookAPI {
 
 struct LogbookRequestParameters {
     
-    var sort: String = "-date"
+//    var sort: String = "-date"
     var page: Int?
     var limit: Int?
 }

@@ -90,6 +90,7 @@ class NewEntryViewModel: ObservableObject {
             newLogbook.additionalInformationCost = newLogbook.additionalInformationCost.replacingOccurrences(of: ",", with: ".")
             if newLogbook.additionalInformationTyp == .Getankt {
                 newLogbook.additionalInformation = newLogbook.additionalInformation.replacingOccurrences(of: ",", with: ".")
+                newLogbook.additionalInformationTyp = .Getankt
             }
             
             let submittedLogbook = try await logbookAPI.send(with: newLogbook)

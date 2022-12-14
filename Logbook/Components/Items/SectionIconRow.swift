@@ -9,6 +9,10 @@ import SwiftUI
 
 struct SectionIconRow<Content: View>: View {
     var iconName: String?
+    var innerFrame: CGFloat? = 24
+    var outerFrame: CGFloat? = 45
+    var contentSpacing: CGFloat? = 16
+    var shouldSpace: Bool = true
     @State var circleValue: Double?
     @State var progressValue: Double?
     @ViewBuilder var content: Content
@@ -16,12 +20,12 @@ struct SectionIconRow<Content: View>: View {
     @EnvironmentObject private var model: Model
     
     var body: some View {
-        HStack(alignment: .top, spacing: 16) {
+        HStack(alignment: .top, spacing: contentSpacing) {
             Image(systemName: iconName ?? "flag")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 24, height: 24)
-                .frame(width: 45, height: 45)
+                .frame(width: innerFrame, height: innerFrame)
+                .frame(width: outerFrame, height: outerFrame)
                 .mask(Circle())
                 .padding(6)
                 .background(Color(UIColor.systemBackground).opacity(0.3))
@@ -36,7 +40,9 @@ struct SectionIconRow<Content: View>: View {
                         .frame(maxWidth: 132)
                 }
             }
-            Spacer()
+            if(shouldSpace) {
+                Spacer()
+            }
         }
     }
 }

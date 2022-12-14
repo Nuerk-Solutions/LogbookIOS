@@ -31,7 +31,7 @@ struct AdditionalInfoImageView: View {
 //                .matchedGeometryEffect(id: "logo\(entry.id)", in: namespace)
         case .Gewartet:
             Image(systemName: "wrench.and.screwdriver")
-                .symbolRenderingMode(.hierarchical)
+//                .symbolRenderingMode(.hierarchical)
                 .resizable()
                 .padding(5)
                 .background(.ultraThickMaterial)

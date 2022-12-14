@@ -58,7 +58,10 @@ struct ListView: View {
                 detail
             }
             content
-            //                .background(Image("Blob 1").offset(x: -180, y: 300))
+                .background(
+                    Image("Blob 1")
+                        .offset(x: -180, y: 300)
+                        .opacity(0.5))
         }
         .overlay(NavigationBar(title: "Fahrtenbuch", contentHasScrolled: $contentHasScrolled))
         .overlay(overlayView)
@@ -89,38 +92,38 @@ struct ListView: View {
             
             scrollDetection
             
-            HStack {
-                Text("Letzte Aktualisierung: \(mediumDateAndTime.string(from: Date(timeIntervalSince1970: TimeInterval(logbooksVM.lastListRefresh))))")
-                    .font(.footnote.weight(.medium))
-                    .transition(.identity.animation(.linear(duration: 1).delay(2)))
-                
-                if logbooksVM.phase == .empty{
-                    ProgressView()
-                        .padding(.horizontal, 5)
-                } else {
-                    if(networkReachablility.connected) {
-                        Button {
-                            Task {
-                                await logbooksVM.loadFirstPage(connected: networkReachablility.connected)
-                            }
-                        } label: {
-                            Image(systemName: "arrow.counterclockwise.circle")
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                                .rotationEffect(Angle(degrees: -90))
-                                .symbolRenderingMode(.hierarchical)
-                        }
-                    } else {
-                        EmptyView()
-                    }
-                }
-            }
-            .frame(maxWidth: .infinity, alignment: .topLeading)
-            .padding(.horizontal, 21)
-            .padding(.top, 50)
+            //            HStack {
+            //                Text("Letzte Aktualisierung: \(mediumDateAndTime.string(from: Date(timeIntervalSince1970: TimeInterval(logbooksVM.lastListRefresh))))")
+            //                    .font(.footnote.weight(.medium))
+            //                    .transition(.identity.animation(.linear(duration: 1).delay(2)))
+            //
+            //                if logbooksVM.phase == .empty{
+            //                    ProgressView()
+            //                        .padding(.horizontal, 5)
+            //                } else {
+            //                    if(networkReachablility.connected) {
+            //                        Button {
+            //                            Task {
+            //                                await logbooksVM.loadFirstPage(connected: networkReachablility.connected)
+            //                            }
+            //                        } label: {
+            //                            Image(systemName: "arrow.counterclockwise.circle")
+            //                                .resizable()
+            //                                .frame(width: 20, height: 20)
+            //                                .rotationEffect(Angle(degrees: -90))
+            //                                .symbolRenderingMode(.hierarchical)
+            //                        }
+            //                    } else {
+            //                        EmptyView()
+            //                    }
+            //                }
+            //            }
+            //            .frame(maxWidth: .infinity, alignment: .topLeading)
+            //            .padding(.horizontal, 21)
+            //            .padding(.top, 50)
             
             entrySection2
-                .padding(.top, 20)
+                .padding(.top, 70)
                 .padding(.bottom, 120)
                 .id("SCROLL_TO_TOP")
             
@@ -178,7 +181,7 @@ struct ListView: View {
         await logbooksVM.loadNextPage()
     }
     
-    @Sendable
+    
     private func refreshTask() {
         Task {
             await logbooksVM.refreshTask()
@@ -192,7 +195,7 @@ struct ListView: View {
                     ForEach(logbooks) { entry in
                         Rectangle()
                             .fill(.regularMaterial)
-                            .frame(height: 300)
+                            .frame(height: 50)
                             .cornerRadius(30)
                             .shadow(color: Color("Shadow").opacity(0.2), radius: 20, x: 0, y: 10)
                             .opacity(0.3)
@@ -201,15 +204,20 @@ struct ListView: View {
                 .padding(.horizontal, 20)
                 .offset(y: -80)
             } else {
-                LazyVGrid(columns: columns, spacing: 20) {
-                    entry.frame(height: 200)
-                        .padding(.bottom, 20)
+                LazyVGrid(columns: columns, spacing: 15) {
+                    entry
+                    
+                    //                        .frame(height: 50)
+                        .padding(.horizontal, 15)
+                    //                        .shadow(radius: 0.5)
+                    //                        .padding(.vertical, 5)
+                    
                     if logbooksVM.isFetchingNextPage {
                         CustomProgressView(message: "Laden...")
                         //                            .offset(y: -40)
                     }
                 }
-                .padding(.horizontal, 20)
+                //                .padding(.horizontal, 20)
                 .opacity(logbooksVM.logbooksOpacity)
             }
         }
@@ -230,28 +238,28 @@ struct ListView: View {
                     .accessibilityAddTraits(.isButton)
                     .transition(.opacity)
                     .contextMenu {
-//                        Button {
-//                            print("Edited")
-//                        } label: {
-//                            Label {
-//                                Text("Bearbeiten")
-//                            } icon: {
-//                                Image(systemName: "pencil")
-//                            }
-//                        }
-                        if entry == logbooks.first {
                         Button {
-                            Task {
-                                await logbooksVM.deleteEntry(connected: networkReachablility.connected, logbook: entry)
-                                await logbooksVM.refreshTask()
-                            }
+                            print("Edited")
                         } label: {
                             Label {
-                                Text("Löschen")
+                                Text("Bearbeiten")
                             } icon: {
-                                Image(systemName: "trash")
+                                Image(systemName: "pencil")
                             }
                         }
+                        if entry == logbooks.first {
+                            Button {
+                                Task {
+                                    await logbooksVM.deleteEntry(connected: networkReachablility.connected, logbook: entry)
+                                    await logbooksVM.refreshTask()
+                                }
+                            } label: {
+                                Label {
+                                    Text("Löschen")
+                                } icon: {
+                                    Image(systemName: "trash")
+                                }
+                            }
                         }
                     }
             }

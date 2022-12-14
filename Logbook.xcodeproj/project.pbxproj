@@ -53,6 +53,7 @@
 		E940E8C328427232009F1225 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E940E8C228427232009F1225 /* Model.swift */; };
 		E940E8C62842738E009F1225 /* PreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E940E8C52842738E009F1225 /* PreferenceKey.swift */; };
 		E940E8C828427395009F1225 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = E940E8C728427395009F1225 /* Tab.swift */; };
+		E94324B9292D357E0083FFD1 /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94324B8292D357E0083FFD1 /* ChartViewModel.swift */; };
 		E94A0CFB284F97AA00693352 /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94A0CFA284F97AA00693352 /* EntryView.swift */; };
 		E94A0CFD284F98CF00693352 /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94A0CFC284F98CF00693352 /* LogoView.swift */; };
 		E94A0CFF284FA96700693352 /* EntryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94A0CFE284FA96700693352 /* EntryItem.swift */; };
@@ -94,6 +95,8 @@
 		E969B0C42892D57500E22690 /* AddEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E969B0C32892D57500E22690 /* AddEntryView.swift */; };
 		E969B0C72893112F00E22690 /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = E969B0C62893112F00E22690 /* RiveRuntime */; };
 		E9715409289D73F200889084 /* DataSendPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9715408289D73F200889084 /* DataSendPhase.swift */; };
+		E97B08BF292A83BD001EDA1A /* SwiftUICollectionView in Frameworks */ = {isa = PBXBuildFile; productRef = E97B08BE292A83BD001EDA1A /* SwiftUICollectionView */; };
+		E97B08C4292A946A001EDA1A /* LocalConsole in Frameworks */ = {isa = PBXBuildFile; productRef = E97B08C3292A946A001EDA1A /* LocalConsole */; };
 		E9969E412899971C008A92A2 /* checkmark_icon.riv in Resources */ = {isa = PBXBuildFile; fileRef = E9969E402899971C008A92A2 /* checkmark_icon.riv */; };
 		E99E2403289C2AE0005A79AB /* button.riv in Resources */ = {isa = PBXBuildFile; fileRef = E99E2402289C2AE0005A79AB /* button.riv */; };
 		E99E240E289C350E005A79AB /* 340-656-like-button.riv in Resources */ = {isa = PBXBuildFile; fileRef = E99E240D289C350E005A79AB /* 340-656-like-button.riv */; };
@@ -159,6 +162,7 @@
 		E940E8C228427232009F1225 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		E940E8C52842738E009F1225 /* PreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceKey.swift; sourceTree = "<group>"; };
 		E940E8C728427395009F1225 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		E94324B8292D357E0083FFD1 /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
 		E94A0CFA284F97AA00693352 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
 		E94A0CFC284F98CF00693352 /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		E94A0CFE284FA96700693352 /* EntryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryItem.swift; sourceTree = "<group>"; };
@@ -227,6 +231,8 @@
 				E91AFA23283FD0D60024131D /* Alamofire in Frameworks */,
 				E91AFA39283FE8B10024131D /* SwiftUI Extensions in Frameworks */,
 				E93872AB286394670009F0F1 /* SwiftDate in Frameworks */,
+				E97B08C4292A946A001EDA1A /* LocalConsole in Frameworks */,
+				E97B08BF292A83BD001EDA1A /* SwiftUICollectionView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,6 +360,7 @@
 				E91AFA3B28400B260024131D /* LogbooksViewModel.swift */,
 				E957A296285F88DB00464FB0 /* GasStationViewModel.swift */,
 				E961ACA628948EDD00C6FCC8 /* NewEntryViewModel.swift */,
+				E94324B8292D357E0083FFD1 /* ChartViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -602,6 +609,8 @@
 				E969B0C62893112F00E22690 /* RiveRuntime */,
 				E9F1E72E2895137D0045A41B /* Introspect */,
 				E94F710628CB8B35003FCF2B /* SwiftUICharts */,
+				E97B08BE292A83BD001EDA1A /* SwiftUICollectionView */,
+				E97B08C3292A946A001EDA1A /* LocalConsole */,
 			);
 			productName = Logbook;
 			productReference = E91AFA0B283FD09F0024131D /* Logbook.app */;
@@ -639,6 +648,8 @@
 				E969B0C52893112F00E22690 /* XCRemoteSwiftPackageReference "rive-ios" */,
 				E9F1E72D2895137D0045A41B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				E94F710528CB8B35003FCF2B /* XCRemoteSwiftPackageReference "ChartView" */,
+				E97B08BD292A83BD001EDA1A /* XCRemoteSwiftPackageReference "SwifUICollectionView" */,
+				E97B08C2292A946A001EDA1A /* XCRemoteSwiftPackageReference "LocalConsole" */,
 			);
 			productRefGroup = E91AFA0C283FD09F0024131D /* Products */;
 			projectDirPath = "";
@@ -747,6 +758,7 @@
 				E94A0CFF284FA96700693352 /* EntryItem.swift in Sources */,
 				E91AFA0F283FD09F0024131D /* LogbookApp.swift in Sources */,
 				E95D87D628A04B770078EA7C /* OfflineRequestManagerDelegate.swift in Sources */,
+				E94324B9292D357E0083FFD1 /* ChartViewModel.swift in Sources */,
 				E94A769C28591AA600BCA71A /* AdditionalInfoImageView.swift in Sources */,
 				E9BA8D702847B255009838C4 /* KeysTracker.swift in Sources */,
 				E920B604285648F600683D67 /* PreferenceManager.swift in Sources */,
@@ -1023,6 +1035,22 @@
 				minimumVersion = 3.0.1;
 			};
 		};
+		E97B08BD292A83BD001EDA1A /* XCRemoteSwiftPackageReference "SwifUICollectionView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/michzio/SwifUICollectionView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
+		E97B08C2292A946A001EDA1A /* XCRemoteSwiftPackageReference "LocalConsole" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/duraidabdul/LocalConsole/";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		E9F1E72D2895137D0045A41B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
@@ -1063,6 +1091,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E969B0C52893112F00E22690 /* XCRemoteSwiftPackageReference "rive-ios" */;
 			productName = RiveRuntime;
+		};
+		E97B08BE292A83BD001EDA1A /* SwiftUICollectionView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E97B08BD292A83BD001EDA1A /* XCRemoteSwiftPackageReference "SwifUICollectionView" */;
+			productName = SwiftUICollectionView;
+		};
+		E97B08C3292A946A001EDA1A /* LocalConsole */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E97B08C2292A946A001EDA1A /* XCRemoteSwiftPackageReference "LocalConsole" */;
+			productName = LocalConsole;
 		};
 		E9F1E72E2895137D0045A41B /* Introspect */ = {
 			isa = XCSwiftPackageProductDependency;

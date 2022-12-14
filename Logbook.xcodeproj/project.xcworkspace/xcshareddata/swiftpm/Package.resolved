@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "localconsole",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/duraidabdul/LocalConsole/",
+      "state" : {
+        "branch" : "main",
+        "revision" : "80e0aa6168d55407c87e403931957d4eaea41f8a"
+      }
+    },
+    {
       "identity" : "rive-ios",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/rive-app/rive-ios",
@@ -61,6 +70,15 @@
       "state" : {
         "branch" : "master",
         "revision" : "7ef0df639079491ee1aaf6b83b6fd4d08df80393"
+      }
+    },
+    {
+      "identity" : "swifuicollectionview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/michzio/SwifUICollectionView",
+      "state" : {
+        "revision" : "d36c34de8d12e172c54fbd7ab0021b47d919381b",
+        "version" : "0.1.0"
       }
     }
   ],

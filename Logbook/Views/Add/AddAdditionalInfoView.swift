@@ -76,15 +76,29 @@ struct AddAdditionalInfoView: View {
                         .foregroundColor(.secondary)
                         .matchedGeometryEffect(id: "informationTitle", in: animation)
                     
-                    TextEditor(text: $newLogbook.additionalInformation)
-                        .addDoneButtonOnKeyboard()
-                        .multilineTextAlignment(.leading)
-                        .frame(minHeight: 30, maxHeight: 120, alignment: .leading)
-                        .textEditorBackground {
-                            Color.clear
-                        }
-                        .customTextArea()
-                        .matchedGeometryEffect(id: "information", in: animation)
+                    if #available(iOS 16.0, *) {
+                        TextEditor(text: $newLogbook.additionalInformation)
+                            .addDoneButtonOnKeyboard()
+                            .multilineTextAlignment(.leading)
+                            .frame(minHeight: 30, maxHeight: 120, alignment: .leading)
+                            .textEditorBackground {
+                                Color.clear
+                            }
+                            .scrollContentBackground(.hidden)
+                            .background(.clear)
+                            .customTextArea()
+                            .matchedGeometryEffect(id: "information", in: animation)
+                    } else {
+                        TextEditor(text: $newLogbook.additionalInformation)
+                            .addDoneButtonOnKeyboard()
+                            .multilineTextAlignment(.leading)
+                            .frame(minHeight: 30, maxHeight: 120, alignment: .leading)
+                            .textEditorBackground {
+                                Color.clear
+                            }
+                            .customTextArea()
+                            .matchedGeometryEffect(id: "information", in: animation)
+                    }
                     
                 }
             } else {
@@ -111,7 +125,12 @@ struct AddAdditionalInfoView: View {
                                      ,suffix: "€")
             }
             Button {
-                playSaveAnimation()
+                if canSubmit {
+                    withAnimation(.spring()) {
+                        isLoading = false
+                        show = false
+                    }
+                }
             } label: {
                 HStack {
                     Image(systemName: "arrow.right")
@@ -143,25 +162,6 @@ struct AddAdditionalInfoView: View {
             }
         )
         .padding()
-    }
-    
-    func playSaveAnimation() {
-        withAnimation(.spring()) {
-            isLoading = true
-        }
-        
-        if canSubmit {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
-                withAnimation(.spring()) {
-                    isLoading = false
-                }
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.1) {
-                withAnimation(.spring()) {
-                    show = false
-                }
-            }
-        }
     }
 }
 
