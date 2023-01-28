@@ -89,7 +89,6 @@ struct ListView: View {
     
     var content: some View {
         ScrollView {
-            
             scrollDetection
             
             //            HStack {
@@ -251,7 +250,13 @@ struct ListView: View {
                             Button {
                                 Task {
                                     await logbooksVM.deleteEntry(connected: networkReachablility.connected, logbook: entry)
-                                    await logbooksVM.refreshTask()
+                                    
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                            logbooksVM.loadedLogbooks.removeFirst()
+                                            logbooksVM.phase = .success(logbooksVM.loadedLogbooks)
+                                        }
+                                    // Refresh Task will execute immidiate, because it does not await the DispatchQueue
+//                                    await logbooksVM.refreshTask()
                                 }
                             } label: {
                                 Label {

@@ -424,6 +424,7 @@ struct AddEntryView: View {
         if canSubmit {
             Task {
                 await newEntryVM.send(connected: networkReachablility.connected)
+                lastAddedEntry = Date()
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
                 withAnimation(.spring()) {

@@ -17,7 +17,7 @@ struct EntryView: View {
     
     @State var viewState: CGSize = .zero
     @State var showSection = false
-    @State var appear = [false, false, false]
+    @State var appear = [false, false, false, true]
     
     @State var show = false
     //    @State var selectedSection = courseSections[0]
@@ -86,7 +86,7 @@ struct EntryView: View {
             
             AdditionalInfoImageView(informationTyp: entry.additionalInformationTyp)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-            //                .padding(20)
+                //.padding(20)
                 .matchedGeometryEffect(id: "logo\(entry.id)", in: namespace)
                 .ignoresSafeArea()
                 .accessibility(hidden: true)
@@ -138,6 +138,7 @@ struct EntryView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(maxHeight: .infinity, alignment: .bottom)
+                    .offset(y: appear[3] ? 30 : 0)
                     .offset(y: scrollY > 0 ? -scrollY : 0)
                     .scaleEffect(scrollY > 0 ? scrollY / 500 + 1 : 1)
                     .opacity(1)
@@ -163,28 +164,29 @@ struct EntryView: View {
                                 .font(.body).bold()
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .foregroundColor(.primary.opacity(0.7))
-                                .matchedGeometryEffect(id: "subtitle\(entry.id)", in: namespace)
                         }
+                        .matchedGeometryEffect(id: "subtitle\(entry.id)", in: namespace)
                         .padding(.bottom, 5)
                         
                         HStack {
                             Image("eurosign")
                                 .resizable()
+                                .background(.clear)
                                 .scaledToFit()
                                 .frame(width: 16, height: 16)
                                 .padding(3)
                                 .padding(.trailing, 1)
                                 .cornerRadius(100)
                                 .overlay(RoundedRectangle(cornerRadius: 100)
-                                    .stroke(Color.black, lineWidth: 2))
+                                    .stroke(Color.primary, lineWidth: 2))
                                 .padding(.leading, 1)
                             
                             Text("\(entry.distanceCost) €")
                                 .font(.body).bold()
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .foregroundColor(.primary.opacity(0.7))
-                                .matchedGeometryEffect(id: "description\(entry.id)", in: namespace)
                         }
+                        .matchedGeometryEffect(id: "description\(entry.id)", in: namespace)
                         .padding(.bottom, 5)
                         
                         HStack {
@@ -199,6 +201,7 @@ struct EntryView: View {
                                 .foregroundColor(.primary.opacity(0.7))
 //                                .matchedGeometryEffect(id: "description\(entry.id)", in: namespace)
                         }
+                        .opacity(appear[1] ? 1 : 0)
                         //                        Text("\(DateFormatter.readableDeShort.string(from: entry.date))".uppercased())
                         //                            .font(.footnote).bold()
                         //                            .frame(maxWidth: .infinity, alignment: .leading)
@@ -256,32 +259,29 @@ struct EntryView: View {
                     .padding(.horizontal, verticalSizeClass == .compact ? 25 : 0)
             )
         }
+        .background(.red)
         .frame(height: verticalSizeClass == .compact ? 600 : 500)
     }
     
     var sectionsSection: some View {
         HStack {
             SectionIconRow(iconName: "flag", innerFrame: 18, outerFrame: 30, contentSpacing: 10, shouldSpace: true, circleValue: 1, progressValue: 0) {
-                Text("Aktuell")
-                    .font(.subheadline.weight(.medium))
-                    .foregroundStyle(.secondary)
                 Text("\(digitsFormatter.string(for: (entry.currentMileAge as NSString).integerValue)!) km")
                     .fontWeight(.semibold)
+                    .padding(.top, 12)
             }
-            .padding(10)
+            .padding(5)
             //            .background(.ultraThinMaterial)
             //            .backgroundStyle(cornerRadius: 30)
             //            .padding(20)
             //            .padding(.top, verticalSizeClass == .compact ? 0 : 80)
             
             SectionIconRow(iconName: "flag.fill", innerFrame: 18, outerFrame: 30, contentSpacing: 10, shouldSpace: false, circleValue: 1, progressValue: 0) {
-                Text("Neu")
-                    .font(.subheadline.weight(.medium))
-                    .foregroundStyle(.secondary)
                 
                 Text("\(digitsFormatter.string(for: (entry.newMileAge as NSString).integerValue)!) km")
                     .fontWeight(.semibold)
                     .padding(.trailing, 15)
+                    .padding(.top, 12)
             }
             //            .padding(5)
             //            .background(.ultraThinMaterial)
@@ -289,6 +289,7 @@ struct EntryView: View {
             //            .padding(20)
             //            .padding(.top, -40)
         }
+        .padding(5)
         .padding(.horizontal, verticalSizeClass == .compact ? 25 : 0)
         .background(.ultraThinMaterial)
         .backgroundStyle(cornerRadius: 30)
@@ -384,6 +385,7 @@ struct EntryView: View {
     }
     
     func fadeIn() {
+        appear[3] = true
         withAnimation(.easeOut.delay(0.3)) {
             appear[0] = true
         }
@@ -393,6 +395,9 @@ struct EntryView: View {
         withAnimation(.easeOut.delay(0.5)) {
             appear[2] = true
         }
+        withAnimation(.easeOut.delay(0.3)) {
+            appear[3] = false
+        }
     }
     
     func fadeOut() {
@@ -400,6 +405,7 @@ struct EntryView: View {
             appear[0] = false
             appear[1] = false
             appear[2] = false
+            appear[3] = true
         }
     }
 }

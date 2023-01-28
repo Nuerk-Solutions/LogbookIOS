@@ -32,7 +32,7 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            Color(hex: "17203A").ignoresSafeArea()
+            //Color(hex: "17203A").ignoresSafeArea()
             
             //            SideMenu()
             
@@ -97,7 +97,7 @@ struct ContentView: View {
                     .ignoresSafeArea(.all, edges: .top)
                     .offset(y: model.showAdd ? -10 : 0)
                     .zIndex(1)
-                    .transition(.move(edge: .top))
+                    .transition(.opacity.combined(with: .move(edge: .top)))
                     .frame(maxWidth: .infinity, minHeight: 600, maxHeight: .infinity)
                 //                Spacer()
             }
