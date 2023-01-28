@@ -14,7 +14,7 @@ struct LogbookAPI {
     static let shared = LogbookAPI()
     private init() {}
     
-    private let baseUrl = "http://192.168.200.184:3000/logbook"
+    private let baseUrl = "https://api.nuerk-solutions.de/logbook"
     private let session = ApiSession.logbookShared.session
     private let jsonDecoder: JSONDecoder = {
         let decoder = JSONDecoder()
