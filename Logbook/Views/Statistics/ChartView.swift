@@ -22,22 +22,22 @@ struct ChartView: View {
             VStack {
                 LineView(data: data1, title: "Ferrari", legend: "KM")
             }
-            .padding(.bottom, 200)
-//            VStack {
-//                LineView(data: data2, title: "VW", legend: "KM")
-//                    .padding(.bottom, 200)
-//            }
-//            VStack {
-//                LineView(data: data3, title: "Porsche", legend: "KM")
-//                    .padding(.bottom, 200)
-//            }
+            .padding(.bottom, 400)
+            VStack {
+                LineView(data: data2, title: "VW", legend: "KM")
+                    .padding(.bottom, 400)
+            }
+            VStack {
+                LineView(data: data3, title: "Porsche", legend: "KM")
+                    .padding(.bottom, 400)
+            }
         }
         .task {
             await chartModel.loadLogbooks()
             data1 = chartModel.allLogbooks.filter({ item in
                 item.vehicleTyp == .Ferrari
             }).reversed().map ({
-                return Double(Int($0.newMileAge) ?? 0)}).enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }
+                return Double(Int($0.newMileAge) ?? 0)}).enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }
             
             data2 = chartModel.allLogbooks.filter({ item in
                 item.vehicleTyp == .VW
@@ -47,9 +47,9 @@ struct ChartView: View {
             data3 = chartModel.allLogbooks.filter({ item in
                 item.vehicleTyp == .Porsche
             }).reversed().map ({
-                return Double(Int($0.newMileAge) ?? 0)}).enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }
+                return Double(Int($0.newMileAge) ?? 0)}).enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }
         }
-        .padding()
+        .padding(20)
     }
 }
 
