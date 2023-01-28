@@ -21,6 +21,7 @@ struct AddEntryView: View {
     @Binding var show: Bool
     @Binding var showTab: Bool
     @Binding var lastAddedEntry: Date
+    @State private var canSubmit = false
     
     @AppStorage("currentDriver") var currentDriver: DriverEnum = .Andrea
     @AppStorage("currentVehicle") var currentVehicle: VehicleEnum = .Ferrari
@@ -33,11 +34,6 @@ struct AddEntryView: View {
     
     let confetti = RiveViewModel(fileName: "confetti", stateMachineName: "State Machine 1")
     let check = RiveViewModel(fileName: "check", stateMachineName: "State Machine 1")
-    
-    var canSubmit: Bool {
-        newEntryVM.newLogbook.newMileAge != "" && newEntryVM.newLogbook.currentMileAge != "" && Int(newEntryVM.newLogbook.newMileAge) ?? 0 > Int(newEntryVM.newLogbook.currentMileAge) ?? 0 &&
-        !newEntryVM.newLogbook.driveReason.isEmpty
-    }
     
     var distance: Double {
         (Double(newEntryVM.newLogbook.newMileAge) ?? 0.0) - Double(newEntryVM.newLogbook.currentMileAge)!
@@ -63,6 +59,12 @@ struct AddEntryView: View {
             
             content
                 .offset(y: showModal ? -50 : 0)
+                .onChange(of: newEntryVM.newLogbook) { newValue in
+                    withAnimation(.spring()) {
+                        canSubmit = newValue.newMileAge != "" && newValue.currentMileAge != "" && Int(newValue.newMileAge) ?? 0 > Int(newValue.currentMileAge) ?? 0 &&
+                        !newValue.driveReason.isEmpty
+                    }
+                }
             
             if showModal {
                 AddAdditionalInfoView(newLogbook: $newEntryVM.newLogbook, show: $showModal)
@@ -149,6 +151,7 @@ struct AddEntryView: View {
                             .rotationEffect(Angle(degrees: -90))
                             .symbolRenderingMode(.hierarchical)
                     }
+                    .offset(x: -20)
                 }
             }
             
@@ -300,12 +303,13 @@ struct AddEntryView: View {
             if(canSubmit) {
                 Text("Zusammenfassung: \(String(format: "%.0fkm", distance)) / \(cost.formatted(.currency(code: "EUR").locale(Locale(identifier: "de-DE"))))")
                     .matchedGeometryEffect(id: "summaryText", in: namespace)
-                    .transition(.opacity)
+                    .transition(.identity)
+                    .lineLimit(1)
                     .frame(maxWidth: .infinity, alignment: .leading)
-            } else {
+            } else { 
                 Text("Bitte überprüfe deine Angaben!")
                     .matchedGeometryEffect(id: "summaryText", in: namespace)
-                    .transition(.opacity)
+                    .transition(.identity)
             }
             VStack {
                 Spacer()
@@ -323,6 +327,8 @@ struct AddEntryView: View {
                     }
                     .largeButton(disabled: !canSubmit)
                 }
+                .opacity(!canSubmit ? 0 : 1)
+                .transition(.identity)
                 .disabled(!canSubmit || isLoading)
                 //                Spacer()
             }
