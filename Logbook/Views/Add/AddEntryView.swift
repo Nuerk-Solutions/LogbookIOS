@@ -36,7 +36,7 @@ struct AddEntryView: View {
     let check = RiveViewModel(fileName: "check", stateMachineName: "State Machine 1")
     
     var distance: Double {
-        (Double(newEntryVM.newLogbook.newMileAge) ?? 0.0) - Double(newEntryVM.newLogbook.currentMileAge)!
+        (Double(newEntryVM.newLogbook.newMileAge) ?? 0.0) - (Double(newEntryVM.newLogbook.currentMileAge) ?? 0.0)
     }
     
     var cost: Double {
@@ -306,7 +306,7 @@ struct AddEntryView: View {
                     .transition(.identity)
                     .lineLimit(1)
                     .frame(maxWidth: .infinity, alignment: .leading)
-            } else { 
+            } else {
                 Text("Bitte überprüfe deine Angaben!")
                     .matchedGeometryEffect(id: "summaryText", in: namespace)
                     .transition(.identity)
@@ -440,6 +440,7 @@ struct AddEntryView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.1) {
                 withAnimation(.spring()) {
                     show = false
+                    showTab = true
                 }
             }
         }

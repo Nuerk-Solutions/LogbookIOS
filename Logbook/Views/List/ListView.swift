@@ -237,15 +237,15 @@ struct ListView: View {
                     .accessibilityAddTraits(.isButton)
                     .transition(.opacity)
                     .contextMenu {
-                        Button {
-                            print("Edited")
-                        } label: {
-                            Label {
-                                Text("Bearbeiten")
-                            } icon: {
-                                Image(systemName: "pencil")
-                            }
-                        }
+//                        Button {
+//                            print("Edited")
+//                        } label: {
+//                            Label {
+//                                Text("Bearbeiten")
+//                            } icon: {
+//                                Image(systemName: "pencil")
+//                            }
+//                        }
                         if entry == logbooks.first {
                             Button {
                                 Task {

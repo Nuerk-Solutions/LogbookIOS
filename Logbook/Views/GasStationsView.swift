@@ -91,7 +91,7 @@ struct GasStationsView: View {
                 }
         }
         .coordinateSpace(name: "scroll")
-        .overlay(NavigationBar(title: "Tankenstellen", contentHasScrolled: $contentHasScrolled).disabled(contentHasScrolled))
+        .overlay(NavigationBar(title: "Tankstellen", contentHasScrolled: $contentHasScrolled).disabled(contentHasScrolled))
         .overlay(overlayView)
         .overlay(pickerOverlay)
     }
