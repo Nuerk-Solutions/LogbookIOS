@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import CoreLocation
+import RealmSwift
 
 class Model: ObservableObject {
     @Published var showNav: Bool = true
@@ -17,7 +18,7 @@ class Model: ObservableObject {
     
     // Detail View
     @Published var showDetail: Bool = false
-    @Published var selectedEntry: UUID = UUID()
+    @Published var selectedEntry: ObjectId = ObjectId()
 }
 
 let homeCoordinates: CLLocation = CLLocation(latitude: 51.0365271, longitude: 13.6883357)

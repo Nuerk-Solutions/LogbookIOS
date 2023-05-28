@@ -28,12 +28,30 @@
       }
     },
     {
+      "identity" : "realm-core",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/realm/realm-core.git",
+      "state" : {
+        "revision" : "36b2df44453ba5e830369c76ab0683799a287605",
+        "version" : "13.13.0"
+      }
+    },
+    {
+      "identity" : "realm-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/realm/realm-swift.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "9ce8cf2c6cc1a7539e9feb1b5b85da6d20219ff5"
+      }
+    },
+    {
       "identity" : "rive-ios",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/rive-app/rive-ios",
       "state" : {
-        "revision" : "45c5adc897e928281ef6db3d90854bb8de2e01c5",
-        "version" : "3.0.1"
+        "revision" : "6f2ca664bee8519a91d8f3779057eba2bb684d78",
+        "version" : "3.0.5"
       }
     },
     {

@@ -10,11 +10,15 @@ import RiveRuntime
 import Introspect
 import UIKit
 import Combine
+import RealmSwift
 
 struct AddEntryView: View {
     
     let button = RiveViewModel(fileName: "button", autoPlay: false)
-    @StateObject var newEntryVM = NewEntryViewModel()
+    
+    @State private var newLogbook: logbook = logbook()
+    @ObservedResults(logbook.self, sortDescriptor: SortDescriptor(keyPath: "newMileAge", ascending: false)) var logbooks
+//    @EnvironmentObject var app: RealmSwift.App
     
     @State var showModal = false
     @State var isLoading = false
@@ -28,15 +32,13 @@ struct AddEntryView: View {
     @Preference(\.isLiteMode) var isLiteMode
     @Preference(\.isLiteModeBackground) var isLiteModeBackground
     
-    @EnvironmentObject var networkReachablility: NetworkReachability
-    
     @Namespace var namespace
     
     let confetti = RiveViewModel(fileName: "confetti", stateMachineName: "State Machine 1")
     let check = RiveViewModel(fileName: "check", stateMachineName: "State Machine 1")
     
     var distance: Double {
-        (Double(newEntryVM.newLogbook.newMileAge) ?? 0.0) - (Double(newEntryVM.newLogbook.currentMileAge) ?? 0.0)
+        (Double(newLogbook.newMileAge) ?? 0.0) - (Double(newLogbook.currentMileAge) ?? 0.0)
     }
     
     var cost: Double {
@@ -59,7 +61,12 @@ struct AddEntryView: View {
             
             content
                 .offset(y: showModal ? -50 : 0)
-                .onChange(of: newEntryVM.newLogbook) { newValue in
+                .task {
+                    let oldLogbook = getLogbookForVehicle(vehicle: newLogbook.vehicleTyp)
+                    newLogbook.currentMileAge = oldLogbook?.currentMileAge ?? "Laden..."
+                    newLogbook.driveReason = "Stadtfahrt"
+                }
+                .onChange(of: newLogbook) { newValue in
                     withAnimation(.spring()) {
                         canSubmit = newValue.newMileAge != "" && newValue.currentMileAge != "" && Int(newValue.newMileAge) ?? 0 > Int(newValue.currentMileAge) ?? 0 &&
                         !newValue.driveReason.isEmpty
@@ -67,7 +74,7 @@ struct AddEntryView: View {
                 }
             
             if showModal {
-                AddAdditionalInfoView(newLogbook: $newEntryVM.newLogbook, show: $showModal)
+                AddAdditionalInfoView(newLogbook: $newLogbook, show: $showModal)
                     .opacity(showModal ? 1 : 0)
                     .offset(y: showModal ? 0 : 300)
                     .overlay(
@@ -86,13 +93,13 @@ struct AddEntryView: View {
                                     .shadow(color: Color("Shadow").opacity(0.3), radius: 5, x: 0, y: 3)
                             }
                             Spacer()
-                            if newEntryVM.newLogbook.additionalInformationTyp != .Keine {
+                            if newLogbook.additionalInformationTyp != .Keine {
                                 Button {
                                     withAnimation(.spring()) {
                                         showModal.toggle()
-                                        newEntryVM.newLogbook.additionalInformationTyp = .Keine
-                                        newEntryVM.newLogbook.additionalInformation = ""
-                                        newEntryVM.newLogbook.additionalInformationCost = ""
+                                        newLogbook.additionalInformationTyp = .Keine
+                                        newLogbook.additionalInformation = ""
+                                        newLogbook.additionalInformationCost = ""
                                     }
                                 } label: {
                                     Image(systemName: "trash")
@@ -138,30 +145,15 @@ struct AddEntryView: View {
                 Text("Neuer Eintrag")
                     .font(.custom("Poppins Bold", size: 30))
                     .frame(width: 260, alignment: .leading)
-                if newEntryVM.fetchPhase == .fetchingNextPage(lastLogbooks) {
-                    ProgressView()
-                        .padding(.horizontal, 5)
-                } else {
-                    Button {
-                        setDefaults(connected: networkReachablility.connected)
-                    } label: {
-                        Image(systemName: "arrow.counterclockwise.circle")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .rotationEffect(Angle(degrees: -90))
-                            .symbolRenderingMode(.hierarchical)
-                    }
-                    .offset(x: -20)
-                }
             }
             
             
-            DatePicker("Datum", selection: $newEntryVM.newLogbook.date, in: (getLogbookForVehicle(vehicle: newEntryVM.newLogbook.vehicleTyp)?.date ?? Date())...Date())
+            DatePicker("Datum", selection: $newLogbook.date, in: (getLogbookForVehicle(vehicle: newLogbook.vehicleTyp)?.date ?? Date())...Date())
                 .customFont(.body)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             HStack {
-                Picker("", selection: $newEntryVM.newLogbook.vehicleTyp) {
+                Picker("", selection: $newLogbook.vehicleTyp) {
                     ForEach(VehicleEnum.allCases) { vehicle in
                         Text(vehicle.rawValue)
                             .tag(vehicle)
@@ -170,12 +162,12 @@ struct AddEntryView: View {
                 .pickerStyle(.segmented)
                 .customFont(.body)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .onChange(of: newEntryVM.newLogbook.vehicleTyp) { newValue in
+                .onChange(of: newLogbook.vehicleTyp) { newValue in
                     updateVehicleData(vehicle: newValue)
                 }
                 
                 Menu(content: {
-                    Picker(selection: $newEntryVM.newLogbook.driver) {
+                    Picker(selection: $newLogbook.driver) {
                         ForEach(DriverEnum.allCases) { driver in
                             Text(driver.rawValue)
                                 .tag(driver)
@@ -196,7 +188,7 @@ struct AddEntryView: View {
                     Text("Aktueller Kilometerstand")
                         .customFont(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField("", text: $newEntryVM.newLogbook.currentMileAge)
+                    TextField("", text: $newLogbook.currentMileAge)
                         .addDoneButtonOnKeyboard()
                         .customTextField(image: Image(systemName: "car.fill"), suffix: "km")
                         .keyboardType(.decimalPad)
@@ -206,7 +198,7 @@ struct AddEntryView: View {
                     Text("Neuer Kilometerstand")
                         .customFont(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField("", text: $newEntryVM.newLogbook.newMileAge)
+                    TextField("", text: $newLogbook.newMileAge)
                         .addDoneButtonOnKeyboard()
                         .customTextField(image: Image(systemName: "car.2.fill"), suffix: "km")
                         .keyboardType(.decimalPad)
@@ -216,7 +208,7 @@ struct AddEntryView: View {
                     Text("Reiseziel")
                         .customFont(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField("", text: $newEntryVM.newLogbook.driveReason)
+                    TextField("", text: $newLogbook.driveReason)
                         .addDoneButtonOnKeyboard()
                         .customTextField(image: Image(systemName: "scope"))
                         .introspectTextField(customize: {
@@ -227,15 +219,15 @@ struct AddEntryView: View {
             
             
             HStack {
-                Image(systemName: newEntryVM.newLogbook.forFreeBool ? "checkmark.square.fill" : "x.square.fill")
+                Image(systemName: newLogbook.forFree ?? false ? "checkmark.square.fill" : "x.square.fill")
                     .resizable()
                     .frame(width: 26, height: 26)
                     .cornerRadius(10)
                     .padding(8)
                     .background(.ultraThinMaterial)
                     .backgroundStyle(cornerRadius: 18, opacity: 0.4)
-                    .foregroundColor(newEntryVM.newLogbook.forFreeBool ? .green : .red)
-                Text(newEntryVM.newLogbook.forFreeBool ? "Die Fahrt wird übernommen" : "Die Fahrt wird nicht übernommen.")
+                    .foregroundColor(newLogbook.forFree ?? false ? .green : .red)
+                Text(newLogbook.forFree ?? false ? "Die Fahrt wird übernommen" : "Die Fahrt wird nicht übernommen.")
                     .font(.footnote.weight(.medium))
                     .padding(6)
                 //                    .foregroundStyle(.secondary)
@@ -245,7 +237,7 @@ struct AddEntryView: View {
             }
             .onTapGesture {
                 withAnimation {
-                    newEntryVM.newLogbook.forFree?.toggle()
+                    newLogbook.forFree?.toggle()
                 }
             }
             .accessibilityElement(children: .combine)
@@ -258,10 +250,10 @@ struct AddEntryView: View {
                         }
                     }
                 } label: {
-                    Image(systemName: newEntryVM.newLogbook.additionalInformationTyp == .Keine ? "link.badge.plus" : "link")
+                    Image(systemName: newLogbook.additionalInformationTyp == .Keine ? "link.badge.plus" : "link")
                         .resizable()
                         .frame(width: 26, height: 26)
-                        .symbolRenderingMode(newEntryVM.newLogbook.additionalInformationTyp == .Keine ? .multicolor : .hierarchical)
+                        .symbolRenderingMode(newLogbook.additionalInformationTyp == .Keine ? .multicolor : .hierarchical)
                         .foregroundColor(.primary)
                         .cornerRadius(10)
                         .padding(8)
@@ -269,7 +261,7 @@ struct AddEntryView: View {
                         .backgroundStyle(cornerRadius: 18, opacity: 0.4)
                 }
                 
-                if newEntryVM.newLogbook.additionalInformationTyp == .Keine {
+                if newLogbook.additionalInformationTyp == .Keine {
                     Text("Zusätzliche Information hinzufügen")
                         .font(.footnote.weight(.medium))
                         .padding(6)
@@ -367,93 +359,37 @@ struct AddEntryView: View {
                     .allowsHitTesting(false)
             }
         )
-        //        .padding()
-        .task {
-            setDefaults(connected: networkReachablility.connected)
-        }
-        .onReceive(networkReachablility.$connected) { newValue in
-            if !networkReachablility.connected && newValue {
-                setDefaults(connected: newValue)
-            }
-        }
-        .onReceive(newEntryVM.$fetchPhase) { newValue in
-            DispatchQueue.main.async {
-                updateVehicleData(vehicle: currentVehicle)
-            }
-        }
         
-        //        .onChange(of: newEntryVM.phase.value ?? [], perform: { newValue in
+        //        .onChange(of: phase.value ?? [], perform: { newValue in
         //
-        //            newEntryVM.newLogbook.currentMileAge = newValue[0].currentMileAge
+        //            newLogbook.currentMileAge = newValue[0].currentMileAge
         //        })
         //        .fixedSize(horizontal: false, vertical: true)
     }
     
-    private func setDefaults(connected: Bool) {
-        Task {
-            await newEntryVM.load(connected: connected)
-            updateVehicleData(vehicle: currentVehicle)
-            newEntryVM.newLogbook.vehicleTyp = currentVehicle
-            newEntryVM.newLogbook.driver = currentDriver
-        }
-    }
+
     
-    private var lastLogbooks: [LogbookEntry] {
-        switch newEntryVM.fetchPhase {
-        case let .success(lastLogbooks):
-            return lastLogbooks
-        case let .fetchingNextPage(lastLogbooks):
-            return lastLogbooks
-        default:
-            return newEntryVM.fetchPhase.value ?? []
-        }
-    }
-    
-    private func getLogbookForVehicle(vehicle: VehicleEnum) -> LogbookEntry? {
-        lastLogbooks.first { entry in
-            entry.vehicleTyp == vehicle
-        }
+    private func getLogbookForVehicle(vehicle: VehicleEnum) -> logbook? {
+        let groupedEntries = Dictionary(grouping: logbooks, by: {$0.vehicleTyp})
+        print(groupedEntries[vehicle])
+        return groupedEntries[vehicle]?[0]
+        
+//        logbooks.first { entry in
+//            entry.vehicleTyp == vehicle
+//        }
     }
     
     private func updateVehicleData(vehicle newValue: VehicleEnum) {
         currentVehicle = newValue
-        newEntryVM.newLogbook.currentMileAge = getLogbookForVehicle(vehicle: newValue)?.newMileAge ?? "Laden..."
+        newLogbook.currentMileAge = getLogbookForVehicle(vehicle: newValue)?.newMileAge ?? "Laden..."
         // MARK: - Set above the cache value
     }
     
     
     func playSaveAnimation() {
-        withAnimation(.spring()) {
-            isLoading = true
-        }
-        
-        if canSubmit {
-            Task {
-                await newEntryVM.send(connected: networkReachablility.connected)
-                lastAddedEntry = Date()
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
-                withAnimation(.spring()) {
-                    isLoading = false
-                }
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.1) {
-                withAnimation(.spring()) {
-                    show = false
-                    showTab = true
-                }
-            }
-        }
+//        $logbooks.append(logbook())
     }
     
-}
-
-struct NewAddView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddEntryView(show: .constant(true), showTab: .constant(false), lastAddedEntry: .constant(Date()))
-            .preferredColorScheme(.light)
-            .environmentObject(NetworkReachability())
-    }
 }
 
 public extension TextField

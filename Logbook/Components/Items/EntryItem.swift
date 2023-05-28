@@ -7,11 +7,12 @@
 
 import SwiftUI
 import SwiftUI_Extensions
+import RealmSwift
 
 struct EntryItem: View {
     
     var namespace: Namespace.ID
-    var entry: LogbookEntry
+    @ObservedRealmObject var entry: logbook
     
     @EnvironmentObject var model: Model
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
@@ -89,21 +90,8 @@ struct EntryItem: View {
         .onTapGesture {
             withAnimation(.openCard) {
                 model.showDetail = true
-                model.selectedEntry = entry.id
+                model.selectedEntry = entry._id
             }
         }
-    }
-}
-
-struct EntryItem_Previews: PreviewProvider {
-    @Namespace static var namespace
-    
-    static var previews: some View {
-//        EntryItem(namespace: namespace, entry: LogbookEntry.previewData[1])
-//            .environmentObject(Model())
-////                        .frame(height: 100)
-                ListView(logbooks: LogbookEntry.previewData, showAdd: .constant(false), lastRefreshDate: .constant(Date()))
-        .environmentObject(Model())
-        .environmentObject(NetworkReachability())
     }
 }

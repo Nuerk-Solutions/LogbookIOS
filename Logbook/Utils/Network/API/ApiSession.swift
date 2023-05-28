@@ -10,7 +10,6 @@ import Alamofire
 
 class ApiSession {
     
-    static let logbookShared = ApiSession(requestAdapter: LogbookSessionAdapter())
     static let gasStationShared = ApiSession(requestAdapter: GasStationSessionAdapter())
     
     let session: Session
@@ -21,15 +20,6 @@ class ApiSession {
         session.sessionConfiguration.timeoutIntervalForRequest = 15
     }
     
-}
-
-class LogbookSessionAdapter: RequestAdapter {
-    
-    func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
-        var urlRequest = urlRequest
-        urlRequest.headers.add(.authorization("Api-Key ca03na188ame03u1d78620de67282882a84"))
-        completion(.success(urlRequest))
-    }
 }
 
 class GasStationSessionAdapter: RequestAdapter {

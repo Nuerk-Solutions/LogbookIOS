@@ -7,56 +7,71 @@
 
 import SwiftUI
 import LocalConsole
+import RealmSwift
 
 struct ContentView: View {
     
+    @ObservedObject var app: RealmSwift.App
+    @EnvironmentObject var errorHandler: ErrorHandler
+    
+    
     @EnvironmentObject var model: Model
-    @EnvironmentObject var networkReachablility: NetworkReachability
     @AppStorage("selectedTab") var selectedTab: Tab = .home
     @AppStorage("showAccount") var showAccount = false
     
     @State private var scrollPositionInList = 0.0
     
     @State var isOpen = false
-    @State var lastRefreshDate: Date? = nil
-    
-    private static let isPreview = false
-    
     
     @Preference(\.isOpenAddViewOnStart) var isOpenAddViewOnStart
     
-    let consoleManager = LCManager.shared
-    init() {
-        showAccount = false
-    }
-    
     var body: some View {
         ZStack {
+            
             //Color(hex: "17203A").ignoresSafeArea()
             
             //            SideMenu()
             
-                        Group {
-            switch selectedTab {
-            case .home:
-                ListView(showAdd: $model.showTab, lastRefreshDate: $lastRefreshDate)
-                    .environmentObject(model)
-                    .environmentObject(networkReachablility)
-            case .gasStations:
-                if ContentView.isPreview {
-                    GasStationsView(gasStations: GasStationWelcome.previewData.data.tankstellen)
+//                        Group {
+//            switch selectedTab {
+//            case .home:
+//                EmptyView()
+                if let user = app.currentUser {
+
+                let config = user.flexibleSyncConfiguration(initialSubscriptions: { subs in
+                    subs.append(QuerySubscription<logbook>(name: "all_items"))
+                })
+                    ListView()
+                        .environmentObject(model)
+                        .environment(\.realmConfiguration, config)
                 } else {
-                    GasStationsView()
+                    LoginView()
                 }
-            case .invoice:
-                ChartView()
-            case .settings:
-                SettingsView()
-            }
-                        }
-                        .safeAreaInset(edge: .bottom) {
-                            VStack {}.frame(height: model.showTab ? 44 : 0)
-                        }
+//            case .gasStations:
+////                EmptyView()
+//                if ContentView.isPreview {
+//                    GasStationsView(gasStations: GasStationWelcome.previewData.data.tankstellen)
+//                } else {
+//                    GasStationsView()
+//                }
+//            case .invoice:
+//                if let user = app.currentUser {
+//
+//                let config = user.flexibleSyncConfiguration(initialSubscriptions: { subs in
+//                    subs.append(QuerySubscription<logbook>(name: "all_items"))
+//                })
+//                MongoPreTest()
+//                    .environment(\.realmConfiguration, config)
+//                } else {
+//                    LoginView()
+//                }
+//            case .settings:
+//                SettingsView()
+//            }
+//                        }
+//                        .safeAreaInset(edge: .bottom) {
+//                            VStack {}.frame(height: model.showTab ? 44 : 0)
+//                        }
             
             
             TabBar()
@@ -116,15 +131,5 @@ struct ContentView: View {
             }
             //            isInitalLoad.toggle()
         }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-            .environmentObject(Model())
-            .environmentObject(NetworkReachability())
-            .preferredColorScheme(.dark)
-        //            .previewInterfaceOrientation(.landscapeRight)
     }
 }

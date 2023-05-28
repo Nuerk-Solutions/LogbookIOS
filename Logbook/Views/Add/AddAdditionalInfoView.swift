@@ -9,7 +9,7 @@ import RiveRuntime
 import Combine
 
 struct AddAdditionalInfoView: View {
-    @Binding var newLogbook: LogbookEntry
+    @Binding var newLogbook: logbook
     @State private var isLoading = false
     @State private var showFuelField = true
     @State private var changeTitle = true
@@ -167,6 +167,6 @@ struct AddAdditionalInfoView: View {
 
 struct AddAdditionalInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        AddAdditionalInfoView(newLogbook: .constant(LogbookEntry()), show: .constant(true))
+        AddAdditionalInfoView(newLogbook: .constant(logbook()), show: .constant(true))
     }
 }
