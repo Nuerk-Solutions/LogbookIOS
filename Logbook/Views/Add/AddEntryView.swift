@@ -201,6 +201,8 @@ struct AddEntryView: View {
                         .customTextField(image: Image(systemName: "car.fill"), suffix: "km")
                         .keyboardType(.decimalPad)
                         .submitLabel(.done)
+                        .opacity(0.4)
+                        .disabled(true)
                 }
                 VStack(alignment: .leading, spacing: 3) {
                     Text("Neuer Kilometerstand")
