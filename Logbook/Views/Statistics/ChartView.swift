@@ -10,46 +10,49 @@ import SwiftUICharts
 
 struct ChartView: View {
     
-    
-    var demoData: [Double] = [8, 10, 50, 20, 2, 4, 6, 12, 9, 2]
     @StateObject private var chartModel = ChartViewModel()
-    @State private var data1: [Double] = []
-    @State private var data2: [Double] = []
-    @State private var data3: [Double] = []
-//        .enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }
+    @State private var data: [Double] = []
+    @State private var newData: [(String, Double)] = []
+    @State private var selectedCar: VehicleEnum = .Ferrari
     var body: some View {
-        ScrollView {
-            VStack {
-                LineView(data: data1, title: "Ferrari", legend: "KM")
+        VStack {
+//            GroupBox {
+//                DisclosureGroup("Menu 1") {
+//                    Text("Item 1")
+//                    Text("Item 2")
+//                    Text("Item 3")
+//                }
+//            }
+            Picker(selection: $selectedCar) {
+                ForEach(VehicleEnum.allCases) { vehicle in
+                    Text(vehicle.rawValue)
+                        .tag(vehicle)
+                }
+            } label: {
+                Text("Fahrzeug")
             }
-            .padding(.bottom, 400)
-            VStack {
-                LineView(data: data2, title: "VW", legend: "KM")
-                    .padding(.bottom, 400)
+            .pickerStyle(.segmented)
+            .padding(15)
+            .onChange(of: selectedCar) { newValue in
+                newData = chartModel.allLogbooks.filter({ item in
+                    item.vehicleTyp == selectedCar && item.additionalInformationTyp == .Getankt
+                }).reversed().map ({item in
+                    let distance = item.distanceSinceLastAdditionalInformation
+                    return ("\(distance)", Double(distance) ?? 0)
+                })
             }
-            VStack {
-                LineView(data: data3, title: "Porsche", legend: "KM")
-                    .padding(.bottom, 400)
-            }
+
+            BarChartView(data: ChartData(values: newData), title: "Entfernung seit Aktion", legend: "Datum", form: ChartForm.extraLarge, dropShadow: true, animatedToBack: true)
         }
-        .task {
-            await chartModel.loadLogbooks()
-            data1 = chartModel.allLogbooks.filter({ item in
-                item.vehicleTyp == .Ferrari
-            }).reversed().map ({
-                return Double(Int($0.newMileAge) ?? 0)}).enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }
-            
-            data2 = chartModel.allLogbooks.filter({ item in
-                item.vehicleTyp == .VW
-            }).reversed().map ({
-                return Double(Int($0.newMileAge) ?? 0)}).enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }
-            
-            data3 = chartModel.allLogbooks.filter({ item in
-                item.vehicleTyp == .Porsche
-            }).reversed().map ({
-                return Double(Int($0.newMileAge) ?? 0)}).enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }.enumerated().compactMap { index, element in index % 3 == 2 ? nil : element }
-        }
-        .padding(20)
+            .task {
+                await chartModel.loadLogbooks()
+                newData = chartModel.allLogbooks.filter({ item in
+                    item.vehicleTyp == selectedCar && item.additionalInformationTyp == .Getankt
+                }).reversed().map ({item in
+                    let distance = item.distanceSinceLastAdditionalInformation
+                    return ("\(distance)", Double(distance) ?? 0)
+                })
+            }
     }
 }
 
