@@ -337,7 +337,7 @@ struct EntryView: View {
                 Text("Kosten")
                     .font(.subheadline.weight(.medium))
                     .foregroundStyle(.secondary)
-                Text("\((Double(entry.additionalInformationCost)?.formatted(.currency(code: "EUR").locale(Locale(identifier: "de-DE"))))!)")
+                Text("\((Double(entry.additionalInformationCost)?.formatted(.currency(code: "EUR").locale(Locale(identifier: "de-DE")))) ?? "Fehler")")
                     .fontWeight(.semibold)
             }
             .padding(20)
