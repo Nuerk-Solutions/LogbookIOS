@@ -6,7 +6,7 @@
       "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
         "branch" : "master",
-        "revision" : "51d67100121d586c9d15ec0227de96442af4dd6d"
+        "revision" : "4abb04eb7aa7c73ea22ca8d02567fb652a7ad629"
       }
     },
     {
@@ -24,7 +24,7 @@
       "location" : "https://github.com/duraidabdul/LocalConsole/",
       "state" : {
         "branch" : "main",
-        "revision" : "80e0aa6168d55407c87e403931957d4eaea41f8a"
+        "revision" : "2c5d5e018acd4963fe6dfe858f6d6fecef7cbf2f"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/rive-app/rive-ios",
       "state" : {
-        "revision" : "45c5adc897e928281ef6db3d90854bb8de2e01c5",
-        "version" : "3.0.1"
+        "revision" : "6f2ca664bee8519a91d8f3779057eba2bb684d78",
+        "version" : "3.0.5"
       }
     },
     {
@@ -42,7 +42,7 @@
       "location" : "https://github.com/malcommac/SwiftDate.git",
       "state" : {
         "branch" : "master",
-        "revision" : "6190d0cefff3013e77ed567e6b074f324e5c5bf5"
+        "revision" : "5d943224c3bb173e6ecf27295611615eba90c80e"
       }
     },
     {
@@ -69,7 +69,7 @@
       "location" : "https://github.com/siteline/SwiftUI-Introspect.git",
       "state" : {
         "branch" : "master",
-        "revision" : "7ef0df639079491ee1aaf6b83b6fd4d08df80393"
+        "revision" : "ccb973cfff703cba53fb88197413485c060eb26b"
       }
     },
     {

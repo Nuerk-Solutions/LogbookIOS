@@ -74,7 +74,7 @@ struct GasStationRow: View {
                     PriceView(price: station.preis)
                     let timeSortDate = station.timeSort.toDate("HH:mm:ss")
                     let mergedDate = station.datum.dateBySet(hour: timeSortDate?.hour, min: timeSortDate?.minute, secs: timeSortDate?.second)?.date
-                    let timeString = mergedDate!.toRelative(since: DateInRegion(), style: RelativeFormatter.defaultStyle(), locale: Locales.german)
+                    let timeString = mergedDate!.toRelative(since: DateInRegion(), dateTimeStyle: .named, unitsStyle: .short)
                     
                     Text("\(timeString)")
                         .font(.caption.weight(.medium))

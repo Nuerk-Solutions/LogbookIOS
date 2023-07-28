@@ -1016,7 +1016,7 @@
 			repositoryURL = "https://github.com/AppPear/ChartView";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.5.2;
+				minimumVersion = 1.5.5;
 			};
 		};
 		E95862B7287B0D990017F2BA /* XCRemoteSwiftPackageReference "SwiftLocationWHeading" */ = {
