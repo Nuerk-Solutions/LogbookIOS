@@ -35,8 +35,12 @@ struct AddEntryView: View {
     let confetti = RiveViewModel(fileName: "confetti", stateMachineName: "State Machine 1")
     let check = RiveViewModel(fileName: "check", stateMachineName: "State Machine 1")
     
+    var distanceSubtraction: Double {
+            (Double(newEntryVM.newLogbook.newMileAge) ?? 0.0) - (Double(newEntryVM.newLogbook.currentMileAge) ?? 0.0)
+    }
+    
     var distance: Double {
-        (Double(newEntryVM.newLogbook.newMileAge) ?? 0.0) - (Double(newEntryVM.newLogbook.currentMileAge) ?? 0.0)
+        newEntryVM.newLogbook.vehicleTyp == .MX5 ? distanceSubtraction * 1.60934 : distanceSubtraction
     }
     
     var cost: Double {
@@ -163,11 +167,16 @@ struct AddEntryView: View {
             HStack {
                 Picker("", selection: $newEntryVM.newLogbook.vehicleTyp) {
                     ForEach(VehicleEnum.allCases) { vehicle in
-                        Text(vehicle.rawValue)
-                            .tag(vehicle)
+                            if(vehicle == .MX5 || vehicle == .DS) {
+                                Text(vehicle.rawValue)
+                                    .tag(vehicle)
+                            } else {
+                                Image("\(getVehicleIcon(vehicleTyp: vehicle))_32")
+                                    .tag(vehicle)
+                            }
                     }
                 }
-                .pickerStyle(.segmented)
+                .pickerStyle(SegmentedPickerStyle())
                 .customFont(.body)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .onChange(of: newEntryVM.newLogbook.vehicleTyp) { newValue in
@@ -193,24 +202,24 @@ struct AddEntryView: View {
             
             VStack(spacing: 8) {
                 VStack(alignment: .leading, spacing: 3) {
-                    Text("Aktueller Kilometerstand")
+                    Text(newEntryVM.newLogbook.vehicleTyp == .MX5 ? "Aktueller Meilenstand" : "Aktueller Kilometerstand")
                         .customFont(.subheadline)
                         .foregroundColor(.secondary)
                     TextField("", text: $newEntryVM.newLogbook.currentMileAge)
                         .addDoneButtonOnKeyboard()
-                        .customTextField(image: Image(systemName: "car.fill"), suffix: "km")
+                        .customTextField(image: Image(systemName: "car.fill"), suffix: newEntryVM.newLogbook.vehicleTyp == .MX5 ? "mi" : "km")
                         .keyboardType(.decimalPad)
                         .submitLabel(.done)
                         .opacity(0.4)
                         .disabled(true)
                 }
                 VStack(alignment: .leading, spacing: 3) {
-                    Text("Neuer Kilometerstand")
+                    Text(newEntryVM.newLogbook.vehicleTyp == .MX5 ? "Neuer Meilenstand" : "Neuer Kilometerstand")
                         .customFont(.subheadline)
                         .foregroundColor(.secondary)
                     TextField("", text: $newEntryVM.newLogbook.newMileAge)
                         .addDoneButtonOnKeyboard()
-                        .customTextField(image: Image(systemName: "car.2.fill"), suffix: "km")
+                        .customTextField(image: Image(systemName: "car.2.fill"), suffix: newEntryVM.newLogbook.vehicleTyp == .MX5 ? "mi" : "km")
                         .keyboardType(.decimalPad)
                         .submitLabel(.done)
                 }

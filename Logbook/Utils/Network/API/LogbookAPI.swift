@@ -104,6 +104,9 @@ struct LogbookAPI {
             queryItems.append(URLQueryItem(name: "page", value: String(requestParameters.page!)))
             queryItems.append(URLQueryItem(name: "limit", value: String(requestParameters.limit!)))
         }
+        if requestParameters.startDate != nil {
+            queryItems.append(URLQueryItem(name: "startDate", value: requestParameters.startDate!))
+        }
         var components = URLComponents(string: baseUrl)
         // Need to be set here beacuse override it
         components?.path = "/logbook/find/all"
@@ -117,4 +120,5 @@ struct LogbookRequestParameters {
 //    var sort: String = "-date"
     var page: Int?
     var limit: Int?
+    var startDate: String? = "2018-01-01"
 }

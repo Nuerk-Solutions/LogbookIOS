@@ -83,26 +83,28 @@ enum VehicleEnum: String, CaseIterable, Identifiable, Codable, Equatable {
     case Ferrari
     case VW
     case Porsche
+    case MX5
+    case DS
     
     var fuelTyp: FuelTyp {
         switch self {
-        case .Ferrari:
+        case .Ferrari, .MX5:
             return .SUPER
         case .VW:
             return .DIESEL
-        case .Porsche:
+        case .Porsche, .DS:
             return .SUPER_E10
         }
     }
     
     var fuelDescription: String {
         switch self {
-        case .Ferrari:
-            return "In den Ferrari wird nur e5 oder Super getankt."
+        case .Ferrari, .MX5:
+            return "In den \(self.id) wird nur Super E5 getankt."
         case .VW:
             return "In den VW wird nur Diesel getankt."
-        case .Porsche:
-            return "In den Porsche wird nur Super+ getankt."
+        case .Porsche, .DS:
+            return "In den \(self.id) wird nur Super+ E5 getankt."
         }
     }
     
@@ -125,6 +127,10 @@ func getVehicleIcon(vehicleTyp: VehicleEnum) -> String {
         return "Porsche"
     case .VW:
         return "VW"
+    case .DS:
+        return "Topic 2"
+    case .MX5:
+        return "Topic 2"
     }
 }
 
@@ -136,6 +142,8 @@ func getVehicleBackground(vehicleTyp: VehicleEnum) -> String {
         return "Background 8"
     case .VW:
         return "Background 5"
+    case .DS, .MX5:
+        return "Background 10"
     }
 }
 
