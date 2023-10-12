@@ -6,7 +6,7 @@
       "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
         "branch" : "master",
-        "revision" : "4abb04eb7aa7c73ea22ca8d02567fb652a7ad629"
+        "revision" : "7f1bff79126ab8fe17744e062723179b36e17f97"
       }
     },
     {
@@ -68,8 +68,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/siteline/SwiftUI-Introspect.git",
       "state" : {
-        "branch" : "master",
-        "revision" : "ccb973cfff703cba53fb88197413485c060eb26b"
+        "revision" : "b9f6bc32772d61cc76ec4b206df0840a3b7c96f4",
+        "version" : "0.3.0"
       }
     },
     {
