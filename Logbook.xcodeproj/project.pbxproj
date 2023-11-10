@@ -42,14 +42,11 @@
 		E920B604285648F600683D67 /* PreferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E920B603285648F600683D67 /* PreferenceManager.swift */; };
 		E920B6062856494500683D67 /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = E920B6052856494500683D67 /* Preference.swift */; };
 		E92F54BB287DDE76008A72AF /* GasStationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F54BA287DDE76008A72AF /* GasStationAPI.swift */; };
-		E93277092A22201000D1188F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = E93277082A22201000D1188F /* Realm */; };
-		E932770B2A22201000D1188F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E932770A2A22201000D1188F /* RealmSwift */; };
 		E93277162A22215000D1188F /* logbookMongo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93277152A22215000D1188F /* logbookMongo.swift */; };
 		E93277192A22248100D1188F /* MongoPreTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93277172A22248100D1188F /* MongoPreTest.swift */; };
 		E932771A2A22248100D1188F /* MongoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93277182A22248100D1188F /* MongoTest.swift */; };
 		E932771C2A22249A00D1188F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E932771B2A22249A00D1188F /* LoginView.swift */; };
 		E932771F2A2224C600D1188F /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = E932771D2A2224C600D1188F /* AppConfig.swift */; };
-		E93277202A2224C600D1188F /* atlasConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = E932771E2A2224C600D1188F /* atlasConfig.plist */; };
 		E93277222A22267200D1188F /* EntryConver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93277212A22267200D1188F /* EntryConver.swift */; };
 		E93872A128638D800009F0F1 /* GasStationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93872A028638D800009F0F1 /* GasStationRow.swift */; };
 		E93872AB286394670009F0F1 /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = E93872AA286394670009F0F1 /* SwiftDate */; };
@@ -79,7 +76,6 @@
 		E95D87C528A046380078EA7C /* VW@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E95D87C028A046370078EA7C /* VW@3x.png */; };
 		E95D87C628A046380078EA7C /* Porsche@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E95D87C128A046370078EA7C /* Porsche@2x.png */; };
 		E95D87C728A046380078EA7C /* Porsche@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E95D87C228A046370078EA7C /* Porsche@3x.png */; };
-		E95D87C828A046380078EA7C /* Porsche@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = E95D87C328A046370078EA7C /* Porsche@1x.png */; };
 		E95D87C928A046380078EA7C /* VW@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E95D87C428A046380078EA7C /* VW@2x.png */; };
 		E96259BC284F5127007D9479 /* ScrollRefreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96259BB284F5127007D9479 /* ScrollRefreshable.swift */; };
 		E962E5C6285E3D8600F6B4D6 /* SectionIconRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E962E5C5285E3D8600F6B4D6 /* SectionIconRow.swift */; };
@@ -92,8 +88,10 @@
 		E9715409289D73F200889084 /* DataSendPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9715408289D73F200889084 /* DataSendPhase.swift */; };
 		E97B08BF292A83BD001EDA1A /* SwiftUICollectionView in Frameworks */ = {isa = PBXBuildFile; productRef = E97B08BE292A83BD001EDA1A /* SwiftUICollectionView */; };
 		E97B08C4292A946A001EDA1A /* LocalConsole in Frameworks */ = {isa = PBXBuildFile; productRef = E97B08C3292A946A001EDA1A /* LocalConsole */; };
+		E98BA40F2AFE9D7D00D1DFF3 /* atlasConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = E98BA40E2AFE9D7D00D1DFF3 /* atlasConfig.plist */; };
+		E98BA4122AFE9EB600D1DFF3 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = E98BA4112AFE9EB600D1DFF3 /* Realm */; };
+		E98BA4142AFE9EB600D1DFF3 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E98BA4132AFE9EB600D1DFF3 /* RealmSwift */; };
 		E9969E412899971C008A92A2 /* checkmark_icon.riv in Resources */ = {isa = PBXBuildFile; fileRef = E9969E402899971C008A92A2 /* checkmark_icon.riv */; };
-		E99E2403289C2AE0005A79AB /* button.riv in Resources */ = {isa = PBXBuildFile; fileRef = E99E2402289C2AE0005A79AB /* button.riv */; };
 		E99E240E289C350E005A79AB /* 340-656-like-button.riv in Resources */ = {isa = PBXBuildFile; fileRef = E99E240D289C350E005A79AB /* 340-656-like-button.riv */; };
 		E9A784F2289DAE08002AC225 /* ContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A784F1289DAE08002AC225 /* ContextMenu.swift */; };
 		E9AACA352853AC23005F30FE /* Pagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AACA342853AC23005F30FE /* Pagination.swift */; };
@@ -151,7 +149,6 @@
 		E93277182A22248100D1188F /* MongoTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MongoTest.swift; sourceTree = "<group>"; };
 		E932771B2A22249A00D1188F /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		E932771D2A2224C600D1188F /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
-		E932771E2A2224C600D1188F /* atlasConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = atlasConfig.plist; sourceTree = "<group>"; };
 		E93277212A22267200D1188F /* EntryConver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryConver.swift; sourceTree = "<group>"; };
 		E93872A028638D800009F0F1 /* GasStationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasStationRow.swift; sourceTree = "<group>"; };
 		E940E8BD28426E50009F1225 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
@@ -178,7 +175,6 @@
 		E95D87C028A046370078EA7C /* VW@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "VW@3x.png"; sourceTree = "<group>"; };
 		E95D87C128A046370078EA7C /* Porsche@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Porsche@2x.png"; sourceTree = "<group>"; };
 		E95D87C228A046370078EA7C /* Porsche@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Porsche@3x.png"; sourceTree = "<group>"; };
-		E95D87C328A046370078EA7C /* Porsche@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Porsche@1x.png"; path = "../../../../../Icons For Testing/Porsche@1x.png"; sourceTree = "<group>"; };
 		E95D87C428A046380078EA7C /* VW@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "VW@2x.png"; sourceTree = "<group>"; };
 		E96259BB284F5127007D9479 /* ScrollRefreshable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollRefreshable.swift; sourceTree = "<group>"; };
 		E962E5C5285E3D8600F6B4D6 /* SectionIconRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionIconRow.swift; sourceTree = "<group>"; };
@@ -188,8 +184,8 @@
 		E962E5D1285E5E4000F6B4D6 /* PriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceView.swift; sourceTree = "<group>"; };
 		E969B0C32892D57500E22690 /* AddEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEntryView.swift; sourceTree = "<group>"; };
 		E9715408289D73F200889084 /* DataSendPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSendPhase.swift; sourceTree = "<group>"; };
+		E98BA40E2AFE9D7D00D1DFF3 /* atlasConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = atlasConfig.plist; sourceTree = "<group>"; };
 		E9969E402899971C008A92A2 /* checkmark_icon.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = checkmark_icon.riv; sourceTree = "<group>"; };
-		E99E2402289C2AE0005A79AB /* button.riv */ = {isa = PBXFileReference; lastKnownFileType = file; name = button.riv; path = ../../../../../../Downloads/button.riv; sourceTree = "<group>"; };
 		E99E240D289C350E005A79AB /* 340-656-like-button.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = "340-656-like-button.riv"; sourceTree = "<group>"; };
 		E9A784F1289DAE08002AC225 /* ContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenu.swift; sourceTree = "<group>"; };
 		E9AACA342853AC23005F30FE /* Pagination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pagination.swift; sourceTree = "<group>"; };
@@ -214,11 +210,11 @@
 				E94F710728CB8B35003FCF2B /* SwiftUICharts in Frameworks */,
 				E9F1E72F2895137D0045A41B /* Introspect in Frameworks */,
 				E95862B9287B0D990017F2BA /* SwiftLocation in Frameworks */,
-				E93277092A22201000D1188F /* Realm in Frameworks */,
+				E98BA4122AFE9EB600D1DFF3 /* Realm in Frameworks */,
 				E91AFA23283FD0D60024131D /* Alamofire in Frameworks */,
 				E91AFA39283FE8B10024131D /* SwiftUI Extensions in Frameworks */,
 				E93872AB286394670009F0F1 /* SwiftDate in Frameworks */,
-				E932770B2A22201000D1188F /* RealmSwift in Frameworks */,
+				E98BA4142AFE9EB600D1DFF3 /* RealmSwift in Frameworks */,
 				E97B08C4292A946A001EDA1A /* LocalConsole in Frameworks */,
 				E97B08BF292A83BD001EDA1A /* SwiftUICollectionView in Frameworks */,
 			);
@@ -231,7 +227,6 @@
 			isa = PBXGroup;
 			children = (
 				E99E240D289C350E005A79AB /* 340-656-like-button.riv */,
-				E99E2402289C2AE0005A79AB /* button.riv */,
 				E9969E402899971C008A92A2 /* checkmark_icon.riv */,
 				E9D2BB182843F450009EC7C5 /* icons.riv */,
 				E91095B228412CB500C1334E /* check.riv */,
@@ -284,7 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				E932771D2A2224C600D1188F /* AppConfig.swift */,
-				E932771E2A2224C600D1188F /* atlasConfig.plist */,
+				E98BA40E2AFE9D7D00D1DFF3 /* atlasConfig.plist */,
 				E91095C428412D8D00C1334E /* Info.plist */,
 				E91AFA10283FD09F0024131D /* ContentView.swift */,
 				E91AFA0E283FD09F0024131D /* LogbookApp.swift */,
@@ -442,7 +437,6 @@
 		E95D87AB28A03B2D0078EA7C /* Icons */ = {
 			isa = PBXGroup;
 			children = (
-				E95D87C328A046370078EA7C /* Porsche@1x.png */,
 				E95D87C128A046370078EA7C /* Porsche@2x.png */,
 				E95D87C228A046370078EA7C /* Porsche@3x.png */,
 				E95D87B828A0455D0078EA7C /* VW@1x.png */,
@@ -575,8 +569,8 @@
 				E94F710628CB8B35003FCF2B /* SwiftUICharts */,
 				E97B08BE292A83BD001EDA1A /* SwiftUICollectionView */,
 				E97B08C3292A946A001EDA1A /* LocalConsole */,
-				E93277082A22201000D1188F /* Realm */,
-				E932770A2A22201000D1188F /* RealmSwift */,
+				E98BA4112AFE9EB600D1DFF3 /* Realm */,
+				E98BA4132AFE9EB600D1DFF3 /* RealmSwift */,
 			);
 			productName = Logbook;
 			productReference = E91AFA0B283FD09F0024131D /* Logbook.app */;
@@ -590,7 +584,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1330;
-				LastUpgradeCheck = 1330;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					E91AFA0A283FD09F0024131D = {
 						CreatedOnToolsVersion = 13.3.1;
@@ -616,7 +610,7 @@
 				E94F710528CB8B35003FCF2B /* XCRemoteSwiftPackageReference "ChartView" */,
 				E97B08BD292A83BD001EDA1A /* XCRemoteSwiftPackageReference "SwifUICollectionView" */,
 				E97B08C2292A946A001EDA1A /* XCRemoteSwiftPackageReference "LocalConsole" */,
-				E93277072A22201000D1188F /* XCRemoteSwiftPackageReference "realm-swift" */,
+				E98BA4102AFE9EB600D1DFF3 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = E91AFA0C283FD09F0024131D /* Products */;
 			projectDirPath = "";
@@ -641,11 +635,9 @@
 				E95D87BF28A045F20078EA7C /* Ferrari@3x.png in Resources */,
 				E91095B428412CB500C1334E /* house.riv in Resources */,
 				E95D87C628A046380078EA7C /* Porsche@2x.png in Resources */,
-				E95D87C828A046380078EA7C /* Porsche@1x.png in Resources */,
 				E91095C328412D6C00C1334E /* Inter-SemiBold.ttf in Resources */,
 				E95D87BE28A045F20078EA7C /* Ferrari@2x.png in Resources */,
-				E93277202A2224C600D1188F /* atlasConfig.plist in Resources */,
-				E99E2403289C2AE0005A79AB /* button.riv in Resources */,
+				E98BA40F2AFE9D7D00D1DFF3 /* atlasConfig.plist in Resources */,
 				E91095BA28412CB500C1334E /* shapes.riv in Resources */,
 				E91AFA16283FD0A10024131D /* Preview Assets.xcassets in Resources */,
 				E95D87C928A046380078EA7C /* VW@2x.png in Resources */,
@@ -774,6 +766,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -834,6 +827,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -962,14 +956,6 @@
 				kind = branch;
 			};
 		};
-		E93277072A22201000D1188F /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		E93872A9286394670009F0F1 /* XCRemoteSwiftPackageReference "SwiftDate" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/malcommac/SwiftDate.git";
@@ -1018,12 +1004,20 @@
 				kind = branch;
 			};
 		};
+		E98BA4102AFE9EB600D1DFF3 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		E9F1E72D2895137D0045A41B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = exactVersion;
+				version = 0.3.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1038,16 +1032,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E91AFA37283FE8B10024131D /* XCRemoteSwiftPackageReference "SwiftUI-Extensions" */;
 			productName = "SwiftUI Extensions";
-		};
-		E93277082A22201000D1188F /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E93277072A22201000D1188F /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		E932770A2A22201000D1188F /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E93277072A22201000D1188F /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
 		};
 		E93872AA286394670009F0F1 /* SwiftDate */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1078,6 +1062,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E97B08C2292A946A001EDA1A /* XCRemoteSwiftPackageReference "LocalConsole" */;
 			productName = LocalConsole;
+		};
+		E98BA4112AFE9EB600D1DFF3 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E98BA4102AFE9EB600D1DFF3 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		E98BA4132AFE9EB600D1DFF3 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E98BA4102AFE9EB600D1DFF3 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 		E9F1E72E2895137D0045A41B /* Introspect */ = {
 			isa = XCSwiftPackageProductDependency;

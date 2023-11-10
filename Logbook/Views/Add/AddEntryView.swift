@@ -14,7 +14,6 @@ import RealmSwift
 
 struct AddEntryView: View {
     
-    let button = RiveViewModel(fileName: "button", autoPlay: false)
     
     @State private var newLogbook: logbook = logbook()
     @ObservedResults(logbook.self, sortDescriptor: SortDescriptor(keyPath: "newMileAge", ascending: false)) var logbooks

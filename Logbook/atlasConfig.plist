@@ -3,16 +3,18 @@
 <plist version="1.0">
 <dict>
 	<key>appId</key>
-	<string>application-0-zwozs</string>
+	<string>application-0-bucew</string>
 	<key>appUrl</key>
-	<string>https://realm.mongodb.com/groups/62223ace79268a2e471263be/apps/646b5f2a61852ed76290cbc4</string>
+	<string>https://realm.mongodb.com/groups/62223ace79268a2e471263be/apps/654e5ce6a76d3bd189da8a0b</string>
 	<key>baseUrl</key>
 	<string>https://realm.mongodb.com</string>
 	<key>clientApiBaseUrl</key>
 	<string>https://eu-central-1.aws.realm.mongodb.com</string>
 	<key>dataApiBaseUrl</key>
 	<string>https://eu-central-1.aws.data.mongodb-api.com</string>
-	<key>dataSourceName</key>
-	<string>mongodb-atlas</string>
+    <key>dataExplorerLink</key>
+    <string>https://cloud.mongodb.com/links/62223ace79268a2e471263be/explorer/LogbookCluster/database/collection/find</string>
+    <key>dataSourceName</key>
+    <string>mongodb-atlas</string>
 </dict>
 </plist>
