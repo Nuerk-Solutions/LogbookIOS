@@ -40,42 +40,6 @@ struct GasStationsView: View {
         .onDisappear {
             gasStationVM.stopAllLocationUpdates()
         }
-        //        ZStack {
-        //            Color("Background").ignoresSafeArea()
-        //        ScrollView {
-        //
-        //            scrollDetection
-        //
-        //            content
-        //
-        //            // [1.899, 1.939, 1.949, 1.959, 1.909]
-        //
-        //            //            .onAppear {
-        //            //                var factorMap = [Double: Decimal]()
-        //            //                var ratingMap = [String : Decimal]()
-        //            //
-        //            //                let dictonary = Dictionary(grouping: gasStations, by: {$0.price!})
-        //            //                let sortedKeys = dictonary.keys.sorted()
-        //            //
-        //            //                stride(from: sortedKeys.first!, to: sortedKeys.last! + 0.01, by: 0.01).enumerated().forEach { index, item in
-        //            //                    factorMap[item] = (pow(2, index) / 10 + 1)
-        //            //                }
-        //            //                gasStations.forEach { item in
-        //            //                    let rating = factorMap[item.price!]! + Decimal(item.dist / 10)
-        //            //                    ratingMap[item.id] = rating
-        //            //                }
-        //            //                let ratio = 1 / ratingMap.values.max()!
-        //            //
-        //            //                gasStations.forEach { item in
-        //            //                    let test: Double = Double(ratio as NSNumber) * Double(ratingMap[item.id]! as NSNumber)
-        //            //                }
-        //            //
-        ////                        }
-        
-        //                .sheet(isPresented: $showSection) {
-        //                    SectionView(section: $selectedSection)
-        //        }
-        //        }
     }
     
     var content: some View {

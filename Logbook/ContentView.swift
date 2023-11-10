@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import LocalConsole
 
 struct ContentView: View {
     
@@ -22,10 +21,8 @@ struct ContentView: View {
     
     private static let isPreview = false
     
-    
     @Preference(\.isOpenAddViewOnStart) var isOpenAddViewOnStart
     
-    let consoleManager = LCManager.shared
     init() {
         showAccount = false
     }
@@ -49,7 +46,7 @@ struct ContentView: View {
                     GasStationsView()
                 }
             case .invoice:
-                ChartView()
+                EmptyView()
             case .settings:
                 SettingsView()
             }

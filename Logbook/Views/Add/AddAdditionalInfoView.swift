@@ -5,7 +5,6 @@
 //  Created by Thomas on 27.05.22.
 //
 import SwiftUI
-import RiveRuntime
 import Combine
 
 struct AddAdditionalInfoView: View {
@@ -17,10 +16,6 @@ struct AddAdditionalInfoView: View {
     @State var keyboardRect: CGRect = CGRect()
     
     @Binding var show: Bool
-    //    let confetti = RiveViewModel(fileName: "confetti", stateMachineName: "State Machine 1")
-    //    let check = RiveViewModel(fileName: "check", stateMachineName: "State Machine 1")
-    let check = RiveViewModel(fileName: "checkmark_icon", autoPlay: true)
-    
     @Namespace var animation
     
     var canSubmit: Bool {
@@ -155,9 +150,8 @@ struct AddAdditionalInfoView: View {
         .overlay(
             ZStack {
                 if isLoading {
-                    check.view()
-                        .frame(width: 150, height: 150)
-                        .allowsHitTesting(false)
+                    ProgressView("Speichern...")
+                        .padding(2)
                 }
             }
         )

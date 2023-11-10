@@ -19,10 +19,6 @@ class NewEntryViewModel: ObservableObject {
     private let cache = DiskCache<[LogbookEntry]>(filename: "xca_last_entries", expirationInterval: 30 * 60 * 60 * 24)
     private let logbookAPI = LogbookAPI.shared
     
-    private var offlineRequestManager: OfflineRequestManager {
-        return OfflineRequestManager.defaultManager
-    }
-    
     
     init(lastEntries: [LogbookEntry]? = nil) {
         if let lastEntries = lastEntries {
@@ -112,16 +108,6 @@ class NewEntryViewModel: ObservableObject {
         withAnimation {
             sendPhase = .sending
         }
-        
-//        if !connected {
-//            offlineRequestManager.queueRequest(AlamonOfflineRequest.newRequest {
-//                Task {
-//                    await self.sendBody()
-//                }
-//            })
-//            sendPhase = .success(newLogbook)
-//            return
-//        }
         await sendBody()
     }
 }

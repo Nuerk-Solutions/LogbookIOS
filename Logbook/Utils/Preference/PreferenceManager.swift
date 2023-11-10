@@ -38,12 +38,6 @@ final class PreferenceManager {
     @UserDefault("isRememberLastDriver")
     var isRememberLastDriver: Bool = false
     
-    @UserDefault("isLiteMode")
-    var isLiteMode: Bool = true
-    
-    @UserDefault("isLiteModeBackground")
-    var isLiteModeBackground: Bool = true
-    
     @UserDefault("isIntelligentGasStationRadius")
     var isIntelligentGasStationRadius: Bool = true
     

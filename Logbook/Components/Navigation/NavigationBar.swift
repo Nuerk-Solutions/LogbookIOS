@@ -18,6 +18,7 @@ struct NavigationBar: View {
     @StateObject private var netWorkActivitIndicatorManager = NetworkActivityIndicatorManager()
     @AppStorage("showAccount") var showAccount = false
     @AppStorage("isLogged") var isLogged = false
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         ZStack {
@@ -32,7 +33,7 @@ struct NavigationBar: View {
             
             Text(title)
                 .animatableFont(size: contentHasScrolled ? 22 : 34, weight: .bold)
-                .foregroundStyle(.primary)
+                .foregroundStyle(colorScheme == .dark ? (contentHasScrolled ? .black : .white) : (contentHasScrolled ? .white : .black))
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 .padding(.horizontal, 20)
                 .padding(.top, 24)

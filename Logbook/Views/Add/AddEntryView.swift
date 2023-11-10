@@ -6,14 +6,12 @@
 //
 
 import SwiftUI
-import RiveRuntime
 import Introspect
 import UIKit
 import Combine
 
 struct AddEntryView: View {
     
-    let button = RiveViewModel(fileName: "button", autoPlay: false)
     @StateObject var newEntryVM = NewEntryViewModel()
     
     @State var showModal = false
@@ -25,15 +23,10 @@ struct AddEntryView: View {
     
     @AppStorage("currentDriver") var currentDriver: DriverEnum = .Andrea
     @AppStorage("currentVehicle") var currentVehicle: VehicleEnum = .Ferrari
-    @Preference(\.isLiteMode) var isLiteMode
-    @Preference(\.isLiteModeBackground) var isLiteModeBackground
     
     @EnvironmentObject var networkReachablility: NetworkReachability
     
     @Namespace var namespace
-    
-    let confetti = RiveViewModel(fileName: "confetti", stateMachineName: "State Machine 1")
-    let check = RiveViewModel(fileName: "check", stateMachineName: "State Machine 1")
     
     var distanceSubtraction: Double {
             (Double(newEntryVM.newLogbook.newMileAge) ?? 0.0) - (Double(newEntryVM.newLogbook.currentMileAge) ?? 0.0)
@@ -145,17 +138,6 @@ struct AddEntryView: View {
                 if newEntryVM.fetchPhase == .fetchingNextPage(lastLogbooks) {
                     ProgressView()
                         .padding(.horizontal, 5)
-                } else {
-                    Button {
-                        setDefaults(connected: networkReachablility.connected)
-                    } label: {
-                        Image(systemName: "arrow.counterclockwise.circle")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .rotationEffect(Angle(degrees: -90))
-                            .symbolRenderingMode(.hierarchical)
-                    }
-                    .offset(x: -20)
                 }
             }
             
@@ -266,6 +248,7 @@ struct AddEntryView: View {
                     DispatchQueue.main.async {
                         withAnimation(.spring()) {
                             showModal.toggle()
+                            newEntryVM.newLogbook.additionalInformationTyp = .Getankt
                         }
                     }
                 } label: {
@@ -347,38 +330,7 @@ struct AddEntryView: View {
         .padding(.horizontal, 40)
         .padding(.top, 80)
         .padding(.bottom, 40)
-        .background {
-            if !isLiteMode {
-                RiveViewModel(fileName: "shapes").view()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .ignoresSafeArea()
-                    .blur(radius: 30)
-                    .blendMode(BlendMode.hardLight)
-            }
-        }
-        .background (
-            ZStack {
-                if isLiteModeBackground {
-                    Image("Spline")
-                        .blur(radius: 50)
-                        .offset(x: 200, y: 100)
-                }
-            }
-        )
-        .background(.regularMaterial)
-        .overlay(
-            ZStack {
-                if isLoading {
-                    check.view()
-                        .frame(width: 100, height: 100)
-                        .allowsHitTesting(false)
-                }
-                confetti.view()
-                    .scaleEffect(3)
-                    .allowsHitTesting(false)
-            }
-        )
-        //        .padding()
+        .background(.ultraThinMaterial)
         .task {
             setDefaults(connected: networkReachablility.connected)
         }

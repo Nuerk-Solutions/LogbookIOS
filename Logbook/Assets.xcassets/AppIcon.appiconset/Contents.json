@@ -1,122 +1,116 @@
 {
   "images" : [
+	{
+      "size" : "20x20",
+      "idiom": "iphone",
+	  "filename" : "Legacy@1x-20@2x.png",
+      "scale": "2x"
+    },
+	{
+      "size" : "20x20",
+      "idiom": "iphone",
+	  "filename" : "Legacy@1x-20@3x.png",
+      "scale": "3x"
+    },
+	{
+      "size" : "20x20",
+      "idiom": "ipad",
+	  "filename" : "Legacy@1x-20.png",
+      "scale": "1x"
+    },
     {
-      "filename" : "iPhone_20@2x.png",
+      "size" : "20x20",
+      "idiom": "ipad",
+	  "filename" : "Legacy@1x-20@2x.png",
+      "scale": "2x"
+    },
+    {
+      "size" : "29x29",
       "idiom" : "iphone",
-      "scale" : "2x",
-      "size" : "20x20"
+      "filename" : "Legacy@1x-29@2x.png",
+      "scale" : "2x"
     },
     {
-      "filename" : "iPhone_20pt@3x.png",
+      "size" : "29x29",
       "idiom" : "iphone",
-      "scale" : "3x",
-      "size" : "20x20"
+      "filename" : "Legacy@1x-29@3x.png",
+      "scale" : "3x"
     },
     {
-      "filename" : "iPhone_29pt.png",
+      "size" : "40x40",
       "idiom" : "iphone",
-      "scale" : "1x",
-      "size" : "29x29"
+      "filename" : "Legacy@1x-40@2x.png",
+      "scale" : "2x"
     },
     {
-      "filename" : "iPhone_29pt@2x.png",
+      "size" : "40x40",
       "idiom" : "iphone",
-      "scale" : "2x",
-      "size" : "29x29"
+      "filename" : "Legacy@1x-40@3x.png",
+      "scale" : "3x"
     },
     {
-      "filename" : "iPhone_29pt@3x.png",
+      "size" : "60x60",
       "idiom" : "iphone",
-      "scale" : "3x",
-      "size" : "29x29"
+      "filename" : "Legacy@1x-60@2x.png",
+      "scale" : "2x"
     },
     {
-      "filename" : "iPhone_40pt@2x.png",
+      "size" : "60x60",
       "idiom" : "iphone",
-      "scale" : "2x",
-      "size" : "40x40"
+      "filename" : "Legacy@1x-60@3x.png",
+      "scale" : "3x"
     },
     {
-      "filename" : "iPhone_40pt@3x.png",
-      "idiom" : "iphone",
-      "scale" : "3x",
-      "size" : "40x40"
-    },
-    {
-      "filename" : "iPhone_60pt@2x.png",
-      "idiom" : "iphone",
-      "scale" : "2x",
-      "size" : "60x60"
-    },
-    {
-      "filename" : "iPhone_60pt@3x.png",
-      "idiom" : "iphone",
-      "scale" : "3x",
-      "size" : "60x60"
-    },
-    {
-      "filename" : "iPad_20pt.png",
+      "size" : "29x29",
       "idiom" : "ipad",
-      "scale" : "1x",
-      "size" : "20x20"
+      "filename" : "Legacy@1x-29.png",
+      "scale" : "1x"
     },
     {
-      "filename" : "iPad_20pt@2x.png",
+      "size" : "29x29",
       "idiom" : "ipad",
-      "scale" : "2x",
-      "size" : "20x20"
+      "filename" : "Legacy@1x-29@2x.png",
+      "scale" : "2x"
     },
     {
-      "filename" : "iPad_29pt.png",
+      "size" : "40x40",
       "idiom" : "ipad",
-      "scale" : "1x",
-      "size" : "29x29"
+      "filename" : "Legacy@1x-40.png",
+      "scale" : "1x"
     },
     {
-      "filename" : "iPad_29pt@2x.png",
+      "size" : "40x40",
       "idiom" : "ipad",
-      "scale" : "2x",
-      "size" : "29x29"
+      "filename" : "Legacy@1x-40@2x.png",
+      "scale" : "2x"
     },
     {
-      "filename" : "iPad_40pt.png",
+      "size" : "76x76",
       "idiom" : "ipad",
-      "scale" : "1x",
-      "size" : "40x40"
+      "filename" : "Legacy@1x-76.png",
+      "scale" : "1x"
     },
     {
-      "filename" : "iPad_40pt@2x.png",
+      "size" : "76x76",
       "idiom" : "ipad",
-      "scale" : "2x",
-      "size" : "40x40"
+      "filename" : "Legacy@1x-76@2x.png",
+      "scale" : "2x"
     },
     {
-      "filename" : "iPad_76pt.png",
+      "size" : "83.5x83.5",
       "idiom" : "ipad",
-      "scale" : "1x",
-      "size" : "76x76"
+      "filename" : "Legacy@1x-83.5@2x.png",
+      "scale" : "2x"
     },
     {
-      "filename" : "iPad_76pt@2x.png",
-      "idiom" : "ipad",
-      "scale" : "2x",
-      "size" : "76x76"
-    },
-    {
-      "filename" : "iPad_83.5pt@2x.png",
-      "idiom" : "ipad",
-      "scale" : "2x",
-      "size" : "83.5x83.5"
-    },
-    {
-      "filename" : "App Icon iOS 1024.png",
+      "size" : "1024x1024",
       "idiom" : "ios-marketing",
-      "scale" : "1x",
-      "size" : "1024x1024"
+      "filename" : "Legacy@1x-1024.png",
+      "scale" : "1x"
     }
   ],
   "info" : {
-    "author" : "xcode",
-    "version" : 1
+    "version" : 1,
+    "author" : "xcode"
   }
 }
