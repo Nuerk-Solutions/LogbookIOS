@@ -12,6 +12,7 @@ import Foundation
 class ChartViewModel: ObservableObject {
     
     @Published var allLogbooks: [LogbookEntry] = []
+    @Published var filteredLogbooks: [LogbookEntry] = []
     private let logbookAPI = LogbookAPI.shared
     
     func loadLogbooks() async {
@@ -23,7 +24,9 @@ class ChartViewModel: ObservableObject {
 //            return
 //        }
         do {
-            allLogbooks = try await logbookAPI.fetch(with: LogbookRequestParameters(page: 0, limit: 0)).data ?? []
+            allLogbooks = try await logbookAPI.fetch(with: LogbookRequestParameters(page: 0, limit: 0)).data?.filter({ item in
+                item.additionalInformationTyp == .Getankt
+            }) ?? []
         } catch {
                 print(error)
                 if Task.isCancelled { return }

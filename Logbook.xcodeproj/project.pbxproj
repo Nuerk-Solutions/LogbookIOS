@@ -83,12 +83,10 @@
 		E962E5D0285E4DCA00F6B4D6 /* gasstations.json in Resources */ = {isa = PBXBuildFile; fileRef = E962E5CF285E4DCA00F6B4D6 /* gasstations.json */; };
 		E962E5D2285E5E4100F6B4D6 /* PriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E962E5D1285E5E4000F6B4D6 /* PriceView.swift */; };
 		E96665382AD85AC500605F49 /* Porsche@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = E96665372AD85AC500605F49 /* Porsche@1x.png */; };
-		E966653B2AD85D7200605F49 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = E966653A2AD85D7200605F49 /* Introspect */; };
-		E966653D2AD85D7200605F49 /* Introspect-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = E966653C2AD85D7200605F49 /* Introspect-Dynamic */; };
-		E966653F2AD85D7200605F49 /* Introspect-Static in Frameworks */ = {isa = PBXBuildFile; productRef = E966653E2AD85D7200605F49 /* Introspect-Static */; };
 		E96665412AD85E0100605F49 /* button.riv in Resources */ = {isa = PBXBuildFile; fileRef = E96665402AD85E0100605F49 /* button.riv */; };
 		E969B0C42892D57500E22690 /* AddEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E969B0C32892D57500E22690 /* AddEntryView.swift */; };
 		E9715409289D73F200889084 /* DataSendPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9715408289D73F200889084 /* DataSendPhase.swift */; };
+		E97591F02B3749C1008B543B /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97591EF2B3749C1008B543B /* StatsView.swift */; };
 		E9969E412899971C008A92A2 /* checkmark_icon.riv in Resources */ = {isa = PBXBuildFile; fileRef = E9969E402899971C008A92A2 /* checkmark_icon.riv */; };
 		E99E240E289C350E005A79AB /* 340-656-like-button.riv in Resources */ = {isa = PBXBuildFile; fileRef = E99E240D289C350E005A79AB /* 340-656-like-button.riv */; };
 		E9A784F2289DAE08002AC225 /* ContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A784F1289DAE08002AC225 /* ContextMenu.swift */; };
@@ -98,6 +96,10 @@
 		E9BA8D702847B255009838C4 /* KeysTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BA8D6F2847B255009838C4 /* KeysTracker.swift */; };
 		E9BA8D732847B73D009838C4 /* LogbookAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BA8D722847B73D009838C4 /* LogbookAPI.swift */; };
 		E9BA8D752847B8AE009838C4 /* ApiSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BA8D742847B8AE009838C4 /* ApiSession.swift */; };
+		E9C254472B013A0200F3BBAA /* Introspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C254462B013A0200F3BBAA /* Introspect.swift */; };
+		E9C254492B013A5100F3BBAA /* IntrospectionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C254482B013A5100F3BBAA /* IntrospectionUIView.swift */; };
+		E9C2544B2B013A5B00F3BBAA /* IntrospectionUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C2544A2B013A5B00F3BBAA /* IntrospectionUIViewController.swift */; };
+		E9C2544D2B013A7100F3BBAA /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C2544C2B013A7100F3BBAA /* ViewExtensions.swift */; };
 		E9C3B8DC2845374000EDE615 /* AnimatableFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C3B8DB2845374000EDE615 /* AnimatableFontModifier.swift */; };
 		E9D2BB09284278E5009EC7C5 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D2BB08284278E5009EC7C5 /* Animations.swift */; };
 		E9D2BB192843F450009EC7C5 /* icons.riv in Resources */ = {isa = PBXBuildFile; fileRef = E9D2BB182843F450009EC7C5 /* icons.riv */; };
@@ -105,6 +107,19 @@
 		E9D2BB21284405DB009EC7C5 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D2BB20284405DB009EC7C5 /* NavigationBar.swift */; };
 		E9E8488128521EE8008D7F0F /* SectionImageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E8488028521EE8008D7F0F /* SectionImageRow.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E9C254442B01398300F3BBAA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		E91095AD28412CB500C1334E /* house.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = house.riv; sourceTree = "<group>"; };
@@ -184,6 +199,7 @@
 		E96665402AD85E0100605F49 /* button.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = button.riv; sourceTree = "<group>"; };
 		E969B0C32892D57500E22690 /* AddEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEntryView.swift; sourceTree = "<group>"; };
 		E9715408289D73F200889084 /* DataSendPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSendPhase.swift; sourceTree = "<group>"; };
+		E97591EF2B3749C1008B543B /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		E9969E402899971C008A92A2 /* checkmark_icon.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = checkmark_icon.riv; sourceTree = "<group>"; };
 		E99E240D289C350E005A79AB /* 340-656-like-button.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = "340-656-like-button.riv"; sourceTree = "<group>"; };
 		E9A784F1289DAE08002AC225 /* ContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenu.swift; sourceTree = "<group>"; };
@@ -193,6 +209,10 @@
 		E9BA8D6F2847B255009838C4 /* KeysTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysTracker.swift; sourceTree = "<group>"; };
 		E9BA8D722847B73D009838C4 /* LogbookAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookAPI.swift; sourceTree = "<group>"; };
 		E9BA8D742847B8AE009838C4 /* ApiSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiSession.swift; sourceTree = "<group>"; };
+		E9C254462B013A0200F3BBAA /* Introspect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Introspect.swift; sourceTree = "<group>"; };
+		E9C254482B013A5100F3BBAA /* IntrospectionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntrospectionUIView.swift; sourceTree = "<group>"; };
+		E9C2544A2B013A5B00F3BBAA /* IntrospectionUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntrospectionUIViewController.swift; sourceTree = "<group>"; };
+		E9C2544C2B013A7100F3BBAA /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		E9C3B8DB2845374000EDE615 /* AnimatableFontModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableFontModifier.swift; sourceTree = "<group>"; };
 		E9D2BB08284278E5009EC7C5 /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		E9D2BB182843F450009EC7C5 /* icons.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = icons.riv; sourceTree = "<group>"; };
@@ -206,9 +226,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E966653F2AD85D7200605F49 /* Introspect-Static in Frameworks */,
-				E966653B2AD85D7200605F49 /* Introspect in Frameworks */,
-				E966653D2AD85D7200605F49 /* Introspect-Dynamic in Frameworks */,
 				E95862B9287B0D990017F2BA /* SwiftLocation in Frameworks */,
 				E91AFA23283FD0D60024131D /* Alamofire in Frameworks */,
 				E91AFA39283FE8B10024131D /* SwiftUI Extensions in Frameworks */,
@@ -313,6 +330,7 @@
 		E91AFA29283FD4170024131D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E97591EE2B3749AF008B543B /* Stats */,
 				E9715407289D531500889084 /* Add */,
 				E96259BF284F9755007D9479 /* Detail */,
 				E91AFA4428401BF70024131D /* List */,
@@ -382,6 +400,7 @@
 		E940E8B928426A53009F1225 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				E9C254452B0139D200F3BBAA /* Introspect */,
 				E957A29B285F91A600464FB0 /* Location */,
 				E962E5C7285E42FB00F6B4D6 /* Network */,
 				E920B600285648B900683D67 /* Preference */,
@@ -496,6 +515,14 @@
 			path = Add;
 			sourceTree = "<group>";
 		};
+		E97591EE2B3749AF008B543B /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				E97591EF2B3749C1008B543B /* StatsView.swift */,
+			);
+			path = Stats;
+			sourceTree = "<group>";
+		};
 		E9BA8D712847B72E009838C4 /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -504,6 +531,17 @@
 				E92F54BA287DDE76008A72AF /* GasStationAPI.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		E9C254452B0139D200F3BBAA /* Introspect */ = {
+			isa = PBXGroup;
+			children = (
+				E9C254462B013A0200F3BBAA /* Introspect.swift */,
+				E9C254482B013A5100F3BBAA /* IntrospectionUIView.swift */,
+				E9C2544A2B013A5B00F3BBAA /* IntrospectionUIViewController.swift */,
+				E9C2544C2B013A7100F3BBAA /* ViewExtensions.swift */,
+			);
+			path = Introspect;
 			sourceTree = "<group>";
 		};
 		E9C3B8DA2845366F00EDE615 /* Assets */ = {
@@ -551,6 +589,7 @@
 				E91AFA07283FD09F0024131D /* Sources */,
 				E91AFA08283FD09F0024131D /* Frameworks */,
 				E91AFA09283FD09F0024131D /* Resources */,
+				E9C254442B01398300F3BBAA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -562,9 +601,6 @@
 				E91AFA38283FE8B10024131D /* SwiftUI Extensions */,
 				E93872AA286394670009F0F1 /* SwiftDate */,
 				E95862B8287B0D990017F2BA /* SwiftLocation */,
-				E966653A2AD85D7200605F49 /* Introspect */,
-				E966653C2AD85D7200605F49 /* Introspect-Dynamic */,
-				E966653E2AD85D7200605F49 /* Introspect-Static */,
 			);
 			productName = Logbook;
 			productReference = E91AFA0B283FD09F0024131D /* Logbook.app */;
@@ -578,7 +614,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1330;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1510;
 				TargetAttributes = {
 					E91AFA0A283FD09F0024131D = {
 						CreatedOnToolsVersion = 13.3.1;
@@ -599,7 +635,6 @@
 				E91AFA37283FE8B10024131D /* XCRemoteSwiftPackageReference "SwiftUI-Extensions" */,
 				E93872A9286394670009F0F1 /* XCRemoteSwiftPackageReference "SwiftDate" */,
 				E95862B7287B0D990017F2BA /* XCRemoteSwiftPackageReference "SwiftLocationWHeading" */,
-				E96665392AD85D7200605F49 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = E91AFA0C283FD09F0024131D /* Products */;
 			projectDirPath = "";
@@ -671,10 +706,12 @@
 				E962E5CE285E465E00F6B4D6 /* GasStationsView.swift in Sources */,
 				E91AFA43284016BE0024131D /* CustomProgressView.swift in Sources */,
 				E91AFA3C28400B260024131D /* LogbooksViewModel.swift in Sources */,
+				E97591F02B3749C1008B543B /* StatsView.swift in Sources */,
 				E91AFA4028400DC90024131D /* RetryView.swift in Sources */,
 				E91AFA4C284129F30024131D /* Extensions.swift in Sources */,
 				E940E8C62842738E009F1225 /* PreferenceKey.swift in Sources */,
 				E91AFA48284129AE0024131D /* CustomTextField.swift in Sources */,
+				E9C2544D2B013A7100F3BBAA /* ViewExtensions.swift in Sources */,
 				E94A0CFB284F97AA00693352 /* EntryView.swift in Sources */,
 				E9BA8D732847B73D009838C4 /* LogbookAPI.swift in Sources */,
 				E962E5C6285E3D8600F6B4D6 /* SectionIconRow.swift in Sources */,
@@ -683,6 +720,7 @@
 				E91AFA11283FD09F0024131D /* ContentView.swift in Sources */,
 				E940E8C828427395009F1225 /* Tab.swift in Sources */,
 				E95D87AF28A03BAC0078EA7C /* IconNames.swift in Sources */,
+				E9C254492B013A5100F3BBAA /* IntrospectionUIView.swift in Sources */,
 				E962E5CB285E440A00F6B4D6 /* GasStationEntry.swift in Sources */,
 				E91AFA4E28412B8E0024131D /* AddAdditionalInfoView.swift in Sources */,
 				E961ACA728948EDD00C6FCC8 /* NewEntryViewModel.swift in Sources */,
@@ -707,9 +745,11 @@
 				E920B604285648F600683D67 /* PreferenceManager.swift in Sources */,
 				E962E5D2285E5E4100F6B4D6 /* PriceView.swift in Sources */,
 				E91AFA3E28400D180024131D /* EmptyPlaceholderView.swift in Sources */,
+				E9C254472B013A0200F3BBAA /* Introspect.swift in Sources */,
 				E91AFA30283FD6230024131D /* DataFetchPhase.swift in Sources */,
 				E91AFA28283FD1FC0024131D /* CacheImplementation.swift in Sources */,
 				E91095C72841306400C1334E /* TabBar.swift in Sources */,
+				E9C2544B2B013A5B00F3BBAA /* IntrospectionUIViewController.swift in Sources */,
 				E9D2BB09284278E5009EC7C5 /* Animations.swift in Sources */,
 				E957A29F285F921900464FB0 /* LocationManager.swift in Sources */,
 				E91AFA34283FD9930024131D /* LogbookAPIResponse.swift in Sources */,
@@ -725,6 +765,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -772,7 +813,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -786,6 +827,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -827,7 +869,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = NO;
@@ -852,10 +894,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Logbook/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Fahrtenbuch;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "When in use";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
@@ -867,6 +911,10 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = de.Thomas.Logbook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -879,6 +927,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_ENTITLEMENTS = Logbook/LogbookRelease.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Logbook/Preview Content\"";
@@ -887,10 +937,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Logbook/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Fahrtenbuch;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "When in use";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
@@ -901,6 +953,11 @@
 				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = de.Thomas.Logbook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -963,14 +1020,6 @@
 				kind = branch;
 			};
 		};
-		E96665392AD85D7200605F49 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
-			requirement = {
-				kind = exactVersion;
-				version = 0.3.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -993,21 +1042,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E95862B7287B0D990017F2BA /* XCRemoteSwiftPackageReference "SwiftLocationWHeading" */;
 			productName = SwiftLocation;
-		};
-		E966653A2AD85D7200605F49 /* Introspect */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E96665392AD85D7200605F49 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = Introspect;
-		};
-		E966653C2AD85D7200605F49 /* Introspect-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E96665392AD85D7200605F49 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = "Introspect-Dynamic";
-		};
-		E966653E2AD85D7200605F49 /* Introspect-Static */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E96665392AD85D7200605F49 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = "Introspect-Static";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

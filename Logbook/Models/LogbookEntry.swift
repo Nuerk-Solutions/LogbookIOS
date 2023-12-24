@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI_Extensions
+import Charts
 
 struct LogbookEntry {
     
@@ -25,6 +26,7 @@ struct LogbookEntry {
         self.currentMileAge = "100"
         self.vehicleTyp = .Ferrari
         self.driver = .Andrea
+        self.animated = false
     }
     
     let id = UUID()
@@ -49,6 +51,8 @@ struct LogbookEntry {
     var forFreeBool: Bool {
         forFree ?? false
     }
+    
+    var animated: Bool? = false
 }
 
 extension LogbookEntry: Codable {}

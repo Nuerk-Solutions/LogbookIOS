@@ -22,13 +22,13 @@ var tabItems = [
 //    TabItem(name: "Einstellungen", icon: RiveViewModel(fileName: "icons", stateMachineName: "USER_Interactivity", artboardName: "USER"), color: .red, selection: .settings)
     TabItem(name: "Übersicht", icon: "house", color: .teal, selection: .home),
     TabItem(name: "Tankstellen", icon: "fuelpump", color: .orange, selection: .gasStations),
-    //TabItem(name: "Abrechnung", icon: "magnifyingglass", color: .blue, selection: .invoice),
+    TabItem(name: "Statisitk", icon: "magnifyingglass", color: .blue, selection: .stats),
     TabItem(name: "Einstellungen", icon: "gear", color: .red, selection: .settings)
 ]
 
 enum Tab: String {
     case home
     case gasStations
-    case invoice
+    case stats
     case settings
 }

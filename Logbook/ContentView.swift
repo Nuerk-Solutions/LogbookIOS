@@ -11,7 +11,7 @@ struct ContentView: View {
     
     @EnvironmentObject var model: Model
     @EnvironmentObject var networkReachablility: NetworkReachability
-    @AppStorage("selectedTab") var selectedTab: Tab = .home
+    @AppStorage("selectedTab") var selectedTab: Tab = .stats
     @AppStorage("showAccount") var showAccount = false
     
     @State private var scrollPositionInList = 0.0
@@ -45,8 +45,8 @@ struct ContentView: View {
                 } else {
                     GasStationsView()
                 }
-            case .invoice:
-                EmptyView()
+            case .stats:
+                StatsView()
             case .settings:
                 SettingsView()
             }
