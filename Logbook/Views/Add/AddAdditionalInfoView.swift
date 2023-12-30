@@ -9,17 +9,18 @@ import Combine
 
 struct AddAdditionalInfoView: View {
     @Binding var newLogbook: LogbookEntry
-    @State private var isLoading = false
     @State private var showFuelField = true
     @State private var changeTitle = true
     @State private var savedMessage = ""
     @State var keyboardRect: CGRect = CGRect()
+    @State private var _informationTyp: AdditionalInformationTypEnum = .Getankt
     
     @Binding var show: Bool
     @Namespace var animation
     
     var canSubmit: Bool {
-        newLogbook.additionalInformation != "" && newLogbook.additionalInformationCost != ""
+        //        newLogbook.additionalInformation != "" && newLogbook.additionalInformationCost != ""
+            false
     }
     
     var body: some View {
@@ -31,13 +32,13 @@ struct AddAdditionalInfoView: View {
             //                .foregroundColor(.secondary)
             
             
-            Picker("", selection: $newLogbook.additionalInformationTyp.animation(.spring())) {
+            Picker("", selection: $_informationTyp.animation(.spring())) {
                 ForEach([AdditionalInformationTypEnum.Getankt, AdditionalInformationTypEnum.Gewartet]) { informationTyp in
                     Text(informationTyp.rawValue)
                         .tag(informationTyp)
                 }
             }
-            .onChange(of: newLogbook.additionalInformationTyp, perform: { newValue in
+            .onChange(of: _informationTyp, perform: { newValue in
                 if newValue == .Getankt && showFuelField {
                     return
                 }
@@ -71,7 +72,6 @@ struct AddAdditionalInfoView: View {
                         .foregroundColor(.secondary)
                         .matchedGeometryEffect(id: "informationTitle", in: animation)
                     
-                    if #available(iOS 16.0, *) {
                         TextEditor(text: $newLogbook.additionalInformation)
                             .addDoneButtonOnKeyboard()
                             .multilineTextAlignment(.leading)
@@ -83,17 +83,6 @@ struct AddAdditionalInfoView: View {
                             .background(.clear)
                             .customTextArea()
                             .matchedGeometryEffect(id: "information", in: animation)
-                    } else {
-                        TextEditor(text: $newLogbook.additionalInformation)
-                            .addDoneButtonOnKeyboard()
-                            .multilineTextAlignment(.leading)
-                            .frame(minHeight: 30, maxHeight: 120, alignment: .leading)
-                            .textEditorBackground {
-                                Color.clear
-                            }
-                            .customTextArea()
-                            .matchedGeometryEffect(id: "information", in: animation)
-                    }
                     
                 }
             } else {
@@ -145,16 +134,7 @@ struct AddAdditionalInfoView: View {
             RoundedRectangle(cornerRadius: 20, style: .continuous)
                 .stroke(.linearGradient(colors: [.white.opacity(0.8), .white.opacity(0.1)], startPoint: .topLeading, endPoint: .bottomTrailing))
         )
-        .overlay(isLoading ? Color.secondary.opacity(0.2) : Color.clear)
         .blur(radius: isLoading ? 1.5 : 0)
-        .overlay(
-            ZStack {
-                if isLoading {
-                    ProgressView("Speichern...")
-                        .padding(2)
-                }
-            }
-        )
         .padding()
     }
 }

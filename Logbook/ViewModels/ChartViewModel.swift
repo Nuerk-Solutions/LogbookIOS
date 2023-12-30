@@ -24,9 +24,7 @@ class ChartViewModel: ObservableObject {
 //            return
 //        }
         do {
-            allLogbooks = try await logbookAPI.fetch(with: LogbookRequestParameters(page: 0, limit: 0)).data?.filter({ item in
-                item.additionalInformationTyp == .Getankt
-            }) ?? []
+            allLogbooks = try await logbookAPI.fetch(with: LogbookRequestParameters(page: 0, limit: 0)).data ?? []
         } catch {
                 print(error)
                 if Task.isCancelled { return }

@@ -13,46 +13,77 @@ struct LogbookEntry {
     
     init() {
         self._id = nil
-        self.distanceSinceLastAdditionalInformation = ""
-        self.additionalInformationCost = ""
-        self.additionalInformation = ""
-        self.additionalInformationTyp = .Keine
-        self.driveReason = "Stadtfahrt"
-        self.forFree = false
+        self.driver = DriverEnum.Andrea
+        self.vehicle = VehicleEnum.VW
         self.date = Date()
-        self.distanceCost = "0"
-        self.distance = "0"
-        self.newMileAge = ""
-        self.currentMileAge = "100"
-        self.vehicleTyp = .Ferrari
-        self.driver = .Andrea
-        self.animated = false
+        self.reason = "Stadtfahrt"
+        self.mileAge = MileAge()
+        self.details = Details()
     }
     
     let id = UUID()
     
     let _id: String?
-    var distanceSinceLastAdditionalInformation: String
-
-    var additionalInformationCost: String
-    var additionalInformation: String
-    var additionalInformationTyp: AdditionalInformationTypEnum
-
-    var driveReason: String
-    var forFree: Bool? // Nullable, since b26
-    var date: Date
-    var distanceCost: String
-    var distance: String
-    var newMileAge: String
-    var currentMileAge: String
-    var vehicleTyp: VehicleEnum
     var driver: DriverEnum
+    var vehicle: VehicleEnum
+    var date: Date
+    var reason: String
+    var mileAge: MileAge
+    var details: Details
+    var refuel: Refuel?
+    var service: Service?
+}
 
-    var forFreeBool: Bool {
-        forFree ?? false
+struct Service: Codable, Equatable {
+    
+    init() {
+        self.message = ""
+        self.price = 0
     }
     
-    var animated: Bool? = false
+    var message: String
+    var price: Decimal
+}
+
+struct Refuel: Codable, Equatable {
+    
+    init() {
+        self.liters = 0
+        self.price = 0
+        self.isSpecial = false
+    }
+    
+    var liters: Decimal
+    var price: Decimal
+    var distanceDifference: Decimal?
+    var consumption: Decimal?
+    var isSpecial: Bool
+}
+
+struct Details: Codable, Equatable {
+    
+    init() {
+        self.covered = false
+    }
+    
+    var covered: Bool
+    var driver: DriverEnum?
+    var code: String?
+    var notes: String?
+}
+
+struct MileAge: Codable, Equatable {
+    
+    init() {
+        self.current = 0
+        self.new = 0
+        self.unit = UnitEnum.Km
+    }
+    var current: Decimal
+    var new: Decimal
+    var unit: UnitEnum
+    var difference: Decimal?
+    var cost: Decimal?
 }
 
 extension LogbookEntry: Codable {}
@@ -83,6 +114,14 @@ enum DriverEnum: String, CaseIterable, Codable, Identifiable {
     
     var id: String { UUID().uuidString }
 }
+
+enum UnitEnum: String, CaseIterable, Codable, Identifiable {
+    case Km = "km"
+    case Mile = "mile"
+    
+    var id: String { UUID().uuidString }
+}
+
 enum VehicleEnum: String, CaseIterable, Identifiable, Codable, Equatable {
     case Ferrari
     case VW
@@ -104,13 +143,20 @@ enum VehicleEnum: String, CaseIterable, Identifiable, Codable, Equatable {
     var fuelDescription: String {
         switch self {
         case .Ferrari, .MX5:
-            return "In den \(self.id) wird nur Super E5 getankt."
+            return "„Super 95 E5“ - WICHTIG ist hier führt das „E5“ , „E10“ zu Schäden"
         case .VW:
-            return "In den VW wird nur Diesel getankt."
+            return "Nur Diesel"
         case .Porsche, .DS:
-            return "In den \(self.id) wird nur Super+ E5 getankt."
+            return "Super Plus 98 E5, WICHTIG ist hier die (mindestens) „98“. (manchmal fehlt auch die Angabe „E5“, weil es bei „98“ eh nur „E5“ gibt)"
         }
     }
+    
+    /*
+     E-Mail vom 28.12.2023
+     Bei Fehl-Betankungen:
+     —> Tanken von Benzin bei Diesel-Autos und von Diesel bei Benzin-Autos führt zu massiven Defekten. Wenn man es bemerkt hat sofort Motor abstellen bzw besser gar nicht erst starten. Per Abschleppfahrzeug in die Werkstatt.
+     —> Tanken der falschen Benzinsorte (95, 98, E5, E10…) bei Benzinautos: hier kann man in der Regel vorsichtig fahren (kein Vollgas, vor allem keine Höchstgeschwindigkeit auf der Autobahn), bis der Tank z.B. halbleer ist, und dann mit der richtigen Sorte wieder auffüllen, so vermischt sich das richtige Benzin mit der falschen Sorte und „verdünnt“ diese. Wenn versehentlich E10 getankt wurde: wenn vollgetankt wurde: umgehend nach Hause fahren und Tank per Schlauch möglichst weit absaugen, dann so weiter so verfahren wie im nächsten Satz beschrieben. Wenn nicht vollgetankt wurde: umgehend mit Shell-VPower100, Aral Ultimate 102 oder ähnlichem auffüllen, diese verdünnen das „E10“ gut.
+     */
     
     var id: String { UUID().uuidString }
 }

@@ -58,6 +58,7 @@
 		E94A0CFD284F98CF00693352 /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94A0CFC284F98CF00693352 /* LogoView.swift */; };
 		E94A0CFF284FA96700693352 /* EntryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94A0CFE284FA96700693352 /* EntryItem.swift */; };
 		E94A769C28591AA600BCA71A /* AdditionalInfoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94A769B28591AA600BCA71A /* AdditionalInfoImageView.swift */; };
+		E94FC9242B40BD75003E5E44 /* RefuelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94FC9232B40BD75003E5E44 /* RefuelView.swift */; };
 		E957A297285F88DB00464FB0 /* GasStationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E957A296285F88DB00464FB0 /* GasStationViewModel.swift */; };
 		E957A29D285F91BA00464FB0 /* HeadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E957A29C285F91BA00464FB0 /* HeadingIndicator.swift */; };
 		E957A29F285F921900464FB0 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E957A29E285F921900464FB0 /* LocationManager.swift */; };
@@ -172,6 +173,7 @@
 		E94A0CFC284F98CF00693352 /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		E94A0CFE284FA96700693352 /* EntryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryItem.swift; sourceTree = "<group>"; };
 		E94A769B28591AA600BCA71A /* AdditionalInfoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoImageView.swift; sourceTree = "<group>"; };
+		E94FC9232B40BD75003E5E44 /* RefuelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefuelView.swift; sourceTree = "<group>"; };
 		E957A296285F88DB00464FB0 /* GasStationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasStationViewModel.swift; sourceTree = "<group>"; };
 		E957A29C285F91BA00464FB0 /* HeadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingIndicator.swift; sourceTree = "<group>"; };
 		E957A29E285F921900464FB0 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -511,6 +513,7 @@
 			children = (
 				E91AFA4D28412B8E0024131D /* AddAdditionalInfoView.swift */,
 				E969B0C32892D57500E22690 /* AddEntryView.swift */,
+				E94FC9232B40BD75003E5E44 /* RefuelView.swift */,
 			);
 			path = Add;
 			sourceTree = "<group>";
@@ -749,6 +752,7 @@
 				E91AFA30283FD6230024131D /* DataFetchPhase.swift in Sources */,
 				E91AFA28283FD1FC0024131D /* CacheImplementation.swift in Sources */,
 				E91095C72841306400C1334E /* TabBar.swift in Sources */,
+				E94FC9242B40BD75003E5E44 /* RefuelView.swift in Sources */,
 				E9C2544B2B013A5B00F3BBAA /* IntrospectionUIViewController.swift in Sources */,
 				E9D2BB09284278E5009EC7C5 /* Animations.swift in Sources */,
 				E957A29F285F921900464FB0 /* LocationManager.swift in Sources */,
