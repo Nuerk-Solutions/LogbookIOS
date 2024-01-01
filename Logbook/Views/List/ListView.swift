@@ -289,11 +289,11 @@ struct ListView: View {
     }
 }
 
-struct ListView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        ListView(logbooks: LogbookEntry.previewData, showAdd: .constant(false), lastRefreshDate: .constant(Date()))
-            .environmentObject(Model())
-            .environmentObject(NetworkReachability())
-    }
-}
+//struct ListView_Previews: PreviewProvider {
+//    
+//    static var previews: some View {
+//        ListView(logbooks: LogbookEntry.previewData, showAdd: .constant(false), lastRefreshDate: .constant(Date()))
+//            .environmentObject(Model())
+//            .environmentObject(NetworkReachability())
+//    }
+//}

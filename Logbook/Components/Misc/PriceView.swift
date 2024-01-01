@@ -11,7 +11,7 @@ struct PriceView: View {
     
     var price: Double = 1.899
     
-    @Preference(\.isUseNotSuperScript) var isUseNotSuperScript
+    @AppStorage("isUseNotSuperScript") var isUseNotSuperScript = false
     
     let currencyFormatter: NumberFormatter = {
        let formatter = NumberFormatter()

@@ -30,14 +30,14 @@ struct SettingsView: View {
     @AppStorage("currentVehicle") var currentVehicle: VehicleEnum = .Ferrari
     @AppStorage("gasStationSort") var gasStationSort: SortTyp = .Preis
     @AppStorage("isGasStationSortDirectionAsc") var isGasStationSortDirectionAsc: Bool = true
-    @Preference(\.isAllowLocationTracking) var isAllowLocationTracking
-    @Preference(\.isShowNotifications) var isShowNotifications
-    @Preference(\.isShowNotificationsIconBadge) var isShowNotificationsIconBadge
-    @Preference(\.isOpenAddViewOnStart) var isOpenAddViewOnStart
-    @Preference(\.isRememberLastDriver) var isRememberLastDriver
-    @Preference(\.isIntelligentGasStationRadius) var isIntelligentGasStationRadius
-    @Preference(\.isIntelligentGasStationSelection) var isIntelligentGasStationSelection
-    @Preference(\.isUseNotSuperScript) var isUseNotSuperScript
+    @AppStorage("isAllowLocationTracking") var isAllowLocationTracking = false
+    @AppStorage("isShowNotifications") var isShowNotifications = false
+    @AppStorage("isShowNotificationsIconBadge") var isShowNotificationsIconBadge = false
+    @AppStorage("isOpenAddViewOnStart") var isOpenAddViewOnStart = false
+    @AppStorage("isRememberLastDriver") var isRememberLastDriver = false
+    @AppStorage("isIntelligentGasStationRadius") var isIntelligentGasStationRadius = false
+    @AppStorage("isIntelligentGasStationSelection") var isIntelligentGasStationSelection = false
+    @AppStorage("isUseNotSuperScript") var isUseNotSuperScript = false
     
     
     var body: some View {

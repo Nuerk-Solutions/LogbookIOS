@@ -15,7 +15,7 @@ struct TabBar: View {
     @State var x: [CGFloat] = [0, 0, 0, 0]
     
     @AppStorage("selectedTab") var selectedTab: Tab = .home
-    @Preference(\.isAllowLocationTracking) var isAllowLocationTracking
+    @AppStorage("isAllowLocationTracking") var isAllowLocationTracking = false
     @EnvironmentObject var model: Model
     
     var body: some View {

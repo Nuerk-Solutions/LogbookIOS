@@ -41,9 +41,20 @@
 		E920B5FB285647B900683D67 /* AnimatedBlobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E920B5FA285647B900683D67 /* AnimatedBlobView.swift */; };
 		E920B5FD285647E900683D67 /* HexagonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E920B5FC285647E900683D67 /* HexagonView.swift */; };
 		E920B5FF2856480800683D67 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E920B5FE2856480800683D67 /* SettingsView.swift */; };
-		E920B602285648DD00683D67 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = E920B601285648DD00683D67 /* UserDefault.swift */; };
-		E920B604285648F600683D67 /* PreferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E920B603285648F600683D67 /* PreferenceManager.swift */; };
-		E920B6062856494500683D67 /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = E920B6052856494500683D67 /* Preference.swift */; };
+		E9227BA82B41B85300589E64 /* RefuelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9227BA72B41B85300589E64 /* RefuelView.swift */; };
+		E9227BAA2B41B85B00589E64 /* ServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9227BA92B41B85B00589E64 /* ServiceView.swift */; };
+		E9227BB02B41B87700589E64 /* MassTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9227BAC2B41B87600589E64 /* MassTextField.swift */; };
+		E9227BB12B41B87700589E64 /* CurrencyUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9227BAD2B41B87600589E64 /* CurrencyUITextField.swift */; };
+		E9227BB32B41B87700589E64 /* MassUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9227BAF2B41B87700589E64 /* MassUITextField.swift */; };
+		E9227BB52B41B89000589E64 /* CurrencyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9227BB42B41B89000589E64 /* CurrencyTextField.swift */; };
+		E9227BBB2B433CBB00589E64 /* MileAgeComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9227BBA2B433CBB00589E64 /* MileAgeComponent.swift */; };
+		E9227BBD2B433E0100589E64 /* DetailsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9227BBC2B433E0100589E64 /* DetailsComponent.swift */; };
+		E9227BBF2B433FC400589E64 /* DVDComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9227BBE2B433FC400589E64 /* DVDComponent.swift */; };
+		E9227BC12B43417F00589E64 /* LogbookUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9227BC02B43417F00589E64 /* LogbookUtils.swift */; };
+		E9227BC32B4345AE00589E64 /* EntrySubmitComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9227BC22B4345AE00589E64 /* EntrySubmitComponent.swift */; };
+		E9227BC52B434A4800589E64 /* AddInfoSelectComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9227BC42B434A4800589E64 /* AddInfoSelectComponent.swift */; };
+		E9227BC72B43510B00589E64 /* AddInfoButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9227BC62B43510B00589E64 /* AddInfoButtonComponent.swift */; };
+		E9227BCA2B43539800589E64 /* AddInfoSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9227BC92B43539800589E64 /* AddInfoSection.swift */; };
 		E92F54BB287DDE76008A72AF /* GasStationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F54BA287DDE76008A72AF /* GasStationAPI.swift */; };
 		E93872A128638D800009F0F1 /* GasStationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93872A028638D800009F0F1 /* GasStationRow.swift */; };
 		E93872AB286394670009F0F1 /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = E93872AA286394670009F0F1 /* SwiftDate */; };
@@ -58,7 +69,6 @@
 		E94A0CFD284F98CF00693352 /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94A0CFC284F98CF00693352 /* LogoView.swift */; };
 		E94A0CFF284FA96700693352 /* EntryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94A0CFE284FA96700693352 /* EntryItem.swift */; };
 		E94A769C28591AA600BCA71A /* AdditionalInfoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94A769B28591AA600BCA71A /* AdditionalInfoImageView.swift */; };
-		E94FC9242B40BD75003E5E44 /* RefuelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94FC9232B40BD75003E5E44 /* RefuelView.swift */; };
 		E957A297285F88DB00464FB0 /* GasStationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E957A296285F88DB00464FB0 /* GasStationViewModel.swift */; };
 		E957A29D285F91BA00464FB0 /* HeadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E957A29C285F91BA00464FB0 /* HeadingIndicator.swift */; };
 		E957A29F285F921900464FB0 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E957A29E285F921900464FB0 /* LocationManager.swift */; };
@@ -157,9 +167,20 @@
 		E920B5FA285647B900683D67 /* AnimatedBlobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedBlobView.swift; sourceTree = "<group>"; };
 		E920B5FC285647E900683D67 /* HexagonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexagonView.swift; sourceTree = "<group>"; };
 		E920B5FE2856480800683D67 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		E920B601285648DD00683D67 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
-		E920B603285648F600683D67 /* PreferenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceManager.swift; sourceTree = "<group>"; };
-		E920B6052856494500683D67 /* Preference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
+		E9227BA72B41B85300589E64 /* RefuelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefuelView.swift; sourceTree = "<group>"; };
+		E9227BA92B41B85B00589E64 /* ServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceView.swift; sourceTree = "<group>"; };
+		E9227BAC2B41B87600589E64 /* MassTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MassTextField.swift; sourceTree = "<group>"; };
+		E9227BAD2B41B87600589E64 /* CurrencyUITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyUITextField.swift; sourceTree = "<group>"; };
+		E9227BAF2B41B87700589E64 /* MassUITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MassUITextField.swift; sourceTree = "<group>"; };
+		E9227BB42B41B89000589E64 /* CurrencyTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyTextField.swift; sourceTree = "<group>"; };
+		E9227BBA2B433CBB00589E64 /* MileAgeComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileAgeComponent.swift; sourceTree = "<group>"; };
+		E9227BBC2B433E0100589E64 /* DetailsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsComponent.swift; sourceTree = "<group>"; };
+		E9227BBE2B433FC400589E64 /* DVDComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DVDComponent.swift; sourceTree = "<group>"; };
+		E9227BC02B43417F00589E64 /* LogbookUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookUtils.swift; sourceTree = "<group>"; };
+		E9227BC22B4345AE00589E64 /* EntrySubmitComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntrySubmitComponent.swift; sourceTree = "<group>"; };
+		E9227BC42B434A4800589E64 /* AddInfoSelectComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInfoSelectComponent.swift; sourceTree = "<group>"; };
+		E9227BC62B43510B00589E64 /* AddInfoButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInfoButtonComponent.swift; sourceTree = "<group>"; };
+		E9227BC92B43539800589E64 /* AddInfoSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInfoSection.swift; sourceTree = "<group>"; };
 		E92F54BA287DDE76008A72AF /* GasStationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasStationAPI.swift; sourceTree = "<group>"; };
 		E93872A028638D800009F0F1 /* GasStationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasStationRow.swift; sourceTree = "<group>"; };
 		E940E8BA28426A64009F1225 /* NetworkReachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachability.swift; sourceTree = "<group>"; };
@@ -173,7 +194,6 @@
 		E94A0CFC284F98CF00693352 /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		E94A0CFE284FA96700693352 /* EntryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryItem.swift; sourceTree = "<group>"; };
 		E94A769B28591AA600BCA71A /* AdditionalInfoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoImageView.swift; sourceTree = "<group>"; };
-		E94FC9232B40BD75003E5E44 /* RefuelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefuelView.swift; sourceTree = "<group>"; };
 		E957A296285F88DB00464FB0 /* GasStationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasStationViewModel.swift; sourceTree = "<group>"; };
 		E957A29C285F91BA00464FB0 /* HeadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingIndicator.swift; sourceTree = "<group>"; };
 		E957A29E285F921900464FB0 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -389,14 +409,54 @@
 			path = List;
 			sourceTree = "<group>";
 		};
-		E920B600285648B900683D67 /* Preference */ = {
+		E9227BA62B41B84A00589E64 /* New */ = {
 			isa = PBXGroup;
 			children = (
-				E920B601285648DD00683D67 /* UserDefault.swift */,
-				E920B603285648F600683D67 /* PreferenceManager.swift */,
-				E920B6052856494500683D67 /* Preference.swift */,
+				E9227BAB2B41B85F00589E64 /* Textfield */,
+				E9227BA72B41B85300589E64 /* RefuelView.swift */,
+				E9227BA92B41B85B00589E64 /* ServiceView.swift */,
 			);
-			path = Preference;
+			path = New;
+			sourceTree = "<group>";
+		};
+		E9227BAB2B41B85F00589E64 /* Textfield */ = {
+			isa = PBXGroup;
+			children = (
+				E9227BB42B41B89000589E64 /* CurrencyTextField.swift */,
+				E9227BAD2B41B87600589E64 /* CurrencyUITextField.swift */,
+				E9227BAC2B41B87600589E64 /* MassTextField.swift */,
+				E9227BAF2B41B87700589E64 /* MassUITextField.swift */,
+			);
+			path = Textfield;
+			sourceTree = "<group>";
+		};
+		E9227BB62B433C9100589E64 /* Old */ = {
+			isa = PBXGroup;
+			children = (
+				E91AFA4D28412B8E0024131D /* AddAdditionalInfoView.swift */,
+			);
+			path = Old;
+			sourceTree = "<group>";
+		};
+		E9227BB72B433C9D00589E64 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E9227BC82B43510F00589E64 /* AddInfo */,
+				E9227BBA2B433CBB00589E64 /* MileAgeComponent.swift */,
+				E9227BBC2B433E0100589E64 /* DetailsComponent.swift */,
+				E9227BBE2B433FC400589E64 /* DVDComponent.swift */,
+				E9227BC22B4345AE00589E64 /* EntrySubmitComponent.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		E9227BC82B43510F00589E64 /* AddInfo */ = {
+			isa = PBXGroup;
+			children = (
+				E9227BC42B434A4800589E64 /* AddInfoSelectComponent.swift */,
+				E9227BC62B43510B00589E64 /* AddInfoButtonComponent.swift */,
+			);
+			path = AddInfo;
 			sourceTree = "<group>";
 		};
 		E940E8B928426A53009F1225 /* Utils */ = {
@@ -405,10 +465,10 @@
 				E9C254452B0139D200F3BBAA /* Introspect */,
 				E957A29B285F91A600464FB0 /* Location */,
 				E962E5C7285E42FB00F6B4D6 /* Network */,
-				E920B600285648B900683D67 /* Preference */,
 				E91AFA24283FD10B0024131D /* Cache */,
 				E9AACA342853AC23005F30FE /* Pagination.swift */,
 				E95D87AE28A03BAC0078EA7C /* IconNames.swift */,
+				E9227BC02B43417F00589E64 /* LogbookUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -473,6 +533,7 @@
 			isa = PBXGroup;
 			children = (
 				E94A0CFA284F97AA00693352 /* EntryView.swift */,
+				E9227BC92B43539800589E64 /* AddInfoSection.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -511,9 +572,10 @@
 		E9715407289D531500889084 /* Add */ = {
 			isa = PBXGroup;
 			children = (
-				E91AFA4D28412B8E0024131D /* AddAdditionalInfoView.swift */,
+				E9227BB72B433C9D00589E64 /* Components */,
+				E9227BB62B433C9100589E64 /* Old */,
+				E9227BA62B41B84A00589E64 /* New */,
 				E969B0C32892D57500E22690 /* AddEntryView.swift */,
-				E94FC9232B40BD75003E5E44 /* RefuelView.swift */,
 			);
 			path = Add;
 			sourceTree = "<group>";
@@ -691,11 +753,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E920B6062856494500683D67 /* Preference.swift in Sources */,
 				E940E8C328427232009F1225 /* Model.swift in Sources */,
 				E9BA8D752847B8AE009838C4 /* ApiSession.swift in Sources */,
 				E91095BC28412D5200C1334E /* CustomFont.swift in Sources */,
+				E9227BC72B43510B00589E64 /* AddInfoButtonComponent.swift in Sources */,
+				E9227BA82B41B85300589E64 /* RefuelView.swift in Sources */,
+				E9227BB02B41B87700589E64 /* MassTextField.swift in Sources */,
 				E91AFA4628401C040024131D /* ListView.swift in Sources */,
+				E9227BBB2B433CBB00589E64 /* MileAgeComponent.swift in Sources */,
+				E9227BB12B41B87700589E64 /* CurrencyUITextField.swift in Sources */,
 				E920B5FB285647B900683D67 /* AnimatedBlobView.swift in Sources */,
 				E91AFA32283FD7020024131D /* LogbookEntry.swift in Sources */,
 				E94A0CFD284F98CF00693352 /* LogoView.swift in Sources */,
@@ -704,6 +770,7 @@
 				E9A784F2289DAE08002AC225 /* ContextMenu.swift in Sources */,
 				E957A297285F88DB00464FB0 /* GasStationViewModel.swift in Sources */,
 				E9D2BB21284405DB009EC7C5 /* NavigationBar.swift in Sources */,
+				E9227BCA2B43539800589E64 /* AddInfoSection.swift in Sources */,
 				E95A6BEB2898567C0027A673 /* CustomTextArea.swift in Sources */,
 				E91AFA26283FD13D0024131D /* CacheEntry.swift in Sources */,
 				E962E5CE285E465E00F6B4D6 /* GasStationsView.swift in Sources */,
@@ -712,53 +779,58 @@
 				E97591F02B3749C1008B543B /* StatsView.swift in Sources */,
 				E91AFA4028400DC90024131D /* RetryView.swift in Sources */,
 				E91AFA4C284129F30024131D /* Extensions.swift in Sources */,
+				E9227BB32B41B87700589E64 /* MassUITextField.swift in Sources */,
 				E940E8C62842738E009F1225 /* PreferenceKey.swift in Sources */,
 				E91AFA48284129AE0024131D /* CustomTextField.swift in Sources */,
 				E9C2544D2B013A7100F3BBAA /* ViewExtensions.swift in Sources */,
 				E94A0CFB284F97AA00693352 /* EntryView.swift in Sources */,
+				E9227BBD2B433E0100589E64 /* DetailsComponent.swift in Sources */,
 				E9BA8D732847B73D009838C4 /* LogbookAPI.swift in Sources */,
 				E962E5C6285E3D8600F6B4D6 /* SectionIconRow.swift in Sources */,
 				E940E8C128426EFA009F1225 /* Modifiers.swift in Sources */,
+				E9227BBF2B433FC400589E64 /* DVDComponent.swift in Sources */,
 				E92F54BB287DDE76008A72AF /* GasStationAPI.swift in Sources */,
 				E91AFA11283FD09F0024131D /* ContentView.swift in Sources */,
 				E940E8C828427395009F1225 /* Tab.swift in Sources */,
 				E95D87AF28A03BAC0078EA7C /* IconNames.swift in Sources */,
 				E9C254492B013A5100F3BBAA /* IntrospectionUIView.swift in Sources */,
 				E962E5CB285E440A00F6B4D6 /* GasStationEntry.swift in Sources */,
+				E9227BAA2B41B85B00589E64 /* ServiceView.swift in Sources */,
 				E91AFA4E28412B8E0024131D /* AddAdditionalInfoView.swift in Sources */,
 				E961ACA728948EDD00C6FCC8 /* NewEntryViewModel.swift in Sources */,
 				E9D2BB1C2843F977009EC7C5 /* CircularView.swift in Sources */,
 				E9C3B8DC2845374000EDE615 /* AnimatableFontModifier.swift in Sources */,
 				E96259BC284F5127007D9479 /* ScrollRefreshable.swift in Sources */,
+				E9227BC32B4345AE00589E64 /* EntrySubmitComponent.swift in Sources */,
 				E93872A128638D800009F0F1 /* GasStationRow.swift in Sources */,
+				E9227BC52B434A4800589E64 /* AddInfoSelectComponent.swift in Sources */,
 				E9E8488128521EE8008D7F0F /* SectionImageRow.swift in Sources */,
 				E957A29D285F91BA00464FB0 /* HeadingIndicator.swift in Sources */,
 				E920B5FF2856480800683D67 /* SettingsView.swift in Sources */,
 				E9BA8D6E2847B22F009838C4 /* Cache.swift in Sources */,
+				E9227BB52B41B89000589E64 /* CurrencyTextField.swift in Sources */,
 				E9AACA3A2853DFB5005F30FE /* NetworkActivityIndicatorManager.swift in Sources */,
 				E9715409289D73F200889084 /* DataSendPhase.swift in Sources */,
 				E940E8BE28426E50009F1225 /* CloseButton.swift in Sources */,
 				E9AACA352853AC23005F30FE /* Pagination.swift in Sources */,
-				E920B602285648DD00683D67 /* UserDefault.swift in Sources */,
 				E94A0CFF284FA96700693352 /* EntryItem.swift in Sources */,
 				E91AFA0F283FD09F0024131D /* LogbookApp.swift in Sources */,
 				E94324B9292D357E0083FFD1 /* ChartViewModel.swift in Sources */,
 				E94A769C28591AA600BCA71A /* AdditionalInfoImageView.swift in Sources */,
 				E9BA8D702847B255009838C4 /* KeysTracker.swift in Sources */,
-				E920B604285648F600683D67 /* PreferenceManager.swift in Sources */,
 				E962E5D2285E5E4100F6B4D6 /* PriceView.swift in Sources */,
 				E91AFA3E28400D180024131D /* EmptyPlaceholderView.swift in Sources */,
 				E9C254472B013A0200F3BBAA /* Introspect.swift in Sources */,
 				E91AFA30283FD6230024131D /* DataFetchPhase.swift in Sources */,
 				E91AFA28283FD1FC0024131D /* CacheImplementation.swift in Sources */,
 				E91095C72841306400C1334E /* TabBar.swift in Sources */,
-				E94FC9242B40BD75003E5E44 /* RefuelView.swift in Sources */,
 				E9C2544B2B013A5B00F3BBAA /* IntrospectionUIViewController.swift in Sources */,
 				E9D2BB09284278E5009EC7C5 /* Animations.swift in Sources */,
 				E957A29F285F921900464FB0 /* LocationManager.swift in Sources */,
 				E91AFA34283FD9930024131D /* LogbookAPIResponse.swift in Sources */,
 				E940E8BB28426A64009F1225 /* NetworkReachability.swift in Sources */,
 				E920B5FD285647E900683D67 /* HexagonView.swift in Sources */,
+				E9227BC12B43417F00589E64 /* LogbookUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -817,7 +889,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -873,7 +945,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = NO;
@@ -906,7 +978,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -949,7 +1021,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

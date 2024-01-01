@@ -18,14 +18,14 @@ struct EntryItem: View {
     
     var body: some View {
         VStack {
-            AdditionalInfoImageView(informationTyp: entry.additionalInformationTyp)
+            AdditionalInfoImageView(logbook: entry)
                 .matchedGeometryEffect(id: "logo\(entry.id)", in: namespace)
                 .padding(.bottom, -45)
 
             
                 VStack(alignment: .leading, spacing: 1) {
                     GeometryReader { metrics in
-                        Text(entry.driveReason)
+                        Text(entry.reason)
                             .font(.title3).bold()
                             .frame(maxWidth: metrics.size.width * 0.7, alignment: .leading)
                             .lineLimit(0)
@@ -53,7 +53,7 @@ struct EntryItem: View {
                 .padding(20)
             }
             .background(
-                Image(getVehicleIcon(vehicleTyp: entry.vehicleTyp))
+                Image(getVehicleIcon(vehicleTyp: entry.vehicle))
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 120, height: 120)
@@ -65,7 +65,7 @@ struct EntryItem: View {
             .background(.secondary.opacity(0.4))
             .background(.ultraThinMaterial)
             .background(
-                Image(getVehicleBackground(vehicleTyp: entry.vehicleTyp))
+                Image(getVehicleBackground(vehicleTyp: entry.vehicle))
                     .resizable()
                     .scaledToFill()
                     .frame(maxWidth: .infinity, maxHeight: 150, alignment: .center)
@@ -97,15 +97,15 @@ struct EntryItem: View {
     }
 }
 
-struct EntryItem_Previews: PreviewProvider {
-    @Namespace static var namespace
-    
-    static var previews: some View {
-//        EntryItem(namespace: namespace, entry: LogbookEntry.previewData[1])
-//            .environmentObject(Model())
-////                        .frame(height: 100)
-                ListView(logbooks: LogbookEntry.previewData, showAdd: .constant(false), lastRefreshDate: .constant(Date()))
-        .environmentObject(Model())
-        .environmentObject(NetworkReachability())
-    }
-}
+//struct EntryItem_Previews: PreviewProvider {
+//    @Namespace static var namespace
+//    
+//    static var previews: some View {
+////        EntryItem(namespace: namespace, entry: LogbookEntry.previewData[1])
+////            .environmentObject(Model())
+//////                        .frame(height: 100)
+//                ListView(logbooks: LogbookEntry.previewData, showAdd: .constant(false), lastRefreshDate: .constant(Date()))
+//        .environmentObject(Model())
+//        .environmentObject(NetworkReachability())
+//    }
+//}

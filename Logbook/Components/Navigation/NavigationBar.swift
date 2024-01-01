@@ -16,7 +16,6 @@ struct NavigationBar: View {
     
     @EnvironmentObject var model: Model
     @StateObject private var netWorkActivitIndicatorManager = NetworkActivityIndicatorManager()
-    @AppStorage("showAccount") var showAccount = false
     @AppStorage("isLogged") var isLogged = false
     @Environment(\.colorScheme) var colorScheme
     

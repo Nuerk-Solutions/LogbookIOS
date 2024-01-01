@@ -14,7 +14,8 @@ struct LogbookAPI {
     static let shared = LogbookAPI()
     private init() {}
     
-    private let baseUrl = "https://api.nuerk-solutions.de/logbook"
+//    private let baseUrl = "https://api.nuerk-solutions.de/logbook"
+    private let baseUrl = "http://127.0.0.1:3000/logbook"
     private let session = ApiSession.logbookShared.session
     private let jsonDecoder: JSONDecoder = {
         let decoder = JSONDecoder()
@@ -46,21 +47,40 @@ struct LogbookAPI {
     
     private func fetchLogbooks(from url: URL) async throws -> LogbookAPIResponse {
         print(url)
-        return try await session.request(url, method: .get)
-            .validate(statusCode: 200..<201)
-            .validate(contentType: ["application/json"])
-            .responseData { (response) in
-                switch response.result {
-                case .success:
-                    break
-                case .failure(let error):
-                    print(error)
-                    // see https://karenxpn.medium.com/swiftui-mvvm-combine-alamofire-make-http-requests-the-right-way-and-handle-errors-258e0f0bb0df
-//                    return generateError(code: response.response?.statusCode ?? -1, description: error.localizedDescription ?? "Ein Fehler ist aufgetreten")
+//        print(LogbookEntry.previewData)
+        do {
+            return try await session.request(url, method: .get)
+                .validate(statusCode: 200..<201)
+                .validate(contentType: ["application/json"])
+                .responseData { (response) in
+                    switch response.result {
+                    case .success:
+                        break
+                    case .failure(let error):
+                        print(error)
+                        // see https://karenxpn.medium.com/swiftui-mvvm-combine-alamofire-make-http-requests-the-right-way-and-handle-errors-258e0f0bb0df
+                        //                    return generateError(code: response.response?.statusCode ?? -1, description: error.localizedDescription ?? "Ein Fehler ist aufgetreten")
+                    }
+//                    if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+//                        print("Data: \(utf8Text)")
+//                    }
                 }
-            }
-            .serializingDecodable(LogbookAPIResponse.self, decoder: jsonDecoder)
-            .value
+                .serializingDecodable(LogbookAPIResponse.self, decoder: jsonDecoder)
+                .value
+            
+        } catch DecodingError.keyNotFound(let key, let context) {
+            print("could not find key \(key) in JSON: \(context.debugDescription)")
+        } catch DecodingError.valueNotFound(let type, let context) {
+            print("could not find type \(type) in JSON: \(context.debugDescription)")
+        } catch DecodingError.typeMismatch(let type, let context) {
+            print("type mismatch for type \(type) in JSON: \(context.debugDescription)")
+        } catch DecodingError.dataCorrupted(let context) {
+            print("data found to be corrupted in JSON: \(context.debugDescription)")
+        } 
+        catch let error as NSError {
+            NSLog("Error in read(from:ofType:) domain= \(error.domain), description= \(error.localizedDescription)")
+        }
+        return LogbookAPIResponse(total: 0, length: 0, limit: 0, pageCount: 0, page: 0, data: [])
     }
     
     private func sendLogbook(from url: URL, logbook body: LogbookEntry) async throws -> LogbookEntry {

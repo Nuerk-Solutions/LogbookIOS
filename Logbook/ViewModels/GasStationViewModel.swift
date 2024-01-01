@@ -37,7 +37,7 @@ class GasStationViewModel: ObservableObject {
     @AppStorage("selectedGasStationVehicle") var stationForVehicle: VehicleEnum = .Ferrari
     @AppStorage("gasStationSort") var gasStationSort: SortTyp = .Preis
     @AppStorage("isGasStationSortDirectionAsc") var isGasStationSortDirectionAsc: Bool = true
-    @Preference(\.isIntelligentGasStationRadius) var isIntelligentGasStationRadius
+    @AppStorage("isIntelligentGasStationRadius") var isIntelligentGasStationRadius = false
     
     init(gasStations: [GasStationEntry]? = nil) {
         if let gasStations = gasStations {

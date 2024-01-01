@@ -1,325 +1,499 @@
-[
-    {
-        "_id": "628bb7c38398c0a95c541c4c",
-        "driver": "Oliver",
-        "vehicleTyp": "VW",
-        "currentMileAge": "164381",
-        "newMileAge": "164406",
-        "forFree": false,
-        "distance": "25.00",
-        "distanceCost": "5.00",
-        "date": "2022-05-23T18:34:49.814Z",
-        "driveReason": "City drive",
-        "additionalInformationTyp": "Keine",
-        "additionalInformation": "",
-        "additionalInformationCost": "",
-        "distanceSinceLastAdditionalInformation": "",
-        "createdAt": "2022-05-23T16:35:15.447Z",
-        "updatedAt": "2022-05-23T16:35:15.447Z",
-        "__v": 0
-    },
-    {
-        "_id": "628b9a978398c0a95c541c3c",
-        "driver": "Thomas",
-        "vehicleTyp": "Ferrari",
-        "currentMileAge": "14846",
-        "newMileAge": "14864",
-        "forFree": false,
-        "distance": "18.00",
-        "distanceCost": "3.60",
-        "date": "2022-05-23T16:30:11.457Z",
-        "driveReason": "Dienstreise Oliver -Tanken",
-        "additionalInformationTyp": "Getankt",
-        "additionalInformation": "test",
-        "additionalInformationCost": "1",
-        "distanceSinceLastAdditionalInformation": "",
-        "createdAt": "2022-05-23T14:30:47.551Z",
-        "updatedAt": "2022-05-23T14:30:47.551Z",
-        "__v": 0
-    },
-    {
-        "_id": "628a80caf0558aa2c7439f7e",
-        "driver": "Oliver",
-        "vehicleTyp": "Ferrari",
-        "currentMileAge": "14838",
-        "newMileAge": "14846",
-        "forFree": false,
-        "distance": "8.00",
-        "distanceCost": "1.60",
-        "date": "2022-05-22T20:27:53.012Z",
-        "driveReason": "Dancing",
-        "additionalInformationTyp": "Keine",
-        "additionalInformation": "",
-        "additionalInformationCost": "",
-        "distanceSinceLastAdditionalInformation": "",
-        "createdAt": "2022-05-22T18:28:26.755Z",
-        "updatedAt": "2022-05-22T18:28:26.755Z",
-        "__v": 0
-    },
-    {
-        "_id": "6289d569820ec9f4f8d77cfe",
-        "driver": "Oliver",
-        "vehicleTyp": "Ferrari",
-        "currentMileAge": "14830",
-        "newMileAge": "14838",
-        "forFree": false,
-        "distance": "8.00",
-        "distanceCost": "1.60",
-        "date": "2022-05-22T08:16:45.621Z",
-        "driveReason": "Kinder zum Bahnhof ",
-        "additionalInformationTyp": "Keine",
-        "additionalInformation": "",
-        "additionalInformationCost": "",
-        "distanceSinceLastAdditionalInformation": "",
-        "createdAt": "2022-05-22T06:17:13.786Z",
-        "updatedAt": "2022-05-22T06:17:13.786Z",
-        "__v": 0
-    },
-    {
-        "_id": "62894a37820ec9f4f8d77cf7",
-        "driver": "Oliver",
-        "vehicleTyp": "Ferrari",
-        "currentMileAge": "14812",
-        "newMileAge": "14830",
-        "forFree": false,
-        "distance": "18.00",
-        "distanceCost": "3.60",
-        "date": "2022-05-21T22:22:21.954Z",
-        "driveReason": "Kinder vom Bahnhof und Oper „Into the Wood“",
-        "additionalInformationTyp": "Keine",
-        "additionalInformation": "",
-        "additionalInformationCost": "",
-        "distanceSinceLastAdditionalInformation": "",
-        "createdAt": "2022-05-21T20:23:19.659Z",
-        "updatedAt": "2022-05-21T20:23:19.659Z",
-        "__v": 0
-    },
-    {
-        "_id": "6287c230b954121f0cc02780",
-        "driver": "Andrea",
-        "vehicleTyp": "Ferrari",
-        "currentMileAge": "14804",
-        "newMileAge": "14812",
-        "forFree": false,
-        "distance": "8.00",
-        "distanceCost": "1.60",
-        "date": "2022-05-20T18:30:17.003Z",
-        "driveReason": "Tanzen",
-        "additionalInformationTyp": "Keine",
-        "additionalInformation": "",
-        "additionalInformationCost": "",
-        "distanceSinceLastAdditionalInformation": "",
-        "createdAt": "2022-05-20T16:30:40.478Z",
-        "updatedAt": "2022-05-20T16:30:40.478Z",
-        "__v": 0
-    },
-    {
-        "_id": "6286a4a4eaf486911471b893",
-        "driver": "Andrea",
-        "vehicleTyp": "VW",
-        "currentMileAge": "164367",
-        "newMileAge": "164381",
-        "forFree": true,
-        "distance": "14.00",
-        "distanceCost": "2.80",
-        "date": "2022-05-19T22:11:33.493Z",
-        "driveReason": "Abholen Finesse ",
-        "additionalInformationTyp": "Keine",
-        "additionalInformation": "",
-        "additionalInformationCost": "",
-        "distanceSinceLastAdditionalInformation": "",
-        "createdAt": "2022-05-19T20:12:20.736Z",
-        "updatedAt": "2022-05-19T20:12:20.736Z",
-        "__v": 0
-    },
-    {
-        "_id": "628558d813409e55c82fc01f",
-        "driver": "Claudia",
-        "vehicleTyp": "VW",
-        "currentMileAge": "164304",
-        "newMileAge": "164367",
-        "forFree": false,
-        "distance": "63.00",
-        "distanceCost": "12.60",
-        "date": "2022-05-18T22:36:06.038Z",
-        "driveReason": "Stadtfahrten",
-        "additionalInformationTyp": "Keine",
-        "additionalInformation": "",
-        "additionalInformationCost": "",
-        "distanceSinceLastAdditionalInformation": "",
-        "createdAt": "2022-05-18T20:36:40.645Z",
-        "updatedAt": "2022-05-18T20:36:40.645Z",
-        "__v": 0
-    },
-    {
-        "_id": "62879758be835f78affd812c",
-        "driver": "Andrea",
-        "vehicleTyp": "Ferrari",
-        "currentMileAge": "14795",
-        "newMileAge": "14804",
-        "forFree": true,
-        "distance": "9.00",
-        "distanceCost": "1.80",
-        "date": "2022-05-18T15:27:00.000Z",
-        "driveReason": "Mittagessen Oma abholen ",
-        "additionalInformationTyp": "Keine",
-        "additionalInformation": "",
-        "additionalInformationCost": "",
-        "distanceSinceLastAdditionalInformation": "",
-        "createdAt": "2022-05-20T13:27:52.952Z",
-        "updatedAt": "2022-05-20T13:27:52.952Z",
-        "__v": 0
-    },
-    {
-        "_id": "62839badce5e37b3b0c68005",
-        "driver": "Thomas",
-        "vehicleTyp": "Ferrari",
-        "currentMileAge": "14774",
-        "newMileAge": "14795",
-        "forFree": false,
-        "distance": "21.00",
-        "distanceCost": "4.20",
-        "date": "2022-05-17T14:56:59.529Z",
-        "driveReason": "Schule",
-        "additionalInformationTyp": "Keine",
-        "additionalInformation": "",
-        "additionalInformationCost": "",
-        "distanceSinceLastAdditionalInformation": "",
-        "createdAt": "2022-05-17T12:57:17.246Z",
-        "updatedAt": "2022-05-17T12:57:17.246Z",
-        "__v": 0
-    },
-    {
-        "_id": "62824b872bce6ab7da88ec24",
-        "driver": "Thomas",
-        "vehicleTyp": "Ferrari",
-        "currentMileAge": "14761",
-        "newMileAge": "14774",
-        "forFree": false,
-        "distance": "13.00",
-        "distanceCost": "2.60",
-        "date": "2022-05-16T15:02:43.499Z",
-        "driveReason": "Schule ",
-        "additionalInformationTyp": "Keine",
-        "additionalInformation": "",
-        "additionalInformationCost": "",
-        "distanceSinceLastAdditionalInformation": "",
-        "createdAt": "2022-05-16T13:03:03.159Z",
-        "updatedAt": "2022-05-16T13:03:03.159Z",
-        "__v": 0
-    },
-    {
-        "_id": "62813a3253ca8cb050e64753",
-        "driver": "Oliver",
-        "vehicleTyp": "Porsche",
-        "currentMileAge": "136802",
-        "newMileAge": "136812",
-        "forFree": false,
-        "distance": "10.00",
-        "distanceCost": "2.00",
-        "date": "2022-05-15T19:35:57.692Z",
-        "driveReason": "Tanzen & Garage",
-        "additionalInformationTyp": "Gewartet",
-        "additionalInformation": "2 l Öl",
-        "additionalInformationCost": "14.00",
-        "distanceSinceLastAdditionalInformation": "1631.00",
-        "createdAt": "2022-05-15T17:36:50.934Z",
-        "updatedAt": "2022-05-15T17:36:50.934Z",
-        "__v": 0
-    },
-    {
-        "_id": "6280e89d033088f86b05718c",
-        "driver": "Oliver",
-        "vehicleTyp": "Porsche",
-        "currentMileAge": "136248",
-        "newMileAge": "136802",
-        "forFree": false,
-        "distance": "554.00",
-        "distanceCost": "110.80",
-        "date": "2022-05-15T13:47:51.892Z",
-        "driveReason": "(Kaufering-) Utting- Dresden (Abfahrt Utting 0930, 25 min Pause)",
-        "additionalInformationTyp": "Keine",
-        "additionalInformation": "",
-        "additionalInformationCost": "",
-        "distanceSinceLastAdditionalInformation": "",
-        "createdAt": "2022-05-15T11:48:45.928Z",
-        "updatedAt": "2022-05-15T13:03:19.128Z",
-        "__v": 0
-    },
-    {
-        "_id": "6281e2eb49eea3afb84db33d",
-        "driver": "Andrea",
-        "vehicleTyp": "Ferrari",
-        "currentMileAge": "14749",
-        "newMileAge": "14761",
-        "forFree": false,
-        "distance": "12.00",
-        "distanceCost": "2.40",
-        "date": "2022-05-15T01:15:00.000Z",
-        "driveReason": "Geburtstag Clemens",
-        "additionalInformationTyp": "Keine",
-        "additionalInformation": "",
-        "additionalInformationCost": "",
-        "distanceSinceLastAdditionalInformation": "",
-        "createdAt": "2022-05-16T05:36:43.627Z",
-        "updatedAt": "2022-05-16T05:36:43.627Z",
-        "__v": 0
-    },
-    {
-        "_id": "627fe63c135c8c77d22ec1d5",
-        "driver": "Oliver",
-        "vehicleTyp": "Porsche",
-        "currentMileAge": "136009",
-        "newMileAge": "136248",
-        "forFree": false,
-        "distance": "239.00",
-        "distanceCost": "47.80",
-        "date": "2022-05-14T19:24:31.749Z",
-        "driveReason": "Unterschleißheim- Utting-Ausflüge-Kaufering",
-        "additionalInformationTyp": "Getankt",
-        "additionalInformation": "68.1",
-        "additionalInformationCost": "140.84",
-        "distanceSinceLastAdditionalInformation": "586.00",
-        "createdAt": "2022-05-14T17:26:20.752Z",
-        "updatedAt": "2022-05-14T17:26:20.752Z",
-        "__v": 0
-    },
-    {
-        "_id": "627f7d255ec086207e4d36c3",
-        "driver": "Andrea",
-        "vehicleTyp": "Ferrari",
-        "currentMileAge": "14747",
-        "newMileAge": "14749",
-        "forFree": true,
-        "distance": "2.00",
-        "distanceCost": "0.40",
-        "date": "2022-05-14T11:57:44.228Z",
-        "driveReason": "Einkauf ",
-        "additionalInformationTyp": "Keine",
-        "additionalInformation": "",
-        "additionalInformationCost": "",
-        "distanceSinceLastAdditionalInformation": "",
-        "createdAt": "2022-05-14T09:57:57.462Z",
-        "updatedAt": "2022-05-14T09:57:57.462Z",
-        "__v": 0
-    },
-    {
-        "_id": "627ebffa62b05ac6931b9c52",
-        "driver": "Thomas",
-        "vehicleTyp": "Ferrari",
-        "currentMileAge": "14733",
-        "newMileAge": "14747",
-        "forFree": false,
-        "distance": "14.00",
-        "distanceCost": "2.80",
-        "date": "2022-05-13T22:30:27.357Z",
-        "driveReason": "Kino",
-        "additionalInformationTyp": "Keine",
-        "additionalInformation": "",
-        "additionalInformationCost": "",
-        "distanceSinceLastAdditionalInformation": "",
-        "createdAt": "2022-05-13T20:30:50.527Z",
-        "updatedAt": "2022-05-13T20:30:50.527Z",
-        "__v": 0
-    }
-]
+{
+    "data": [
+        {
+            "_id": "6592b8316928a4697b63942b",
+            "driver": "Oliver",
+            "vehicle": "Porsche",
+            "date": "2023-12-28T14:02:00.000Z",
+            "reason": "Stadtfahrt",
+            "mileAge": {
+                "current": 145814,
+                "new": 145842,
+                "difference": 28,
+                "cost": 5.6,
+                "unit": "km"
+            },
+            "details": {
+                "covered": false
+            },
+            "refuel": {
+                "liters": 65.18,
+                "price": 119.21,
+                "distanceDifference": 586,
+                "consumption": 11.122866894197953,
+                "isSpecial": false,
+                "previousRecordId": "6559f5b9ea9e74abc0388587"
+            },
+            "createdAt": "2024-01-01T13:03:45.412Z"
+        },
+        {
+            "_id": "6592b8646928a4697b639433",
+            "driver": "Oliver",
+            "vehicle": "MX5",
+            "date": "2023-12-27T14:04:02.152Z",
+            "reason": "Stadtfahrt",
+            "mileAge": {
+                "current": 27454,
+                "new": 27460,
+                "difference": 6,
+                "cost": 1.2,
+                "unit": "mile"
+            },
+            "details": {
+                "covered": false
+            },
+            "refuel": {
+                "liters": 31.46,
+                "price": 55.34,
+                "distanceDifference": 0,
+                "consumption": 0,
+                "isSpecial": false
+            },
+            "createdAt": "2024-01-01T13:04:36.315Z"
+        },
+        {
+            "_id": "6588197e2296c378312145d3",
+            "driver": "Oliver",
+            "vehicle": "VW",
+            "date": "2023-12-23T12:43:00.000Z",
+            "reason": "Stadtfahrt",
+            "mileAge": {
+                "current": 193197,
+                "new": 193217,
+                "difference": 20,
+                "cost": 4,
+                "unit": "km"
+            },
+            "details": {
+                "covered": false
+            },
+            "refuel": {
+                "liters": 58.54,
+                "price": 96.53,
+                "distanceDifference": 825,
+                "consumption": 7.095757575757576,
+                "isSpecial": false,
+                "previousRecordId": "657b6031f0a7c4d0079791b6"
+            },
+            "createdAt": "2023-12-24T11:43:58.681Z"
+        },
+        {
+            "_id": "658487f98d550965259e7b3d",
+            "driver": "Thomas",
+            "vehicle": "Ferrari",
+            "date": "2023-12-21T19:46:06.390Z",
+            "reason": "SLUb",
+            "mileAge": {
+                "current": 19264,
+                "new": 19274,
+                "difference": 10,
+                "cost": 2,
+                "unit": "km"
+            },
+            "details": {
+                "covered": false
+            },
+            "createdAt": "2023-12-21T18:46:17.342Z"
+        },
+        {
+            "_id": "65845f5475ddec62577dee6c",
+            "driver": "Oliver",
+            "vehicle": "VW",
+            "date": "2023-12-21T16:52:06.355Z",
+            "reason": "Berlin & Shoppen in DD",
+            "mileAge": {
+                "current": 192688,
+                "new": 193197,
+                "difference": 509,
+                "cost": 101.8,
+                "unit": "km"
+            },
+            "details": {
+                "covered": false
+            },
+            "createdAt": "2023-12-21T15:52:52.782Z"
+        },
+        {
+            "_id": "658470a8ce20a6af4554e7eb",
+            "driver": "Andrea",
+            "vehicle": "Ferrari",
+            "date": "2023-12-17T20:08:00.000Z",
+            "reason": "Papa zurück",
+            "mileAge": {
+                "current": 19257,
+                "new": 19264,
+                "difference": 7,
+                "cost": 1.4,
+                "unit": "km"
+            },
+            "details": {
+                "covered": false
+            },
+            "createdAt": "2023-12-21T17:06:48.182Z"
+        },
+        {
+            "_id": "65847080ce20a6af4554e7e4",
+            "driver": "Thomas",
+            "vehicle": "Ferrari",
+            "date": "2023-12-17T18:05:00.000Z",
+            "reason": "Papa - Hin",
+            "mileAge": {
+                "current": 19250,
+                "new": 19257,
+                "difference": 7,
+                "cost": 1.4,
+                "unit": "km"
+            },
+            "details": {
+                "covered": false
+            },
+            "createdAt": "2023-12-21T17:06:08.593Z"
+        },
+        {
+            "_id": "657e08db68fb1741be7dc54a",
+            "driver": "Oliver",
+            "vehicle": "VW",
+            "date": "2023-12-16T21:30:00.400Z",
+            "reason": "Stadtfahrten",
+            "mileAge": {
+                "current": 192583,
+                "new": 192688,
+                "difference": 105,
+                "cost": 21,
+                "unit": "km"
+            },
+            "details": {
+                "covered": false
+            },
+            "createdAt": "2023-12-16T20:30:19.640Z"
+        },
+        {
+            "_id": "65847055ce20a6af4554e7dd",
+            "driver": "Thomas",
+            "vehicle": "Ferrari",
+            "date": "2023-12-15T18:05:00.000Z",
+            "reason": "Uni + Bäcker",
+            "mileAge": {
+                "current": 19217,
+                "new": 19250,
+                "difference": 33,
+                "cost": 6.6,
+                "unit": "km"
+            },
+            "details": {
+                "covered": false
+            },
+            "createdAt": "2023-12-21T17:05:25.266Z"
+        },
+        {
+            "_id": "657c3f6294c794748341a3f5",
+            "driver": "Oliver",
+            "vehicle": "Ferrari",
+            "date": "2023-12-15T12:57:56.191Z",
+            "reason": "Stadtfahrten",
+            "mileAge": {
+                "current": 19195,
+                "new": 19217,
+                "difference": 22,
+                "cost": 4.4,
+                "unit": "km"
+            },
+            "details": {
+                "covered": false
+            },
+            "createdAt": "2023-12-15T11:58:26.351Z"
+        },
+        {
+            "_id": "657b76fa53439500439dae4d",
+            "driver": "Oliver",
+            "vehicle": "VW",
+            "date": "2023-12-14T22:42:59.823Z",
+            "reason": "Berlin-Dresden",
+            "mileAge": {
+                "current": 192392,
+                "new": 192583,
+                "difference": 191,
+                "cost": 38.2,
+                "unit": "km"
+            },
+            "details": {
+                "covered": false
+            },
+            "createdAt": "2023-12-14T21:43:22.875Z"
+        },
+        {
+            "_id": "657b6031f0a7c4d0079791b6",
+            "driver": "Oliver",
+            "vehicle": "VW",
+            "date": "2023-12-14T21:05:20.280Z",
+            "reason": "Dresden-Berlin",
+            "mileAge": {
+                "current": 192119,
+                "new": 192392,
+                "difference": 273,
+                "cost": 54.6,
+                "unit": "km"
+            },
+            "details": {
+                "covered": false
+            },
+            "refuel": {
+                "liters": 59.3,
+                "price": 99.06,
+                "distanceDifference": 849,
+                "consumption": 6.984687868080094,
+                "isSpecial": false,
+                "previousRecordId": "654d19001ff9285577173687"
+            },
+            "createdAt": "2023-12-14T20:06:09.558Z"
+        },
+        {
+            "_id": "657b365a4d25fe3c3d81996f",
+            "driver": "Thomas",
+            "vehicle": "Ferrari",
+            "date": "2023-12-14T18:07:29.061Z",
+            "reason": "Uni",
+            "mileAge": {
+                "current": 19184,
+                "new": 19195,
+                "difference": 11,
+                "cost": 2.2,
+                "unit": "km"
+            },
+            "details": {
+                "covered": false
+            },
+            "createdAt": "2023-12-14T17:07:38.821Z"
+        },
+        {
+            "_id": "6578b3717558f28a68ff4c2b",
+            "driver": "Oliver",
+            "vehicle": "Ferrari",
+            "date": "2023-12-12T20:24:15.057Z",
+            "reason": "Stadtfahrt",
+            "mileAge": {
+                "current": 19164,
+                "new": 19184,
+                "difference": 20,
+                "cost": 4,
+                "unit": "km"
+            },
+            "details": {
+                "covered": false
+            },
+            "createdAt": "2023-12-12T19:24:33.136Z"
+        },
+        {
+            "_id": "657862ceb906db720e9e3ddc",
+            "driver": "Oliver",
+            "vehicle": "MX5",
+            "date": "2023-12-12T14:40:05.826Z",
+            "reason": "Probefahrt",
+            "mileAge": {
+                "current": 27451,
+                "new": 27454,
+                "difference": 3,
+                "cost": 0.6,
+                "unit": "mile"
+            },
+            "details": {
+                "covered": false
+            },
+            "createdAt": "2023-12-12T13:40:30.904Z"
+        },
+        {
+            "_id": "65785b8a69bcc05ae355491a",
+            "driver": "Oliver",
+            "vehicle": "DS",
+            "date": "2023-12-12T14:09:09.762Z",
+            "reason": "Probefahrt",
+            "mileAge": {
+                "current": 99077,
+                "new": 99088,
+                "difference": 11,
+                "cost": 2.2,
+                "unit": "km"
+            },
+            "details": {
+                "covered": false
+            },
+            "createdAt": "2023-12-12T13:09:30.364Z"
+        },
+        {
+            "_id": "65759b82264d3975824ec5df",
+            "driver": "Thomas",
+            "vehicle": "Ferrari",
+            "date": "2023-12-10T12:05:23.270Z",
+            "reason": "Mama Bahnhof",
+            "mileAge": {
+                "current": 19155,
+                "new": 19164,
+                "difference": 9,
+                "cost": 1.8,
+                "unit": "km"
+            },
+            "details": {
+                "covered": true,
+                "driver": "Claudia"
+            },
+            "createdAt": "2023-12-10T11:05:38.654Z"
+        },
+        {
+            "_id": "65742986584f90c0e0cb43d5",
+            "driver": "Oliver",
+            "vehicle": "Ferrari",
+            "date": "2023-12-09T09:46:50.556Z",
+            "reason": "Stadtfahrt",
+            "mileAge": {
+                "current": 19141,
+                "new": 19155,
+                "difference": 14,
+                "cost": 2.8,
+                "unit": "km"
+            },
+            "details": {
+                "covered": false
+            },
+            "createdAt": "2023-12-09T08:47:02.226Z"
+        },
+        {
+            "_id": "6571c9ecf90b143dd7e355f2",
+            "driver": "Oliver",
+            "vehicle": "VW",
+            "date": "2023-12-07T14:34:09.676Z",
+            "reason": "Stadtfahrten, Weihnachtsbaumkauf",
+            "mileAge": {
+                "current": 192092,
+                "new": 192119,
+                "difference": 27,
+                "cost": 5.4,
+                "unit": "km"
+            },
+            "details": {
+                "covered": false
+            },
+            "createdAt": "2023-12-07T13:34:36.856Z"
+        },
+        {
+            "_id": "6568f26f18f7413237896717",
+            "driver": "Oliver",
+            "vehicle": "VW",
+            "date": "2023-11-30T21:36:44.129Z",
+            "reason": "Stadtfahrten",
+            "mileAge": {
+                "current": 192046,
+                "new": 192092,
+                "difference": 46,
+                "cost": 9.2,
+                "unit": "km"
+            },
+            "details": {
+                "covered": false
+            },
+            "createdAt": "2023-11-30T20:37:03.367Z"
+        },
+        {
+            "_id": "6564c16c6209bf5e8740c4a3",
+            "driver": "Andrea",
+            "vehicle": "VW",
+            "date": "2023-11-27T17:18:38.983Z",
+            "reason": "Reiten Emilia",
+            "mileAge": {
+                "current": 192018,
+                "new": 192046,
+                "difference": 28,
+                "cost": 5.6,
+                "unit": "km"
+            },
+            "details": {
+                "covered": false
+            },
+            "createdAt": "2023-11-27T16:18:52.674Z"
+        },
+        {
+            "_id": "6564c1556209bf5e8740c49c",
+            "driver": "Andrea",
+            "vehicle": "VW",
+            "date": "2023-11-27T17:18:06.673Z",
+            "reason": "Clemens & Kino",
+            "mileAge": {
+                "current": 191978,
+                "new": 192018,
+                "difference": 40,
+                "cost": 8,
+                "unit": "km"
+            },
+            "details": {
+                "covered": false
+            },
+            "createdAt": "2023-11-27T16:18:29.081Z"
+        },
+        {
+            "_id": "6564c1386209bf5e8740c495",
+            "driver": "Andrea",
+            "vehicle": "VW",
+            "date": "2023-11-27T17:17:14.428Z",
+            "reason": "Jumphouse+Einkaufen",
+            "mileAge": {
+                "current": 191926,
+                "new": 191978,
+                "difference": 52,
+                "cost": 10.4,
+                "unit": "km"
+            },
+            "details": {
+                "covered": true,
+                "driver": "Claudia"
+            },
+            "createdAt": "2023-11-27T16:18:00.789Z"
+        },
+        {
+            "_id": "656366d5736f402d18488d96",
+            "driver": "Oliver",
+            "vehicle": "Ferrari",
+            "date": "2023-11-26T16:39:50.624Z",
+            "reason": "Stadtfahrt",
+            "mileAge": {
+                "current": 19129,
+                "new": 19141,
+                "difference": 12,
+                "cost": 2.4,
+                "unit": "km"
+            },
+            "details": {
+                "covered": false
+            },
+            "createdAt": "2023-11-26T15:40:05.152Z"
+        },
+        {
+            "_id": "65623388fea0d8b09099b005",
+            "driver": "Oliver",
+            "vehicle": "DS",
+            "date": "2023-11-25T18:48:16.505Z",
+            "reason": "Stadtfahrt",
+            "mileAge": {
+                "current": 99061,
+                "new": 99077,
+                "difference": 16,
+                "cost": 3.2,
+                "unit": "km"
+            },
+            "details": {
+                "covered": false
+            },
+            "refuel": {
+                "liters": 58.2,
+                "price": 103.45,
+                "distanceDifference": 0,
+                "consumption": 0,
+                "isSpecial": false
+            },
+            "createdAt": "2023-11-25T17:48:56.137Z"
+        }
+    ],
+    "total": 823,
+    "length": 25,
+    "limit": 25,
+    "page": 0,
+    "pageCount": 33
+}

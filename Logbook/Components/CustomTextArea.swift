@@ -14,7 +14,7 @@ struct CustomTextArea: ViewModifier {
         content
             .padding(.vertical, 10)
             .padding(.horizontal, 15)
-            .background(.secondary)
+            .background(.secondary.opacity(0.5))
             .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
             .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).stroke(lineWidth: 1).fill(.black.opacity(0.1)))
     }
@@ -30,7 +30,7 @@ extension View {
         func textEditorBackground<V>(@ViewBuilder _ content: () -> V) -> some View where V : View {
             self
                 .onAppear {
-                    UITextView.appearance().backgroundColor = .red
+                    UITextView.appearance().backgroundColor = .clear
                 }
                 .background(content())
         }

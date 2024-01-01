@@ -11,8 +11,7 @@ struct ContentView: View {
     
     @EnvironmentObject var model: Model
     @EnvironmentObject var networkReachablility: NetworkReachability
-    @AppStorage("selectedTab") var selectedTab: Tab = .stats
-    @AppStorage("showAccount") var showAccount = false
+    @AppStorage("selectedTab") var selectedTab: Tab = .home
     
     @State private var scrollPositionInList = 0.0
     
@@ -21,19 +20,13 @@ struct ContentView: View {
     
     private static let isPreview = false
     
-    @Preference(\.isOpenAddViewOnStart) var isOpenAddViewOnStart
-    
-    init() {
-        showAccount = false
-    }
+    @AppStorage("isOpenAddViewOnStart") var isOpenAddViewOnStart = false
     
     var body: some View {
         ZStack {
-            //Color(hex: "17203A").ignoresSafeArea()
+//            Color(hex: "17203A").ignoresSafeArea()
             
-            //            SideMenu()
-            
-                        Group {
+            Group {
             switch selectedTab {
             case .home:
                 ListView(showAdd: $model.showTab, lastRefreshDate: $lastRefreshDate)
@@ -45,8 +38,8 @@ struct ContentView: View {
                 } else {
                     GasStationsView()
                 }
-            case .stats:
-                StatsView()
+//            case .stats:
+//                StatsView()
             case .settings:
                 SettingsView()
             }
@@ -69,41 +62,8 @@ struct ContentView: View {
                 .offset(y: isOpen ? 300 : 0)
                 .offset(y: !model.showTab ? 200 : 0)
             
-            
-            
-            //            Image(systemName: "person")
-            //                .frame(width: 36, height: 36)
-            //                .background(.background)
-            //                .mask(Circle())
-            //                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-            //                .shadow(color: Color("Shadow").opacity(0.2), radius: 5, x: 0, y: 5)
-            //                .padding()
-            //                .offset(y: 4)
-            //                .offset(x: isOpen ? 100 : 0)
-            //                .onTapGesture {
-            //                    withAnimation(.spring()) {
-            //                        model.showAdd.toggle()
-            //                    }
-            //                }
-            
-            if model.showAdd {
-                AddEntryView(show: $model.showAdd, showTab: $model.showTab, lastAddedEntry: $model.lastAddedEntry)
-                    .background(.regularMaterial)
-                    .mask(RoundedRectangle(cornerRadius: 30, style: .continuous))
-                    .shadow(color: .black.opacity(0.5), radius: 40, x: 0, y: 40)
-                    .ignoresSafeArea(.all, edges: .top)
-                    .offset(y: model.showAdd ? -10 : 0)
-                    .zIndex(1)
-                    .transition(.opacity.combined(with: .move(edge: .top)))
-                    .frame(maxWidth: .infinity, minHeight: 600, maxHeight: .infinity)
-                //                Spacer()
-            }
         }
-        //        .clipped()
         .dynamicTypeSize(.large ... .xxLarge)
-        .sheet(isPresented: $showAccount) {
-            EmptyView()
-        }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 withAnimation(.spring()) {
@@ -112,6 +72,12 @@ struct ContentView: View {
                 }
             }
             //            isInitalLoad.toggle()
+        }
+        .sheet(isPresented: $model.showAdd) {
+            AddEntryView(show: $model.showAdd, showTab: $model.showTab, lastAddedEntry: $model.lastAddedEntry)
+                .presentationBackground(.ultraThinMaterial)
+                .presentationCornerRadius(30)
+                .presentationDetents([.large])
         }
     }
 }

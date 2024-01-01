@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI_Extensions
 import Charts
+import Alamofire
 
 struct LogbookEntry {
     
@@ -34,7 +35,7 @@ struct LogbookEntry {
     var service: Service?
 }
 
-struct Service: Codable, Equatable {
+public struct Service: Codable, Equatable {
     
     init() {
         self.message = ""
@@ -42,10 +43,10 @@ struct Service: Codable, Equatable {
     }
     
     var message: String
-    var price: Decimal
+    var price: Double
 }
 
-struct Refuel: Codable, Equatable {
+public struct Refuel: Codable, Equatable {
     
     init() {
         self.liters = 0
@@ -53,11 +54,12 @@ struct Refuel: Codable, Equatable {
         self.isSpecial = false
     }
     
-    var liters: Decimal
-    var price: Decimal
-    var distanceDifference: Decimal?
-    var consumption: Decimal?
+    var liters: Double
+    var price: Double
+    var distanceDifference: Double?
+    var consumption: Double?
     var isSpecial: Bool
+    var previousRecordID: String?
 }
 
 struct Details: Codable, Equatable {
@@ -77,13 +79,12 @@ struct MileAge: Codable, Equatable {
     init() {
         self.current = 0
         self.new = 0
-        self.unit = UnitEnum.Km
+        self.unit = "km"
     }
-    var current: Decimal
-    var new: Decimal
-    var unit: UnitEnum
-    var difference: Decimal?
-    var cost: Decimal?
+    var current, new: Int
+    var unit: String
+    var difference: Int?
+    var cost: Double?
 }
 
 extension LogbookEntry: Codable {}
@@ -92,14 +93,14 @@ extension LogbookEntry: Identifiable {}
 
 extension LogbookEntry {
     
-    static var previewData: [LogbookEntry] {
+    static var previewData: LogbookAPIResponse {
         let previewDataURL = Bundle.main.url(forResource: "logbooks", withExtension: "json")!
         let data = try! Data(contentsOf: previewDataURL)
         
         let jsonDecoder = JSONDecoder()
         jsonDecoder.dateDecodingStrategy = .formatted(.iso8601Full)
         
-        let apiResponse = try! jsonDecoder.decode([LogbookEntry].self, from: data)
+        let apiResponse = try! jsonDecoder.decode(LogbookAPIResponse.self, from: data)
         
         return apiResponse
     }
@@ -116,8 +117,8 @@ enum DriverEnum: String, CaseIterable, Codable, Identifiable {
 }
 
 enum UnitEnum: String, CaseIterable, Codable, Identifiable {
-    case Km = "km"
-    case Mile = "mile"
+    case km
+    case mile
     
     var id: String { UUID().uuidString }
 }
@@ -161,14 +162,6 @@ enum VehicleEnum: String, CaseIterable, Identifiable, Codable, Equatable {
     var id: String { UUID().uuidString }
 }
 
-enum AdditionalInformationTypEnum: String, Equatable, CaseIterable, Codable, Identifiable {
-    case Keine
-    case Getankt
-    case Gewartet
-    
-    var id: String { UUID().uuidString }
-}
-
 func getVehicleIcon(vehicleTyp: VehicleEnum) -> String {
     switch vehicleTyp {
     case .Ferrari:
@@ -178,9 +171,9 @@ func getVehicleIcon(vehicleTyp: VehicleEnum) -> String {
     case .VW:
         return "VW"
     case .DS:
-        return "Topic 2"
+        return "ds"
     case .MX5:
-        return "Topic 2"
+        return "mx5"
     }
 }
 
@@ -197,3 +190,60 @@ func getVehicleBackground(vehicleTyp: VehicleEnum) -> String {
     }
 }
 
+
+extension Optional where Wrapped == String {
+    var _bound: String? {
+        get {
+            return self
+        }
+        set {
+            self = newValue
+        }
+    }
+    public var bound: String {
+        get {
+            return _bound ?? ""
+        }
+        set {
+            _bound = newValue.isEmpty ? nil : newValue
+        }
+    }
+}
+
+extension Optional where Wrapped == Service {
+    var _bound: Service? {
+        get {
+            return self
+        }
+        set {
+            self = newValue
+        }
+    }
+    public var bound: Service {
+        get {
+            return _bound ?? Service()
+        }
+        set {
+            _bound = newValue
+        }
+    }
+}
+
+extension Optional where Wrapped == Refuel {
+    var _bound: Refuel? {
+        get {
+            return self
+        }
+        set {
+            self = newValue
+        }
+    }
+    public var bound: Refuel {
+        get {
+            return _bound ?? Refuel()
+        }
+        set {
+            _bound = newValue
+        }
+    }
+}
