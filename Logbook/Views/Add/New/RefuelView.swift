@@ -9,12 +9,11 @@ import SwiftUI
 
 struct RefuelView: View {
     
-    @State private var logbookEntry: LogbookEntry = LogbookEntry()    
     @State var price = 0
     @State var liters = 0
-    @State var isSpecial: Bool = false
     @State var canSubmit: Bool = true
     
+    @Binding var newLogbook: LogbookEntry
     @Binding var showAddInfoSelection: Bool
     @Binding var showSheet: Bool
     @Binding var selection: Int
@@ -26,9 +25,16 @@ struct RefuelView: View {
         return formatter
     }()
     
+    var isSubmittable: Bool {
+        (liters != 0 && price != 0 && !(newLogbook.refuel?.isSpecial ?? false)) || (liters != 0 && price != 0 && (newLogbook.refuel?.isSpecial ?? false))
+    }
+    
     var body: some View {
         VStack {
             Button {
+                if(!isSubmittable) {
+                    newLogbook.refuel = nil
+                }
                 selection = -1
                 showSheet.toggle()
             } label: {
@@ -53,7 +59,7 @@ struct RefuelView: View {
                 
                 MassTextField(value: $liters)
                     .padding(.horizontal, 10)
-                    .customTextField(image: Image(systemName: "eurosign"))
+                    .customTextField(image: Image(systemName: "flame"))
                     .frame(height: 50)
                 
                 Text("Preis")
@@ -62,7 +68,7 @@ struct RefuelView: View {
                 
                 CurrencyTextField(numberFormatter: numberFormatter, value: $price)
                     .padding(.horizontal, 10)
-                    .customTextField(image: Image(systemName: "flame"))
+                    .customTextField(image: Image(systemName: "eurosign"))
                     .frame(height: 50)
 //                    .overlay(RoundedRectangle(cornerRadius: 16)
 //                                .stroke(Color.gray.opacity(0.3), lineWidth: 2))
@@ -71,14 +77,15 @@ struct RefuelView: View {
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                 
-                
-                Toggle(isOn: $isSpecial) {
+                Toggle(isOn: $newLogbook.refuel.bound.isSpecial) {
                     Text("Keine Volltankung")
                 }
                 .padding(.top, 10)
                 .padding(.bottom, 20)
                 
                 Button {
+                    newLogbook.refuel?.liters = Double(liters) / 100
+                    newLogbook.refuel?.price = Double(price) / 100
                     showAddInfoSelection.toggle()
                 } label: {
                     HStack {
@@ -86,24 +93,21 @@ struct RefuelView: View {
                         Text("Speichern")
                             .customFont(.headline)
                     }
-                    .largeButton(disabled: !canSubmit)
+                    .largeButton(disabled: !isSubmittable)
                 }
-                .disabled(!canSubmit)
+                .disabled(!isSubmittable)
 
             }
             .padding(20)
-//            .background(.ultraThinMaterial)
-//            .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
-//            .shadow(color: Color("Shadow").opacity(0.3), radius: 5, x: 0, y: 3)
-//            .shadow(color: Color("Shadow").opacity(0.3), radius: 30, x: 0, y: 30)
-//            .overlay(
-//                RoundedRectangle(cornerRadius: 20, style: .continuous)
-//                    .stroke(.linearGradient(colors: [.white.opacity(0.8), .white.opacity(0.1)], startPoint: .topLeading, endPoint: .bottomTrailing))
-//            )
+            .onAppear {
+                if(newLogbook.refuel == nil) {
+                    newLogbook.refuel = Refuel()
+                }
+            }
         }
     }
 }
 
 #Preview {
-    RefuelView(showAddInfoSelection: .constant(false), showSheet: .constant(false), selection: .constant(-1))
+    RefuelView(newLogbook: .constant(LogbookEntry.previewData.data[0]), showAddInfoSelection: .constant(false), showSheet: .constant(false), selection: .constant(-1))
 }

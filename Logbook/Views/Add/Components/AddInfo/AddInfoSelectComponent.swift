@@ -12,11 +12,33 @@ struct AddInfoSelectComponent: View {
     @State private var selection: Int = -1
     @State private var showSheet: Bool = false
     @Binding var showAddInfoSelection: Bool
+    @Binding var newLogbook: LogbookEntry
+    
+    // Change the opacity based on the selection index
+    // The index is based on the additional Information given
+    // -1 = No Information
+    // 0 = Refuel
+    // 1 = Service
+    // 2 = Refuel & Service
+    var selectionIndex: Int {
+        if(newLogbook.refuel != nil && newLogbook.service != nil) {
+            return 2
+        }
+        if(newLogbook.service != nil) {
+            return 1
+        } 
+        if(newLogbook.refuel != nil) {
+            return 0
+        }
+        return -1
+    }
     
     var body: some View {
         VStack {
             Button {
-                showAddInfoSelection.toggle()
+                withAnimation {
+                    showAddInfoSelection.toggle()
+                }
             } label: {
                 Image(systemName: "xmark")
                     .foregroundColor(.white)
@@ -53,9 +75,9 @@ struct AddInfoSelectComponent: View {
     @ViewBuilder
     func AddInfoComponent() -> some View {
         if(selection == 0) {
-            RefuelView(showAddInfoSelection: $showAddInfoSelection, showSheet: $showSheet, selection: $selection)
+            RefuelView(price: Int((newLogbook.refuel?.price ?? 0) * 100), liters: Int((newLogbook.refuel?.liters ?? 0) * 100), newLogbook: $newLogbook, showAddInfoSelection: $showAddInfoSelection, showSheet: $showSheet, selection: $selection)
         } else {
-            ServiceView(selection: $selection, showSheet: $showSheet, showAddInfoSelection: $showAddInfoSelection)
+            ServiceView(price: Int(newLogbook.service?.price ?? 0) * 100, message: newLogbook.service?.message ?? "", newLogbook: $newLogbook, selection: $selection, showSheet: $showSheet, showAddInfoSelection: $showAddInfoSelection)
         }
     }
     
@@ -64,19 +86,21 @@ struct AddInfoSelectComponent: View {
         VStack {
             Button {
                 action()
-                showSheet.toggle()
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    showSheet.toggle()
+//                }
             } label: {
                 Image(systemName: iconName)
                     .resizable()
                     .scaledToFit()
-                    .symbolEffect(.pulse, isActive: index == selection)
+                    .symbolEffect(.variableColor, options: .nonRepeating, isActive: selection == index)
             }
             .padding()
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(.blue, lineWidth: 5)
             )
-            .opacity(selection == index ? 1 : 0.4)
+            .opacity(selectionIndex == index || selectionIndex == 2 ? 1 : 0.4) //
             
             Text(description)
                 .font(.subheadline)
@@ -86,5 +110,5 @@ struct AddInfoSelectComponent: View {
 }
 
 #Preview {
-    AddInfoSelectComponent(showAddInfoSelection: .constant(false))
+    AddInfoSelectComponent(showAddInfoSelection: .constant(false), newLogbook: .constant(LogbookEntry.previewData.data[0]))
 }

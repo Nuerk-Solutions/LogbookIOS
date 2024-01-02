@@ -9,12 +9,10 @@ import SwiftUI
 
 struct ServiceView: View {
     
-    @State private var logbookEntry: LogbookEntry = LogbookEntry()
-    @State private var price = 0
-    @State private var message = ""
-    @State private var test: String? = "Test"
-    @State private var canSubmit: Bool = true
+    @State var price = 0
+    @State var message = ""
     
+    @Binding var newLogbook: LogbookEntry
     @Binding var selection: Int
     @Binding var showSheet: Bool
     @Binding var showAddInfoSelection: Bool
@@ -26,9 +24,16 @@ struct ServiceView: View {
         return formatter
     }()
     
+    var isSubmittable: Bool {
+        price != 0  && !message.isEmpty
+    }
+    
     var body: some View {
         NavigationStack {
             Button {
+                if(!isSubmittable) {
+                    newLogbook.service = nil
+                }
                 selection = -1
                 showSheet.toggle()
             } label: {
@@ -60,7 +65,7 @@ struct ServiceView: View {
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                 
-                TextEditor(text: $logbookEntry.service.bound.message)
+                TextEditor(text: $message)
                     .multilineTextAlignment(.leading)
                     .frame(minHeight: 30, maxHeight: 220, alignment: .leading)
                     .scrollContentBackground(.hidden)
@@ -75,8 +80,11 @@ struct ServiceView: View {
                             }
                         }
                     }
+                    .padding(.bottom, 20)
                 
                     Button {
+                        newLogbook.service?.price = Double(price) / 100
+                        newLogbook.service?.message = message
                         showAddInfoSelection.toggle()
                     } label: {
                         HStack {
@@ -84,18 +92,22 @@ struct ServiceView: View {
                             Text("Übernehmen")
                                 .customFont(.headline)
                         }
-                        .largeButton(disabled: !canSubmit)
+                        .largeButton(disabled: !isSubmittable)
                     }
-                    .disabled(!canSubmit)
+                    .disabled(!isSubmittable)
                 
             }
             .padding(20)
-            .background(.regularMaterial)
+            .onAppear {
+                if(newLogbook.service == nil) {
+                    newLogbook.service = Service()
+                }
+            }
         }
     }
 }
 
 
 #Preview {
-    ServiceView(selection: .constant(-1), showSheet: .constant(false), showAddInfoSelection: .constant(false))
+    ServiceView(newLogbook: .constant(LogbookEntry.previewData.data[0]), selection: .constant(-1), showSheet: .constant(false), showAddInfoSelection: .constant(false))
 }

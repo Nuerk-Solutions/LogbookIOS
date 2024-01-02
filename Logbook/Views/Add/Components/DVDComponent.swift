@@ -12,24 +12,15 @@ struct DVDComponent: View {
     @AppStorage("currentDriver") var currentDriver: DriverEnum = .Andrea
     @AppStorage("currentVehicle") var currentVehicle: VehicleEnum = .Ferrari
     @Binding var newLogbook: LogbookEntry
+    
     var lastLogbooks: [LogbookEntry]
     
     var body: some View {
-        Group {
-            DatePicker("Datum", selection: $newLogbook.date, in: (getLogbookForVehicle(lastLogbooks: lastLogbooks, vehicle: newLogbook.vehicle)?.date ?? Date())...Date())
-                .customFont(.body)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            
+        VStack {
             HStack {
-                Picker("", selection: $newLogbook.vehicle) {
-                    ForEach(VehicleEnum.allCases) { vehicle in
-                        Image("\(getVehicleIcon(vehicleTyp: vehicle))_32")
-                            .tag(vehicle)
-                    }
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .customFont(.body)
-                .frame(maxWidth: .infinity, alignment: .leading)
+                DatePicker("Datum", selection: $newLogbook.date, in: (getLogbookForVehicle(lastLogbooks: lastLogbooks, vehicle: newLogbook.vehicle)?.date ?? Date())...Date())
+                    .customFont(.body)
+
                 
                 Menu(content: {
                     Picker(selection: $newLogbook.driver) {
@@ -37,24 +28,40 @@ struct DVDComponent: View {
                             Text(driver.rawValue)
                                 .tag(driver)
                         }
-                    } label: {
-                        Text("TEST")
-                    }
+                    } label: {}
                     .customFont(.body)
                 }, label: {
                     Image(systemName: "person.circle")
                         .resizable()
-                        .frame(width: 24, height: 24)
+                        .frame(width: 28, height: 28)
                 })
             }
-//            .onChange(of: $newLogbook.vehicle) { newValue in
-//                currentVehicle = newValue
-//                newLogbook.mileAge.current = getLogbookForVehicle(vehicle: newValue)?.mileAge.new ?? 0
-//            }
+            
+            VehicleView()
+            .onChange(of: newLogbook.vehicle) {
+                newLogbook.mileAge.unit = newLogbook.vehicle.unit
+                newLogbook.mileAge.current = getLogbookForVehicle(lastLogbooks: lastLogbooks, vehicle: newLogbook.vehicle)?.mileAge.new ?? 0
+            }
         }
     }
+    
+    @ViewBuilder
+    func VehicleView() -> some View {
+//        GeometryReader { proxy in
+        Picker("", selection: $newLogbook.vehicle) {
+                    ForEach(VehicleEnum.allCases) { vehicle in
+                        Image("\(getVehicleIcon(vehicleTyp: vehicle))_32")
+                            .tag(vehicle)
+                            .frame(width: 32, height: 32)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .animation(nil)
+//                .frame(width: proxy.size.width, height: 20)
+//        }
+    }
+    
 }
-
 #Preview {
-    DVDComponent(newLogbook: .constant(LogbookEntry.previewData.data[0]), lastLogbooks: [])
+    DVDComponent(newLogbook: .constant(LogbookEntry.previewData.data[0]),  lastLogbooks: [])
 }

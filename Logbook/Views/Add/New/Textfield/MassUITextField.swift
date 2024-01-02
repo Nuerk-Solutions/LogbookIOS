@@ -23,12 +23,15 @@ class MassUITextField: UITextField {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: superview)
         addTarget(self, action: #selector(editingChanged), for: .editingChanged)
+        addTarget(self, action: #selector(valueChanged), for: .valueChanged)
         addTarget(self, action: #selector(resetSelection), for: .allTouchEvents)
         keyboardType = .numberPad
         textAlignment = .right
+        sendActions(for: .valueChanged)
         sendActions(for: .editingChanged)
     }
     
@@ -54,7 +57,12 @@ class MassUITextField: UITextField {
         }
     }
     
+    @objc private func valueChanged() {
+        print("Value changed!", self.value)
+    }
+    
     @objc private func editingChanged() {
+        print("Edit changed!", self.value)
         if(self.intValue < 100000) {
             text = unit(from: decimal)
         } else {

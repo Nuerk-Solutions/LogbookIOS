@@ -195,7 +195,7 @@ struct EntryView: View {
                                 .scaledToFit()
                                 .frame(width: 24, height: 24)
                             
-                            Text("\(entry.mileAge.difference ?? -1) km")
+                            Text("\(entry.mileAge.difference ?? -1) \(entry.mileAge.unit.name)")
                                 .font(.body).bold()
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .foregroundColor(.primary.opacity(0.7))
@@ -266,7 +266,7 @@ struct EntryView: View {
     var sectionsSection: some View {
         HStack {
             SectionIconRow(iconName: "flag", innerFrame: 18, outerFrame: 30, contentSpacing: 10, shouldSpace: true, circleValue: 1, progressValue: 0) {
-                Text("\(digitsFormatter.string(for: entry.mileAge.current)!) km")
+                Text("\(digitsFormatter.string(for: entry.mileAge.current)!) \(entry.mileAge.unit.name)")
                     .fontWeight(.semibold)
                     .padding(.top, 12)
             }
@@ -278,7 +278,7 @@ struct EntryView: View {
             
             SectionIconRow(iconName: "flag.fill", innerFrame: 18, outerFrame: 30, contentSpacing: 10, shouldSpace: false, circleValue: 1, progressValue: 0) {
                 
-                Text("\(digitsFormatter.string(for: entry.mileAge.new)!) km")
+                Text("\(digitsFormatter.string(for: entry.mileAge.new)!) \(entry.mileAge.unit.name)")
                     .fontWeight(.semibold)
                     .padding(.trailing, 15)
                     .padding(.top, 12)

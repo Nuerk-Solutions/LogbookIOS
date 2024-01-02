@@ -57,7 +57,8 @@ struct LogbookAPI {
                     case .success:
                         break
                     case .failure(let error):
-                        print(error)
+                        return
+//                        print(error)
                         // see https://karenxpn.medium.com/swiftui-mvvm-combine-alamofire-make-http-requests-the-right-way-and-handle-errors-258e0f0bb0df
                         //                    return generateError(code: response.response?.statusCode ?? -1, description: error.localizedDescription ?? "Ein Fehler ist aufgetreten")
                     }

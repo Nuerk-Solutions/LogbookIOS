@@ -12,13 +12,13 @@ import Alamofire
 
 struct LogbookEntry {
     
-    init() {
+    init(mileAge: MileAge = MileAge()) {
         self._id = nil
         self.driver = DriverEnum.Andrea
         self.vehicle = VehicleEnum.VW
         self.date = Date()
         self.reason = "Stadtfahrt"
-        self.mileAge = MileAge()
+        self.mileAge = mileAge
         self.details = Details()
     }
     
@@ -48,10 +48,10 @@ public struct Service: Codable, Equatable {
 
 public struct Refuel: Codable, Equatable {
     
-    init() {
-        self.liters = 0
-        self.price = 0
-        self.isSpecial = false
+    init(liters: Double = 0, price: Double = 0, isSpecial: Bool = false) {
+        self.liters = liters
+        self.price = price
+        self.isSpecial = isSpecial
     }
     
     var liters: Double
@@ -76,13 +76,13 @@ struct Details: Codable, Equatable {
 
 struct MileAge: Codable, Equatable {
     
-    init() {
-        self.current = 0
-        self.new = 0
-        self.unit = "km"
+    init(current: Int = 0, new: Int = 0) {
+        self.current = current
+        self.new = new
+        self.unit = UnitEnum.KM
     }
     var current, new: Int
-    var unit: String
+    var unit: UnitEnum
     var difference: Int?
     var cost: Double?
 }
@@ -117,8 +117,27 @@ enum DriverEnum: String, CaseIterable, Codable, Identifiable {
 }
 
 enum UnitEnum: String, CaseIterable, Codable, Identifiable {
-    case km
-    case mile
+    case KM = "km"
+    case MILE = "mile"
+    
+    
+    var name: String {
+        switch self {
+        case .KM:
+            return "km"
+        case .MILE:
+            return "mi"
+        }
+    }
+    
+    var fullName: String {
+        switch self {
+        case .KM:
+            return "Kilometerstand"
+        case .MILE:
+            return "Meilenstand"
+        }
+    }
     
     var id: String { UUID().uuidString }
 }
@@ -139,6 +158,10 @@ enum VehicleEnum: String, CaseIterable, Identifiable, Codable, Equatable {
         case .Porsche, .DS:
             return .SUPER_E10
         }
+    }
+    
+    var unit: UnitEnum {
+        return self != .MX5 ? .KM : .MILE
     }
     
     var fuelDescription: String {

@@ -12,7 +12,7 @@ struct EntrySubmitComponent: View {
     
     var body: some View {
         if(newLogbook.isSubmittable) {
-            Text("Zusammenfassung: \(String(format: "%.0fkm", newLogbook.distance)) / \((newLogbook.distance * 0.2).formatted(.currency(code: "EUR")))")
+            Text("Zusammenfassung: \(String(format: "%.0f\(newLogbook.mileAge.unit.name)", newLogbook.distance)) / \((newLogbook.computedDistance * 0.2).formatted(.currency(code: "EUR")))")
                 .lineLimit(1)
                 .frame(maxWidth: .infinity, alignment: .leading)
         } else {

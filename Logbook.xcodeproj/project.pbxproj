@@ -58,6 +58,7 @@
 		E92F54BB287DDE76008A72AF /* GasStationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F54BA287DDE76008A72AF /* GasStationAPI.swift */; };
 		E93872A128638D800009F0F1 /* GasStationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93872A028638D800009F0F1 /* GasStationRow.swift */; };
 		E93872AB286394670009F0F1 /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = E93872AA286394670009F0F1 /* SwiftDate */; };
+		E93F33A72B44601300978042 /* Macaw in Frameworks */ = {isa = PBXBuildFile; productRef = E93F33A62B44601300978042 /* Macaw */; };
 		E940E8BB28426A64009F1225 /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = E940E8BA28426A64009F1225 /* NetworkReachability.swift */; };
 		E940E8BE28426E50009F1225 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E940E8BD28426E50009F1225 /* CloseButton.swift */; };
 		E940E8C128426EFA009F1225 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E940E8C028426EFA009F1225 /* Modifiers.swift */; };
@@ -249,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E95862B9287B0D990017F2BA /* SwiftLocation in Frameworks */,
+				E93F33A72B44601300978042 /* Macaw in Frameworks */,
 				E91AFA23283FD0D60024131D /* Alamofire in Frameworks */,
 				E91AFA39283FE8B10024131D /* SwiftUI Extensions in Frameworks */,
 				E93872AB286394670009F0F1 /* SwiftDate in Frameworks */,
@@ -666,6 +668,7 @@
 				E91AFA38283FE8B10024131D /* SwiftUI Extensions */,
 				E93872AA286394670009F0F1 /* SwiftDate */,
 				E95862B8287B0D990017F2BA /* SwiftLocation */,
+				E93F33A62B44601300978042 /* Macaw */,
 			);
 			productName = Logbook;
 			productReference = E91AFA0B283FD09F0024131D /* Logbook.app */;
@@ -700,6 +703,7 @@
 				E91AFA37283FE8B10024131D /* XCRemoteSwiftPackageReference "SwiftUI-Extensions" */,
 				E93872A9286394670009F0F1 /* XCRemoteSwiftPackageReference "SwiftDate" */,
 				E95862B7287B0D990017F2BA /* XCRemoteSwiftPackageReference "SwiftLocationWHeading" */,
+				E93F33A52B44601200978042 /* XCRemoteSwiftPackageReference "Macaw" */,
 			);
 			productRefGroup = E91AFA0C283FD09F0024131D /* Products */;
 			projectDirPath = "";
@@ -1088,6 +1092,14 @@
 				kind = branch;
 			};
 		};
+		E93F33A52B44601200978042 /* XCRemoteSwiftPackageReference "Macaw" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/Macaw";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.10;
+			};
+		};
 		E95862B7287B0D990017F2BA /* XCRemoteSwiftPackageReference "SwiftLocationWHeading" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/derech1e/SwiftLocationWHeading";
@@ -1113,6 +1125,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E93872A9286394670009F0F1 /* XCRemoteSwiftPackageReference "SwiftDate" */;
 			productName = SwiftDate;
+		};
+		E93F33A62B44601300978042 /* Macaw */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E93F33A52B44601200978042 /* XCRemoteSwiftPackageReference "Macaw" */;
+			productName = Macaw;
 		};
 		E95862B8287B0D990017F2BA /* SwiftLocation */ = {
 			isa = XCSwiftPackageProductDependency;
