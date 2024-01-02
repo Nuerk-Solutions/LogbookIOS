@@ -6,13 +6,15 @@
 //
 
 import SwiftUI
+import AlertKit
 
 struct EntrySubmitComponent: View {
-    @Binding var newLogbook: LogbookEntry
+    @EnvironmentObject var newEntryVM: NewEntryViewModel
+    @EnvironmentObject var networkReachablility: NetworkReachability
     
     var body: some View {
-        if(newLogbook.isSubmittable) {
-            Text("Zusammenfassung: \(String(format: "%.0f\(newLogbook.mileAge.unit.name)", newLogbook.distance)) / \((newLogbook.computedDistance * 0.2).formatted(.currency(code: "EUR")))")
+        if(newEntryVM.newLogbook.isSubmittable) {
+            Text("Zusammenfassung: \(String(format: "%.0f\(newEntryVM.newLogbook.mileAge.unit.name)", newEntryVM.newLogbook.distance)) / \((newEntryVM.newLogbook.computedDistance * 0.2).formatted(.currency(code: "EUR")))")
                 .lineLimit(1)
                 .frame(maxWidth: .infinity, alignment: .leading)
         } else {
@@ -22,8 +24,12 @@ struct EntrySubmitComponent: View {
             Spacer()
             
             Button {
-                if !newLogbook.isSubmittable {
+                if !newEntryVM.newLogbook.isSubmittable {
                     return
+                }
+                
+                Task {
+                    await newEntryVM.send(connected: networkReachablility.connected)
                 }
             } label: {
                 HStack {
@@ -31,16 +37,16 @@ struct EntrySubmitComponent: View {
                     Text("Fahrt hinzufügen")
                         .customFont(.headline)
                 }
-                .largeButton(disabled: !newLogbook.isSubmittable)
+                .largeButton(disabled: !newEntryVM.newLogbook.isSubmittable)
             }
-            .opacity(!newLogbook.isSubmittable ? 0 : 1)
+            .opacity(!newEntryVM.newLogbook.isSubmittable ? 0.4 : 1)
             .transition(.identity)
-            .disabled(!newLogbook.isSubmittable)
+            .disabled(!newEntryVM.newLogbook.isSubmittable)
             //                Spacer()
         }
     }
 }
 
 #Preview {
-    EntrySubmitComponent(newLogbook: .constant(LogbookEntry.previewData.data[0]))
+    EntrySubmitComponent()
 }

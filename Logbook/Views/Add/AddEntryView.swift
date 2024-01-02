@@ -8,22 +8,22 @@
 import SwiftUI
 import UIKit
 import Combine
+import AlertKit
 
 struct AddEntryView: View {
     
     @StateObject var newEntryVM = NewEntryViewModel()
     
     @State var showAddInfoSelection = false
-    @State var isLoading = false
     @Binding var show: Bool
     @Binding var showTab: Bool
     @Binding var lastAddedEntry: Date
     @State private var canSubmit = false
     
     @AppStorage("currentDriver") var currentDriver: DriverEnum = .Andrea
-    @AppStorage("currentVehicle") var currentVehicle: VehicleEnum = .Ferrari
     
     @EnvironmentObject var networkReachablility: NetworkReachability
+    @StateObject private var netWorkActivitIndicatorManager = NetworkActivityIndicatorManager()
     
     @Namespace var namespace
         
@@ -46,7 +46,7 @@ struct AddEntryView: View {
                         Text("Neuer Eintrag")
                             .font(.custom("Poppins Bold", size: 30))
                             .frame(width: 260, alignment: .leading)
-                        if newEntryVM.fetchPhase == .fetchingNextPage(lastLogbooks) {
+                        if newEntryVM.fetchPhase == .fetchingNextPage(lastLogbooks) || netWorkActivitIndicatorManager.isNetworkActivityIndicatorVisible {
                             ProgressView()
                                 .padding(.horizontal, 5)
                         }
@@ -54,13 +54,17 @@ struct AddEntryView: View {
                     
                     DVDComponent(newLogbook: $newEntryVM.newLogbook, lastLogbooks: lastLogbooks)
                     MileAgeComponent(newLogbook: $newEntryVM.newLogbook)
-                    DetailsComponent(newLogbook: $newEntryVM.newLogbook)
-                    AddInfoButtonComponent(newLogbook: $newEntryVM.newLogbook, showAddInfoSlection: $showAddInfoSelection)
-                    EntrySubmitComponent(newLogbook: $newEntryVM.newLogbook)
+                    HStack {
+                        AddInfoButtonComponent(newLogbook: $newEntryVM.newLogbook, showAddInfoSlection: $showAddInfoSelection)
+                        DetailsComponent(newLogbook: $newEntryVM.newLogbook)
+                    }
+                    EntrySubmitComponent()
+                        .environmentObject(newEntryVM)
+                        .environmentObject(networkReachablility)
                 }
-                .padding(.horizontal, 40)
+                .padding(.horizontal, 20)
                 .padding(.top, 80)
-                .padding(.bottom, 40)
+//                .padding(.bottom, 40)
                 .background(.ultraThinMaterial)
                 .sheet(isPresented: $showAddInfoSelection) {
                     AddInfoSelectComponent(showAddInfoSelection: $showAddInfoSelection, newLogbook: $newEntryVM.newLogbook)
@@ -68,25 +72,45 @@ struct AddEntryView: View {
                         .presentationCornerRadius(30)
                         .presentationBackground(.thinMaterial)
                 }
+                .overlay(content: {
+                    
+                    switch $newEntryVM.sendPhase.wrappedValue {
+                    case .sending:
+                            CustomProgressView(message: "Senden...")
+                        case .failure(let error):
+                        EmptyView()
+                            .onAppear {
+                                print("ERROR DURING SEND!")
+                                print(error)
+                            AlertKitAPI.present(
+                                title: "Fehler beim Speichern!",
+                                icon: .error,
+                                style: .iOS17AppleMusic,
+                                haptic: .error
+                            )
+                            }
+                        case .success:
+                        EmptyView()
+                            .onAppear {
+                                AlertKitAPI.present(
+                                    title: "Eintrag hinzugefügt",
+                                    icon: .done,
+                                    style: .iOS16AppleMusic,
+                                    haptic: .success
+                                )
+                            }
+                    case .empty:
+                        EmptyView()
+                        }
+                })
+                .overlay {
+                    if  newEntryVM.fetchPhase == .fetchingNextPage(lastLogbooks) || netWorkActivitIndicatorManager.isNetworkActivityIndicatorVisible {
+                        CustomProgressView(message: "Warte auf Antwort...")
+                    }
+                }
                 .task {
                     setDefaults(connected: networkReachablility.connected)
                 }
-                .onReceive(networkReachablility.$connected) { newValue in
-                    if !networkReachablility.connected && newValue {
-                        setDefaults(connected: newValue)
-                    }
-                }
-                .onReceive(newEntryVM.$fetchPhase) { newValue in
-                    DispatchQueue.main.async {
-                        updateVehicleData(vehicle: currentVehicle)
-                    }
-                }
-                
-                //        .onChange(of: newEntryVM.phase.value ?? [], perform: { newValue in
-                //
-                //            newEntryVM.newLogbook.currentMileAge = newValue[0].currentMileAge
-                //        })
-                //        .fixedSize(horizontal: false, vertical: true)
             }
                 .offset(y: showAddInfoSelection ? -25 : 0)
             
@@ -113,16 +137,11 @@ struct AddEntryView: View {
     
     private func setDefaults(connected: Bool) {
         Task {
-            await newEntryVM.load(connected: connected)
-            updateVehicleData(vehicle: currentVehicle)
-            newEntryVM.newLogbook.vehicle = currentVehicle
+            await newEntryVM.load(forceFetching: true, connected: connected)
+            newEntryVM.newLogbook.mileAge.current = getLogbookForVehicle(lastLogbooks: lastLogbooks, vehicle: .Ferrari)?.mileAge.new ?? 0
+            newEntryVM.newLogbook.vehicle = .Ferrari
             newEntryVM.newLogbook.driver = currentDriver
         }
-    }
-    
-    private func updateVehicleData(vehicle: VehicleEnum) {
-        currentVehicle = vehicle
-        newEntryVM.newLogbook.mileAge.current = getLogbookForVehicle(lastLogbooks: lastLogbooks, vehicle: vehicle)?.mileAge.new ?? 0
     }
     
     private var lastLogbooks: [LogbookEntry] {

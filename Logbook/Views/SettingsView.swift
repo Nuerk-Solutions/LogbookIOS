@@ -27,7 +27,6 @@ struct SettingsView: View {
     @StateObject var iconSettings: IconNames = IconNames()
     
     @AppStorage("currentDriver") var currentDriver: DriverEnum = .Andrea
-    @AppStorage("currentVehicle") var currentVehicle: VehicleEnum = .Ferrari
     @AppStorage("gasStationSort") var gasStationSort: SortTyp = .Preis
     @AppStorage("isGasStationSortDirectionAsc") var isGasStationSortDirectionAsc: Bool = true
     @AppStorage("isAllowLocationTracking") var isAllowLocationTracking = false
@@ -247,8 +246,6 @@ struct SettingsView: View {
             }
             Text(currentDriver.rawValue)
                 .font(.title.weight(.semibold))
-            Text(currentVehicle.rawValue)
-                .foregroundColor(.secondary)
         }
         .frame(maxWidth: .infinity)
         .padding()

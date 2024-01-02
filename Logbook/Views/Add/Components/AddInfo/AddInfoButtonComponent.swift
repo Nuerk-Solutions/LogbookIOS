@@ -29,25 +29,25 @@ struct AddInfoButtonComponent: View {
                     .backgroundStyle(cornerRadius: 18, opacity: 0.4)
                 
                 
-                if !newLogbook.hasAddInfo {
-                    Text("Weitere Daten speichern")
-                        .font(.footnote.weight(.medium))
-                        .padding(6)
-                        .background(.secondary)
-                        .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                        .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).stroke(lineWidth: 1).fill(.black.opacity(0.1)))
-                        .fixedSize(horizontal: false, vertical: true)
-                } else {
-                    HStack {
-                        Text("Datenübersicht")
-                            .font(.footnote.weight(.medium))
-                    }
-                    .lineLimit(2)
-                    .padding(6)
-                    .background(.secondary)
-                    .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                    .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).stroke(lineWidth: 1).fill(.black.opacity(0.1)))
-                }
+//                if !newLogbook.hasAddInfo {
+//                    Text("Weitere Daten speichern")
+//                        .font(.footnote.weight(.medium))
+//                        .padding(6)
+//                        .background(.secondary)
+//                        .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
+//                        .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).stroke(lineWidth: 1).fill(.black.opacity(0.1)))
+//                        .fixedSize(horizontal: false, vertical: true)
+//                } else {
+//                    HStack {
+//                        Text("Datenübersicht")
+//                            .font(.footnote.weight(.medium))
+//                    }
+//                    .lineLimit(2)
+//                    .padding(6)
+//                    .background(.secondary)
+//                    .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
+//                    .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).stroke(lineWidth: 1).fill(.black.opacity(0.1)))
+//                }
             }.buttonStyle(PlainButtonStyle())
         }
     }

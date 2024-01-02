@@ -16,7 +16,7 @@ class ApiSession {
     let session: Session
     
     init(requestAdapter: RequestAdapter) {
-        let interceptor = Interceptor(adapter: requestAdapter, retrier: RetryPolicy(retryLimit: 1, retryableHTTPStatusCodes: Set(202...400)))
+        let interceptor = Interceptor(adapter: requestAdapter, retrier: RetryPolicy(retryLimit: 3, retryableHTTPStatusCodes: Set(202...400)))
         session = Session(interceptor: interceptor)
         session.sessionConfiguration.timeoutIntervalForRequest = 15
     }

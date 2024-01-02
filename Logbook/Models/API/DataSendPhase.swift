@@ -11,13 +11,13 @@ enum DataSendPhase<T> {
     
     case empty
     case sending
-    case success(T)
+    case success
     case failure(Error)
     
-    var value: T? {
-        if case .success(let value) = self {
-            return value
-        }
-        return nil
-    }
+//    var value: T? {
+//        if case .success(let value) = self {
+//            return value
+//        }
+//        return nil
+//    }
 }

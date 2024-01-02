@@ -57,8 +57,8 @@ struct LogbookAPI {
                     case .success:
                         break
                     case .failure(let error):
-                        return
-//                        print(error)
+//                        return
+                        print(error)
                         // see https://karenxpn.medium.com/swiftui-mvvm-combine-alamofire-make-http-requests-the-right-way-and-handle-errors-258e0f0bb0df
                         //                    return generateError(code: response.response?.statusCode ?? -1, description: error.localizedDescription ?? "Ein Fehler ist aufgetreten")
                     }
@@ -85,12 +85,16 @@ struct LogbookAPI {
     }
     
     private func sendLogbook(from url: URL, logbook body: LogbookEntry) async throws -> LogbookEntry {
+        print(body)
         return try await session.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder(encoder: jsonEncoder))
             .validate(statusCode: 201..<202)
             .validate(contentType: ["application/json"])
             .responseData { (response) in
                 switch response.result {
                 case .success:
+                    if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                        print("Data: \(utf8Text)")
+                    }
                     break
                 case .failure(let error):
                     print(error)

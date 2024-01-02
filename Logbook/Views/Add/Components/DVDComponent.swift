@@ -10,7 +10,6 @@ import SwiftUI
 struct DVDComponent: View {
     
     @AppStorage("currentDriver") var currentDriver: DriverEnum = .Andrea
-    @AppStorage("currentVehicle") var currentVehicle: VehicleEnum = .Ferrari
     @Binding var newLogbook: LogbookEntry
     
     var lastLogbooks: [LogbookEntry]

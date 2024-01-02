@@ -24,14 +24,14 @@ struct DetailsComponent: View {
             
             Text(newLogbook.details.covered ? "Die Fahrt wird übernommen" : "Die Fahrt wird nicht übernommen.")
                 .font(.footnote.weight(.medium))
-                .padding(6)
+                .padding(5)
             //                    .foregroundStyle(.secondary)
                 .background(.secondary)
                 .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
                 .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).stroke(lineWidth: 1).fill(.black.opacity(0.1)))
         }
         .onTapGesture {
-            withAnimation(.easeInOut(duration: 0.05)) {
+            withAnimation(.easeInOut(duration: 0.2)) {
                 newLogbook.details.covered.toggle()
             }
         }

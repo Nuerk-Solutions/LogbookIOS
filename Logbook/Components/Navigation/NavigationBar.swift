@@ -16,6 +16,7 @@ struct NavigationBar: View {
     
     @EnvironmentObject var model: Model
     @StateObject private var netWorkActivitIndicatorManager = NetworkActivityIndicatorManager()
+    @EnvironmentObject var networkReachablility: NetworkReachability
     @AppStorage("isLogged") var isLogged = false
     @Environment(\.colorScheme) var colorScheme
     
@@ -62,19 +63,39 @@ struct NavigationBar: View {
 //                        }
                 
                 Button {
-                    withAnimation(.spring()) {
-//                        showSheet.toggle()
-                        model.showAdd.toggle()
-                        model.showTab.toggle()
+                    if(networkReachablility.reachable && networkReachablility.connected){
+                        withAnimation(.spring()) {
+                            //                        showSheet.toggle()
+                            model.showAdd.toggle()
+                            model.showTab.toggle()
+                        }
                     }
                 } label: {
-                    Image(systemName: "doc.badge.plus")
-                        .symbolRenderingMode(.multicolor)
-                        .font(.system(size: 17, weight: .bold))
-                        .frame(width: 40, height: 40)
-                        .foregroundColor(.secondary)
-                        .background(.ultraThickMaterial)
-                        .backgroundStyle(cornerRadius: 16, opacity: 0.4)
+                    if(networkReachablility.reachable && networkReachablility.connected) {
+                        Image(systemName: "doc.badge.plus")
+                            .resizable()
+                            .scaledToFit()
+                            .symbolRenderingMode(.multicolor)
+                            .font(.system(size: 17, weight: .bold))
+                            .frame(width: 28, height: 28)
+                            .foregroundColor(.secondary)
+                            .padding(10)
+                            .background(.regularMaterial)
+                            .backgroundStyle(cornerRadius: 16, opacity: 0.4)
+                            .shadow(color: .black.opacity(0.3), radius: 10, x: 0, y: 10)
+                    } else {
+                        Image(systemName: "wifi.exclamationmark")
+                            .resizable()
+                            .scaledToFit()
+                            .symbolRenderingMode(.palette)
+                            .symbolEffect(.pulse.byLayer, options: .repeating)
+                            .foregroundStyle(.primary, .red)
+                            .frame(width: 32, height: 32)
+                            .padding(10)
+                            .background(.regularMaterial)
+                            .backgroundStyle(cornerRadius: 16, opacity: 0.4)
+                            .shadow(color: .black.opacity(0.3), radius: 10, x: 0, y: 10)
+                    }
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
