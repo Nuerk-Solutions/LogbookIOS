@@ -17,15 +17,13 @@ struct AddEntryView: View {
     @State var showAddInfoSelection = false
     @Binding var show: Bool
     @Binding var showTab: Bool
-    @Binding var lastAddedEntry: Date
-    @State private var canSubmit = false
     
     @AppStorage("currentDriver") var currentDriver: DriverEnum = .Andrea
     
     @EnvironmentObject var networkReachablility: NetworkReachability
+    @EnvironmentObject var model: Model
+    @EnvironmentObject var logbooksVM: LogbooksViewModel
     @StateObject private var netWorkActivitIndicatorManager = NetworkActivityIndicatorManager()
-    
-    @Namespace var namespace
         
     let mediumDateAndTime: DateFormatter = {
         let formatter = DateFormatter()
@@ -72,37 +70,7 @@ struct AddEntryView: View {
                         .presentationCornerRadius(30)
                         .presentationBackground(.thinMaterial)
                 }
-                .overlay(content: {
-                    
-                    switch $newEntryVM.sendPhase.wrappedValue {
-                    case .sending:
-                            CustomProgressView(message: "Senden...")
-                        case .failure(let error):
-                        EmptyView()
-                            .onAppear {
-                                print("ERROR DURING SEND!")
-                                print(error)
-                            AlertKitAPI.present(
-                                title: "Fehler beim Speichern!",
-                                icon: .error,
-                                style: .iOS17AppleMusic,
-                                haptic: .error
-                            )
-                            }
-                        case .success:
-                        EmptyView()
-                            .onAppear {
-                                AlertKitAPI.present(
-                                    title: "Eintrag hinzugefügt",
-                                    icon: .done,
-                                    style: .iOS16AppleMusic,
-                                    haptic: .success
-                                )
-                            }
-                    case .empty:
-                        EmptyView()
-                        }
-                })
+//                .overlay(overlayView)
                 .overlay {
                     if  newEntryVM.fetchPhase == .fetchingNextPage(lastLogbooks) || netWorkActivitIndicatorManager.isNetworkActivityIndicatorVisible {
                         CustomProgressView(message: "Warte auf Antwort...")
@@ -117,7 +85,7 @@ struct AddEntryView: View {
             Button {
                 withAnimation {
                     show.toggle()
-                    showTab.toggle()
+//                    showTab.toggle()
                 }
             } label: {
                 Image(systemName: "xmark")
@@ -131,9 +99,52 @@ struct AddEntryView: View {
             .padding(20)
             .offset(y: showAddInfoSelection ? -10 : 0)
             .opacity(showAddInfoSelection ? 0.2 : 1)
+            .onReceive(newEntryVM.$sendPhase) { newValue in
+                AlertKitAPI.dismissAllAlerts()
+                switch newValue {
+                case .sending:
+                    AlertKitAPI.present(
+                              title: "Senden...",
+                              icon: .spinnerSmall,
+                              style: .iOS17AppleMusic,
+                              haptic: AlertHaptic.none
+                          )
+                case .success(let logbook):
+                    AlertKitAPI.present(
+                              title: "Eintrag hinzugefügt",
+                              icon: .done,
+                              style: .iOS17AppleMusic,
+                              haptic: .success
+                          )
+                    show.toggle()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        logbooksVM.loadedLogbooks.insert(logbook, at: 0)
+                        logbooksVM.phase = .success(logbooksVM.loadedLogbooks)
+                        // model.lastAddedEntry = Date()  // Alternative: Trigger listener on listview to force update the logbooks
+                    }
+                case .failure(_):
+                    AlertKitAPI.present(
+                        title: "Fehler beim speichern",
+                        icon: .error,
+                        style: .iOS16AppleMusic,
+                        haptic: .error
+                    ) 
+                default:
+                    break
+                }
+            }
             
         }
     }
+    
+//    @ViewBuilder
+//    private var overlayView: some View {
+//        switch newEntryVM.sendPhase {
+//        case .sending:
+//            CustomProgressView(message: "Daten übermitteln")
+//        default: EmptyView()
+//        }
+//    }
     
     private func setDefaults(connected: Bool) {
         Task {
@@ -159,7 +170,7 @@ struct AddEntryView: View {
 
 struct NewAddView_Previews: PreviewProvider {
     static var previews: some View {
-        AddEntryView(show: .constant(true), showTab: .constant(false), lastAddedEntry: .constant(Date()))
+        AddEntryView(show: .constant(true), showTab: .constant(false))
             .preferredColorScheme(.light)
             .environmentObject(NetworkReachability())
     }

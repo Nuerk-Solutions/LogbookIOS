@@ -85,8 +85,8 @@ class LogbooksViewModel: ObservableObject {
         if let nextLogbooks = await nextLogbooksFromCache(), !nextLogbooks.isEmpty {
             withAnimation {
                 self.phase = .success(nextLogbooks)
+                loadedLogbooks = nextLogbooks
             }
-            loadedLogbooks = nextLogbooks
         }
 
         if !connected {
@@ -124,14 +124,16 @@ class LogbooksViewModel: ObservableObject {
 //            loadedLogbooks = logbooks
             
             if cacheHasChanged {
-//                withAnimation {
+                withAnimation {
                     phase = .success(logbooks)
                     loadedLogbooks = self.phase.value!
-//                }
+                }
                 return
             }
-            phase = .success(logbooks)
-            loadedLogbooks = self.phase.value!
+            withAnimation {
+                phase = .success(logbooks)
+                loadedLogbooks = self.phase.value!
+            }
         } catch {
             if Task.isCancelled { return }
 

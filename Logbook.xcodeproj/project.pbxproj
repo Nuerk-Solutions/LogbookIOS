@@ -37,7 +37,6 @@
 		E91AFA48284129AE0024131D /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91AFA47284129AE0024131D /* CustomTextField.swift */; };
 		E91AFA4A284129CC0024131D /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91AFA49284129CC0024131D /* CustomButton.swift */; };
 		E91AFA4C284129F30024131D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91AFA4B284129F30024131D /* Extensions.swift */; };
-		E91AFA4E28412B8E0024131D /* AddAdditionalInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91AFA4D28412B8E0024131D /* AddAdditionalInfoView.swift */; };
 		E920B5FB285647B900683D67 /* AnimatedBlobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E920B5FA285647B900683D67 /* AnimatedBlobView.swift */; };
 		E920B5FD285647E900683D67 /* HexagonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E920B5FC285647E900683D67 /* HexagonView.swift */; };
 		E920B5FF2856480800683D67 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E920B5FE2856480800683D67 /* SettingsView.swift */; };
@@ -164,7 +163,6 @@
 		E91AFA47284129AE0024131D /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		E91AFA49284129CC0024131D /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		E91AFA4B284129F30024131D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		E91AFA4D28412B8E0024131D /* AddAdditionalInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAdditionalInfoView.swift; sourceTree = "<group>"; };
 		E920B5FA285647B900683D67 /* AnimatedBlobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedBlobView.swift; sourceTree = "<group>"; };
 		E920B5FC285647E900683D67 /* HexagonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexagonView.swift; sourceTree = "<group>"; };
 		E920B5FE2856480800683D67 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -411,16 +409,6 @@
 			path = List;
 			sourceTree = "<group>";
 		};
-		E9227BA62B41B84A00589E64 /* New */ = {
-			isa = PBXGroup;
-			children = (
-				E9227BAB2B41B85F00589E64 /* Textfield */,
-				E9227BA72B41B85300589E64 /* RefuelView.swift */,
-				E9227BA92B41B85B00589E64 /* ServiceView.swift */,
-			);
-			path = New;
-			sourceTree = "<group>";
-		};
 		E9227BAB2B41B85F00589E64 /* Textfield */ = {
 			isa = PBXGroup;
 			children = (
@@ -430,14 +418,6 @@
 				E9227BAF2B41B87700589E64 /* MassUITextField.swift */,
 			);
 			path = Textfield;
-			sourceTree = "<group>";
-		};
-		E9227BB62B433C9100589E64 /* Old */ = {
-			isa = PBXGroup;
-			children = (
-				E91AFA4D28412B8E0024131D /* AddAdditionalInfoView.swift */,
-			);
-			path = Old;
 			sourceTree = "<group>";
 		};
 		E9227BB72B433C9D00589E64 /* Components */ = {
@@ -455,6 +435,9 @@
 		E9227BC82B43510F00589E64 /* AddInfo */ = {
 			isa = PBXGroup;
 			children = (
+				E9227BAB2B41B85F00589E64 /* Textfield */,
+				E9227BA72B41B85300589E64 /* RefuelView.swift */,
+				E9227BA92B41B85B00589E64 /* ServiceView.swift */,
 				E9227BC42B434A4800589E64 /* AddInfoSelectComponent.swift */,
 				E9227BC62B43510B00589E64 /* AddInfoButtonComponent.swift */,
 			);
@@ -575,8 +558,6 @@
 			isa = PBXGroup;
 			children = (
 				E9227BB72B433C9D00589E64 /* Components */,
-				E9227BB62B433C9100589E64 /* Old */,
-				E9227BA62B41B84A00589E64 /* New */,
 				E969B0C32892D57500E22690 /* AddEntryView.swift */,
 			);
 			path = Add;
@@ -801,7 +782,6 @@
 				E9C254492B013A5100F3BBAA /* IntrospectionUIView.swift in Sources */,
 				E962E5CB285E440A00F6B4D6 /* GasStationEntry.swift in Sources */,
 				E9227BAA2B41B85B00589E64 /* ServiceView.swift in Sources */,
-				E91AFA4E28412B8E0024131D /* AddAdditionalInfoView.swift in Sources */,
 				E961ACA728948EDD00C6FCC8 /* NewEntryViewModel.swift in Sources */,
 				E9D2BB1C2843F977009EC7C5 /* CircularView.swift in Sources */,
 				E9C3B8DC2845374000EDE615 /* AnimatableFontModifier.swift in Sources */,

@@ -430,8 +430,8 @@
             filePath = "Logbook/ViewModels/LogbooksViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
             landmarkName = "loadFirstPage(connected:)"
             landmarkType = "7">
             <Locations>

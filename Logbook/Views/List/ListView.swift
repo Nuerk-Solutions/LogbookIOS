@@ -24,8 +24,9 @@ struct ListView: View {
     
     @EnvironmentObject var model: Model
     @EnvironmentObject var networkReachablility: NetworkReachability
+    @EnvironmentObject var logbooksVM: LogbooksViewModel
     
-    @StateObject var logbooksVM: LogbooksViewModel
+//    @StateObject var logbooksVM: LogbooksViewModel
     @Namespace var namespace
     let deleteAction = UIAction(
         title: "Delete",
@@ -45,7 +46,7 @@ struct ListView: View {
     }()
     
     init(logbooks: [LogbookEntry]? = nil, showAdd: Binding<Bool>, lastRefreshDate: Binding<Date?>) {
-        self._logbooksVM = StateObject(wrappedValue: LogbooksViewModel(logbooks: logbooks))
+//        self._logbooksVM = StateObject(wrappedValue: LogbooksViewModel(logbooks: logbooks))
         //        self._showAdd = showAdd
         self._lastRefreshDate = lastRefreshDate
     }
@@ -137,6 +138,7 @@ struct ListView: View {
             }
         }
         .onReceive(logbooksVM.$phase, perform: { newValue in
+            print(newValue)
             withAnimation {
                 model.showDetail = false
             }
@@ -146,8 +148,8 @@ struct ListView: View {
     @ViewBuilder
     private var overlayView: some View {
         switch logbooksVM.phase {
-            //        case .empty:
-            //            CustomProgressView(message: "Fetching Logbooks")
+//        case .empty:
+//            CustomProgressView(message: "Fetching Logbooks")
         case .success(let logbooks) where logbooks.isEmpty:
             EmptyPlaceholderView(text: "Keine Einträge vorhanden")
         case .failure(let error):
@@ -216,6 +218,8 @@ struct ListView: View {
                         //                            .offset(y: -40)
                     }
                 }
+//                .transition(.identity)
+//                .animation(.flipCard)
                 //                .padding(.horizontal, 20)
                 .opacity(logbooksVM.logbooksOpacity)
             }

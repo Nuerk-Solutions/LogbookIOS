@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @StateObject var logbooksVM: LogbooksViewModel = LogbooksViewModel()
+    
     @EnvironmentObject var model: Model
     @EnvironmentObject var networkReachablility: NetworkReachability
     @AppStorage("selectedTab") var selectedTab: Tab = .home
@@ -32,6 +34,7 @@ struct ContentView: View {
                 ListView(showAdd: $model.showTab, lastRefreshDate: $lastRefreshDate)
                     .environmentObject(model)
                     .environmentObject(networkReachablility)
+                    .environmentObject(logbooksVM)
             case .gasStations:
                 if ContentView.isPreview {
                     GasStationsView(gasStations: GasStationWelcome.previewData.data.tankstellen)
@@ -74,10 +77,11 @@ struct ContentView: View {
             //            isInitalLoad.toggle()
         }
         .sheet(isPresented: $model.showAdd) {
-            AddEntryView(show: $model.showAdd, showTab: $model.showTab, lastAddedEntry: $model.lastAddedEntry)
+            AddEntryView(show: $model.showAdd, showTab: $model.showTab)
                 .presentationBackground(.ultraThinMaterial)
                 .presentationCornerRadius(30)
                 .presentationDetents([.large])
+                .environmentObject(logbooksVM)
         }
     }
 }

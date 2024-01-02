@@ -67,7 +67,7 @@ struct NavigationBar: View {
                         withAnimation(.spring()) {
                             //                        showSheet.toggle()
                             model.showAdd.toggle()
-                            model.showTab.toggle()
+//                            model.showTab.toggle()
                         }
                     }
                 } label: {

@@ -95,8 +95,8 @@ class NewEntryViewModel: ObservableObject {
             let submittedLogbook = try await logbookAPI.send(with: newLogbook)
             if Task.isCancelled { return }
             
-//            sendPhase = .success(submittedLogbook)
-            sendPhase = .success
+            sendPhase = .success(submittedLogbook)
+//            sendPhase = .success
         } catch {
             if Task.isCancelled { return }
 
