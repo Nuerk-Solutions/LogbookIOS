@@ -615,54 +615,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6BCA61E0-8993-4394-898F-FD45CBBEEB64"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Logbook/Views/Stats/StatsView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
-            landmarkName = "unknown"
-            landmarkType = "0">
-            <Locations>
-               <Location
-                  uuid = "6BCA61E0-8993-4394-898F-FD45CBBEEB64 - f6d4fecfe27f53a6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.pickerStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.PickerStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt;&gt;, SwiftUI.Text, &lt;&lt;opaque return type of Logbook.StatsView.AnimatedChart() -&gt; some&gt;&gt;.0)&gt; in Logbook.StatsView.ChartView() -&gt; some"
-                  moduleName = "Logbook"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/thomas/Documents/IOS%20Projects/LogbookIOS/Logbook/Views/Stats/StatsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "114"
-                  endingLineNumber = "114"
-                  offsetFromSymbolStart = "656">
-               </Location>
-               <Location
-                  uuid = "6BCA61E0-8993-4394-898F-FD45CBBEEB64 - efd6f8246fe5ec06"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Double, Logbook.LogbookEntry) -&gt; Swift.Double in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.pickerStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.PickerStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt;&gt;, SwiftUI.Text, &lt;&lt;opaque return type of Logbook.StatsView.AnimatedChart() -&gt; some&gt;&gt;.0)&gt; in Logbook.StatsView.ChartView() -&gt; some"
-                  moduleName = "Logbook"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/thomas/Documents/IOS%20Projects/LogbookIOS/Logbook/Views/Stats/StatsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "115"
-                  endingLineNumber = "115"
-                  offsetFromSymbolStart = "52">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "C79B430F-6EB1-4D9D-90FB-18B7D59B6938"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -670,10 +622,10 @@
             filePath = "Logbook/Views/Stats/StatsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "ChartView(vehicle:)"
+            landmarkType = "7">
             <Locations>
                <Location
                   uuid = "C79B430F-6EB1-4D9D-90FB-18B7D59B6938 - f6d4fecfe27f5322"
@@ -736,6 +688,22 @@
                   offsetFromSymbolStart = "52">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "561DCD4D-7E34-481F-844F-404C826D6994"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Logbook/ContentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "body"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

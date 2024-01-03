@@ -11,23 +11,17 @@ import Foundation
 @MainActor
 class ChartViewModel: ObservableObject {
     
-    @Published var allLogbooks: [LogbookEntry] = []
-    @Published var filteredLogbooks: [LogbookEntry] = []
+    @Published var allLogbooks: [LogbookRefuelReceive] = []
     private let logbookAPI = LogbookAPI.shared
     
     func loadLogbooks() async {
         if Task.isCancelled { return }
         
-//        if !connected {
-//            print("[Deleting]: No network connection")
-//            print("[Deleting]: 🛑 Prevent API request...")
-//            return
-//        }
         do {
-            allLogbooks = try await logbookAPI.fetch(with: LogbookRequestParameters(page: 0, limit: 0)).data ?? []
+            allLogbooks = try await logbookAPI.fetchRefuels(with: 10)
         } catch {
-                print(error)
-                if Task.isCancelled { return }
+            print(error)
+            if Task.isCancelled { return }
         }
         
     }

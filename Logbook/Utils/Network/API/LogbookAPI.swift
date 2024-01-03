@@ -37,12 +37,51 @@ struct LogbookAPI {
         try await fetchLogbooks(from: URL(string: baseUrl + "/find/latest")!)
     }
     
+    func fetchRefuels(with limit: Int) async throws -> [LogbookRefuelReceive] {
+        try await fetchRefuels(from: generateSearchUrl(with: LogbookRequestParameters(limit: limit)))
+    }
+    
     func send(with logbook: LogbookEntry) async throws -> LogbookEntry {
         try await sendLogbook(from: URL(string: baseUrl)!, logbook: logbook)
     }
     
     func delete(with logbook: LogbookEntry) {
         deleteLogbook(from: URL(string: baseUrl + "/\(logbook._id!)")!)
+    }
+    
+    private func fetchRefuels(from url: URL) async throws -> [LogbookRefuelReceive] {
+        print(url)
+        do {
+            return try await session.request(url, method: .get)
+                .validate(statusCode: 200..<201)
+                .validate(contentType: ["application/json"])
+                .responseData { (response) in
+                    switch response.result {
+                    case .success:
+                        break
+                    case .failure(let error):
+                        print(error)
+                    }
+//                    if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+//                        print("Data: \(utf8Text)")
+//                    }
+                }
+                .serializingDecodable([LogbookRefuelReceive].self, decoder: jsonDecoder)
+                .value
+            
+        } catch DecodingError.keyNotFound(let key, let context) {
+            print("could not find key \(key) in JSON: \(context.debugDescription)")
+        } catch DecodingError.valueNotFound(let type, let context) {
+            print("could not find type \(type) in JSON: \(context.debugDescription)")
+        } catch DecodingError.typeMismatch(let type, let context) {
+            print("type mismatch for type \(type) in JSON: \(context.debugDescription)")
+        } catch DecodingError.dataCorrupted(let context) {
+            print("data found to be corrupted in JSON: \(context.debugDescription)")
+        }
+        catch let error as NSError {
+            NSLog("Error in read(from:ofType:) domain= \(error.domain), description= \(error.localizedDescription)")
+        }
+        throw NSError()
     }
     
     private func fetchLogbooks(from url: URL) async throws -> LogbookAPIResponse {
@@ -92,12 +131,19 @@ struct LogbookAPI {
             .responseData { (response) in
                 switch response.result {
                 case .success:
-                    if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                        print("Data: \(utf8Text)")
-                    }
+//                    if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+//                        print("Data: \(utf8Text)")
+//                    }
                     break
                 case .failure(let error):
                     print(error)
+                }
+                let encoded = try? jsonEncoder.encode(body)
+                if let data = encoded, let utf8Text = String(data: data, encoding: .utf8) {
+                    print("Request:\n \(utf8Text)\n\n")
+                }
+                if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                    print("Response:\n \(utf8Text)\n\n")
                 }
             }
             .serializingDecodable(LogbookEntry.self, decoder: jsonDecoder)

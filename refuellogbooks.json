@@ -1,0 +1,377 @@
+[
+    {
+        "vehicle": "Ferrari",
+        "refuels": [
+            {
+                "date": "2023-10-19T18:44:17.576Z",
+                "refuel": {
+                    "liters": 39.38,
+                    "price": 72.03,
+                    "distanceDifference": 510,
+                    "consumption": 7.721568627450981,
+                    "isSpecial": false,
+                    "previousRecordId": "64b506757fc9750629be13bd"
+                }
+            },
+            {
+                "date": "2023-07-17T11:13:52.254Z",
+                "refuel": {
+                    "liters": 38.76,
+                    "price": 70.5,
+                    "distanceDifference": 1048,
+                    "consumption": 3.6984732824427478,
+                    "isSpecial": false,
+                    "previousRecordId": "640b1efc285381602e98da61"
+                }
+            },
+            {
+                "date": "2023-03-10T13:12:54.323Z",
+                "refuel": {
+                    "liters": 42.1,
+                    "price": 79.53,
+                    "distanceDifference": 465,
+                    "consumption": 9.053763440860216,
+                    "isSpecial": false,
+                    "previousRecordId": "63b8725e7b554f985dd66afb"
+                }
+            },
+            {
+                "date": "2023-01-06T20:10:45.824Z",
+                "refuel": {
+                    "liters": 45.02,
+                    "price": 79.19,
+                    "distanceDifference": 578,
+                    "consumption": 7.788927335640139,
+                    "isSpecial": false,
+                    "previousRecordId": "6380e232d42e67bbfce8fbfb"
+                }
+            },
+            {
+                "date": "2022-11-25T16:40:49.616Z",
+                "refuel": {
+                    "liters": 42.9,
+                    "price": 77.18,
+                    "distanceDifference": 499,
+                    "consumption": 8.597194388777554,
+                    "isSpecial": false,
+                    "previousRecordId": "63399ab46c2c95f0e3330770"
+                }
+            },
+            {
+                "date": "2022-10-02T16:04:32.587Z",
+                "refuel": {
+                    "liters": 38.14,
+                    "price": 72.81,
+                    "distanceDifference": 579,
+                    "consumption": 6.587219343696028,
+                    "isSpecial": false,
+                    "previousRecordId": "62d05dbc32ec82f92346b0a0"
+                }
+            },
+            {
+                "date": "2022-07-14T20:16:41.586Z",
+                "refuel": {
+                    "liters": 39.12,
+                    "price": 71.94,
+                    "distanceDifference": 516,
+                    "consumption": 7.581395348837209,
+                    "isSpecial": false,
+                    "previousRecordId": "6273e9453cefac82d2da9ee1"
+                }
+            },
+            {
+                "date": "2022-05-05T17:11:22.526Z",
+                "refuel": {
+                    "liters": 39.69,
+                    "price": 80.13,
+                    "distanceDifference": 544,
+                    "consumption": 7.29595588235294,
+                    "isSpecial": false,
+                    "previousRecordId": "6213df74b97c4a704dca1b5e"
+                }
+            },
+            {
+                "date": "2022-02-21T19:50:02.700Z",
+                "refuel": {
+                    "liters": 39.17,
+                    "price": 70.08,
+                    "distanceDifference": 455,
+                    "consumption": 8.60879120879121,
+                    "isSpecial": false,
+                    "previousRecordId": "61f52e612cf4df2a43b7a2bf"
+                }
+            },
+            {
+                "date": "2022-01-13T13:18:30.955Z",
+                "refuel": {
+                    "liters": 41.2,
+                    "price": 70,
+                    "distanceDifference": 481,
+                    "consumption": 8.565488565488566,
+                    "isSpecial": false,
+                    "previousRecordId": "61f52e612cf4df2a43b7a288"
+                }
+            }
+        ]
+    },
+    {
+        "vehicle": "DS",
+        "refuels": [
+            {
+                "date": "2023-11-25T18:48:16.505Z",
+                "refuel": {
+                    "liters": 58.2,
+                    "price": 103.45,
+                    "distanceDifference": 0,
+                    "consumption": 0,
+                    "isSpecial": false
+                }
+            }
+        ]
+    },
+    {
+        "vehicle": "Porsche",
+        "refuels": [
+            {
+                "date": "2023-12-28T14:02:00.000Z",
+                "refuel": {
+                    "liters": 65.18,
+                    "price": 119.21,
+                    "distanceDifference": 586,
+                    "consumption": 11.122866894197953,
+                    "isSpecial": false,
+                    "previousRecordId": "6559f5b9ea9e74abc0388587"
+                }
+            },
+            {
+                "date": "2023-11-19T12:46:11.683Z",
+                "refuel": {
+                    "liters": 57.2,
+                    "price": 105.78,
+                    "distanceDifference": 565,
+                    "consumption": 10.123893805309734,
+                    "isSpecial": false,
+                    "previousRecordId": "655902c73e39340e6e85fd5f"
+                }
+            },
+            {
+                "date": "2023-11-18T19:29:52.913Z",
+                "refuel": {
+                    "liters": 15.1,
+                    "price": 28.34,
+                    "distanceDifference": 133,
+                    "consumption": 11.353383458646617,
+                    "isSpecial": false,
+                    "previousRecordId": "65576af602fb7e2e731babd2"
+                }
+            },
+            {
+                "date": "2023-11-17T14:28:52.510Z",
+                "refuel": {
+                    "liters": 68.1,
+                    "price": 125.25,
+                    "distanceDifference": 633,
+                    "consumption": 10.758293838862558,
+                    "isSpecial": false,
+                    "previousRecordId": "65511144165c779819a38d83"
+                }
+            },
+            {
+                "date": "2023-11-12T18:53:33.176Z",
+                "refuel": {
+                    "liters": 46.1,
+                    "price": 84.39,
+                    "distanceDifference": 427,
+                    "consumption": 10.796252927400468,
+                    "isSpecial": false,
+                    "previousRecordId": "653f79ef533a1ed112a3b65c"
+                }
+            },
+            {
+                "date": "2023-10-30T10:39:28.146Z",
+                "refuel": {
+                    "liters": 55.2,
+                    "price": 103,
+                    "distanceDifference": 484,
+                    "consumption": 11.404958677685952,
+                    "isSpecial": false,
+                    "previousRecordId": "652f8f38d6d5cd715cb62fca"
+                }
+            },
+            {
+                "date": "2023-10-18T09:53:42.150Z",
+                "refuel": {
+                    "liters": 57.7,
+                    "price": 121.63,
+                    "distanceDifference": 506,
+                    "consumption": 11.403162055335969,
+                    "isSpecial": false,
+                    "previousRecordId": "64e23fd8a76a7b1d304665b5"
+                }
+            },
+            {
+                "date": "2023-08-20T18:30:22.770Z",
+                "refuel": {
+                    "liters": 66.6,
+                    "price": 131.04,
+                    "distanceDifference": 798,
+                    "consumption": 8.345864661654135,
+                    "isSpecial": false,
+                    "previousRecordId": "648f07a5be9461de1a80b5df"
+                }
+            },
+            {
+                "date": "2023-06-18T15:32:47.411Z",
+                "refuel": {
+                    "liters": 40,
+                    "price": 80,
+                    "distanceDifference": 509,
+                    "consumption": 7.858546168958743,
+                    "isSpecial": false,
+                    "previousRecordId": "63da54a753b3368397a070bc"
+                }
+            },
+            {
+                "date": "2023-02-01T13:00:39.847Z",
+                "refuel": {
+                    "liters": 68,
+                    "price": 127.79,
+                    "distanceDifference": 629,
+                    "consumption": 10.81081081081081,
+                    "isSpecial": false,
+                    "previousRecordId": "635ff4b1bf90cf0af9fbd8cb"
+                }
+            }
+        ]
+    },
+    {
+        "vehicle": "MX5",
+        "refuels": [
+            {
+                "date": "2023-12-27T14:04:02.152Z",
+                "refuel": {
+                    "liters": 31.46,
+                    "price": 55.34,
+                    "distanceDifference": 0,
+                    "consumption": 0,
+                    "isSpecial": false
+                }
+            }
+        ]
+    },
+    {
+        "vehicle": "VW",
+        "refuels": [
+            {
+                "date": "2023-12-23T12:43:00.000Z",
+                "refuel": {
+                    "liters": 58.54,
+                    "price": 96.53,
+                    "distanceDifference": 825,
+                    "consumption": 7.095757575757576,
+                    "isSpecial": false,
+                    "previousRecordId": "657b6031f0a7c4d0079791b6"
+                }
+            },
+            {
+                "date": "2023-12-14T21:05:20.280Z",
+                "refuel": {
+                    "liters": 59.3,
+                    "price": 99.06,
+                    "distanceDifference": 849,
+                    "consumption": 6.984687868080094,
+                    "isSpecial": false,
+                    "previousRecordId": "654d19001ff9285577173687"
+                }
+            },
+            {
+                "date": "2023-11-09T18:37:08.307Z",
+                "refuel": {
+                    "liters": 60.4,
+                    "price": 102.05,
+                    "distanceDifference": 458,
+                    "consumption": 13.187772925764191,
+                    "isSpecial": false,
+                    "previousRecordId": "654914ed2fabc52ae572b3fd"
+                }
+            },
+            {
+                "date": "2023-11-06T17:30:25.558Z",
+                "refuel": {
+                    "liters": 20,
+                    "price": 40,
+                    "distanceDifference": 695,
+                    "consumption": 2.877697841726619,
+                    "isSpecial": false,
+                    "previousRecordId": "650d6b1ba7da269e43af673c"
+                }
+            },
+            {
+                "date": "2023-09-22T12:22:01.937Z",
+                "refuel": {
+                    "liters": 48.66,
+                    "price": 88.01,
+                    "distanceDifference": 546,
+                    "consumption": 8.91208791208791,
+                    "isSpecial": false,
+                    "previousRecordId": "64fdf2eb9a0e93c0afed8de6"
+                }
+            },
+            {
+                "date": "2023-09-10T18:45:53.146Z",
+                "refuel": {
+                    "liters": 20,
+                    "price": 40,
+                    "distanceDifference": 440,
+                    "consumption": 4.545454545454546,
+                    "isSpecial": false,
+                    "previousRecordId": "64ef3752f6e085dbf1601472"
+                }
+            },
+            {
+                "date": "2023-08-30T14:33:54.149Z",
+                "refuel": {
+                    "liters": 55.53,
+                    "price": 101.01,
+                    "distanceDifference": 829,
+                    "consumption": 6.6984318455971055,
+                    "isSpecial": false,
+                    "previousRecordId": "64a44539f76aeb7076eb54fd"
+                }
+            },
+            {
+                "date": "2023-07-04T18:12:56.624Z",
+                "refuel": {
+                    "liters": 41.86,
+                    "price": 67.77,
+                    "distanceDifference": 559,
+                    "consumption": 7.488372093023256,
+                    "isSpecial": false,
+                    "previousRecordId": "64a3b79811e3b22f5cc9dc7e"
+                }
+            },
+            {
+                "date": "2023-07-04T08:08:39.242Z",
+                "refuel": {
+                    "liters": 32.75,
+                    "price": 54.33,
+                    "distanceDifference": 604,
+                    "consumption": 5.422185430463576,
+                    "isSpecial": false,
+                    "previousRecordId": "649fdb04b4fe97eabe9a8880"
+                }
+            },
+            {
+                "date": "2023-07-01T09:50:54.663Z",
+                "refuel": {
+                    "liters": 44.6,
+                    "price": 66.46,
+                    "distanceDifference": 584,
+                    "consumption": 7.636986301369864,
+                    "isSpecial": false,
+                    "previousRecordId": "64992c39ccaf7bbc8aeab21d"
+                }
+            }
+        ]
+    }
+]

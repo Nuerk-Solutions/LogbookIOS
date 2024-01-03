@@ -27,17 +27,17 @@ class MassUITextField: UITextField {
     override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: superview)
         addTarget(self, action: #selector(editingChanged), for: .editingChanged)
-        addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+//        addTarget(self, action: #selector(valueChanged), for: .valueChanged)
         addTarget(self, action: #selector(resetSelection), for: .allTouchEvents)
         keyboardType = .numberPad
         textAlignment = .right
-        sendActions(for: .valueChanged)
+//        sendActions(for: .valueChanged)
         sendActions(for: .editingChanged)
     }
     
-    override func removeFromSuperview() {
-        print(#function)
-    }
+//    override func removeFromSuperview() {
+//        print(#function)
+//    }
     
     override func deleteBackward() {
         text = textValue.digits.dropLast().string
@@ -57,9 +57,9 @@ class MassUITextField: UITextField {
         }
     }
     
-    @objc private func valueChanged() {
-        print("Value changed!", self.value)
-    }
+//    @objc private func valueChanged() {
+//        print("Value changed!", self.value)
+//    }
     
     @objc private func editingChanged() {
         print("Edit changed!", self.value)

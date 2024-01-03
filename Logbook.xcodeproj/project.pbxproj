@@ -117,6 +117,10 @@
 		E9D2BB1C2843F977009EC7C5 /* CircularView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D2BB1B2843F977009EC7C5 /* CircularView.swift */; };
 		E9D2BB21284405DB009EC7C5 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D2BB20284405DB009EC7C5 /* NavigationBar.swift */; };
 		E9E8488128521EE8008D7F0F /* SectionImageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E8488028521EE8008D7F0F /* SectionImageRow.swift */; };
+		E9F32ED12B45AFA90003303C /* LogbookRefuelReceive.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F32ED02B45AFA90003303C /* LogbookRefuelReceive.swift */; };
+		E9F32ED32B45BCBB0003303C /* refuellogbooks.json in Resources */ = {isa = PBXBuildFile; fileRef = E9F32ED22B45B3B60003303C /* refuellogbooks.json */; };
+		E9F32ED52B45C8740003303C /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F32ED42B45C8740003303C /* ChartView.swift */; };
+		E9F32ED72B45CF4F0003303C /* ChartAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F32ED62B45CF4F0003303C /* ChartAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -240,6 +244,10 @@
 		E9D2BB1B2843F977009EC7C5 /* CircularView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularView.swift; sourceTree = "<group>"; };
 		E9D2BB20284405DB009EC7C5 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		E9E8488028521EE8008D7F0F /* SectionImageRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionImageRow.swift; sourceTree = "<group>"; };
+		E9F32ED02B45AFA90003303C /* LogbookRefuelReceive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookRefuelReceive.swift; sourceTree = "<group>"; };
+		E9F32ED22B45B3B60003303C /* refuellogbooks.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = refuellogbooks.json; sourceTree = "<group>"; };
+		E9F32ED42B45C8740003303C /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		E9F32ED62B45CF4F0003303C /* ChartAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartAnnotation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -296,6 +304,7 @@
 		E91AFA02283FD09F0024131D = {
 			isa = PBXGroup;
 			children = (
+				E9F32ED22B45B3B60003303C /* refuellogbooks.json */,
 				E91AFA35283FE5E70024131D /* logbooks.json */,
 				E962E5CF285E4DCA00F6B4D6 /* gasstations.json */,
 				E91AFA0D283FD09F0024131D /* Logbook */,
@@ -369,6 +378,7 @@
 				E962E5C9285E43B400F6B4D6 /* API */,
 				E940E8C428427380009F1225 /* UI */,
 				E91AFA31283FD7020024131D /* LogbookEntry.swift */,
+				E9F32ED02B45AFA90003303C /* LogbookRefuelReceive.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -567,6 +577,8 @@
 			isa = PBXGroup;
 			children = (
 				E97591EF2B3749C1008B543B /* StatsView.swift */,
+				E9F32ED42B45C8740003303C /* ChartView.swift */,
+				E9F32ED62B45CF4F0003303C /* ChartAnnotation.swift */,
 			);
 			path = Stats;
 			sourceTree = "<group>";
@@ -701,6 +713,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9F32ED32B45BCBB0003303C /* refuellogbooks.json in Resources */,
 				E95D87BB28A0455D0078EA7C /* VW@1x.png in Resources */,
 				E96665412AD85E0100605F49 /* button.riv in Resources */,
 				E95D87B428A040890078EA7C /* Legacy@2x.png in Resources */,
@@ -768,6 +781,7 @@
 				E9227BB32B41B87700589E64 /* MassUITextField.swift in Sources */,
 				E940E8C62842738E009F1225 /* PreferenceKey.swift in Sources */,
 				E91AFA48284129AE0024131D /* CustomTextField.swift in Sources */,
+				E9F32ED12B45AFA90003303C /* LogbookRefuelReceive.swift in Sources */,
 				E9C2544D2B013A7100F3BBAA /* ViewExtensions.swift in Sources */,
 				E94A0CFB284F97AA00693352 /* EntryView.swift in Sources */,
 				E9227BBD2B433E0100589E64 /* DetailsComponent.swift in Sources */,
@@ -783,6 +797,7 @@
 				E962E5CB285E440A00F6B4D6 /* GasStationEntry.swift in Sources */,
 				E9227BAA2B41B85B00589E64 /* ServiceView.swift in Sources */,
 				E961ACA728948EDD00C6FCC8 /* NewEntryViewModel.swift in Sources */,
+				E9F32ED72B45CF4F0003303C /* ChartAnnotation.swift in Sources */,
 				E9D2BB1C2843F977009EC7C5 /* CircularView.swift in Sources */,
 				E9C3B8DC2845374000EDE615 /* AnimatableFontModifier.swift in Sources */,
 				E96259BC284F5127007D9479 /* ScrollRefreshable.swift in Sources */,
@@ -794,6 +809,7 @@
 				E920B5FF2856480800683D67 /* SettingsView.swift in Sources */,
 				E9BA8D6E2847B22F009838C4 /* Cache.swift in Sources */,
 				E9227BB52B41B89000589E64 /* CurrencyTextField.swift in Sources */,
+				E9F32ED52B45C8740003303C /* ChartView.swift in Sources */,
 				E9AACA3A2853DFB5005F30FE /* NetworkActivityIndicatorManager.swift in Sources */,
 				E9715409289D73F200889084 /* DataSendPhase.swift in Sources */,
 				E940E8BE28426E50009F1225 /* CloseButton.swift in Sources */,

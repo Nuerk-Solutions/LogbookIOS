@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI_Extensions
-import Charts
 import Alamofire
 
 struct LogbookEntry {

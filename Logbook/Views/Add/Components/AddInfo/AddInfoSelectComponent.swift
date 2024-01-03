@@ -75,9 +75,9 @@ struct AddInfoSelectComponent: View {
     @ViewBuilder
     func AddInfoComponent() -> some View {
         if(selection == 0) {
-            RefuelView(price: Int((newLogbook.refuel?.price ?? 0) * 100), liters: Int((newLogbook.refuel?.liters ?? 0) * 100), newLogbook: $newLogbook, showAddInfoSelection: $showAddInfoSelection, showSheet: $showSheet, selection: $selection)
+            RefuelView(price: Int((newLogbook.refuel?.price ?? 0) * 100), liters: Int((newLogbook.refuel?.liters ?? 0) * 100), isSpecial: newLogbook.refuel?.isSpecial ?? false, newLogbook: $newLogbook, showAddInfoSelection: $showAddInfoSelection, showSheet: $showSheet, selection: $selection)
         } else {
-            ServiceView(price: Int(newLogbook.service?.price ?? 0) * 100, message: newLogbook.service?.message ?? "", newLogbook: $newLogbook, selection: $selection, showSheet: $showSheet, showAddInfoSelection: $showAddInfoSelection)
+            ServiceView(price: Int((newLogbook.service?.price ?? 0) * 100), message: newLogbook.service?.message ?? "", newLogbook: $newLogbook, selection: $selection, showSheet: $showSheet, showAddInfoSelection: $showAddInfoSelection)
         }
     }
     

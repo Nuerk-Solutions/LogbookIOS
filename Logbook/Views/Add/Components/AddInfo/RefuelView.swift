@@ -11,6 +11,7 @@ struct RefuelView: View {
     
     @State var price = 0
     @State var liters = 0
+    @State var isSpecial = false
     @State var canSubmit: Bool = true
     
     @Binding var newLogbook: LogbookEntry
@@ -77,7 +78,7 @@ struct RefuelView: View {
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                 
-                Toggle(isOn: $newLogbook.refuel.bound.isSpecial) {
+                Toggle(isOn: $isSpecial) {
                     Text("Keine Volltankung")
                 }
                 .padding(.top, 10)
@@ -86,6 +87,7 @@ struct RefuelView: View {
                 Button {
                     newLogbook.refuel?.liters = Double(liters) / 100
                     newLogbook.refuel?.price = Double(price) / 100
+                    newLogbook.refuel?.isSpecial = isSpecial
                     showAddInfoSelection.toggle()
                 } label: {
                     HStack {

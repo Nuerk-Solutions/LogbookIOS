@@ -16,7 +16,6 @@ struct AddEntryView: View {
     
     @State var showAddInfoSelection = false
     @Binding var show: Bool
-    @Binding var showTab: Bool
     
     @AppStorage("currentDriver") var currentDriver: DriverEnum = .Andrea
     
@@ -118,8 +117,10 @@ struct AddEntryView: View {
                           )
                     show.toggle()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        logbooksVM.loadedLogbooks.insert(logbook, at: 0)
-                        logbooksVM.phase = .success(logbooksVM.loadedLogbooks)
+                        withAnimation {
+                            logbooksVM.loadedLogbooks.insert(logbook, at: 0)
+                            logbooksVM.phase = .success(logbooksVM.loadedLogbooks)
+                        }
                         // model.lastAddedEntry = Date()  // Alternative: Trigger listener on listview to force update the logbooks
                     }
                 case .failure(_):
@@ -170,7 +171,7 @@ struct AddEntryView: View {
 
 struct NewAddView_Previews: PreviewProvider {
     static var previews: some View {
-        AddEntryView(show: .constant(true), showTab: .constant(false))
+        AddEntryView(show: .constant(true))
             .preferredColorScheme(.light)
             .environmentObject(NetworkReachability())
     }

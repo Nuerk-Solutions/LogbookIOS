@@ -31,7 +31,7 @@ struct ContentView: View {
             Group {
             switch selectedTab {
             case .home:
-                ListView(showAdd: $model.showTab, lastRefreshDate: $lastRefreshDate)
+                ListView(lastRefreshDate: $lastRefreshDate)
                     .environmentObject(model)
                     .environmentObject(networkReachablility)
                     .environmentObject(logbooksVM)
@@ -41,28 +41,30 @@ struct ContentView: View {
                 } else {
                     GasStationsView()
                 }
-//            case .stats:
-//                StatsView()
+            case .stats:
+//                StatsView(refuelEntries: .constant(LogbookRefuelReceive.previewData))
+                ChartView()
             case .settings:
                 SettingsView()
             }
                         }
                         .safeAreaInset(edge: .bottom) {
-                            VStack {}.frame(height: model.showTab ? 44 : 0)
+//                            VStack {}.frame(height: model.showTab ? 44 : 0)
+                            VStack {}.frame(height: 44)
                         }
             
             
             TabBar()
 //                            .offset(y: -24)
-                .background(
-                    LinearGradient(colors: [Color("Background").opacity(0), Color("Background")], startPoint: .top, endPoint: .bottom)
-                        .frame(height: 100)
-                        .frame(maxHeight: .infinity, alignment: .bottom)
-                        .allowsHitTesting(false)
-                        .blur(radius: 15)
-                )
+//                .background(
+//                    LinearGradient(colors: [Color("Background").opacity(0), Color("Background")], startPoint: .top, endPoint: .bottom)
+//                        .frame(height: 100)
+//                        .frame(maxHeight: .infinity, alignment: .bottom)
+//                        .allowsHitTesting(false)
+//                        .blur(radius: 15)
+//                )
 //                            .ignoresSafeArea()
-                .offset(y: isOpen ? 300 : 0)
+//                .offset(y: isOpen ? 300 : 0)
                 .offset(y: !model.showTab ? 200 : 0)
             
         }
@@ -71,13 +73,13 @@ struct ContentView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 withAnimation(.spring()) {
                     model.showAdd = isOpenAddViewOnStart
-                    model.showTab = !isOpenAddViewOnStart
+//                    model.showTab = !isOpenAddViewOnStart
                 }
             }
             //            isInitalLoad.toggle()
         }
         .sheet(isPresented: $model.showAdd) {
-            AddEntryView(show: $model.showAdd, showTab: $model.showTab)
+            AddEntryView(show: $model.showAdd)
                 .presentationBackground(.ultraThinMaterial)
                 .presentationCornerRadius(30)
                 .presentationDetents([.large])

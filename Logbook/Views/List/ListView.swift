@@ -45,7 +45,7 @@ struct ListView: View {
         return formatter
     }()
     
-    init(logbooks: [LogbookEntry]? = nil, showAdd: Binding<Bool>, lastRefreshDate: Binding<Date?>) {
+    init(logbooks: [LogbookEntry]? = nil, lastRefreshDate: Binding<Date?>) {
 //        self._logbooksVM = StateObject(wrappedValue: LogbooksViewModel(logbooks: logbooks))
         //        self._showAdd = showAdd
         self._lastRefreshDate = lastRefreshDate
@@ -137,12 +137,11 @@ struct ListView: View {
                 }
             }
         }
-        .onReceive(logbooksVM.$phase, perform: { newValue in
-            print(newValue)
-            withAnimation {
-                model.showDetail = false
-            }
-        })
+//        .onReceive(logbooksVM.$phase, perform: { newValue in
+//            withAnimation {
+//                model.showDetail = false
+//            }
+//        })
     }
     
     @ViewBuilder
@@ -218,7 +217,7 @@ struct ListView: View {
                         //                            .offset(y: -40)
                     }
                 }
-//                .transition(.identity)
+                .transition(.blurReplace)
 //                .animation(.flipCard)
                 //                .padding(.horizontal, 20)
                 .opacity(logbooksVM.logbooksOpacity)
@@ -234,12 +233,12 @@ struct ListView: View {
                     .accessibilityElement(children: .combine)
                     .accessibilityAddTraits(.isButton)
                     .task(id: logbooksVM.lastListRefresh, loadTask)
-                    .transition(.opacity)
+                    .transition(.blurReplace)
             } else {
                 EntryItem(namespace: namespace, entry: entry)
                     .accessibilityElement(children: .combine)
                     .accessibilityAddTraits(.isButton)
-                    .transition(.opacity)
+                    .transition(.blurReplace)
                     .contextMenu {
 //                        Button {
 //                            print("Edited")
@@ -256,8 +255,10 @@ struct ListView: View {
                                     await logbooksVM.deleteEntry(connected: networkReachablility.connected, logbook: entry)
                                     
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                            logbooksVM.loadedLogbooks.removeFirst()
-                                            logbooksVM.phase = .success(logbooksVM.loadedLogbooks)
+                                            withAnimation {
+                                                logbooksVM.loadedLogbooks.removeFirst()
+                                                logbooksVM.phase = .success(logbooksVM.loadedLogbooks)
+                                            }
                                         }
                                     // Refresh Task will execute immidiate, because it does not await the DispatchQueue
 //                                    await logbooksVM.refreshTask()

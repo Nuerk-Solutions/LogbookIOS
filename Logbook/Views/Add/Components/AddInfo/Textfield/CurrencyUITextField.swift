@@ -33,9 +33,9 @@ class CurrencyUITextField: UITextField {
         sendActions(for: .editingChanged)
     }
 
-    override func removeFromSuperview() {
-        print(#function)
-    }
+//    override func removeFromSuperview() {
+//        print(#function)
+//    }
 
     override func deleteBackward() {
         text = textValue.digits.dropLast().string
