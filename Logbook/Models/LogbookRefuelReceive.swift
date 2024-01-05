@@ -23,6 +23,7 @@ struct RefuelsRecive: Codable, Equatable, Identifiable {
     let date: Date
     let refuel: RefuelRecive
     var animated: Bool? = false
+    var sumAverage: Double?
 }
 
 struct RefuelRecive: Codable, Equatable {
