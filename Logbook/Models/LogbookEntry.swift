@@ -32,6 +32,7 @@ struct LogbookEntry {
     var details: Details
     var refuel: Refuel?
     var service: Service?
+    var animated: Bool? = false
 }
 
 public struct Service: Codable, Equatable {

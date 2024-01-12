@@ -39,13 +39,12 @@ struct AddEntryView: View {
             
             NavigationStack {
                 VStack(alignment: .leading, spacing: 16) {
-                    HStack (alignment: .firstTextBaseline, spacing: 0) {
+                    HStack (spacing: 0) {
                         Text("Neuer Eintrag")
                             .font(.custom("Poppins Bold", size: 30))
                             .frame(width: 260, alignment: .leading)
                         if newEntryVM.fetchPhase == .fetchingNextPage(lastLogbooks) || netWorkActivitIndicatorManager.isNetworkActivityIndicatorVisible {
                             ProgressView()
-                                .padding(.horizontal, 5)
                         }
                     }
                     
@@ -72,7 +71,18 @@ struct AddEntryView: View {
 //                .overlay(overlayView)
                 .overlay {
                     if  newEntryVM.fetchPhase == .fetchingNextPage(lastLogbooks) || netWorkActivitIndicatorManager.isNetworkActivityIndicatorVisible {
-                        CustomProgressView(message: "Warte auf Antwort...")
+                        ZStack{}
+                            .onAppear {
+                            AlertKitAPI.present(
+                                      title: "Laden...",
+                                      icon: .spinnerSmall,
+                                      style: .iOS17AppleMusic,
+                                      haptic: AlertHaptic.none
+                                  )
+                        }
+                            .onDisappear {
+                                AlertKitAPI.dismissAllAlerts()
+                            }
                     }
                 }
                 .task {

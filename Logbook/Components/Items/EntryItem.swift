@@ -36,11 +36,18 @@ struct EntryItem: View {
                     }
                     .padding(.bottom, 15)
                     
-                    Text("\(DateFormatter.readableDeShort.string(from: entry.date)) - \(entry.driver.rawValue)".uppercased())
-                        .font(.footnote).bold()
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .matchedGeometryEffect(id: "subtitle\(entry.id)", in: namespace)
-                        .foregroundColor(.white.opacity(0.7))
+                    HStack(spacing: 0) {
+                        Text("\(DateFormatter.readableDeShort.string(from: entry.date)) - ")
+                            .font(.footnote).bold()
+                            .matchedGeometryEffect(id: "date\(entry.id)", in: namespace)
+                            .foregroundColor(.white.opacity(0.7))
+                        
+                        Text("\(entry.driver.rawValue)".uppercased())
+                            .font(.footnote).bold()
+                            .matchedGeometryEffect(id: "subtitle\(entry.id)", in: namespace)
+                            .foregroundColor(.white.opacity(0.7))
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     //                                    .background {
                     //                                        Rectangle()
                     //                                            .fill(.ultraThinMaterial)
@@ -62,16 +69,16 @@ struct EntryItem: View {
                 //                .padding(.horizontal, -10)
                 //                .padding(.vertical, -20)
             )
-            .background(.secondary.opacity(0.4))
-            .background(.ultraThinMaterial)
-            .background(
-                Image(getVehicleBackground(vehicleTyp: entry.vehicle))
-                    .resizable()
-                    .scaledToFill()
-                    .frame(maxWidth: .infinity, maxHeight: 150, alignment: .center)
-                    .disabled(true)
-                    .matchedGeometryEffect(id: "background\(entry.id)", in: namespace)
-            )
+            .background(.secondary)
+            .background(.regularMaterial)
+//            .background(
+//                Image(getVehicleBackground(vehicleTyp: entry.vehicle))
+//                    .resizable()
+//                    .scaledToFill()
+//                    .frame(maxWidth: .infinity, maxHeight: 150, alignment: .center)
+//                    .disabled(true)
+//                    .matchedGeometryEffect(id: "background\(entry.id)", in: namespace)
+//            )
             .clipped()
             .contentShape(RoundedRectangle(cornerRadius: CGFloat(30)))
             .mask(

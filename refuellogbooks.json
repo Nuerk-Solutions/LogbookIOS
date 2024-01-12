@@ -1,377 +1,2443 @@
 [
     {
-        "vehicle": "Ferrari",
-        "refuels": [
-            {
-                "date": "2023-10-19T18:44:17.576Z",
-                "refuel": {
-                    "liters": 39.38,
-                    "price": 72.03,
-                    "distanceDifference": 510,
-                    "consumption": 7.721568627450981,
-                    "isSpecial": false,
-                    "previousRecordId": "64b506757fc9750629be13bd"
-                }
-            },
-            {
-                "date": "2023-07-17T11:13:52.254Z",
-                "refuel": {
-                    "liters": 38.76,
-                    "price": 70.5,
-                    "distanceDifference": 1048,
-                    "consumption": 3.6984732824427478,
-                    "isSpecial": false,
-                    "previousRecordId": "640b1efc285381602e98da61"
-                }
-            },
-            {
-                "date": "2023-03-10T13:12:54.323Z",
-                "refuel": {
-                    "liters": 42.1,
-                    "price": 79.53,
-                    "distanceDifference": 465,
-                    "consumption": 9.053763440860216,
-                    "isSpecial": false,
-                    "previousRecordId": "63b8725e7b554f985dd66afb"
-                }
-            },
-            {
-                "date": "2023-01-06T20:10:45.824Z",
-                "refuel": {
-                    "liters": 45.02,
-                    "price": 79.19,
-                    "distanceDifference": 578,
-                    "consumption": 7.788927335640139,
-                    "isSpecial": false,
-                    "previousRecordId": "6380e232d42e67bbfce8fbfb"
-                }
-            },
-            {
-                "date": "2022-11-25T16:40:49.616Z",
-                "refuel": {
-                    "liters": 42.9,
-                    "price": 77.18,
-                    "distanceDifference": 499,
-                    "consumption": 8.597194388777554,
-                    "isSpecial": false,
-                    "previousRecordId": "63399ab46c2c95f0e3330770"
-                }
-            },
-            {
-                "date": "2022-10-02T16:04:32.587Z",
-                "refuel": {
-                    "liters": 38.14,
-                    "price": 72.81,
-                    "distanceDifference": 579,
-                    "consumption": 6.587219343696028,
-                    "isSpecial": false,
-                    "previousRecordId": "62d05dbc32ec82f92346b0a0"
-                }
-            },
-            {
-                "date": "2022-07-14T20:16:41.586Z",
-                "refuel": {
-                    "liters": 39.12,
-                    "price": 71.94,
-                    "distanceDifference": 516,
-                    "consumption": 7.581395348837209,
-                    "isSpecial": false,
-                    "previousRecordId": "6273e9453cefac82d2da9ee1"
-                }
-            },
-            {
-                "date": "2022-05-05T17:11:22.526Z",
-                "refuel": {
-                    "liters": 39.69,
-                    "price": 80.13,
-                    "distanceDifference": 544,
-                    "consumption": 7.29595588235294,
-                    "isSpecial": false,
-                    "previousRecordId": "6213df74b97c4a704dca1b5e"
-                }
-            },
-            {
-                "date": "2022-02-21T19:50:02.700Z",
-                "refuel": {
-                    "liters": 39.17,
-                    "price": 70.08,
-                    "distanceDifference": 455,
-                    "consumption": 8.60879120879121,
-                    "isSpecial": false,
-                    "previousRecordId": "61f52e612cf4df2a43b7a2bf"
-                }
-            },
-            {
-                "date": "2022-01-13T13:18:30.955Z",
-                "refuel": {
-                    "liters": 41.2,
-                    "price": 70,
-                    "distanceDifference": 481,
-                    "consumption": 8.565488565488566,
-                    "isSpecial": false,
-                    "previousRecordId": "61f52e612cf4df2a43b7a288"
-                }
-            }
-        ]
-    },
-    {
-        "vehicle": "DS",
-        "refuels": [
-            {
-                "date": "2023-11-25T18:48:16.505Z",
-                "refuel": {
-                    "liters": 58.2,
-                    "price": 103.45,
-                    "distanceDifference": 0,
-                    "consumption": 0,
-                    "isSpecial": false
-                }
-            }
-        ]
-    },
-    {
-        "vehicle": "Porsche",
-        "refuels": [
-            {
-                "date": "2023-12-28T14:02:00.000Z",
-                "refuel": {
-                    "liters": 65.18,
-                    "price": 119.21,
-                    "distanceDifference": 586,
-                    "consumption": 11.122866894197953,
-                    "isSpecial": false,
-                    "previousRecordId": "6559f5b9ea9e74abc0388587"
-                }
-            },
-            {
-                "date": "2023-11-19T12:46:11.683Z",
-                "refuel": {
-                    "liters": 57.2,
-                    "price": 105.78,
-                    "distanceDifference": 565,
-                    "consumption": 10.123893805309734,
-                    "isSpecial": false,
-                    "previousRecordId": "655902c73e39340e6e85fd5f"
-                }
-            },
-            {
-                "date": "2023-11-18T19:29:52.913Z",
-                "refuel": {
-                    "liters": 15.1,
-                    "price": 28.34,
-                    "distanceDifference": 133,
-                    "consumption": 11.353383458646617,
-                    "isSpecial": false,
-                    "previousRecordId": "65576af602fb7e2e731babd2"
-                }
-            },
-            {
-                "date": "2023-11-17T14:28:52.510Z",
-                "refuel": {
-                    "liters": 68.1,
-                    "price": 125.25,
-                    "distanceDifference": 633,
-                    "consumption": 10.758293838862558,
-                    "isSpecial": false,
-                    "previousRecordId": "65511144165c779819a38d83"
-                }
-            },
-            {
-                "date": "2023-11-12T18:53:33.176Z",
-                "refuel": {
-                    "liters": 46.1,
-                    "price": 84.39,
-                    "distanceDifference": 427,
-                    "consumption": 10.796252927400468,
-                    "isSpecial": false,
-                    "previousRecordId": "653f79ef533a1ed112a3b65c"
-                }
-            },
-            {
-                "date": "2023-10-30T10:39:28.146Z",
-                "refuel": {
-                    "liters": 55.2,
-                    "price": 103,
-                    "distanceDifference": 484,
-                    "consumption": 11.404958677685952,
-                    "isSpecial": false,
-                    "previousRecordId": "652f8f38d6d5cd715cb62fca"
-                }
-            },
-            {
-                "date": "2023-10-18T09:53:42.150Z",
-                "refuel": {
-                    "liters": 57.7,
-                    "price": 121.63,
-                    "distanceDifference": 506,
-                    "consumption": 11.403162055335969,
-                    "isSpecial": false,
-                    "previousRecordId": "64e23fd8a76a7b1d304665b5"
-                }
-            },
-            {
-                "date": "2023-08-20T18:30:22.770Z",
-                "refuel": {
-                    "liters": 66.6,
-                    "price": 131.04,
-                    "distanceDifference": 798,
-                    "consumption": 8.345864661654135,
-                    "isSpecial": false,
-                    "previousRecordId": "648f07a5be9461de1a80b5df"
-                }
-            },
-            {
-                "date": "2023-06-18T15:32:47.411Z",
-                "refuel": {
-                    "liters": 40,
-                    "price": 80,
-                    "distanceDifference": 509,
-                    "consumption": 7.858546168958743,
-                    "isSpecial": false,
-                    "previousRecordId": "63da54a753b3368397a070bc"
-                }
-            },
-            {
-                "date": "2023-02-01T13:00:39.847Z",
-                "refuel": {
-                    "liters": 68,
-                    "price": 127.79,
-                    "distanceDifference": 629,
-                    "consumption": 10.81081081081081,
-                    "isSpecial": false,
-                    "previousRecordId": "635ff4b1bf90cf0af9fbd8cb"
-                }
-            }
-        ]
-    },
-    {
-        "vehicle": "MX5",
-        "refuels": [
-            {
-                "date": "2023-12-27T14:04:02.152Z",
-                "refuel": {
-                    "liters": 31.46,
-                    "price": 55.34,
-                    "distanceDifference": 0,
-                    "consumption": 0,
-                    "isSpecial": false
-                }
-            }
-        ]
-    },
-    {
+        "_id": "6588197e2296c378312145d3",
+        "driver": "Oliver",
         "vehicle": "VW",
-        "refuels": [
-            {
-                "date": "2023-12-23T12:43:00.000Z",
-                "refuel": {
-                    "liters": 58.54,
-                    "price": 96.53,
-                    "distanceDifference": 825,
-                    "consumption": 7.095757575757576,
-                    "isSpecial": false,
-                    "previousRecordId": "657b6031f0a7c4d0079791b6"
-                }
-            },
-            {
-                "date": "2023-12-14T21:05:20.280Z",
-                "refuel": {
-                    "liters": 59.3,
-                    "price": 99.06,
-                    "distanceDifference": 849,
-                    "consumption": 6.984687868080094,
-                    "isSpecial": false,
-                    "previousRecordId": "654d19001ff9285577173687"
-                }
-            },
-            {
-                "date": "2023-11-09T18:37:08.307Z",
-                "refuel": {
-                    "liters": 60.4,
-                    "price": 102.05,
-                    "distanceDifference": 458,
-                    "consumption": 13.187772925764191,
-                    "isSpecial": false,
-                    "previousRecordId": "654914ed2fabc52ae572b3fd"
-                }
-            },
-            {
-                "date": "2023-11-06T17:30:25.558Z",
-                "refuel": {
-                    "liters": 20,
-                    "price": 40,
-                    "distanceDifference": 695,
-                    "consumption": 2.877697841726619,
-                    "isSpecial": false,
-                    "previousRecordId": "650d6b1ba7da269e43af673c"
-                }
-            },
-            {
-                "date": "2023-09-22T12:22:01.937Z",
-                "refuel": {
-                    "liters": 48.66,
-                    "price": 88.01,
-                    "distanceDifference": 546,
-                    "consumption": 8.91208791208791,
-                    "isSpecial": false,
-                    "previousRecordId": "64fdf2eb9a0e93c0afed8de6"
-                }
-            },
-            {
-                "date": "2023-09-10T18:45:53.146Z",
-                "refuel": {
-                    "liters": 20,
-                    "price": 40,
-                    "distanceDifference": 440,
-                    "consumption": 4.545454545454546,
-                    "isSpecial": false,
-                    "previousRecordId": "64ef3752f6e085dbf1601472"
-                }
-            },
-            {
-                "date": "2023-08-30T14:33:54.149Z",
-                "refuel": {
-                    "liters": 55.53,
-                    "price": 101.01,
-                    "distanceDifference": 829,
-                    "consumption": 6.6984318455971055,
-                    "isSpecial": false,
-                    "previousRecordId": "64a44539f76aeb7076eb54fd"
-                }
-            },
-            {
-                "date": "2023-07-04T18:12:56.624Z",
-                "refuel": {
-                    "liters": 41.86,
-                    "price": 67.77,
-                    "distanceDifference": 559,
-                    "consumption": 7.488372093023256,
-                    "isSpecial": false,
-                    "previousRecordId": "64a3b79811e3b22f5cc9dc7e"
-                }
-            },
-            {
-                "date": "2023-07-04T08:08:39.242Z",
-                "refuel": {
-                    "liters": 32.75,
-                    "price": 54.33,
-                    "distanceDifference": 604,
-                    "consumption": 5.422185430463576,
-                    "isSpecial": false,
-                    "previousRecordId": "649fdb04b4fe97eabe9a8880"
-                }
-            },
-            {
-                "date": "2023-07-01T09:50:54.663Z",
-                "refuel": {
-                    "liters": 44.6,
-                    "price": 66.46,
-                    "distanceDifference": 584,
-                    "consumption": 7.636986301369864,
-                    "isSpecial": false,
-                    "previousRecordId": "64992c39ccaf7bbc8aeab21d"
-                }
-            }
-        ]
+        "date": "2023-12-23T12:43:00.000Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 193197,
+            "new": 193217,
+            "difference": 20,
+            "cost": 4,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 58.54,
+            "price": 96.53,
+            "distanceDifference": 825,
+            "consumption": 7.095757575757576,
+            "isSpecial": false,
+            "previousRecordId": "657b6031f0a7c4d0079791b6"
+        },
+        "createdAt": "2023-12-24T11:43:58.681Z"
+    },
+    {
+        "_id": "657b6031f0a7c4d0079791b6",
+        "driver": "Oliver",
+        "vehicle": "VW",
+        "date": "2023-12-14T21:05:20.280Z",
+        "reason": "Dresden-Berlin",
+        "mileAge": {
+            "current": 192119,
+            "new": 192392,
+            "difference": 273,
+            "cost": 54.6,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 59.3,
+            "price": 99.06,
+            "distanceDifference": 849,
+            "consumption": 6.984687868080094,
+            "isSpecial": false,
+            "previousRecordId": "654d19001ff9285577173687"
+        },
+        "createdAt": "2023-12-14T20:06:09.558Z"
+    },
+    {
+        "_id": "654d19001ff9285577173687",
+        "driver": "Oliver",
+        "vehicle": "VW",
+        "date": "2023-11-09T18:37:08.307Z",
+        "reason": "Dresden-Berlin-Dresden",
+        "mileAge": {
+            "current": 191085,
+            "new": 191543,
+            "difference": 458,
+            "cost": 91.6,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 60.4,
+            "price": 102.05,
+            "distanceDifference": 458,
+            "consumption": 13.187772925764191,
+            "isSpecial": false,
+            "previousRecordId": "654914ed2fabc52ae572b3fd"
+        },
+        "createdAt": "2023-11-09T17:38:08.715Z"
+    },
+    {
+        "_id": "654914ed2fabc52ae572b3fd",
+        "driver": "Oliver",
+        "vehicle": "VW",
+        "date": "2023-11-06T17:30:25.558Z",
+        "reason": "Stadtfahrten",
+        "mileAge": {
+            "current": 191067,
+            "new": 191085,
+            "difference": 18,
+            "cost": 3.6,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 20,
+            "price": 40,
+            "distanceDifference": 695,
+            "consumption": 2.877697841726619,
+            "isSpecial": false,
+            "previousRecordId": "650d6b1ba7da269e43af673c"
+        },
+        "createdAt": "2023-11-06T16:31:41.031Z"
+    },
+    {
+        "_id": "650d6b1ba7da269e43af673c",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2023-09-22T12:22:01.937Z",
+        "reason": "Äpfel + Friseur Hinfahrt",
+        "mileAge": {
+            "current": 190352,
+            "new": 190390,
+            "difference": 38,
+            "cost": 7.6,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 48.66,
+            "price": 88.01,
+            "distanceDifference": 546,
+            "consumption": 8.91208791208791,
+            "isSpecial": false,
+            "previousRecordId": "64fdf2eb9a0e93c0afed8de6"
+        },
+        "createdAt": "2023-09-22T10:23:23.016Z"
+    },
+    {
+        "_id": "64fdf2eb9a0e93c0afed8de6",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2023-09-10T18:45:53.146Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 189821,
+            "new": 189844,
+            "difference": 23,
+            "cost": 4.6,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 20,
+            "price": 40,
+            "distanceDifference": 440,
+            "consumption": 4.545454545454546,
+            "isSpecial": false,
+            "previousRecordId": "64ef3752f6e085dbf1601472"
+        },
+        "createdAt": "2023-09-10T16:46:35.345Z"
+    },
+    {
+        "_id": "64ef3752f6e085dbf1601472",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2023-08-30T14:33:54.149Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 189400,
+            "new": 189404,
+            "difference": 4,
+            "cost": 0.8,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 55.53,
+            "price": 101.01,
+            "distanceDifference": 829,
+            "consumption": 6.6984318455971055,
+            "isSpecial": false,
+            "previousRecordId": "64a44539f76aeb7076eb54fd"
+        },
+        "createdAt": "2023-08-30T12:34:26.208Z"
+    },
+    {
+        "_id": "64a44539f76aeb7076eb54fd",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2023-07-04T18:12:56.624Z",
+        "reason": "Köln-Berlin",
+        "mileAge": {
+            "current": 188016,
+            "new": 188575,
+            "difference": 559,
+            "cost": 111.8,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 41.86,
+            "price": 67.77,
+            "distanceDifference": 559,
+            "consumption": 7.488372093023256,
+            "isSpecial": false,
+            "previousRecordId": "64a3b79811e3b22f5cc9dc7e"
+        },
+        "createdAt": "2023-07-04T16:13:45.848Z"
+    },
+    {
+        "_id": "64a3b79811e3b22f5cc9dc7e",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2023-07-04T08:08:39.242Z",
+        "reason": "Stadtfahrt Köln",
+        "mileAge": {
+            "current": 188014,
+            "new": 188016,
+            "difference": 2,
+            "cost": 0.4,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 32.75,
+            "price": 54.33,
+            "distanceDifference": 604,
+            "consumption": 5.422185430463576,
+            "isSpecial": false,
+            "previousRecordId": "649fdb04b4fe97eabe9a8880"
+        },
+        "createdAt": "2023-07-04T06:09:28.051Z"
+    },
+    {
+        "_id": "649fdb04b4fe97eabe9a8880",
+        "driver": "Oliver",
+        "vehicle": "VW",
+        "date": "2023-07-01T09:50:54.663Z",
+        "reason": "Dorffahrten",
+        "mileAge": {
+            "current": 187390,
+            "new": 187412,
+            "difference": 22,
+            "cost": 4.4,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 44.6,
+            "price": 66.46,
+            "distanceDifference": 584,
+            "consumption": 7.636986301369864,
+            "isSpecial": false,
+            "previousRecordId": "64992c39ccaf7bbc8aeab21d"
+        },
+        "createdAt": "2023-07-01T07:51:32.395Z"
+    },
+    {
+        "_id": "64992c39ccaf7bbc8aeab21d",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2023-06-26T08:11:40.147Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 186821,
+            "new": 186828,
+            "difference": 7,
+            "cost": 1.4,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 42.2,
+            "price": 70.01,
+            "distanceDifference": 631,
+            "consumption": 6.687797147385104,
+            "isSpecial": false,
+            "previousRecordId": "6490619608b4657973eadb30"
+        },
+        "createdAt": "2023-06-26T06:12:09.600Z"
+    },
+    {
+        "_id": "6490619608b4657973eadb30",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2023-06-19T16:08:13.121Z",
+        "reason": "Stadtfahrten",
+        "mileAge": {
+            "current": 186135,
+            "new": 186197,
+            "difference": 62,
+            "cost": 12.4,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 53.75,
+            "price": 87.02,
+            "distanceDifference": 817,
+            "consumption": 6.578947368421052,
+            "isSpecial": false,
+            "previousRecordId": "6481721943f8cd2c14a5b377"
+        },
+        "createdAt": "2023-06-19T14:09:26.997Z"
+    },
+    {
+        "_id": "6481721943f8cd2c14a5b377",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2023-06-08T08:15:09.791Z",
+        "reason": "Köln-Berlin",
+        "mileAge": {
+            "current": 184829,
+            "new": 185380,
+            "difference": 551,
+            "cost": 110.2,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 34.2,
+            "price": 55.29,
+            "distanceDifference": 551,
+            "consumption": 6.206896551724139,
+            "isSpecial": false,
+            "previousRecordId": "64804f2e88a29ca0e91e990b"
+        },
+        "createdAt": "2023-06-08T06:15:53.188Z"
+    },
+    {
+        "_id": "64804f2e88a29ca0e91e990b",
+        "driver": "Oliver",
+        "vehicle": "VW",
+        "date": "2023-06-07T11:33:33.948Z",
+        "reason": "Köln-Trier-Lux-Köln",
+        "mileAge": {
+            "current": 184248,
+            "new": 184829,
+            "difference": 581,
+            "cost": 116.2,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 33.7,
+            "price": 55.55,
+            "distanceDifference": 581,
+            "consumption": 5.800344234079175,
+            "isSpecial": false,
+            "previousRecordId": "6479f8ccfc7fd7be05d06a43"
+        },
+        "createdAt": "2023-06-07T09:34:38.551Z"
+    },
+    {
+        "_id": "6479f8ccfc7fd7be05d06a43",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2023-06-02T16:11:19.004Z",
+        "reason": "DD-Köln",
+        "mileAge": {
+            "current": 183630,
+            "new": 184248,
+            "difference": 618,
+            "cost": 123.6,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 41.06,
+            "price": 64.01,
+            "distanceDifference": 618,
+            "consumption": 6.644012944983819,
+            "isSpecial": false,
+            "previousRecordId": "64749f224308601dd90c7983"
+        },
+        "createdAt": "2023-06-02T14:12:28.030Z"
+    },
+    {
+        "_id": "64749f224308601dd90c7983",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2023-05-29T14:47:47.976Z",
+        "reason": "Stadtfahrten",
+        "mileAge": {
+            "current": 183605,
+            "new": 183630,
+            "difference": 25,
+            "cost": 5,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 40.89,
+            "price": 61.25,
+            "distanceDifference": 530,
+            "consumption": 7.715094339622642,
+            "isSpecial": false,
+            "previousRecordId": "64561745a9e696b7614a9605"
+        },
+        "createdAt": "2023-05-29T12:48:34.269Z"
+    },
+    {
+        "_id": "64561745a9e696b7614a9605",
+        "driver": "Oliver",
+        "vehicle": "VW",
+        "date": "2023-05-06T10:59:45.801Z",
+        "reason": "Stadtfahrten",
+        "mileAge": {
+            "current": 183092,
+            "new": 183100,
+            "difference": 8,
+            "cost": 1.6,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 41.2,
+            "price": 68.3,
+            "distanceDifference": 603,
+            "consumption": 6.832504145936983,
+            "isSpecial": false,
+            "previousRecordId": "6453a288ae7504ad691219ea"
+        },
+        "createdAt": "2023-05-06T09:00:53.989Z"
+    },
+    {
+        "_id": "6453a288ae7504ad691219ea",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2023-05-04T14:17:26.348Z",
+        "reason": "Köln",
+        "mileAge": {
+            "current": 182385,
+            "new": 182497,
+            "difference": 112,
+            "cost": 22.4,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 43.3,
+            "price": 68.82,
+            "distanceDifference": 581,
+            "consumption": 7.452667814113596,
+            "isSpecial": false,
+            "previousRecordId": "644cd46d2e73598284d44669"
+        },
+        "createdAt": "2023-05-04T12:18:16.164Z"
+    },
+    {
+        "_id": "644cd46d2e73598284d44669",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2023-04-29T10:24:12.494Z",
+        "reason": "DD-Köln +Stadtfahrt",
+        "mileAge": {
+            "current": 181270,
+            "new": 181916,
+            "difference": 646,
+            "cost": 129.2,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 35.95,
+            "price": 54.25,
+            "distanceDifference": 646,
+            "consumption": 5.565015479876161,
+            "isSpecial": false,
+            "previousRecordId": "6445019d106153c05d8a99d1"
+        },
+        "createdAt": "2023-04-29T08:25:17.367Z"
+    },
+    {
+        "_id": "6445019d106153c05d8a99d1",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2023-04-23T11:59:10.191Z",
+        "reason": "Stadtfahrten",
+        "mileAge": {
+            "current": 181263,
+            "new": 181270,
+            "difference": 7,
+            "cost": 1.4,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 28.35,
+            "price": 46.18,
+            "distanceDifference": 421,
+            "consumption": 6.733966745843231,
+            "isSpecial": false,
+            "previousRecordId": "642dbc8658260188e7c99c8d"
+        },
+        "createdAt": "2023-04-23T09:59:57.611Z"
+    },
+    {
+        "_id": "642dbc8658260188e7c99c8d",
+        "driver": "Oliver",
+        "vehicle": "VW",
+        "date": "2023-04-05T20:22:18.636Z",
+        "reason": "Dresden-Berlin-Dresden",
+        "mileAge": {
+            "current": 180350,
+            "new": 180849,
+            "difference": 499,
+            "cost": 99.8,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 63.5,
+            "price": 103,
+            "distanceDifference": 999,
+            "consumption": 6.356356356356356,
+            "isSpecial": false,
+            "previousRecordId": "641df26eb3d95e6205ddc908"
+        },
+        "createdAt": "2023-04-05T18:23:02.276Z"
+    },
+    {
+        "_id": "641df26eb3d95e6205ddc908",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2023-03-24T19:55:42.103Z",
+        "reason": "Moritzburg bis STAR",
+        "mileAge": {
+            "current": 179829,
+            "new": 179850,
+            "difference": 21,
+            "cost": 4.2,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 35.51,
+            "price": 55,
+            "distanceDifference": 516,
+            "consumption": 6.8817829457364335,
+            "isSpecial": false,
+            "previousRecordId": "64186206cacc3afca283aaa7"
+        },
+        "createdAt": "2023-03-24T18:56:46.553Z"
+    },
+    {
+        "_id": "64186206cacc3afca283aaa7",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2023-03-20T14:38:41.394Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 179326,
+            "new": 179334,
+            "difference": 8,
+            "cost": 1.6,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 50,
+            "price": 85.01,
+            "distanceDifference": 830,
+            "consumption": 6.024096385542169,
+            "isSpecial": false,
+            "previousRecordId": "640b5029ec513834525b4cbc"
+        },
+        "createdAt": "2023-03-20T13:39:18.632Z"
+    },
+    {
+        "_id": "640b5029ec513834525b4cbc",
+        "driver": "Oliver",
+        "vehicle": "VW",
+        "date": "2023-03-10T16:42:43.151Z",
+        "reason": "Dresden - München",
+        "mileAge": {
+            "current": 178056,
+            "new": 178504,
+            "difference": 448,
+            "cost": 89.6,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 66.2,
+            "price": 115.78,
+            "distanceDifference": 905,
+            "consumption": 7.314917127071824,
+            "isSpecial": false,
+            "previousRecordId": "63f9196e6f43ed9b07c9ebf3"
+        },
+        "createdAt": "2023-03-10T15:43:37.895Z"
+    },
+    {
+        "_id": "63f9196e6f43ed9b07c9ebf3",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2023-02-24T21:08:03.115Z",
+        "reason": "Leipzig/ Wustermark",
+        "mileAge": {
+            "current": 177306,
+            "new": 177599,
+            "difference": 293,
+            "cost": 58.6,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 60.38,
+            "price": 105,
+            "distanceDifference": 862,
+            "consumption": 7.0046403712297,
+            "isSpecial": false,
+            "previousRecordId": "63ef7e09c37cbe21c64521cd"
+        },
+        "createdAt": "2023-02-24T20:09:18.971Z"
+    },
+    {
+        "_id": "63ef7e09c37cbe21c64521cd",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2023-02-17T14:15:10.330Z",
+        "reason": "Stadtfahrten",
+        "mileAge": {
+            "current": 176670,
+            "new": 176737,
+            "difference": 67,
+            "cost": 13.4,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 46.5,
+            "price": 79,
+            "distanceDifference": 694,
+            "consumption": 6.7002881844380395,
+            "isSpecial": false,
+            "previousRecordId": "63de8911d1bae1b0dbe76f76"
+        },
+        "createdAt": "2023-02-17T13:15:53.371Z"
+    },
+    {
+        "_id": "63de8911d1bae1b0dbe76f76",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2023-02-04T17:33:15.192Z",
+        "reason": "Friseur",
+        "mileAge": {
+            "current": 176013,
+            "new": 176043,
+            "difference": 30,
+            "cost": 6,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 53.29,
+            "price": 90.01,
+            "distanceDifference": 683,
+            "consumption": 7.802342606149342,
+            "isSpecial": false,
+            "previousRecordId": "63d6bdce3a2a0f55df279585"
+        },
+        "createdAt": "2023-02-04T16:34:25.974Z"
+    },
+    {
+        "_id": "63d6bdce3a2a0f55df279585",
+        "driver": "Oliver",
+        "vehicle": "VW",
+        "date": "2023-01-29T19:40:14.205Z",
+        "reason": "Dresden-Utting",
+        "mileAge": {
+            "current": 174735,
+            "new": 175360,
+            "difference": 625,
+            "cost": 125,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 35.9,
+            "price": 65.64,
+            "distanceDifference": 625,
+            "consumption": 5.744,
+            "isSpecial": false,
+            "previousRecordId": "63d3c9d0ed9bf79dbad3bfad"
+        },
+        "createdAt": "2023-01-29T18:41:18.501Z"
+    },
+    {
+        "_id": "63d3c9d0ed9bf79dbad3bfad",
+        "driver": "Oliver",
+        "vehicle": "VW",
+        "date": "2023-01-27T13:54:55.073Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 174707,
+            "new": 174735,
+            "difference": 28,
+            "cost": 5.6,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 46.2,
+            "price": 85.39,
+            "distanceDifference": 701,
+            "consumption": 6.590584878744651,
+            "isSpecial": false,
+            "previousRecordId": "63bd779e366fdfd8dca97618"
+        },
+        "createdAt": "2023-01-27T12:55:44.621Z"
+    },
+    {
+        "_id": "63bd779e366fdfd8dca97618",
+        "driver": "Oliver",
+        "vehicle": "VW",
+        "date": "2023-01-10T15:34:09.488Z",
+        "reason": "Dienstreise Dresden-Berlin",
+        "mileAge": {
+            "current": 173766,
+            "new": 174034,
+            "difference": 268,
+            "cost": 53.6,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 60.6,
+            "price": 110.8,
+            "distanceDifference": 721,
+            "consumption": 8.40499306518724,
+            "isSpecial": false,
+            "previousRecordId": "63a1bedf0798bd08c32140d4"
+        },
+        "createdAt": "2023-01-10T14:35:10.488Z"
+    },
+    {
+        "_id": "63a1bedf0798bd08c32140d4",
+        "driver": "Oliver",
+        "vehicle": "VW",
+        "date": "2022-12-20T14:54:53.807Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 173271,
+            "new": 173313,
+            "difference": 42,
+            "cost": 8.4,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 52.2,
+            "price": 91.87,
+            "distanceDifference": 915,
+            "consumption": 5.704918032786885,
+            "isSpecial": false,
+            "previousRecordId": "639b3143f3d8d29637b496ee"
+        },
+        "createdAt": "2022-12-20T13:55:43.161Z"
+    },
+    {
+        "_id": "639b3143f3d8d29637b496ee",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2022-12-09T17:23:00.000Z",
+        "reason": "Berlin",
+        "mileAge": {
+            "current": 172128,
+            "new": 172398,
+            "difference": 270,
+            "cost": 54,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 43.4,
+            "price": 74.17,
+            "distanceDifference": 633,
+            "consumption": 6.856240126382305,
+            "isSpecial": false,
+            "previousRecordId": "6386030f243416bb150e3be9"
+        },
+        "createdAt": "2022-12-15T14:37:55.216Z"
+    },
+    {
+        "_id": "6386030f243416bb150e3be9",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2022-11-29T14:02:14.967Z",
+        "reason": "Frau Baron",
+        "mileAge": {
+            "current": 171742,
+            "new": 171765,
+            "difference": 23,
+            "cost": 4.6,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 47.28,
+            "price": 86,
+            "distanceDifference": 731,
+            "consumption": 6.467852257181943,
+            "isSpecial": false,
+            "previousRecordId": "637d047167541dcbbf2e4820"
+        },
+        "createdAt": "2022-11-29T13:03:11.596Z"
+    },
+    {
+        "_id": "637d047167541dcbbf2e4820",
+        "driver": "Oliver",
+        "vehicle": "VW",
+        "date": "2022-11-22T18:17:10.628Z",
+        "reason": "Alaunstraße",
+        "mileAge": {
+            "current": 171021,
+            "new": 171034,
+            "difference": 13,
+            "cost": 2.6,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 39.93,
+            "price": 72.63,
+            "distanceDifference": 565,
+            "consumption": 7.067256637168142,
+            "isSpecial": false,
+            "previousRecordId": "636d4cfc4540b7d6317bfbdf"
+        },
+        "createdAt": "2022-11-22T17:18:41.549Z"
+    },
+    {
+        "_id": "636d4cfc4540b7d6317bfbdf",
+        "driver": "Oliver",
+        "vehicle": "VW",
+        "date": "2022-11-10T20:10:47.995Z",
+        "reason": "Stadtfahrt - Tanken",
+        "mileAge": {
+            "current": 170464,
+            "new": 170469,
+            "difference": 5,
+            "cost": 1,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 62.7,
+            "price": 125.32,
+            "distanceDifference": 991,
+            "consumption": 6.326942482341071,
+            "isSpecial": false,
+            "previousRecordId": "63590b0a5d76c1191a48cdc1"
+        },
+        "createdAt": "2022-11-10T19:11:56.323Z"
+    },
+    {
+        "_id": "63590b0a5d76c1191a48cdc1",
+        "driver": "Oliver",
+        "vehicle": "VW",
+        "date": "2022-10-26T12:24:04.355Z",
+        "reason": "DR Oliver Stop in Prag",
+        "mileAge": {
+            "current": 168768,
+            "new": 169478,
+            "difference": 710,
+            "cost": 142,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 40.3,
+            "price": 1891,
+            "distanceDifference": 710,
+            "consumption": 5.676056338028169,
+            "isSpecial": false,
+            "previousRecordId": "635518442340c5a2f9821fee"
+        },
+        "createdAt": "2022-10-26T10:25:14.685Z"
+    },
+    {
+        "_id": "635518442340c5a2f9821fee",
+        "driver": "Oliver",
+        "vehicle": "VW",
+        "date": "2022-10-23T12:31:18.940Z",
+        "reason": "Dienstreise Oliver -Tanken",
+        "mileAge": {
+            "current": 168666,
+            "new": 168768,
+            "difference": 102,
+            "cost": 20.4,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 58.9,
+            "price": 2700,
+            "distanceDifference": 513,
+            "consumption": 11.481481481481481,
+            "isSpecial": false,
+            "previousRecordId": "6351395cf53026254bdc7d29"
+        },
+        "createdAt": "2022-10-23T10:32:36.371Z"
+    },
+    {
+        "_id": "6351395cf53026254bdc7d29",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2022-10-20T14:04:06.607Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 168251,
+            "new": 168255,
+            "difference": 4,
+            "cost": 0.8,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 24.67,
+            "price": 54,
+            "distanceDifference": 750,
+            "consumption": 3.289333333333334,
+            "isSpecial": false,
+            "previousRecordId": "633aa8345c0211070506fb94"
+        },
+        "createdAt": "2022-10-20T12:04:44.719Z"
+    },
+    {
+        "_id": "633aa8345c0211070506fb94",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2022-10-03T11:14:22.286Z",
+        "reason": "Stadtfahrten",
+        "mileAge": {
+            "current": 167466,
+            "new": 167505,
+            "difference": 39,
+            "cost": 7.8,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 49.65,
+            "price": 101.73,
+            "distanceDifference": 699,
+            "consumption": 7.103004291845494,
+            "isSpecial": false,
+            "previousRecordId": "631c5894c7f5a387d84975f7"
+        },
+        "createdAt": "2022-10-03T09:15:32.583Z"
+    },
+    {
+        "_id": "631c5894c7f5a387d84975f7",
+        "driver": "Oliver",
+        "vehicle": "VW",
+        "date": "2022-09-10T11:26:57.616Z",
+        "reason": "Tanken",
+        "mileAge": {
+            "current": 166805,
+            "new": 166806,
+            "difference": 1,
+            "cost": 0.2,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 20,
+            "price": 45,
+            "distanceDifference": 241,
+            "consumption": 8.29875518672199,
+            "isSpecial": false,
+            "previousRecordId": "62ea4b81c33b5f72b99fdf7e"
+        },
+        "createdAt": "2022-09-10T09:27:48.514Z"
+    },
+    {
+        "_id": "62ea4b81c33b5f72b99fdf7e",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2022-08-03T12:17:54.359Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 166530,
+            "new": 166565,
+            "difference": 35,
+            "cost": 7,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 56.65,
+            "price": 104.75,
+            "distanceDifference": 757,
+            "consumption": 7.48348745046235,
+            "isSpecial": false,
+            "previousRecordId": "62beea5c256a8a94fe200ac2"
+        },
+        "createdAt": "2022-08-03T10:18:41.367Z"
+    },
+    {
+        "_id": "62beea5c256a8a94fe200ac2",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2022-07-01T14:35:38.064Z",
+        "reason": "Neustadt/Hornbach",
+        "mileAge": {
+            "current": 165787,
+            "new": 165808,
+            "difference": 21,
+            "cost": 4.2,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 59.52,
+            "price": 113.03,
+            "distanceDifference": 866,
+            "consumption": 6.8729792147806,
+            "isSpecial": false,
+            "previousRecordId": "62ab69467826d740c8016203"
+        },
+        "createdAt": "2022-07-01T12:36:44.553Z"
+    },
+    {
+        "_id": "62ab69467826d740c8016203",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2022-06-16T19:31:32.505Z",
+        "reason": "Frankfurt Oder",
+        "mileAge": {
+            "current": 164757,
+            "new": 164942,
+            "difference": 185,
+            "cost": 37,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 61.03,
+            "price": 478,
+            "distanceDifference": 185,
+            "consumption": 32.98918918918919,
+            "isSpecial": false,
+            "previousRecordId": "62ab1e2264f734b58a74a94a"
+        },
+        "createdAt": "2022-06-16T17:32:54.878Z"
+    },
+    {
+        "_id": "62ab1e2264f734b58a74a94a",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2022-06-16T14:11:35.322Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 164751,
+            "new": 164757,
+            "difference": 6,
+            "cost": 1.2,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 10.11,
+            "price": 21.02,
+            "distanceDifference": 191,
+            "consumption": 5.293193717277487,
+            "isSpecial": false,
+            "previousRecordId": "62a038e1453853249ffd856a"
+        },
+        "createdAt": "2022-06-16T12:12:18.776Z"
+    },
+    {
+        "_id": "62a038e1453853249ffd856a",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2022-06-08T07:49:53.545Z",
+        "reason": "Stadtfahrten",
+        "mileAge": {
+            "current": 164536,
+            "new": 164566,
+            "difference": 30,
+            "cost": 6,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 20,
+            "price": 42,
+            "distanceDifference": 1865,
+            "consumption": 1.0723860589812333,
+            "isSpecial": false,
+            "previousRecordId": "6251bed0e973769abb25d0fe"
+        },
+        "createdAt": "2022-06-08T05:51:29.070Z"
+    },
+    {
+        "_id": "6251bed0e973769abb25d0fe",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2022-04-09T19:13:02.443Z",
+        "reason": "Stadtfahrten",
+        "mileAge": {
+            "current": 162656,
+            "new": 162701,
+            "difference": 45,
+            "cost": 9,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 19.54,
+            "price": 37.5,
+            "distanceDifference": 297,
+            "consumption": 6.579124579124579,
+            "isSpecial": false,
+            "previousRecordId": "6249e9d0874a89a912c4cd62"
+        },
+        "createdAt": "2022-04-09T17:13:52.652Z"
+    },
+    {
+        "_id": "6249e9d0874a89a912c4cd62",
+        "driver": "Oliver",
+        "vehicle": "VW",
+        "date": "2022-04-03T20:38:14.541Z",
+        "reason": "Dresden-Berlin",
+        "mileAge": {
+            "current": 162154,
+            "new": 162404,
+            "difference": 250,
+            "cost": 50,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 53.2,
+            "price": 107.41,
+            "distanceDifference": 795,
+            "consumption": 6.69182389937107,
+            "isSpecial": false,
+            "previousRecordId": "623b6996a3b1281ff6d254fb"
+        },
+        "createdAt": "2022-04-03T18:39:12.827Z"
+    },
+    {
+        "_id": "623b6996a3b1281ff6d254fb",
+        "driver": "Oliver",
+        "vehicle": "VW",
+        "date": "2022-03-23T19:38:27.153Z",
+        "reason": "Deponi/ Metro/ Tanken/ARB18",
+        "mileAge": {
+            "current": 161594,
+            "new": 161609,
+            "difference": 15,
+            "cost": 3,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 62.41,
+            "price": 132.25,
+            "distanceDifference": 992,
+            "consumption": 6.29133064516129,
+            "isSpecial": false,
+            "previousRecordId": "621cafabf4011629f2bd439c"
+        },
+        "createdAt": "2022-03-23T18:40:22.260Z"
+    },
+    {
+        "_id": "621cafabf4011629f2bd439c",
+        "driver": "Oliver",
+        "vehicle": "VW",
+        "date": "2022-02-28T12:18:24.314Z",
+        "reason": "Dresden-Frankfurt Oder",
+        "mileAge": {
+            "current": 160423,
+            "new": 160617,
+            "difference": 194,
+            "cost": 38.8,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 60,
+            "price": 75.71,
+            "distanceDifference": 542,
+            "consumption": 11.07011070110701,
+            "isSpecial": false,
+            "previousRecordId": "621a2a6cf4011629f2bd42d5"
+        },
+        "createdAt": "2022-02-28T11:19:07.970Z"
+    },
+    {
+        "_id": "621a2a6cf4011629f2bd42d5",
+        "driver": "Oliver",
+        "vehicle": "VW",
+        "date": "2022-02-26T14:25:17.091Z",
+        "reason": "DD-Wetzlar-Gotha",
+        "mileAge": {
+            "current": 159383,
+            "new": 160075,
+            "difference": 692,
+            "cost": 138.4,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 40,
+            "price": 69.96,
+            "distanceDifference": 926,
+            "consumption": 4.319654427645788,
+            "isSpecial": false,
+            "previousRecordId": "6210987fd8dd0b6147bf71cf"
+        },
+        "createdAt": "2022-02-26T13:26:04.720Z"
+    },
+    {
+        "_id": "6210987fd8dd0b6147bf71cf",
+        "driver": "Oliver",
+        "vehicle": "VW",
+        "date": "2022-02-18T08:11:00.000Z",
+        "reason": "Dresden-Berlin-Dresden",
+        "mileAge": {
+            "current": 158682,
+            "new": 159149,
+            "difference": 467,
+            "cost": 93.4,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 56.1,
+            "price": 95.84,
+            "distanceDifference": 987,
+            "consumption": 5.683890577507599,
+            "isSpecial": false,
+            "previousRecordId": "6208f6f0d87997ebf87d00bf"
+        },
+        "createdAt": "2022-02-19T07:13:03.604Z"
+    },
+    {
+        "_id": "6208f6f0d87997ebf87d00bf",
+        "driver": "Oliver",
+        "vehicle": "VW",
+        "date": "2022-02-13T13:16:39.122Z",
+        "reason": "DD-Augsburg-Weiden",
+        "mileAge": {
+            "current": 157464,
+            "new": 158162,
+            "difference": 698,
+            "cost": 139.6,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 40.4,
+            "price": 65,
+            "distanceDifference": 698,
+            "consumption": 5.787965616045845,
+            "isSpecial": false,
+            "previousRecordId": "62067923d87997ebf87d00a4"
+        },
+        "createdAt": "2022-02-13T12:17:52.308Z"
+    },
+    {
+        "_id": "62067923d87997ebf87d00a4",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2022-02-11T15:55:25.663Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 157430,
+            "new": 157464,
+            "difference": 34,
+            "cost": 6.8,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 55.25,
+            "price": 90,
+            "distanceDifference": 716,
+            "consumption": 7.716480446927375,
+            "isSpecial": false,
+            "previousRecordId": "61f52e612cf4df2a43b7a2d0"
+        },
+        "createdAt": "2022-02-11T14:56:35.964Z"
+    },
+    {
+        "_id": "61f52e612cf4df2a43b7a2d0",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2022-01-26T16:48:42.195Z",
+        "reason": "DD-Glashütte-DD",
+        "mileAge": {
+            "current": 156682,
+            "new": 156748,
+            "difference": 66,
+            "cost": 13.2,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 63.28,
+            "price": 98.02,
+            "distanceDifference": 1031,
+            "consumption": 6.137730358874879,
+            "isSpecial": false,
+            "previousRecordId": "61f52e612cf4df2a43b7a2c9"
+        },
+        "createdAt": "2022-01-26T15:52:10.000Z"
+    },
+    {
+        "_id": "61f52e612cf4df2a43b7a2c9",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2022-01-20T16:59:21.486Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 155715,
+            "new": 155717,
+            "difference": 2,
+            "cost": 0.4,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 59.39,
+            "price": 92,
+            "distanceDifference": 875,
+            "consumption": 6.787428571428572,
+            "isSpecial": false,
+            "previousRecordId": "61f52e612cf4df2a43b7a29b"
+        },
+        "createdAt": "2022-01-20T16:00:28.000Z"
+    },
+    {
+        "_id": "61f52e612cf4df2a43b7a29b",
+        "driver": "Oliver",
+        "vehicle": "VW",
+        "date": "2021-12-27T00:00:00.000Z",
+        "reason": "DD-B-DD",
+        "mileAge": {
+            "current": 154443,
+            "new": 154842,
+            "difference": 399,
+            "cost": 79.8,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 54.7,
+            "price": 80.41,
+            "distanceDifference": 845,
+            "consumption": 6.4733727810650885,
+            "isSpecial": false,
+            "previousRecordId": "61f52e612cf4df2a43b7a289"
+        },
+        "createdAt": "2021-12-27T15:21:14.000Z"
+    },
+    {
+        "_id": "61f52e612cf4df2a43b7a289",
+        "driver": "Oliver",
+        "vehicle": "VW",
+        "date": "2021-12-14T00:00:00.000Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 153986,
+            "new": 153997,
+            "difference": 11,
+            "cost": 2.2,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 62.1,
+            "price": 91.77,
+            "distanceDifference": 997,
+            "consumption": 6.228686058174524,
+            "isSpecial": false,
+            "previousRecordId": "61f52e612cf4df2a43b7a27e"
+        },
+        "createdAt": "2021-12-14T18:58:54.000Z"
+    },
+    {
+        "_id": "61f52e612cf4df2a43b7a27e",
+        "driver": "Oliver",
+        "vehicle": "VW",
+        "date": "2021-12-09T00:00:00.000Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 152989,
+            "new": 153000,
+            "difference": 11,
+            "cost": 2.2,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 43.1,
+            "price": 62.93,
+            "distanceDifference": 644,
+            "consumption": 6.692546583850932,
+            "isSpecial": false,
+            "previousRecordId": "61f52e612cf4df2a43b7a271"
+        },
+        "createdAt": "2021-12-10T16:10:10.000Z"
+    },
+    {
+        "_id": "61f52e612cf4df2a43b7a271",
+        "driver": "Claudia",
+        "vehicle": "VW",
+        "date": "2021-12-02T00:00:00.000Z",
+        "reason": "Berlin",
+        "mileAge": {
+            "current": 152078,
+            "new": 152356,
+            "difference": 278,
+            "cost": 55.6,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 60,
+            "price": 0,
+            "distanceDifference": 0,
+            "consumption": 0,
+            "isSpecial": false
+        },
+        "createdAt": "2021-12-02T17:49:17.000Z"
+    },
+    {
+        "_id": "6592b8316928a4697b63942b",
+        "driver": "Oliver",
+        "vehicle": "Porsche",
+        "date": "2023-12-28T14:02:00.000Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 145814,
+            "new": 145842,
+            "difference": 28,
+            "cost": 5.6,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 65.18,
+            "price": 119.21,
+            "distanceDifference": 586,
+            "consumption": 11.122866894197953,
+            "isSpecial": false,
+            "previousRecordId": "6559f5b9ea9e74abc0388587"
+        },
+        "createdAt": "2024-01-01T13:03:45.412Z"
+    },
+    {
+        "_id": "6559f5b9ea9e74abc0388587",
+        "driver": "Oliver",
+        "vehicle": "Porsche",
+        "date": "2023-11-19T12:46:11.683Z",
+        "reason": "Utting-Dresden",
+        "mileAge": {
+            "current": 144691,
+            "new": 145256,
+            "difference": 565,
+            "cost": 113,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 57.2,
+            "price": 105.78,
+            "distanceDifference": 565,
+            "consumption": 10.123893805309734,
+            "isSpecial": false,
+            "previousRecordId": "655902c73e39340e6e85fd5f"
+        },
+        "createdAt": "2023-11-19T11:47:05.887Z"
+    },
+    {
+        "_id": "655902c73e39340e6e85fd5f",
+        "driver": "Oliver",
+        "vehicle": "Porsche",
+        "date": "2023-11-18T19:29:52.913Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 144558,
+            "new": 144691,
+            "difference": 133,
+            "cost": 26.6,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 15.1,
+            "price": 28.34,
+            "distanceDifference": 133,
+            "consumption": 11.353383458646617,
+            "isSpecial": false,
+            "previousRecordId": "65576af602fb7e2e731babd2"
+        },
+        "createdAt": "2023-11-18T18:30:31.343Z"
+    },
+    {
+        "_id": "65576af602fb7e2e731babd2",
+        "driver": "Oliver",
+        "vehicle": "Porsche",
+        "date": "2023-11-17T14:28:52.510Z",
+        "reason": "Dresden-Waischenfeld-München-Utting",
+        "mileAge": {
+            "current": 143925,
+            "new": 144558,
+            "difference": 633,
+            "cost": 126.6,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 68.1,
+            "price": 125.25,
+            "distanceDifference": 633,
+            "consumption": 10.758293838862558,
+            "isSpecial": false,
+            "previousRecordId": "65511144165c779819a38d83"
+        },
+        "createdAt": "2023-11-17T13:30:30.937Z"
+    },
+    {
+        "_id": "65511144165c779819a38d83",
+        "driver": "Oliver",
+        "vehicle": "Porsche",
+        "date": "2023-11-12T18:53:33.176Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 143921,
+            "new": 143925,
+            "difference": 4,
+            "cost": 0.8,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 46.1,
+            "price": 84.39,
+            "distanceDifference": 427,
+            "consumption": 10.796252927400468,
+            "isSpecial": false,
+            "previousRecordId": "653f79ef533a1ed112a3b65c"
+        },
+        "createdAt": "2023-11-12T17:54:12.999Z"
+    },
+    {
+        "_id": "653f79ef533a1ed112a3b65c",
+        "driver": "Oliver",
+        "vehicle": "Porsche",
+        "date": "2023-10-30T10:39:28.146Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 143494,
+            "new": 143498,
+            "difference": 4,
+            "cost": 0.8,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 55.2,
+            "price": 103,
+            "distanceDifference": 484,
+            "consumption": 11.404958677685952,
+            "isSpecial": false,
+            "previousRecordId": "652f8f38d6d5cd715cb62fca"
+        },
+        "createdAt": "2023-10-30T09:39:59.353Z"
+    },
+    {
+        "_id": "652f8f38d6d5cd715cb62fca",
+        "driver": "Oliver",
+        "vehicle": "Porsche",
+        "date": "2023-10-18T09:53:42.150Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 143003,
+            "new": 143014,
+            "difference": 11,
+            "cost": 2.2,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 57.7,
+            "price": 121.63,
+            "distanceDifference": 506,
+            "consumption": 11.403162055335969,
+            "isSpecial": false,
+            "previousRecordId": "64e23fd8a76a7b1d304665b5"
+        },
+        "createdAt": "2023-10-18T07:54:32.632Z"
+    },
+    {
+        "_id": "64e23fd8a76a7b1d304665b5",
+        "driver": "Oliver",
+        "vehicle": "Porsche",
+        "date": "2023-08-20T18:30:22.770Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 142502,
+            "new": 142508,
+            "difference": 6,
+            "cost": 1.2,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 66.6,
+            "price": 131.04,
+            "distanceDifference": 798,
+            "consumption": 8.345864661654135,
+            "isSpecial": false,
+            "previousRecordId": "648f07a5be9461de1a80b5df"
+        },
+        "createdAt": "2023-08-20T16:31:20.042Z"
+    },
+    {
+        "_id": "648f07a5be9461de1a80b5df",
+        "driver": "Oliver",
+        "vehicle": "Porsche",
+        "date": "2023-06-18T15:32:47.411Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 142208,
+            "new": 142219,
+            "difference": 11,
+            "cost": 2.2,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 40,
+            "price": 80,
+            "distanceDifference": 509,
+            "consumption": 7.858546168958743,
+            "isSpecial": false,
+            "previousRecordId": "63da54a753b3368397a070bc"
+        },
+        "createdAt": "2023-06-18T13:33:25.731Z"
+    },
+    {
+        "_id": "63da54a753b3368397a070bc",
+        "driver": "Oliver",
+        "vehicle": "Porsche",
+        "date": "2023-02-01T13:00:39.847Z",
+        "reason": "Dresden-Berlin (Mittenwalde)",
+        "mileAge": {
+            "current": 141524,
+            "new": 141710,
+            "difference": 186,
+            "cost": 37.2,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 68,
+            "price": 127.79,
+            "distanceDifference": 629,
+            "consumption": 10.81081081081081,
+            "isSpecial": false,
+            "previousRecordId": "635ff4b1bf90cf0af9fbd8cb"
+        },
+        "createdAt": "2023-02-01T12:01:43.285Z"
+    },
+    {
+        "_id": "635ff4b1bf90cf0af9fbd8cb",
+        "driver": "Oliver",
+        "vehicle": "Porsche",
+        "date": "2022-10-31T17:14:38.412Z",
+        "reason": "Röbel",
+        "mileAge": {
+            "current": 140525,
+            "new": 141081,
+            "difference": 556,
+            "cost": 111.2,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 55.1,
+            "price": 105.8,
+            "distanceDifference": 1048,
+            "consumption": 5.25763358778626,
+            "isSpecial": false,
+            "previousRecordId": "6346f546c25d2ca11cd208b5"
+        },
+        "createdAt": "2022-10-31T16:15:45.888Z"
+    },
+    {
+        "_id": "6346f546c25d2ca11cd208b5",
+        "driver": "Oliver",
+        "vehicle": "Porsche",
+        "date": "2022-10-12T18:26:45.479Z",
+        "reason": "Stadtfahrt-Tanken",
+        "mileAge": {
+            "current": 140029,
+            "new": 140033,
+            "difference": 4,
+            "cost": 0.8,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 69,
+            "price": 130,
+            "distanceDifference": 629,
+            "consumption": 10.969793322734498,
+            "isSpecial": false,
+            "previousRecordId": "631cd6f81adb56e264c33d11"
+        },
+        "createdAt": "2022-10-12T17:11:34.706Z"
+    },
+    {
+        "_id": "631cd6f81adb56e264c33d11",
+        "driver": "Oliver",
+        "vehicle": "Porsche",
+        "date": "2022-09-10T20:25:16.405Z",
+        "reason": "Dresden - Frankfurt (Oder)",
+        "mileAge": {
+            "current": 139202,
+            "new": 139404,
+            "difference": 202,
+            "cost": 40.4,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 61,
+            "price": 999,
+            "distanceDifference": 312,
+            "consumption": 19.55128205128205,
+            "isSpecial": false,
+            "previousRecordId": "62ff547937f77431c1ec4a72"
+        },
+        "createdAt": "2022-09-10T18:27:04.631Z"
+    },
+    {
+        "_id": "62ff547937f77431c1ec4a72",
+        "driver": "Andrea",
+        "vehicle": "Porsche",
+        "date": "2022-08-19T11:13:41.152Z",
+        "reason": "Tanken",
+        "mileAge": {
+            "current": 139087,
+            "new": 139092,
+            "difference": 5,
+            "cost": 1,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 28.01,
+            "price": 51.79,
+            "distanceDifference": 589,
+            "consumption": 4.755517826825128,
+            "isSpecial": false,
+            "previousRecordId": "62ea4924c33b5f72b99fdf6b"
+        },
+        "createdAt": "2022-08-19T09:14:33.297Z"
+    },
+    {
+        "_id": "62ea4924c33b5f72b99fdf6b",
+        "driver": "Oliver",
+        "vehicle": "Porsche",
+        "date": "2022-08-03T12:07:16.803Z",
+        "reason": "Tanken",
+        "mileAge": {
+            "current": 138498,
+            "new": 138503,
+            "difference": 5,
+            "cost": 1,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 58.2,
+            "price": 106.41,
+            "distanceDifference": 1593,
+            "consumption": 3.6534839924670437,
+            "isSpecial": false,
+            "previousRecordId": "62cb11e4a9900f36d44db1ef"
+        },
+        "createdAt": "2022-08-03T10:08:36.282Z"
+    },
+    {
+        "_id": "62cb11e4a9900f36d44db1ef",
+        "driver": "Oliver",
+        "vehicle": "Porsche",
+        "date": "2022-07-10T19:51:41.943Z",
+        "reason": "Zum Tanken",
+        "mileAge": {
+            "current": 137884,
+            "new": 137910,
+            "difference": 26,
+            "cost": 5.2,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 63.2,
+            "price": 123.75,
+            "distanceDifference": 602,
+            "consumption": 10.498338870431894,
+            "isSpecial": false,
+            "previousRecordId": "62c87ac71b5cc315f6c2ec11"
+        },
+        "createdAt": "2022-07-10T17:52:36.505Z"
+    },
+    {
+        "_id": "62c87ac71b5cc315f6c2ec11",
+        "driver": "Oliver",
+        "vehicle": "Porsche",
+        "date": "2022-07-08T20:42:20.470Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 137279,
+            "new": 137308,
+            "difference": 29,
+            "cost": 5.8,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 61.63,
+            "price": 117.66,
+            "distanceDifference": 485,
+            "consumption": 12.70721649484536,
+            "isSpecial": false,
+            "previousRecordId": "629f22c36810b26341147925"
+        },
+        "createdAt": "2022-07-08T18:43:19.228Z"
+    },
+    {
+        "_id": "629f22c36810b26341147925",
+        "driver": "Oliver",
+        "vehicle": "Porsche",
+        "date": "2022-06-07T12:04:03.476Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 136812,
+            "new": 136823,
+            "difference": 11,
+            "cost": 2.2,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 60.9,
+            "price": 119.21,
+            "distanceDifference": 575,
+            "consumption": 10.591304347826087,
+            "isSpecial": false,
+            "previousRecordId": "627fe63c135c8c77d22ec1d5"
+        },
+        "createdAt": "2022-06-07T10:04:51.958Z"
+    },
+    {
+        "_id": "627fe63c135c8c77d22ec1d5",
+        "driver": "Oliver",
+        "vehicle": "Porsche",
+        "date": "2022-05-14T19:24:31.749Z",
+        "reason": "Unterschleißheim- Utting-Ausflüge-Kaufering",
+        "mileAge": {
+            "current": 136009,
+            "new": 136248,
+            "difference": 239,
+            "cost": 47.8,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 68.1,
+            "price": 140.84,
+            "distanceDifference": 586,
+            "consumption": 11.621160409556314,
+            "isSpecial": false,
+            "previousRecordId": "627d366826afad4c93c39229"
+        },
+        "createdAt": "2022-05-14T17:26:20.752Z"
+    },
+    {
+        "_id": "627d366826afad4c93c39229",
+        "driver": "Oliver",
+        "vehicle": "Porsche",
+        "date": "2022-05-12T18:30:43.379Z",
+        "reason": "Dresden Berlin Eisenberg",
+        "mileAge": {
+            "current": 135181,
+            "new": 135662,
+            "difference": 481,
+            "cost": 96.2,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 53.5,
+            "price": 106.85,
+            "distanceDifference": 1086,
+            "consumption": 4.92633517495396,
+            "isSpecial": false,
+            "previousRecordId": "62514722aae2cada4a1796dc"
+        },
+        "createdAt": "2022-05-12T16:31:36.943Z"
+    },
+    {
+        "_id": "62514722aae2cada4a1796dc",
+        "driver": "Oliver",
+        "vehicle": "Porsche",
+        "date": "2022-04-09T10:41:54.711Z",
+        "reason": "Utting-Augsburg",
+        "mileAge": {
+            "current": 134160,
+            "new": 134576,
+            "difference": 416,
+            "cost": 83.2,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 45.1,
+            "price": 89.68,
+            "distanceDifference": 416,
+            "consumption": 10.841346153846153,
+            "isSpecial": false,
+            "previousRecordId": "624f06926f721fcc77b4f51a"
+        },
+        "createdAt": "2022-04-09T08:43:14.730Z"
+    },
+    {
+        "_id": "624f06926f721fcc77b4f51a",
+        "driver": "Oliver",
+        "vehicle": "Porsche",
+        "date": "2022-04-07T17:42:08.847Z",
+        "reason": "Dresden-Himmelkron",
+        "mileAge": {
+            "current": 133935,
+            "new": 134160,
+            "difference": 225,
+            "cost": 45,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 71,
+            "price": 141.12,
+            "distanceDifference": 0,
+            "consumption": 0,
+            "isSpecial": false
+        },
+        "createdAt": "2022-04-07T15:43:14.942Z"
+    },
+    {
+        "_id": "65623388fea0d8b09099b005",
+        "driver": "Oliver",
+        "vehicle": "DS",
+        "date": "2023-11-25T18:48:16.505Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 99061,
+            "new": 99077,
+            "difference": 16,
+            "cost": 3.2,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 58.2,
+            "price": 103.45,
+            "distanceDifference": 0,
+            "consumption": 0,
+            "isSpecial": false
+        },
+        "createdAt": "2023-11-25T17:48:56.137Z"
+    },
+    {
+        "_id": "6592b8646928a4697b639433",
+        "driver": "Oliver",
+        "vehicle": "MX5",
+        "date": "2023-12-27T14:04:02.152Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 27454,
+            "new": 27460,
+            "difference": 6,
+            "cost": 1.2,
+            "unit": "mile"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 31.46,
+            "price": 55.34,
+            "distanceDifference": 0,
+            "consumption": 0,
+            "isSpecial": false
+        },
+        "createdAt": "2024-01-01T13:04:36.315Z"
+    },
+    {
+        "_id": "65315d2aaa67ec8d2ea4596f",
+        "driver": "Claudia",
+        "vehicle": "Ferrari",
+        "date": "2023-10-19T18:44:17.576Z",
+        "reason": "Stadtfahrten",
+        "mileAge": {
+            "current": 18865,
+            "new": 18921,
+            "difference": 56,
+            "cost": 11.2,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 39.38,
+            "price": 72.03,
+            "distanceDifference": 510,
+            "consumption": 7.721568627450981,
+            "isSpecial": false,
+            "previousRecordId": "64b506757fc9750629be13bd"
+        },
+        "createdAt": "2023-10-19T16:45:30.037Z"
+    },
+    {
+        "_id": "64b506757fc9750629be13bd",
+        "driver": "Oliver",
+        "vehicle": "Ferrari",
+        "date": "2023-07-17T11:13:52.254Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 18400,
+            "new": 18411,
+            "difference": 11,
+            "cost": 2.2,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 38.76,
+            "price": 70.5,
+            "distanceDifference": 1048,
+            "consumption": 3.6984732824427478,
+            "isSpecial": false,
+            "previousRecordId": "640b1efc285381602e98da61"
+        },
+        "createdAt": "2023-07-17T09:14:29.422Z"
+    },
+    {
+        "_id": "640b1efc285381602e98da61",
+        "driver": "Thomas",
+        "vehicle": "Ferrari",
+        "date": "2023-03-10T13:12:54.323Z",
+        "reason": "Schule",
+        "mileAge": {
+            "current": 17351,
+            "new": 17363,
+            "difference": 12,
+            "cost": 2.4,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 42.1,
+            "price": 79.53,
+            "distanceDifference": 465,
+            "consumption": 9.053763440860216,
+            "isSpecial": false,
+            "previousRecordId": "63b8725e7b554f985dd66afb"
+        },
+        "createdAt": "2023-03-10T12:13:48.374Z"
+    },
+    {
+        "_id": "63b8725e7b554f985dd66afb",
+        "driver": "Thomas",
+        "vehicle": "Ferrari",
+        "date": "2023-01-06T20:10:45.824Z",
+        "reason": "Zu Hause Tanken",
+        "mileAge": {
+            "current": 16896,
+            "new": 16898,
+            "difference": 2,
+            "cost": 0.4,
+            "unit": "km"
+        },
+        "details": {
+            "covered": true,
+            "driver": "Claudia"
+        },
+        "refuel": {
+            "liters": 45.02,
+            "price": 79.19,
+            "distanceDifference": 578,
+            "consumption": 7.788927335640139,
+            "isSpecial": false,
+            "previousRecordId": "6380e232d42e67bbfce8fbfb"
+        },
+        "createdAt": "2023-01-06T19:11:26.750Z"
+    },
+    {
+        "_id": "6380e232d42e67bbfce8fbfb",
+        "driver": "Thomas",
+        "vehicle": "Ferrari",
+        "date": "2022-11-25T16:40:49.616Z",
+        "reason": "Gabi",
+        "mileAge": {
+            "current": 16316,
+            "new": 16320,
+            "difference": 4,
+            "cost": 0.8,
+            "unit": "km"
+        },
+        "details": {
+            "covered": true,
+            "driver": "Claudia"
+        },
+        "refuel": {
+            "liters": 42.9,
+            "price": 77.18,
+            "distanceDifference": 499,
+            "consumption": 8.597194388777554,
+            "isSpecial": false,
+            "previousRecordId": "63399ab46c2c95f0e3330770"
+        },
+        "createdAt": "2022-11-25T15:41:38.993Z"
+    },
+    {
+        "_id": "63399ab46c2c95f0e3330770",
+        "driver": "Oliver",
+        "vehicle": "Ferrari",
+        "date": "2022-10-02T16:04:32.587Z",
+        "reason": "Tanzschule Nebl",
+        "mileAge": {
+            "current": 15814,
+            "new": 15821,
+            "difference": 7,
+            "cost": 1.4,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 38.14,
+            "price": 72.81,
+            "distanceDifference": 579,
+            "consumption": 6.587219343696028,
+            "isSpecial": false,
+            "previousRecordId": "62d05dbc32ec82f92346b0a0"
+        },
+        "createdAt": "2022-10-02T14:05:40.601Z"
+    },
+    {
+        "_id": "62d05dbc32ec82f92346b0a0",
+        "driver": "Oliver",
+        "vehicle": "Ferrari",
+        "date": "2022-07-14T20:16:41.586Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 15240,
+            "new": 15242,
+            "difference": 2,
+            "cost": 0.4,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 39.12,
+            "price": 71.94,
+            "distanceDifference": 516,
+            "consumption": 7.581395348837209,
+            "isSpecial": false,
+            "previousRecordId": "6273e9453cefac82d2da9ee1"
+        },
+        "createdAt": "2022-07-14T18:17:32.489Z"
+    },
+    {
+        "_id": "6273e9453cefac82d2da9ee1",
+        "driver": "Thomas",
+        "vehicle": "Ferrari",
+        "date": "2022-05-05T17:11:22.526Z",
+        "reason": "Schule + Tanken",
+        "mileAge": {
+            "current": 14718,
+            "new": 14726,
+            "difference": 8,
+            "cost": 1.6,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 39.69,
+            "price": 80.13,
+            "distanceDifference": 544,
+            "consumption": 7.29595588235294,
+            "isSpecial": false,
+            "previousRecordId": "6213df74b97c4a704dca1b5e"
+        },
+        "createdAt": "2022-05-05T15:12:05.423Z"
+    },
+    {
+        "_id": "6213df74b97c4a704dca1b5e",
+        "driver": "Claudia",
+        "vehicle": "Ferrari",
+        "date": "2022-02-21T19:50:02.700Z",
+        "reason": "Stadtfahrt + Tanken",
+        "mileAge": {
+            "current": 14179,
+            "new": 14182,
+            "difference": 3,
+            "cost": 0.6,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 39.17,
+            "price": 70.08,
+            "distanceDifference": 455,
+            "consumption": 8.60879120879121,
+            "isSpecial": false,
+            "previousRecordId": "61f52e612cf4df2a43b7a2bf"
+        },
+        "createdAt": "2022-02-21T18:52:36.689Z"
+    },
+    {
+        "_id": "61f52e612cf4df2a43b7a2bf",
+        "driver": "Claudia",
+        "vehicle": "Ferrari",
+        "date": "2022-01-13T13:18:30.955Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 13715,
+            "new": 13727,
+            "difference": 12,
+            "cost": 2.4,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 41.2,
+            "price": 70,
+            "distanceDifference": 481,
+            "consumption": 8.565488565488566,
+            "isSpecial": false,
+            "previousRecordId": "61f52e612cf4df2a43b7a288"
+        },
+        "createdAt": "2022-01-13T12:19:17.000Z"
+    },
+    {
+        "_id": "61f52e612cf4df2a43b7a288",
+        "driver": "Claudia",
+        "vehicle": "Ferrari",
+        "date": "2021-12-14T00:00:00.000Z",
+        "reason": "Stadtfahrt",
+        "mileAge": {
+            "current": 13233,
+            "new": 13246,
+            "difference": 13,
+            "cost": 2.6,
+            "unit": "km"
+        },
+        "details": {
+            "covered": false
+        },
+        "refuel": {
+            "liters": 40.9,
+            "price": 67,
+            "distanceDifference": 0,
+            "consumption": 0,
+            "isSpecial": false
+        },
+        "createdAt": "2021-12-14T14:10:14.000Z"
     }
 ]

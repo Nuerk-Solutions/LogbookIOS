@@ -43,15 +43,15 @@ struct RefuelRecive: Codable, Equatable {
 
 extension LogbookRefuelReceive {
     
-    static var previewData: [LogbookRefuelReceive] {
+    static var previewData: [LogbookEntry] {
         let previewDataURL = Bundle.main.url(forResource: "refuellogbooks", withExtension: "json")!
         let data = try! Data(contentsOf: previewDataURL)
         
         let jsonDecoder = JSONDecoder()
         jsonDecoder.dateDecodingStrategy = .formatted(.iso8601Full)
-        var apiResponse: [LogbookRefuelReceive] = []
+        var apiResponse: [LogbookEntry] = []
         do {
-        apiResponse = try jsonDecoder.decode([LogbookRefuelReceive].self, from: data)
+        apiResponse = try jsonDecoder.decode([LogbookEntry].self, from: data)
         } catch DecodingError.keyNotFound(let key, let context) {
             print("could not find key \(key) in JSON: \(context.debugDescription)")
         } catch DecodingError.valueNotFound(let type, let context) {

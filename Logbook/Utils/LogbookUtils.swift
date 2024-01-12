@@ -104,26 +104,26 @@ let dayAndMonth: DateFormatter = {
     return dateFormatter
 }()
 
-func calculateTrend() -> LogbookRefuelReceive {
-    var data = LogbookRefuelReceive.previewData[4]
-    var trends: [String: Double] = [:]
-    
-    for i in 0..<data.refuels.count {
-        let currentRecord = data.refuels[i]
-        
-        // Calculate the sum of consumption for previous records and current record
-        let sumOfConsumptions = data.refuels[0...i].map { $0.refuel.consumption }.reduce(0, +)
-        
-        // Calculate the average of the sum
-        let averageConsumption = sumOfConsumptions / Double(i + 1)
-        data.refuels[i].sumAverage = averageConsumption
-        
-        trends.updateValue(averageConsumption, forKey: dayAndMonth.string(from: currentRecord.date))
-//        trends.append(averageConsumption)
-    }
-    
-    return data
-}
+//func calculateTrend() -> LogbookRefuelReceive {
+//    var data = LogbookRefuelReceive.previewData[4]
+//    var trends: [String: Double] = [:]
+//    
+//    for i in 0..<data.refuels.count {
+//        let currentRecord = data.refuels[i]
+//        
+//        // Calculate the sum of consumption for previous records and current record
+//        let sumOfConsumptions = data.refuels[0...i].map { $0.refuel.consumption }.reduce(0, +)
+//        
+//        // Calculate the average of the sum
+//        let averageConsumption = sumOfConsumptions / Double(i + 1)
+//        data.refuels[i].sumAverage = averageConsumption
+//        
+//        trends.updateValue(averageConsumption, forKey: dayAndMonth.string(from: currentRecord.date))
+////        trends.append(averageConsumption)
+//    }
+//    
+//    return data
+//}
 
 
 //let trendArray = LogbookRefuelReceive.previewData[0].refuels.reduce([String: Double]) { partialResult, item in

@@ -42,8 +42,7 @@ struct ContentView: View {
                     GasStationsView()
                 }
             case .stats:
-//                StatsView(refuelEntries: .constant(LogbookRefuelReceive.previewData))
-                ChartView()
+                BarChart()
             case .settings:
                 SettingsView()
             }

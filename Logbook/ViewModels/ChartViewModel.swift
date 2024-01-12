@@ -6,19 +6,40 @@
 //
 
 import Foundation
-
+import SwiftUI
 
 @MainActor
 class ChartViewModel: ObservableObject {
     
-    @Published var allLogbooks: [LogbookRefuelReceive] = []
+    @Published var allLogbooks: [LogbookEntry] = []
+    @Published var logbooks: [LogbookEntry] = []
+//    @Published var selectedVehicles: [VehicleEnum] = [.Ferrari]
     private let logbookAPI = LogbookAPI.shared
+    
+    func updateLogbooks(for vehicles: [VehicleEnum]) {
+        resetAnimation()
+        logbooks = allLogbooks.filter({ item in
+            vehicles.contains(item.vehicle)
+        })
+    }
+    
+    private func resetAnimation() {
+        for(index, _) in allLogbooks.enumerated() {
+            allLogbooks[index].animated = false
+        }
+    }
     
     func loadLogbooks() async {
         if Task.isCancelled { return }
         
         do {
-            allLogbooks = try await logbookAPI.fetchRefuels(with: 10)
+            let result = try await logbookAPI.fetchRefuels(with: 8)
+
+            withAnimation {
+                allLogbooks = result
+                updateLogbooks(for: [.Ferrari])
+                print(logbooks[0])
+            }
         } catch {
             print(error)
             if Task.isCancelled { return }

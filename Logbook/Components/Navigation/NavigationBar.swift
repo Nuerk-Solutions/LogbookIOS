@@ -107,7 +107,7 @@ struct NavigationBar: View {
 //                model.showTab.toggle()
 //            }
 //        })
-        .offset(y: model.showNav ? 0 : -120)
+        .offset(y: model.showNav ? 0 : -125)
         .accessibility(hidden: !model.showNav)
         .offset(y: contentHasScrolled ? -16 : 0)
     }

@@ -119,7 +119,7 @@ struct EntryView: View {
                 //                    .frame(maxWidth: 150)
             )
             .background(
-                Image(getVehicleBackground(vehicleTyp: entry.vehicle))
+                Image("road")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .matchedGeometryEffect(id: "background\(entry.id)", in: namespace)
@@ -127,6 +127,14 @@ struct EntryView: View {
                     .scaleEffect(scrollY > 0 ? scrollY / 1000 + 1 : 1)
                     .blur(radius: scrollY > 0 ? scrollY / 10 : 0)
                     .accessibility(hidden: true)
+//                Image(getVehicleBackground(vehicleTyp: entry.vehicle))
+//                    .resizable()
+//                    .aspectRatio(contentMode: .fill)
+//                    .matchedGeometryEffect(id: "background\(entry.id)", in: namespace)
+//                    .offset(y: scrollY > 0 ? -scrollY : 0)
+//                    .scaleEffect(scrollY > 0 ? scrollY / 1000 + 1 : 1)
+//                    .blur(radius: scrollY > 0 ? scrollY / 10 : 0)
+//                    .accessibility(hidden: true)
             )
             .mask(
                 RoundedRectangle(cornerRadius: appear[0] ? 0 : 30)
@@ -153,60 +161,92 @@ struct EntryView: View {
                         .foregroundColor(.primary)
                         .matchedGeometryEffect(id: "title\(entry.id)", in: namespace)
                     
-                    VStack(alignment: .leading, spacing: 2) {
-                        HStack {
-                            Image(systemName: "person.circle")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 24, height: 24)
+                    HStack {
+                        VStack(alignment: .leading, spacing: 2) {
+                            HStack {
+                                Image(systemName: "person.circle")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 24, height: 24)
+                                
+                                Text("\(entry.driver.rawValue)")
+                                    .font(.body).bold()
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .foregroundColor(.primary.opacity(0.7))
+                            }
+                            .matchedGeometryEffect(id: "subtitle\(entry.id)", in: namespace)
+                            .padding(.bottom, 5)
                             
-                            Text("\(entry.driver.rawValue)")
-                                .font(.body).bold()
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .foregroundColor(.primary.opacity(0.7))
-                        }
-                        .matchedGeometryEffect(id: "subtitle\(entry.id)", in: namespace)
-                        .padding(.bottom, 5)
-                        
-                        HStack {
-                            Image("eurosign")
-                                .resizable()
-                                .background(.clear)
-                                .scaledToFit()
-                                .frame(width: 16, height: 16)
-                                .padding(3)
-                                .padding(.trailing, 1)
-                                .cornerRadius(100)
-                                .overlay(RoundedRectangle(cornerRadius: 100)
-                                    .stroke(Color.primary, lineWidth: 2))
-                                .padding(.leading, 1)
+                            HStack {
+                                Image(systemName: "eurosign.circle")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 24, height: 24)
+                                
+                                Text((entry.mileAge.cost ?? -1).formatted(.currency(code: "EUR")))
+                                    .font(.body).bold()
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .foregroundColor(.primary.opacity(0.7))
+                            }
+                            .opacity(appear[1] ? 1 : 0)
+//                            .matchedGeometryEffect(id: "description\(entry.id)", in: namespace)
+                            .padding(.bottom, 5)
                             
-                            Text((entry.mileAge.cost ?? -1).formatted(.currency(code: "EUR")))
-                                .font(.body).bold()
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .foregroundColor(.primary.opacity(0.7))
+                            HStack {
+                                Image(systemName: "road.lanes")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 24, height: 24)
+                                
+                                Text("\(entry.mileAge.difference ?? -1) \(entry.mileAge.unit.name)")
+                                    .font(.body).bold()
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .foregroundColor(.primary.opacity(0.7))
+                                //                                .matchedGeometryEffect(id: "description\(entry.id)", in: namespace)
+                            }
+                            .opacity(appear[1] ? 1 : 0)
+                            //                        Text("\(DateFormatter.readableDeShort.string(from: entry.date))".uppercased())
+                            //                            .font(.footnote).bold()
+                            //                            .frame(maxWidth: .infinity, alignment: .leading)
+                            //                            .foregroundColor(.primary.opacity(0.7))
+                            //                            .matchedGeometryEffect(id: "description\(entry.id)", in: namespace)
                         }
-                        .matchedGeometryEffect(id: "description\(entry.id)", in: namespace)
-                        .padding(.bottom, 5)
-                        
-                        HStack {
-                            Image(systemName: "road.lanes")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 24, height: 24)
+                        Spacer()
+                        VStack(alignment: .leading, spacing: 2) {
+                            HStack {
+                                Image(systemName: "calendar.circle")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 24, height: 24)
+                                
+                                Text(entry.date, format: Date.FormatStyle(date: .abbreviated, time: .omitted))
+                                    .font(.body).bold()
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .foregroundColor(.primary.opacity(0.7))
+                            }
+                            .matchedGeometryEffect(id: "date\(entry.id)", in: namespace)
+                            .padding(.bottom, 5)
                             
-                            Text("\(entry.mileAge.difference ?? -1) \(entry.mileAge.unit.name)")
-                                .font(.body).bold()
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .foregroundColor(.primary.opacity(0.7))
-//                                .matchedGeometryEffect(id: "description\(entry.id)", in: namespace)
+                            HStack {
+                                Image(systemName: "clock")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 24, height: 24)
+                                
+                                Text(entry.date, style: .time)
+                                    .font(.body).bold()
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .foregroundColor(.primary.opacity(0.7))
+                            }
+                            .opacity(appear[1] ? 1 : 0)
+//                            .matchedGeometryEffect(id: "description\(entry.id)", in: namespace)
+                            .padding(.bottom, 5)
+                            //                        Text("\(DateFormatter.readableDeShort.string(from: entry.date))".uppercased())
+                            //                            .font(.footnote).bold()
+                            //                            .frame(maxWidth: .infinity, alignment: .leading)
+                            //                            .foregroundColor(.primary.opacity(0.7))
+                            //                            .matchedGeometryEffect(id: "description\(entry.id)", in: namespace)
                         }
-                        .opacity(appear[1] ? 1 : 0)
-                        //                        Text("\(DateFormatter.readableDeShort.string(from: entry.date))".uppercased())
-                        //                            .font(.footnote).bold()
-                        //                            .frame(maxWidth: .infinity, alignment: .leading)
-                        //                            .foregroundColor(.primary.opacity(0.7))
-                        //                            .matchedGeometryEffect(id: "description\(entry.id)", in: namespace)
                     }
                     
                     //                    Text("Bei dieser Fahrt wurden \(entry.distance)km zu einem Preis von \(entry.distanceCost)€ gefahren.")

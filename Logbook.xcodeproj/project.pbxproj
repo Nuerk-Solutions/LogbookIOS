@@ -97,7 +97,6 @@
 		E96665412AD85E0100605F49 /* button.riv in Resources */ = {isa = PBXBuildFile; fileRef = E96665402AD85E0100605F49 /* button.riv */; };
 		E969B0C42892D57500E22690 /* AddEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E969B0C32892D57500E22690 /* AddEntryView.swift */; };
 		E9715409289D73F200889084 /* DataSendPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9715408289D73F200889084 /* DataSendPhase.swift */; };
-		E97591F02B3749C1008B543B /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97591EF2B3749C1008B543B /* StatsView.swift */; };
 		E9969E412899971C008A92A2 /* checkmark_icon.riv in Resources */ = {isa = PBXBuildFile; fileRef = E9969E402899971C008A92A2 /* checkmark_icon.riv */; };
 		E99E240E289C350E005A79AB /* 340-656-like-button.riv in Resources */ = {isa = PBXBuildFile; fileRef = E99E240D289C350E005A79AB /* 340-656-like-button.riv */; };
 		E9A784F2289DAE08002AC225 /* ContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A784F1289DAE08002AC225 /* ContextMenu.swift */; };
@@ -119,7 +118,7 @@
 		E9E8488128521EE8008D7F0F /* SectionImageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E8488028521EE8008D7F0F /* SectionImageRow.swift */; };
 		E9F32ED12B45AFA90003303C /* LogbookRefuelReceive.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F32ED02B45AFA90003303C /* LogbookRefuelReceive.swift */; };
 		E9F32ED32B45BCBB0003303C /* refuellogbooks.json in Resources */ = {isa = PBXBuildFile; fileRef = E9F32ED22B45B3B60003303C /* refuellogbooks.json */; };
-		E9F32ED52B45C8740003303C /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F32ED42B45C8740003303C /* ChartView.swift */; };
+		E9F32ED52B45C8740003303C /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F32ED42B45C8740003303C /* BarChart.swift */; };
 		E9F32ED72B45CF4F0003303C /* ChartAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F32ED62B45CF4F0003303C /* ChartAnnotation.swift */; };
 /* End PBXBuildFile section */
 
@@ -224,7 +223,6 @@
 		E96665402AD85E0100605F49 /* button.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = button.riv; sourceTree = "<group>"; };
 		E969B0C32892D57500E22690 /* AddEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEntryView.swift; sourceTree = "<group>"; };
 		E9715408289D73F200889084 /* DataSendPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSendPhase.swift; sourceTree = "<group>"; };
-		E97591EF2B3749C1008B543B /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		E9969E402899971C008A92A2 /* checkmark_icon.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = checkmark_icon.riv; sourceTree = "<group>"; };
 		E99E240D289C350E005A79AB /* 340-656-like-button.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = "340-656-like-button.riv"; sourceTree = "<group>"; };
 		E9A784F1289DAE08002AC225 /* ContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenu.swift; sourceTree = "<group>"; };
@@ -246,7 +244,7 @@
 		E9E8488028521EE8008D7F0F /* SectionImageRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionImageRow.swift; sourceTree = "<group>"; };
 		E9F32ED02B45AFA90003303C /* LogbookRefuelReceive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookRefuelReceive.swift; sourceTree = "<group>"; };
 		E9F32ED22B45B3B60003303C /* refuellogbooks.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = refuellogbooks.json; sourceTree = "<group>"; };
-		E9F32ED42B45C8740003303C /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		E9F32ED42B45C8740003303C /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
 		E9F32ED62B45CF4F0003303C /* ChartAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartAnnotation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -576,8 +574,7 @@
 		E97591EE2B3749AF008B543B /* Stats */ = {
 			isa = PBXGroup;
 			children = (
-				E97591EF2B3749C1008B543B /* StatsView.swift */,
-				E9F32ED42B45C8740003303C /* ChartView.swift */,
+				E9F32ED42B45C8740003303C /* BarChart.swift */,
 				E9F32ED62B45CF4F0003303C /* ChartAnnotation.swift */,
 			);
 			path = Stats;
@@ -775,7 +772,6 @@
 				E962E5CE285E465E00F6B4D6 /* GasStationsView.swift in Sources */,
 				E91AFA43284016BE0024131D /* CustomProgressView.swift in Sources */,
 				E91AFA3C28400B260024131D /* LogbooksViewModel.swift in Sources */,
-				E97591F02B3749C1008B543B /* StatsView.swift in Sources */,
 				E91AFA4028400DC90024131D /* RetryView.swift in Sources */,
 				E91AFA4C284129F30024131D /* Extensions.swift in Sources */,
 				E9227BB32B41B87700589E64 /* MassUITextField.swift in Sources */,
@@ -809,7 +805,7 @@
 				E920B5FF2856480800683D67 /* SettingsView.swift in Sources */,
 				E9BA8D6E2847B22F009838C4 /* Cache.swift in Sources */,
 				E9227BB52B41B89000589E64 /* CurrencyTextField.swift in Sources */,
-				E9F32ED52B45C8740003303C /* ChartView.swift in Sources */,
+				E9F32ED52B45C8740003303C /* BarChart.swift in Sources */,
 				E9AACA3A2853DFB5005F30FE /* NetworkActivityIndicatorManager.swift in Sources */,
 				E9715409289D73F200889084 /* DataSendPhase.swift in Sources */,
 				E940E8BE28426E50009F1225 /* CloseButton.swift in Sources */,

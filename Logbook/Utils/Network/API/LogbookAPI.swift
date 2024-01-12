@@ -37,8 +37,8 @@ struct LogbookAPI {
         try await fetchLogbooks(from: URL(string: baseUrl + "/find/latest")!)
     }
     
-    func fetchRefuels(with limit: Int) async throws -> [LogbookRefuelReceive] {
-        try await fetchRefuels(from: generateSearchUrl(with: LogbookRequestParameters(limit: limit)))
+    func fetchRefuels(with limit: Int) async throws -> [LogbookEntry] {
+        try await fetchRefuels(from: URL(string: baseUrl + "/refuels/last?limit=\(limit)")!)
     }
     
     func send(with logbook: LogbookEntry) async throws -> LogbookEntry {
@@ -49,7 +49,7 @@ struct LogbookAPI {
         deleteLogbook(from: URL(string: baseUrl + "/\(logbook._id!)")!)
     }
     
-    private func fetchRefuels(from url: URL) async throws -> [LogbookRefuelReceive] {
+    private func fetchRefuels(from url: URL) async throws -> [LogbookEntry] {
         print(url)
         do {
             return try await session.request(url, method: .get)
@@ -66,7 +66,7 @@ struct LogbookAPI {
 //                        print("Data: \(utf8Text)")
 //                    }
                 }
-                .serializingDecodable([LogbookRefuelReceive].self, decoder: jsonDecoder)
+                .serializingDecodable([LogbookEntry].self, decoder: jsonDecoder)
                 .value
             
         } catch DecodingError.keyNotFound(let key, let context) {

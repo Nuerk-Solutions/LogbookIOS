@@ -21,6 +21,8 @@ struct ChartAnnotation: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
+            
+            
             Text("Verbrauch")
                 .fontWeight(.semibold)
                 .foregroundStyle(.gray)
@@ -35,6 +37,7 @@ struct ChartAnnotation: View {
                     .textScale(.secondary)
             }
         }
+        .animation(nil)
         .padding()
         .background {
             RoundedRectangle(cornerRadius: 8)
