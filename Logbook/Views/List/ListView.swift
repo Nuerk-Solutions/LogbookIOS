@@ -90,7 +90,7 @@ struct ListView: View {
     
     var content: some View {
         ScrollView {
-            scrollDetection
+//            scrollDetection
             
             //            HStack {
             //                Text("Letzte Aktualisierung: \(mediumDateAndTime.string(from: Date(timeIntervalSince1970: TimeInterval(logbooksVM.lastListRefresh))))")
@@ -125,18 +125,18 @@ struct ListView: View {
             entrySection2
                 .padding(.top, 70)
                 .padding(.bottom, 120)
-                .id("SCROLL_TO_TOP")
+//                .id("SCROLL_TO_TOP")
             
         }
         .task(id: logbooksVM.lastListRefresh, loadFirstTask)
-        .coordinateSpace(name: "scroll")
-        .onReceive(networkReachablility.$connected) { newValue in
-            if !networkReachablility.connected && newValue {
-                Task {
-                    await logbooksVM.loadFirstPage(connected: newValue)
-                }
-            }
-        }
+//        .coordinateSpace(name: "scroll")
+//        .onReceive(networkReachablility.$connected) { newValue in
+//            if !networkReachablility.connected && newValue {
+//                Task {
+//                    await logbooksVM.loadFirstPage(connected: newValue)
+//                }
+//            }
+//        }
 //        .onReceive(logbooksVM.$phase, perform: { newValue in
 //            withAnimation {
 //                model.showDetail = false
@@ -217,7 +217,9 @@ struct ListView: View {
                         //                            .offset(y: -40)
                     }
                 }
-                .transition(.blurReplace)
+                
+//                .animation(nil)
+//                .transition(.blurReplace)
 //                .animation(.flipCard)
                 //                .padding(.horizontal, 20)
                 .opacity(logbooksVM.logbooksOpacity)
@@ -227,17 +229,17 @@ struct ListView: View {
     
     var entry: some View {
         
-        ForEach(logbooks) { entry in
+        ForEach(logbooks, id: \._id) { entry in
             if entry == logbooks.last {
                 EntryItem(namespace: namespace, entry: entry)
-                    .accessibilityElement(children: .combine)
-                    .accessibilityAddTraits(.isButton)
+//                    .accessibilityElement(children: .combine)
+//                    .accessibilityAddTraits(.isButton)
                     .task(id: logbooksVM.lastListRefresh, loadTask)
                     .transition(.blurReplace)
             } else {
                 EntryItem(namespace: namespace, entry: entry)
-                    .accessibilityElement(children: .combine)
-                    .accessibilityAddTraits(.isButton)
+//                    .accessibilityElement(children: .combine)
+//                    .accessibilityAddTraits(.isButton)
                     .transition(.blurReplace)
                     .contextMenu {
 //                        Button {

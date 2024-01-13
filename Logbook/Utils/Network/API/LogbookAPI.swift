@@ -81,7 +81,7 @@ struct LogbookAPI {
         catch let error as NSError {
             NSLog("Error in read(from:ofType:) domain= \(error.domain), description= \(error.localizedDescription)")
         }
-        throw NSError()
+        return []
     }
     
     private func fetchLogbooks(from url: URL) async throws -> LogbookAPIResponse {

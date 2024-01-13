@@ -127,18 +127,16 @@ struct SettingsView: View {
                 
                 Section {
                     
-                    Picker(selection: $iconSettings.currentIndex) {
+                    Picker("AppIcon", selection: $iconSettings.currentIndex) {
                         ForEach(0 ..< iconSettings.iconNames.count, id: \.self) { icon in
                             HStack(spacing: 20) {
-                                Image(uiImage: UIImage(named: self.iconSettings.iconNames[icon] ?? "AppIcon") ?? UIImage())
+                                Text(self.iconSettings.iconNames[icon] ?? "Standard")
+                                Image("\(self.iconSettings.iconNames[icon] ?? "")_32")
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 40, height: 40, alignment: .leading)
-                                Text(self.iconSettings.iconNames[icon] ?? "Standard")
                             }
+                            .tag(icon)
                         }
-                    } label: {
-                        Text("App Icon")
                     }
                     .onReceive([self.iconSettings.currentIndex].publisher.first()) { value in
                         
@@ -195,6 +193,7 @@ struct SettingsView: View {
                                     HStack {
                                         Image(vehicle.rawValue)
                                                 .resizable()
+                                                .scaledToFit()
                                                 .frame(width: 60, height: 60, alignment: .center)
                                         Text(vehicle.rawValue)
                                     }

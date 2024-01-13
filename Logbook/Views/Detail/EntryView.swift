@@ -113,13 +113,13 @@ struct EntryView: View {
                     .aspectRatio(contentMode: .fit)
                     .padding(20)
                     .matchedGeometryEffect(id: "image\(entry.id)", in: namespace)
-                    .offset(y: -70)
+                    .offset(y: -70 - (entry.vehicle == .VW ? 40 : 25))
                     .offset(y: scrollY > 0 ? -scrollY : 0)
                     .accessibility(hidden: true)
                 //                    .frame(maxWidth: 150)
             )
             .background(
-                Image("road")
+                Image("road_1")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .matchedGeometryEffect(id: "background\(entry.id)", in: namespace)
@@ -241,6 +241,23 @@ struct EntryView: View {
                             .opacity(appear[1] ? 1 : 0)
 //                            .matchedGeometryEffect(id: "description\(entry.id)", in: namespace)
                             .padding(.bottom, 5)
+                            
+                            // MARK: TODO: FIX THIS HEIGHT ISSUE
+                            HStack {
+                                Image(systemName: "clock")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 24, height: 24)
+                                
+                                Text(entry.date, style: .time)
+                                    .font(.body).bold()
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .foregroundColor(.primary.opacity(0.7))
+                            }
+                            .hidden()
+//                            .matchedGeometryEffect(id: "description\(entry.id)", in: namespace)
+                            .padding(.bottom, 5)
+                            
                             //                        Text("\(DateFormatter.readableDeShort.string(from: entry.date))".uppercased())
                             //                            .font(.footnote).bold()
                             //                            .frame(maxWidth: .infinity, alignment: .leading)
@@ -298,8 +315,9 @@ struct EntryView: View {
                     .padding(20)
                     .padding(.horizontal, verticalSizeClass == .compact ? 25 : 0)
             )
+            .background(.secondary.opacity(scrollY < 0 ? 0.5 : 0.5 - (scrollY / 100)))
         }
-        .background(.red)
+        .background(Color("Background"))
         .frame(height: verticalSizeClass == .compact ? 600 : 500)
     }
     

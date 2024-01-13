@@ -13,6 +13,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         SwiftDate.defaultRegion = Region.current
         NetworkActivityIndicatorManager.shared.startDelay = 0
         NetworkActivityIndicatorManager.shared.isEnabled = true
+        NetworkReachability.shared.startNetworkReachabilityObserver()
         return true
     }
 }

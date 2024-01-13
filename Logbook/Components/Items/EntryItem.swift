@@ -32,7 +32,7 @@ struct EntryItem: View {
                             .truncationMode(.tail)
                             .allowsTightening(true)
                             .matchedGeometryEffect(id: "title\(entry.id)", in: namespace)
-                            .foregroundColor(.white)
+//                            .foregroundColor(.white)
                     }
                     .padding(.bottom, 15)
                     
@@ -40,12 +40,12 @@ struct EntryItem: View {
                         Text("\(DateFormatter.readableDeShort.string(from: entry.date)) - ")
                             .font(.footnote).bold()
                             .matchedGeometryEffect(id: "date\(entry.id)", in: namespace)
-                            .foregroundColor(.white.opacity(0.7))
+//                            .foregroundColor(.white.opacity(0.7))
                         
                         Text("\(entry.driver.rawValue)".uppercased())
                             .font(.footnote).bold()
                             .matchedGeometryEffect(id: "subtitle\(entry.id)", in: namespace)
-                            .foregroundColor(.white.opacity(0.7))
+//                            .foregroundColor(.white.opacity(0.7))
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     //                                    .background {
@@ -69,8 +69,8 @@ struct EntryItem: View {
                 //                .padding(.horizontal, -10)
                 //                .padding(.vertical, -20)
             )
-            .background(.secondary)
-            .background(.regularMaterial)
+            .background(LinearGradient(colors: [Color.secondary, entry.vehicle == .Ferrari ? .red : entry.vehicle == .VW ? .white : entry.vehicle == .Porsche ? .black : entry.vehicle == .MX5 ? .blue : .background], startPoint: .leading, endPoint: .trailing).blur(radius: 80))
+            .background(.thinMaterial)
 //            .background(
 //                Image(getVehicleBackground(vehicleTyp: entry.vehicle))
 //                    .resizable()

@@ -13,13 +13,6 @@
 					<string>Ferrari</string>
 				</array>
 			</dict>
-			<key>Legacy</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>Legacy</string>
-				</array>
-			</dict>
 			<key>Porsche</key>
 			<dict>
 				<key>CFBundleIconFiles</key>

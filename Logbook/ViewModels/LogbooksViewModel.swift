@@ -79,6 +79,10 @@ class LogbooksViewModel: ObservableObject {
         //        }
     }
     
+    func combine<T>(_ arrays: Array<T>?...) -> Set<T> {
+        return arrays.compactMap{$0}.compactMap{Set($0)}.reduce(Set<T>()){$0.union($1)}
+    }
+    
     func loadFirstPage(connected: Bool) async {
         if Task.isCancelled { return }
         
@@ -118,21 +122,22 @@ class LogbooksViewModel: ObservableObject {
 //            self.lastListRefresh = Int(Date().timeIntervalSince1970)
 
             if Task.isCancelled { return }
-
-            let cacheHasChanged = loadedLogbooks.first?._id != logbooks.first?._id
             
+            var cacheHasChanged = false
+            if(!logbooks.isEmpty) {
+                cacheHasChanged = loadedLogbooks.first?._id != logbooks.first?._id
+            }
+            print("CACHE CHANGED: \(cacheHasChanged)")
 //            loadedLogbooks = logbooks
+            
+//            let newArray = combine(logbooks, loadedLogbooks)
             
             if cacheHasChanged {
                 withAnimation {
+                    loadedLogbooks = logbooks
                     phase = .success(logbooks)
-                    loadedLogbooks = self.phase.value!
                 }
                 return
-            }
-            withAnimation {
-                phase = .success(logbooks)
-                loadedLogbooks = self.phase.value!
             }
         } catch {
             if Task.isCancelled { return }

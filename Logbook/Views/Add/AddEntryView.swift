@@ -13,8 +13,10 @@ import AlertKit
 struct AddEntryView: View {
     
     @StateObject var newEntryVM = NewEntryViewModel()
+    @Environment(\.dismiss) var dismiss
     
     @State var showAddInfoSelection = false
+    @State var savedLogbook: LogbookEntry?
     @Binding var show: Bool
     
     @AppStorage("currentDriver") var currentDriver: DriverEnum = .Andrea
@@ -67,6 +69,9 @@ struct AddEntryView: View {
                         .presentationDetents([.fraction(CGFloat(0.45))])
                         .presentationCornerRadius(30)
                         .presentationBackground(.thinMaterial)
+                        .onAppear {
+                            savedLogbook = newEntryVM.newLogbook
+                        }
                 }
 //                .overlay(overlayView)
                 .overlay {

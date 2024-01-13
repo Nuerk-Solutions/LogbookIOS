@@ -38,7 +38,6 @@ class ChartViewModel: ObservableObject {
             withAnimation {
                 allLogbooks = result
                 updateLogbooks(for: [.Ferrari])
-                print(logbooks[0])
             }
         } catch {
             print(error)
