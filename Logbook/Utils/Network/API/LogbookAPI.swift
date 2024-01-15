@@ -15,7 +15,7 @@ struct LogbookAPI {
     private init() {}
     
 //    private let baseUrl = "https://api.nuerk-solutions.de/logbook"
-    private let baseUrl = "http://127.0.0.1:3000/logbook"
+    private let baseUrl = "https://api.nuerk-solutions.de/v2/logbook"
     private let session = ApiSession.logbookShared.session
     private let jsonDecoder: JSONDecoder = {
         let decoder = JSONDecoder()
@@ -180,7 +180,7 @@ struct LogbookAPI {
         }
         var components = URLComponents(string: baseUrl)
         // Need to be set here beacuse override it
-        components?.path = "/logbook/find/all"
+        components?.path = "/v2/logbook/find/all"
         components?.queryItems = queryItems
         return components!.url!
     }

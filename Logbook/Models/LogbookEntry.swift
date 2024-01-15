@@ -152,13 +152,14 @@ enum VehicleEnum: String, CaseIterable, Identifiable, Codable, Equatable {
     var fuelTyp: FuelTyp {
         switch self {
         case .Ferrari, .MX5:
-            return .SUPER
+            return .SUPER_95_E5
         case .VW:
             return .DIESEL
         case .Porsche, .DS:
-            return .SUPER_E10
+            return .SUPER_95_E10
         }
     }
+    
     
     var unit: UnitEnum {
         return self != .MX5 ? .KM : .MILE

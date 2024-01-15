@@ -83,11 +83,20 @@ struct GasStationEntry: Codable {
 
 }
 
-enum FuelTyp: String, Codable, CodingKey {
-    case SUPER_E10 = "Super_E10"
-    case SUPER = "Super"
+enum FuelTyp: String, Codable, CodingKey, Identifiable, CaseIterable {
+    case SUPER_E10 = "Super_E10" // Only for request
+    case SUPER = "Super" // Only for request
+    case SUPER_95_E5 = "Super 95 E5"
+    case SUPER_95_E10 = "Super 95 E10"
+    case SUPER_PLUS_98_E5 = "Super Plus 98 E5"
     case DIESEL = "Diesel"
-    case ERDGAS = "Erdgas"
+    
+    var id: String { UUID().uuidString }
+    
+    
+    static var allNonApiCases: [FuelTyp] {
+        return [.DIESEL, .SUPER_95_E5, .SUPER_95_E10, .SUPER_PLUS_98_E5]
+    }
 }
 
 struct SycAngebote: Codable {

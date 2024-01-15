@@ -55,7 +55,6 @@ struct DVDComponent: View {
                     }
                 }
                 .pickerStyle(.segmented)
-                .animation(nil)
 //                .frame(width: proxy.size.width, height: 20)
 //        }
     }

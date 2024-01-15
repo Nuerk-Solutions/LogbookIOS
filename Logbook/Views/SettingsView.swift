@@ -29,7 +29,7 @@ struct SettingsView: View {
     @AppStorage("currentDriver") var currentDriver: DriverEnum = .Andrea
     @AppStorage("gasStationSort") var gasStationSort: SortTyp = .Preis
     @AppStorage("isGasStationSortDirectionAsc") var isGasStationSortDirectionAsc: Bool = true
-    @AppStorage("isAllowLocationTracking") var isAllowLocationTracking = false
+    @AppStorage("isAllowLocationTracking") var isAllowLocationTracking = true
     @AppStorage("isShowNotifications") var isShowNotifications = false
     @AppStorage("isShowNotificationsIconBadge") var isShowNotificationsIconBadge = false
     @AppStorage("isOpenAddViewOnStart") var isOpenAddViewOnStart = false
@@ -184,29 +184,13 @@ struct SettingsView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink {
-                        Form {
-                            ForEach(VehicleEnum.allCases) { vehicle in
-                                Section {
-                                    Text(vehicle.fuelDescription)
-//                                    .padding()
-                                } header: {
-                                    HStack {
-                                        Image(vehicle.rawValue)
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 60, height: 60, alignment: .center)
-                                        Text(vehicle.rawValue)
-                                    }
-                                }
-                                .headerProminence(.increased)
-                            }
-                        }
-                        .navigationBarTitleDisplayMode(.inline)
+                        VehicleFuelList()
+                            .navigationTitle("Tankübersicht")
+                            .navigationBarTitleDisplayMode(.inline)
                     } label: {
                         Image(systemName: "info.circle")
                             .padding()
                     }
-
                 }
             }
         }

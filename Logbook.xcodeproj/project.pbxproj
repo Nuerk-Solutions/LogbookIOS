@@ -55,6 +55,9 @@
 		E9227BC72B43510B00589E64 /* AddInfoButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9227BC62B43510B00589E64 /* AddInfoButtonComponent.swift */; };
 		E9227BCA2B43539800589E64 /* AddInfoSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9227BC92B43539800589E64 /* AddInfoSection.swift */; };
 		E92F54BB287DDE76008A72AF /* GasStationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F54BA287DDE76008A72AF /* GasStationAPI.swift */; };
+		E937B8262B55AC1100DC073A /* RefuelInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E937B8252B55AC1100DC073A /* RefuelInfo.swift */; };
+		E937B8282B55AFA200DC073A /* RefuelInfoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E937B8272B55AFA200DC073A /* RefuelInfoList.swift */; };
+		E937B82A2B55BB1B00DC073A /* VehicleFuelList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E937B8292B55BB1B00DC073A /* VehicleFuelList.swift */; };
 		E93872A128638D800009F0F1 /* GasStationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93872A028638D800009F0F1 /* GasStationRow.swift */; };
 		E93872AB286394670009F0F1 /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = E93872AA286394670009F0F1 /* SwiftDate */; };
 		E93F33AA2B4497BA00978042 /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = E93F33A92B4497BA00978042 /* AlertKit */; };
@@ -184,6 +187,9 @@
 		E9227BC62B43510B00589E64 /* AddInfoButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInfoButtonComponent.swift; sourceTree = "<group>"; };
 		E9227BC92B43539800589E64 /* AddInfoSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInfoSection.swift; sourceTree = "<group>"; };
 		E92F54BA287DDE76008A72AF /* GasStationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasStationAPI.swift; sourceTree = "<group>"; };
+		E937B8252B55AC1100DC073A /* RefuelInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefuelInfo.swift; sourceTree = "<group>"; };
+		E937B8272B55AFA200DC073A /* RefuelInfoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefuelInfoList.swift; sourceTree = "<group>"; };
+		E937B8292B55BB1B00DC073A /* VehicleFuelList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleFuelList.swift; sourceTree = "<group>"; };
 		E93872A028638D800009F0F1 /* GasStationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasStationRow.swift; sourceTree = "<group>"; };
 		E940E8BA28426A64009F1225 /* NetworkReachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachability.swift; sourceTree = "<group>"; };
 		E940E8BD28426E50009F1225 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
@@ -547,6 +553,9 @@
 				E91AFA42284016BE0024131D /* CustomProgressView.swift */,
 				E91AFA3D28400D180024131D /* EmptyPlaceholderView.swift */,
 				E91AFA3F28400DC90024131D /* RetryView.swift */,
+				E937B8252B55AC1100DC073A /* RefuelInfo.swift */,
+				E937B8272B55AFA200DC073A /* RefuelInfoList.swift */,
+				E937B8292B55BB1B00DC073A /* VehicleFuelList.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -759,6 +768,7 @@
 				E9227BBB2B433CBB00589E64 /* MileAgeComponent.swift in Sources */,
 				E9227BB12B41B87700589E64 /* CurrencyUITextField.swift in Sources */,
 				E920B5FB285647B900683D67 /* AnimatedBlobView.swift in Sources */,
+				E937B8262B55AC1100DC073A /* RefuelInfo.swift in Sources */,
 				E91AFA32283FD7020024131D /* LogbookEntry.swift in Sources */,
 				E94A0CFD284F98CF00693352 /* LogoView.swift in Sources */,
 				E91AFA4A284129CC0024131D /* CustomButton.swift in Sources */,
@@ -772,6 +782,7 @@
 				E962E5CE285E465E00F6B4D6 /* GasStationsView.swift in Sources */,
 				E91AFA43284016BE0024131D /* CustomProgressView.swift in Sources */,
 				E91AFA3C28400B260024131D /* LogbooksViewModel.swift in Sources */,
+				E937B82A2B55BB1B00DC073A /* VehicleFuelList.swift in Sources */,
 				E91AFA4028400DC90024131D /* RetryView.swift in Sources */,
 				E91AFA4C284129F30024131D /* Extensions.swift in Sources */,
 				E9227BB32B41B87700589E64 /* MassUITextField.swift in Sources */,
@@ -793,6 +804,7 @@
 				E962E5CB285E440A00F6B4D6 /* GasStationEntry.swift in Sources */,
 				E9227BAA2B41B85B00589E64 /* ServiceView.swift in Sources */,
 				E961ACA728948EDD00C6FCC8 /* NewEntryViewModel.swift in Sources */,
+				E937B8282B55AFA200DC073A /* RefuelInfoList.swift in Sources */,
 				E9F32ED72B45CF4F0003303C /* ChartAnnotation.swift in Sources */,
 				E9D2BB1C2843F977009EC7C5 /* CircularView.swift in Sources */,
 				E9C3B8DC2845374000EDE615 /* AnimatableFontModifier.swift in Sources */,
@@ -980,7 +992,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.2;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = de.Thomas.Logbook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1023,7 +1035,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = de.Thomas.Logbook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
