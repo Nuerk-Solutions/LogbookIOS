@@ -10,11 +10,12 @@ import SwiftUI
 struct VehicleFuelList: View {
     
     var body: some View {
-        List {
-            ForEach(VehicleEnum.allCases) { vehicle in
-                RefuelInfoList(vehicle: vehicle)
+            List {
+                ForEach(VehicleEnum.allCases, id: \.self) { vehicle in
+                    RefuelInfoList(vehicle: vehicle)
+                }
             }
-        }
+            .listStyle(.sidebar)
     }
 }
 

@@ -90,12 +90,13 @@ enum FuelTyp: String, Codable, CodingKey, Identifiable, CaseIterable {
     case SUPER_95_E10 = "Super 95 E10"
     case SUPER_PLUS_98_E5 = "Super Plus 98 E5"
     case DIESEL = "Diesel"
+    case SP_VP_AU = "SuperPremium (VPower,...)"
     
     var id: String { UUID().uuidString }
     
     
     static var allNonApiCases: [FuelTyp] {
-        return [.DIESEL, .SUPER_95_E5, .SUPER_95_E10, .SUPER_PLUS_98_E5]
+        return [.DIESEL, .SUPER_95_E10, .SUPER_95_E5, .SUPER_PLUS_98_E5, .SP_VP_AU]
     }
 }
 

@@ -149,14 +149,17 @@ enum VehicleEnum: String, CaseIterable, Identifiable, Codable, Equatable {
     case MX5
     case DS
     
-    var fuelTyp: FuelTyp {
+    var fuelTyp: [FuelTyp] {
         switch self {
         case .Ferrari, .MX5:
-            return .SUPER_95_E5
+            return [.SUPER_95_E5, .SUPER_PLUS_98_E5, .SP_VP_AU]
+            //return .SUPER_95_E5
         case .VW:
-            return .DIESEL
+            return [.DIESEL]
+            //return .DIESEL
         case .Porsche, .DS:
-            return .SUPER_95_E10
+            return [.SUPER_PLUS_98_E5, .SP_VP_AU]
+            //return .SUPER_95_E10
         }
     }
     

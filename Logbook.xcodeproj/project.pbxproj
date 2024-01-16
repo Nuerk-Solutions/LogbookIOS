@@ -123,6 +123,7 @@
 		E9F32ED32B45BCBB0003303C /* refuellogbooks.json in Resources */ = {isa = PBXBuildFile; fileRef = E9F32ED22B45B3B60003303C /* refuellogbooks.json */; };
 		E9F32ED52B45C8740003303C /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F32ED42B45C8740003303C /* BarChart.swift */; };
 		E9F32ED72B45CF4F0003303C /* ChartAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F32ED62B45CF4F0003303C /* ChartAnnotation.swift */; };
+		E9FFA23A2B567F1A00634E49 /* WrongFuelHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FFA2392B567F1A00634E49 /* WrongFuelHelp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -252,6 +253,7 @@
 		E9F32ED22B45B3B60003303C /* refuellogbooks.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = refuellogbooks.json; sourceTree = "<group>"; };
 		E9F32ED42B45C8740003303C /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
 		E9F32ED62B45CF4F0003303C /* ChartAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartAnnotation.swift; sourceTree = "<group>"; };
+		E9FFA2392B567F1A00634E49 /* WrongFuelHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongFuelHelp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -556,6 +558,7 @@
 				E937B8252B55AC1100DC073A /* RefuelInfo.swift */,
 				E937B8272B55AFA200DC073A /* RefuelInfoList.swift */,
 				E937B8292B55BB1B00DC073A /* VehicleFuelList.swift */,
+				E9FFA2392B567F1A00634E49 /* WrongFuelHelp.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -778,6 +781,7 @@
 				E9D2BB21284405DB009EC7C5 /* NavigationBar.swift in Sources */,
 				E9227BCA2B43539800589E64 /* AddInfoSection.swift in Sources */,
 				E95A6BEB2898567C0027A673 /* CustomTextArea.swift in Sources */,
+				E9FFA23A2B567F1A00634E49 /* WrongFuelHelp.swift in Sources */,
 				E91AFA26283FD13D0024131D /* CacheEntry.swift in Sources */,
 				E962E5CE285E465E00F6B4D6 /* GasStationsView.swift in Sources */,
 				E91AFA43284016BE0024131D /* CustomProgressView.swift in Sources */,

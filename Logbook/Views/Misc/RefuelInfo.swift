@@ -11,6 +11,7 @@ struct RefuelInfo: View {
     
     var fuelInformation: String = "Text here"
     var isAllowed: Bool = true
+    var isPrefered: Bool = true
     
     var body: some View {
         HStack {
@@ -19,7 +20,7 @@ struct RefuelInfo: View {
                 .scaledToFit()
                 .symbolRenderingMode(.hierarchical)
                 .foregroundStyle(isAllowed ? .green : .red)
-                .symbolEffect(.pulse)
+                .symbolEffect(isPrefered ? .pulse.wholeSymbol : .pulse, options: isPrefered ? .speed(1) : .speed(0.001).nonRepeating)
                 .frame(maxWidth: 24, maxHeight: 24)
             Text(fuelInformation)
                 .frame(maxWidth: .infinity, alignment: .leading)

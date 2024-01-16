@@ -121,8 +121,8 @@ class GasStationViewModel: ObservableObject {
             return
         }
         
-        if let gasStations = await cache.value(forKey: stationForVehicle.fuelTyp.rawValue) {
-            print("[GasStation]: CACHE HIT for \(stationForVehicle.fuelTyp.rawValue)")
+        if let gasStations = await cache.value(forKey: stationForVehicle.fuelTyp[0].rawValue) {
+            print("[GasStation]: CACHE HIT for \(stationForVehicle.fuelTyp[0].rawValue)")
             withAnimation {
                 //                phase = .success(gasStations)
                 calculationEvaluation(data: gasStations)
@@ -144,12 +144,12 @@ class GasStationViewModel: ObservableObject {
             
             gasStationAPI.cancelPreviousRequest()
             
-            let gasStations = try await gasStationAPI.fetch(with: GasStationRequestParameters(lat: currentLocation.coordinate.latitude, lng: currentLocation.coordinate.longitude, fuelTyp: stationForVehicle.fuelTyp, radius: radius, sortTyp: gasStationSort, sortDirection: isGasStationSortDirectionAsc ? "asc" : "desc"))
-            await cache.setValue(gasStations, forKey: stationForVehicle.fuelTyp.rawValue)
+            let gasStations = try await gasStationAPI.fetch(with: GasStationRequestParameters(lat: currentLocation.coordinate.latitude, lng: currentLocation.coordinate.longitude, fuelTyp: stationForVehicle.fuelTyp[0], radius: radius, sortTyp: gasStationSort, sortDirection: isGasStationSortDirectionAsc ? "asc" : "desc"))
+            await cache.setValue(gasStations, forKey: stationForVehicle.fuelTyp[0].rawValue)
             
             if Task.isCancelled { return }
             
-            print("[GasStation]: Fetched GasStations for fuel: \(stationForVehicle.fuelTyp), radius: \(radius)km, sortTyp: \(gasStationSort)")
+            print("[GasStation]: Fetched GasStations for fuel: \(stationForVehicle.fuelTyp[0]), radius: \(radius)km, sortTyp: \(gasStationSort)")
             print("[GasStation]: \(gasStations.count)")
             calculationEvaluation(data: gasStations) // Includes success phase setter
             

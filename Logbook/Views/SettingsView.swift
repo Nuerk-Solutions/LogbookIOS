@@ -187,6 +187,17 @@ struct SettingsView: View {
                         VehicleFuelList()
                             .navigationTitle("Tankübersicht")
                             .navigationBarTitleDisplayMode(.inline)
+                            .toolbar {
+                                
+                                NavigationLink {
+                                    WrongFuelHelp()
+                                        .navigationTitle("Fehlbetankung. Was jetzt?")
+                                } label: {
+                                        Image(systemName: "exclamationmark.triangle")
+                                            .symbolRenderingMode(.multicolor)
+                                            .padding()
+                                }
+                            }
                     } label: {
                         Image(systemName: "info.circle")
                             .padding()

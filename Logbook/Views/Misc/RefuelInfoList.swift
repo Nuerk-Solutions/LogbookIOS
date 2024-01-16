@@ -10,13 +10,18 @@ import SwiftUI
 struct RefuelInfoList: View {
     
     var vehicle: VehicleEnum = .Ferrari
-    @State private var isExpanded: Bool = true
+    @AppStorage<Bool> var isExpanded: Bool
+    
+    init(vehicle: VehicleEnum = .Ferrari, isExpanded: Bool = false) {
+        self.vehicle = vehicle
+        self._isExpanded = AppStorage(wrappedValue: isExpanded, "\(vehicle)_expand_view")
+    }
     
     var body: some View {
         Section(isExpanded: $isExpanded.animation()) {
             VStack(spacing: 5) {
                 ForEach(FuelTyp.allNonApiCases, id: \.id) { item in
-                    RefuelInfo(fuelInformation: item.rawValue, isAllowed: vehicle.fuelTyp == item)
+                    RefuelInfo(fuelInformation: item.rawValue, isAllowed: vehicle.fuelTyp.contains(item), isPrefered: vehicle.fuelTyp[0] == item)
                 }
             }
         } header: {
@@ -28,6 +33,7 @@ struct RefuelInfoList: View {
                 Text(vehicle.rawValue)
             }
         }
+        .listStyle(.sidebar)
         .headerProminence(.increased)
 
     }

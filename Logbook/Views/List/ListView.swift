@@ -90,7 +90,7 @@ struct ListView: View {
     
     var content: some View {
         ScrollView {
-//            scrollDetection
+            scrollDetection
             
             //            HStack {
             //                Text("Letzte Aktualisierung: \(mediumDateAndTime.string(from: Date(timeIntervalSince1970: TimeInterval(logbooksVM.lastListRefresh))))")
@@ -125,23 +125,23 @@ struct ListView: View {
             entrySection2
                 .padding(.top, 70)
                 .padding(.bottom, 120)
-//                .id("SCROLL_TO_TOP")
+                .id("SCROLL_TO_TOP")
             
         }
         .task(id: logbooksVM.lastListRefresh, loadFirstTask)
-//        .coordinateSpace(name: "scroll")
-//        .onReceive(networkReachablility.$connected) { newValue in
-//            if !networkReachablility.connected && newValue {
-//                Task {
-//                    await logbooksVM.loadFirstPage(connected: newValue)
-//                }
-//            }
-//        }
-//        .onReceive(logbooksVM.$phase, perform: { newValue in
-//            withAnimation {
-//                model.showDetail = false
-//            }
-//        })
+        .coordinateSpace(name: "scroll")
+        .onReceive(networkReachablility.$connected) { newValue in
+            if !networkReachablility.connected && newValue {
+                Task {
+                    await logbooksVM.loadFirstPage(connected: newValue)
+                }
+            }
+        }
+        .onReceive(logbooksVM.$phase, perform: { newValue in
+            withAnimation {
+                model.showDetail = false
+            }
+        })
     }
     
     @ViewBuilder
