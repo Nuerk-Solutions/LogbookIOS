@@ -51,6 +51,8 @@
 			<string>UINewsstandBindingTypeMagazine</string>
 		</dict>
 	</dict>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Inter-Regular.ttf</string>
