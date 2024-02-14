@@ -12,7 +12,7 @@ struct NewListView: View {
     
     @State private var searchString: String = ""
     @State private var showStatusBar = true
-    @Namespace private var namespace
+    @Namespace var namespace
     
     @EnvironmentObject var model: Model
     @EnvironmentObject var networkReachablility: NetworkReachability
@@ -20,16 +20,27 @@ struct NewListView: View {
     @StateObject private var netWorkActivitIndicatorManager = NetworkActivityIndicatorManager()
     
     var body: some View {
+        // TODO: Split following into files
         NavigationStack {
             List {
                 ForEach(filteredLogbooks, id: \._id) { item in
-                    if(item == logbooks.last && searchString.isEmpty) {
-                        EntryItem(namespace: namespace, entry: item)
-                            .listRowBackground(Color("Background").ignoresSafeArea())
-                            .task(id: logbooksVM.lastListRefresh, loadTask)
+                    if(item == logbooks.last) {
+                        // TODO: Optimize this code
+                        if(searchString.isEmpty) {
+                            EntryItem(namespace: namespace, entry: item)
+                                .listRowBackground(Color("Background").ignoresSafeArea())
+                                .task(id: logbooksVM.lastListRefresh, loadTask)
+                        }
                     } else {
-                        EntryItem(namespace: namespace, entry: item)
-                            .listRowBackground(Color("Background").ignoresSafeArea())
+                        NavigationLink {
+                            Text("Test")
+//                            EntryView(namespace: namespace, entry: item)
+//                                .environmentObject(model)
+                        } label: {
+                            EntryItem(namespace: namespace, entry: item)
+                                .listRowBackground(Color("Background").ignoresSafeArea())
+                        }
+
                     }
                 }
                 
