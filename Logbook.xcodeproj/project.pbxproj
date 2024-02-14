@@ -189,6 +189,7 @@
 		E9227BC62B43510B00589E64 /* AddInfoButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInfoButtonComponent.swift; sourceTree = "<group>"; };
 		E9227BC92B43539800589E64 /* AddInfoSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInfoSection.swift; sourceTree = "<group>"; };
 		E92F54BA287DDE76008A72AF /* GasStationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasStationAPI.swift; sourceTree = "<group>"; };
+		E934BD402B7D109400912B8C /* Logbook.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Logbook.entitlements; sourceTree = "<group>"; };
 		E937B8252B55AC1100DC073A /* RefuelInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefuelInfo.swift; sourceTree = "<group>"; };
 		E937B8272B55AFA200DC073A /* RefuelInfoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefuelInfoList.swift; sourceTree = "<group>"; };
 		E937B8292B55BB1B00DC073A /* VehicleFuelList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleFuelList.swift; sourceTree = "<group>"; };
@@ -331,6 +332,7 @@
 		E91AFA0D283FD09F0024131D /* Logbook */ = {
 			isa = PBXGroup;
 			children = (
+				E934BD402B7D109400912B8C /* Logbook.entitlements */,
 				E91095C428412D8D00C1334E /* Info.plist */,
 				E91AFA10283FD09F0024131D /* ContentView.swift */,
 				E91AFA0E283FD09F0024131D /* LogbookApp.swift */,
@@ -984,7 +986,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Logbook/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3JWUJEGD2M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Logbook/Info.plist;
@@ -1002,7 +1004,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3;
+				MARKETING_VERSION = 2.4;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = de.Thomas.Logbook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1046,7 +1048,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3;
+				MARKETING_VERSION = 2.4;
 				PRODUCT_BUNDLE_IDENTIFIER = de.Thomas.Logbook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
