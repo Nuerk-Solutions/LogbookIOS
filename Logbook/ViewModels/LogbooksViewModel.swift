@@ -25,14 +25,6 @@ class LogbooksViewModel: ObservableObject {
     private let limit = 25
     private var canLoadMorePages = true
     
-    var lastRefreshedDateText: String {
-        if lastListRefresh != -1 {
-            return "Letzte Aktualisierung: \(DateFormatter.readableDeShort.string(from: Date(timeIntervalSince1970: TimeInterval(lastListRefresh))))"
-        } else {
-            return "Warten..."
-        }
-    }
-    
     var logbooks: [LogbookEntry] {
         phase.value ?? []
     }

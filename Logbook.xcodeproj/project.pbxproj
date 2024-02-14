@@ -105,6 +105,7 @@
 		E9A784F2289DAE08002AC225 /* ContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A784F1289DAE08002AC225 /* ContextMenu.swift */; };
 		E9AACA352853AC23005F30FE /* Pagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AACA342853AC23005F30FE /* Pagination.swift */; };
 		E9AACA3A2853DFB5005F30FE /* NetworkActivityIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AACA392853DFB5005F30FE /* NetworkActivityIndicatorManager.swift */; };
+		E9AF311C2B7942370051DD0B /* NewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AF311B2B7942370051DD0B /* NewListView.swift */; };
 		E9BA8D6E2847B22F009838C4 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BA8D6D2847B22F009838C4 /* Cache.swift */; };
 		E9BA8D702847B255009838C4 /* KeysTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BA8D6F2847B255009838C4 /* KeysTracker.swift */; };
 		E9BA8D732847B73D009838C4 /* LogbookAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BA8D722847B73D009838C4 /* LogbookAPI.swift */; };
@@ -235,6 +236,7 @@
 		E9A784F1289DAE08002AC225 /* ContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenu.swift; sourceTree = "<group>"; };
 		E9AACA342853AC23005F30FE /* Pagination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pagination.swift; sourceTree = "<group>"; };
 		E9AACA392853DFB5005F30FE /* NetworkActivityIndicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkActivityIndicatorManager.swift; sourceTree = "<group>"; };
+		E9AF311B2B7942370051DD0B /* NewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListView.swift; sourceTree = "<group>"; };
 		E9BA8D6D2847B22F009838C4 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		E9BA8D6F2847B255009838C4 /* KeysTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysTracker.swift; sourceTree = "<group>"; };
 		E9BA8D722847B73D009838C4 /* LogbookAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookAPI.swift; sourceTree = "<group>"; };
@@ -421,6 +423,7 @@
 			isa = PBXGroup;
 			children = (
 				E91AFA4528401C040024131D /* ListView.swift */,
+				E9AF311B2B7942370051DD0B /* NewListView.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -774,6 +777,7 @@
 				E937B8262B55AC1100DC073A /* RefuelInfo.swift in Sources */,
 				E91AFA32283FD7020024131D /* LogbookEntry.swift in Sources */,
 				E94A0CFD284F98CF00693352 /* LogoView.swift in Sources */,
+				E9AF311C2B7942370051DD0B /* NewListView.swift in Sources */,
 				E91AFA4A284129CC0024131D /* CustomButton.swift in Sources */,
 				E969B0C42892D57500E22690 /* AddEntryView.swift in Sources */,
 				E9A784F2289DAE08002AC225 /* ContextMenu.swift in Sources */,
@@ -975,6 +979,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_ENTITLEMENTS = Logbook/Logbook.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Logbook/Preview Content\"";
@@ -1000,6 +1006,7 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = de.Thomas.Logbook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

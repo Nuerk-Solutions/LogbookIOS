@@ -81,12 +81,12 @@ public class NetworkActivityIndicatorManager : ObservableObject {
 
     /// A time interval indicating the minimum duration of networking activity that should occur before the activity
     /// indicator is displayed. Defaults to `1.0` second.
-    public var startDelay: TimeInterval = 0.0
+    public var startDelay: TimeInterval = 0.2
 
     /// A time interval indicating the duration of time that no networking activity should be observed before dismissing
     /// the activity indicator. This allows the activity indicator to be continuously displayed between multiple network
     /// requests. Without this delay, the activity indicator tends to flicker. Defaults to `0.2` seconds.
-    public var completionDelay: TimeInterval = 0.8
+    public var completionDelay: TimeInterval = 0.0
 
     private var activityIndicatorState: ActivityIndicatorState = .notActive {
         didSet {

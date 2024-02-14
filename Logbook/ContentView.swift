@@ -23,6 +23,7 @@ struct ContentView: View {
     private static let isPreview = false
     
     @AppStorage("isOpenAddViewOnStart") var isOpenAddViewOnStart = false
+    @Namespace var dummyNameSpace
     
     var body: some View {
         ZStack {
@@ -42,7 +43,11 @@ struct ContentView: View {
                     GasStationsView()
                 }
             case .stats:
-                BarChart()
+//                NewListView(logbooks: LogbookEntry.previewData.data)
+                  NewListView()
+                    .environmentObject(model)
+                    .environmentObject(networkReachablility)
+                    .environmentObject(logbooksVM)
             case .settings:
                 SettingsView()
             }
