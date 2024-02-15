@@ -25,12 +25,6 @@ struct NewListView: View {
     var body: some View {
         NavigationStack {
             ListContent(logbooks: filteredLogbooks)
-                .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        AddLogbookButton()
-                            .padding(.bottom, 10)
-                    }
-                }
                 .overlay {
                     if  logbooksVM.isFetchingNextPage || nAIM.isVisible {
                         ZStack{}
@@ -61,6 +55,7 @@ struct NewListView: View {
                 }
                 .padding(.bottom, 50)
                 .navigationTitle("Fahrtenbuch")
+                .navigationBarTitleDisplayMode(.large)
                 .searchable(text: $searchString)
                 
                 //            .onChange(of: model.showDetail, { oldValue, newValue in
@@ -76,6 +71,18 @@ struct NewListView: View {
                         await logbooksVM.refreshTask()
                     }
                 })
+        }
+        .overlay {
+            ZStack {
+                AddLogbookButton()
+                    .padding(.horizontal, 10)
+                    .padding(.top, 45)
+            }
+            .if(model.showDetail, transform: { view in
+                view.hidden()
+            })
+            .ignoresSafeArea(edges: .top)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
         }
         .statusBar(hidden: model.showDetail)
         .task(id: logbooksVM.lastListRefresh, logbooksVM.loadFirstPage)

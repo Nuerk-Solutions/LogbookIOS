@@ -77,7 +77,7 @@ struct ListView: View {
         .onChange(of: model.lastAddedEntry, perform: { newValue in
             refreshTask()
         })
-        .statusBar(hidden: !showStatusBar)
+//        .statusBar(hidden: !showStatusBar)
     }
     
     var detail: some View {
@@ -231,13 +231,13 @@ struct ListView: View {
         
         ForEach(logbooks, id: \._id) { entry in
             if entry == logbooks.last {
-                EntryItem(namespace: namespace, entry: entry)
+                EntryItem(entry: entry)
 //                    .accessibilityElement(children: .combine)
 //                    .accessibilityAddTraits(.isButton)
                     .task(id: logbooksVM.lastListRefresh, loadTask)
                     .transition(.blurReplace)
             } else {
-                EntryItem(namespace: namespace, entry: entry)
+                EntryItem(entry: entry)
 //                    .accessibilityElement(children: .combine)
 //                    .accessibilityAddTraits(.isButton)
                     .transition(.blurReplace)

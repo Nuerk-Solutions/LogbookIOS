@@ -10,7 +10,6 @@ import SwiftUI_Extensions
 
 struct EntryItem: View {
     
-    var namespace: Namespace.ID
     var entry: LogbookEntry
     
     @EnvironmentObject var model: Model
@@ -32,10 +31,10 @@ struct EntryItem: View {
 //        .background(.ultraThinMaterial)
 //        .clipped()
         .contentShape(RoundedRectangle(cornerRadius: CGFloat(15)))
-        .mask(
-            RoundedRectangle(cornerRadius: 15)
-                .matchedGeometryEffect(id: "mask\(entry.id)", in: namespace)
-        )
+//        .mask(
+//            RoundedRectangle(cornerRadius: 15)
+//                .matchedGeometryEffect(id: "mask\(entry.id)", in: namespace)
+//        )
 //        .onTapGesture {
 //            withAnimation(.openCard) {
 //                model.showDetail = true
@@ -51,7 +50,7 @@ struct EntryItem: View {
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: 110, height: 110)
-            .matchedGeometryEffect(id: "image\(entry.id)", in: namespace)
+//            .matchedGeometryEffect(id: "image\(entry.id)", in: namespace)
             .frame(alignment: .leading)
             .padding(-10)
             .background(entry.vehicle == .Ferrari ? .red.opacity(0.2) : entry.vehicle == .VW ? .gray.opacity(0.1) : .black.opacity(0.3))
@@ -60,7 +59,7 @@ struct EntryItem: View {
             .clipShape(RoundedCorner(radius: 15))
             .overlay {
                 AdditionalInfoImageView(logbook: entry)
-                    .matchedGeometryEffect(id: "logo\(entry.id)", in: namespace)
+//                    .matchedGeometryEffect(id: "logo\(entry.id)", in: namespace)
                     .padding(-15)
             }
     }
@@ -93,7 +92,6 @@ struct EntryItem: View {
             Text(entry.reason)
                 .lineLimit(3)
                 .allowsTightening(true)
-                .matchedGeometryEffect(id: "title\(entry.id)", in: namespace)
                 .padding(.trailing, 5)
                 .padding(.bottom, 5)
         }
@@ -144,7 +142,7 @@ struct EntryItem_Previews: PreviewProvider {
     @Namespace static var namespace
     
     static var previews: some View {
-        EntryItem(namespace: namespace, entry: LogbookEntry.previewData.data[0])
+        EntryItem(entry: LogbookEntry.previewData.data[0])
             .environmentObject(Model())
             .frame(height: 100)
     }

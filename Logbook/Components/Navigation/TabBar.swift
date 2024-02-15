@@ -47,7 +47,7 @@ struct TabBar: View {
                     .offset(x: selectedX)
                     .blendMode(.overlay)
             )
-            .backgroundStyle(cornerRadius: hasHomeIndicator ? 34 : 0)
+            .backgroundStyle(cornerRadius: hasHomeIndicator ? 20 : 0)
             .frame(maxHeight: .infinity, alignment: .bottom)
             .ignoresSafeArea()
             .offset(y: model.showTab ? 0 : 200)

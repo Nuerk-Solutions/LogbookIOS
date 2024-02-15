@@ -18,7 +18,7 @@ struct ListContent: View {
                 NavigationLink {
                     EntryView(namespace: namespace, entry: item)
                 } label: {
-                    EntryItem(namespace: namespace, entry: item)
+                    EntryItem(entry: item)
                 }
                 .listRowBackground(Color.clear)
             }

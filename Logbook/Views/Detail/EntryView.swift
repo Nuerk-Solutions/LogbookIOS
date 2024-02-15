@@ -13,19 +13,22 @@ struct EntryView: View {
     
     var namespace: Namespace.ID
     var entry: LogbookEntry
-    var isAnimated = true
+    var isAnimated = false
     
     @State var viewState: CGSize = .zero
     @State var showSection = false
     @State var appear = [false, false, false, true]
     
     @State var show = false
+    @State private var hideNavigationBar: Bool = false
     //    @State var selectedSection = courseSections[0]
     
     @EnvironmentObject var model: Model
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.verticalSizeClass) var verticalSizeClass
     @Environment(\.presentationMode) var presentationMode
+    
+    @AppStorage("isLiteMode") var isLiteMode: Bool = false
     
     let digitsFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -63,7 +66,9 @@ struct EntryView: View {
             .mask(RoundedRectangle(cornerRadius: appear[0] ? 0 : 30))
             .mask(RoundedRectangle(cornerRadius: viewState.width / 3))
             .modifier(OutlineModifier(cornerRadius: viewState.width / 3))
-            .shadow(color: Color("Shadow").opacity(0.5), radius: 30, x: 0, y: 10)
+            .if(!isLiteMode, transform: { view in
+                view.shadow(color: Color("Shadow").opacity(0.5), radius: 30, x: 0, y: 10)
+            })
             .scaleEffect(-viewState.width/500 + 1)
             .background(Color("Shadow").opacity(viewState.width / 500))
             .background(.ultraThinMaterial)
@@ -81,6 +86,9 @@ struct EntryView: View {
             }
             
             Button {
+                withAnimation {
+                    hideNavigationBar = false
+                }
                 isAnimated ?
                 withAnimation(.closeCard) {
                     model.showDetail = false
@@ -97,15 +105,19 @@ struct EntryView: View {
             AdditionalInfoImageView(logbook: entry)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 //.padding(20)
-                .matchedGeometryEffect(id: "logo\(entry.id)", in: namespace)
+//                .matchedGeometryEffect(id: "logo\(entry.id)", in: namespace)
                 .ignoresSafeArea()
                 .accessibility(hidden: true)
         }
         .zIndex(1)
-        .onAppear { fadeIn() }
+        .onAppear {
+            fadeIn()
+            hideNavigationBar = true
+        }
         .onChange(of: model.showDetail) { show in
             fadeOut()
         }
+        .toolbar(hideNavigationBar ? .hidden : .visible, for: .navigationBar)
     }
     
     var cover: some View {
@@ -122,7 +134,7 @@ struct EntryView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .padding(20)
-                    .matchedGeometryEffect(id: "image\(entry.id)", in: namespace)
+//                    .matchedGeometryEffect(id: "image\(entry.id)", in: namespace)
                     .offset(y: -70 - (entry.vehicle == .VW ? 40 : 25))
                     .offset(y: scrollY > 0 ? -scrollY : 0)
                     .accessibility(hidden: true)
@@ -132,7 +144,7 @@ struct EntryView: View {
                 Image("road_1")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .matchedGeometryEffect(id: "background\(entry.id)", in: namespace)
+//                    .matchedGeometryEffect(id: "background\(entry.id)", in: namespace)
                     .offset(y: scrollY > 0 ? -scrollY : 0)
                     .scaleEffect(scrollY > 0 ? scrollY / 1000 + 1 : 1)
                     .blur(radius: scrollY > 0 ? scrollY / 10 : 0)
@@ -148,7 +160,7 @@ struct EntryView: View {
             )
             .mask(
                 RoundedRectangle(cornerRadius: appear[0] ? 0 : 30)
-                    .matchedGeometryEffect(id: "mask\(entry.id)", in: namespace)
+//                    .matchedGeometryEffect(id: "mask\(entry.id)", in: namespace)
                     .offset(y: scrollY > 0 ? -scrollY : 0)
             )
             .overlay(
@@ -160,7 +172,7 @@ struct EntryView: View {
                     .offset(y: scrollY > 0 ? -scrollY : 0)
                     .scaleEffect(scrollY > 0 ? scrollY / 500 + 1 : 1)
                     .opacity(1)
-                    .matchedGeometryEffect(id: "waves\(entry.id)", in: namespace)
+//                    .matchedGeometryEffect(id: "waves\(entry.id)", in: namespace)
                     .accessibility(hidden: true)
             )
             .overlay(
@@ -169,7 +181,7 @@ struct EntryView: View {
                         .font(.title3).bold()
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .foregroundColor(.primary)
-                        .matchedGeometryEffect(id: "title\(entry.id)", in: namespace)
+//                        .matchedGeometryEffect(id: "title\(entry.id)", in: namespace)
                     
                     HStack {
                         VStack(alignment: .leading, spacing: 2) {
@@ -184,7 +196,7 @@ struct EntryView: View {
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .foregroundColor(.primary.opacity(0.7))
                             }
-                            .matchedGeometryEffect(id: "subtitle\(entry.id)", in: namespace)
+//                            .matchedGeometryEffect(id: "subtitle\(entry.id)", in: namespace)
                             .padding(.bottom, 5)
                             
                             HStack {
@@ -234,7 +246,7 @@ struct EntryView: View {
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .foregroundColor(.primary.opacity(0.7))
                             }
-                            .matchedGeometryEffect(id: "date\(entry.id)", in: namespace)
+//                            .matchedGeometryEffect(id: "date\(entry.id)", in: namespace)
                             .padding(.bottom, 5)
                             
                             HStack {
@@ -309,8 +321,10 @@ struct EntryView: View {
                             .fill(.ultraThinMaterial)
                             .frame(maxHeight: .infinity, alignment: .bottom)
                             .cornerRadius(30)
-                            .blur(radius: 30)
-                            .matchedGeometryEffect(id: "blur\(entry.id)", in: namespace)
+                            .if(!isLiteMode, transform: { view in
+                                view.blur(radius: 30)
+                            })
+//                            .matchmdGeometryEffect(id: "blur\(entry.id)", in: namespace)
                             .opacity(appear[0] ? 0 : 1)
                     )
                     .background(
@@ -325,7 +339,6 @@ struct EntryView: View {
                     .padding(20)
                     .padding(.horizontal, verticalSizeClass == .compact ? 25 : 0)
             )
-            .background(.secondary.opacity(scrollY < 0 ? 0.5 : 0.5 - (scrollY / 100)))
         }
         .background(Color("Background"))
         .frame(height: verticalSizeClass == .compact ? 600 : 500)
@@ -402,19 +415,22 @@ struct EntryView: View {
             }
     }
     
+    
     func fadeIn() {
-        appear[3] = true
-        withAnimation(.easeOut.delay(0.3)) {
-            appear[0] = true
-        }
-        withAnimation(.easeOut.delay(0.4)) {
-            appear[1] = true
-        }
-        withAnimation(.easeOut.delay(0.5)) {
-            appear[2] = true
-        }
-        withAnimation(.easeOut.delay(0.3)) {
-            appear[3] = false
+        DispatchQueue.main.async {
+            appear[3] = true
+            withAnimation(.easeOut.delay(0.3)) {
+                appear[0] = true
+            }
+            withAnimation(.easeOut.delay(0.4)) {
+                appear[1] = true
+            }
+            withAnimation(.easeOut.delay(0.5)) {
+                appear[2] = true
+            }
+            withAnimation(.easeOut.delay(0.3)) {
+                appear[3] = false
+            }
         }
     }
     
@@ -441,3 +457,4 @@ struct EntryView: View {
 //        //            .preferredColorScheme(.dark)
 //    }
 //}
+
