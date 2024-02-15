@@ -16,7 +16,7 @@ struct NavigationBar: View {
     
     @EnvironmentObject var model: Model
     @StateObject private var netWorkActivitIndicatorManager = NetworkActivityIndicatorManager()
-    @EnvironmentObject var networkReachablility: NetworkReachability
+    @EnvironmentObject var nR: NetworkReachability
     @AppStorage("isLogged") var isLogged = false
     @Environment(\.colorScheme) var colorScheme
     
@@ -63,7 +63,7 @@ struct NavigationBar: View {
 //                        }
                 
                 Button {
-                    if(networkReachablility.reachable && networkReachablility.connected){
+                    if(nR.reachable){
                         withAnimation(.spring()) {
                             //                        showSheet.toggle()
                             model.showAdd.toggle()
@@ -71,7 +71,7 @@ struct NavigationBar: View {
                         }
                     }
                 } label: {
-                    if(networkReachablility.reachable && networkReachablility.connected) {
+                    if(nR.reachable) {
                         Image(systemName: "doc.badge.plus")
                             .resizable()
                             .scaledToFit()

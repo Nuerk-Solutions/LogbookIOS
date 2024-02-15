@@ -58,7 +58,7 @@ struct AddEntryView: View {
                     }
                     EntrySubmitComponent()
                         .environmentObject(newEntryVM)
-                        .environmentObject(networkReachablility)
+//                        .environmentObject(networkReachablility)
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 80)
@@ -91,7 +91,7 @@ struct AddEntryView: View {
                     }
                 }
                 .task {
-                    setDefaults(connected: networkReachablility.connected)
+                    setDefaults()
                 }
             }
                 .offset(y: showAddInfoSelection ? -25 : 0)
@@ -162,9 +162,9 @@ struct AddEntryView: View {
 //        }
 //    }
     
-    private func setDefaults(connected: Bool) {
+    private func setDefaults() {
         Task {
-            await newEntryVM.load(forceFetching: true, connected: connected)
+            await newEntryVM.load(forceFetching: true)
             newEntryVM.newLogbook.mileAge.current = getLogbookForVehicle(lastLogbooks: lastLogbooks, vehicle: .Ferrari)?.mileAge.new ?? 0
             newEntryVM.newLogbook.vehicle = .Ferrari
             newEntryVM.newLogbook.driver = currentDriver
@@ -188,6 +188,6 @@ struct NewAddView_Previews: PreviewProvider {
     static var previews: some View {
         AddEntryView(show: .constant(true))
             .preferredColorScheme(.light)
-            .environmentObject(NetworkReachability())
+//            .environmentObject(NetworkReachability())
     }
 }

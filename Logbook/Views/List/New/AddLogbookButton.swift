@@ -9,19 +9,19 @@ import SwiftUI
 
 struct AddLogbookButton: View {
     
-    @EnvironmentObject private var networkReachablility: NetworkReachability
+    @EnvironmentObject private var nR: NetworkReachability
     @EnvironmentObject private var model: Model
     @AppStorage("isLiteMode") private var isLiteMode: Bool = false
     
     var body: some View {
         Button {
-            if((NetworkReachability.shared.reachabilityManager?.isReachable) != nil){
+            if(nR.reachable){
                 withAnimation(.spring()) {
                     model.showAdd.toggle()
                 }
             }
         } label: {
-            if((NetworkReachability.shared.reachabilityManager?.isReachable) != nil) {
+            if(nR.reachable) {
                 Image(systemName: "doc.badge.plus")
                     .resizable()
                     .scaledToFit()

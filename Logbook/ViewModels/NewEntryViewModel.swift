@@ -33,21 +33,21 @@ class NewEntryViewModel: ObservableObject {
         }
     }
     
-    func load(forceFetching: Bool = false, connected: Bool) async {
+    func load(forceFetching: Bool = false) async {
         if Task.isCancelled { return }
         
-        if !forceFetching || !connected {
+        if !forceFetching || !NetworkReachability.shared.reachable {
             if let lastLogbooks = await cache.value(forKey: "last") {
                 print("[NewEntry]: CACHE HIT for last value")
                 withAnimation {
-                    fetchPhase = !connected ? .success(lastLogbooks) : .fetchingNextPage(lastLogbooks)
+                    fetchPhase = !NetworkReachability.shared.reachable ? .success(lastLogbooks) : .fetchingNextPage(lastLogbooks)
                 }
             }
         }
         
         
 
-        if !connected {
+        if !NetworkReachability.shared.reachable {
             print("[NewEntry]: No network connection")
             print("[NewEntr]: 🛑 Prevent API request...")
             return
@@ -106,7 +106,7 @@ class NewEntryViewModel: ObservableObject {
         }
     }
     
-    func send(connected: Bool) async {
+    func send() async {
         if Task.isCancelled { return }
         
         withAnimation {

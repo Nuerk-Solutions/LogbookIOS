@@ -23,7 +23,7 @@ struct ListView: View {
     @Binding var lastRefreshDate: Date?
     
     @EnvironmentObject var model: Model
-    @EnvironmentObject var networkReachablility: NetworkReachability
+//    @EnvironmentObject var networkReachablility: NetworkReachability
     @EnvironmentObject var logbooksVM: LogbooksViewModel
     
 //    @StateObject var logbooksVM: LogbooksViewModel
@@ -130,10 +130,10 @@ struct ListView: View {
         }
         .task(id: logbooksVM.lastListRefresh, loadFirstTask)
         .coordinateSpace(name: "scroll")
-        .onReceive(networkReachablility.$connected) { newValue in
-            if !networkReachablility.connected && newValue {
+        .onReceive(NetworkReachability.shared.$reachable) { newValue in
+            if newValue {
                 Task {
-                    await logbooksVM.loadFirstPage(connected: newValue)
+                    await logbooksVM.loadFirstPage()
                 }
             }
         }
@@ -173,7 +173,7 @@ struct ListView: View {
         if canFetch {
             lastRefreshDate = Date()
         }
-        await logbooksVM.loadFirstPage(connected: networkReachablility.connected && canFetch)
+        await logbooksVM.loadFirstPage() // TODO: May re-implement canFetch check
     }
     
     @Sendable
@@ -254,7 +254,7 @@ struct ListView: View {
                         if entry == logbooks.first {
                             Button {
                                 Task {
-                                    await logbooksVM.deleteEntry(connected: networkReachablility.connected, logbook: entry)
+                                    await logbooksVM.deleteEntry(logbook: entry)
                                     
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                             withAnimation {

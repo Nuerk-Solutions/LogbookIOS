@@ -50,10 +50,10 @@ class LogbooksViewModel: ObservableObject {
         }
     }
     
-    func deleteEntry(connected: Bool, logbook: LogbookEntry) async {
+    func deleteEntry(logbook: LogbookEntry) async {
         if Task.isCancelled { return }
         
-        if !connected {
+        if !NetworkReachability.shared.reachable {
             print("[Deleting]: No network connection")
             print("[Deleting]: 🛑 Prevent API request...")
             return
@@ -77,7 +77,8 @@ class LogbooksViewModel: ObservableObject {
         return arrays.compactMap{$0}.compactMap{Set($0)}.reduce(Set<T>()){$0.union($1)}
     }
     
-    func loadFirstPage(connected: Bool = true) async {
+    @Sendable
+    func loadFirstPage() async {
         if Task.isCancelled { return }
         
         if let nextLogbooks = await nextLogbooksFromCache(), !nextLogbooks.isEmpty {
@@ -87,7 +88,7 @@ class LogbooksViewModel: ObservableObject {
             }
         }
 
-        if !connected {
+        if !NetworkReachability.shared.reachable {
             print("[Paging]: No network connection")
             print("[Paging]: 🛑 Prevent API request...")
             return

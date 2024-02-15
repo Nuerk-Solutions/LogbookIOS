@@ -27,6 +27,26 @@ struct ListContent: View {
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
     }
+    
+//    var scrollDetection: some View {
+//        GeometryReader { proxy in
+//            let offset = proxy.frame(in: .named("scroll")).minY
+//            Color.red.preference(key: ScrollPreferenceKey.self, value: offset)
+//                .frame(width: 0, height: 1)
+//        }
+//        .onPreferenceChange(ScrollPreferenceKey.self) { value in
+//            print(value)
+//            withAnimation(.snappy) {
+//                if value < 0 {
+//                    contentHasScrolled = true
+//                    print("TRUE")
+//                } else {
+//                    contentHasScrolled = false
+//                    print("FALSE")
+//                }
+//            }
+//        }
+//    }
 }
 
 #Preview {

@@ -13,7 +13,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         SwiftDate.defaultRegion = Region.current
         NetworkActivityIndicatorManager.shared.startDelay = 0
         NetworkActivityIndicatorManager.shared.isEnabled = true
-        NetworkReachability.shared.startNetworkReachabilityObserver()
         return true
     }
 }
@@ -25,14 +24,15 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct LogbookApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject var model = Model() // Avoid calling multiple times, ensures that model initilize once and follows the lifecycle of the app
-    @StateObject var networkReachablility: NetworkReachability = NetworkReachability()
-    @StateObject var nt: NetworkAvailabilityChecker = NetworkAvailabilityChecker()
+    @StateObject var nR = NetworkReachability()
+    @StateObject var nAIM = NetworkActivityIndicatorManager()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(model)
-                .environmentObject(networkReachablility)
+                .environmentObject(nR)
+                .environmentObject(nAIM)
             
         }
     }

@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import SwiftUI
 
 class NetworkReachability : ObservableObject {
     
@@ -14,7 +15,7 @@ class NetworkReachability : ObservableObject {
     @Published private(set) var reachable: Bool = true
     let reachabilityManager = NetworkReachabilityManager(host: "www.apple.com")
 
-    private init() {
+     init() {
         startListening()
     }
 
@@ -22,11 +23,15 @@ class NetworkReachability : ObservableObject {
         reachabilityManager?.startListening { status in
             switch status {
             case .notReachable:
-                self.reachable = false
+                withAnimation {
+                    self.reachable = false
+                }
             case .reachable(.ethernetOrWiFi), .reachable(.cellular):
-                self.reachable = true
+                withAnimation {
+                    self.reachable = true
+                }
             case .unknown:
-                self.reachable = false
+                    self.reachable = false
                 print("Internet availability is unknown.")
             }
         }

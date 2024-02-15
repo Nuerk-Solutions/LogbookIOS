@@ -29,7 +29,7 @@ struct EntrySubmitComponent: View {
                 }
                 
                 Task {
-                    await newEntryVM.send(connected: networkReachablility.connected)
+                    await newEntryVM.send()
                 }
             } label: {
                 HStack {

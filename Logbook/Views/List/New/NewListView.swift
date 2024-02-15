@@ -11,14 +11,13 @@ import AlertKit
 struct NewListView: View {
     
     @State private var searchString: String = ""
-    @State var contentHasScrolled = false
     @State private var showStatusBar = true
     @Namespace var namespace
     
     @EnvironmentObject var model: Model
     @EnvironmentObject var networkReachablility: NetworkReachability
     @EnvironmentObject var logbooksVM: LogbooksViewModel
-    @StateObject private var netWorkActivitIndicatorManager = NetworkActivityIndicatorManager()
+    @StateObject private var nAIM = NetworkActivityIndicatorManager()
     
     @AppStorage("isLiteMode") private var isLiteMode: Bool = false
     
@@ -29,13 +28,11 @@ struct NewListView: View {
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
                         AddLogbookButton()
-                            .environmentObject(networkReachablility)
-                            .environmentObject(model)
                             .padding(.bottom, 10)
                     }
                 }
                 .overlay {
-                    if  logbooksVM.isFetchingNextPage || netWorkActivitIndicatorManager.isVisible {
+                    if  logbooksVM.isFetchingNextPage || nAIM.isVisible {
                         ZStack{}
                             .onAppear {
                                 AlertKitAPI.present(
@@ -81,13 +78,9 @@ struct NewListView: View {
                 })
         }
         .statusBar(hidden: model.showDetail)
-        .task(id: logbooksVM.lastListRefresh, loadFirstTask)
+        .task(id: logbooksVM.lastListRefresh, logbooksVM.loadFirstPage)
     }
     
-    @Sendable
-    private func loadFirstTask() async {
-        await logbooksVM.loadFirstPage(connected: networkReachablility.connected)
-    }
     
     @Sendable
     private func loadTask() async {
@@ -110,30 +103,12 @@ struct NewListView: View {
             return logbooksVM.phase.value ?? logbooksVM.loadedLogbooks
         }
     }
-    
-    
-    var scrollDetection: some View {
-        GeometryReader { proxy in
-            let offset = proxy.frame(in: .named("scroll")).minY
-            Color.clear.preference(key: ScrollPreferenceKey.self, value: offset)
-        }
-        .onPreferenceChange(ScrollPreferenceKey.self) { value in
-            print(value)
-            withAnimation(.snappy) {
-                if value < 115 {
-                    contentHasScrolled = true
-                } else {
-                    contentHasScrolled = false
-                }
-            }
-        }
-    }
 }
 
 #Preview {
 //    NewListView(logbooks: LogbookEntry.previewData.data)
         NewListView()
         .environmentObject(Model())
-        .environmentObject(NetworkReachability())
+//        .environmentObject(NetworkReachability())
         .environmentObject(LogbooksViewModel())
 }
