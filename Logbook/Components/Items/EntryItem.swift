@@ -36,12 +36,12 @@ struct EntryItem: View {
             RoundedRectangle(cornerRadius: 15)
                 .matchedGeometryEffect(id: "mask\(entry.id)", in: namespace)
         )
-        .onTapGesture {
-            withAnimation(.openCard) {
-                model.showDetail = true
-                model.selectedEntry = entry.id
-            }
-        }
+//        .onTapGesture {
+//            withAnimation(.openCard) {
+//                model.showDetail = true
+//                model.selectedEntry = entry.id
+//            }
+//        }
     }
     
     

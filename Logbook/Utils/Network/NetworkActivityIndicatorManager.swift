@@ -65,13 +65,13 @@ public class NetworkActivityIndicatorManager : ObservableObject {
     }
 
     /// A boolean value indicating whether the network activity indicator is currently visible.
-    @Published public private(set) var isNetworkActivityIndicatorVisible: Bool = false {
+    @Published public private(set) var isVisible: Bool = false {
         didSet {
-            guard isNetworkActivityIndicatorVisible != oldValue else { return }
+            guard isVisible != oldValue else { return }
 
             DispatchQueue.main.async {
 //                UIApplication.shared.isNetworkActivityIndicatorVisible = self.isNetworkActivityIndicatorVisible
-                self.networkActivityIndicatorVisibilityChanged?(self.isNetworkActivityIndicatorVisible)
+                self.networkActivityIndicatorVisibilityChanged?(self.isVisible)
             }
         }
     }
@@ -81,7 +81,7 @@ public class NetworkActivityIndicatorManager : ObservableObject {
 
     /// A time interval indicating the minimum duration of networking activity that should occur before the activity
     /// indicator is displayed. Defaults to `1.0` second.
-    public var startDelay: TimeInterval = 0.2
+    public var startDelay: TimeInterval = 0.5
 
     /// A time interval indicating the duration of time that no networking activity should be observed before dismissing
     /// the activity indicator. This allows the activity indicator to be continuously displayed between multiple network
@@ -92,14 +92,14 @@ public class NetworkActivityIndicatorManager : ObservableObject {
         didSet {
             switch activityIndicatorState {
             case .notActive:
-                isNetworkActivityIndicatorVisible = false
+                isVisible = false
                 invalidateStartDelayTimer()
                 invalidateCompletionDelayTimer()
             case .delayingStart:
                 scheduleStartDelayTimer()
             case .active:
                 invalidateCompletionDelayTimer()
-                isNetworkActivityIndicatorVisible = true
+                isVisible = true
             case .delayingCompletion:
                 scheduleCompletionDelayTimer()
             }

@@ -83,7 +83,7 @@ struct ListView: View {
     var detail: some View {
         ForEach(logbooks) { entry in
             if entry.id == model.selectedEntry {
-                EntryView(namespace: namespace, entry: .constant(entry))
+                EntryView(namespace: namespace, entry: entry)
             }
         }
     }

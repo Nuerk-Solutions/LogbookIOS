@@ -36,7 +36,7 @@ struct BarChart: View {
 //                            .padding(.leading)
 //                            .padding(.bottom, -10)
                     Spacer()
-                    if netWorkActivitIndicatorManager.isNetworkActivityIndicatorVisible {
+                    if netWorkActivitIndicatorManager.isVisible {
                         ProgressView()
                             .padding(.trailing, 5)
                     }

@@ -41,7 +41,7 @@ struct NavigationBar: View {
             
             HStack(spacing: 16) {
                 
-                if netWorkActivitIndicatorManager.isNetworkActivityIndicatorVisible {
+                if netWorkActivitIndicatorManager.isVisible {
                     ProgressView()
                 }
                 

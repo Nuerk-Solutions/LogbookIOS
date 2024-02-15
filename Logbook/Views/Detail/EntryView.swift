@@ -12,7 +12,7 @@ struct EntryView: View {
     
     
     var namespace: Namespace.ID
-    @Binding var entry: LogbookEntry
+    var entry: LogbookEntry
     var isAnimated = true
     
     @State var viewState: CGSize = .zero
@@ -69,6 +69,16 @@ struct EntryView: View {
             .background(.ultraThinMaterial)
             .gesture(isAnimated ? drag : nil)
             .ignoresSafeArea()
+            .onAppear {
+                withAnimation {
+                    model.showDetail = true
+                }
+            }
+            .onDisappear {
+                withAnimation {
+                    model.showDetail = false
+                }
+            }
             
             Button {
                 isAnimated ?

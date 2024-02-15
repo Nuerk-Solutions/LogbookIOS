@@ -37,6 +37,7 @@ struct SettingsView: View {
     @AppStorage("isIntelligentGasStationRadius") var isIntelligentGasStationRadius = false
     @AppStorage("isIntelligentGasStationSelection") var isIntelligentGasStationSelection = false
     @AppStorage("isUseNotSuperScript") var isUseNotSuperScript = false
+    @AppStorage("isLiteMode") var isLiteMode = false
     
     
     var body: some View {
@@ -118,6 +119,9 @@ struct SettingsView: View {
                     Toggle(isOn: $isOpenAddViewOnStart) {
                         Label("Neuer Eintrag anzeigen", systemImage: "doc.badge.plus")
                         
+                    }
+                    Toggle(isOn: $isLiteMode) {
+                        Label("Lite Mode", systemImage: "tortoise")
                     }
                 }
                     

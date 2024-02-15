@@ -62,6 +62,8 @@ class LogbooksViewModel: ObservableObject {
         logbookAPI.delete(with: logbook)
         
     }
+    
+    @Sendable
     func refreshTask() async {
         //        Task {
         await pagingData.reset()
@@ -75,7 +77,7 @@ class LogbooksViewModel: ObservableObject {
         return arrays.compactMap{$0}.compactMap{Set($0)}.reduce(Set<T>()){$0.union($1)}
     }
     
-    func loadFirstPage(connected: Bool) async {
+    func loadFirstPage(connected: Bool = true) async {
         if Task.isCancelled { return }
         
         if let nextLogbooks = await nextLogbooksFromCache(), !nextLogbooks.isEmpty {

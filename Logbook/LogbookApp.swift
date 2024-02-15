@@ -26,6 +26,7 @@ struct LogbookApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject var model = Model() // Avoid calling multiple times, ensures that model initilize once and follows the lifecycle of the app
     @StateObject var networkReachablility: NetworkReachability = NetworkReachability()
+    @StateObject var nt: NetworkAvailabilityChecker = NetworkAvailabilityChecker()
     
     var body: some Scene {
         WindowGroup {

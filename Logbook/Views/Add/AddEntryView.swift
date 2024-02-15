@@ -45,7 +45,7 @@ struct AddEntryView: View {
                         Text("Neuer Eintrag")
                             .font(.custom("Poppins Bold", size: 30))
                             .frame(width: 260, alignment: .leading)
-                        if newEntryVM.fetchPhase == .fetchingNextPage(lastLogbooks) || netWorkActivitIndicatorManager.isNetworkActivityIndicatorVisible {
+                        if newEntryVM.fetchPhase == .fetchingNextPage(lastLogbooks) || netWorkActivitIndicatorManager.isVisible {
                             ProgressView()
                         }
                     }
@@ -75,7 +75,7 @@ struct AddEntryView: View {
                 }
 //                .overlay(overlayView)
                 .overlay {
-                    if  newEntryVM.fetchPhase == .fetchingNextPage(lastLogbooks) || netWorkActivitIndicatorManager.isNetworkActivityIndicatorVisible {
+                    if  newEntryVM.fetchPhase == .fetchingNextPage(lastLogbooks) || netWorkActivitIndicatorManager.isVisible {
                         ZStack{}
                             .onAppear {
                             AlertKitAPI.present(
