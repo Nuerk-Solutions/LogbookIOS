@@ -50,7 +50,6 @@ extension View {
 
 public extension TextField
 {
-    @available(*, deprecated)
     func addDoneButtonOnKeyboard() -> some View
     {
         let doneToolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
@@ -71,7 +70,6 @@ public extension TextField
 
 public extension TextEditor
 {
-    @available(*, deprecated)
     func addDoneButtonOnKeyboard() -> some View
     {
         let doneToolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
@@ -92,7 +90,6 @@ public extension TextEditor
 public extension View {
     
     /// Finds a `UITextField` from a `SwiftUI.TextField`
-    @available(*, deprecated)
     func introspectTextEditor(customize: @escaping (UITextView) -> ()) -> some View {
         introspect(selector: TargetViewSelector.siblingContainingOrAncestorOrAncestorChild, customize: customize)
     }
@@ -103,42 +100,3 @@ let dayAndMonth: DateFormatter = {
     dateFormatter.dateFormat = "dd.MM"
     return dateFormatter
 }()
-
-//func calculateTrend() -> LogbookRefuelReceive {
-//    var data = LogbookRefuelReceive.previewData[4]
-//    var trends: [String: Double] = [:]
-//    
-//    for i in 0..<data.refuels.count {
-//        let currentRecord = data.refuels[i]
-//        
-//        // Calculate the sum of consumption for previous records and current record
-//        let sumOfConsumptions = data.refuels[0...i].map { $0.refuel.consumption }.reduce(0, +)
-//        
-//        // Calculate the average of the sum
-//        let averageConsumption = sumOfConsumptions / Double(i + 1)
-//        data.refuels[i].sumAverage = averageConsumption
-//        
-//        trends.updateValue(averageConsumption, forKey: dayAndMonth.string(from: currentRecord.date))
-////        trends.append(averageConsumption)
-//    }
-//    
-//    return data
-//}
-
-
-//let trendArray = LogbookRefuelReceive.previewData[0].refuels.reduce([String: Double]) { partialResult, item in
-//    let dateString = dayAndMonth.string(from: refuel.date)
-//}
-//    .map { (dateString, consumptions) in
-//        ("Datum", dateString, "Durchschnitt", consumptions.reduce(0, +) / Double(consumptions.count))
-//    }
-
-
-//let averageConsumptionData = refuelEntries.refuels
-//    .reduce(into: [String: Double]()) { result, refuel in
-//        let dateString = dayAndMonth.string(from: refuel.date)
-//        result[dateString, default: []].append(refuel.refuel.consumption)
-//    }
-//    .map { (dateString, consumptions) in
-//        ("Datum", dateString, "Durchschnitt", consumptions.reduce(0, +) / Double(consumptions.count))
-//    }

@@ -30,19 +30,12 @@ struct ServiceView: View {
     
     var body: some View {
         NavigationStack {
-            Button {
-                if(!isSubmittable) {
-                    newLogbook.service = nil
-                }
-                selection = -1
-                showSheet.toggle()
-            } label: {
-                Image(systemName: "xmark")
-                    .foregroundColor(.white)
-                    .frame(width: 36, height: 36)
-                    .background(.black)
-                    .mask(Circle())
-                    .shadow(color: .black.opacity(0.3), radius: 10, x: 0, y: 10)
+            AlternativeCloseButton {
+                    if(!isSubmittable) {
+                        newLogbook.service = nil
+                    }
+                    selection = -1
+                    showSheet.toggle()
             }
             .frame(maxWidth: .infinity, alignment: .topTrailing)
             .padding(.trailing, 20)

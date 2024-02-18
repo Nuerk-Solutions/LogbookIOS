@@ -10,6 +10,9 @@
 		E90523132B7E55140044B399 /* ListContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90523122B7E55140044B399 /* ListContent.swift */; };
 		E90523152B7E58650044B399 /* AddLogbookButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90523142B7E58650044B399 /* AddLogbookButton.swift */; };
 		E90523172B7E60370044B399 /* UiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90523162B7E60370044B399 /* UiHelper.swift */; };
+		E908C1942B823EC50009C954 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E908C1932B823EC50009C954 /* SegmentedControl.swift */; };
+		E908C1962B8253F30009C954 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E908C1952B8253F30009C954 /* AlertHelper.swift */; };
+		E908C1982B82581B0009C954 /* AlternativeCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E908C1972B82581B0009C954 /* AlternativeCloseButton.swift */; };
 		E91095B428412CB500C1334E /* house.riv in Resources */ = {isa = PBXBuildFile; fileRef = E91095AD28412CB500C1334E /* house.riv */; };
 		E91095B628412CB500C1334E /* confetti.riv in Resources */ = {isa = PBXBuildFile; fileRef = E91095AF28412CB500C1334E /* confetti.riv */; };
 		E91095B828412CB500C1334E /* menu_button.riv in Resources */ = {isa = PBXBuildFile; fileRef = E91095B128412CB500C1334E /* menu_button.riv */; };
@@ -149,6 +152,9 @@
 		E90523122B7E55140044B399 /* ListContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListContent.swift; sourceTree = "<group>"; };
 		E90523142B7E58650044B399 /* AddLogbookButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLogbookButton.swift; sourceTree = "<group>"; };
 		E90523162B7E60370044B399 /* UiHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiHelper.swift; sourceTree = "<group>"; };
+		E908C1932B823EC50009C954 /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
+		E908C1952B8253F30009C954 /* AlertHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; };
+		E908C1972B82581B0009C954 /* AlternativeCloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeCloseButton.swift; sourceTree = "<group>"; };
 		E91095AD28412CB500C1334E /* house.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = house.riv; sourceTree = "<group>"; };
 		E91095AF28412CB500C1334E /* confetti.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = confetti.riv; sourceTree = "<group>"; };
 		E91095B128412CB500C1334E /* menu_button.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = menu_button.riv; sourceTree = "<group>"; };
@@ -436,6 +442,7 @@
 				E91095BB28412D5200C1334E /* CustomFont.swift */,
 				E96259BB284F5127007D9479 /* ScrollRefreshable.swift */,
 				E95A6BEA2898567C0027A673 /* CustomTextArea.swift */,
+				E908C1932B823EC50009C954 /* SegmentedControl.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -496,6 +503,7 @@
 				E95D87AE28A03BAC0078EA7C /* IconNames.swift */,
 				E9227BC02B43417F00589E64 /* LogbookUtils.swift */,
 				E90523162B7E60370044B399 /* UiHelper.swift */,
+				E908C1952B8253F30009C954 /* AlertHelper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -504,6 +512,7 @@
 			isa = PBXGroup;
 			children = (
 				E940E8BD28426E50009F1225 /* CloseButton.swift */,
+				E908C1972B82581B0009C954 /* AlternativeCloseButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -834,6 +843,7 @@
 				E9227BBD2B433E0100589E64 /* DetailsComponent.swift in Sources */,
 				E9BA8D732847B73D009838C4 /* LogbookAPI.swift in Sources */,
 				E962E5C6285E3D8600F6B4D6 /* SectionIconRow.swift in Sources */,
+				E908C1962B8253F30009C954 /* AlertHelper.swift in Sources */,
 				E940E8C128426EFA009F1225 /* Modifiers.swift in Sources */,
 				E9227BBF2B433FC400589E64 /* DVDComponent.swift in Sources */,
 				E92F54BB287DDE76008A72AF /* GasStationAPI.swift in Sources */,
@@ -850,6 +860,7 @@
 				E9C3B8DC2845374000EDE615 /* AnimatableFontModifier.swift in Sources */,
 				E96259BC284F5127007D9479 /* ScrollRefreshable.swift in Sources */,
 				E9227BC32B4345AE00589E64 /* EntrySubmitComponent.swift in Sources */,
+				E908C1982B82581B0009C954 /* AlternativeCloseButton.swift in Sources */,
 				E93872A128638D800009F0F1 /* GasStationRow.swift in Sources */,
 				E9227BC52B434A4800589E64 /* AddInfoSelectComponent.swift in Sources */,
 				E9E8488128521EE8008D7F0F /* SectionImageRow.swift in Sources */,
@@ -884,6 +895,7 @@
 				E940E8BB28426A64009F1225 /* NetworkReachability.swift in Sources */,
 				E920B5FD285647E900683D67 /* HexagonView.swift in Sources */,
 				E9227BC12B43417F00589E64 /* LogbookUtils.swift in Sources */,
+				E908C1942B823EC50009C954 /* SegmentedControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,9 +6,6 @@
 //
 
 import SwiftUI
-import UIKit
-import Combine
-import AlertKit
 
 struct AddEntryView: View {
     
@@ -22,9 +19,9 @@ struct AddEntryView: View {
     @AppStorage("currentDriver") var currentDriver: DriverEnum = .Andrea
     
     @EnvironmentObject var networkReachablility: NetworkReachability
-    @EnvironmentObject var model: Model
+//    @EnvironmentObject var model: Model
     @EnvironmentObject var logbooksVM: LogbooksViewModel
-    @StateObject private var netWorkActivitIndicatorManager = NetworkActivityIndicatorManager()
+    @EnvironmentObject var nAIM: NetworkActivityIndicatorManager
         
     let mediumDateAndTime: DateFormatter = {
         let formatter = DateFormatter()
@@ -35,140 +32,100 @@ struct AddEntryView: View {
     }()
     
     var body: some View {
-        ZStack {
-            Color("Shadow").ignoresSafeArea()
-                .opacity(showAddInfoSelection ? 0.4 : 0)
-            
-            NavigationStack {
-                VStack(alignment: .leading, spacing: 16) {
-                    HStack (spacing: 0) {
-                        Text("Neuer Eintrag")
-                            .font(.custom("Poppins Bold", size: 30))
-                            .frame(width: 260, alignment: .leading)
-                        if newEntryVM.fetchPhase == .fetchingNextPage(lastLogbooks) || netWorkActivitIndicatorManager.isVisible {
-                            ProgressView()
-                        }
+        NavigationView {
+            ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                HStack (spacing: 0) {
+                    if newEntryVM.fetchPhase == .fetchingNextPage(lastLogbooks) || nAIM.isVisible {
+                        ProgressView()
                     }
-                    
-                    DVDComponent(newLogbook: $newEntryVM.newLogbook, lastLogbooks: lastLogbooks)
-                    MileAgeComponent(newLogbook: $newEntryVM.newLogbook)
-                    HStack {
-                        AddInfoButtonComponent(newLogbook: $newEntryVM.newLogbook, showAddInfoSlection: $showAddInfoSelection)
-                        DetailsComponent(newLogbook: $newEntryVM.newLogbook)
-                    }
-                    EntrySubmitComponent()
-                        .environmentObject(newEntryVM)
-//                        .environmentObject(networkReachablility)
                 }
-                .padding(.horizontal, 20)
-                .padding(.top, 80)
-//                .padding(.bottom, 40)
-                .background(.ultraThinMaterial)
-                .sheet(isPresented: $showAddInfoSelection) {
-                    AddInfoSelectComponent(showAddInfoSelection: $showAddInfoSelection, newLogbook: $newEntryVM.newLogbook)
-                        .presentationDetents([.fraction(CGFloat(0.45))])
-                        .presentationCornerRadius(30)
-                        .presentationBackground(.thinMaterial)
-                        .onAppear {
-                            savedLogbook = newEntryVM.newLogbook
-                        }
-                }
-//                .overlay(overlayView)
-                .overlay {
-                    if  newEntryVM.fetchPhase == .fetchingNextPage(lastLogbooks) || netWorkActivitIndicatorManager.isVisible {
-                        ZStack{}
-                            .onAppear {
-                            AlertKitAPI.present(
-                                      title: "Laden...",
-                                      icon: .spinnerSmall,
-                                      style: .iOS17AppleMusic,
-                                      haptic: AlertHaptic.none
-                                  )
-                        }
-                            .onDisappear {
-                                AlertKitAPI.dismissAllAlerts()
+                
+                DVDComponent(newLogbook: $newEntryVM.newLogbook, lastLogbooks: lastLogbooks)
+                MileAgeComponent(newLogbook: $newEntryVM.newLogbook)
+                    .toolbar(content: {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            Spacer()
+                            Button("Fertig", role: .destructive) {
+                                print("Test")
                             }
-                    }
-                }
-                .task {
-                    setDefaults()
-                }
-            }
-                .offset(y: showAddInfoSelection ? -25 : 0)
-            
-            Button {
-                withAnimation {
-                    show.toggle()
-//                    showTab.toggle()
-                }
-            } label: {
-                Image(systemName: "xmark")
-                    .foregroundColor(.white)
-                    .frame(width: 36, height: 36)
-                    .background(.black)
-                    .mask(Circle())
-                    .shadow(color: .black.opacity(0.3), radius: 10, x: 0, y: 10)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-            .padding(20)
-            .offset(y: showAddInfoSelection ? -10 : 0)
-            .opacity(showAddInfoSelection ? 0.2 : 1)
-            .onReceive(newEntryVM.$sendPhase) { newValue in
-                AlertKitAPI.dismissAllAlerts()
-                switch newValue {
-                case .sending:
-                    AlertKitAPI.present(
-                              title: "Senden...",
-                              icon: .spinnerSmall,
-                              style: .iOS17AppleMusic,
-                              haptic: AlertHaptic.none
-                          )
-                case .success(let logbook):
-                    AlertKitAPI.present(
-                              title: "Eintrag hinzugefügt",
-                              icon: .done,
-                              style: .iOS17AppleMusic,
-                              haptic: .success
-                          )
-                    show.toggle()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        withAnimation {
-                            logbooksVM.loadedLogbooks.insert(logbook, at: 0)
-                            logbooksVM.phase = .success(logbooksVM.loadedLogbooks)
                         }
-                        // model.lastAddedEntry = Date()  // Alternative: Trigger listener on listview to force update the logbooks
+                    })
+                HStack {
+                    AddInfoButtonComponent(newLogbook: $newEntryVM.newLogbook, showAddInfoSlection: $showAddInfoSelection)
+                    DetailsComponent(newLogbook: $newEntryVM.newLogbook)
+                }
+                EntrySubmitComponent()
+                    .environmentObject(newEntryVM)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            .navigationTitle("Neuer Eintrag")
+            .padding(.horizontal, 10)
+            .sheet(isPresented: $showAddInfoSelection) {
+                AddInfoSelectComponent(showAddInfoSelection: $showAddInfoSelection, newLogbook: $newEntryVM.newLogbook)
+                    .presentationDetents([.fraction(CGFloat(0.45))])
+                    .presentationCornerRadius(30)
+                    .presentationBackground(.thinMaterial)
+                    .onAppear {
+                        savedLogbook = newEntryVM.newLogbook
                     }
-                case .failure(_):
-                    AlertKitAPI.present(
-                        title: "Fehler beim speichern",
-                        icon: .error,
-                        style: .iOS16AppleMusic,
-                        haptic: .error
-                    ) 
-                default:
-                    break
+            }
+            .overlay {
+                if  newEntryVM.fetchPhase == .fetchingNextPage(lastLogbooks) || nAIM.isVisible {
+                    ZStack{}
+                        .onAppear {
+                            showSpinningAlert(title: "Laden...")
+                    }
+                        .onDisappear {
+                            dismissAllAlerts()
+                        }
                 }
             }
-            
+            .task(setDefaults)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    AlternativeCloseButton(action: {
+                        withAnimation {
+                            show.toggle()
+                        }
+                    })
+                    .padding(.top, 20)
+                    .padding(.trailing, 5)
+                    .opacity(showAddInfoSelection ? 0.2 : 1)
+                    .onReceive(newEntryVM.$sendPhase) { newValue in
+                        dismissAllAlerts()
+                        switch newValue {
+                        case .sending:
+                            showSpinningAlert()
+                        case .success(let logbook):
+                            showSuccessfulAlert()
+                            show.toggle()
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                withAnimation {
+                                    logbooksVM.loadedLogbooks.insert(logbook, at: 0)
+                                    logbooksVM.phase = .success(logbooksVM.loadedLogbooks)
+                                }
+                                // model.lastAddedEntry = Date()  // Alternative: Trigger listener on listview to force update the logbooks
+                            }
+                        case .failure(_):
+                            showFailureAlert()
+                        default:
+                            break
+                        }
+                    }
+                }
+            }
+            }
         }
+        .offset(y: showAddInfoSelection ? -25 : 0)
     }
     
-//    @ViewBuilder
-//    private var overlayView: some View {
-//        switch newEntryVM.sendPhase {
-//        case .sending:
-//            CustomProgressView(message: "Daten übermitteln")
-//        default: EmptyView()
-//        }
-//    }
-    
-    private func setDefaults() {
-        Task {
-            await newEntryVM.load(forceFetching: true)
-            newEntryVM.newLogbook.mileAge.current = getLogbookForVehicle(lastLogbooks: lastLogbooks, vehicle: .Ferrari)?.mileAge.new ?? 0
-            newEntryVM.newLogbook.vehicle = .Ferrari
-            newEntryVM.newLogbook.driver = currentDriver
-        }
+    @Sendable
+    private func setDefaults() async {
+        await newEntryVM.load(forceFetching: true)
+        newEntryVM.newLogbook.mileAge.current = getLogbookForVehicle(lastLogbooks: lastLogbooks, vehicle: .Ferrari)?.mileAge.new ?? 0
+        newEntryVM.newLogbook.vehicle = .Ferrari
+        newEntryVM.newLogbook.driver = currentDriver
     }
     
     private var lastLogbooks: [LogbookEntry] {

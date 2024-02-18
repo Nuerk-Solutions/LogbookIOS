@@ -48,10 +48,13 @@ struct MileAgeComponent: View {
                     TextField("", value: $newLogbook.mileAge.new, formatter: showSeperator ? numberFormatterWGroup : numberFormatterNoGroup, onEditingChanged: { isEdit in
                         showSeperator = !isEdit
                     })
-                        .addDoneButtonOnKeyboard()
-                        .customTextField(image: Image(systemName: "car.2.fill"), suffix: newLogbook.mileAge.unit.name)
-                        .keyboardType(.decimalPad)
-                        .submitLabel(.done)
+                    .introspectTextField(customize: { textfield in
+                        textfield.butt
+                    })
+//                    .addDoneButtonOnKeyboard()
+                    .customTextField(image: Image(systemName: "car.2.fill"), suffix: newLogbook.mileAge.unit.name)
+                    .keyboardType(.decimalPad)
+                    .submitLabel(.done)
                     
                     Text("Reiseziel")
                         .customFont(.subheadline)
@@ -62,6 +65,7 @@ struct MileAgeComponent: View {
                         .introspectTextField(customize: {
                             $0.clearButtonMode = .whileEditing
                         })
+                        .submitLabel(.done)
                 }
             }
     }

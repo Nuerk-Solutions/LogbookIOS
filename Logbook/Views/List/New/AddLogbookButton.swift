@@ -56,4 +56,6 @@ struct AddLogbookButton: View {
 
 #Preview {
     AddLogbookButton()
+        .environmentObject(NetworkReachability())
+        .environmentObject(Model())
 }

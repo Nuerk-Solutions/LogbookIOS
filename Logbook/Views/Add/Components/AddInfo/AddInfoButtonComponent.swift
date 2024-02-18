@@ -18,12 +18,12 @@ struct AddInfoButtonComponent: View {
                     showAddInfoSlection.toggle()
                 }
             } label: {
-                Image(systemName: !newLogbook.hasAddInfo ? "link.badge.plus" : "link")
+                Image(systemName: !newLogbook.hasAddInfo ? "paperclip" : newLogbook.service != nil ? "wrench.and.screwdriver" : "fuelpump")
                     .resizable()
+                    .scaledToFit()
                     .frame(width: 26, height: 26)
-                    .symbolRenderingMode(.multicolor)
+                    .symbolRenderingMode(.palette)
                     .foregroundColor(.primary)
-                    .cornerRadius(10)
                     .padding(8)
                     .background(.ultraThinMaterial)
                     .backgroundStyle(cornerRadius: 18, opacity: 0.4)

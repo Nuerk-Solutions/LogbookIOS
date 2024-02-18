@@ -84,7 +84,7 @@ struct ContentView: View {
         }
         .sheet(isPresented: $model.showAdd) {
             AddEntryView(show: $model.showAdd)
-                .presentationBackground(.ultraThinMaterial)
+                .presentationBackground(.thinMaterial)
                 .presentationCornerRadius(30)
                 .presentationDetents([.large])
                 .environmentObject(logbooksVM)

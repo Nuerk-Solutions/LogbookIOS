@@ -26,7 +26,7 @@ struct DetailsComponent: View {
                 .font(.footnote.weight(.medium))
                 .padding(5)
             //                    .foregroundStyle(.secondary)
-                .background(.secondary)
+                .background(.secondary.opacity(0.4))
                 .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
                 .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).stroke(lineWidth: 1).fill(.black.opacity(0.1)))
         }

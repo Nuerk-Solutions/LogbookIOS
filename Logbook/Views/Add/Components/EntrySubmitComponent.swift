@@ -14,15 +14,19 @@ struct EntrySubmitComponent: View {
     
     var body: some View {
         if(newEntryVM.newLogbook.isSubmittable) {
-            Text("Zusammenfassung: \(String(format: "%.0f\(newEntryVM.newLogbook.mileAge.unit.name)", newEntryVM.newLogbook.distance)) / \((newEntryVM.newLogbook.computedDistance * 0.2).formatted(.currency(code: "EUR")))")
-                .lineLimit(1)
-                .frame(maxWidth: .infinity, alignment: .leading)
+            HStack (spacing: 2) {
+                Image(systemName: "sum")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 15, height: 15)
+                Text("\(String(format: "%.0f\(newEntryVM.newLogbook.mileAge.unit.name)", newEntryVM.newLogbook.distance)) / \((newEntryVM.newLogbook.computedDistance * 0.2).formatted(.currency(code: "EUR")))")
+                    .lineLimit(1)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
         } else {
             Text("Bitte überprüfe deine Angaben!")
         }
         VStack {
-            Spacer()
-            
             Button {
                 if !newEntryVM.newLogbook.isSubmittable {
                     return
@@ -42,7 +46,6 @@ struct EntrySubmitComponent: View {
             .opacity(!newEntryVM.newLogbook.isSubmittable ? 0.4 : 1)
             .transition(.identity)
             .disabled(!newEntryVM.newLogbook.isSubmittable)
-            //                Spacer()
         }
     }
 }

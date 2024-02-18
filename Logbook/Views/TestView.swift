@@ -44,5 +44,7 @@ struct TestView: View {
 }
 
 #Preview {
-    TestView()
+    HeroWrapper {
+        TestView()
+    }
 }

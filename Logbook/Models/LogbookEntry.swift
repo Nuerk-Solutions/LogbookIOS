@@ -14,7 +14,7 @@ struct LogbookEntry {
     init(mileAge: MileAge = MileAge()) {
         self._id = nil
         self.driver = DriverEnum.Andrea
-        self.vehicle = VehicleEnum.VW
+        self.vehicle = VehicleEnum.Ferrari
         self.date = Date()
         self.reason = "Stadtfahrt"
         self.mileAge = mileAge

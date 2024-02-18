@@ -11,6 +11,7 @@ struct DVDComponent: View {
     
     @AppStorage("currentDriver") var currentDriver: DriverEnum = .Andrea
     @Binding var newLogbook: LogbookEntry
+    @State var test: VehicleEnum = .Ferrari
     
     var lastLogbooks: [LogbookEntry]
     
@@ -46,17 +47,8 @@ struct DVDComponent: View {
     
     @ViewBuilder
     func VehicleView() -> some View {
-//        GeometryReader { proxy in
-        Picker("", selection: $newLogbook.vehicle) {
-                    ForEach(VehicleEnum.allCases) { vehicle in
-                        Image("\(getVehicleIcon(vehicleTyp: vehicle))_32")
-                            .tag(vehicle)
-                            .frame(width: 32, height: 32)
-                    }
-                }
-                .pickerStyle(.segmented)
-//                .frame(width: proxy.size.width, height: 20)
-//        }
+        SegmentedControl(items: VehicleEnum.allCases, images: 
+                            VehicleEnum.allCases.map { $0.rawValue + "_32" }, selectedItem: $newLogbook.vehicle)
     }
     
 }
