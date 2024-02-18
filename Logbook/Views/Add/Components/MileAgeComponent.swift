@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import SwiftUIIntrospect
 
 struct MileAgeComponent: View {
     
     @Binding var newLogbook: LogbookEntry
     @State private var showSeperator: Bool = false
     @State private var test = 0
+    @State private var scrollViewOffset: CGFloat = 0
     
     let numberFormatterNoGroup: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -48,10 +50,7 @@ struct MileAgeComponent: View {
                     TextField("", value: $newLogbook.mileAge.new, formatter: showSeperator ? numberFormatterWGroup : numberFormatterNoGroup, onEditingChanged: { isEdit in
                         showSeperator = !isEdit
                     })
-                    .introspectTextField(customize: { textfield in
-                        textfield.butt
-                    })
-//                    .addDoneButtonOnKeyboard()
+                    .addDoneButtonOnKeyboard()
                     .customTextField(image: Image(systemName: "car.2.fill"), suffix: newLogbook.mileAge.unit.name)
                     .keyboardType(.decimalPad)
                     .submitLabel(.done)
@@ -62,13 +61,14 @@ struct MileAgeComponent: View {
                     TextField("", text: $newLogbook.reason)
                         .addDoneButtonOnKeyboard()
                         .customTextField(image: Image(systemName: "house.and.flag"))
-                        .introspectTextField(customize: {
-                            $0.clearButtonMode = .whileEditing
+                        .introspect(.textField, on: .iOS(.v15, .v16, .v17), customize: { view in
+                            view.clearButtonMode = .whileEditing
                         })
                         .submitLabel(.done)
                 }
             }
     }
+    
 }
 
 #Preview {

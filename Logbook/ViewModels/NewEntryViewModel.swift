@@ -65,7 +65,7 @@ class NewEntryViewModel: ObservableObject {
             print("[NewEntry]: Count of \(lastFetchedLogbooks.length)")
             
             withAnimation {
-                fetchPhase = .success(lastFetchedLogbooks.data ?? [])
+                fetchPhase = .success(lastFetchedLogbooks.data )
                 self.fetchTaskToken = FetchTaskToken(fetchCategory: .latest, token: Date())
             }
             

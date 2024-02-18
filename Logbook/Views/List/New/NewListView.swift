@@ -55,16 +55,13 @@ struct NewListView: View {
                 }
                 .padding(.bottom, 50)
                 .navigationTitle("Fahrtenbuch")
-                .navigationBarTitleDisplayMode(.large)
                 .searchable(text: $searchString)
-                
-                //            .onChange(of: model.showDetail, { oldValue, newValue in
-                //                withAnimation {
-                //                    model.showTab.toggle()
-                //                    model.showNav.toggle()
-                //                    showStatusBar.toggle()
-                //                }
-                //            })
+                .onChange(of: model.showDetail, { oldValue, newValue in
+                    
+                    withAnimation {
+                        showStatusBar.toggle()
+                    }
+                })
                 
                 .onChange(of: model.lastAddedEntry, { oldValue, newValue in
                     Task {
@@ -76,7 +73,7 @@ struct NewListView: View {
             ZStack {
                 AddLogbookButton()
                     .padding(.horizontal, 10)
-                    .padding(.top, 45)
+                    .padding(.top, 35)
             }
             .if(model.showDetail, transform: { view in
                 view.hidden()
@@ -84,7 +81,7 @@ struct NewListView: View {
             .ignoresSafeArea(edges: .top)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
         }
-        .statusBar(hidden: model.showDetail)
+        .statusBar(hidden: !showStatusBar)
         .task(id: logbooksVM.lastListRefresh, logbooksVM.loadFirstPage)
     }
     

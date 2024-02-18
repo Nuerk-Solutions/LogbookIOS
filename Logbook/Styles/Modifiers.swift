@@ -98,8 +98,8 @@ struct BackgroundColor: ViewModifier {
 }
 
 extension View {
-    func backgroundColor(opacity: Double = 0.6) -> some View {
-        self.modifier(BackgroundColor(opacity: opacity))
+    func backgroundColor(opacity: Double = 0.6, cornerRadius: Double = 20) -> some View {
+        self.modifier(BackgroundColor(opacity: opacity, cornerRadius: cornerRadius))
     }
 }
 
@@ -109,7 +109,7 @@ struct BackgroundStyle: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .backgroundColor(opacity: opacity)
+            .backgroundColor(opacity: opacity, cornerRadius: cornerRadius)
             .cornerRadius(cornerRadius)
             .modifier(OutlineOverlay(cornerRadius: cornerRadius))
     }

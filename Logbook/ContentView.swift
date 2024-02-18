@@ -12,7 +12,7 @@ struct ContentView: View {
     @StateObject var logbooksVM: LogbooksViewModel = LogbooksViewModel()
     
     @EnvironmentObject var model: Model
-//    @EnvironmentObject var networkReachablility: NetworkReachability
+    @EnvironmentObject var networkReachablility: NetworkReachability
     @AppStorage("selectedTab") var selectedTab: Tab = .home
     
     @State private var scrollPositionInList = 0.0
@@ -32,9 +32,7 @@ struct ContentView: View {
             Group {
             switch selectedTab {
             case .home:
-                ListView(lastRefreshDate: $lastRefreshDate)
-                    .environmentObject(model)
-//                    .environmentObject(networkReachablility)
+                NewListView()
                     .environmentObject(logbooksVM)
             case .gasStations:
                 if ContentView.isPreview {
@@ -43,11 +41,7 @@ struct ContentView: View {
                     GasStationsView()
                 }
             case .stats:
-//                NewListView(logbooks: LogbookEntry.previewData.data)
-                  NewListView()
-                    .environmentObject(model)
-//                    .environmentObject(networkReachablility)
-                    .environmentObject(logbooksVM)
+                BarChart()
             case .settings:
                 SettingsView()
             }

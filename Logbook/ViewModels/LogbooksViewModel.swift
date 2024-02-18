@@ -203,7 +203,7 @@ class LogbooksViewModel: ObservableObject {
         if Task.isCancelled {  return [] }
         await print("[Paging]: Cache EXPIRED for page \(pagingData.currentPage) (\(page)), maxPageLimit: \(pagingData.maxPageLimit), size: \(logbooks.length)")
         print("[Paging]: 🚀 Making request...")
-        return logbooks.data ?? []
+        return logbooks.data 
     }
 }
 

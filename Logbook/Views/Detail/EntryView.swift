@@ -75,7 +75,7 @@ struct EntryView: View {
             .gesture(isAnimated ? drag : nil)
             .ignoresSafeArea()
             .onAppear {
-                withAnimation {
+                withAnimation(.bouncy) {
                     model.showDetail = true
                 }
             }
@@ -86,15 +86,22 @@ struct EntryView: View {
             }
             
             Button {
-                withAnimation {
-                    hideNavigationBar = false
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+//                    withAnimation(.bouncy) {
+                        hideNavigationBar = false
+//                    }
+//                }
+                if (isAnimated) {
+                    withAnimation(.closeCard) {
+                        model.showDetail = false
+                        //                    model.selectedCourse = 0
+                    }
+                } else {
+                    withAnimation {
+                        model.showDetail = false
+                    }
+                    presentationMode.wrappedValue.dismiss()
                 }
-                isAnimated ?
-                withAnimation(.closeCard) {
-                    model.showDetail = false
-                    //                    model.selectedCourse = 0
-                }
-                : presentationMode.wrappedValue.dismiss()
             } label: {
                 CloseButton()
             }
@@ -112,7 +119,11 @@ struct EntryView: View {
         .zIndex(1)
         .onAppear {
             fadeIn()
-            hideNavigationBar = true
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+//                withAnimation(.bouncy) {
+                    hideNavigationBar = true
+//                }
+//            }
         }
         .onChange(of: model.showDetail) { show in
             fadeOut()

@@ -13,6 +13,9 @@
 		E908C1942B823EC50009C954 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E908C1932B823EC50009C954 /* SegmentedControl.swift */; };
 		E908C1962B8253F30009C954 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E908C1952B8253F30009C954 /* AlertHelper.swift */; };
 		E908C1982B82581B0009C954 /* AlternativeCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E908C1972B82581B0009C954 /* AlternativeCloseButton.swift */; };
+		E908C19B2B82660D0009C954 /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = E908C19A2B82660D0009C954 /* SwiftUIIntrospect */; };
+		E908C19D2B82660D0009C954 /* SwiftUIIntrospect-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = E908C19C2B82660D0009C954 /* SwiftUIIntrospect-Dynamic */; };
+		E908C19F2B82660D0009C954 /* SwiftUIIntrospect-Static in Frameworks */ = {isa = PBXBuildFile; productRef = E908C19E2B82660D0009C954 /* SwiftUIIntrospect-Static */; };
 		E91095B428412CB500C1334E /* house.riv in Resources */ = {isa = PBXBuildFile; fileRef = E91095AD28412CB500C1334E /* house.riv */; };
 		E91095B628412CB500C1334E /* confetti.riv in Resources */ = {isa = PBXBuildFile; fileRef = E91095AF28412CB500C1334E /* confetti.riv */; };
 		E91095B828412CB500C1334E /* menu_button.riv in Resources */ = {isa = PBXBuildFile; fileRef = E91095B128412CB500C1334E /* menu_button.riv */; };
@@ -39,7 +42,6 @@
 		E91AFA3E28400D180024131D /* EmptyPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91AFA3D28400D180024131D /* EmptyPlaceholderView.swift */; };
 		E91AFA4028400DC90024131D /* RetryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91AFA3F28400DC90024131D /* RetryView.swift */; };
 		E91AFA43284016BE0024131D /* CustomProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91AFA42284016BE0024131D /* CustomProgressView.swift */; };
-		E91AFA4628401C040024131D /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91AFA4528401C040024131D /* ListView.swift */; };
 		E91AFA48284129AE0024131D /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91AFA47284129AE0024131D /* CustomTextField.swift */; };
 		E91AFA4A284129CC0024131D /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91AFA49284129CC0024131D /* CustomButton.swift */; };
 		E91AFA4C284129F30024131D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91AFA4B284129F30024131D /* Extensions.swift */; };
@@ -118,10 +120,6 @@
 		E9BA8D702847B255009838C4 /* KeysTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BA8D6F2847B255009838C4 /* KeysTracker.swift */; };
 		E9BA8D732847B73D009838C4 /* LogbookAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BA8D722847B73D009838C4 /* LogbookAPI.swift */; };
 		E9BA8D752847B8AE009838C4 /* ApiSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BA8D742847B8AE009838C4 /* ApiSession.swift */; };
-		E9C254472B013A0200F3BBAA /* Introspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C254462B013A0200F3BBAA /* Introspect.swift */; };
-		E9C254492B013A5100F3BBAA /* IntrospectionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C254482B013A5100F3BBAA /* IntrospectionUIView.swift */; };
-		E9C2544B2B013A5B00F3BBAA /* IntrospectionUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C2544A2B013A5B00F3BBAA /* IntrospectionUIViewController.swift */; };
-		E9C2544D2B013A7100F3BBAA /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C2544C2B013A7100F3BBAA /* ViewExtensions.swift */; };
 		E9C3B8DC2845374000EDE615 /* AnimatableFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C3B8DB2845374000EDE615 /* AnimatableFontModifier.swift */; };
 		E9D2BB09284278E5009EC7C5 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D2BB08284278E5009EC7C5 /* Animations.swift */; };
 		E9D2BB192843F450009EC7C5 /* icons.riv in Resources */ = {isa = PBXBuildFile; fileRef = E9D2BB182843F450009EC7C5 /* icons.riv */; };
@@ -180,7 +178,6 @@
 		E91AFA3D28400D180024131D /* EmptyPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyPlaceholderView.swift; sourceTree = "<group>"; };
 		E91AFA3F28400DC90024131D /* RetryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetryView.swift; sourceTree = "<group>"; };
 		E91AFA42284016BE0024131D /* CustomProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressView.swift; sourceTree = "<group>"; };
-		E91AFA4528401C040024131D /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		E91AFA47284129AE0024131D /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		E91AFA49284129CC0024131D /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		E91AFA4B284129F30024131D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -257,10 +254,6 @@
 		E9BA8D6F2847B255009838C4 /* KeysTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysTracker.swift; sourceTree = "<group>"; };
 		E9BA8D722847B73D009838C4 /* LogbookAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookAPI.swift; sourceTree = "<group>"; };
 		E9BA8D742847B8AE009838C4 /* ApiSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiSession.swift; sourceTree = "<group>"; };
-		E9C254462B013A0200F3BBAA /* Introspect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Introspect.swift; sourceTree = "<group>"; };
-		E9C254482B013A5100F3BBAA /* IntrospectionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntrospectionUIView.swift; sourceTree = "<group>"; };
-		E9C2544A2B013A5B00F3BBAA /* IntrospectionUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntrospectionUIViewController.swift; sourceTree = "<group>"; };
-		E9C2544C2B013A7100F3BBAA /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		E9C3B8DB2845374000EDE615 /* AnimatableFontModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableFontModifier.swift; sourceTree = "<group>"; };
 		E9D2BB08284278E5009EC7C5 /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		E9D2BB182843F450009EC7C5 /* icons.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = icons.riv; sourceTree = "<group>"; };
@@ -282,7 +275,10 @@
 				E95862B9287B0D990017F2BA /* SwiftLocation in Frameworks */,
 				E91AFA23283FD0D60024131D /* Alamofire in Frameworks */,
 				E93F33AA2B4497BA00978042 /* AlertKit in Frameworks */,
+				E908C19F2B82660D0009C954 /* SwiftUIIntrospect-Static in Frameworks */,
+				E908C19B2B82660D0009C954 /* SwiftUIIntrospect in Frameworks */,
 				E91AFA39283FE8B10024131D /* SwiftUI Extensions in Frameworks */,
+				E908C19D2B82660D0009C954 /* SwiftUIIntrospect-Dynamic in Frameworks */,
 				E93872AB286394670009F0F1 /* SwiftDate in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -451,7 +447,6 @@
 			isa = PBXGroup;
 			children = (
 				E90523112B7E54FD0044B399 /* New */,
-				E91AFA4528401C040024131D /* ListView.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -495,7 +490,6 @@
 			isa = PBXGroup;
 			children = (
 				E9A196E02B7D59A900989336 /* ViewTransition */,
-				E9C254452B0139D200F3BBAA /* Introspect */,
 				E957A29B285F91A600464FB0 /* Location */,
 				E962E5C7285E42FB00F6B4D6 /* Network */,
 				E91AFA24283FD10B0024131D /* Cache */,
@@ -645,17 +639,6 @@
 			path = API;
 			sourceTree = "<group>";
 		};
-		E9C254452B0139D200F3BBAA /* Introspect */ = {
-			isa = PBXGroup;
-			children = (
-				E9C254462B013A0200F3BBAA /* Introspect.swift */,
-				E9C254482B013A5100F3BBAA /* IntrospectionUIView.swift */,
-				E9C2544A2B013A5B00F3BBAA /* IntrospectionUIViewController.swift */,
-				E9C2544C2B013A7100F3BBAA /* ViewExtensions.swift */,
-			);
-			path = Introspect;
-			sourceTree = "<group>";
-		};
 		E9C3B8DA2845366F00EDE615 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -714,6 +697,9 @@
 				E93872AA286394670009F0F1 /* SwiftDate */,
 				E95862B8287B0D990017F2BA /* SwiftLocation */,
 				E93F33A92B4497BA00978042 /* AlertKit */,
+				E908C19A2B82660D0009C954 /* SwiftUIIntrospect */,
+				E908C19C2B82660D0009C954 /* SwiftUIIntrospect-Dynamic */,
+				E908C19E2B82660D0009C954 /* SwiftUIIntrospect-Static */,
 			);
 			productName = Logbook;
 			productReference = E91AFA0B283FD09F0024131D /* Logbook.app */;
@@ -750,6 +736,7 @@
 				E95862B7287B0D990017F2BA /* XCRemoteSwiftPackageReference "SwiftLocationWHeading" */,
 				E93F33A52B44601200978042 /* XCRemoteSwiftPackageReference "Macaw" */,
 				E93F33A82B4497BA00978042 /* XCRemoteSwiftPackageReference "AlertKit" */,
+				E908C1992B82660D0009C954 /* XCRemoteSwiftPackageReference "swiftui-introspect" */,
 			);
 			productRefGroup = E91AFA0C283FD09F0024131D /* Products */;
 			projectDirPath = "";
@@ -810,7 +797,6 @@
 				E9227BC72B43510B00589E64 /* AddInfoButtonComponent.swift in Sources */,
 				E9227BA82B41B85300589E64 /* RefuelView.swift in Sources */,
 				E9227BB02B41B87700589E64 /* MassTextField.swift in Sources */,
-				E91AFA4628401C040024131D /* ListView.swift in Sources */,
 				E9227BBB2B433CBB00589E64 /* MileAgeComponent.swift in Sources */,
 				E9227BB12B41B87700589E64 /* CurrencyUITextField.swift in Sources */,
 				E920B5FB285647B900683D67 /* AnimatedBlobView.swift in Sources */,
@@ -838,7 +824,6 @@
 				E91AFA48284129AE0024131D /* CustomTextField.swift in Sources */,
 				E9A196E42B7D6AB600989336 /* TestView.swift in Sources */,
 				E9F32ED12B45AFA90003303C /* LogbookRefuelReceive.swift in Sources */,
-				E9C2544D2B013A7100F3BBAA /* ViewExtensions.swift in Sources */,
 				E94A0CFB284F97AA00693352 /* EntryView.swift in Sources */,
 				E9227BBD2B433E0100589E64 /* DetailsComponent.swift in Sources */,
 				E9BA8D732847B73D009838C4 /* LogbookAPI.swift in Sources */,
@@ -850,7 +835,6 @@
 				E91AFA11283FD09F0024131D /* ContentView.swift in Sources */,
 				E940E8C828427395009F1225 /* Tab.swift in Sources */,
 				E95D87AF28A03BAC0078EA7C /* IconNames.swift in Sources */,
-				E9C254492B013A5100F3BBAA /* IntrospectionUIView.swift in Sources */,
 				E962E5CB285E440A00F6B4D6 /* GasStationEntry.swift in Sources */,
 				E9227BAA2B41B85B00589E64 /* ServiceView.swift in Sources */,
 				E961ACA728948EDD00C6FCC8 /* NewEntryViewModel.swift in Sources */,
@@ -883,11 +867,9 @@
 				E90523172B7E60370044B399 /* UiHelper.swift in Sources */,
 				E91AFA3E28400D180024131D /* EmptyPlaceholderView.swift in Sources */,
 				E90523152B7E58650044B399 /* AddLogbookButton.swift in Sources */,
-				E9C254472B013A0200F3BBAA /* Introspect.swift in Sources */,
 				E91AFA30283FD6230024131D /* DataFetchPhase.swift in Sources */,
 				E91AFA28283FD1FC0024131D /* CacheImplementation.swift in Sources */,
 				E91095C72841306400C1334E /* TabBar.swift in Sources */,
-				E9C2544B2B013A5B00F3BBAA /* IntrospectionUIViewController.swift in Sources */,
 				E90523132B7E55140044B399 /* ListContent.swift in Sources */,
 				E9D2BB09284278E5009EC7C5 /* Animations.swift in Sources */,
 				E957A29F285F921900464FB0 /* LocationManager.swift in Sources */,
@@ -1132,6 +1114,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E908C1992B82660D0009C954 /* XCRemoteSwiftPackageReference "swiftui-introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/swiftui-introspect";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.2;
+			};
+		};
 		E91AFA21283FD0D60024131D /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -1183,6 +1173,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E908C19A2B82660D0009C954 /* SwiftUIIntrospect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E908C1992B82660D0009C954 /* XCRemoteSwiftPackageReference "swiftui-introspect" */;
+			productName = SwiftUIIntrospect;
+		};
+		E908C19C2B82660D0009C954 /* SwiftUIIntrospect-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E908C1992B82660D0009C954 /* XCRemoteSwiftPackageReference "swiftui-introspect" */;
+			productName = "SwiftUIIntrospect-Dynamic";
+		};
+		E908C19E2B82660D0009C954 /* SwiftUIIntrospect-Static */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E908C1992B82660D0009C954 /* XCRemoteSwiftPackageReference "swiftui-introspect" */;
+			productName = "SwiftUIIntrospect-Static";
+		};
 		E91AFA22283FD0D60024131D /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E91AFA21283FD0D60024131D /* XCRemoteSwiftPackageReference "Alamofire" */;
