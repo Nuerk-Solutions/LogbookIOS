@@ -17,7 +17,7 @@ struct NewListView: View {
     @EnvironmentObject var model: Model
     @EnvironmentObject var networkReachablility: NetworkReachability
     @EnvironmentObject var logbooksVM: LogbooksViewModel
-    @StateObject private var nAIM = NetworkActivityIndicatorManager()
+    @EnvironmentObject var nAIM: NetworkActivityIndicatorManager
     
     @AppStorage("isLiteMode") private var isLiteMode: Bool = false
     
