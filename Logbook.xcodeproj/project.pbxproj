@@ -78,7 +78,6 @@
 		E957A29D285F91BA00464FB0 /* HeadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E957A29C285F91BA00464FB0 /* HeadingIndicator.swift */; };
 		E957A29F285F921900464FB0 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E957A29E285F921900464FB0 /* LocationManager.swift */; };
 		E95862B9287B0D990017F2BA /* SwiftLocation in Frameworks */ = {isa = PBXBuildFile; productRef = E95862B8287B0D990017F2BA /* SwiftLocation */; };
-		E95A6BEB2898567C0027A673 /* CustomTextArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95A6BEA2898567C0027A673 /* CustomTextArea.swift */; };
 		E95D87AF28A03BAC0078EA7C /* IconNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95D87AE28A03BAC0078EA7C /* IconNames.swift */; };
 		E95D87B328A040890078EA7C /* Legacy@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = E95D87B028A040880078EA7C /* Legacy@1x.png */; };
 		E95D87B428A040890078EA7C /* Legacy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E95D87B128A040880078EA7C /* Legacy@2x.png */; };
@@ -92,7 +91,6 @@
 		E95D87C728A046380078EA7C /* Porsche@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E95D87C228A046370078EA7C /* Porsche@3x.png */; };
 		E95D87C928A046380078EA7C /* VW@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E95D87C428A046380078EA7C /* VW@2x.png */; };
 		E961ACA728948EDD00C6FCC8 /* NewEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E961ACA628948EDD00C6FCC8 /* NewEntryViewModel.swift */; };
-		E96259BC284F5127007D9479 /* ScrollRefreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96259BB284F5127007D9479 /* ScrollRefreshable.swift */; };
 		E962E5C6285E3D8600F6B4D6 /* SectionIconRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E962E5C5285E3D8600F6B4D6 /* SectionIconRow.swift */; };
 		E962E5CB285E440A00F6B4D6 /* GasStationEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = E962E5CA285E440A00F6B4D6 /* GasStationEntry.swift */; };
 		E962E5CE285E465E00F6B4D6 /* GasStationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E962E5CD285E465E00F6B4D6 /* GasStationsView.swift */; };
@@ -102,7 +100,6 @@
 		E969B0C42892D57500E22690 /* AddEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E969B0C32892D57500E22690 /* AddEntryView.swift */; };
 		E9715409289D73F200889084 /* DataSendPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9715408289D73F200889084 /* DataSendPhase.swift */; };
 		E9A196E22B7D59C200989336 /* HeroWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A196E12B7D59C200989336 /* HeroWrapper.swift */; };
-		E9A196E42B7D6AB600989336 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A196E32B7D6AB600989336 /* TestView.swift */; };
 		E9A784F2289DAE08002AC225 /* ContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A784F1289DAE08002AC225 /* ContextMenu.swift */; };
 		E9AACA352853AC23005F30FE /* Pagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AACA342853AC23005F30FE /* Pagination.swift */; };
 		E9AACA3A2853DFB5005F30FE /* NetworkActivityIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AACA392853DFB5005F30FE /* NetworkActivityIndicatorManager.swift */; };
@@ -203,7 +200,6 @@
 		E957A296285F88DB00464FB0 /* GasStationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasStationViewModel.swift; sourceTree = "<group>"; };
 		E957A29C285F91BA00464FB0 /* HeadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingIndicator.swift; sourceTree = "<group>"; };
 		E957A29E285F921900464FB0 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		E95A6BEA2898567C0027A673 /* CustomTextArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextArea.swift; sourceTree = "<group>"; };
 		E95D87AE28A03BAC0078EA7C /* IconNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconNames.swift; sourceTree = "<group>"; };
 		E95D87B028A040880078EA7C /* Legacy@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Legacy@1x.png"; sourceTree = "<group>"; };
 		E95D87B128A040880078EA7C /* Legacy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Legacy@2x.png"; sourceTree = "<group>"; };
@@ -217,7 +213,6 @@
 		E95D87C228A046370078EA7C /* Porsche@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Porsche@3x.png"; sourceTree = "<group>"; };
 		E95D87C428A046380078EA7C /* VW@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "VW@2x.png"; sourceTree = "<group>"; };
 		E961ACA628948EDD00C6FCC8 /* NewEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntryViewModel.swift; sourceTree = "<group>"; };
-		E96259BB284F5127007D9479 /* ScrollRefreshable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollRefreshable.swift; sourceTree = "<group>"; };
 		E962E5C5285E3D8600F6B4D6 /* SectionIconRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionIconRow.swift; sourceTree = "<group>"; };
 		E962E5CA285E440A00F6B4D6 /* GasStationEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasStationEntry.swift; sourceTree = "<group>"; };
 		E962E5CD285E465E00F6B4D6 /* GasStationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasStationsView.swift; sourceTree = "<group>"; };
@@ -227,7 +222,6 @@
 		E969B0C32892D57500E22690 /* AddEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEntryView.swift; sourceTree = "<group>"; };
 		E9715408289D73F200889084 /* DataSendPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSendPhase.swift; sourceTree = "<group>"; };
 		E9A196E12B7D59C200989336 /* HeroWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroWrapper.swift; sourceTree = "<group>"; };
-		E9A196E32B7D6AB600989336 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		E9A784F1289DAE08002AC225 /* ContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenu.swift; sourceTree = "<group>"; };
 		E9AACA342853AC23005F30FE /* Pagination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pagination.swift; sourceTree = "<group>"; };
 		E9AACA392853DFB5005F30FE /* NetworkActivityIndicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkActivityIndicatorManager.swift; sourceTree = "<group>"; };
@@ -362,7 +356,6 @@
 				E962E5C8285E433500F6B4D6 /* Misc */,
 				E920B5FE2856480800683D67 /* SettingsView.swift */,
 				E962E5CD285E465E00F6B4D6 /* GasStationsView.swift */,
-				E9A196E32B7D6AB600989336 /* TestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -400,8 +393,6 @@
 				E91AFA49284129CC0024131D /* CustomButton.swift */,
 				E91AFA4B284129F30024131D /* Extensions.swift */,
 				E91095BB28412D5200C1334E /* CustomFont.swift */,
-				E96259BB284F5127007D9479 /* ScrollRefreshable.swift */,
-				E95A6BEA2898567C0027A673 /* CustomTextArea.swift */,
 				E908C1932B823EC50009C954 /* SegmentedControl.swift */,
 			);
 			path = Components;
@@ -763,7 +754,6 @@
 				E957A297285F88DB00464FB0 /* GasStationViewModel.swift in Sources */,
 				E9D2BB21284405DB009EC7C5 /* NavigationBar.swift in Sources */,
 				E9227BCA2B43539800589E64 /* AddInfoSection.swift in Sources */,
-				E95A6BEB2898567C0027A673 /* CustomTextArea.swift in Sources */,
 				E9FFA23A2B567F1A00634E49 /* WrongFuelHelp.swift in Sources */,
 				E91AFA26283FD13D0024131D /* CacheEntry.swift in Sources */,
 				E962E5CE285E465E00F6B4D6 /* GasStationsView.swift in Sources */,
@@ -775,7 +765,6 @@
 				E9227BB32B41B87700589E64 /* MassUITextField.swift in Sources */,
 				E940E8C62842738E009F1225 /* PreferenceKey.swift in Sources */,
 				E91AFA48284129AE0024131D /* CustomTextField.swift in Sources */,
-				E9A196E42B7D6AB600989336 /* TestView.swift in Sources */,
 				E9F32ED12B45AFA90003303C /* LogbookRefuelReceive.swift in Sources */,
 				E94A0CFB284F97AA00693352 /* EntryView.swift in Sources */,
 				E9227BBD2B433E0100589E64 /* DetailsComponent.swift in Sources */,
@@ -795,7 +784,6 @@
 				E9F32ED72B45CF4F0003303C /* ChartAnnotation.swift in Sources */,
 				E9D2BB1C2843F977009EC7C5 /* CircularView.swift in Sources */,
 				E9C3B8DC2845374000EDE615 /* AnimatableFontModifier.swift in Sources */,
-				E96259BC284F5127007D9479 /* ScrollRefreshable.swift in Sources */,
 				E9227BC32B4345AE00589E64 /* EntrySubmitComponent.swift in Sources */,
 				E908C1982B82581B0009C954 /* AlternativeCloseButton.swift in Sources */,
 				E93872A128638D800009F0F1 /* GasStationRow.swift in Sources */,

@@ -62,7 +62,11 @@ struct ServiceView: View {
                     .multilineTextAlignment(.leading)
                     .frame(minHeight: 30, maxHeight: 220, alignment: .leading)
                     .scrollContentBackground(.hidden)
-                    .customTextArea()
+                    .padding(.vertical, 10)
+                    .padding(.horizontal, 15)
+                    .background(.secondary.opacity(0.5))
+                    .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).stroke(lineWidth: 1).fill(.black.opacity(0.1)))
                     .toolbar {
                         ToolbarItem(placement: .keyboard) {
                             HStack {

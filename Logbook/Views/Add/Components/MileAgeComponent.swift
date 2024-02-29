@@ -50,7 +50,7 @@ struct MileAgeComponent: View {
                     TextField("", value: $newLogbook.mileAge.new, formatter: showSeperator ? numberFormatterWGroup : numberFormatterNoGroup, onEditingChanged: { isEdit in
                         showSeperator = !isEdit
                     })
-                    .addDoneButtonOnKeyboard()
+                    //.addDoneButtonOnKeyboard()
                     .customTextField(image: Image(systemName: "car.2.fill"), suffix: newLogbook.mileAge.unit.name)
                     .keyboardType(.decimalPad)
                     .submitLabel(.done)
@@ -59,7 +59,7 @@ struct MileAgeComponent: View {
                         .customFont(.subheadline)
                         .foregroundColor(.secondary)
                     TextField("", text: $newLogbook.reason)
-                        .addDoneButtonOnKeyboard()
+                        //.addDoneButtonOnKeyboard()
                         .customTextField(image: Image(systemName: "house.and.flag"))
                         .introspect(.textField, on: .iOS(.v15, .v16, .v17), customize: { view in
                             view.clearButtonMode = .whileEditing

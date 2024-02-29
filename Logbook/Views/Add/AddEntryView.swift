@@ -33,7 +33,7 @@ struct AddEntryView: View {
     }()
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     HStack (spacing: 0) {
@@ -44,14 +44,6 @@ struct AddEntryView: View {
                     
                     DVDComponent(newLogbook: $newEntryVM.newLogbook, lastLogbooks: lastLogbooks)
                     MileAgeComponent(newLogbook: $newEntryVM.newLogbook)
-                        .toolbar(content: {
-                            ToolbarItemGroup(placement: .keyboard) {
-                                Spacer()
-                                Button("Fertig", role: .destructive) {
-                                    print("Test")
-                                }
-                            }
-                        })
                     HStack {
                         AddInfoButtonComponent(newLogbook: $newEntryVM.newLogbook, showAddInfoSlection: $showAddInfoSelection)
                         DetailsComponent(newLogbook: $newEntryVM.newLogbook)

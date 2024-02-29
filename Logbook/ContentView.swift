@@ -34,6 +34,17 @@ struct ContentView: View {
             case .home:
                 NewListView()
                     .environmentObject(logbooksVM)
+                    .toolbar {
+                        ToolbarItem(placement: .keyboard) {
+                            HStack {
+                                Spacer()
+                                Button("Fertig", role: .cancel) {
+                                    hideKeyboard()
+                                }
+                                .foregroundStyle(.accent)
+                            }
+                        }
+                    }
             case .gasStations:
                 if ContentView.isPreview {
                     GasStationsView(gasStations: GasStationWelcome.previewData.data.tankstellen)

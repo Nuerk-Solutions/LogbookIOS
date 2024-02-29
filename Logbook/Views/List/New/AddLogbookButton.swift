@@ -51,6 +51,10 @@ struct AddLogbookButton: View {
                     })
             }
         }
+//        .frame(width: 50, height: 50)
+//        .scrollClipDisabled()
+//        .background(.blue)
+//        .compositingGroup()
     }
 }
 

@@ -62,24 +62,18 @@ struct NewListView: View {
                         showStatusBar.toggle()
                     }
                 })
-                
                 .onChange(of: model.lastAddedEntry, { oldValue, newValue in
                     Task {
                         await logbooksVM.refreshTask()
                     }
                 })
-        }
-        .overlay {
-            ZStack {
-                AddLogbookButton()
-                    .padding(.horizontal, 10)
-                    .padding(.top, 35)
-            }
-            .if(model.showDetail, transform: { view in
-                view.hidden()
-            })
-            .ignoresSafeArea(edges: .top)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+//                .toolbarBackground(.hidden, for: .navigationBar)
+                .toolbar {
+                        AddLogbookButton()
+//                            .padding(.horizontal, 10)
+//                            .padding(.top, 35)
+//                            .background(.red)
+                }
         }
         .statusBar(hidden: !showStatusBar)
         .task(id: logbooksVM.lastListRefresh, logbooksVM.loadFirstPage)
