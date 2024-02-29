@@ -1,0 +1,13 @@
+[
+    {
+      "_id":  "65c68dab08e48f46af4b7ca2",
+      "code": "2C8RJGIF4E",
+      "value": 50,
+      "distance": 250,
+      "remainingDistance": 250,
+      "expiration": "2024-05-06T10:59:45.801Z",
+      "isExpired": true,
+      "creator": "Oliver",
+      "redeemed": false
+    }
+]

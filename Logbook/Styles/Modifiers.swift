@@ -59,67 +59,49 @@ extension View {
     }
 }
 
-struct OutlineOverlay: ViewModifier {
-    @Environment(\.colorScheme) var colorScheme
-    var cornerRadius: CGFloat = 20
-    
-    func body(content: Content) -> some View {
-        content.overlay(
-            RoundedRectangle(cornerRadius: cornerRadius)
-                .stroke(
-                    .linearGradient(
-                        colors: [
-                            .white.opacity(colorScheme == .dark ? 0.6 : 0.3),
-                            .black.opacity(colorScheme == .dark ? 0.3 : 0.1)
-                        ],
-                        startPoint: .top,
-                        endPoint: .bottom)
-                )
-                .blendMode(.overlay)
-        )
-    }
-}
-
-struct BackgroundColor: ViewModifier {
-    var opacity: Double = 0.6
-    var cornerRadius: CGFloat = 20
-    @Environment(\.colorScheme) var colorScheme
-    
-    func body(content: Content) -> some View {
-        content
-            .overlay(
-                Color("Background")
-                    .opacity(colorScheme == .dark ? opacity : 0)
-                    .mask(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
-                    .blendMode(.overlay)
-                    .allowsHitTesting(false)
-            )
-    }
-}
-
 extension View {
-    func backgroundColor(opacity: Double = 0.6, cornerRadius: Double = 20) -> some View {
-        self.modifier(BackgroundColor(opacity: opacity, cornerRadius: cornerRadius))
+    func backgroundStyle(cornerRadius: CGFloat = 20, corners: UIRectCorner = [.allCorners], opacity: Double = 0.6, lightBackground: Bool = false) -> some View {
+        self.modifier(BackgroundStyle(cornerRadius: cornerRadius, corners: corners, opacity: opacity, lightBackground: lightBackground))
+    }
+    
+    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape(RoundedCorner(radius: radius, corners: corners))
     }
 }
 
 struct BackgroundStyle: ViewModifier {
+    @Environment(\.colorScheme) var colorScheme
     var cornerRadius: CGFloat = 20
+    var corners: UIRectCorner = [.allCorners]
     var opacity: Double = 0.6
+    var lightBackground: Bool = false
     
     func body(content: Content) -> some View {
         content
-            .backgroundColor(opacity: opacity, cornerRadius: cornerRadius)
-            .cornerRadius(cornerRadius)
-            .modifier(OutlineOverlay(cornerRadius: cornerRadius))
+            .overlay(
+                Color(colorScheme == .light && lightBackground ? "Shadow": "Background")
+                    .opacity(colorScheme == .light && lightBackground ? opacity : colorScheme == .dark ? opacity : 0)
+                    .mask(RoundedCorner(radius: cornerRadius, corners: corners))
+                    .blendMode(.overlay)
+                    .allowsHitTesting(false)
+            )
+            .cornerRadius(cornerRadius, corners: corners)
+            .overlay(
+                RoundedCorner(radius: cornerRadius, corners: corners)
+                    .stroke(
+                        .linearGradient(
+                            colors: [
+                                .white.opacity(colorScheme == .dark ? 0.6 : 0.3),
+                                .black.opacity(colorScheme == .dark ? 0.3 : 0.1)
+                            ],
+                            startPoint: .top,
+                            endPoint: .bottom)
+                    )
+                    .blendMode(.overlay)
+            )
     }
 }
 
-extension View {
-    func backgroundStyle(cornerRadius: CGFloat = 20, opacity: Double = 0.6) -> some View {
-        self.modifier(BackgroundStyle(cornerRadius: cornerRadius, opacity: opacity))
-    }
-}
 
 struct CentreAlignedLabelStyle: LabelStyle {
     func makeBody(configuration: Configuration) -> some View {

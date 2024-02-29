@@ -27,12 +27,10 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-//            Color(hex: "17203A").ignoresSafeArea()
-            
-            Group {
-            switch selectedTab {
-            case .home:
+            Color(hex: "17203A").ignoresSafeArea()
+            TabView(selection: $selectedTab) {
                 NewListView()
+                    .tag(Tab.home)
                     .environmentObject(logbooksVM)
                     .toolbar {
                         ToolbarItem(placement: .keyboard) {
@@ -45,36 +43,22 @@ struct ContentView: View {
                             }
                         }
                     }
-            case .gasStations:
                 if ContentView.isPreview {
                     GasStationsView(gasStations: GasStationWelcome.previewData.data.tankstellen)
+                        .tag(Tab.gasStations)
                 } else {
                     GasStationsView()
+                        .tag(Tab.gasStations)
                 }
-            case .stats:
+                
                 BarChart()
-            case .settings:
+                    .tag(Tab.stats)
+                
                 SettingsView()
+                    .tag(Tab.settings)
             }
-                        }
-                        .safeAreaInset(edge: .bottom) {
-//                            VStack {}.frame(height: model.showTab ? 44 : 0)
-                            VStack {}.frame(height: 44)
-                        }
-            
             
             TabBar()
-//                            .offset(y: -24)
-//                .background(
-//                    LinearGradient(colors: [Color("Background").opacity(0), Color("Background")], startPoint: .top, endPoint: .bottom)
-//                        .frame(height: 100)
-//                        .frame(maxHeight: .infinity, alignment: .bottom)
-//                        .allowsHitTesting(false)
-//                        .blur(radius: 15)
-//                )
-//                            .ignoresSafeArea()
-//                .offset(y: isOpen ? 300 : 0)
-                .offset(y: !model.showTab ? 200 : 0)
             
         }
         .dynamicTypeSize(.large ... .xxLarge)
@@ -101,8 +85,6 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
             .environmentObject(Model())
-//            .environmentObject(NetworkReachability())
-            .preferredColorScheme(.dark)
-        //            .previewInterfaceOrientation(.landscapeRight)
+            .environmentObject(NetworkReachability())
     }
 }

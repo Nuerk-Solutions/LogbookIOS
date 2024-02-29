@@ -96,6 +96,10 @@
 		E962E5CE285E465E00F6B4D6 /* GasStationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E962E5CD285E465E00F6B4D6 /* GasStationsView.swift */; };
 		E962E5D0285E4DCA00F6B4D6 /* gasstations.json in Resources */ = {isa = PBXBuildFile; fileRef = E962E5CF285E4DCA00F6B4D6 /* gasstations.json */; };
 		E962E5D2285E5E4100F6B4D6 /* PriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E962E5D1285E5E4000F6B4D6 /* PriceView.swift */; };
+		E964B0F52B910FBA00433AB2 /* VoucherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E964B0F42B910FBA00433AB2 /* VoucherView.swift */; };
+		E964B0F72B910FD100433AB2 /* Voucher.swift in Sources */ = {isa = PBXBuildFile; fileRef = E964B0F62B910FD100433AB2 /* Voucher.swift */; };
+		E964B0F92B91122600433AB2 /* vouchers.json in Resources */ = {isa = PBXBuildFile; fileRef = E964B0F82B91122600433AB2 /* vouchers.json */; };
+		E964B0FB2B91326B00433AB2 /* VoucherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E964B0FA2B91326B00433AB2 /* VoucherViewModel.swift */; };
 		E96665382AD85AC500605F49 /* Porsche@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = E96665372AD85AC500605F49 /* Porsche@1x.png */; };
 		E969B0C42892D57500E22690 /* AddEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E969B0C32892D57500E22690 /* AddEntryView.swift */; };
 		E9715409289D73F200889084 /* DataSendPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9715408289D73F200889084 /* DataSendPhase.swift */; };
@@ -218,6 +222,10 @@
 		E962E5CD285E465E00F6B4D6 /* GasStationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasStationsView.swift; sourceTree = "<group>"; };
 		E962E5CF285E4DCA00F6B4D6 /* gasstations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gasstations.json; sourceTree = "<group>"; };
 		E962E5D1285E5E4000F6B4D6 /* PriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceView.swift; sourceTree = "<group>"; };
+		E964B0F42B910FBA00433AB2 /* VoucherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoucherView.swift; sourceTree = "<group>"; };
+		E964B0F62B910FD100433AB2 /* Voucher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voucher.swift; sourceTree = "<group>"; };
+		E964B0F82B91122600433AB2 /* vouchers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = vouchers.json; sourceTree = "<group>"; };
+		E964B0FA2B91326B00433AB2 /* VoucherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoucherViewModel.swift; sourceTree = "<group>"; };
 		E96665372AD85AC500605F49 /* Porsche@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Porsche@1x.png"; sourceTree = "<group>"; };
 		E969B0C32892D57500E22690 /* AddEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEntryView.swift; sourceTree = "<group>"; };
 		E9715408289D73F200889084 /* DataSendPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSendPhase.swift; sourceTree = "<group>"; };
@@ -292,6 +300,7 @@
 		E91AFA02283FD09F0024131D = {
 			isa = PBXGroup;
 			children = (
+				E964B0F82B91122600433AB2 /* vouchers.json */,
 				E9F32ED22B45B3B60003303C /* refuellogbooks.json */,
 				E91AFA35283FE5E70024131D /* logbooks.json */,
 				E962E5CF285E4DCA00F6B4D6 /* gasstations.json */,
@@ -367,6 +376,7 @@
 				E940E8C428427380009F1225 /* UI */,
 				E91AFA31283FD7020024131D /* LogbookEntry.swift */,
 				E9F32ED02B45AFA90003303C /* LogbookRefuelReceive.swift */,
+				E964B0F62B910FD100433AB2 /* Voucher.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -378,6 +388,7 @@
 				E957A296285F88DB00464FB0 /* GasStationViewModel.swift */,
 				E961ACA628948EDD00C6FCC8 /* NewEntryViewModel.swift */,
 				E94324B8292D357E0083FFD1 /* ChartViewModel.swift */,
+				E964B0FA2B91326B00433AB2 /* VoucherViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -543,6 +554,7 @@
 				E937B8272B55AFA200DC073A /* RefuelInfoList.swift */,
 				E937B8292B55BB1B00DC073A /* VehicleFuelList.swift */,
 				E9FFA2392B567F1A00634E49 /* WrongFuelHelp.swift */,
+				E964B0F42B910FBA00433AB2 /* VoucherView.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -725,6 +737,7 @@
 				E95D87B328A040890078EA7C /* Legacy@1x.png in Resources */,
 				E91AFA13283FD0A10024131D /* Assets.xcassets in Resources */,
 				E96665382AD85AC500605F49 /* Porsche@1x.png in Resources */,
+				E964B0F92B91122600433AB2 /* vouchers.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -763,6 +776,7 @@
 				E91AFA4028400DC90024131D /* RetryView.swift in Sources */,
 				E91AFA4C284129F30024131D /* Extensions.swift in Sources */,
 				E9227BB32B41B87700589E64 /* MassUITextField.swift in Sources */,
+				E964B0F72B910FD100433AB2 /* Voucher.swift in Sources */,
 				E940E8C62842738E009F1225 /* PreferenceKey.swift in Sources */,
 				E91AFA48284129AE0024131D /* CustomTextField.swift in Sources */,
 				E9F32ED12B45AFA90003303C /* LogbookRefuelReceive.swift in Sources */,
@@ -791,6 +805,7 @@
 				E9E8488128521EE8008D7F0F /* SectionImageRow.swift in Sources */,
 				E957A29D285F91BA00464FB0 /* HeadingIndicator.swift in Sources */,
 				E920B5FF2856480800683D67 /* SettingsView.swift in Sources */,
+				E964B0FB2B91326B00433AB2 /* VoucherViewModel.swift in Sources */,
 				E9BA8D6E2847B22F009838C4 /* Cache.swift in Sources */,
 				E9227BB52B41B89000589E64 /* CurrencyTextField.swift in Sources */,
 				E9F32ED52B45C8740003303C /* BarChart.swift in Sources */,
@@ -800,6 +815,7 @@
 				E9AACA352853AC23005F30FE /* Pagination.swift in Sources */,
 				E94A0CFF284FA96700693352 /* EntryItem.swift in Sources */,
 				E91AFA0F283FD09F0024131D /* LogbookApp.swift in Sources */,
+				E964B0F52B910FBA00433AB2 /* VoucherView.swift in Sources */,
 				E94324B9292D357E0083FFD1 /* ChartViewModel.swift in Sources */,
 				E94A769C28591AA600BCA71A /* AdditionalInfoImageView.swift in Sources */,
 				E9BA8D702847B255009838C4 /* KeysTracker.swift in Sources */,

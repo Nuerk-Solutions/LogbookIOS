@@ -10,23 +10,19 @@ import SwiftUI
 struct TabItem: Identifiable {
     let id = UUID()
     var name: String
-//    var icon: RiveViewModel
     var icon: String
     var color: Color
     var selection: Tab
 }
 
 var tabItems = [
-//    TabItem(name: "Übersicht", icon: RiveViewModel(fileName: "icons", stateMachineName: "HOME_interactivity", artboardName: "HOME"), color: .teal, selection: .home),
-//    TabItem(name: "Abrechnung", icon: RiveViewModel(fileName: "icons", stateMachineName: "SEARCH_Interactivity", artboardName: "SEARCH"), color: .blue, selection: .invoice),
-//    TabItem(name: "Einstellungen", icon: RiveViewModel(fileName: "icons", stateMachineName: "USER_Interactivity", artboardName: "USER"), color: .red, selection: .settings)
-    TabItem(name: "Übersicht", icon: "house", color: .teal, selection: .home),
-    TabItem(name: "Tankstellen", icon: "fuelpump", color: .orange, selection: .gasStations),
-    TabItem(name: "Statisitk", icon: "magnifyingglass", color: .blue, selection: .stats),
-    TabItem(name: "Einstellungen", icon: "gear", color: .red, selection: .settings)
+    TabItem(name: "Übersicht", icon: "house", color: .accentColor, selection: .home),
+    TabItem(name: "Tankstellen", icon: "fuelpump", color: .accentColor, selection: .gasStations),
+    TabItem(name: "Statisitk", icon: "magnifyingglass", color: .accentColor, selection: .stats),
+    TabItem(name: "Einstellungen", icon: "gear", color: .accentColor, selection: .settings)
 ]
 
-enum Tab: String {
+enum Tab: String, CaseIterable {
     case home
     case gasStations
     case stats

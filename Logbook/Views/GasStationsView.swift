@@ -184,3 +184,4 @@ struct GasStationsView_Previews: PreviewProvider {
             .environmentObject(Model())
     }
 }
+

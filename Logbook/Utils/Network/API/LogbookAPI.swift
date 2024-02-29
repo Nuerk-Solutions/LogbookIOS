@@ -49,8 +49,71 @@ struct LogbookAPI {
         deleteLogbook(from: URL(string: baseUrl + "/\(logbook._id!)")!)
     }
     
+    func fetchVouchers() async throws -> [Voucher] {
+        return try await session.request(URL(string: baseUrl + "/voucher/list")!, method: .get)
+            .validate(statusCode: 200..<201)
+            .validate(contentType: ["application/json"])
+            .responseData { (response) in
+                switch response.result {
+                case .success:
+                    break
+                case .failure(let error):
+                    print(error)
+                    break
+                }
+            }
+            .serializingDecodable([Voucher].self, decoder: jsonDecoder)
+            .value
+    }
+    
+    func redeemVoucher(voucher voucherCode: Voucher) async throws -> Bool {
+        let (data, _) = try await withUnsafeThrowingContinuation { (continuation: UnsafeContinuation<(Data, URLResponse?), Error>) in
+            session.request(URL(string: baseUrl + "/voucher/redeem")!, method: .post, parameters: voucherCode, encoder: JSONParameterEncoder(encoder: jsonEncoder))
+                .validate(statusCode: 200..<202)
+                .validate(contentType: ["text/html"])
+                .responseData { response in
+                    switch response.result {
+                    case .success(let value):
+                        continuation.resume(returning: (value, response.response))
+                    case .failure(let error):
+                        continuation.resume(throwing: error)
+                    }
+                }
+        }
+        if let boolString = String(data: data, encoding: .utf8) {
+            return (boolString as NSString).boolValue
+        }
+        return false
+    }
+    
+    func createVoucher(voucher voucherCode: Voucher) async throws -> Bool {
+        return try await session.request(URL(string: baseUrl + "/voucher/create")!, method: .post, parameters: voucherCode, encoder: JSONParameterEncoder(encoder: jsonEncoder))
+            .validate(statusCode: 201..<202)
+            .validate(contentType: ["application/json"])
+            .responseData { (response) in
+                switch response.result {
+                case .success:
+//                    if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+//                        print("Data: \(utf8Text)")
+//                    }
+                    break
+                case .failure(let error):
+                    print(error)
+                }
+//                let encoded = try? jsonEncoder.encode(body)
+//                if let data = encoded, let utf8Text = String(data: data, encoding: .utf8) {
+//                    print("Request:\n \(utf8Text)\n\n")
+//                }
+//                if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+//                    print("Response:\n \(utf8Text)\n\n")
+//                }
+            }
+            .serializingDecodable(Voucher.self, decoder: jsonDecoder)
+            .value
+            .redeemed
+    }
+    
     private func fetchRefuels(from url: URL) async throws -> [LogbookEntry] {
-        print(url)
         do {
             return try await session.request(url, method: .get)
                 .validate(statusCode: 200..<201)
@@ -124,7 +187,6 @@ struct LogbookAPI {
     }
     
     private func sendLogbook(from url: URL, logbook body: LogbookEntry) async throws -> LogbookEntry {
-        print(body)
         return try await session.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder(encoder: jsonEncoder))
             .validate(statusCode: 201..<202)
             .validate(contentType: ["application/json"])
@@ -164,7 +226,7 @@ struct LogbookAPI {
             }
     }
     
-    private func generateError(code: Int = 1, description: String) async -> Error {
+    private func generateError(code: Int = 1, description: String) -> Error {
         NSError(domain: "LogbookAPI", code: code, userInfo: [NSLocalizedDescriptionKey: description])
     }
     

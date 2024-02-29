@@ -12,7 +12,7 @@ struct RefuelInfoList: View {
     var vehicle: VehicleEnum = .Ferrari
     @AppStorage<Bool> var isExpanded: Bool
     
-    init(vehicle: VehicleEnum = .Ferrari, isExpanded: Bool = false) {
+    init(vehicle: VehicleEnum = .Ferrari, isExpanded: Bool = true) {
         self.vehicle = vehicle
         self._isExpanded = AppStorage(wrappedValue: isExpanded, "\(vehicle)_expand_view")
     }

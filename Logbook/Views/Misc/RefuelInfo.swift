@@ -24,6 +24,7 @@ struct RefuelInfo: View {
                 .frame(maxWidth: 24, maxHeight: 24)
             Text(fuelInformation)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .bold(isPrefered)
         }
     }
 }

@@ -27,14 +27,8 @@ struct AddLogbookButton: View {
                     .scaledToFit()
                     .symbolRenderingMode(.multicolor)
                     .font(.system(size: 17, weight: .bold))
-                    .frame(width: 24, height: 24)
-                    .foregroundColor(.secondary)
-                    .padding(10)
-                    .background(.regularMaterial)
-                    .backgroundStyle(cornerRadius: 16, opacity: 0.4)
-                    .if(!isLiteMode, transform: { view in
-                        view.shadow(color: .black.opacity(0.3), radius: 10, x: 0, y: 10)
-                    })
+                    .frame(width: 30, height: 30)
+//                    .padding(10)
             } else {
                 Image(systemName: "wifi.exclamationmark")
                     .resizable()
@@ -42,19 +36,10 @@ struct AddLogbookButton: View {
                     .symbolRenderingMode(.palette)
                     .symbolEffect(.pulse.byLayer, options: .repeating)
                     .foregroundStyle(.primary, .red)
-                    .frame(width: 24, height: 24)
-                    .padding(10)
-                    .background(.regularMaterial)
-                    .backgroundStyle(cornerRadius: 16, opacity: 0.4)
-                    .if(!isLiteMode, transform: { view in
-                            view.shadow(color: .black.opacity(0.3), radius: 10, x: 0, y: 10)
-                    })
+                    .frame(width: 30, height: 30)
+//                    .padding(10)
             }
         }
-//        .frame(width: 50, height: 50)
-//        .scrollClipDisabled()
-//        .background(.blue)
-//        .compositingGroup()
     }
 }
 

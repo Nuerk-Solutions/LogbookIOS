@@ -47,7 +47,7 @@ struct TabBar: View {
                     .offset(x: selectedX)
                     .blendMode(.overlay)
             )
-            .backgroundStyle(cornerRadius: hasHomeIndicator ? 20 : 10)
+            .backgroundStyle(cornerRadius: hasHomeIndicator ? 20 : 10, corners: [.topLeft, .topRight], lightBackground: true)
             .frame(maxHeight: .infinity, alignment: .bottom)
             .ignoresSafeArea()
             .offset(y: model.showTab ? 0 : 200)
@@ -56,19 +56,10 @@ struct TabBar: View {
     }
     
     var content: some View {
-        ForEach(Array(tabItems.filter { if !isAllowLocationTracking {
-            return $0.selection != .gasStations
-        }
-            return true
-        }.enumerated()), id: \.offset) { index, tab in
+        ForEach(Array(tabItems.enumerated()), id: \.offset) { index, tab in
             if index == 0 { Spacer() }
             
             Button {
-                
-                //                try? tab.icon.setInput("active", value: true)
-                //                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                //                    try? tab.icon.setInput("active", value: false)
-                //                }
                 withAnimation(.tabSelection) {
                     selectedTab = tab.selection
                     selectedX = x[index]
@@ -80,10 +71,8 @@ struct TabBar: View {
                         .symbolVariant(.fill)
                         .font(.system(size: 17, weight: .bold))
                         .frame(width: 44, height: 29)
-                    //                    tab.icon.view()
-                    //                        .frame(width: 36, height: 36)
-                    //                        .frame(maxWidth: .infinity)
-                    Text(tab.name).font(.caption2)
+                    Text(tab.name)
+                        .font(.caption2)
                         .frame(width: 88)
                         .lineLimit(1)
                 }

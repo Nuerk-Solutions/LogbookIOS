@@ -65,12 +65,10 @@ class LogbooksViewModel: ObservableObject {
     
     @Sendable
     func refreshTask() async {
-        //        Task {
-        await pagingData.reset()
         await cache.removeValue(forKey: "\(pagingData.currentPage)")
+        await pagingData.reset()
+        try? await Task.sleep(nanoseconds: 0_500_000_000)
         self.lastListRefresh = Int(Date().timeIntervalSince1970)
-//        self.fetchTaskToken.token = Date()
-        //        }
     }
     
     func combine<T>(_ arrays: Array<T>?...) -> Set<T> {
@@ -86,6 +84,7 @@ class LogbooksViewModel: ObservableObject {
                 self.phase = .success(nextLogbooks)
                 loadedLogbooks = nextLogbooks
             }
+            return
         }
 
         if !NetworkReachability.shared.reachable {

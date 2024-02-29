@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @State var isPinned = false
-    @State var isDeleted = false
-    @State var isLogged = true
+    @State var isAlertVisible = false
+    @State var voucherCode = ""
+    @StateObject private var voucherVM: VoucherViewModel = VoucherViewModel()
     
     @AppStorage("gasStationRadius") var gasStationRadius: Int = 5
     var intProxy: Binding<Double>{
@@ -45,6 +45,37 @@ struct SettingsView: View {
             List {
                 Section {
                     profile
+                }
+                
+                Section {
+                    NavigationLink("Übersicht", symbol: "123.rectangle", destination: VoucherView())
+                    Button {
+                        isAlertVisible.toggle()
+                    } label: {
+                        Text("Gutschein einlösen")
+                    }
+                    .alert("Gutschein einlösen", isPresented: $isAlertVisible) {
+                        TextField("Gutschein", text: $voucherCode)
+                            .textInputAutocapitalization(.never)
+                        Button("OK") {
+                            isAlertVisible.toggle()
+                            Task {
+                                let success = await voucherVM.redeemVoucher(voucher: Voucher(code: voucherCode))
+                                print(success)
+                                if(success) {
+                                    showSuccessfulAlert(title: "Voucher Hinzugefügt")
+                                } else {
+                                    showFailureAlert(title: "Ein Fehler ist aufgetreten")
+                                }
+                                voucherCode.removeAll()
+                            }
+                        }
+                        Button("Abbrechen", role: .cancel) { }
+                    }
+                } header: {
+                    Text("Gutscheine")
+                } footer: {
+                    Text("Gutscheine sind mit dem Einlösen an den oben ausgewählten Benutzer gebunden.")
                 }
                 
                 Section {
@@ -179,7 +210,7 @@ struct SettingsView: View {
                     .foregroundColor(.gray)
                     .font(.caption)
                 }
-                .frame(minHeight: 100)
+//                .frame(minHeight: 100)
             }
             .navigationTitle("Account")
             .listStyle(.insetGrouped)
