@@ -9,7 +9,7 @@ import Foundation
 
 // TODO: Split up voucher struct into chunks, so e.g. only the code is sent when reedeming a voucher
 
-struct Voucher: Codable {
+struct Voucher: Codable, Hashable {
     
     init(code: String, value: Int, distance: Int, remainingDistance: Int, expiration: Date, isExpired: Bool, creator: DriverEnum, redeemed: Bool) {
         self._id = ""

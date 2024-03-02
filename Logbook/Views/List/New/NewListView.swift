@@ -28,17 +28,12 @@ struct NewListView: View {
                 .refreshable {
                     await logbooksVM.refreshTask()
                 }
-                .sensoryFeedback(.success, trigger: logbooksVM.lastListRefresh)
+                .sensoryFeedback(.impact, trigger: logbooksVM.lastListRefresh)
                 .overlay {
                     if  logbooksVM.isFetchingNextPage || nAIM.isVisible {
                         ZStack{}
                             .onAppear {
-                                AlertKitAPI.present(
-                                    title: "Laden...",
-                                    icon: .spinnerSmall,
-                                    style: .iOS17AppleMusic,
-                                    haptic: AlertHaptic.none
-                                )
+                                showSpinningAlert(title: "Laden...")
                             }
                             .onDisappear {
                                 AlertKitAPI.dismissAllAlerts()
@@ -60,7 +55,6 @@ struct NewListView: View {
                 .navigationTitle("Fahrtenbuch")
                 .searchable(text: $searchString)
                 .onChange(of: model.showDetail, { oldValue, newValue in
-                    
                     withAnimation {
                         showStatusBar.toggle()
                     }

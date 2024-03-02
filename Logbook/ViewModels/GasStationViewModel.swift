@@ -144,7 +144,7 @@ class GasStationViewModel: ObservableObject {
             
             gasStationAPI.cancelPreviousRequest()
             
-            let gasStations = try await gasStationAPI.fetch(with: GasStationRequestParameters(lat: currentLocation.coordinate.latitude, lng: currentLocation.coordinate.longitude, fuelTyp: stationForVehicle.fuelTyp[0], radius: radius, sortTyp: gasStationSort, sortDirection: isGasStationSortDirectionAsc ? "asc" : "desc"))
+            let gasStations = try await gasStationAPI.fetch(with: GasStationRequestParameters(lat: currentLocation.coordinate.latitude, lng: currentLocation.coordinate.longitude, fuelTyp: stationForVehicle.fuelTypGasStation, radius: radius, sortTyp: gasStationSort, sortDirection: isGasStationSortDirectionAsc ? "asc" : "desc"))
             await cache.setValue(gasStations, forKey: stationForVehicle.fuelTyp[0].rawValue)
             
             if Task.isCancelled { return }

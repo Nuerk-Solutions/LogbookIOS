@@ -23,6 +23,8 @@ struct AddEntryView: View {
 //    @EnvironmentObject var model: Model
     @EnvironmentObject var logbooksVM: LogbooksViewModel
     @EnvironmentObject var nAIM: NetworkActivityIndicatorManager
+    
+    @StateObject var voucherVM: VoucherViewModel = VoucherViewModel()
         
     let mediumDateAndTime: DateFormatter = {
         let formatter = DateFormatter()
@@ -45,6 +47,8 @@ struct AddEntryView: View {
                     DVDComponent(newLogbook: $newEntryVM.newLogbook, lastLogbooks: lastLogbooks)
                     MileAgeComponent(newLogbook: $newEntryVM.newLogbook)
                     HStack {
+                        VoucherSelectButtonComponent()
+                            .environmentObject(voucherVM)
                         AddInfoButtonComponent(newLogbook: $newEntryVM.newLogbook, showAddInfoSlection: $showAddInfoSelection)
                         DetailsComponent(newLogbook: $newEntryVM.newLogbook)
                     }
@@ -138,6 +142,6 @@ struct NewAddView_Previews: PreviewProvider {
     static var previews: some View {
         AddEntryView(show: .constant(true))
             .preferredColorScheme(.light)
-//            .environmentObject(NetworkReachability())
+            .environmentObject(NetworkActivityIndicatorManager())
     }
 }

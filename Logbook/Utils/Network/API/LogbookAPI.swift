@@ -15,7 +15,7 @@ struct LogbookAPI {
     private init() {}
     
 //    private let baseUrl = "https://api.nuerk-solutions.de/logbook"
-    private let baseUrl = "https://api.nuerk-solutions.de/v2/logbook"
+    private let baseUrl = "http://localhost/v2/logbook"
     private let session = ApiSession.logbookShared.session
     private let jsonDecoder: JSONDecoder = {
         let decoder = JSONDecoder()
@@ -86,7 +86,7 @@ struct LogbookAPI {
         return false
     }
     
-    func createVoucher(voucher voucherCode: Voucher) async throws -> Bool {
+    func createVoucher(voucher voucherCode: Voucher) async throws -> Voucher {
         return try await session.request(URL(string: baseUrl + "/voucher/create")!, method: .post, parameters: voucherCode, encoder: JSONParameterEncoder(encoder: jsonEncoder))
             .validate(statusCode: 201..<202)
             .validate(contentType: ["application/json"])
@@ -110,7 +110,7 @@ struct LogbookAPI {
             }
             .serializingDecodable(Voucher.self, decoder: jsonDecoder)
             .value
-            .redeemed
+            
     }
     
     private func fetchRefuels(from url: URL) async throws -> [LogbookEntry] {

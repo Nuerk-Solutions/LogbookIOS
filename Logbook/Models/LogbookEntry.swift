@@ -35,6 +35,7 @@ struct LogbookEntry {
     var animated: Bool? = false
 }
 
+
 public struct Service: Codable, Equatable {
     
     init() {
@@ -160,6 +161,17 @@ enum VehicleEnum: String, CaseIterable, Identifiable, Codable, Equatable {
         case .Porsche, .DS:
             return [.SUPER_PLUS_98_E5, .SP_VP_AU]
             //return .SUPER_95_E10
+        }
+    }
+    
+    
+    var fuelTypGasStation: FuelTyp {
+        switch self {
+        case .Ferrari, .MX5, .Porsche, .DS:
+            return .SUPER
+        case .VW:
+            return .DIESEL
+            
         }
     }
     

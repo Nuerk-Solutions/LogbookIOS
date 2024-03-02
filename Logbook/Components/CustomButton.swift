@@ -27,6 +27,8 @@ extension View {
 
 struct LargeButton: ViewModifier {
     let disabled: Bool
+    let shadowRadius: CGFloat
+    
     func body(content: Content) -> some View {
         content
             .padding(20)
@@ -35,13 +37,13 @@ struct LargeButton: ViewModifier {
             .foregroundColor(.white)
             .mask(RoundedCorner(radius: 20, corners: [.topRight, .bottomLeft, .bottomRight]))
             .mask(RoundedRectangle(cornerRadius: 8))
-            .shadow(color: Color(hex: "F77D8E").opacity(0.5), radius: 20, x: 0, y: 10)
+            .shadow(color: Color(hex: "F77D8E").opacity(0.5), radius: shadowRadius, x: 0, y: 10)
         
     }
 }
 
 extension View {
-    func largeButton(disabled: Bool = false) -> some View {
-        modifier(LargeButton(disabled: disabled))
+    func largeButton(disabled: Bool = false, shadowRadius radius: CGFloat = 20) -> some View {
+        modifier(LargeButton(disabled: disabled, shadowRadius: radius))
     }
 }
