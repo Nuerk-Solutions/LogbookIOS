@@ -26,6 +26,7 @@ struct RetryView: View {
         .padding(16)
         .background(.ultraThinMaterial)
         .backgroundStyle(cornerRadius: 18, opacity: 0.4)
+        .onAppear(perform: dismissAllAlerts)
     }
 }
 

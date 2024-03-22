@@ -34,7 +34,7 @@ class GasStationViewModel: ObservableObject {
     @Published var ratingMap = [Int : Double]()
     
     @AppStorage("gasStationRadius") var gasStationRadius: Int = 5
-    @AppStorage("selectedGasStationVehicle") var stationForVehicle: VehicleEnum = .Ferrari
+    @AppStorage("selectedFuelTyp") var selectedFuelTyp: FuelTyp = .DIESEL
     @AppStorage("gasStationSort") var gasStationSort: SortTyp = .Preis
     @AppStorage("isGasStationSortDirectionAsc") var isGasStationSortDirectionAsc: Bool = true
     @AppStorage("isIntelligentGasStationRadius") var isIntelligentGasStationRadius = false
@@ -82,6 +82,7 @@ class GasStationViewModel: ObservableObject {
                 phase = .success(gasStations)
             }
         }
+        dismissAllAlerts()
     }
     
 //
@@ -115,14 +116,15 @@ class GasStationViewModel: ObservableObject {
         }
     }
     
+    @Sendable
     func loadGasStations() async {
         if Task.isCancelled || isPreviewData {
             isPreviewData.toggle()
             return
         }
         
-        if let gasStations = await cache.value(forKey: stationForVehicle.fuelTyp[0].rawValue) {
-            print("[GasStation]: CACHE HIT for \(stationForVehicle.fuelTyp[0].rawValue)")
+        if let gasStations = await cache.value(forKey: selectedFuelTyp.rawValue) {
+            print("[GasStation]: CACHE HIT for \(selectedFuelTyp.rawValue)")
             withAnimation {
                 //                phase = .success(gasStations)
                 calculationEvaluation(data: gasStations)
@@ -144,12 +146,12 @@ class GasStationViewModel: ObservableObject {
             
             gasStationAPI.cancelPreviousRequest()
             
-            let gasStations = try await gasStationAPI.fetch(with: GasStationRequestParameters(lat: currentLocation.coordinate.latitude, lng: currentLocation.coordinate.longitude, fuelTyp: stationForVehicle.fuelTypGasStation, radius: radius, sortTyp: gasStationSort, sortDirection: isGasStationSortDirectionAsc ? "asc" : "desc"))
-            await cache.setValue(gasStations, forKey: stationForVehicle.fuelTyp[0].rawValue)
+            let gasStations = try await gasStationAPI.fetch(with: GasStationRequestParameters(lat: currentLocation.coordinate.latitude, lng: currentLocation.coordinate.longitude, fuelTyp: selectedFuelTyp.apiName, radius: radius, sortTyp: gasStationSort, sortDirection: isGasStationSortDirectionAsc ? "asc" : "desc"))
+            await cache.setValue(gasStations, forKey: selectedFuelTyp.rawValue)
             
             if Task.isCancelled { return }
             
-            print("[GasStation]: Fetched GasStations for fuel: \(stationForVehicle.fuelTyp[0]), radius: \(radius)km, sortTyp: \(gasStationSort)")
+            print("[GasStation]: Fetched GasStations for fuel: \(selectedFuelTyp), radius: \(radius)km, sortTyp: \(gasStationSort)")
             print("[GasStation]: \(gasStations.count)")
             calculationEvaluation(data: gasStations) // Includes success phase setter
             
@@ -208,9 +210,4 @@ class GasStationViewModel: ObservableObject {
         }
     }
     
-}
-extension Double {
-    func truncate(places : Int)-> Double {
-        return Double(floor(pow(10.0, Double(places)) * self)/pow(10.0, Double(places)))
-    }
 }

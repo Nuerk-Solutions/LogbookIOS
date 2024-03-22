@@ -20,8 +20,8 @@ struct RefuelInfoList: View {
     var body: some View {
         Section(isExpanded: $isExpanded.animation()) {
             VStack(spacing: 5) {
-                ForEach(FuelTyp.allNonApiCases, id: \.id) { item in
-                    RefuelInfo(fuelInformation: item.rawValue, isAllowed: vehicle.fuelTyp.contains(item), isPrefered: vehicle.fuelTyp[0] == item)
+                ForEach(FuelTyp.allCases, id: \.id) { item in
+                    RefuelInfo(fuelInformation: item.rawValue, isAllowed: vehicle.fuelTyp.contains(item), isPrefered: item == vehicle.preferedFuelTyp)
                 }
             }
         } header: {

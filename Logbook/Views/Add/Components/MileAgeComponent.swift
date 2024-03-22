@@ -35,7 +35,7 @@ struct MileAgeComponent: View {
             VStack(spacing: 8) {
                 VStack(alignment: .leading, spacing: 3) {
                     Text("Aktueller \(newLogbook.mileAge.unit.fullName)")
-                        .customFont(.subheadline)
+                        .font(.subheadline)
                         .foregroundColor(.secondary)
                     TextField("", value: $newLogbook.mileAge.current, format: .number)
                         .customTextField(image: Image(systemName: "car.fill"), suffix: newLogbook.mileAge.unit.name)
@@ -45,7 +45,7 @@ struct MileAgeComponent: View {
                         .disabled(true)
                     
                     Text("Neuer \(newLogbook.mileAge.unit.fullName)")
-                        .customFont(.subheadline)
+                        .font(.subheadline)
                         .foregroundColor(.secondary)
                     TextField("", value: $newLogbook.mileAge.new, formatter: showSeperator ? numberFormatterWGroup : numberFormatterNoGroup, onEditingChanged: { isEdit in
                         showSeperator = !isEdit
@@ -56,7 +56,7 @@ struct MileAgeComponent: View {
                     .submitLabel(.done)
                     
                     Text("Reiseziel")
-                        .customFont(.subheadline)
+                        .font(.subheadline)
                         .foregroundColor(.secondary)
                     TextField("", text: $newLogbook.reason)
                         //.addDoneButtonOnKeyboard()

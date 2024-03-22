@@ -39,7 +39,7 @@ struct EntrySubmitComponent: View {
                 HStack {
                     Image(systemName: "arrow.right")
                     Text("Fahrt hinzufügen")
-                        .customFont(.headline)
+                        .font(.headline)
                 }
                 .largeButton(disabled: !newEntryVM.newLogbook.isSubmittable)
             }

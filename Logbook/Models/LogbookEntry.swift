@@ -6,10 +6,10 @@
 //
 
 import Foundation
-import SwiftUI_Extensions
 import Alamofire
+import SwiftUI
 
-struct LogbookEntry {
+struct LogbookEntry: Codable, Identifiable, Equatable {
     
     init(mileAge: MileAge = MileAge()) {
         self._id = nil
@@ -88,10 +88,6 @@ struct MileAge: Codable, Equatable {
     var cost: Double?
 }
 
-extension LogbookEntry: Codable {}
-extension LogbookEntry: Equatable {}
-extension LogbookEntry: Identifiable {}
-
 extension LogbookEntry {
     
     static var previewData: LogbookAPIResponse {
@@ -104,6 +100,22 @@ extension LogbookEntry {
         let apiResponse = try! jsonDecoder.decode(LogbookAPIResponse.self, from: data)
         
         return apiResponse
+    }
+    
+    var isSubmittable: Bool {
+        self.mileAge.new > self.mileAge.current && !self.reason.isEmpty
+    }
+    
+    var distance: Double {
+        Double(self.mileAge.new - self.mileAge.current)
+    }
+    
+    var computedDistance: Double {
+        distance * self.mileAge.unit.distanceMultiplier
+    }
+    
+    var hasAddInfo: Bool {
+        self.service != nil || self.refuel != nil
     }
 }
 
@@ -140,8 +152,14 @@ enum UnitEnum: String, CaseIterable, Codable, Identifiable {
         }
     }
     
+    
+    var distanceMultiplier: Double {
+        self == .KM ? 1 : 1.60934
+    }
+    
     var id: String { UUID().uuidString }
 }
+
 
 enum VehicleEnum: String, CaseIterable, Identifiable, Codable, Equatable {
     case Ferrari
@@ -164,17 +182,16 @@ enum VehicleEnum: String, CaseIterable, Identifiable, Codable, Equatable {
         }
     }
     
-    
-    var fuelTypGasStation: FuelTyp {
+    var preferedFuelTyp: FuelTyp {
         switch self {
-        case .Ferrari, .MX5, .Porsche, .DS:
-            return .SUPER
+        case .Ferrari, .MX5:
+            return .SUPER_95_E5
         case .VW:
             return .DIESEL
-            
+        case .Porsche, .DS:
+            return .SUPER_PLUS_98_E5
         }
     }
-    
     
     var unit: UnitEnum {
         return self != .MX5 ? .KM : .MILE
@@ -210,9 +227,24 @@ func getVehicleIcon(vehicleTyp: VehicleEnum) -> String {
     case .VW:
         return "VW"
     case .DS:
-        return "ds"
+        return "DS"
     case .MX5:
-        return "mx5"
+        return "MX5"
+    }
+}
+
+func getVehicleBackgroundColor(vehicleTyp: VehicleEnum) -> Color {
+    switch vehicleTyp {
+    case .Ferrari:
+        return Color.red.opacity(0.2)
+    case .Porsche:
+        return Color.black.opacity(0.3)
+    case .VW:
+        return Color.gray.opacity(0.1)
+    case .DS:
+        return Color.brown.opacity(0.2)
+    case .MX5:
+        return Color.blue.opacity(0.1)
     }
 }
 
@@ -230,59 +262,8 @@ func getVehicleBackground(vehicleTyp: VehicleEnum) -> String {
 }
 
 
-extension Optional where Wrapped == String {
-    var _bound: String? {
-        get {
-            return self
-        }
-        set {
-            self = newValue
-        }
-    }
-    public var bound: String {
-        get {
-            return _bound ?? ""
-        }
-        set {
-            _bound = newValue.isEmpty ? nil : newValue
-        }
-    }
-}
-
-extension Optional where Wrapped == Service {
-    var _bound: Service? {
-        get {
-            return self
-        }
-        set {
-            self = newValue
-        }
-    }
-    public var bound: Service {
-        get {
-            return _bound ?? Service()
-        }
-        set {
-            _bound = newValue
-        }
-    }
-}
-
-extension Optional where Wrapped == Refuel {
-    var _bound: Refuel? {
-        get {
-            return self
-        }
-        set {
-            self = newValue
-        }
-    }
-    public var bound: Refuel {
-        get {
-            return _bound ?? Refuel()
-        }
-        set {
-            _bound = newValue
-        }
+func getLogbookForVehicle(lastLogbooks: [LogbookEntry], vehicle: VehicleEnum) -> LogbookEntry? {
+    lastLogbooks.first { entry in
+        entry.vehicle == vehicle
     }
 }

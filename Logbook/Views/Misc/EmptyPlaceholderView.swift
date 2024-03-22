@@ -28,6 +28,7 @@ struct EmptyPlaceholderView: View {
             Text(text)
             Spacer()
         }
+        .onAppear(perform: dismissAllAlerts)
     }
 }
 

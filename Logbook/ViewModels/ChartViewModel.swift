@@ -46,4 +46,15 @@ class ChartViewModel: ObservableObject {
         
     }
     
+    
+    func animateGraph(fromChange: Bool = false) {
+        for(index, _) in logbooks.enumerated() {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) * (fromChange ? 0.03 : 0.05)) { [self] in
+                withAnimation(fromChange ? .easeInOut(duration: 0.5) : .interactiveSpring(response: 0.8, dampingFraction: 0.8, blendDuration: 0.8)) {
+                    logbooks[index].animated = true
+                }
+            }
+        }
+    }
+    
 }

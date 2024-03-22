@@ -19,7 +19,7 @@ struct DVDComponent: View {
         VStack {
             HStack {
                 DatePicker("Datum", selection: $newLogbook.date, in: (getLogbookForVehicle(lastLogbooks: lastLogbooks, vehicle: newLogbook.vehicle)?.date ?? Date())...Date())
-                    .customFont(.body)
+                    .font(.body)
 
                 
                 Menu(content: {
@@ -29,7 +29,7 @@ struct DVDComponent: View {
                                 .tag(driver)
                         }
                     } label: {}
-                    .customFont(.body)
+                        .font(.body)
                 }, label: {
                     Image(systemName: "person.circle")
                         .resizable()
@@ -47,7 +47,7 @@ struct DVDComponent: View {
     
     @ViewBuilder
     func VehicleView() -> some View {
-        SegmentedControl(items: VehicleEnum.allCases, images: 
+        SegmentControlContainer(items: VehicleEnum.allCases, images: 
                             VehicleEnum.allCases.map { $0.rawValue + "_32" }, selectedItem: $newLogbook.vehicle)
     }
     

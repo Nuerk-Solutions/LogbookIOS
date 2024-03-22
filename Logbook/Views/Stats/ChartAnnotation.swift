@@ -13,12 +13,6 @@ struct ChartAnnotation: View {
     var date: Date
     var consumption: Double
     
-    let dayAndMonth: DateFormatter = {
-        var dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd.MM"
-        return dateFormatter
-    }()
-    
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             

@@ -19,15 +19,6 @@
       }
     },
     {
-      "identity" : "macaw",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/exyte/Macaw",
-      "state" : {
-        "revision" : "29ec199cbc9c814f8ceffc1a33b8775b7349dcdd",
-        "version" : "0.9.10"
-      }
-    },
-    {
       "identity" : "swiftdate",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/malcommac/SwiftDate.git",
@@ -61,15 +52,6 @@
       "state" : {
         "revision" : "18e965f867e37a558ad13c12d330dbe047099180",
         "version" : "1.1.2"
-      }
-    },
-    {
-      "identity" : "swxmlhash",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/drmohundro/SWXMLHash",
-      "state" : {
-        "revision" : "6469881a3f30417c5bb02404ea4b69207f297592",
-        "version" : "6.0.0"
       }
     }
   ],

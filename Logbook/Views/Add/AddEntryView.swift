@@ -81,7 +81,7 @@ struct AddEntryView: View {
                 .task(setDefaults)
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
-                        AlternativeCloseButton(action: {
+                        DarkCloseButton(action: {
                             withAnimation {
                                 show.toggle()
                             }
