@@ -49,8 +49,8 @@ struct LogbookAPI {
         deleteLogbook(from: URL(string: baseUrl + "/\(logbook._id!)")!)
     }
     
-    func fetchVouchers() async throws -> [Voucher] {
-        return try await session.request(URL(string: baseUrl + "/voucher/list")!, method: .get)
+    func fetchVouchers(redeemer: DriverEnum) async throws -> [Voucher] {
+        return try await session.request(URL(string: baseUrl + "/voucher/list/" + redeemer.rawValue)!, method: .get)
             .validate(statusCode: 200..<201)
             .validate(contentType: ["application/json"])
             .responseData { (response) in
@@ -66,9 +66,9 @@ struct LogbookAPI {
             .value
     }
     
-    func redeemVoucher(voucher voucherCode: Voucher) async throws -> Bool {
+    func redeemVoucher(voucher voucherCode: Voucher, redeemer: DriverEnum) async throws -> Bool {
         let (data, _) = try await withUnsafeThrowingContinuation { (continuation: UnsafeContinuation<(Data, URLResponse?), Error>) in
-            session.request(URL(string: baseUrl + "/voucher/redeem")!, method: .post, parameters: voucherCode, encoder: JSONParameterEncoder(encoder: jsonEncoder))
+            session.request(URL(string: baseUrl + "/voucher/redeem/" + redeemer.rawValue)!, method: .post, parameters: voucherCode, encoder: JSONParameterEncoder(encoder: jsonEncoder))
                 .validate(statusCode: 200..<202)
                 .validate(contentType: ["text/html"])
                 .responseData { response in
@@ -87,7 +87,7 @@ struct LogbookAPI {
     }
     
     func createVoucher(voucher voucherCode: Voucher) async throws -> Voucher {
-        return try await session.request(URL(string: baseUrl + "/voucher/create")!, method: .post, parameters: voucherCode, encoder: JSONParameterEncoder(encoder: jsonEncoder))
+        return try await session.request(URL(string: baseUrl + "/voucher/create/")!, method: .post, parameters: voucherCode, encoder: JSONParameterEncoder(encoder: jsonEncoder))
             .validate(statusCode: 201..<202)
             .validate(contentType: ["application/json"])
             .responseData { (response) in
@@ -157,6 +157,7 @@ struct LogbookAPI {
                 .responseData { (response) in
                     switch response.result {
                     case .success:
+//                        print()
                         break
                     case .failure(let error):
 //                        return
@@ -164,9 +165,9 @@ struct LogbookAPI {
                         // see https://karenxpn.medium.com/swiftui-mvvm-combine-alamofire-make-http-requests-the-right-way-and-handle-errors-258e0f0bb0df
                         //                    return generateError(code: response.response?.statusCode ?? -1, description: error.localizedDescription ?? "Ein Fehler ist aufgetreten")
                     }
-//                    if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-//                        print("Data: \(utf8Text)")
-//                    }
+                    if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                        print("Data: \(utf8Text)")
+                    }
                 }
                 .serializingDecodable(LogbookAPIResponse.self, decoder: jsonDecoder)
                 .value
@@ -179,11 +180,11 @@ struct LogbookAPI {
             print("type mismatch for type \(type) in JSON: \(context.debugDescription)")
         } catch DecodingError.dataCorrupted(let context) {
             print("data found to be corrupted in JSON: \(context.debugDescription)")
-        } 
+        }
         catch let error as NSError {
             NSLog("Error in read(from:ofType:) domain= \(error.domain), description= \(error.localizedDescription)")
         }
-        return LogbookAPIResponse(total: 0, length: 0, limit: 0, pageCount: 0, page: 0, data: [])
+        return LogbookAPIResponse(total: 0, length: 0, limit: 1, pageCount: 1, page: 1, data: [])
     }
     
     private func sendLogbook(from url: URL, logbook body: LogbookEntry) async throws -> LogbookEntry {

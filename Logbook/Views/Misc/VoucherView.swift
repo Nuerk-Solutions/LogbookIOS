@@ -28,14 +28,12 @@ struct VoucherView: View {
                     Spacer()
                     if voucher.redeemed {
                         VStack {
-                            if !voucher.isExpired {
+                            if !voucher.isExpired && voucher.expiration > Date() {
                                 Text("Verfällt in \(voucher.expiration.toRelative(since: DateInRegion(), dateTimeStyle: .named, unitsStyle: .full))")
                             } else {
                                 Text("Code Verfallen!")
+                                    .foregroundStyle(.red)
                             }
-                        }
-                        .if(voucher.isExpired) { view in
-                            view.foregroundStyle(.red)
                         }
                     } else {
                         Text("\(voucher.remainingDistance) km")

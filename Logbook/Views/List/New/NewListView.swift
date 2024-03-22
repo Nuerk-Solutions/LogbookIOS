@@ -24,10 +24,8 @@ struct NewListView: View {
     
     var body: some View {
         NavigationStack {
-            ListContent(logbooks: filteredLogbooks)
-                .refreshable {
-                    await logbooksVM.refreshTask()
-                }
+            ListContent(logbooks: [])
+                .refreshable(action: logbooksVM.refreshTask)
                 .sensoryFeedback(.impact, trigger: logbooksVM.lastListRefresh)
                 .overlay {
                     if  logbooksVM.isFetchingNextPage || nAIM.isVisible {
@@ -70,25 +68,16 @@ struct NewListView: View {
     }
     
     
-    @Sendable
     private func loadTask() async {
         await logbooksVM.loadNextPage()
     }
     
     private var filteredLogbooks: [LogbookEntry] {
         if (searchString.isEmpty) {
-            return logbooks
+            return logbooksVM.loadedLogbooks
         }
-        return logbooks.filter {
+        return logbooksVM.loadedLogbooks.filter {
             return $0.driver.rawValue.lowercased().contains(searchString.lowercased()) || $0.reason.lowercased().contains(searchString.lowercased()) || $0.date.getHumanReadableDayString().contains(searchString.lowercased())
-        }
-    }
-    
-    private var logbooks: [LogbookEntry] {
-        if case let .success(logbooks) = logbooksVM.phase {
-            return logbooks
-        } else {
-            return logbooksVM.phase.value ?? logbooksVM.loadedLogbooks
         }
     }
 }

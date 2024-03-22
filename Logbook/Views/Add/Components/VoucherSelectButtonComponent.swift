@@ -11,6 +11,7 @@ struct VoucherSelectButtonComponent: View {
     
     @State private var showVoucherSelectView: Bool = false
     @State private var usedVoucher: Bool = false
+    @EnvironmentObject private var voucherVM: VoucherViewModel
     
     var body: some View {
         HStack {
@@ -18,6 +19,7 @@ struct VoucherSelectButtonComponent: View {
                 withAnimation {
                     if(usedVoucher) {
                         usedVoucher.toggle()
+                        voucherVM.selectedVoucher = nil
                     } else {
                         showVoucherSelectView.toggle()
                     }
@@ -37,6 +39,7 @@ struct VoucherSelectButtonComponent: View {
         .sheet(isPresented: $showVoucherSelectView, content: {
             VoucherSelectView(usedVoucher: $usedVoucher, showVoucherSelectView: $showVoucherSelectView)
                 .presentationDetents([.medium])
+                .presentationDragIndicator(.visible)
         })
     }
 }

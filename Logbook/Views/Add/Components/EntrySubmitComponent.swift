@@ -11,6 +11,7 @@ import AlertKit
 struct EntrySubmitComponent: View {
     @EnvironmentObject var newEntryVM: NewEntryViewModel
     @EnvironmentObject var networkReachablility: NetworkReachability
+    @EnvironmentObject var voucherVM: VoucherViewModel
     
     var body: some View {
         if(newEntryVM.newLogbook.isSubmittable) {
@@ -19,7 +20,7 @@ struct EntrySubmitComponent: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 15, height: 15)
-                Text("\(String(format: "%.0f\(newEntryVM.newLogbook.mileAge.unit.name)", newEntryVM.newLogbook.distance)) / \((newEntryVM.newLogbook.computedDistance * 0.2).formatted(.currency(code: "EUR")))")
+                Text(.init("\(String(format: "%.0f\(newEntryVM.newLogbook.mileAge.unit.name)", newEntryVM.newLogbook.distance)) / \(summaryString)"))
                     .lineLimit(1)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
@@ -30,6 +31,9 @@ struct EntrySubmitComponent: View {
             Button {
                 if !newEntryVM.newLogbook.isSubmittable {
                     return
+                }
+                if voucherVM.selectedVoucher != nil {
+                    newEntryVM.newLogbook.details.voucher = VoucherResponse(code: voucherVM.selectedVoucher!.code, usedValue: newEntryVM.newLogbook.voucherRemainingDistance(voucher: voucherVM.selectedVoucher!))
                 }
                 
                 Task {
@@ -47,6 +51,13 @@ struct EntrySubmitComponent: View {
             .transition(.identity)
             .disabled(!newEntryVM.newLogbook.isSubmittable)
         }
+    }
+    
+    var summaryString: String {
+        if voucherVM.selectedVoucher == nil {
+            return (newEntryVM.newLogbook.computedDistance * 0.2).formatted(.currency(code: "EUR"))
+        }        
+        return "~~\((newEntryVM.newLogbook.computedDistance * 0.2).formatted(.currency(code: "EUR")))~~ \((newEntryVM.newLogbook.voucherRemainingDistance(voucher: voucherVM.selectedVoucher!) * 0.2).formatted(.currency(code: "EUR")))"
     }
 }
 

@@ -50,6 +50,7 @@ class LogbooksViewModel: ObservableObject {
         }
     }
     
+    @Sendable
     func deleteEntry(logbook: LogbookEntry) async {
         if Task.isCancelled { return }
         
@@ -58,8 +59,13 @@ class LogbooksViewModel: ObservableObject {
             print("[Deleting]: 🛑 Prevent API request...")
             return
         }
-        
         logbookAPI.delete(with: logbook)
+        
+        withAnimation {
+            loadedLogbooks.removeAll { entry in
+                entry._id == logbook._id
+            }
+        }
         
     }
     
@@ -67,7 +73,7 @@ class LogbooksViewModel: ObservableObject {
     func refreshTask() async {
         await cache.removeValue(forKey: "\(pagingData.currentPage)")
         await pagingData.reset()
-        try? await Task.sleep(nanoseconds: 0_500_000_000)
+        try? await Task.sleep(nanoseconds: 1_000_000_000)
         self.lastListRefresh = Int(Date().timeIntervalSince1970)
     }
     
@@ -81,8 +87,9 @@ class LogbooksViewModel: ObservableObject {
         
         if let nextLogbooks = await nextLogbooksFromCache(), !nextLogbooks.isEmpty {
             withAnimation {
-                self.phase = .success(nextLogbooks)
+//                self.phase = .success(nextLogbooks)
                 loadedLogbooks = nextLogbooks
+                phase = .empty
             }
             return
         }
@@ -129,7 +136,8 @@ class LogbooksViewModel: ObservableObject {
             if cacheHasChanged {
                 withAnimation {
                     loadedLogbooks = logbooks
-                    phase = .success(logbooks)
+//                    phase = .success(logbooks)
+                    phase = .empty
                 }
                 return
             }
@@ -142,6 +150,7 @@ class LogbooksViewModel: ObservableObject {
         }
     }
     
+    @Sendable
     func loadNextPage() async {
         if Task.isCancelled {  return }
         
@@ -152,9 +161,11 @@ class LogbooksViewModel: ObservableObject {
         
         if let nextLogbooks = await nextLogbooksFromCache(), !nextLogbooks.isEmpty {
             withAnimation {
-                phase = .success(nextLogbooks)
+//                phase = .success(nextLogbooks)
+                loadedLogbooks = nextLogbooks
+                phase = .empty
             }
-            loadedLogbooks = self.phase.value!
+//            loadedLogbooks = self.phase.value!
             return
         }
         
@@ -170,10 +181,12 @@ class LogbooksViewModel: ObservableObject {
             try? await cache.saveToDisk()
             
             withAnimation {
-                phase = .success(logbooks)
+//                phase = .success(logbooks)
+                loadedLogbooks = nextLogbooks
+                phase = .empty
             }
             
-            loadedLogbooks = self.phase.value!
+//            loadedLogbooks = self.phase.value!
         } catch {
             print(error.localizedDescription)
         }

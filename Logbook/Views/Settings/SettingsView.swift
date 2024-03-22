@@ -60,7 +60,7 @@ struct SettingsView: View {
                         Button("OK") {
                             isAlertVisible.toggle()
                             Task {
-                                let success = await voucherVM.redeemVoucher(voucher: Voucher(code: voucherCode))
+                                let success = await voucherVM.redeemVoucher(voucher: Voucher(code: voucherCode), redeemer: currentDriver)
                                 print(success)
                                 if(success) {
                                     showSuccessfulAlert(title: "Voucher Hinzugefügt")
@@ -89,21 +89,21 @@ struct SettingsView: View {
                 }
                 
                 if isAllowLocationTracking {
-                    Section {
-                        Toggle(isOn: $isShowNotifications.animation()) {
-                            Label("Benachrichtigungen", systemImage: isShowNotifications ? "bell" : "bell.slash")
-                        }
-                        if isShowNotifications {
-                            Toggle(isOn: $isShowNotificationsIconBadge) {
-                                Label("Icon Badge", systemImage: "bell.badge")
-                            }
-                        }
-                    } header: {
-                        Text("Benachrichtigung")
-                    } footer: {
-                        Text("Du bekommst eine Benachrichtigung, wenn du außerhalb eines Umkreises von 600m dem ARB 19 wieder näher kommst.")
-                    }
-                    .disabled(true)
+//                    Section {
+//                        Toggle(isOn: $isShowNotifications.animation()) {
+//                            Label("Benachrichtigungen", systemImage: isShowNotifications ? "bell" : "bell.slash")
+//                        }
+//                        if isShowNotifications {
+//                            Toggle(isOn: $isShowNotificationsIconBadge) {
+//                                Label("Icon Badge", systemImage: "bell.badge")
+//                            }
+//                        }
+//                    } header: {
+//                        Text("Benachrichtigung")
+//                    } footer: {
+//                        Text("Du bekommst eine Benachrichtigung, wenn du außerhalb eines Umkreises von 600m dem ARB 19 wieder näher kommst.")
+//                    }
+//                    .disabled(true)
                     
                     Section {
                         Toggle(isOn: $isIntelligentGasStationRadius.animation()) {
@@ -246,14 +246,13 @@ struct SettingsView: View {
     var profile: some View {
         VStack {
             ZStack {
-                Picker("", selection: $currentDriver.animation()) {
+                Picker(selection: $currentDriver.animation(), label: EmptyView()) {
                     ForEach(DriverEnum.allCases) { driver in
                         Text(driver.rawValue)
                             .tag(driver)
                     }
                 }
-                .labelsHidden()
-                .frame(maxWidth: 50, maxHeight: 50)
+                .frame(maxWidth: 100, maxHeight: 40)
                 
                 Image(systemName: "person.crop.circle.fill.badge.checkmark")
                     .symbolVariant(.circle.fill)

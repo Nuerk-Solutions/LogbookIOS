@@ -59,6 +59,8 @@ struct EntryView: View {
                     AddInfoSection(entry: entry)
                         .opacity(appear[2] ? 1 : 0)
                 }
+                VStack {}
+                    .padding(.bottom, 60)
             }
             .coordinateSpace(name: "scroll")
             .background(Color("Background"))

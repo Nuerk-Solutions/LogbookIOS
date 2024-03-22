@@ -71,7 +71,7 @@ struct Details: Codable, Equatable {
     
     var covered: Bool
     var driver: DriverEnum?
-    var code: String?
+    var voucher: VoucherResponse?
     var notes: String?
 }
 
@@ -112,6 +112,14 @@ extension LogbookEntry {
     
     var computedDistance: Double {
         distance * self.mileAge.unit.distanceMultiplier
+    }
+    
+    func voucherRemainingDistance(voucher: Voucher) -> Double {
+        let dist = self.computedDistance - Double(voucher.remainingDistance)
+        if dist < 0 {
+            return 0.0
+        }
+        return dist
     }
     
     var hasAddInfo: Bool {

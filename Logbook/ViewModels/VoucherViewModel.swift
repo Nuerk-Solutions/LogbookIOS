@@ -12,6 +12,8 @@ import SwiftUI
 class VoucherViewModel: ObservableObject {
     
     @Published var vouchers: [Voucher] = Voucher.previewData
+    @Published var selectedVoucher: Voucher?
+    @AppStorage("currentDriver") var currentDriver: DriverEnum = .Andrea
     private let logbookAPI = LogbookAPI.shared
     
     @Sendable
@@ -19,7 +21,7 @@ class VoucherViewModel: ObservableObject {
         if Task.isCancelled { return }
         
         do {
-            let result = try await logbookAPI.fetchVouchers()
+            let result = try await logbookAPI.fetchVouchers(redeemer: currentDriver)
 
             withAnimation {
                 vouchers = result
@@ -30,10 +32,10 @@ class VoucherViewModel: ObservableObject {
         }
     }
     
-    func redeemVoucher(voucher: Voucher) async -> Bool {
+    func redeemVoucher(voucher: Voucher, redeemer: DriverEnum) async -> Bool {
         if Task.isCancelled { return false }
         do {
-            return try await logbookAPI.redeemVoucher(voucher: voucher)
+            return try await logbookAPI.redeemVoucher(voucher: voucher, redeemer: redeemer)
         } catch {
             print(error)
             if Task.isCancelled { return false }

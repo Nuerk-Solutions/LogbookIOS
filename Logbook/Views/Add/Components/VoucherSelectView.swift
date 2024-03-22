@@ -11,14 +11,13 @@ struct VoucherSelectView: View {
     @Binding var usedVoucher: Bool
     @Binding var showVoucherSelectView: Bool
     @State var editMode = EditMode.active
-    @State private var selection: Voucher?
     
     @EnvironmentObject private var voucherVM: VoucherViewModel
     
     var body: some View {
-        List(voucherVM.vouchers, id: \.self, selection: $selection.animation()) { voucher in
+        List(voucherVM.vouchers, id: \.self, selection: $voucherVM.selectedVoucher.animation()) { voucher in
             HStack {
-                Image(systemName: selection == voucher ? "checkmark.circle.fill" : "circle")
+                Image(systemName: voucherVM.selectedVoucher == voucher ? "checkmark.circle.fill" : "circle")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 20, height: 20)
@@ -42,9 +41,17 @@ struct VoucherSelectView: View {
                 Text("\(voucher.remainingDistance) km")
             }
         }
+        .overlay {
+            if voucherVM.vouchers.isEmpty {
+                VStack {
+                    Text("Keine Gutscheine verfügbar")
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+        }
         .task(voucherVM.loadVouchers)
         .environment(\.editMode, $editMode)
-        .onChange(of: selection) { oldValue, newValue in
+        .onChange(of: voucherVM.selectedVoucher) { oldValue, newValue in
             showVoucherSelectView.toggle()
             usedVoucher = true
         }

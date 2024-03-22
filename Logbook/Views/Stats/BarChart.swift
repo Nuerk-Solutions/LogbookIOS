@@ -20,11 +20,13 @@ struct BarChart: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 12) {
+                VStack(alignment: .leading, spacing: 20) {
                     StatsTitleComponent(vehicleSelection: $vehicleSelection)
                         .environmentObject(chartVM)
                     
-                    let totalAverageConsumption: Double = chartVM.logbooks.average(\.refuel!.consumption!) // TODO: Crash check
+                    var totalAverageConsumption: Double = chartVM.logbooks.average { item in
+                        item.refuel?.consumption ?? 0
+                    }
                     
                     let maxYScale = chartVM.logbooks.max { item1, item2 in
                         return Int(round((item2.refuel?.consumption!)! / 2.0)) * 2 > Int(round((item1.refuel?.consumption!)! / 2.0)) * 2
@@ -55,49 +57,47 @@ struct BarChart: View {
                                 }
                         }
                         
-//                        RuleMark(y: .value("Ø", totalAverageConsumption))
-//                            .lineStyle(StrokeStyle(lineWidth: 3))
-//                            .foregroundStyle(.gray)
-//                            .chartYAxisLabel("L/ 100km")
-//                            .chartXAxisLabel("Datum", alignment: .bottomTrailing)
-//                            .chartYScale(domain: 0...(maxYScale > 15 ? 15 : maxYScale))
-//                            .chartYAxis {
-//                                AxisMarks(position: .leading)
-//                            }
-//                            .chartXAxis {
-//                                AxisMarks(position: AxisMarkPosition.automatic)
-//                            }
-//                            .chartXSelection(value: $barSelection.animation(.snappy(duration: 0.2)))
-//                            .chartLegend(position: .bottom, alignment: .leading, spacing: 25)
-//                            .frame(height: 250)
-//                            .padding(.top, 15)
+                        RuleMark(y: .value("Ø", totalAverageConsumption))
+                                .lineStyle(StrokeStyle(lineWidth: 3))
+                                .foregroundStyle(.gray)
                     }
-                    .onChange(of: barSelection, { oldValue, newValu in
-                        print(oldValue, newValu)
-                    })
-                    .padding()
-                    .background {
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .fill(.regularMaterial.shadow(.drop(radius: 2)))
+                    .chartYAxisLabel("L/ 100km")
+                    .chartXAxisLabel("Datum", alignment: .bottomTrailing)
+                    .chartYScale(domain: 0...(maxYScale > 15 ? 15 : maxYScale))
+                    .chartYAxis {
+                        AxisMarks(position: .leading)
                     }
+                    .chartXAxis {
+                        AxisMarks(position: AxisMarkPosition.automatic)
+                    }
+                    .chartXSelection(value: $barSelection.animation(.snappy(duration: 0.2)))
+                    .chartLegend(position: .bottom, alignment: .leading, spacing: 25)
+                    .frame(height: 250)
+                    .padding(.top, 15)
+//                    .padding()
                     .navigationTitle("Statistiken")
-                    .padding()
+//                    .padding()
                     .animation(.snappy, value: chartVM.logbooks)
                     .task {
                         await chartVM.loadLogbooks()
                         
-                        //                    chartVM.updateLogbooks(for: [.Ferrari])
-                        //                    await chartVM.loadLogbooks()
+//                                            chartVM.updateLogbooks(for: [.Ferrari])
+//                                            await chartVM.loadLogbooks()
                         
                     }
-//                    .onChange(of: chartVM.logbooks) { oldValue, newValue in
-//                        if(oldValue.count == 0 && newValue.count != 0) {
-//                            //                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                            chartVM.animateGraph()
-//                            //                    }
-//                        }
-//                        
-//                    }
+                    .onChange(of: chartVM.logbooks) { oldValue, newValue in
+                        if(oldValue.count == 0 && newValue.count != 0) {
+                            //                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            chartVM.animateGraph()
+                            //                    }
+                        }
+                        
+                    }
+                }
+                .padding()
+                .background {
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .fill(.regularMaterial.shadow(.drop(radius: 2)))
                 }
             }
             

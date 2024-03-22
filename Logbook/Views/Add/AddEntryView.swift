@@ -54,6 +54,7 @@ struct AddEntryView: View {
                     }
                     EntrySubmitComponent()
                         .environmentObject(newEntryVM)
+                        .environmentObject(voucherVM)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 .navigationTitle("Neuer Eintrag")
@@ -62,7 +63,7 @@ struct AddEntryView: View {
                     AddInfoSelectComponent(showAddInfoSelection: $showAddInfoSelection, newLogbook: $newEntryVM.newLogbook)
                         .presentationDetents([.fraction(CGFloat(0.45))])
                         .presentationCornerRadius(30)
-                        .presentationBackground(.thinMaterial)
+//                        .presentationBackground(.regularMaterial) // TODO: CHECK WHY THIS CRASHES THE APP
                         .onAppear {
                             savedLogbook = newEntryVM.newLogbook
                         }
@@ -97,13 +98,16 @@ struct AddEntryView: View {
                             case .success(let logbook):
                                 showSuccessfulAlert()
                                 show.toggle()
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                    withAnimation {
-                                        logbooksVM.loadedLogbooks.insert(logbook, at: 0)
-                                        logbooksVM.phase = .success(logbooksVM.loadedLogbooks)
-                                    }
-                                    // model.lastAddedEntry = Date()  // Alternative: Trigger listener on listview to force update the logbooks
+                                Task {
+                                    await logbooksVM.refreshTask()
                                 }
+//                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//                                    withAnimation {
+//                                        logbooksVM.loadedLogbooks.insert(logbook, at: 0)
+//                                        logbooksVM.phase = .success(logbooksVM.loadedLogbooks)
+//                                    }
+                                    // model.lastAddedEntry = Date()  // Alternative: Trigger listener on listview to force update the logbooks
+//                                }
                             case .failure(_):
                                 showFailureAlert()
                             default:
