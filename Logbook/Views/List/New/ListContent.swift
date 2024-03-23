@@ -48,6 +48,7 @@ struct ListContent: View {
                         Button("", systemImage: "pencil") {
                             showDetails.toggle()
                         }
+                        .disabled(true)
                     }
                 }
             }
