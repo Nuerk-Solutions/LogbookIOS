@@ -49,7 +49,6 @@
 		E9227BC72B43510B00589E64 /* AddInfoButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9227BC62B43510B00589E64 /* AddInfoButtonComponent.swift */; };
 		E9227BCA2B43539800589E64 /* AddInfoSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9227BC92B43539800589E64 /* AddInfoSection.swift */; };
 		E92F54BB287DDE76008A72AF /* GasStationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F54BA287DDE76008A72AF /* GasStationAPI.swift */; };
-		E93043892BAE3301009CA929 /* OnlyChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93043882BAE3301009CA929 /* OnlyChart.swift */; };
 		E937B8262B55AC1100DC073A /* RefuelInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E937B8252B55AC1100DC073A /* RefuelInfo.swift */; };
 		E937B8282B55AFA200DC073A /* RefuelInfoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E937B8272B55AFA200DC073A /* RefuelInfoList.swift */; };
 		E937B82A2B55BB1B00DC073A /* VehicleFuelList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E937B8292B55BB1B00DC073A /* VehicleFuelList.swift */; };
@@ -166,7 +165,6 @@
 		E9227BC62B43510B00589E64 /* AddInfoButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInfoButtonComponent.swift; sourceTree = "<group>"; };
 		E9227BC92B43539800589E64 /* AddInfoSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInfoSection.swift; sourceTree = "<group>"; };
 		E92F54BA287DDE76008A72AF /* GasStationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasStationAPI.swift; sourceTree = "<group>"; };
-		E93043882BAE3301009CA929 /* OnlyChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyChart.swift; sourceTree = "<group>"; };
 		E934BD402B7D109400912B8C /* Logbook.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Logbook.entitlements; sourceTree = "<group>"; };
 		E937B8252B55AC1100DC073A /* RefuelInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefuelInfo.swift; sourceTree = "<group>"; };
 		E937B8272B55AFA200DC073A /* RefuelInfoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefuelInfoList.swift; sourceTree = "<group>"; };
@@ -491,7 +489,6 @@
 				E9C2D5C32B97B3AA004AEA58 /* Components */,
 				E9F32ED42B45C8740003303C /* BarChart.swift */,
 				E9F32ED62B45CF4F0003303C /* ChartAnnotation.swift */,
-				E93043882BAE3301009CA929 /* OnlyChart.swift */,
 			);
 			path = Stats;
 			sourceTree = "<group>";
@@ -717,7 +714,6 @@
 				E920B5FB285647B900683D67 /* SettingsAnimatedBlobComponent.swift in Sources */,
 				E9C2D5C02B97B1A8004AEA58 /* Utils.swift in Sources */,
 				E937B8262B55AC1100DC073A /* RefuelInfo.swift in Sources */,
-				E93043892BAE3301009CA929 /* OnlyChart.swift in Sources */,
 				E91AFA32283FD7020024131D /* LogbookEntry.swift in Sources */,
 				E9AF311C2B7942370051DD0B /* NewListView.swift in Sources */,
 				E969B0C42892D57500E22690 /* AddEntryView.swift in Sources */,

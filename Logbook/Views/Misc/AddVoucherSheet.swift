@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct AddVoucherSheet: View {
     @State private var date: Date = Date()
@@ -17,8 +18,12 @@ struct AddVoucherSheet: View {
     @Binding var showSheet: Bool
     
     @EnvironmentObject var voucherVM: VoucherViewModel
+    @Environment(\.dismiss) var dismiss
     
-    init(showSheet: Binding<Bool>) {
+    @State private var voucherResponse: Voucher? = nil
+    @State private var showVoucherCodeSheet: Bool = false
+    
+    init(showSheet: Binding<Bool> = .constant(false)) {
         UITableView.appearance().backgroundColor = UIColor.clear
         self._showSheet = showSheet
     }
@@ -61,10 +66,11 @@ struct AddVoucherSheet: View {
                     Button {
                         Task {
                             showSpinningAlert()
-                            let result = await voucherVM.createVoucher(voucher: Voucher(code: "", value: value, expiration: date, creator: creator))
-                            if result {
+                            self.voucherResponse = await voucherVM.createVoucher(voucher: Voucher(code: "", value: value, expiration: date, creator: creator))
+                            if (voucherResponse != nil) {
                                 dismissAllAlerts()
                                 showSheet.toggle()
+                                showVoucherCodeSheet.toggle()
                                 showSuccessfulAlert(title: "Gutschein erstellt")
                                 await voucherVM.loadVouchers()
                             } else {
@@ -82,6 +88,35 @@ struct AddVoucherSheet: View {
                 }
             }
             .listRowBackground(Color.clear)
+        }
+        .sheet(isPresented: $showVoucherCodeSheet) {
+            NavigationStack {
+                VStack {
+                    Text("\(self.voucherResponse?.code ?? "ERROR")")
+                        .bold()
+                        .font(.title2)
+                    
+                    Button {
+                        UIPasteboard.general.setValue(self.voucherResponse?.code ?? "ERROR",
+                            forPasteboardType: UTType.plainText.identifier)
+                        showSuccessfulAlert(title: "Gutschein kopiert!")
+                    } label: {
+                        Text("Kopieren")
+                    }
+                    .largeButton()
+                    .padding(.horizontal)
+                    
+                    Button("Fertig", role: .cancel) {
+                        self.showVoucherCodeSheet.toggle()
+                        self.dismiss()
+                    }
+                    .largeButton(color: "25801f")
+                    .padding(.horizontal)
+
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .navigationTitle("Gutschein erstellt")
+            }
         }
         .task {
             creator = currentDriver

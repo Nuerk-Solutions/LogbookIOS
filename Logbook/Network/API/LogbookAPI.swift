@@ -14,8 +14,8 @@ struct LogbookAPI {
     static let shared = LogbookAPI()
     private init() {}
     
-//    private let baseUrl = "https://api.nuerk-solutions.de/logbook"
-    private let baseUrl = "http://localhost:3000/v2/logbook"
+    private let baseUrl = "https://api.nuerk-solutions.de/v2/logbook"
+//    private let baseUrl = "http://localhost:3000/v2/logbook"
     private let session = ApiSession.logbookShared.session
     private let jsonDecoder: JSONDecoder = {
         let decoder = JSONDecoder()
@@ -76,6 +76,8 @@ struct LogbookAPI {
                     case .success(let value):
                         continuation.resume(returning: (value, response.response))
                     case .failure(let error):
+                        showFailureAlert(title: extractMessage(from: String(data: response.data!, encoding: .utf8) ?? "") ?? "")
+                        print(String(data: response.data!, encoding: .utf8))
                         continuation.resume(throwing: error)
                     }
                 }
@@ -247,6 +249,26 @@ struct LogbookAPI {
         components?.queryItems = queryItems
         return components!.url!
     }
+}
+
+func extractMessage(from jsonString: String) -> String? {
+    let pattern = "\"message\"\\s*:\\s*\"([^\"]+)\""
+    
+    do {
+        let regex = try NSRegularExpression(pattern: pattern)
+        let nsString = jsonString as NSString
+        let range = NSRange(location: 0, length: nsString.length)
+        if let match = regex.firstMatch(in: jsonString, options: [], range: range) {
+            let matchRange = match.range(at: 1)
+            if let swiftRange = Range(matchRange, in: jsonString) {
+                return String(jsonString[swiftRange])
+            }
+        }
+    } catch {
+        print("Error: \(error)")
+    }
+    
+    return nil
 }
 
 struct LogbookRequestParameters {

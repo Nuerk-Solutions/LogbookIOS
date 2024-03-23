@@ -99,6 +99,7 @@ struct BarChart: View {
                     RoundedRectangle(cornerRadius: 10, style: .continuous)
                         .fill(.regularMaterial.shadow(.drop(radius: 2)))
                 }
+                .padding()
             }
             
         }

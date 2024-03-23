@@ -103,16 +103,17 @@ struct CustomTextFieldView: ViewModifier {
 struct LargeButton: ViewModifier {
     let disabled: Bool
     let shadowRadius: CGFloat
+    let color: String
     
     func body(content: Content) -> some View {
         content
             .padding(20)
             .frame(maxWidth: .infinity)
-            .background(Color(hex: "F77D8E").opacity(disabled ? 0.35 : 1))
+            .background(Color(hex: color).opacity(disabled ? 0.35 : 1))
             .foregroundColor(.white)
             .mask(RoundedCorner(radius: 20, corners: [.topRight, .bottomLeft, .bottomRight]))
             .mask(RoundedRectangle(cornerRadius: 8))
-            .shadow(color: Color(hex: "F77D8E").opacity(0.5), radius: shadowRadius, x: 0, y: 10)
+            .shadow(color: Color(hex: color).opacity(0.5), radius: shadowRadius, x: 0, y: 10)
         
     }
 }

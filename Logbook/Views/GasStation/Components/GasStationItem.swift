@@ -46,7 +46,8 @@ struct GasStationItem: View {
             .background(Color(UIColor.systemBackground).opacity(0.3))
             .mask(Circle())
             .padding(6)
-            .overlay(CircularView(value: 1 - circleValue))
+//            .overlay(CircularView(value: 1 - circleValue))
+            .overlay(CircularView(value: 1))
             
             VStack(alignment: .leading, spacing: 8) {
                 VStack(alignment: .leading, spacing: 4) {
@@ -83,11 +84,11 @@ struct GasStationItem: View {
                 }
                 
                 
-                if progressValue != 0 {
-                    ProgressView(value: progressValue)
-                        .accentColor(.white)
-                        .frame(maxWidth: 132)
-                }
+//                if progressValue != 0 {
+//                    ProgressView(value: progressValue)
+//                        .accentColor(.white)
+//                        .frame(maxWidth: 132)
+//                }
             }
             Spacer()
         }

@@ -11,6 +11,7 @@ struct SettingsView: View {
     @State var isAlertVisible = false
     @State var voucherCode = ""
     @StateObject private var voucherVM: VoucherViewModel = VoucherViewModel()
+    @State var enableCode: Bool = true
     
     @AppStorage("gasStationRadius") var gasStationRadius: Int = 5
     var intProxy: Binding<Double>{
@@ -46,9 +47,17 @@ struct SettingsView: View {
                 Section {
                     profile
                 }
-                
                 Section {
-                    NavigationLink("Übersicht", symbol: "123.rectangle", destination: VoucherView())
+//                    NavigationLink("Übersicht", symbol: "123.rectangle", destination: VoucherView())
+                    
+                    NavigationLink {
+                        AddVoucherSheet()
+                            .environmentObject(voucherVM)
+                    } label: {
+                        Image(systemName: "123.rectangle")
+                        Text("Gutschein hinzufügen")
+                    }
+                    
                     Button {
                         isAlertVisible.toggle()
                     } label: {
@@ -65,30 +74,31 @@ struct SettingsView: View {
                                 if(success) {
                                     showSuccessfulAlert(title: "Voucher Hinzugefügt")
                                 } else {
-                                    showFailureAlert(title: "Ein Fehler ist aufgetreten")
+//                                    showFailureAlert(title: "Ein Fehler ist aufgetreten")
                                 }
                                 voucherCode.removeAll()
                             }
                         }
                         Button("Abbrechen", role: .cancel) { }
                     }
+                    .disabled(self.enableCode)
                 } header: {
                     Text("Gutscheine")
                 } footer: {
-                    Text("Gutscheine sind mit dem Einlösen an den oben ausgewählten Benutzer gebunden.")
+                    Text("Gutscheine sind mit dem Einlösen an den oben ausgewählten Benutzer gebunden. Diese Funktion ist derzeit deaktiviert.")
                 }
                 
-                Section {
-                    Toggle(isOn: $isAllowLocationTracking.animation()) {
-                        Text("Tracking erlauben")
-                    }
-                } header: {
-                    Text("Standort")
-                } footer: {
-                    Text("Durch das Deaktivieren dieser Option ist es nicht möglich, die Funktion Tankstellensuche und Benachrichtigungen zu benutzen.")
-                }
+//                Section {
+//                    Toggle(isOn: $isAllowLocationTracking.animation()) {
+//                        Text("Tracking erlauben")
+//                    }
+//                } header: {
+//                    Text("Standort")
+//                } footer: {
+//                    Text("Durch das Deaktivieren dieser Option ist es nicht möglich, die Funktion Tankstellensuche und Benachrichtigungen zu benutzen.")
+//                }
                 
-                if isAllowLocationTracking {
+//                if isAllowLocationTracking {
 //                    Section {
 //                        Toggle(isOn: $isShowNotifications.animation()) {
 //                            Label("Benachrichtigungen", systemImage: isShowNotifications ? "bell" : "bell.slash")
@@ -144,7 +154,7 @@ struct SettingsView: View {
                         Text("Der Tankstellenradius wird mit zunehmender Geschwindigkeit automatisch auf bis zu 50 km vergrößert.")
 //                        \n\nMit der intelligenten Auswahl werden nur Tankstellen in Fahrtrichtung bis zu einem Winkel von 65° angezeigt.
                     }
-                }
+//                }
                 
                 Section {
                     Toggle(isOn: $isOpenAddViewOnStart) {
@@ -202,13 +212,16 @@ struct SettingsView: View {
                     VStack {
                         Text("Made with ❤️")
                         Text("v\(Bundle.main.appVersionLong) (\(Bundle.main.appBuild))")
-                        
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                     .listRowInsets(EdgeInsets())
                     .background(Color(UIColor.systemGroupedBackground))
                     .foregroundColor(.gray)
                     .font(.caption)
+                    .onTapGesture(count: 3) {
+                        self.enableCode.toggle()
+                    }
+                    
                 }
 //                .frame(minHeight: 100)
             }

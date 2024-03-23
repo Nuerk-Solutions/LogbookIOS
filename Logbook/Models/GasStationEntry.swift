@@ -75,7 +75,7 @@ struct GasStationRequestParameters {
     var lng: Double
     var fuelTyp: String
     var radius: Int
-    var pageSize: Int = 20
+    var pageSize: Int = 10
     var pageNumber: Int = 1
     var sortTyp: SortTyp
     var sortDirection: String

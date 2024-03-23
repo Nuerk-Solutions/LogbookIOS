@@ -58,9 +58,9 @@ struct GasStationsView: View {
             .task {
                 await gasStationVM.loadGasStations()
             }
-            //        .onAppear {
-            //            locationManager.requestAuthorization()
-            //        }
+            .onAppear {
+                locationManager.requestAuthorization()
+            }
             .onDisappear {
                 gasStationVM.stopAllLocationUpdates()
             }
@@ -84,7 +84,7 @@ struct GasStationsView: View {
             }
         }
         .padding(20)
-        .background(.ultraThinMaterial)
+        .background(.thinMaterial)
         .backgroundStyle(cornerRadius: 30)
         .padding(20)
     }

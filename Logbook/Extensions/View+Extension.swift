@@ -19,8 +19,8 @@ extension View {
     }
     
     //MARK: - LargeButton
-    func largeButton(disabled: Bool = false, shadowRadius radius: CGFloat = 20) -> some View {
-        modifier(LargeButton(disabled: disabled, shadowRadius: radius))
+    func largeButton(disabled: Bool = false, shadowRadius radius: CGFloat = 20, color: String = "F77D8E") -> some View {
+        modifier(LargeButton(disabled: disabled, shadowRadius: radius, color: color))
     }
 
     

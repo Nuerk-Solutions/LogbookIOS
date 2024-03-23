@@ -22,7 +22,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.delegate = self
         
         // Init location Updates
-//        initUpdates()
+        initUpdates()
     }
     
     private func initUpdates() {

@@ -68,12 +68,12 @@ class LogbooksViewModel: ObservableObject {
         }
         
     }
-    
+        
     @Sendable
     func refreshTask() async {
+        try? await Task.sleep(nanoseconds: 1_000_000_000)
         await cache.removeValue(forKey: "\(pagingData.currentPage)")
         await pagingData.reset()
-        try? await Task.sleep(nanoseconds: 1_000_000_000)
         self.lastListRefresh = Int(Date().timeIntervalSince1970)
     }
     

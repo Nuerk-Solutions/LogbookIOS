@@ -65,6 +65,9 @@ struct NewListView: View {
         }
         .statusBar(hidden: !showStatusBar)
         .task(id: logbooksVM.lastListRefresh, logbooksVM.loadFirstPage)
+        .onAppear {
+            logbooksVM.lastListRefresh = Int(Date().timeIntervalSince1970)
+        }
     }
     
     

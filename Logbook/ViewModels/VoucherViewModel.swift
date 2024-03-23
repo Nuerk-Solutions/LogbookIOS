@@ -43,17 +43,18 @@ class VoucherViewModel: ObservableObject {
         return false
     }
     
-    func createVoucher(voucher: Voucher) async -> Bool {
-        if Task.isCancelled { return false }
+    func createVoucher(voucher: Voucher) async -> Voucher? {
+        if Task.isCancelled { return nil }
         do {
             let response = try await logbookAPI.createVoucher(voucher: voucher)
-            print(response.expiration, voucher.expiration)
-            return response.creator == voucher.creator && response.value == voucher.value
+            return response
+//            print(response.expiration, voucher.expiration)
+//            return response.creator == voucher.creator && response.value == voucher.value
         } catch {
             print(error)
-            if Task.isCancelled { return false }
+            if Task.isCancelled { return nil }
         }
-        return false
+        return nil
     }
     
 }
